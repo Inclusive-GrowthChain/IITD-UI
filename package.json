@@ -3,12 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.5",
     "@mui/system": "^5.10.5",
-    "apexcharts": "^3.35.5",
     "bootstrap": "^5.2.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
