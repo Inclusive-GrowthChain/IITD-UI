@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Modal from "react-bootstrap/Modal";
 
-const pageFour = ({ onButtonClick }) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+const PageFour = ({ onButtonClick, canEdit = true }) => {
   const [showPayment, setShowPayment] = useState(false);
-  const handleShowPayment = () => {
-    setShowPayment(true);
-  };
+
+  const handleShowPayment = () => setShowPayment(true)
   const handleClosePayment = () => setShowPayment(false);
 
   const onSubmit = (e) => {
@@ -20,7 +18,7 @@ const pageFour = ({ onButtonClick }) => {
       style={{ maxWidth: "100%", margin: "auto" }}
     >
       <form className="measure">
-      <div>
+        <div>
           <h5
             className="mt-5"
             style={{
@@ -101,20 +99,23 @@ const pageFour = ({ onButtonClick }) => {
             </div>
             <div className="row m-2">
               <div className="col-lg-12">
-                <button
-                  className="btn btn-success"
-                  style={{
-                    marginTop: "1rem",
-                    backgroundColor: "#064420",
-                    width: "96%",
-                  }}
-                  onClick={() => {
-                    onSubmit();
-                    handleShowPayment();
-                  }}
-                >
-                  Submit
-                </button>
+                {
+                  canEdit &&
+                  <button
+                    className="btn btn-success"
+                    style={{
+                      marginTop: "1rem",
+                      backgroundColor: "#064420",
+                      width: "96%",
+                    }}
+                    onClick={() => {
+                      onSubmit();
+                      handleShowPayment();
+                    }}
+                  >
+                    Submit
+                  </button>
+                }
                 <Modal
                   // size="sm"
                   show={showPayment}
@@ -167,4 +168,4 @@ const pageFour = ({ onButtonClick }) => {
   );
 };
 
-export default pageFour;
+export default PageFour;

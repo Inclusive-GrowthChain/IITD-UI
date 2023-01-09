@@ -16,6 +16,210 @@ import PageThree from "./Progress Pages/PageThree";
 import PageFour from "./Progress Pages/PageFour";
 import PageFive from "./Progress Pages/PageFive";
 
+const activeBidList = [
+  {
+    id: "B123456",
+    startDate: "2021-10-10",
+    endDate: "2023-10-10",
+    status: "Active",
+    lacStrainType: "Kusmi",
+    treeSource: "Kusum",
+    origin: "Jharkhand",
+    reportsReqd: [
+      {
+        reportName: "Chowri",
+        reportReqd: true,
+      },
+      {
+        reportName: "Panna",
+        reportReqd: true,
+      },
+    ],
+    seedlacContent: 100,
+    freshResinContent: 100,
+    quantity: 200,
+    supplyDate: "2021-10-10",
+    remarks: "Remark 1",
+  },
+  {
+    id: "B767622",
+    startDate: "2020-10-10",
+    endDate: "2021-10-10",
+    status: "Active",
+    lacStrainType: "Rangeeni",
+    treeSource: "Ber",
+    origin: "Chattisgarh",
+    reportsReqd: [
+      {
+        reportName: "Chowri",
+        reportReqd: false,
+      },
+      {
+        reportName: "Panna",
+        reportReqd: true,
+      },
+    ],
+    seedlacContent: 100,
+    freshResinContent: 100,
+    quantity: 200,
+    supplyDate: "2021-10-10",
+    remarks: "Remark 2",
+  },
+  {
+    id: "B989898",
+    startDate: "2020-10-10",
+    endDate: "2022-10-10",
+    status: "Active",
+    lacStrainType: "Kusmi",
+    treeSource: "Palash",
+    origin: "MP",
+    reportsReqd: [
+      {
+        reportName: "Chowri",
+        reportReqd: true,
+      },
+      {
+        reportName: "Panna",
+        reportReqd: false,
+      },
+    ],
+    seedlacContent: 100,
+    freshResinContent: 100,
+    quantity: 200,
+    supplyDate: "2021-10-10",
+    remarks: "Remark 3",
+  },
+  {
+    id: "B555555",
+    startDate: "2020-10-10",
+    endDate: "2021-10-10",
+    status: "Active",
+    lacStrainType: "Rangeeni",
+    treeSource: "Kusum",
+    origin: "Jharkhand",
+    reportsReqd: [
+      {
+        reportName: "Chowri",
+        reportReqd: true,
+      },
+      {
+        reportName: "Panna",
+        reportReqd: true,
+      },
+    ],
+    seedlacContent: 100,
+    freshResinContent: 100,
+    quantity: 200,
+    supplyDate: "2021-10-10",
+    remarks: "Remark 4",
+  },
+  {
+    id: "B987654",
+    startDate: "2021-10-10",
+    endDate: "2023-10-10",
+    status: "Active",
+    lacStrainType: "Kusmi",
+    treeSource: "Kusum",
+    origin: "Jharkhand",
+    reportsReqd: [
+      {
+        reportName: "Chowri",
+        reportReqd: false,
+      },
+      {
+        reportName: "Panna",
+        reportReqd: true,
+      },
+    ],
+    seedlacContent: 100,
+    freshResinContent: 100,
+    quantity: 200,
+    supplyDate: "2021-10-10",
+    remarks: "Remark 5",
+  },
+]
+
+const purchaseHistory = [
+  {
+    fpoID: "FPO123456",
+    bidID: "B111111",
+    fpoName: "FPO 1",
+    lacStrainType: "Kusmi",
+    treeSource: "Kusum",
+    origin: "Jharkhand",
+    seedlacContent: 100,
+    freshResinContent: 100,
+    quantity: 200,
+    supplyDate: "2021-10-10",
+    amount: 10000,
+  },
+  {
+    fpoID: "FPO222222",
+    bidID: "B222222",
+    fpoName: "FPO 2",
+    lacStrainType: "Rangeeni",
+    treeSource: "Kusum",
+    origin: "Chattisgarh",
+    seedlacContent: 100,
+    freshResinContent: 100,
+    quantity: 200,
+    supplyDate: "2021-10-10",
+    amount: 20000,
+  },
+  {
+    fpoID: "FPO333333",
+    bidID: "B333333",
+    fpoName: "FPO 3",
+    lacStrainType: "Kusmi",
+    treeSource: "Palash",
+    origin: "Jharkhand",
+    seedlacContent: 100,
+    freshResinContent: 100,
+    quantity: 200,
+    supplyDate: "2021-10-10",
+    amount: 10000,
+  },
+  {
+    fpoID: "FPO444444",
+    bidID: "B444444",
+    fpoName: "FPO 4",
+    lacStrainType: "Kusmi",
+    treeSource: "Ber",
+    origin: "Mednapore",
+    seedlacContent: 100,
+    freshResinContent: 100,
+    quantity: 200,
+    supplyDate: "2021-10-10",
+    amount: 15000,
+  },
+  {
+    fpoID: "FPO555555",
+    bidID: "B555555",
+    fpoName: "FPO 5",
+    lacStrainType: "Rangeeni",
+    treeSource: "Kusum",
+    origin: "MP",
+    seedlacContent: 100,
+    freshResinContent: 100,
+    quantity: 200,
+    supplyDate: "2021-10-10",
+    amount: 20000,
+  },
+  {
+    fpoID: "FPO666666",
+    bidID: "B666666",
+    fpoName: "FPO 6",
+    lacStrainType: "Kusmi",
+    treeSource: "Kusum",
+    origin: "MP",
+    seedlacContent: 100,
+    freshResinContent: 100,
+    quantity: 200,
+    supplyDate: "2021-10-10",
+    amount: 10000,
+  },
+]
+
 const Corporate_Client_Lac_Bidding = () => {
   const [multiSelectReportName, setMultiSelectReportName] = useState([]);
   const [showConfirmBox, setShowConfirmBox] = useState(false);
@@ -23,217 +227,14 @@ const Corporate_Client_Lac_Bidding = () => {
   const [showStartBid, setShowStartBid] = useState(false);
   const [currentBid, setCurrentBid] = useState({});
 
-  const activeBidList = [
-    {
-      id: "B123456",
-      startDate: "2021-10-10",
-      endDate: "2023-10-10",
-      status: "Active",
-      lacStrainType: "Kusmi",
-      treeSource: "Kusum",
-      origin: "Jharkhand",
-      reportsReqd: [
-        {
-          reportName: "Chowri",
-          reportReqd: true,
-        },
-        {
-          reportName: "Panna",
-          reportReqd: true,
-        },
-      ],
-      seedlacContent: 100,
-      freshResinContent: 100,
-      quantity: 200,
-      supplyDate: "2021-10-10",
-      remarks: "Remark 1",
-    },
-    {
-      id: "B767622",
-      startDate: "2020-10-10",
-      endDate: "2021-10-10",
-      status: "Active",
-      lacStrainType: "Rangeeni",
-      treeSource: "Ber",
-      origin: "Chattisgarh",
-      reportsReqd: [
-        {
-          reportName: "Chowri",
-          reportReqd: false,
-        },
-        {
-          reportName: "Panna",
-          reportReqd: true,
-        },
-      ],
-      seedlacContent: 100,
-      freshResinContent: 100,
-      quantity: 200,
-      supplyDate: "2021-10-10",
-      remarks: "Remark 2",
-    },
-    {
-      id: "B989898",
-      startDate: "2020-10-10",
-      endDate: "2022-10-10",
-      status: "Active",
-      lacStrainType: "Kusmi",
-      treeSource: "Palash",
-      origin: "MP",
-      reportsReqd: [
-        {
-          reportName: "Chowri",
-          reportReqd: true,
-        },
-        {
-          reportName: "Panna",
-          reportReqd: false,
-        },
-      ],
-      seedlacContent: 100,
-      freshResinContent: 100,
-      quantity: 200,
-      supplyDate: "2021-10-10",
-      remarks: "Remark 3",
-    },
-    {
-      id: "B555555",
-      startDate: "2020-10-10",
-      endDate: "2021-10-10",
-      status: "Active",
-      lacStrainType: "Rangeeni",
-      treeSource: "Kusum",
-      origin: "Jharkhand",
-      reportsReqd: [
-        {
-          reportName: "Chowri",
-          reportReqd: true,
-        },
-        {
-          reportName: "Panna",
-          reportReqd: true,
-        },
-      ],
-      seedlacContent: 100,
-      freshResinContent: 100,
-      quantity: 200,
-      supplyDate: "2021-10-10",
-      remarks: "Remark 4",
-    },
-    {
-      id: "B987654",
-      startDate: "2021-10-10",
-      endDate: "2023-10-10",
-      status: "Active",
-      lacStrainType: "Kusmi",
-      treeSource: "Kusum",
-      origin: "Jharkhand",
-      reportsReqd: [
-        {
-          reportName: "Chowri",
-          reportReqd: false,
-        },
-        {
-          reportName: "Panna",
-          reportReqd: true,
-        },
-      ],
-      seedlacContent: 100,
-      freshResinContent: 100,
-      quantity: 200,
-      supplyDate: "2021-10-10",
-      remarks: "Remark 5",
-    },
-  ];
-
-  const purchaseHistory = [
-    {
-      fpoID: "FPO123456",
-      bidID: "B111111",
-      fpoName: "FPO 1",
-      lacStrainType: "Kusmi",
-      treeSource: "Kusum",
-      origin: "Jharkhand",
-      seedlacContent: 100,
-      freshResinContent: 100,
-      quantity: 200,
-      supplyDate: "2021-10-10",
-      amount: 10000,
-    },
-    {
-      fpoID: "FPO222222",
-      bidID: "B222222",
-      fpoName: "FPO 2",
-      lacStrainType: "Rangeeni",
-      treeSource: "Kusum",
-      origin: "Chattisgarh",
-      seedlacContent: 100,
-      freshResinContent: 100,
-      quantity: 200,
-      supplyDate: "2021-10-10",
-      amount: 20000,
-    },
-    {
-      fpoID: "FPO333333",
-      bidID: "B333333",
-      fpoName: "FPO 3",
-      lacStrainType: "Kusmi",
-      treeSource: "Palash",
-      origin: "Jharkhand",
-      seedlacContent: 100,
-      freshResinContent: 100,
-      quantity: 200,
-      supplyDate: "2021-10-10",
-      amount: 10000,
-    },
-    {
-      fpoID: "FPO444444",
-      bidID: "B444444",
-      fpoName: "FPO 4",
-      lacStrainType: "Kusmi",
-      treeSource: "Ber",
-      origin: "Mednapore",
-      seedlacContent: 100,
-      freshResinContent: 100,
-      quantity: 200,
-      supplyDate: "2021-10-10",
-      amount: 15000,
-    },
-    {
-      fpoID: "FPO555555",
-      bidID: "B555555",
-      fpoName: "FPO 5",
-      lacStrainType: "Rangeeni",
-      treeSource: "Kusum",
-      origin: "MP",
-      seedlacContent: 100,
-      freshResinContent: 100,
-      quantity: 200,
-      supplyDate: "2021-10-10",
-      amount: 20000,
-    },
-    {
-      fpoID: "FPO666666",
-      bidID: "B666666",
-      fpoName: "FPO 6",
-      lacStrainType: "Kusmi",
-      treeSource: "Kusum",
-      origin: "MP",
-      seedlacContent: 100,
-      freshResinContent: 100,
-      quantity: 200,
-      supplyDate: "2021-10-10",
-      amount: 10000,
-    },
-  ];
-
+  const handleShowStartBid = () => setShowStartBid(true);
+  const handleCloseStartBid = () => setShowStartBid(false);
   const handleShowBidStatus = () => setShowBidStatus(true);
+
   const handleCloseBidStatus = () => {
     setShowBidStatus(false);
     setPage("pageone");
   };
-  const handleShowStartBid = () => setShowStartBid(true);
-  const handleCloseStartBid = () => setShowStartBid(false);
 
   const onMultiSelectReportNameChange = (event) => {
     const {
@@ -675,7 +676,6 @@ const Corporate_Client_Lac_Bidding = () => {
                         </div>
                       </div>
                     </div>
-
                   </TabContent>
                 </div>
               </div>

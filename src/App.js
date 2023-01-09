@@ -5,6 +5,7 @@ import Register from "./components/Auth/Register";
 
 import TransactionHistory from "./pages/farmer/TransactionHistory";
 import TrainingUpdate from "./pages/farmer/TrainingUpdate";
+import CropAdvisory2 from "./pages/farmer/CropAdvisory2";
 import SellingPrice from "./pages/farmer/SellingPrice";
 import CropAdvisory from "./pages/farmer/CropAdvisory";
 import Dashboard from "./pages/farmer/Dashboard";
@@ -69,6 +70,7 @@ function App() {
         <Route path="/farmer/support" element={<Support />} />
         <Route path="/farmer/crop-advisory" element={<CropAdvisory />} />
         <Route path="/farmer/training" element={<TrainingUpdate />} />
+        <Route path="/farmer/crop-advisory2" element={<CropAdvisory2 />} />
 
         {/* FPO route */}
         <Route path="/fpo/dashboard" element={<FpoDashboard />} />

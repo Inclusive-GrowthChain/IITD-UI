@@ -101,7 +101,7 @@ function StoreModal() {
                               </div>
                             </div>
                             <div className="row m-2">
-                              <button className="btn btn-success" style={{backgroundColor: "#064420"}}>
+                              <button className="btn btn-success" style={{ backgroundColor: "#064420" }}>
                                 Submit
                               </button>
                             </div>
@@ -216,7 +216,7 @@ function StoreModal() {
                               </div>
                             </div>
                             <div className="row m-2">
-                              <button className="btn btn-success" style={{backgroundColor: "#064420"}}>
+                              <button className="btn btn-success" style={{ backgroundColor: "#064420" }}>
                                 Submit
                               </button>
                             </div>
@@ -331,7 +331,7 @@ function StoreModal() {
                               </div>
                             </div>
                             <div className="row m-2">
-                              <button className="btn btn-success" style={{backgroundColor: "#064420"}}>
+                              <button className="btn btn-success" style={{ backgroundColor: "#064420" }}>
                                 Submit
                               </button>
                             </div>

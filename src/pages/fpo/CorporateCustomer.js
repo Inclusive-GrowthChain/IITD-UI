@@ -1,59 +1,59 @@
 import React, { useState } from "react";
-import Sidebar from "./Sidebar";
-import Navbar from "./Navbar";
-import "./style.css";
+import { MenuItem } from "@mui/material";
+import Select from '@mui/material/Select';
 import Modal from "react-bootstrap/Modal";
+import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
+
 import ProgressBar from "./ProgressBar/ProgressBar";
 import PageOne from "./ProgressPage/PageOne";
 import PageTwo from "./ProgressPage/PageTwo";
 import PageThree from "./ProgressPage/PageThree";
 import PageFour from "./ProgressPage/PageFour";
-import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
+import Sidebar from "./Sidebar";
+import Navbar from "./Navbar";
+import "./style.css";
+
+const labelArray = [
+  "Bid Information",
+  "Upload Test",
+  "Invoice Upload",
+  "Verify Payment",
+];
 
 const CorporateCustomer = ({ alert }) => {
-  const [activeIndex, setActiveIndex] = useState(1);
-  const handleClick = (index) => setActiveIndex(index);
+  const [multiSelectReportName, setMultiSelectReportName] = useState([]);
+  const [showTranscation, setShowTransaction] = useState(false)
+  const [showConfirmBox, setShowConfirmBox] = useState(false)
+  const [currentStep, updateCurrentStep] = useState(1)
+  const [showStartBid, setShowStartBid] = useState(false)
+  const [showCustomer, setShowCustomer] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(1)
+  const [showBid, setShowBid] = useState(false)
+  const [canEdit, setCanEdit] = useState(false)
+  const [page, setPage] = useState("pageone")
+
   const checkActive = (index, className) =>
     activeIndex === index ? className : "";
 
-  const [showBid, setShowBid] = useState(false);
-  const [showCustomer, setShowCustomer] = useState(false);
-  const [showTranscation, setShowTransaction] = useState(false);
-  const handleShowBid = () => {
-    setShowBid(true);
-  };
+  const handleClick = (index) => setActiveIndex(index)
+  const handleShowBid = () => setShowBid(true)
   const handleShowCustomer = () => {
-    setShowCustomer(true);
-  };
-  const handleShowTransaction = () => {
-    setShowTransaction(true);
-  };
-  const handleCloseBid = () => setShowBid(false);
-  const handleCloseCustomer = () => setShowCustomer(false);
-  const handleCloseTransaction = () => setShowTransaction(false);
-
-  const [page, setPage] = useState("pageone");
-
-  const nextPage = (page) => {
-    setPage(page);
-  };
-
-  const labelArray = [
-    "Bid Information",
-    "Upload Test",
-    "Invoice Upload",
-    "Verify Payment",
-  ];
-  const [currentStep, updateCurrentStep] = useState(1);
-
-  function updateStep(step) {
-    updateCurrentStep(step);
+    setShowCustomer(true)
+    setCanEdit(true)
   }
+  const handleCloseStartBid = () => setShowStartBid(false)
+  const handleCloseBid = () => setShowBid(false)
+  const handleCloseCustomer = () => setShowCustomer(false)
+  const handleCloseTransaction = () => setShowTransaction(false)
+  const handleCloseConfirmBox = () => setShowConfirmBox(false)
+  const updateStep = (step) => updateCurrentStep(step)
+  const nextPage = (page) => setPage(page)
+  const handleShowStartBid = () => setShowStartBid(true)
 
-  const [showConfirmBox, setShowConfirmBox] = useState(false);
-  const handleCloseConfirmBox = () => {
-    setShowConfirmBox(false);
-  };
+  const handleShowTransaction = () => {
+    setShowCustomer(true)
+    setCanEdit(false)
+  }
 
   const confirmBid = (e) => {
     e.preventDefault();
@@ -65,6 +65,15 @@ const CorporateCustomer = ({ alert }) => {
     setShowConfirmBox(false);
     setShowBid(false);
   };
+
+  const onMultiSelectReportNameChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setMultiSelectReportName(
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  }
 
   return (
     <div className="home">
@@ -119,6 +128,7 @@ const CorporateCustomer = ({ alert }) => {
                             <th>Quantity</th>
                             <th>Date of Supply</th>
                             <th>End Date of Bidding</th>
+                            <th>Information</th>
                             <th>Status</th>
                           </tr>
                         </thead>
@@ -136,6 +146,24 @@ const CorporateCustomer = ({ alert }) => {
                             <td>2</td>
                             <td>02-01-2021</td>
                             <td>01-05-2022</td>
+                            <td>
+                              <button
+                                style={{
+                                  backgroundColor: "#064420",
+                                  alignItems: "center",
+                                  borderRadius: "5px",
+                                  border: "none",
+                                  padding: "0.25rem 1rem",
+                                  width: "fit-content",
+                                  fontSize: ".75rem",
+                                  lineHeight: "1rem",
+                                  color: "#fff",
+                                }}
+                                onClick={handleShowStartBid}
+                              >
+                                View
+                              </button>
+                            </td>
                             <td>
                               <button
                                 style={{
@@ -269,6 +297,24 @@ const CorporateCustomer = ({ alert }) => {
                                   lineHeight: "1rem",
                                   color: "#fff",
                                 }}
+                                onClick={handleShowStartBid}
+                              >
+                                View
+                              </button>
+                            </td>
+                            <td>
+                              <button
+                                style={{
+                                  backgroundColor: "#064420",
+                                  alignItems: "center",
+                                  borderRadius: "5px",
+                                  border: "none",
+                                  padding: "0.25rem 1rem",
+                                  width: "fit-content",
+                                  fontSize: ".75rem",
+                                  lineHeight: "1rem",
+                                  color: "#fff",
+                                }}
                               >
                                 Place a Bid
                               </button>
@@ -332,48 +378,49 @@ const CorporateCustomer = ({ alert }) => {
                                   lineHeight: "1rem",
                                   color: "#fff",
                                 }}
-                                onClick={() => {
-                                  handleShowCustomer();
-                                }}
+                                onClick={handleShowCustomer}
                               >
                                 view
                               </button>
 
-                              <Modal
-                                className="progressModal"
-                                size="lg"
-                                show={showCustomer}
-                                onHide={handleCloseCustomer}
-                                style={{ height: "100%" }}
-                              >
-                                <Modal.Header closeButton>
-                                  Bid Status
-                                </Modal.Header>
-                                <Modal.Body>
-                                  <ProgressBar
-                                    page={page}
-                                    labelArray={labelArray}
-                                    currentStep={currentStep}
-                                    updateStep={updateStep}
-                                  />
-                                  {
+                              {
+                                showCustomer &&
+                                <Modal
+                                  className="progressModal"
+                                  size="lg"
+                                  show={showCustomer}
+                                  onHide={handleCloseCustomer}
+                                  style={{ height: "100%" }}
+                                >
+                                  <Modal.Header closeButton>
+                                    Bid Status
+                                  </Modal.Header>
+                                  <Modal.Body>
+                                    <ProgressBar
+                                      page={page}
+                                      labelArray={labelArray}
+                                      currentStep={currentStep}
+                                      updateStep={updateStep}
+                                    />
                                     {
-                                      pageone: (
-                                        <PageOne onButtonClick={nextPage} />
-                                      ),
-                                      pagetwo: (
-                                        <PageTwo onButtonClick={nextPage} />
-                                      ),
-                                      pagethree: (
-                                        <PageThree onButtonClick={nextPage} />
-                                      ),
-                                      pagefour: (
-                                        <PageFour onButtonClick={nextPage} />
-                                      ),
-                                    }[page]
-                                  }
-                                </Modal.Body>
-                              </Modal>
+                                      {
+                                        pageone: (
+                                          <PageOne onButtonClick={nextPage} />
+                                        ),
+                                        pagetwo: (
+                                          <PageTwo onButtonClick={nextPage} />
+                                        ),
+                                        pagethree: (
+                                          <PageThree onButtonClick={nextPage} />
+                                        ),
+                                        pagefour: (
+                                          <PageFour onButtonClick={nextPage} canEdit={canEdit} />
+                                        ),
+                                      }[page]
+                                    }
+                                  </Modal.Body>
+                                </Modal>
+                              }
                             </td>
                           </tr>
                           <tr>
@@ -457,9 +504,7 @@ const CorporateCustomer = ({ alert }) => {
                                   lineHeight: "1rem",
                                   color: "#fff",
                                 }}
-                                onClick={() => {
-                                  handleShowTransaction();
-                                }}
+                                onClick={handleShowTransaction}
                               >
                                 view
                               </button>
@@ -561,6 +606,7 @@ const CorporateCustomer = ({ alert }) => {
                                   lineHeight: "1rem",
                                   color: "#fff",
                                 }}
+                                onClick={handleShowTransaction}
                               >
                                 view
                               </button>
@@ -576,6 +622,153 @@ const CorporateCustomer = ({ alert }) => {
           </div>
         </main>
       </div>
+
+      <Modal show={showStartBid} onHide={handleCloseStartBid}>
+        <Modal.Header closeButton>Start Bid Information</Modal.Header>
+        <Modal.Body>
+          <div className="row">
+            <div className="col">
+              <form>
+                <div className="form">
+                  <div className="card p-2">
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Bid ID</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={12346}
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Lac Strain Type</label>
+                      </div>
+                      <div className="col-lg-12">
+                        <select
+                          className="form-control"
+                          name="category"
+                        // value={category}
+                        // onChange={(e) => setCategory(e.target.value)}
+                        >
+                          <option value="0">Select Type</option>
+                          <option value="1">Kusmi</option>
+                          <option value="2">Rangeeni</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Source of Tree</label>
+                      </div>
+                      <div className="col-lg-12">
+                        <select
+                          className="form-control"
+                          name="category"
+                        >
+                          <option value="0">Select Tree</option>
+                          <option value="1">Kusum</option>
+                          <option value="2">Ber</option>
+                          <option value="3">Palash</option>
+                          <option value="4">Other</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Origin</label>
+                      </div>
+                      <div className="col-lg-12">
+                        <select
+                          className="form-control"
+                          name="category"
+                        >
+                          <option value="0">Select Origin</option>
+                          <option value="1">Jharkhand</option>
+                          <option value="2">Chattisgarh</option>
+                          <option value="3">MP</option>
+                          <option value="4">Mednapore</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Seedlac Content</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input className="form-control" type="number" />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Fresh Resin Content</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input className="form-control" type="number" />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Quantity</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input className="form-control" type="number" />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Date of Supply</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input className="form-control" type="date" />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>End Date for Bidding</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input className="form-control" type="date" />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Required Test Reports</label>
+                      </div>
+                      <div className="col-lg-12">
+                        <Select
+                          className="form-control"
+                          name="category"
+                          labelId="demo-multiple-name-label"
+                          id="demo-multiple-name"
+                          multiple
+                          value={multiSelectReportName}
+                          onChange={onMultiSelectReportNameChange}
+                        >
+                          <MenuItem value="0">Chowri</MenuItem>
+                          <MenuItem value="1">Panna</MenuItem>
+                        </Select>
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Remarks</label>
+                      </div>
+                      <div className="col-lg-12">
+                        <textarea className="form-control" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
