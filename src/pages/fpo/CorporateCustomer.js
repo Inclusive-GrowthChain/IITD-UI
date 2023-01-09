@@ -383,44 +383,41 @@ const CorporateCustomer = ({ alert }) => {
                                 view
                               </button>
 
-                              {
-                                showCustomer &&
-                                <Modal
-                                  className="progressModal"
-                                  size="lg"
-                                  show={showCustomer}
-                                  onHide={handleCloseCustomer}
-                                  style={{ height: "100%" }}
-                                >
-                                  <Modal.Header closeButton>
-                                    Bid Status
-                                  </Modal.Header>
-                                  <Modal.Body>
-                                    <ProgressBar
-                                      page={page}
-                                      labelArray={labelArray}
-                                      currentStep={currentStep}
-                                      updateStep={updateStep}
-                                    />
+                              <Modal
+                                className="progressModal"
+                                size="lg"
+                                show={showCustomer}
+                                onHide={handleCloseCustomer}
+                                style={{ height: "100%" }}
+                              >
+                                <Modal.Header closeButton>
+                                  Bid Status
+                                </Modal.Header>
+                                <Modal.Body>
+                                  <ProgressBar
+                                    page={page}
+                                    labelArray={labelArray}
+                                    currentStep={currentStep}
+                                    updateStep={updateStep}
+                                  />
+                                  {
                                     {
-                                      {
-                                        pageone: (
-                                          <PageOne onButtonClick={nextPage} />
-                                        ),
-                                        pagetwo: (
-                                          <PageTwo onButtonClick={nextPage} />
-                                        ),
-                                        pagethree: (
-                                          <PageThree onButtonClick={nextPage} />
-                                        ),
-                                        pagefour: (
-                                          <PageFour onButtonClick={nextPage} canEdit={canEdit} />
-                                        ),
-                                      }[page]
-                                    }
-                                  </Modal.Body>
-                                </Modal>
-                              }
+                                      pageone: (
+                                        <PageOne onButtonClick={nextPage} />
+                                      ),
+                                      pagetwo: (
+                                        <PageTwo onButtonClick={nextPage} />
+                                      ),
+                                      pagethree: (
+                                        <PageThree onButtonClick={nextPage} />
+                                      ),
+                                      pagefour: (
+                                        <PageFour onButtonClick={nextPage} canEdit={canEdit} />
+                                      ),
+                                    }[page]
+                                  }
+                                </Modal.Body>
+                              </Modal>
                             </td>
                           </tr>
                           <tr>

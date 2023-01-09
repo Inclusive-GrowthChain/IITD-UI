@@ -16,6 +16,12 @@ import PageThree from "./Progress Pages/PageThree";
 import PageFour from "./Progress Pages/PageFour";
 import PageFive from "./Progress Pages/PageFive";
 
+import FPOProgressBar from "../fpo/ProgressBar/ProgressBar";
+import FPOPageOne from "../fpo/ProgressPage/PageOne";
+import FPOPageTwo from "../fpo/ProgressPage/PageTwo";
+import FPOPageThree from "../fpo/ProgressPage/PageThree";
+import FPOPageFour from "../fpo/ProgressPage/PageFour";
+
 const activeBidList = [
   {
     id: "B123456",
@@ -220,62 +226,70 @@ const purchaseHistory = [
   },
 ]
 
-const Corporate_Client_Lac_Bidding = () => {
-  const [multiSelectReportName, setMultiSelectReportName] = useState([]);
-  const [showConfirmBox, setShowConfirmBox] = useState(false);
-  const [showBidStatus, setShowBidStatus] = useState(false);
-  const [showStartBid, setShowStartBid] = useState(false);
-  const [currentBid, setCurrentBid] = useState({});
+const labelArray = [
+  "Bid Information",
+  "Upload Test",
+  "Invoice Upload",
+  "Verify Payment",
+]
 
-  const handleShowStartBid = () => setShowStartBid(true);
-  const handleCloseStartBid = () => setShowStartBid(false);
-  const handleShowBidStatus = () => setShowBidStatus(true);
+const Corporate_Client_Lac_Bidding = () => {
+  const [multiSelectReportName, setMultiSelectReportName] = useState([])
+  const [showConfirmBox, setShowConfirmBox] = useState(false)
+  const [showBidStatus, setShowBidStatus] = useState(false)
+  const [showStartBid, setShowStartBid] = useState(false)
+  const [showCustomer, setShowCustomer] = useState(false)
+  const [currentBid, setCurrentBid] = useState({})
+  const [activeTab, setActiveTab] = useState("tab1")
+  const [currentStep, updateCurrentStep] = useState(1)
+  const [page2, setPage2] = useState("pageone")
+  const [page, setPage] = useState("pageone")
+
+  const handleShowStartBid = () => setShowStartBid(true)
+  const handleCloseStartBid = () => setShowStartBid(false)
+  const handleShowBidStatus = () => setShowBidStatus(true)
+  const handleCloseCustomer = () => setShowCustomer(false)
+  const nextPage = (page) => setPage(page)
+  const nextPage2 = (page) => setPage2(page)
+  const updateStep = (step) => updateCurrentStep(step)
 
   const handleCloseBidStatus = () => {
-    setShowBidStatus(false);
-    setPage("pageone");
-  };
+    setShowBidStatus(false)
+    setPage("pageone")
+  }
 
   const onMultiSelectReportNameChange = (event) => {
     const {
       target: { value },
-    } = event;
+    } = event
     setMultiSelectReportName(
       typeof value === 'string' ? value.split(',') : value,
-    );
-  };
+    )
+  }
 
   const generateRandomBidID = () => {
-    let bidValue = 'B' + (Math.floor(100000 + Math.random() * 900000));
+    let bidValue = 'B' + (Math.floor(100000 + Math.random() * 900000))
     // eslint-disable-next-line eqeqeq
     if (activeBidList.find((bid) => bid.id == bidValue)) {
-      generateRandomBidID();
+      generateRandomBidID()
     }
-    return bidValue;
-  };
-
-  const [activeTab, setActiveTab] = useState("tab1");
-
-  const [page, setPage] = useState("pageone");
-
-  const nextPage = (page) => {
-    setPage(page);
-  };
+    return bidValue
+  }
 
   const confirmBid = (e) => {
-    e.preventDefault();
-    setShowConfirmBox(true);
-  };
+    e.preventDefault()
+    setShowConfirmBox(true)
+  }
 
   const handleCloseConfirmBox = () => {
-    setShowConfirmBox(false);
-  };
+    setShowConfirmBox(false)
+  }
 
   const placeBid = (e) => {
-    e.preventDefault();
-    setShowConfirmBox(false);
-    setShowStartBid(false);
-  };
+    e.preventDefault()
+    setShowConfirmBox(false)
+    setShowStartBid(false)
+  }
 
   // useEffect(() => {
   //   if(closeBidStatus) {
@@ -644,6 +658,7 @@ const Corporate_Client_Lac_Bidding = () => {
                                   <td>Fresh Resin Content</td>
                                   <td>Quantity</td>
                                   <td>Amount</td>
+                                  <td>Status</td>
                                 </tr>
                               </thead>
                               <tbody
@@ -667,6 +682,18 @@ const Corporate_Client_Lac_Bidding = () => {
                                       <td>{purchase.freshResinContent}</td>
                                       <td>{purchase.quantity}</td>
                                       <td>{purchase.amount}</td>
+                                      <td>
+                                        <button
+                                          onClick={() => setShowCustomer(true)}
+                                          style={{
+                                            backgroundColor: "#064420",
+                                            color: "#fff",
+                                            padding: ".2rem .4rem"
+                                          }}
+                                        >
+                                          View
+                                        </button>
+                                      </td>
                                     </tr>
                                   ))
                                 }
@@ -683,6 +710,42 @@ const Corporate_Client_Lac_Bidding = () => {
           </div>
         </div>
       </div>
+
+      <Modal
+        className="progressModal"
+        size="lg"
+        show={showCustomer}
+        onHide={handleCloseCustomer}
+        style={{ height: "100%" }}
+      >
+        <Modal.Header closeButton>
+          Bid Status
+        </Modal.Header>
+        <Modal.Body>
+          <FPOProgressBar
+            page={page2}
+            labelArray={labelArray}
+            currentStep={currentStep}
+            updateStep={updateStep}
+          />
+          {
+            {
+              pageone: (
+                <FPOPageOne onButtonClick={nextPage2} />
+              ),
+              pagetwo: (
+                <FPOPageTwo onButtonClick={nextPage2} />
+              ),
+              pagethree: (
+                <FPOPageThree onButtonClick={nextPage2} />
+              ),
+              pagefour: (
+                <FPOPageFour onButtonClick={nextPage2} canEdit={false} />
+              ),
+            }[page]
+          }
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
