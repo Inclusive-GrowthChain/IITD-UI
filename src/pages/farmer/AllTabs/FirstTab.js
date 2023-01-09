@@ -21,7 +21,7 @@ const FirstTab = () => {
                     <th>Purchase Id</th>
                     <th>Purchase of Order</th>
                     <th>Item Name</th>
-                    <th>Type</th>
+                    {/* <th>Type</th> */}
                     <th>Quantity</th>
                   </tr>
                 </thead>
@@ -37,35 +37,35 @@ const FirstTab = () => {
                     <td>SAM107254367</td>
                     <td>17-02-22</td>
                     <td>Nylon Bag</td>
-                    <td>Bag</td>
+                    {/* <td>Bag</td> */}
                     <td>3</td>
                   </tr>
                   <tr>
                     <td>SAM107254367</td>
                     <td>17-02-22</td>
                     <td>Nylon Bag</td>
-                    <td>Bag</td>
+                    {/* <td>Bag</td> */}
                     <td>3</td>
                   </tr>
                   <tr>
                     <td>SAM107254367</td>
                     <td>17-02-22</td>
                     <td>Nylon Bag</td>
-                    <td>Bag</td>
+                    {/* <td>Bag</td> */}
                     <td>3</td>
                   </tr>
                   <tr>
                     <td>SAM107254367</td>
                     <td>17-02-22</td>
                     <td>Nylon Bag</td>
-                    <td>Bag</td>
+                    {/* <td>Bag</td> */}
                     <td>3</td>
                   </tr>
                   <tr>
                     <td>SAM107254367</td>
                     <td>17-02-22</td>
                     <td>Nylon Bag</td>
-                    <td>Bag</td>
+                    {/* <td>Bag</td> */}
                     <td>3</td>
                   </tr>
                 </tbody>

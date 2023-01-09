@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import './Dashboard.css';
 
 import TabNavItem from "../../pages/fpo/Tabs/TabNavItem";
 import TabContent from "../../pages/fpo/Tabs/TabContent";
@@ -12,9 +11,9 @@ const IINRG_Settings = () => {
   return (
     <div className="home">
       <Navbar />
-      <div className="homeContainer" style={{marginTop: "-3.188rem"}}>
+      <div className="homeContainer" style={{ marginTop: "-3.188rem" }}>
         <Sidebar />
-        <main id="main_container" className="main_container container-fluid" style={{marginTop: "3.188rem"}}>
+        <main id="main_container" className="main_container container-fluid" style={{ marginTop: "3.188rem" }}>
           <div className="list_title">
             <div className="settings_wrapper">
               <div className="d-sm-flex justify-content-between align-items-center mb-4">

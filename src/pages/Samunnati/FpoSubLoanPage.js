@@ -1,298 +1,286 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
-import React, {useState, useEffect} from "react";
-import Sidebar from "./Sidebar";
-import Navbar from "./Navbar";
-import "./Dashboard.css";
+import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {useNavigate} from 'react-router-dom';
+import Modal from "react-bootstrap/Modal";
+
+import logo from "../../assets/img/logo.png";
+
 import TabNavItem from "../../pages/farmer/Tabs/TabNavItem";
 import TabContent from "../../pages/farmer/Tabs/TabContent";
-import Modal from "react-bootstrap/Modal";
-import logo from "../../assets/img/logo.png";
-// eslint-disable-next-line no-unused-vars
-import Button from "react-bootstrap/Button";
-// eslint-disable-next-line no-unused-vars
-import { ShowChart } from "@mui/icons-material";
+import Sidebar from "./Sidebar";
+import Navbar from "./Navbar";
+
+const completedLoanList = [
+  {
+    id: "L 1",
+    dateOfApp: "2021-10-10",
+    loanAmount: "100000",
+    transactionID: "T 1",
+    lastPaymentDate: "2022-10-10",
+  },
+  {
+    id: "L 2",
+    dateOfApp: "2021-10-10",
+    loanAmount: "100000",
+    transactionID: "T 2",
+    lastPaymentDate: "2022-10-10",
+  },
+  {
+    id: "L 3",
+    dateOfApp: "2021-10-10",
+    loanAmount: "100000",
+    transactionID: "T 3",
+    lastPaymentDate: "2022-10-10",
+  },
+  {
+    id: "L 4",
+    dateOfApp: "2021-10-10",
+    loanAmount: "100000",
+    transactionID: "T 4",
+    lastPaymentDate: "2022-10-10",
+  },
+]
+
+const ongoingLoanList = [
+  {
+    id: "L 1",
+    payeeName: "P 1",
+    accountNo: "1234567890",
+    ifsc: "1234567890",
+    amount: "1000000",
+    tenure: "12",
+    purpose: "Purpose 1",
+    dateOfApproval: "2021-10-10",
+    outstandingAmount: "90000",
+    nextPaymentAmount: "10000",
+    nextPaymentDate: "2021-10-10",
+  },
+  {
+    id: "L 2",
+    payeeName: "P 2",
+    accountNo: "1234567890",
+    ifsc: "1234567890",
+    amount: "1000000",
+    tenure: "12",
+    purpose: "Purpose 2",
+    dateOfApproval: "2021-10-10",
+    outstandingAmount: "90000",
+    nextPaymentAmount: "10000",
+    nextPaymentDate: "2021-10-10",
+  },
+  {
+    id: "L 3",
+    payeeName: "P 3",
+    accountNo: "1234567890",
+    ifsc: "1234567890",
+    amount: "1000000",
+    tenure: "12",
+    purpose: "Purpose 3",
+    dateOfApproval: "2021-10-10",
+    outstandingAmount: "90000",
+    nextPaymentAmount: "10000",
+    nextPaymentDate: "2021-10-10",
+  },
+]
+
+const completedTransactionDetails = [
+  {
+    transactionID: "T 1",
+    receiverName: "R 1",
+    accountNo: "1234567890",
+    ifsc: "1234567890",
+    bankName: "B 1",
+    paymentRefNo: "1234567890",
+    paymentDate: "2021-10-10",
+    paymentAmount: "100000",
+  },
+  {
+    transactionID: "T 2",
+    receiverName: "R 2",
+    accountNo: "1234567890",
+    ifsc: "1234567890",
+    bankName: "B 2",
+    paymentRefNo: "1234567890",
+    paymentDate: "2021-10-10",
+    paymentAmount: "100000",
+  },
+  {
+    transactionID: "T 3",
+    receiverName: "R 3",
+    accountNo: "1234567890",
+    ifsc: "1234567890",
+    bankName: "B 3",
+    paymentRefNo: "1234567890",
+    paymentDate: "2021-10-10",
+    paymentAmount: "100000",
+  },
+  {
+    transactionID: "T 4",
+    receiverName: "R 1",
+    accountNo: "1234567890",
+    ifsc: "1234567890",
+    bankName: "B 1",
+    paymentRefNo: "1234567890",
+    paymentDate: "2021-10-10",
+    paymentAmount: "100000",
+  },
+  {
+    transactionID: "T 5",
+    receiverName: "R 2",
+    accountNo: "1234567890",
+    ifsc: "1234567890",
+    bankName: "B 2",
+    paymentRefNo: "1234567890",
+    paymentDate: "2021-10-10",
+    paymentAmount: "100000",
+  },
+  {
+    transactionID: "T 6",
+    receiverName: "R 3",
+    accountNo: "1234567890",
+    ifsc: "1234567890",
+    bankName: "B 3",
+    paymentRefNo: "1234567890",
+    paymentDate: "2021-10-10",
+    paymentAmount: "100000",
+  },
+]
+
+const requestedTransactionDetails = [
+  {
+    loanId: "L 1",
+    receiverName: "R 1",
+    accountNo: "1234567890",
+    ifsc: "1234567890",
+    bankName: "B 1",
+    paymentAmount: "100000",
+  },
+  {
+    loanId: "L 2",
+    receiverName: "R 2",
+    accountNo: "1234567890",
+    ifsc: "1234567890",
+    bankName: "B 2",
+    paymentAmount: "100000",
+  },
+]
+
+const pendingLoanList = [
+  {
+    id: "L 1",
+    dateOfApp: "2021-10-10",
+    loanAmount: "100000",
+    windowId: "W123456",
+    payeeName: "P 1",
+    accountNo: "1234567890",
+    ifsc: "1234567890",
+    bankName: "B 1",
+    interest: "12",
+    tenure: "12",
+    purpose: "Purpose 1",
+  },
+  {
+    id: "L 2",
+    dateOfApp: "2021-10-10",
+    loanAmount: "100000",
+    windowId: "W654321",
+    payeeName: "P 2",
+    accountNo: "1234567890",
+    ifsc: "1234567890",
+    bankName: "B 2",
+    interest: "12",
+    tenure: "12",
+    purpose: "Purpose 2",
+  },
+]
 
 const Sammunati_FPO_SubLoan_Page = () => {
-  const [currentLoan, setCurrentLoan] = useState({});
-  const [currentTransaction, setCurrentTransaction] = useState({});
-  const [showCompletedLoanDetails, setShowCompletedLoanDetails] = useState(false);
-  const [showOngoingLoanDetails, setShowOngoingLoanDetails] = useState(false);
-  const [showPendingLoanDetails, setShowPendingLoanDetails] = useState(false);
-  const [firstPage, setFirstPage] = useState(true);
-  const [secondPage, setSecondPage] = useState(false);
-  const [thirdPage, setThirdPage] = useState(false);
-  const [showPaymentProof, setShowPaymentProof] = useState(false);
-  const [showApproveForm, setShowApproveForm] = useState(false);
-  const [showRejectForm, setShowRejectForm] = useState(false);
-  const [showRepaymentStatus, setShowRepaymentStatus] = useState(false);
-  const [showRepaymentConfirmation, setShowRepaymentConfirmation] = useState(false);
+  const [showRepaymentConfirmation, setShowRepaymentConfirmation] = useState(false)
+  const [showCompletedLoanDetails, setShowCompletedLoanDetails] = useState(false)
+  const [showOngoingLoanDetails, setShowOngoingLoanDetails] = useState(false)
+  const [showPendingLoanDetails, setShowPendingLoanDetails] = useState(false)
+  const [showRepaymentStatus, setShowRepaymentStatus] = useState(false)
+  const [currentTransaction, setCurrentTransaction] = useState({})
+  const [showPaymentProof, setShowPaymentProof] = useState(false)
+  const [showApproveForm, setShowApproveForm] = useState(false)
+  const [showRejectForm, setShowRejectForm] = useState(false)
+  const [currentLoan, setCurrentLoan] = useState({})
+  const [secondPage, setSecondPage] = useState(false)
+  const [activeTab, setActiveTab] = useState("tab1")
+  const [thirdPage, setThirdPage] = useState(false)
+  const [firstPage, setFirstPage] = useState(true)
+  const [fpoId] = useState(localStorage.getItem("fpoId"))
 
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    localStorage.removeItem("fpoId");
-    navigate('/samunnati/fpo-loan', {replace: true});
-  };
-
-  // eslint-disable-next-line no-unused-vars
-  const [fpoId, setFpoId] = useState(localStorage.getItem("fpoId"));
-
-  const completedLoanList = [
-    {
-      id: "L 1",
-      dateOfApp: "2021-10-10",
-      loanAmount: "100000",
-      transactionID: "T 1",
-      lastPaymentDate: "2022-10-10",
-    },
-    {
-      id: "L 2",
-      dateOfApp: "2021-10-10",
-      loanAmount: "100000",
-      transactionID: "T 2",
-      lastPaymentDate: "2022-10-10",
-    },
-    {
-      id: "L 3",
-      dateOfApp: "2021-10-10",
-      loanAmount: "100000",
-      transactionID: "T 3",
-      lastPaymentDate: "2022-10-10",
-    },
-    {
-      id: "L 4",
-      dateOfApp: "2021-10-10",
-      loanAmount: "100000",
-      transactionID: "T 4",
-      lastPaymentDate: "2022-10-10",
-    },
-  ];
-    
-  const ongoingLoanList = [
-    {
-      id: "L 1",
-      payeeName: "P 1",
-      accountNo: "1234567890",
-      ifsc: "1234567890",
-      amount: "1000000",
-      tenure: "12",
-      purpose: "Purpose 1",
-      dateOfApproval: "2021-10-10",
-      outstandingAmount: "90000",
-      nextPaymentAmount: "10000",
-      nextPaymentDate: "2021-10-10",
-    },
-    {
-      id: "L 2",
-      payeeName: "P 2",
-      accountNo: "1234567890",
-      ifsc: "1234567890",
-      amount: "1000000",
-      tenure: "12",
-      purpose: "Purpose 2",
-      dateOfApproval: "2021-10-10",
-      outstandingAmount: "90000",
-      nextPaymentAmount: "10000",
-      nextPaymentDate: "2021-10-10",
-    },
-    {
-      id: "L 3",
-      payeeName: "P 3",
-      accountNo: "1234567890",
-      ifsc: "1234567890",
-      amount: "1000000",
-      tenure: "12",
-      purpose: "Purpose 3",
-      dateOfApproval: "2021-10-10",
-      outstandingAmount: "90000",
-      nextPaymentAmount: "10000",
-      nextPaymentDate: "2021-10-10",
-    },
-  ];
-
-  const completedTransactionDetails = [
-    {
-      transactionID: "T 1",
-      receiverName: "R 1",
-      accountNo: "1234567890",
-      ifsc: "1234567890",
-      bankName: "B 1",
-      paymentRefNo: "1234567890",
-      paymentDate: "2021-10-10",
-      paymentAmount: "100000",
-    },
-    {
-      transactionID: "T 2",
-      receiverName: "R 2",
-      accountNo: "1234567890",
-      ifsc: "1234567890",
-      bankName: "B 2",
-      paymentRefNo: "1234567890",
-      paymentDate: "2021-10-10",
-      paymentAmount: "100000",
-    },
-    {
-      transactionID: "T 3",
-      receiverName: "R 3",
-      accountNo: "1234567890",
-      ifsc: "1234567890",
-      bankName: "B 3",
-      paymentRefNo: "1234567890",
-      paymentDate: "2021-10-10",
-      paymentAmount: "100000",
-    },
-    {
-      transactionID: "T 4",
-      receiverName: "R 1",
-      accountNo: "1234567890",
-      ifsc: "1234567890",
-      bankName: "B 1",
-      paymentRefNo: "1234567890",
-      paymentDate: "2021-10-10",
-      paymentAmount: "100000",
-    },
-    {
-      transactionID: "T 5",
-      receiverName: "R 2",
-      accountNo: "1234567890",
-      ifsc: "1234567890",
-      bankName: "B 2",
-      paymentRefNo: "1234567890",
-      paymentDate: "2021-10-10",
-      paymentAmount: "100000",
-    },
-    {
-      transactionID: "T 6",
-      receiverName: "R 3",
-      accountNo: "1234567890",
-      ifsc: "1234567890",
-      bankName: "B 3",
-      paymentRefNo: "1234567890",
-      paymentDate: "2021-10-10",
-      paymentAmount: "100000",
-    },
-  ];
-
-  const requestedTransactionDetails = [
-    {
-      loanId: "L 1",
-      receiverName: "R 1",
-      accountNo: "1234567890",
-      ifsc: "1234567890",
-      bankName: "B 1",
-      paymentAmount: "100000",
-    },
-    {
-      loanId: "L 2",
-      receiverName: "R 2",
-      accountNo: "1234567890",
-      ifsc: "1234567890",
-      bankName: "B 2",
-      paymentAmount: "100000",
-    },
-  ];
-
-  const pendingLoanList = [
-    {
-      id: "L 1",
-      dateOfApp: "2021-10-10",
-      loanAmount: "100000",
-      windowId: "W123456",
-      payeeName: "P 1",
-      accountNo: "1234567890",
-      ifsc: "1234567890",
-      bankName: "B 1",
-      interest: "12",
-      tenure: "12",
-      purpose: "Purpose 1",
-    },
-    {
-      id: "L 2",
-      dateOfApp: "2021-10-10",
-      loanAmount: "100000",
-      windowId: "W654321",
-      payeeName: "P 2",
-      accountNo: "1234567890",
-      ifsc: "1234567890",
-      bankName: "B 2",
-      interest: "12",
-      tenure: "12",
-      purpose: "Purpose 2",
-    },
-  ];
-
-  const [activeTab, setActiveTab] = useState("tab1");
-
-  const handleShowCompletedLoanDetails = () => setShowCompletedLoanDetails(true);
-  const handleCloseCompletedLoanDetails = () => {
-    setFirstPage(true);
-    setSecondPage(false);
-    setThirdPage(false);
-    setShowCompletedLoanDetails(false);
-  };
-
-  const handleShowOngoingLoanDetails = () => setShowOngoingLoanDetails(true);
-  const handleCloseOngoingLoanDetails = () => {
-    setFirstPage(true);
-    setSecondPage(false);
-    setThirdPage(false);
-    setShowOngoingLoanDetails(false);
-  };
-  const handleShowPendingLoanDetails = () => setShowPendingLoanDetails(true);
-  const handleClosePendingLoanDetails = () => setShowPendingLoanDetails(false);
-
-  const handleCurrentTransaction = () => {
-    // eslint-disable-next-line array-callback-return
-    completedTransactionDetails.map((transaction) => {
-      if (transaction.transactionID === currentLoan.transactionID) {
-        setCurrentTransaction(transaction);
-      }
-    })
-    // eslint-disable-next-line array-callback-return
-    requestedTransactionDetails.map((transaction) => {
-      if (transaction.loanId === currentLoan.id) {
-        setCurrentTransaction(transaction);
-      }
-    })
-  };
-
-  const handleShowPaymemntProof = () => setShowPaymentProof(true);
-  const handleClosePaymentProof = () => setShowPaymentProof(false);
-  // eslint-disable-next-line no-unused-vars
-  const handleShowApproveForm = () => setShowApproveForm(true);
-  const handleCloseApproveForm = () => setShowApproveForm(false);
-  // eslint-disable-next-line no-unused-vars
-  const handleShowRejectForm = () => setShowRejectForm(true);
-  const handleCloseRejectForm = () => setShowRejectForm(false);
-
-  const handlePendingLoanStatus = (e) => {
-    e.preventDefault();
-    if(e.target.value === "Approved") {
-      setShowApproveForm(true);
-    }
-    else if(e.target.value === "Rejected") {
-      setShowRejectForm(true);
-    }
-  };
-
-  const handleShowRepaymentStatus = () => setShowRepaymentStatus(true);
-  const handleCloseRepaymentStatus = () => setShowRepaymentStatus(false);
-  const handleShowRepaymentConfirmation = () => setShowRepaymentConfirmation(true);
-  const handleCloseRepaymentConfirmation = () => setShowRepaymentConfirmation(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
-    handleCurrentTransaction();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentLoan]);
+    handleCurrentTransaction()
+    // eslint-disable-next-line
+  }, [currentLoan])
+
+  const handleClick = () => {
+    localStorage.removeItem("fpoId")
+    navigate('/samunnati/fpo-loan', { replace: true })
+  }
+
+  const handleCloseCompletedLoanDetails = () => {
+    setFirstPage(true)
+    setSecondPage(false)
+    setThirdPage(false)
+    setShowCompletedLoanDetails(false)
+  }
+
+  const handleCloseOngoingLoanDetails = () => {
+    setFirstPage(true)
+    setSecondPage(false)
+    setThirdPage(false)
+    setShowOngoingLoanDetails(false)
+  }
+
+  const handleShowPendingLoanDetails = () => setShowPendingLoanDetails(true)
+  const handleShowOngoingLoanDetails = () => setShowOngoingLoanDetails(true)
+  const handleClosePendingLoanDetails = () => setShowPendingLoanDetails(false)
+  const handleShowCompletedLoanDetails = () => setShowCompletedLoanDetails(true)
+
+  const handleCurrentTransaction = () => {
+    completedTransactionDetails.forEach((transaction) => {
+      if (transaction.transactionID === currentLoan.transactionID) {
+        setCurrentTransaction(transaction)
+      }
+    })
+    requestedTransactionDetails.forEach((transaction) => {
+      if (transaction.loanId === currentLoan.id) {
+        setCurrentTransaction(transaction)
+      }
+    })
+  }
+
+  const handleShowPaymemntProof = () => setShowPaymentProof(true)
+  const handleClosePaymentProof = () => setShowPaymentProof(false)
+  const handleCloseApproveForm = () => setShowApproveForm(false)
+  const handleCloseRejectForm = () => setShowRejectForm(false)
+
+  const handlePendingLoanStatus = (e) => {
+    e.preventDefault()
+    if (e.target.value === "Approved") {
+      setShowApproveForm(true)
+    }
+    else if (e.target.value === "Rejected") {
+      setShowRejectForm(true)
+    }
+  }
+
+  const handleShowRepaymentStatus = () => setShowRepaymentStatus(true)
+  const handleCloseRepaymentStatus = () => setShowRepaymentStatus(false)
+  const handleShowRepaymentConfirmation = () => setShowRepaymentConfirmation(true)
+  const handleCloseRepaymentConfirmation = () => setShowRepaymentConfirmation(false)
 
   return (
     <div className="home">
       <Navbar />
-      <div className="homeContainer" style={{marginTop: "-3.188rem"}}>
+      <div className="homeContainer" style={{ marginTop: "-3.188rem" }}>
         <Sidebar />
-        <main id="main_container" className="main_container container-fluid" style={{marginTop: "3.188rem"}}>
+        <main id="main_container" className="main_container container-fluid" style={{ marginTop: "3.188rem" }}>
           <div className="">
             <h3 className="mb-4">FPO Loan Requests</h3>
           </div>
@@ -306,7 +294,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                   <div className="container-fluid">
                     <div className="tabs_wrapper">
                       <ul className="nav-tab">
-                      <TabNavItem
+                        <TabNavItem
                           title="Profile"
                           id="tab1"
                           activeTab={activeTab}
@@ -481,27 +469,27 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                             <td>{loan.dateOfApp}</td>
                                             <td>{loan.loanAmount}</td>
                                             <td>
-                                                <button
-                                                  style={{
-                                                    backgroundColor: "#064420",
-                                                    color: "#fff",
-                                                    alignItems: "center",
-                                                    borderRadius: "5px",
-                                                    border: "none",
-                                                    padding: "0.25rem 1rem",
-                                                    width: "fit-content",
-                                                    fontSize: ".75rem",
-                                                    lineHeight: "1rem",
-                                                  }}
-                                                  onClick={() => {
-                                                    setCurrentLoan(loan);
-                                                    handleCurrentTransaction();
-                                                    handleShowCompletedLoanDetails();
-                                                  }}
-                                                >
-                                                  view
-                                                </button>
-                                              </td>
+                                              <button
+                                                style={{
+                                                  backgroundColor: "#064420",
+                                                  color: "#fff",
+                                                  alignItems: "center",
+                                                  borderRadius: "5px",
+                                                  border: "none",
+                                                  padding: "0.25rem 1rem",
+                                                  width: "fit-content",
+                                                  fontSize: ".75rem",
+                                                  lineHeight: "1rem",
+                                                }}
+                                                onClick={() => {
+                                                  setCurrentLoan(loan);
+                                                  handleCurrentTransaction();
+                                                  handleShowCompletedLoanDetails();
+                                                }}
+                                              >
+                                                view
+                                              </button>
+                                            </td>
                                           </tr>
                                         ))
                                       }
@@ -509,11 +497,11 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                   </table>
                                 </div>
                               </div>
-                              <div style={{marginTop: '2%'}}>
-                                  <p>
-                                    Remaining Loan Window: 60000
-                                  </p>
-                                </div>
+                              <div style={{ marginTop: '2%' }}>
+                                <p>
+                                  Remaining Loan Window: 60000
+                                </p>
+                              </div>
                             </div>
                           </div>
                           <div>
@@ -597,7 +585,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                                   <button
                                                     className="btn btn-primary"
                                                     onClick={() => setFirstPage(false)}
-                                                    style={{ float: "right", backgroundColor: '#064420', marginTop: '10%'}}
+                                                    style={{ float: "right", backgroundColor: '#064420', marginTop: '10%' }}
                                                   >
                                                     View Transaction Details
                                                   </button>
@@ -723,7 +711,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                                       e.preventDefault();
                                                       handleCloseCompletedLoanDetails();
                                                     }}
-                                                    style={{ float: "right", backgroundColor: '#064420', marginTop: '10%'}}
+                                                    style={{ float: "right", backgroundColor: '#064420', marginTop: '10%' }}
                                                   >
                                                     Close
                                                   </button>
@@ -743,10 +731,10 @@ const Sammunati_FPO_SubLoan_Page = () => {
                             <Modal show={showPaymentProof} onHide={handleClosePaymentProof}>
                               <Modal.Header closeButton>Proof of Payment</Modal.Header>
                               <Modal.Body>
-                         
+
                                 <img
                                   src={logo}
-                                  alt="Payment Image"
+                                  alt="Payment"
                                   style={{ width: "100%", height: "100%" }}
                                 />
                               </Modal.Body>
@@ -828,11 +816,11 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                   </table>
                                 </div>
                               </div>
-                              <div style={{marginTop: '2%'}}>
-                                  <p>
-                                    Total amount to be paid in next installment: 30000
-                                  </p>
-                                </div>
+                              <div style={{ marginTop: '2%' }}>
+                                <p>
+                                  Total amount to be paid in next installment: 30000
+                                </p>
+                              </div>
                             </div>
                           </div>
                           <div>
@@ -1368,7 +1356,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                               <Modal.Body>
                                 <img
                                   src={logo}
-                                  alt="Payment Image"
+                                  alt="Payment"
                                   style={{ width: "100%", height: "100%" }}
                                 />
                               </Modal.Body>
@@ -1380,25 +1368,25 @@ const Sammunati_FPO_SubLoan_Page = () => {
                               <Modal.Body>
                                 <div className="row">
                                   <div className="col-lg-6">
-                                    <label style={{marginTop: '10%'}}>Repayment Date</label>
+                                    <label style={{ marginTop: '10%' }}>Repayment Date</label>
                                   </div>
                                   <div className="col-lg-6">
                                     <input
                                       type="date"
                                       className="form-control"
-                                      style={{marginTop: '7.5%'}}
+                                      style={{ marginTop: '7.5%' }}
                                     />
                                   </div>
                                 </div>
                                 <div className="row">
                                   <div className="col-lg-6">
-                                    <label style={{marginTop: '20%'}}>Repayment Amount</label>
+                                    <label style={{ marginTop: '20%' }}>Repayment Amount</label>
                                   </div>
                                   <div className="col-lg-6">
                                     <input
                                       type="number"
                                       className="form-control"
-                                      style={{marginTop: '17.5%'}}
+                                      style={{ marginTop: '17.5%' }}
                                     />
                                   </div>
                                 </div>
@@ -1407,7 +1395,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                     <button
                                       className="btn btn-primary"
                                       style={{ float: "right", backgroundColor: '#064420', marginTop: '10%', width: '100%' }}
-                                      onClick={() => {handleShowRepaymentConfirmation()}}
+                                      onClick={() => { handleShowRepaymentConfirmation() }}
                                     >
                                       Submit
                                     </button>
@@ -1440,7 +1428,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                     <button
                                       className="btn btn-primary"
                                       style={{ float: "right", backgroundColor: '#064420', marginTop: '10%', width: '100%' }}
-                                      onClick={() => {handleCloseRepaymentConfirmation()}}
+                                      onClick={() => { handleCloseRepaymentConfirmation() }}
                                     >
                                       No
                                     </button>
@@ -1530,173 +1518,173 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                     <form>
                                       <div className="form">
                                         <div className="card p-2">
-                                        <div className="row m-2">
-                                          <div className="col-lg-6">
-                                            <label>Loan Window ID</label>
+                                          <div className="row m-2">
+                                            <div className="col-lg-6">
+                                              <label>Loan Window ID</label>
+                                            </div>
+                                            <div className="col-lg-6">
+                                              <input
+                                                type="text"
+                                                className="form-control"
+                                                value={currentLoan.windowId}
+                                                disabled
+                                              />
+                                            </div>
                                           </div>
-                                          <div className="col-lg-6">
-                                            <input
-                                              type="text"
-                                              className="form-control"
-                                              value={currentLoan.windowId}
-                                              disabled
-                                            />
+                                          <div className="row m-2">
+                                            <div className="col-lg-6">
+                                              <label>Loan ID</label>
+                                            </div>
+                                            <div className="col-lg-6">
+                                              <input
+                                                type="text"
+                                                className="form-control"
+                                                value={currentLoan.id}
+                                                disabled
+                                              />
+                                            </div>
                                           </div>
-                                        </div>
-                                        <div className="row m-2">
-                                          <div className="col-lg-6">
-                                            <label>Loan ID</label>
+                                          <div className="row m-2">
+                                            <div className="col-lg-6">
+                                              <label>Name of Payee</label>
+                                            </div>
+                                            <div className="col-lg-6">
+                                              <input
+                                                type="text"
+                                                className="form-control"
+                                                value={currentLoan.payeeName}
+                                                disabled
+                                              />
+                                            </div>
                                           </div>
-                                          <div className="col-lg-6">
-                                            <input
-                                              type="text"
-                                              className="form-control"
-                                              value={currentLoan.id}
-                                              disabled
-                                            />
+                                          <div className="row m-2">
+                                            <div className="col-lg-6">
+                                              <label>Account Number</label>
+                                            </div>
+                                            <div className="col-lg-6">
+                                              <input
+                                                type="text"
+                                                className="form-control"
+                                                value={currentLoan.accountNo}
+                                                disabled
+                                              />
+                                            </div>
                                           </div>
-                                        </div>
-                                        <div className="row m-2">
-                                          <div className="col-lg-6">
-                                            <label>Name of Payee</label>
+                                          <div className="row m-2">
+                                            <div className="col-lg-6">
+                                              <label>IFSC Number</label>
+                                            </div>
+                                            <div className="col-lg-6">
+                                              <input
+                                                type="number"
+                                                className="form-control"
+                                                value={currentLoan.ifsc}
+                                                disabled
+                                              />
+                                            </div>
                                           </div>
-                                          <div className="col-lg-6">
-                                            <input
-                                              type="text"
-                                              className="form-control"
-                                              value={currentLoan.payeeName}
-                                              disabled
-                                            />
+                                          <div className="row m-2">
+                                            <div className="col-lg-6">
+                                              <label>Bank Name</label>
+                                            </div>
+                                            <div className="col-lg-6">
+                                              <input
+                                                type="text"
+                                                className="form-control"
+                                                value={currentLoan.bankName}
+                                                disabled
+                                              />
+                                            </div>
                                           </div>
-                                        </div>
-                                        <div className="row m-2">
-                                          <div className="col-lg-6">
-                                            <label>Account Number</label>
+                                          <div className="row m-2">
+                                            <div className="col-lg-6">
+                                              <label>Amount</label>
+                                            </div>
+                                            <div className="col-lg-6">
+                                              <input
+                                                type="text"
+                                                className="form-control"
+                                                value={currentLoan.loanAmount}
+                                                disabled
+                                              />
+                                            </div>
                                           </div>
-                                          <div className="col-lg-6">
-                                            <input
-                                              type="text"
-                                              className="form-control"
-                                              value={currentLoan.accountNo}
-                                              disabled
-                                            />
+                                          <div className="row m-2">
+                                            <div className="col-lg-6">
+                                              <label>Interest Rate (%)</label>
+                                            </div>
+                                            <div className="col-lg-6">
+                                              <input
+                                                type="text"
+                                                className="form-control"
+                                                value={currentLoan.interest}
+                                                disabled
+                                              />
+                                            </div>
                                           </div>
-                                        </div>
-                                        <div className="row m-2">
-                                          <div className="col-lg-6">
-                                            <label>IFSC Number</label>
+                                          <div className="row m-2">
+                                            <div className="col-lg-6">
+                                              <label>Tenure of Loan in Months</label>
+                                            </div>
+                                            <div className="col-lg-6">
+                                              <input
+                                                type="text"
+                                                className="form-control"
+                                                value={currentLoan.tenure}
+                                                disabled
+                                              />
+                                            </div>
                                           </div>
-                                          <div className="col-lg-6">
-                                            <input
-                                              type="number"
-                                              className="form-control"
-                                              value={currentLoan.ifsc}
-                                              disabled
-                                            />
+                                          <div className="row m-2">
+                                            <div className="col-lg-6">
+                                              <label>Invoice</label>
+                                            </div>
+                                            <div className="col-lg-6">
+                                              <button
+                                                style={{
+                                                  backgroundColor: "#064420",
+                                                  color: "#fff",
+                                                  alignItems: "center",
+                                                  borderRadius: "5px",
+                                                  border: "none",
+                                                  padding: "0.25rem 1rem",
+                                                  width: "100%",
+                                                  fontSize: "1rem",
+                                                  lineHeight: "1.5rem",
+                                                }}
+                                                onClick={(e) => {
+                                                  e.preventDefault();
+                                                  handleShowPaymemntProof();
+                                                }}
+                                              >
+                                                View
+                                              </button>
+                                            </div>
                                           </div>
-                                        </div>
-                                        <div className="row m-2">
-                                          <div className="col-lg-6">
-                                            <label>Bank Name</label>
+                                          <div className="row m-2">
+                                            <div className="col-lg-6">
+                                              <label>Purpose</label>
+                                            </div>
+                                            <div className="col-lg-6">
+                                              <input
+                                                type="text"
+                                                className="form-control"
+                                                value={currentLoan.purpose}
+                                                disabled
+                                              />
+                                            </div>
                                           </div>
-                                          <div className="col-lg-6">
-                                            <input
-                                              type="text"
-                                              className="form-control"
-                                              value={currentLoan.bankName}
-                                              disabled
-                                            />
-                                          </div>
-                                        </div>
-                                        <div className="row m-2">
-                                          <div className="col-lg-6">
-                                            <label>Amount</label>
-                                          </div>
-                                          <div className="col-lg-6">
-                                            <input
-                                              type="text"
-                                              className="form-control"
-                                              value={currentLoan.loanAmount}
-                                              disabled
-                                            />
-                                          </div>
-                                        </div>
-                                        <div className="row m-2">
-                                          <div className="col-lg-6">
-                                            <label>Interest Rate (%)</label>
-                                          </div>
-                                          <div className="col-lg-6">
-                                            <input
-                                              type="text"
-                                              className="form-control"
-                                              value={currentLoan.interest}
-                                              disabled
-                                            />
-                                          </div>
-                                        </div>
-                                        <div className="row m-2">
-                                          <div className="col-lg-6">
-                                            <label>Tenure of Loan in Months</label>
-                                          </div>
-                                          <div className="col-lg-6">
-                                            <input
-                                              type="text"
-                                              className="form-control"
-                                              value={currentLoan.tenure}
-                                              disabled
-                                            />
-                                          </div>
-                                        </div>
-                                        <div className="row m-2">
-                                          <div className="col-lg-6">
-                                            <label>Invoice</label>
-                                          </div>
-                                          <div className="col-lg-6">
-                                            <button
-                                              style={{
-                                                backgroundColor: "#064420",
-                                                color: "#fff",
-                                                alignItems: "center",
-                                                borderRadius: "5px",
-                                                border: "none",
-                                                padding: "0.25rem 1rem",
-                                                width: "100%",
-                                                fontSize: "1rem",
-                                                lineHeight: "1.5rem",
-                                              }}
-                                              onClick={(e) => {
-                                                e.preventDefault();
-                                                handleShowPaymemntProof();
-                                              }}
-                                            >
-                                              View
-                                            </button>
-                                          </div>
-                                        </div>
-                                        <div className="row m-2">
-                                          <div className="col-lg-6">
-                                            <label>Purpose</label>
-                                          </div>
-                                          <div className="col-lg-6">
-                                            <input
-                                              type="text"
-                                              className="form-control"
-                                              value={currentLoan.purpose}
-                                              disabled
-                                            />
-                                          </div>
-                                        </div>
                                           <div className="row m-2">
                                             <div className="col-lg-12">
                                               <select
-                                                  className="form-control"
-                                                  onChange={(e) => handlePendingLoanStatus(e)}
-                                                  style={{marginTop: '7%'}}
-                                                >
-                                                  <option value="Pending">Change Loan Status</option>
-                                                  <option value="Approved">Approve</option>
-                                                  <option value="Rejected">Reject</option>
-                                                </select>
+                                                className="form-control"
+                                                onChange={(e) => handlePendingLoanStatus(e)}
+                                                style={{ marginTop: '7%' }}
+                                              >
+                                                <option value="Pending">Change Loan Status</option>
+                                                <option value="Approved">Approve</option>
+                                                <option value="Rejected">Reject</option>
+                                              </select>
                                             </div>
                                           </div>
                                         </div>
@@ -1713,7 +1701,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                               <Modal.Body>
                                 <img
                                   src={logo}
-                                  alt="Payment Image"
+                                  alt="Payment"
                                   style={{ width: "100%", height: "100%" }}
                                 />
                               </Modal.Body>

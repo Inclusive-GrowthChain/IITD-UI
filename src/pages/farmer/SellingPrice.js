@@ -51,7 +51,7 @@ class SellingPrice extends Component {
                       color: "rgb(33, 37, 41)",
                     }}
                   >
-                    Shop from FPO
+                    Sell to FPO
                   </h3>
                 </div>
                 <div className="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4">
@@ -61,7 +61,7 @@ class SellingPrice extends Component {
                         src="https://3.imimg.com/data3/TM/JM/ETO-196508/1-294285-full-images-stick-lac-1081592-500x500.jpg"
                         className="card-img-top"
                         alt=""
-                        style={{ height: "450px", }}
+                        style={{ height: "280px", objectFit: "cover" }}
                       />
                       <div className="card-body">
                         <div className="row">
@@ -118,7 +118,7 @@ class SellingPrice extends Component {
                         src="https://img3.exportersindia.com/product_images/bc-full/2018/9/1491297/seedlac-shellac-1536140025-4266463.jpg"
                         className="card-img-top"
                         alt=""
-                        style={{ height: "450px", }}
+                        style={{ height: "280px", objectFit: "cover" }}
                       />
                       <div className="card-body">
                         <div className="row">
@@ -175,7 +175,7 @@ class SellingPrice extends Component {
                         src="https://5.imimg.com/data5/WH/TW/MY-1496311/shellac-processed-versatile-lac-golden-kusmi-500x500.jpg"
                         className="card-img-top"
                         alt=""
-                        style={{ height: "450px", }}
+                        style={{ height: "280px", objectFit: "cover" }}
                       />
                       <div className="card-body">
                         <div className="row">

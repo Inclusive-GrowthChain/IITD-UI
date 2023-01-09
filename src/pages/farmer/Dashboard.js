@@ -1,7 +1,6 @@
-import React from "react";
-import "./Dashboard.css";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
+import "./Dashboard.css";
 
 import ImageSlider from "./SliderImage/ImageSlider";
 import { SliderData } from "./SliderImage/SliderData";

@@ -29,7 +29,7 @@ const Store = () => {
                 <div className="col">
                   <div className="card">
                     <img
-                      style={{ height: "450px" }}
+                      style={{ height: "280px", objectFit: "contain" }}
                       src={Nylonbag}
                       className="card-img-top"
                       alt="..."
@@ -56,7 +56,7 @@ const Store = () => {
                         <div className="col-5">
                           <div className="row">
                             <div className="col">
-                              <strong>FPO Price</strong>
+                              <strong>FPO Price</strong>
                             </div>
                           </div>
                           <div className="row">
@@ -72,7 +72,7 @@ const Store = () => {
                 <div className="col">
                   <div className="card">
                     <img
-                      style={{ height: "450px" }}
+                      style={{ height: "280px", objectFit: "contain" }}
                       src="https://my-test-11.slatic.net/p/486223832ffd2e9a31da49d2f5299e07.png"
                       className="card-img-top"
                       alt="..."
@@ -99,7 +99,7 @@ const Store = () => {
                         <div className="col-5">
                           <div className="row">
                             <div className="col">
-                              <strong>FPO Price</strong>
+                              <strong>FPO Price</strong>
                             </div>
                           </div>
                           <div className="row">
@@ -116,7 +116,7 @@ const Store = () => {
                   <div className="card">
                     <i className="bi bi-heart-fill"></i>
                     <img
-                      style={{ height: "450px" }}
+                      style={{ height: "280px", objectFit: "contain" }}
                       src="https://www.katrafert.com/wp-content/uploads/2020/07/Banlarva-1.jpg"
                       className="card-img-top"
                       alt="..."
@@ -143,7 +143,7 @@ const Store = () => {
                         <div className="col-5">
                           <div className="row">
                             <div className="col">
-                              <strong>FPO Price</strong>
+                              <strong>FPO Price</strong>
                             </div>
                           </div>
                           <div className="row">

@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import "./Dashboard.css";
-import Sidebar from "./Sidebar";
-import Navbar from "./Navbar";
+import { useState } from "react";
+import { MenuItem } from "@mui/material";
+import Select from '@mui/material/Select';
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import MultiStepProgressBar from "./ProgressBar/ProgressBar";
 
+import MultiStepProgressBar from "./ProgressBar/ProgressBar";
 import TabNavItem from "../farmer/Tabs/TabNavItem";
 import TabContent from "../farmer/Tabs/TabContent";
-
-// import logo from "../../assets/img/logo.png";
+import Sidebar from "./Sidebar";
+import Navbar from "./Navbar";
 
 import PageOne from "./Progress Pages/PageOne";
 import PageTwo from "./Progress Pages/PageTwo";
@@ -17,16 +16,12 @@ import PageThree from "./Progress Pages/PageThree";
 import PageFour from "./Progress Pages/PageFour";
 import PageFive from "./Progress Pages/PageFive";
 
-import Select from '@mui/material/Select';
-import { MenuItem } from "@mui/material";
-
 const Corporate_Client_Lac_Bidding = () => {
+  const [multiSelectReportName, setMultiSelectReportName] = useState([]);
+  const [showConfirmBox, setShowConfirmBox] = useState(false);
   const [showBidStatus, setShowBidStatus] = useState(false);
   const [showStartBid, setShowStartBid] = useState(false);
-  const [multiSelectReportName, setMultiSelectReportName] = useState([]);
   const [currentBid, setCurrentBid] = useState({});
-  const [showConfirmBox, setShowConfirmBox] = useState(false);
-  // const [closeBidStatus, setCloseBidStatus] = useState(false);
 
   const activeBidList = [
     {
@@ -37,7 +32,7 @@ const Corporate_Client_Lac_Bidding = () => {
       lacStrainType: "Kusmi",
       treeSource: "Kusum",
       origin: "Jharkhand",
-      reportsReqd: [        
+      reportsReqd: [
         {
           reportName: "Chowri",
           reportReqd: true,
@@ -61,7 +56,7 @@ const Corporate_Client_Lac_Bidding = () => {
       lacStrainType: "Rangeeni",
       treeSource: "Ber",
       origin: "Chattisgarh",
-      reportsReqd: [        
+      reportsReqd: [
         {
           reportName: "Chowri",
           reportReqd: false,
@@ -85,7 +80,7 @@ const Corporate_Client_Lac_Bidding = () => {
       lacStrainType: "Kusmi",
       treeSource: "Palash",
       origin: "MP",
-      reportsReqd: [        
+      reportsReqd: [
         {
           reportName: "Chowri",
           reportReqd: true,
@@ -109,7 +104,7 @@ const Corporate_Client_Lac_Bidding = () => {
       lacStrainType: "Rangeeni",
       treeSource: "Kusum",
       origin: "Jharkhand",
-      reportsReqd: [        
+      reportsReqd: [
         {
           reportName: "Chowri",
           reportReqd: true,
@@ -133,7 +128,7 @@ const Corporate_Client_Lac_Bidding = () => {
       lacStrainType: "Kusmi",
       treeSource: "Kusum",
       origin: "Jharkhand",
-      reportsReqd: [        
+      reportsReqd: [
         {
           reportName: "Chowri",
           reportReqd: false,
@@ -252,7 +247,7 @@ const Corporate_Client_Lac_Bidding = () => {
   const generateRandomBidID = () => {
     let bidValue = 'B' + (Math.floor(100000 + Math.random() * 900000));
     // eslint-disable-next-line eqeqeq
-    if(activeBidList.find((bid) => bid.id == bidValue)) {
+    if (activeBidList.find((bid) => bid.id == bidValue)) {
       generateRandomBidID();
     }
     return bidValue;
@@ -288,24 +283,23 @@ const Corporate_Client_Lac_Bidding = () => {
   //   }
   // }, [closeBidStatus]);
 
-  // eslint-disable-next-line no-unused-vars
-  const nextPageNumber = (pageNumber) => {
-    switch (pageNumber) {
-      case "1":
-        setPage("pageone");
-        break;
-      case "2":
-        setPage("pagetwo");
-        break;
-      case "3":
-        setPage("pagethree");
-        break;
-      case "4":
-        break;
-      default:
-        setPage("1");
-    }
-  };
+  // const nextPageNumber = (pageNumber) => {
+  //   switch (pageNumber) {
+  //     case "1":
+  //       setPage("pageone");
+  //       break;
+  //     case "2":
+  //       setPage("pagetwo");
+  //       break;
+  //     case "3":
+  //       setPage("pagethree");
+  //       break;
+  //     case "4":
+  //       break;
+  //     default:
+  //       setPage("1");
+  //   }
+  // };
 
   return (
     <div className="corporateClient">
@@ -330,33 +324,33 @@ const Corporate_Client_Lac_Bidding = () => {
               <div
                 className="list__btn"
                 style={{
-                position: "relative",
-                float: "right",
-                right: "18px",
-                top: "10px",
+                  position: "relative",
+                  float: "right",
+                  right: "18px",
+                  top: "10px",
                 }}
               >
                 <Button
                   className="crop-advisory_button"
                   style={{
-                      backgroundColor: "#064420",
-                      border: "none",
-                      width: "fit-content",
+                    backgroundColor: "#064420",
+                    border: "none",
+                    width: "fit-content",
                   }}
                   onClick={handleShowStartBid}
-                  >
+                >
                   Start Bid
-                  </Button>
+                </Button>
               </div>
               <div>
                 <Modal show={showStartBid} onHide={handleCloseStartBid}>
                   <Modal.Header closeButton>Start Bid</Modal.Header>
-                    <Modal.Body>
-                      <div className="row">
-                        <div className="col">
-                          <form>
-                            <div className="form">
-                              <div className="card p-2">
+                  <Modal.Body>
+                    <div className="row">
+                      <div className="col">
+                        <form>
+                          <div className="form">
+                            <div className="card p-2">
                               <div className="row m-2">
                                 <div className="col-lg-6">
                                   <label>Bid ID</label>
@@ -378,8 +372,8 @@ const Corporate_Client_Lac_Bidding = () => {
                                   <select
                                     className="form-control"
                                     name="category"
-                                    // value={category}
-                                    // onChange={(e) => setCategory(e.target.value)}
+                                  // value={category}
+                                  // onChange={(e) => setCategory(e.target.value)}
                                   >
                                     <option value="0">Select Type</option>
                                     <option value="1">Kusmi</option>
@@ -486,14 +480,14 @@ const Corporate_Client_Lac_Bidding = () => {
                                 </div>
                                 <div className="col-lg-12">
                                   <textarea className="form-control"
-                                    style={{ height: "200%"}}
+                                    style={{ height: "200%" }}
                                   />
                                 </div>
                               </div>
                               <div className="row m-2">
-                                <button 
-                                  className="btn btn-success" 
-                                  style={{marginTop: '5rem', backgroundColor: '#064420'}}
+                                <button
+                                  className="btn btn-success"
+                                  style={{ marginTop: '5rem', backgroundColor: '#064420' }}
                                   onClick={(e) => confirmBid(e)}
                                 >
                                   Submit
@@ -514,10 +508,10 @@ const Corporate_Client_Lac_Bidding = () => {
                     <p>
                       Are you sure you want to start this bid? Bid details cannot be editted once started.
                     </p>
-                    <div className="col-lg-12" style={{display: "flex", justifyContent: "flex-end"}}>
-                      <button 
-                        className="btn btn-success" 
-                        style={{backgroundColor: '#064420'}}
+                    <div className="col-lg-12" style={{ display: "flex", justifyContent: "flex-end" }}>
+                      <button
+                        className="btn btn-success"
+                        style={{ backgroundColor: '#064420' }}
                         onClick={(e) => placeBid(e)}
                       >
                         Confirm
@@ -608,17 +602,17 @@ const Corporate_Client_Lac_Bidding = () => {
                     <div>
                       <Modal show={showBidStatus} onHide={handleCloseBidStatus} className="progressModal" size="lg">
                         <Modal.Header closeButton>Bid Status</Modal.Header>
-                        <Modal.Body style={{padding: '1.25rem'}}>
-                          <MultiStepProgressBar page={page}/>
+                        <Modal.Body style={{ padding: '1.25rem' }}>
+                          <MultiStepProgressBar page={page} />
+                          {
                             {
-                              {
-                                pageone: <PageOne onButtonClick={nextPage} bid={currentBid}/>,
-                                pagetwo: <PageTwo onButtonClick={nextPage} />,
-                                pagethree: <PageThree onButtonClick={nextPage} />,
-                                pagefour: <PageFour onButtonClick={nextPage} />,
-                                pagefive: <PageFive onButtonClick={nextPage} closeBidStatus={handleCloseBidStatus}/>,
-                              }[page]
-                            }
+                              pageone: <PageOne onButtonClick={nextPage} bid={currentBid} />,
+                              pagetwo: <PageTwo onButtonClick={nextPage} />,
+                              pagethree: <PageThree onButtonClick={nextPage} />,
+                              pagefour: <PageFour onButtonClick={nextPage} />,
+                              pagefive: <PageFive onButtonClick={nextPage} closeBidStatus={handleCloseBidStatus} />,
+                            }[page]
+                          }
                         </Modal.Body>
                       </Modal>
                     </div>
@@ -681,7 +675,7 @@ const Corporate_Client_Lac_Bidding = () => {
                         </div>
                       </div>
                     </div>
-                    
+
                   </TabContent>
                 </div>
               </div>

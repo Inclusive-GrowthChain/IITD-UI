@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./styles.css";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
@@ -92,36 +92,36 @@ const TrainingUpdate = () => {
                   Training Programs
                 </h3>
                 <div
-                    className="list__btn"
-                    style={{
+                  className="list__btn"
+                  style={{
                     position: "relative",
                     float: "right",
                     right: "18px",
                     top: "10px",
-                    }}
+                  }}
                 >
-                    <Button
+                  <Button
                     className="crop-advisory_button"
                     style={{
-                        backgroundColor: "#064420",
-                        border: "none",
-                        width: "fit-content",
+                      backgroundColor: "#064420",
+                      border: "none",
+                      width: "fit-content",
                     }}
                     onClick={handleTPShow}
-                    >
+                  >
                     Add Training Program
-                    </Button>
+                  </Button>
                 </div>
               </div>
               <div>
                 <Modal show={showAddTP} onHide={handleTPClose}>
                   <Modal.Header closeButton>Add Training Program</Modal.Header>
-                    <Modal.Body>
-                      <div className="row">
-                        <div className="col">
-                          <form>
-                            <div className="form">
-                              <div className="card p-2">
+                  <Modal.Body>
+                    <div className="row">
+                      <div className="col">
+                        <form>
+                          <div className="form">
+                            <div className="card p-2">
                               <div className="row m-2">
                                 <div className="col-lg-6">
                                   <label>Training ID</label>
@@ -175,7 +175,7 @@ const TrainingUpdate = () => {
                                   <label>Fee (in Rs.)</label>
                                 </div>
                                 <div className="col-lg-6">
-                                <input className="form-control" type="number" />
+                                  <input className="form-control" type="number" />
                                 </div>
                               </div>
                               <div className="row m-2">
@@ -184,14 +184,14 @@ const TrainingUpdate = () => {
                                 </div>
                                 <div className="col-lg-12">
                                   <textarea className="form-control"
-                                    style={{ height: "200%"}}
+                                    style={{ height: "200%" }}
                                   />
                                 </div>
                               </div>
                               <div className="row m-2">
-                                <button 
-                                  className="btn btn-success" 
-                                  style={{marginTop: '5rem', backgroundColor: '#064420'}}
+                                <button
+                                  className="btn btn-success"
+                                  style={{ marginTop: '5rem', backgroundColor: '#064420' }}
                                 >
                                   Submit
                                 </button>
@@ -245,27 +245,27 @@ const TrainingUpdate = () => {
                             <td>{tp.fee}</td>
                             <td>{tp.remarks}</td>
                             <td>
-                              <button 
+                              <button
                                 onClick={() => handleEditTPShow(ind)}
-                                style={{backgroundColor: 'white'}}>
+                                style={{ backgroundColor: 'white' }}>
                                 <EditIcon />
                               </button>
                             </td>
                             <div>
                               <Modal show={showEditTP} onHide={handleEditTPClose}>
                                 <Modal.Header closeButton>Edit Training Program</Modal.Header>
-                                  <Modal.Body>
-                                    <div className="row">
-                                      <div className="col">
-                                        <form>
-                                          <div className="form">
-                                            <div className="card p-2">
+                                <Modal.Body>
+                                  <div className="row">
+                                    <div className="col">
+                                      <form>
+                                        <div className="form">
+                                          <div className="card p-2">
                                             <div className="row m-2">
                                               <div className="col-lg-6">
                                                 <label>Training Course Name</label>
                                               </div>
                                               <div className="col-lg-12">
-                                                <input className="form-control" type="text" defaultValue={currentTP.name}/>
+                                                <input className="form-control" type="text" defaultValue={currentTP.name} />
                                               </div>
                                             </div>
                                             <div className="row m-2">
@@ -273,7 +273,7 @@ const TrainingUpdate = () => {
                                                 <label>Course Start Date</label>
                                               </div>
                                               <div className="col-lg-6">
-                                                <input className="form-control" type="date" defaultValue={currentTP.courseStartDate}/>
+                                                <input className="form-control" type="date" defaultValue={currentTP.courseStartDate} />
                                               </div>
                                             </div>
                                             <div className="row m-2">
@@ -281,7 +281,7 @@ const TrainingUpdate = () => {
                                                 <label>Duration</label>
                                               </div>
                                               <div className="col-lg-6">
-                                                <input className="form-control" type="text" defaultValue={currentTP.duration}/>
+                                                <input className="form-control" type="text" defaultValue={currentTP.duration} />
                                               </div>
                                             </div>
                                             <div className="row m-2">
@@ -289,7 +289,7 @@ const TrainingUpdate = () => {
                                                 <label>Application Start Date</label>
                                               </div>
                                               <div className="col-lg-6">
-                                                <input className="form-control" type="date" defaultValue={currentTP.appStartDate}/>
+                                                <input className="form-control" type="date" defaultValue={currentTP.appStartDate} />
                                               </div>
                                             </div>
                                             <div className="row m-2">
@@ -297,7 +297,7 @@ const TrainingUpdate = () => {
                                                 <label>Application End Date</label>
                                               </div>
                                               <div className="col-lg-6">
-                                                <input className="form-control" type="date" defaultValue={currentTP.appEndDate}/>
+                                                <input className="form-control" type="date" defaultValue={currentTP.appEndDate} />
                                               </div>
                                             </div>
                                             <div className="row m-2">
@@ -305,7 +305,7 @@ const TrainingUpdate = () => {
                                                 <label>Fee (in Rs.)</label>
                                               </div>
                                               <div className="col-lg-6">
-                                              <input className="form-control" type="number" defaultValue={currentTP.fee}/>
+                                                <input className="form-control" type="number" defaultValue={currentTP.fee} />
                                               </div>
                                             </div>
                                             <div className="row m-2">
@@ -314,15 +314,15 @@ const TrainingUpdate = () => {
                                               </div>
                                               <div className="col-lg-12">
                                                 <textarea className="form-control"
-                                                  style={{ height: "200%"}}
+                                                  style={{ height: "200%" }}
                                                   defaultValue={tp.remarks}
                                                 />
                                               </div>
                                             </div>
                                             <div className="row m-2">
-                                              <button 
-                                                className="btn btn-success" 
-                                                style={{marginTop: '5rem', backgroundColor: '#064420'}}
+                                              <button
+                                                className="btn btn-success"
+                                                style={{ marginTop: '5rem', backgroundColor: '#064420' }}
                                               >
                                                 Submit
                                               </button>
