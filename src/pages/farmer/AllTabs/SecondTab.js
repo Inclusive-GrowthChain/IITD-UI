@@ -1,5 +1,37 @@
-import React from "react";
-import "../Dashboard.css";
+const data = [
+  {
+    id: "SAM107254367",
+    date: "17-02-22",
+    name: "Stick Lac",
+    pricePerKg: "100",
+    quantity: "2",
+    totalAmount: "200",
+  },
+  {
+    id: "SAM107254368",
+    date: "17-02-22",
+    name: "Seed Lac",
+    pricePerKg: "300",
+    quantity: "2",
+    totalAmount: "600",
+  },
+  {
+    id: "SAM107254369",
+    date: "17-02-22",
+    name: "Shellac Lac",
+    pricePerKg: "150",
+    quantity: "6",
+    totalAmount: "900",
+  },
+  {
+    id: "SAM107254370",
+    date: "19-02-22",
+    name: "Stick Lac",
+    pricePerKg: "50",
+    quantity: "6",
+    totalAmount: "300",
+  },
+]
 
 const SecondTab = () => {
   return (
@@ -19,9 +51,10 @@ const SecondTab = () => {
                   <tr>
                     <th>Sale Id</th>
                     <th>Date of Sale</th>
-                    <th>Type of Lac</th>
+                    <th>Item</th>
                     <th>Quantity</th>
-                    <th>Price</th>
+                    <th>Price Per KG</th>
+                    <th>Total Amount</th>
                   </tr>
                 </thead>
                 <tbody
@@ -31,48 +64,18 @@ const SecondTab = () => {
                     fontWeight: "500",
                   }}
                 >
-                  <tr>
-                    <td>SAM10742671</td>
-                    <td>12-02-22</td>
-                    <td>Stick Lac</td>
-                    <td>3 kg</td>
-                    <td>₹ 520</td>
-                  </tr>
-                  <tr>
-                    <td>SAM10742672</td>
-                    <td>24-04-21</td>
-                    <td>Seed Lac</td>
-                    <td>500 gm</td>
-                    <td>₹ 520</td>
-                  </tr>
-                  <tr>
-                    <td>SAM10742672</td>
-                    <td>24-04-21</td>
-                    <td>Shellac Lac</td>
-                    <td>500 gm</td>
-                    <td>₹ 520</td>
-                  </tr>
-                  <tr>
-                    <td>SAM10742672</td>
-                    <td>24-04-21</td>
-                    <td>Stick Lac</td>
-                    <td>500 gm</td>
-                    <td>₹ 520</td>
-                  </tr>
-                  <tr>
-                    <td>SAM10742672</td>
-                    <td>24-04-21</td>
-                    <td>Seed Lac</td>
-                    <td>500 gm</td>
-                    <td>₹ 520</td>
-                  </tr>
-                  <tr>
-                    <td>SAM10742672</td>
-                    <td>24-04-21</td>
-                    <td>Shellac Lac</td>
-                    <td>500 gm</td>
-                    <td>₹ 520</td>
-                  </tr>
+                  {
+                    data.map(d => (
+                      <tr key={d.id}>
+                        <td>{d.id}</td>
+                        <td>{d.date}</td>
+                        <td>{d.name}</td>
+                        <td>{d.pricePerKg}</td>
+                        <td>{d.quantity}</td>
+                        <td>{d.totalAmount}</td>
+                      </tr>
+                    ))
+                  }
                 </tbody>
               </table>
             </div>
