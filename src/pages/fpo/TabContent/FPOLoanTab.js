@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
 import logo from "../../../assets/img/logo.png";
 
-function FpoLoanTab() {
+function FpoLoanTab({ Comp }) {
   const [showConfirmLoanStatus, setShowConfirmLoanStatus] = useState(false)
   const [showRepaymentAmount, setShowRepaymentAmount] = useState(false)
   const [showLoanApplication, setShowLoanApplication] = useState(false)
@@ -53,26 +53,34 @@ function FpoLoanTab() {
         <div className="card_content">
           <div className="bloc-tab">
             <button
-              className={toggleState === 1 ? "tabloan active-tab" : "tabloan"}
+              className={`tabloan ${toggleState === 1 ? "active-tab" : ""}`}
               onClick={() => toggleTab(1)}
-              style={{ width: "14%" }}
+              style={{ fontSize: "14px", width: "200px" }}
             >
               Approved Application
             </button>
             <button
-              className={toggleState === 2 ? "tabloan active-tab" : "tabloan"}
+              className={`tabloan ${toggleState === 2 ? "active-tab" : ""}`}
               onClick={() => toggleTab(2)}
-              style={{ width: "15%" }}
+              style={{ fontSize: "14px", width: "200px" }}
             >
               Applications History
             </button>
             <button
-              className={toggleState === 3 ? "tabloan active-tab" : "tabloan"}
+              className={`tabloan ${toggleState === 3 ? "active-tab" : ""}`}
               onClick={() => toggleTab(3)}
-              style={{ width: "15%" }}
+              style={{ fontSize: "14px", width: "200px" }}
             >
               Applications in Process
             </button>
+            <button
+              className={`tabloan ${toggleState === 4 ? "active-tab" : ""}`}
+              onClick={() => toggleTab(4)}
+              style={{ fontSize: "14px", width: "200px" }}
+            >
+              Loan Window
+            </button>
+
             <button
               style={{
                 color: "blue",
@@ -94,7 +102,7 @@ function FpoLoanTab() {
           </div>
 
           <div className="content_tab">
-            <div className={toggleState === 1 ? "content1  active_content" : "content1"}>
+            <div className={toggleState === 1 ? "content1 active_content" : "content1"}>
               <table>
                 <thead
                   style={{
@@ -217,7 +225,7 @@ function FpoLoanTab() {
 
             <div
               className={
-                toggleState === 2 ? "content1  active_content" : "content1"
+                toggleState === 2 ? "content1 active_content" : "content1"
               }
             >
               <table>
@@ -272,7 +280,7 @@ function FpoLoanTab() {
 
             <div
               className={
-                toggleState === 3 ? "content1  active_content" : "content1"
+                toggleState === 3 ? "content1 active_content" : "content1"
               }
             >
               <table>
@@ -342,6 +350,10 @@ function FpoLoanTab() {
                 </tbody>
               </table>
             </div>
+
+            <div className={toggleState === 4 ? "content1 active_content" : "content1"}>
+              {Comp}
+            </div>
           </div>
         </div>
       </div>
@@ -349,25 +361,32 @@ function FpoLoanTab() {
       <div className="card_wrapper mt-2">
         <div className="bloc-tabs" style={{ width: "100%" }}>
           <button
-            style={{ width: "12%" }}
-            className={toggleChange === 1 ? "tabs-1 active-tabs" : "tabs-1"}
+            className={`tabs-1 ${toggleChange === 1 ? "active-tabs" : ""}`}
+            style={{ fontSize: "14px", width: "200px" }}
             onClick={() => toggleTab1(1)}
           >
             Approved Application
           </button>
           <button
-            style={{ width: "12%" }}
-            className={toggleChange === 2 ? "tabs-1 active-tabs" : "tabs-1"}
+            className={`tabs-1 ${toggleChange === 2 ? "active-tabs" : ""}`}
+            style={{ fontSize: "14px", width: "200px" }}
             onClick={() => toggleTab1(2)}
           >
             Application History
           </button>
           <button
-            style={{ width: "12%" }}
-            className={toggleChange === 3 ? "tabs-1 active-tabs" : "tabs-1"}
+            className={`tabs-1 ${toggleChange === 3 ? "active-tabs" : ""}`}
+            style={{ fontSize: "14px", width: "200px" }}
             onClick={() => toggleTab1(3)}
           >
             Application in Process
+          </button>
+          <button
+            className={`tabs-1 ${toggleChange === 4 ? "active-tabs" : ""}`}
+            style={{ fontSize: "14px", width: "200px" }}
+            onClick={() => toggleTab1(4)}
+          >
+            Loan Window
           </button>
           <button
             style={{
@@ -573,7 +592,7 @@ function FpoLoanTab() {
             </table>
           </div>
 
-          <div className={toggleChange === 3 ? "content  active-content" : "content"}>
+          <div className={toggleChange === 3 ? "content active-content" : "content"}>
             <table>
               <thead
                 style={{
@@ -775,6 +794,10 @@ function FpoLoanTab() {
                 </tr> */}
               </tbody>
             </table>
+          </div>
+
+          <div className={toggleChange === 4 ? "content active-content" : "content"}>
+            {Comp}
           </div>
         </div>
       </div>

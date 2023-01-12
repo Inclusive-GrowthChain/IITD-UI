@@ -626,7 +626,7 @@ function DocumentsCollected({
                       <div className="row m-2">
                         <div className="col-lg-12">
                           <label>
-                            Product wise break up of revenues
+                            Product wise break up of revenues (2 fiscal)
                           </label>
                         </div>
                         <div className="col-lg-12">
@@ -664,7 +664,7 @@ function DocumentsCollected({
                       </div>
                       <div className="row m-2">
                         <div className="col-lg-12">
-                          <label>Top 5 suppliers/vintage</label>
+                          <label>Top 5 suppliers/vintage (last 6 months)</label>
                         </div>
                         <div className="col-lg-12">
                           <input
@@ -675,7 +675,7 @@ function DocumentsCollected({
                       </div>
                       <div className="row m-2">
                         <div className="col-lg-12">
-                          <label>Top 5 buyers/vintage</label>
+                          <label>Top 5 buyers/vintage (last 6 months)</label>
                         </div>
                         <div className="col-lg-12">
                           <input
@@ -687,7 +687,7 @@ function DocumentsCollected({
                       <div className="row m-2">
                         <div className="col-lg-12">
                           <label>
-                            Sanction limit & O/svfor both WC & TL
+                            Sanction limit & O/s for both WC & TL
                           </label>
                         </div>
                         <div className="col-lg-12">

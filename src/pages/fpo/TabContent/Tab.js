@@ -1,114 +1,109 @@
-import React, { useState } from "react";
-import "../style.css";
-import { NavLink } from "react-router-dom";
-import Modal from "react-bootstrap/Modal";
-import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
-import logo from "../../../assets/img/logo.png";
+import React, { useState } from "react"
+import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone"
+import { NavLink } from "react-router-dom"
+import Modal from "react-bootstrap/Modal"
+
+import logo from "../../../assets/img/logo.png"
+import "../style.css"
+
+const approvedMembershipList = [
+  {
+    loanId: 1,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+  {
+    loanId: 3,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+  {
+    loanId: 4,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+  {
+    loanId: 8,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+  {
+    loanId: 9,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+]
+
+const rejectedMembershipList = [
+  {
+    loanId: 5,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+  {
+    loanId: 7,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+  {
+    loanI: 10,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+]
+
+const pendingMembershipList = [
+  {
+    loanId: 2,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+  {
+    loanId: 6,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+]
 
 const Tab = () => {
-  const [activeIndex, setActiveIndex] = useState(1);
-  const handleClick = (index) => setActiveIndex(index);
+  const [showLoanApplicationDetails, setShowLoanApplicationDetails] = useState(false)
+  const [showAadharCardImg, setShowAadharCardImg] = useState(false)
+  const [showPanCardImg, setShowPanCardImg] = useState(false)
+  const [showConfirmBox, setShowConfirmBox] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(1)
+  const [step, setStep] = useState(0)
+
   const checkActive = (index, className) =>
-    activeIndex === index ? className : "";
+    activeIndex === index ? className : ""
 
-  const approvedMembershipList = [
-    {
-      loanId: 1,
-      farmerName: "Farmer 1",
-      village: "Hyderabad",
-      contact: "1234567890",
-      aadhaar: "12345XXXXX",
-    },
-    {
-      loanId: 3,
-      farmerName: "Farmer 1",
-      village: "Hyderabad",
-      contact: "1234567890",
-      aadhaar: "12345XXXXX",
-    },
-    {
-      loanId: 4,
-      farmerName: "Farmer 1",
-      village: "Hyderabad",
-      contact: "1234567890",
-      aadhaar: "12345XXXXX",
-    },
-    {
-      loanId: 8,
-      farmerName: "Farmer 1",
-      village: "Hyderabad",
-      contact: "1234567890",
-      aadhaar: "12345XXXXX",
-    },
-    {
-      loanId: 9,
-      farmerName: "Farmer 1",
-      village: "Hyderabad",
-      contact: "1234567890",
-      aadhaar: "12345XXXXX",
-    },
-  ];
-
-  const rejectedMembershipList = [
-    {
-      loanId: 5,
-      farmerName: "Farmer 1",
-      village: "Hyderabad",
-      contact: "1234567890",
-      aadhaar: "12345XXXXX",
-    },
-    {
-      loanId: 7,
-      farmerName: "Farmer 1",
-      village: "Hyderabad",
-      contact: "1234567890",
-      aadhaar: "12345XXXXX",
-    },
-    {
-      loanI: 10,
-      farmerName: "Farmer 1",
-      village: "Hyderabad",
-      contact: "1234567890",
-      aadhaar: "12345XXXXX",
-    },
-  ];
-
-  const pendingMembershipList = [
-    {
-      loanId: 2,
-      farmerName: "Farmer 1",
-      village: "Hyderabad",
-      contact: "1234567890",
-      aadhaar: "12345XXXXX",
-    },
-    {
-      loanId: 6,
-      farmerName: "Farmer 1",
-      village: "Hyderabad",
-      contact: "1234567890",
-      aadhaar: "12345XXXXX",
-    },
-  ];
-
-  const [showLoanApplicationDetails, setShowLoanApplicationDetails] = useState(false);
-  const handleShowLoanApplicationDetails = () => {
-    setShowLoanApplicationDetails(true);
-  };
-  const handleCloseLoanApplicationDetails = () => setShowLoanApplicationDetails(false);
-
-  const [step, setStep] = useState(0);
-  const [showConfirmBox, setShowConfirmBox] = useState(false);
-  const handleCloseConfirmBox = () => {
-    setShowConfirmBox(false);
-  };
-
-  const [showAadharCardImg, setShowAadharCardImg] = useState(false);
-  const [showPanCardImg, setShowPanCardImg] = useState(false);
-
-  const handleShowAadharCardImg = () => setShowAadharCardImg(true);
-  const handleShowPanCardImg = () => setShowPanCardImg(true);
-  const handleCloseAadharCardImg = () => setShowAadharCardImg(false);
-  const handleClosePanCardImg = () => setShowPanCardImg(false);
+  const handleClick = (index) => setActiveIndex(index)
+  const handleShowLoanApplicationDetails = () => setShowLoanApplicationDetails(true)
+  const handleCloseLoanApplicationDetails = () => setShowLoanApplicationDetails(false)
+  const handleCloseConfirmBox = () => setShowConfirmBox(false)
+  const handleShowAadharCardImg = () => setShowAadharCardImg(true)
+  const handleShowPanCardImg = () => setShowPanCardImg(true)
+  const handleCloseAadharCardImg = () => setShowAadharCardImg(false)
+  const handleClosePanCardImg = () => setShowPanCardImg(false)
 
   return (
     <>
@@ -147,11 +142,12 @@ const Tab = () => {
                   }}
                 >
                   <tr>
+                    <th>Id</th>
                     <th>Name</th>
                     <th>Village</th>
                     <th>Phone Number</th>
                     <th>Aadhaar Number</th>
-                    <th>Status</th>
+                    <th>View Application</th>
                   </tr>
                 </thead>
                 <tbody
@@ -162,8 +158,9 @@ const Tab = () => {
                     // textAlign: "center",
                   }}
                 >
-                  {approvedMembershipList.map((app) => (
+                  {approvedMembershipList.map((app, i) => (
                     <tr>
+                      <td>farmer-{i}</td>
                       <td>
                         <NavLink
                           to="/fpo/farmer-information"
@@ -293,7 +290,7 @@ const Tab = () => {
                             lineHeight: "1rem",
                           }}
                           onClick={() => {
-                            handleShowLoanApplicationDetails();
+                            handleShowLoanApplicationDetails()
                           }}
                         >
                           View
@@ -315,43 +312,148 @@ const Tab = () => {
             </div>
           </div>
           <div>
-          <Modal show={showLoanApplicationDetails} onHide={handleCloseLoanApplicationDetails}>
-            <Modal.Header closeButton>Loan Application</Modal.Header>
-            <Modal.Body>
-              {step === 0 && (
-                <div className="row">
-                  <div className="col">
-                    <form>
+            <Modal show={showLoanApplicationDetails} onHide={handleCloseLoanApplicationDetails}>
+              <Modal.Header closeButton>Loan Application</Modal.Header>
+              <Modal.Body>
+                {step === 0 && (
+                  <div className="row">
+                    <div className="col">
+                      <form>
+                        <div className="form">
+                          <label className="form-label select-label">
+                            <div className="">
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Loan ID</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>112345</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>FPO Name</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>FPO 1</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Bank Name</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>SBI</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Account Number</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>1234567890</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Bank IFSC</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>23423XXXX</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Branch Name</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>Branch Name</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Applicant Name</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>N 1</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Loan Requested Amount</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>200000</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Applicant Gender</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>Male</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Applicant Mobile Number</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>1234567890</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-12">
+                                  {(("Create" && step < 6) ||
+                                    ("Create" && step < 5)) && (
+                                      <button
+                                        className="btn btn-success"
+                                        onClick={() => setStep((p) => p + 1)}
+                                        style={{
+                                          marginTop: "20px",
+                                          backgroundColor: "#064420",
+                                          width: "20%",
+                                          position: "relative",
+                                          float: "right",
+                                        }}
+                                      >
+                                        Next
+                                      </button>
+                                    )}
+                                </div>
+                              </div>
+                            </div>
+                          </label>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                )}
+                {step === 1 && (
+                  <div className="row mt-3">
+                    <div className="col">
                       <div className="form">
                         <label className="form-label select-label">
                           <div className="">
                             <div className="row m-2">
                               <div className="col-lg-6">
-                                <label>Loan ID</label>
+                                <label>Applicant DOB</label>
                               </div>
                               <div className="col-lg-6">
-                                <label>112345</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>FPO Name</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>FPO 1</label>
+                                <label>07-04-2000</label>
                               </div>
                             </div>
                             <div className="row m-2">
                               <div className="col-lg-6">
-                                <label>Bank Name</label>
+                                <label>Applicant Age</label>
                               </div>
                               <div className="col-lg-6">
-                                <label>SBI</label>
+                                <label>22</label>
                               </div>
                             </div>
                             <div className="row m-2">
                               <div className="col-lg-6">
-                                <label>Account Number</label>
+                                <label>Aadhard Card Number</label>
                               </div>
                               <div className="col-lg-6">
                                 <label>1234567890</label>
@@ -359,61 +461,103 @@ const Tab = () => {
                             </div>
                             <div className="row m-2">
                               <div className="col-lg-6">
-                                <label>Bank IFSC</label>
+                                <label>Aadhar Card Image</label>
                               </div>
                               <div className="col-lg-6">
-                                <label>23423XXXX</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Branch Name</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>Branch Name</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Applicant Name</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>N 1</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Loan Requested Amount</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>200000</label>
+                                <button
+                                  style={{
+                                    backgroundColor: "#064420",
+                                    color: "#fff",
+                                    alignItems: "center",
+                                    borderRadius: "5px",
+                                    border: "none",
+                                    padding: "0.25rem 1rem",
+                                    width: "100%",
+                                    fontSize: ".75rem",
+                                    lineHeight: "2rem",
+                                  }}
+                                  onClick={(e) => {
+                                    handleShowAadharCardImg()
+                                  }}
+                                >
+                                  view
+                                </button>
                               </div>
                             </div>
                             <div className="row m-2">
                               <div className="col-lg-6">
-                                <label>Applicant Gender</label>
+                                <label>PAN Card Number</label>
+                              </div>
+                              <div className="col-lg-6">
+                                <label>1234567890</label>
+                              </div>
+                            </div>
+                            <div className="row m-2">
+                              <div className="col-lg-6">
+                                <label>PAN Card Image</label>
+                              </div>
+                              <div className="col-lg-6">
+                                <button
+                                  style={{
+                                    backgroundColor: "#064420",
+                                    color: "#fff",
+                                    alignItems: "center",
+                                    borderRadius: "5px",
+                                    border: "none",
+                                    padding: "0.25rem 1rem",
+                                    width: "100%",
+                                    fontSize: ".75rem",
+                                    lineHeight: "2rem",
+                                  }}
+                                  onClick={(e) => {
+                                    handleShowPanCardImg()
+                                  }}
+                                >
+                                  view
+                                </button>
+                              </div>
+                            </div>
+                            <div className="row m-2">
+                              <div className="col-lg-6">
+                                <label>Co-Applicant Name</label>
+                              </div>
+                              <div className="col-lg-6">FPO 3</div>
+                            </div>
+                            <div className="row m-2">
+                              <div className="col-lg-6">
+                                <label>Co-Applicant Gender</label>
                               </div>
                               <div className="col-lg-6">
                                 <label>Male</label>
                               </div>
                             </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Applicant Mobile Number</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>1234567890</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-12">
-                                {(("Create" && step < 6) ||
-                                  ("Create" && step < 5)) && (
+                            <div
+                              className="row m-2"
+                              style={{
+                                justifyContent: "space-between",
+                                padding: "0 10px",
+                              }}
+                            >
+                              {step > 0 && (
+                                <button
+                                  className="btn btn-success"
+                                  onClick={() => setStep((p) => p - 1)}
+                                  style={{
+                                    marginTop: "1rem",
+                                    backgroundColor: "#064420",
+                                    width: "20%",
+                                  }}
+                                >
+                                  Back
+                                </button>
+                              )}
+                              {(("Create" && step < 6) ||
+                                ("Create" && step < 5)) && (
                                   <button
                                     className="btn btn-success"
                                     onClick={() => setStep((p) => p + 1)}
                                     style={{
-                                      marginTop: "20px",
+                                      marginTop: "1rem",
                                       backgroundColor: "#064420",
                                       width: "20%",
                                       position: "relative",
@@ -423,512 +567,365 @@ const Tab = () => {
                                     Next
                                   </button>
                                 )}
-                              </div>
                             </div>
                           </div>
                         </label>
                       </div>
-                    </form>
-                  </div>
-                </div>
-              )}
-              {step === 1 && (
-                <div className="row mt-3">
-                  <div className="col">
-                    <div className="form">
-                      <label className="form-label select-label">
-                        <div className="">
-                          <div className="row m-2">
-                            <div className="col-lg-6">
-                              <label>Applicant DOB</label>
-                            </div>
-                            <div className="col-lg-6">
-                              <label>07-04-2000</label>
-                            </div>
-                          </div>
-                          <div className="row m-2">
-                            <div className="col-lg-6">
-                              <label>Applicant Age</label>
-                            </div>
-                            <div className="col-lg-6">
-                              <label>22</label>
-                            </div>
-                          </div>
-                          <div className="row m-2">
-                            <div className="col-lg-6">
-                              <label>Aadhard Card Number</label>
-                            </div>
-                            <div className="col-lg-6">
-                              <label>1234567890</label>
-                            </div>
-                          </div>
-                          <div className="row m-2">
-                            <div className="col-lg-6">
-                              <label>Aadhar Card Image</label>
-                            </div>
-                            <div className="col-lg-6">
-                              <button
-                                style={{
-                                  backgroundColor: "#064420",
-                                  color: "#fff",
-                                  alignItems: "center",
-                                  borderRadius: "5px",
-                                  border: "none",
-                                  padding: "0.25rem 1rem",
-                                  width: "100%",
-                                  fontSize: ".75rem",
-                                  lineHeight: "2rem",
-                                }}
-                                onClick={(e) => {
-                                  handleShowAadharCardImg();
-                                }}
-                              >
-                                view
-                              </button>
-                            </div>
-                          </div>
-                          <div className="row m-2">
-                            <div className="col-lg-6">
-                              <label>PAN Card Number</label>
-                            </div>
-                            <div className="col-lg-6">
-                              <label>1234567890</label>
-                            </div>
-                          </div>
-                          <div className="row m-2">
-                            <div className="col-lg-6">
-                              <label>PAN Card Image</label>
-                            </div>
-                            <div className="col-lg-6">
-                              <button
-                                style={{
-                                  backgroundColor: "#064420",
-                                  color: "#fff",
-                                  alignItems: "center",
-                                  borderRadius: "5px",
-                                  border: "none",
-                                  padding: "0.25rem 1rem",
-                                  width: "100%",
-                                  fontSize: ".75rem",
-                                  lineHeight: "2rem",
-                                }}
-                                onClick={(e) => {
-                                  handleShowPanCardImg();
-                                }}
-                              >
-                                view
-                              </button>
-                            </div>
-                          </div>
-                          <div className="row m-2">
-                            <div className="col-lg-6">
-                              <label>Co-Applicant Name</label>
-                            </div>
-                            <div className="col-lg-6">FPO 3</div>
-                          </div>
-                          <div className="row m-2">
-                            <div className="col-lg-6">
-                              <label>Co-Applicant Gender</label>
-                            </div>
-                            <div className="col-lg-6">
-                              <label>Male</label>
-                            </div>
-                          </div>
-                          <div
-                            className="row m-2"
-                            style={{
-                              justifyContent: "space-between",
-                              padding: "0 10px",
-                            }}
-                          >
-                            {step > 0 && (
-                              <button
-                                className="btn btn-success"
-                                onClick={() => setStep((p) => p - 1)}
-                                style={{
-                                  marginTop: "1rem",
-                                  backgroundColor: "#064420",
-                                  width: "20%",
-                                }}
-                              >
-                                Back
-                              </button>
-                            )}
-                            {(("Create" && step < 6) ||
-                              ("Create" && step < 5)) && (
-                              <button
-                                className="btn btn-success"
-                                onClick={() => setStep((p) => p + 1)}
-                                style={{
-                                  marginTop: "1rem",
-                                  backgroundColor: "#064420",
-                                  width: "20%",
-                                  position: "relative",
-                                  float: "right",
-                                }}
-                              >
-                                Next
-                              </button>
-                            )}
-                          </div>
-                        </div>
-                      </label>
+                    </div>
+                    <div>
+                      <Modal
+                        show={showAadharCardImg}
+                        onHide={handleCloseAadharCardImg}
+                      >
+                        <Modal.Header closeButton>Aadhar Card</Modal.Header>
+                        <Modal.Body>
+                          <img
+                            src={logo}
+                            alt="Aadhar Card"
+                            style={{ width: "100%", height: "100%" }}
+                          />
+                        </Modal.Body>
+                      </Modal>
+                      <Modal show={showPanCardImg} onHide={handleClosePanCardImg}>
+                        <Modal.Header closeButton>PAN Card</Modal.Header>
+                        <Modal.Body>
+                          <img
+                            src={logo}
+                            alt="PAN Card"
+                            style={{ width: "100%", height: "100%" }}
+                          />
+                        </Modal.Body>
+                      </Modal>
                     </div>
                   </div>
-                  <div>
-                    <Modal
-                      show={showAadharCardImg}
-                      onHide={handleCloseAadharCardImg}
-                    >
-                      <Modal.Header closeButton>Aadhar Card</Modal.Header>
-                      <Modal.Body>
-                        <img
-                          src={logo}
-                          alt="Aadhar Card"
-                          style={{ width: "100%", height: "100%" }}
-                        />
-                      </Modal.Body>
-                    </Modal>
-                    <Modal show={showPanCardImg} onHide={handleClosePanCardImg}>
-                      <Modal.Header closeButton>PAN Card</Modal.Header>
-                      <Modal.Body>
-                        <img
-                          src={logo}
-                          alt="PAN Card"
-                          style={{ width: "100%", height: "100%" }}
-                        />
-                      </Modal.Body>
-                    </Modal>
+                )}
+                {step === 2 && (
+                  <div className="row mt-3">
+                    <div className="col">
+                      <form>
+                        <div className="form">
+                          <label className="form-label select-label">
+                            <div className="">
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Co-Applicant DOB</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>02-03-2000</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Co-Applicant Age</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>22</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Relationship with Applicant</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>Son</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Applicant Father Name</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>Father Name</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Applicant Mother Name</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>Mother Name</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Door Number</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>24/H</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Street Name</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>Jv Colony</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Village</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>Hyderabad</label>
+                                </div>
+                              </div>
+                              <div
+                                className="row m-2"
+                                style={{
+                                  justifyContent: "space-between",
+                                  padding: "0 10px",
+                                }}
+                              >
+                                {step > 0 && (
+                                  <button
+                                    className="btn btn-success"
+                                    onClick={() => setStep((p) => p - 1)}
+                                    style={{
+                                      marginTop: "1rem",
+                                      backgroundColor: "#064420",
+                                      width: "20%",
+                                    }}
+                                  >
+                                    Back
+                                  </button>
+                                )}
+                                {(("Create" && step < 6) ||
+                                  ("Create" && step < 5)) && (
+                                    <button
+                                      className="btn btn-success"
+                                      onClick={() => setStep((p) => p + 1)}
+                                      style={{
+                                        marginTop: "1rem",
+                                        backgroundColor: "#064420",
+                                        width: "20%",
+                                        position: "relative",
+                                        float: "right",
+                                      }}
+                                    >
+                                      Next
+                                    </button>
+                                  )}
+                              </div>
+                            </div>
+                          </label>
+                        </div>
+                      </form>
+                    </div>
                   </div>
-                </div>
-              )}
-              {step === 2 && (
-                <div className="row mt-3">
-                  <div className="col">
-                    <form>
-                      <div className="form">
-                        <label className="form-label select-label">
-                          <div className="">
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Co-Applicant DOB</label>
+                )}
+                {step === 3 && (
+                  <div className="row mt-3">
+                    <div className="col">
+                      <form>
+                        <div className="form">
+                          <label className="form-label select-label">
+                            <div className="">
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Taluk</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>Taluk</label>
+                                </div>
                               </div>
-                              <div className="col-lg-6">
-                                <label>02-03-2000</label>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>District</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>district</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>State</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>Telangana</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Pin Code</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>50XXXXX</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Occupation</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>occupation</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Education</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>12th</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Nature of Place</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>Hyderabad</label>
+                                </div>
+                              </div>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Residence</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>Hyderabad</label>
+                                </div>
+                              </div>
+                              <div
+                                className="row m-2"
+                                style={{
+                                  justifyContent: "space-between",
+                                  padding: "0 10px",
+                                }}
+                              >
+                                {step > 0 && (
+                                  <button
+                                    className="btn btn-success"
+                                    onClick={() => setStep((p) => p - 1)}
+                                    style={{
+                                      marginTop: "1rem",
+                                      backgroundColor: "#064420",
+                                      width: "20%",
+                                    }}
+                                  >
+                                    Back
+                                  </button>
+                                )}
+                                {(("Create" && step < 6) ||
+                                  ("Create" && step < 5)) && (
+                                    <button
+                                      className="btn btn-success"
+                                      onClick={() => setStep((p) => p + 1)}
+                                      style={{
+                                        marginTop: "1rem",
+                                        backgroundColor: "#064420",
+                                        width: "20%",
+                                        position: "relative",
+                                        float: "right",
+                                      }}
+                                    >
+                                      Next
+                                    </button>
+                                  )}
                               </div>
                             </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Co-Applicant Age</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>22</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Relationship with Applicant</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>Son</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Applicant Father Name</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>Father Name</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Applicant Mother Name</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>Mother Name</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Door Number</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>24/H</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Street Name</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>Jv Colony</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Village</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>Hyderabad</label>
-                              </div>
-                            </div>
-                            <div
-                              className="row m-2"
-                              style={{
-                                justifyContent: "space-between",
-                                padding: "0 10px",
-                              }}
-                            >
-                              {step > 0 && (
-                                <button
-                                  className="btn btn-success"
-                                  onClick={() => setStep((p) => p - 1)}
-                                  style={{
-                                    marginTop: "1rem",
-                                    backgroundColor: "#064420",
-                                    width: "20%",
-                                  }}
-                                >
-                                  Back
-                                </button>
-                              )}
-                              {(("Create" && step < 6) ||
-                                ("Create" && step < 5)) && (
-                                <button
-                                  className="btn btn-success"
-                                  onClick={() => setStep((p) => p + 1)}
-                                  style={{
-                                    marginTop: "1rem",
-                                    backgroundColor: "#064420",
-                                    width: "20%",
-                                    position: "relative",
-                                    float: "right",
-                                  }}
-                                >
-                                  Next
-                                </button>
-                              )}
-                            </div>
-                          </div>
-                        </label>
-                      </div>
-                    </form>
+                          </label>
+                        </div>
+                      </form>
+                    </div>
                   </div>
-                </div>
-              )}
-              {step === 3 && (
-                <div className="row mt-3">
-                  <div className="col">
-                    <form>
-                      <div className="form">
-                        <label className="form-label select-label">
-                          <div className="">
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Taluk</label>
+                )}
+                {step === 4 && (
+                  <div className="row mt-3">
+                    <div className="col">
+                      <form>
+                        <div className="form">
+                          <label className="form-label select-label">
+                            <div className="">
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Land Holding</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>Land</label>
+                                </div>
                               </div>
-                              <div className="col-lg-6">
-                                <label>Taluk</label>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Type of Land Holding</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>XXXXXXXX</label>
+                                </div>
                               </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>District</label>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Caste</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>XXXXXXX</label>
+                                </div>
                               </div>
-                              <div className="col-lg-6">
-                                <label>district</label>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Religion</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>XXXXXXXX</label>
+                                </div>
                               </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>State</label>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Monthly HH Income</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>XXXXXXX</label>
+                                </div>
                               </div>
-                              <div className="col-lg-6">
-                                <label>Telangana</label>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Monthly HH Expenses</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>XXXXXXX</label>
+                                </div>
                               </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Pin Code</label>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Loan Purpose</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>XXXXXXX</label>
+                                </div>
                               </div>
-                              <div className="col-lg-6">
-                                <label>50XXXXX</label>
+                              <div className="row m-2">
+                                <div className="col-lg-6">
+                                  <label>Loan Tenure (Months)</label>
+                                </div>
+                                <div className="col-lg-6">
+                                  <label>3 months</label>
+                                </div>
                               </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Occupation</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>occupation</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Education</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>12th</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Nature of Place</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>Hyderabad</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Residence</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>Hyderabad</label>
-                              </div>
-                            </div>
-                            <div
-                              className="row m-2"
-                              style={{
-                                justifyContent: "space-between",
-                                padding: "0 10px",
-                              }}
-                            >
-                              {step > 0 && (
-                                <button
-                                  className="btn btn-success"
-                                  onClick={() => setStep((p) => p - 1)}
-                                  style={{
-                                    marginTop: "1rem",
-                                    backgroundColor: "#064420",
-                                    width: "20%",
-                                  }}
-                                >
-                                  Back
-                                </button>
-                              )}
-                              {(("Create" && step < 6) ||
-                                ("Create" && step < 5)) && (
-                                <button
-                                  className="btn btn-success"
-                                  onClick={() => setStep((p) => p + 1)}
-                                  style={{
-                                    marginTop: "1rem",
-                                    backgroundColor: "#064420",
-                                    width: "20%",
-                                    position: "relative",
-                                    float: "right",
-                                  }}
-                                >
-                                  Next
-                                </button>
-                              )}
-                            </div>
-                          </div>
-                        </label>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              )}
-              {step === 4 && (
-                <div className="row mt-3">
-                  <div className="col">
-                    <form>
-                      <div className="form">
-                        <label className="form-label select-label">
-                          <div className="">
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Land Holding</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>Land</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Type of Land Holding</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>XXXXXXXX</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Caste</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>XXXXXXX</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Religion</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>XXXXXXXX</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Monthly HH Income</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>XXXXXXX</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Monthly HH Expenses</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>XXXXXXX</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Loan Purpose</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>XXXXXXX</label>
-                              </div>
-                            </div>
-                            <div className="row m-2">
-                              <div className="col-lg-6">
-                                <label>Loan Tenure (Months)</label>
-                              </div>
-                              <div className="col-lg-6">
-                                <label>3 months</label>
-                              </div>
-                            </div>
-                            <div
-                              className="row m-2"
-                              style={{
-                                justifyContent: "space-between",
-                                padding: "0 10px",
-                              }}
-                            >
-                              {step > 0 && (
-                                <button
-                                  className="btn btn-success"
-                                  onClick={() => setStep((p) => p - 1)}
-                                  style={{
-                                    marginTop: "1rem",
-                                    backgroundColor: "#064420",
-                                    width: "20%",
-                                  }}
-                                >
-                                  Back
-                                </button>
-                              )}
-                              {/* {(("Create" && step < 6) ||
+                              <div
+                                className="row m-2"
+                                style={{
+                                  justifyContent: "space-between",
+                                  padding: "0 10px",
+                                }}
+                              >
+                                {step > 0 && (
+                                  <button
+                                    className="btn btn-success"
+                                    onClick={() => setStep((p) => p - 1)}
+                                    style={{
+                                      marginTop: "1rem",
+                                      backgroundColor: "#064420",
+                                      width: "20%",
+                                    }}
+                                  >
+                                    Back
+                                  </button>
+                                )}
+                                {/* {(("Create" && step < 6) ||
                                 ("Create" && step < 5)) && (
                                 <button
                                   className="btn btn-success"
                                   onClick={(e) => {
-                                    confirmBid(e);
+                                    confirmBid(e)
                                   }}
                                   style={{
                                     marginTop: "1rem",
@@ -941,51 +938,51 @@ const Tab = () => {
                                   Submit
                                 </button>
                               )} */}
-                              <Modal
-                                show={showConfirmBox}
-                                onHide={handleCloseConfirmBox}
-                              >
-                                <Modal.Body
-                                  closeButton
-                                  style={{
-                                    position: "absolute",
-                                    top: "10rem",
-                                    width: "60%",
-                                    height: "100px",
-                                    timer: "1500",
-                                    backgroundColor: "#e9ecef",
-                                    color: "#000",
-                                    textAlign: "center",
-                                  }}
+                                <Modal
+                                  show={showConfirmBox}
+                                  onHide={handleCloseConfirmBox}
                                 >
-                                  <div
+                                  <Modal.Body
+                                    closeButton
                                     style={{
-                                      dispalay: "flex",
-                                      alignItems: "center",
+                                      position: "absolute",
+                                      top: "10rem",
+                                      width: "60%",
+                                      height: "100px",
+                                      timer: "1500",
+                                      backgroundColor: "#e9ecef",
+                                      color: "#000",
+                                      textAlign: "center",
                                     }}
                                   >
-                                    <CheckCircleTwoToneIcon />
-                                    <p className="text-center">
-                                      Your details are submitted!
-                                    </p>
-                                  </div>
-                                </Modal.Body>
-                              </Modal>
+                                    <div
+                                      style={{
+                                        dispalay: "flex",
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      <CheckCircleTwoToneIcon />
+                                      <p className="text-center">
+                                        Your details are submitted!
+                                      </p>
+                                    </div>
+                                  </Modal.Body>
+                                </Modal>
+                              </div>
                             </div>
-                          </div>
-                        </label>
-                      </div>
-                    </form>
+                          </label>
+                        </div>
+                      </form>
+                    </div>
                   </div>
-                </div>
-              )}
-            </Modal.Body>
-          </Modal>
-        </div>
+                )}
+              </Modal.Body>
+            </Modal>
+          </div>
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Tab;
+export default Tab

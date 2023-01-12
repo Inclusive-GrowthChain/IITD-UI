@@ -1,217 +1,195 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState } from "react";
+import Modal from "react-bootstrap/Modal";
+import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
+
+import logo from "../../assets/img/logo.png";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import "./style.css";
-import Modal from "react-bootstrap/Modal";
-import logo from "../../assets/img/logo.png";
-import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
+
+const repaymentList = [
+  {
+    id: "1",
+    sno: "1",
+    scheduled_repayment: "12-08-2021",
+    scheduled_emi: "abcd",
+  },
+  {
+    id: "2",
+    sno: "2",
+    scheduled_repayment: "12-08-2021",
+    scheduled_emi: "abcd",
+  },
+  {
+    id: "3",
+    sno: "3",
+    scheduled_repayment: "12-08-2021",
+    scheduled_emi: "abcd",
+  },
+  {
+    id: "4",
+    sno: "4",
+    scheduled_repayment: "12-08-2021",
+    scheduled_emi: "abcd",
+  },
+  {
+    id: "5",
+    sno: "5",
+    scheduled_repayment: "12-08-2021",
+    scheduled_emi: "abcd",
+  },
+]
+
+const farmerList = [
+  {
+    id: "F 1",
+    name: "Farmer Name",
+    loanId: "L 1",
+    loanAppDate: "12-08-2021",
+    loanAmount: "10000",
+    status: "Approval Pending",
+    email: "Email",
+    mobile: "1234567890",
+    aadharNo: "1234567890",
+    panNo: "1234567890",
+    address: "Address",
+    incomeType: "Income",
+    dob: "2022-10-10",
+    landOwned: "Land",
+    loanReason: "Reason",
+    interest: 12,
+    amount: 1000000,
+    tenure: 12,
+  },
+  {
+    id: "F 2",
+    name: "Farmer Name",
+    loanId: "L 2",
+    loanAppDate: "12-08-2021",
+    loanAmount: "10000",
+    status: "Approval Pending",
+    email: "Email",
+    mobile: "1234567890",
+    aadharNo: "1234567890",
+    panNo: "1234567890",
+    address: "Address",
+    incomeType: "Income",
+    dob: "2022-10-10",
+    landOwned: "Land",
+    loanReason: "Reason",
+    interest: 12,
+    amount: 1000000,
+    tenure: 12,
+  },
+  {
+    id: "F 3",
+    name: "Farmer Name",
+    loanId: "L 3",
+    loanAppDate: "12-08-2021",
+    loanAmount: "10000",
+    status: "Approved",
+    email: "Email",
+    mobile: "1234567890",
+    aadharNo: "1234567890",
+    panNo: "1234567890",
+    address: "Address",
+    incomeType: "Income",
+    dob: "2022-10-10",
+    landOwned: "Land",
+    loanReason: "Reason",
+    interest: 12,
+    amount: 1000000,
+    tenure: 12,
+  },
+  {
+    id: "F 4",
+    name: "Farmer Name",
+    loanId: "L 4",
+    loanAppDate: "12-08-2021",
+    loanAmount: "10000",
+    status: "Approved",
+    email: "Email",
+    mobile: "1234567890",
+    aadharNo: "1234567890",
+    panNo: "1234567890",
+    address: "Address",
+    incomeType: "Income",
+    dob: "2022-10-10",
+    landOwned: "Land",
+    loanReason: "Reason",
+    interest: 12,
+    amount: 1000000,
+    tenure: 12,
+  },
+]
 
 const FarmerLoan = ({ isToggled, onToggle }) => {
-  // const [show, setShow] = useState(false);
-  const [showApproveConfirm, setShowApproveConfirm] = useState(false);
+  const [showApproveConfirm, setShowApproveConfirm] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(1)
+  const [showRepaymentForm, setShowRepaymentForm] = useState(false)
+  const [showInterest, setShowInterest] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [currentFarmer, setCurrentFarmer] = useState({})
+  const [showImg, setShowImg] = useState(false)
+  const [showConfirmPayment, setShowConfirmPayment] = useState(false)
+  const [step, setStep] = useState(0)
+  const [showLoanApplication, setShowLoanApplication] = useState(false)
+  const [showAadharCardImg, setShowAadharCardImg] = useState(false)
+  const [showPanCardImg, setShowPanCardImg] = useState(false)
+  const [showConfirmBox, setShowConfirmBox] = useState(false)
+  const [showAggRepayment, setShowAggRepayment] = useState(false)
+  const [textState, setTextState] = useState("")
 
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
-
-  const [activeIndex, setActiveIndex] = useState(1);
-  const handleClick = (index) => setActiveIndex(index);
   const checkActive = (index, className) =>
-    activeIndex === index ? className : "";
+    activeIndex === index ? className : ""
 
-  const [showRepaymentForm, setShowRepaymentForm] = useState(false);
-  const [showInterest, setShowInterest] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
-  const [currentFarmer, setCurrentFarmer] = useState({});
-  const [showImg, setShowImg] = useState(false);
-  const [showConfirmPayment, setShowConfirmPayment] = useState(false);
-
-  const [step, setStep] = useState(0);
-  const [showLoanApplication, setShowLoanApplication] = useState(false);
-  const [showAadharCardImg, setShowAadharCardImg] = useState(false);
-  const [showPanCardImg, setShowPanCardImg] = useState(false);
-  const [showConfirmBox, setShowConfirmBox] = useState(false);
-  const [showAggRepayment, setShowAggRepayment] = useState(false);
-  const handleCloseConfirmBox = () => {
-    setShowConfirmBox(false);
-  };
-
-  const handleShowAadharCardImg = () => setShowAadharCardImg(true);
-  const handleShowPanCardImg = () => setShowPanCardImg(true);
-  const handleCloseAadharCardImg = () => setShowAadharCardImg(false);
-  const handleClosePanCardImg = () => setShowPanCardImg(false);
-  const handleShowLoanApplication = () => setShowLoanApplication(true);
-  const handleCloseLoanApplication = () => setShowLoanApplication(false);
-  const handleShowAggRepayment = () => setShowAggRepayment(true);
-  const handleCloseAggRepayment = () => setShowAggRepayment(false);
-
-  // eslint-disable-next-line no-unused-vars
-  const handleShowApproveConfirm = () => setShowApproveConfirm(true);
-  const handleCloseApproveConfirm = () => setShowApproveConfirm(false);
-
-  const handleShowRepaymentForm = () => {
-    setShowRepaymentForm(true);
-  };
-  const handleShowInterest = () => {
-    setShowInterest(true);
-  };
-  const handleShowConfirm = () => {
-    setShowConfirm(true);
-  };
-  const handleShowConfirmPayment = () => {
-    setShowConfirmPayment(true);
-  };
-
-  const handleCloseRepaymentForm = () => setShowRepaymentForm(false);
-  const handleCloseInterest = () => setShowInterest(false);
-  const handleCloseConfirm = () => setShowConfirm(false);
-  const handleCloseConfirmPayment = () => setShowConfirmPayment(false);
-
-  const handleShowImg = () => setShowImg(true);
-  const handleCloseImg = () => setShowImg(false);
+  const handleClick = (index) => setActiveIndex(index)
+  const handleCloseConfirmBox = () => setShowConfirmBox(false)
+  const handleShowAadharCardImg = () => setShowAadharCardImg(true)
+  const handleShowPanCardImg = () => setShowPanCardImg(true)
+  const handleCloseAadharCardImg = () => setShowAadharCardImg(false)
+  const handleClosePanCardImg = () => setShowPanCardImg(false)
+  const handleShowLoanApplication = () => setShowLoanApplication(true)
+  const handleCloseLoanApplication = () => setShowLoanApplication(false)
+  const handleShowAggRepayment = () => setShowAggRepayment(true)
+  const handleCloseAggRepayment = () => setShowAggRepayment(false)
+  const handleCloseApproveConfirm = () => setShowApproveConfirm(false)
+  const handleShowRepaymentForm = () => setShowRepaymentForm(true)
+  const handleShowInterest = () => setShowInterest(true)
+  const handleShowConfirm = () => setShowConfirm(true)
+  const handleShowConfirmPayment = () => setShowConfirmPayment(true)
+  const handleCloseRepaymentForm = () => setShowRepaymentForm(false)
+  const handleCloseInterest = () => setShowInterest(false)
+  const handleCloseConfirm = () => setShowConfirm(false)
+  const handleCloseConfirmPayment = () => setShowConfirmPayment(false)
+  const handleShowImg = () => setShowImg(true)
+  const handleCloseImg = () => setShowImg(false)
 
   const confirmBox = (e) => {
-    e.preventDefault();
-    setShowConfirmPayment(true);
-  };
+    e.preventDefault()
+    setShowConfirmPayment(true)
+  }
 
   const confirmBid = (e) => {
-    e.preventDefault();
-    setShowConfirm(false);
-    setShowInterest(false);
-  };
+    e.preventDefault()
+    setShowConfirm(false)
+    setShowInterest(false)
+  }
 
   const cancelBid = (e) => {
-    e.preventDefault();
-    setShowConfirm(false);
-    setShowInterest(false);
-  };
-
-  const repaymentList = [
-    {
-      id: "1",
-      sno: "1",
-      scheduled_repayment: "12-08-2021",
-      scheduled_emi: "abcd",
-    },
-    {
-      id: "2",
-      sno: "2",
-      scheduled_repayment: "12-08-2021",
-      scheduled_emi: "abcd",
-    },
-    {
-      id: "3",
-      sno: "3",
-      scheduled_repayment: "12-08-2021",
-      scheduled_emi: "abcd",
-    },
-    {
-      id: "4",
-      sno: "4",
-      scheduled_repayment: "12-08-2021",
-      scheduled_emi: "abcd",
-    },
-    {
-      id: "5",
-      sno: "5",
-      scheduled_repayment: "12-08-2021",
-      scheduled_emi: "abcd",
-    },
-  ];
-
-  const farmerList = [
-    {
-      id: "F 1",
-      name: "Farmer Name",
-      loanId: "L 1",
-      loanAppDate: "12-08-2021",
-      loanAmount: "10000",
-      status: "Approval Pending",
-      email: "Email",
-      mobile: "1234567890",
-      aadharNo: "1234567890",
-      panNo: "1234567890",
-      address: "Address",
-      incomeType: "Income",
-      dob: "2022-10-10",
-      landOwned: "Land",
-      loanReason: "Reason",
-      interest: 12,
-      amount: 1000000,
-      tenure: 12,
-    },
-    {
-      id: "F 2",
-      name: "Farmer Name",
-      loanId: "L 2",
-      loanAppDate: "12-08-2021",
-      loanAmount: "10000",
-      status: "Approval Pending",
-      email: "Email",
-      mobile: "1234567890",
-      aadharNo: "1234567890",
-      panNo: "1234567890",
-      address: "Address",
-      incomeType: "Income",
-      dob: "2022-10-10",
-      landOwned: "Land",
-      loanReason: "Reason",
-      interest: 12,
-      amount: 1000000,
-      tenure: 12,
-    },
-    {
-      id: "F 3",
-      name: "Farmer Name",
-      loanId: "L 3",
-      loanAppDate: "12-08-2021",
-      loanAmount: "10000",
-      status: "Approved",
-      email: "Email",
-      mobile: "1234567890",
-      aadharNo: "1234567890",
-      panNo: "1234567890",
-      address: "Address",
-      incomeType: "Income",
-      dob: "2022-10-10",
-      landOwned: "Land",
-      loanReason: "Reason",
-      interest: 12,
-      amount: 1000000,
-      tenure: 12,
-    },
-    {
-      id: "F 4",
-      name: "Farmer Name",
-      loanId: "L 4",
-      loanAppDate: "12-08-2021",
-      loanAmount: "10000",
-      status: "Approved",
-      email: "Email",
-      mobile: "1234567890",
-      aadharNo: "1234567890",
-      panNo: "1234567890",
-      address: "Address",
-      incomeType: "Income",
-      dob: "2022-10-10",
-      landOwned: "Land",
-      loanReason: "Reason",
-      interest: 12,
-      amount: 1000000,
-      tenure: 12,
-    },
-  ];
-
-  const [textState, setTextState] = useState("");
+    e.preventDefault()
+    setShowConfirm(false)
+    setShowInterest(false)
+  }
 
   const toggleText = () => {
     setTextState((state) =>
       state === "Receive Loan Application Enabled"
         ? "Receive Loan Application Disabled"
         : "Receive Loan Application Enabled"
-    );
-  };
+    )
+  }
 
   return (
     <div className="home">
@@ -258,7 +236,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
             <button
               className="loan_btn"
               onClick={() => {
-                handleShowInterest();
+                handleShowInterest()
               }}
             >
               Set Interest Rate
@@ -294,8 +272,8 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                           lineHeight: "1rem",
                         }}
                         onClick={() => {
-                          handleShowConfirm();
-                          confirmBox();
+                          handleShowConfirm()
+                          confirmBox()
                         }}
                       >
                         Submit
@@ -332,7 +310,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                 color: "#fff",
                               }}
                               onClick={(e) => {
-                                confirmBid(e);
+                                confirmBid(e)
                               }}
                             >
                               Yes
@@ -347,7 +325,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                 color: "#fff",
                               }}
                               onClick={(e) => {
-                                cancelBid(e);
+                                cancelBid(e)
                               }}
                             >
                               No
@@ -395,7 +373,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                     left: "400px",
                   }}
                   onClick={() => {
-                    handleShowAggRepayment();
+                    handleShowAggRepayment()
                   }}
                 >
                   Aggregate Repayment
@@ -455,7 +433,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                       lineHeight: "1rem",
                                     }}
                                     onClick={() => {
-                                      handleShowRepaymentForm();
+                                      handleShowRepaymentForm()
                                     }}
                                   >
                                     View
@@ -476,9 +454,9 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                       lineHeight: "1rem",
                                     }}
                                     onClick={() => {
-                                      setCurrentFarmer(farmer);
-                                      setStep(0);
-                                      handleShowLoanApplication();
+                                      setCurrentFarmer(farmer)
+                                      setStep(0)
+                                      handleShowLoanApplication()
                                     }}
                                   >
                                     View
@@ -528,7 +506,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                   )
                                 } */}
                               </tr>
-                            );
+                            )
                           })}
                         </tbody>
                       </table>
@@ -631,9 +609,9 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                           lineHeight: "1rem",
                                         }}
                                         onClick={() => {
-                                          // handleShowConfirm();
-                                          // confirmBox(e);
-                                          handleShowConfirmPayment();
+                                          // handleShowConfirm()
+                                          // confirmBox(e)
+                                          handleShowConfirmPayment()
                                         }}
                                       >
                                         Add Repayment
@@ -693,8 +671,8 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                   lineHeight: "1rem",
                                 }}
                                 onClick={(e) => {
-                                  confirmBid(e);
-                                  handleShowConfirm();
+                                  confirmBid(e)
+                                  handleShowConfirm()
                                 }}
                               >
                                 Submit
@@ -738,7 +716,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                 marginRight: "10px",
                               }}
                               onClick={(e) => {
-                                confirmBid(e);
+                                confirmBid(e)
                               }}
                             >
                               Yes
@@ -753,7 +731,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                 color: "#fff",
                               }}
                               onClick={(e) => {
-                                cancelBid(e);
+                                cancelBid(e)
                               }}
                             >
                               No
@@ -937,8 +915,8 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                                 lineHeight: "1.7rem",
                                               }}
                                               onClick={(e) => {
-                                                e.preventDefault();
-                                                handleShowImg();
+                                                e.preventDefault()
+                                                handleShowImg()
                                               }}
                                             >
                                               View
@@ -962,8 +940,8 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                                 lineHeight: "1.7rem",
                                               }}
                                               onClick={(e) => {
-                                                e.preventDefault();
-                                                handleShowImg();
+                                                e.preventDefault()
+                                                handleShowImg()
                                               }}
                                             >
                                               View
@@ -989,8 +967,8 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                                 lineHeight: "1.7rem",
                                               }}
                                               onClick={(e) => {
-                                                e.preventDefault();
-                                                handleShowImg();
+                                                e.preventDefault()
+                                                handleShowImg()
                                               }}
                                             >
                                               View
@@ -1014,8 +992,8 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                                 lineHeight: "1.7rem",
                                               }}
                                               onClick={(e) => {
-                                                e.preventDefault();
-                                                handleShowImg();
+                                                e.preventDefault()
+                                                handleShowImg()
                                               }}
                                             >
                                               View
@@ -1074,8 +1052,8 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                                 lineHeight: "1.7rem",
                                               }}
                                               onClick={(e) => {
-                                                e.preventDefault();
-                                                handleShowImg();
+                                                e.preventDefault()
+                                                handleShowImg()
                                               }}
                                             >
                                               View
@@ -1136,8 +1114,8 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                                 marginTop: "3rem",
                                               }}
                                               onClick={(e) => {
-                                                e.preventDefault();
-                                                handleShowApproveConfirm();
+                                                e.preventDefault()
+                                                handleShowApproveConfirm()
                                               }}
                                             >
                                               Approve
@@ -1201,8 +1179,8 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                                   <button
                                                     className="btn btn-success"
                                                     onClick={(e) => {
-                                                      e.preventDefault();
-                                                      handleCloseApproveConfirm();
+                                                      e.preventDefault()
+                                                      handleCloseApproveConfirm()
                                                     }}
                                                     style={{
                                                       marginTop: "1rem",
@@ -1332,22 +1310,22 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                             <div className="col-lg-12">
                                               {(("Create" && step < 6) ||
                                                 ("Create" && step < 5)) && (
-                                                <button
-                                                  className="btn btn-success"
-                                                  onClick={() =>
-                                                    setStep((p) => p + 1)
-                                                  }
-                                                  style={{
-                                                    marginTop: "20px",
-                                                    backgroundColor: "#064420",
-                                                    width: "20%",
-                                                    position: "relative",
-                                                    float: "right",
-                                                  }}
-                                                >
-                                                  Next
-                                                </button>
-                                              )}
+                                                  <button
+                                                    className="btn btn-success"
+                                                    onClick={() =>
+                                                      setStep((p) => p + 1)
+                                                    }
+                                                    style={{
+                                                      marginTop: "20px",
+                                                      backgroundColor: "#064420",
+                                                      width: "20%",
+                                                      position: "relative",
+                                                      float: "right",
+                                                    }}
+                                                  >
+                                                    Next
+                                                  </button>
+                                                )}
                                             </div>
                                           </div>
                                         </div>
@@ -1405,7 +1383,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                                 lineHeight: "2rem",
                                               }}
                                               onClick={(e) => {
-                                                handleShowAadharCardImg();
+                                                handleShowAadharCardImg()
                                               }}
                                             >
                                               view
@@ -1438,7 +1416,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                                 lineHeight: "2rem",
                                               }}
                                               onClick={(e) => {
-                                                handleShowPanCardImg();
+                                                handleShowPanCardImg()
                                               }}
                                             >
                                               view
@@ -1483,22 +1461,22 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                           )}
                                           {(("Create" && step < 6) ||
                                             ("Create" && step < 5)) && (
-                                            <button
-                                              className="btn btn-success"
-                                              onClick={() =>
-                                                setStep((p) => p + 1)
-                                              }
-                                              style={{
-                                                marginTop: "1rem",
-                                                backgroundColor: "#064420",
-                                                width: "20%",
-                                                position: "relative",
-                                                float: "right",
-                                              }}
-                                            >
-                                              Next
-                                            </button>
-                                          )}
+                                              <button
+                                                className="btn btn-success"
+                                                onClick={() =>
+                                                  setStep((p) => p + 1)
+                                                }
+                                                style={{
+                                                  marginTop: "1rem",
+                                                  backgroundColor: "#064420",
+                                                  width: "20%",
+                                                  position: "relative",
+                                                  float: "right",
+                                                }}
+                                              >
+                                                Next
+                                              </button>
+                                            )}
                                         </div>
                                       </div>
                                     </label>
@@ -1645,22 +1623,22 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                             )}
                                             {(("Create" && step < 6) ||
                                               ("Create" && step < 5)) && (
-                                              <button
-                                                className="btn btn-success"
-                                                onClick={() =>
-                                                  setStep((p) => p + 1)
-                                                }
-                                                style={{
-                                                  marginTop: "1rem",
-                                                  backgroundColor: "#064420",
-                                                  width: "20%",
-                                                  position: "relative",
-                                                  float: "right",
-                                                }}
-                                              >
-                                                Next
-                                              </button>
-                                            )}
+                                                <button
+                                                  className="btn btn-success"
+                                                  onClick={() =>
+                                                    setStep((p) => p + 1)
+                                                  }
+                                                  style={{
+                                                    marginTop: "1rem",
+                                                    backgroundColor: "#064420",
+                                                    width: "20%",
+                                                    position: "relative",
+                                                    float: "right",
+                                                  }}
+                                                >
+                                                  Next
+                                                </button>
+                                              )}
                                           </div>
                                         </div>
                                       </label>
@@ -1764,22 +1742,22 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                             )}
                                             {(("Create" && step < 6) ||
                                               ("Create" && step < 5)) && (
-                                              <button
-                                                className="btn btn-success"
-                                                onClick={() =>
-                                                  setStep((p) => p + 1)
-                                                }
-                                                style={{
-                                                  marginTop: "1rem",
-                                                  backgroundColor: "#064420",
-                                                  width: "20%",
-                                                  position: "relative",
-                                                  float: "right",
-                                                }}
-                                              >
-                                                Next
-                                              </button>
-                                            )}
+                                                <button
+                                                  className="btn btn-success"
+                                                  onClick={() =>
+                                                    setStep((p) => p + 1)
+                                                  }
+                                                  style={{
+                                                    marginTop: "1rem",
+                                                    backgroundColor: "#064420",
+                                                    width: "20%",
+                                                    position: "relative",
+                                                    float: "right",
+                                                  }}
+                                                >
+                                                  Next
+                                                </button>
+                                              )}
                                           </div>
                                         </div>
                                       </label>
@@ -1887,22 +1865,22 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                             )}
                                             {(("Create" && step < 6) ||
                                               ("Create" && step < 5)) && (
-                                              <button
-                                                className="btn btn-success"
-                                                onClick={() =>
-                                                  setStep((p) => p + 1)
-                                                }
-                                                style={{
-                                                  marginTop: "1rem",
-                                                  backgroundColor: "#064420",
-                                                  width: "20%",
-                                                  position: "relative",
-                                                  float: "right",
-                                                }}
-                                              >
-                                                Next
-                                              </button>
-                                            )}
+                                                <button
+                                                  className="btn btn-success"
+                                                  onClick={() =>
+                                                    setStep((p) => p + 1)
+                                                  }
+                                                  style={{
+                                                    marginTop: "1rem",
+                                                    backgroundColor: "#064420",
+                                                    width: "20%",
+                                                    position: "relative",
+                                                    float: "right",
+                                                  }}
+                                                >
+                                                  Next
+                                                </button>
+                                              )}
                                             <Modal
                                               show={showConfirmBox}
                                               onHide={handleCloseConfirmBox}
@@ -1968,8 +1946,8 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                                 lineHeight: "1.7rem",
                                               }}
                                               onClick={(e) => {
-                                                e.preventDefault();
-                                                handleShowImg();
+                                                e.preventDefault()
+                                                handleShowImg()
                                               }}
                                             >
                                               View
@@ -2082,8 +2060,8 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                                   <button
                                                     className="btn btn-success"
                                                     onClick={(e) => {
-                                                      e.preventDefault();
-                                                      handleCloseApproveConfirm();
+                                                      e.preventDefault()
+                                                      handleCloseApproveConfirm()
                                                     }}
                                                     style={{
                                                       marginTop: "1rem",
@@ -2308,7 +2286,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
         </main>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default FarmerLoan;
+export default FarmerLoan

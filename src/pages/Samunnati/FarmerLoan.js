@@ -178,11 +178,11 @@ const Samunnati_Farmer_Loan = () => {
 
   const changeLoanStatus = (e, loanApp) => {
     e.preventDefault();
-    if(e.target.value === "Approved") {
+    if (e.target.value === "Approved") {
       setCurrentPendLoanApp(loanApp);
       setShowApproveForm(true);
     }
-    else if(e.target.value === "Rejected") {
+    else if (e.target.value === "Rejected") {
       setCurrentPendLoanApp(loanApp);
       setShowRejectForm(true);
     }
@@ -237,9 +237,9 @@ const Samunnati_Farmer_Loan = () => {
 
   const [activeTab, setActiveTab] = useState("tab1");
 
-  useEffect(()=>{
+  useEffect(() => {
     searchLoans();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText]);
 
   return (
@@ -286,10 +286,10 @@ const Samunnati_Farmer_Loan = () => {
                 </ul>
                 <div className="outlet">
                   <TabContent id="tab1" activeTab={activeTab}>
-                    <div 
+                    <div
                       className="form-group"
                       style={{
-                        width: '20%', 
+                        width: '20%',
                         marginBottom: '1%',
                         borderRadius: '5px',
                       }}
@@ -385,7 +385,7 @@ const Samunnati_Farmer_Loan = () => {
                                           fontWeight: "400"
                                         }}
                                         onClick={() => {
-                                          localStorage.setItem("fpoId", app.fpoId);                               
+                                          localStorage.setItem("fpoId", app.fpoId);
                                         }}
                                       >
                                         view
@@ -637,25 +637,25 @@ const Samunnati_Farmer_Loan = () => {
                         <Modal.Body>
                           <div className="row">
                             <div className="col-lg-6">
-                              <label style={{marginTop: '10%'}}>Repayment Date</label>
+                              <label style={{ marginTop: '10%' }}>Repayment Date</label>
                             </div>
                             <div className="col-lg-6">
                               <input
                                 type="date"
                                 className="form-control"
-                                style={{marginTop: '7.5%'}}
+                                style={{ marginTop: '7.5%' }}
                               />
                             </div>
                           </div>
                           <div className="row">
                             <div className="col-lg-6">
-                              <label style={{marginTop: '20%'}}>Repayment Amount</label>
+                              <label style={{ marginTop: '20%' }}>Repayment Amount</label>
                             </div>
                             <div className="col-lg-6">
                               <input
                                 type="number"
                                 className="form-control"
-                                style={{marginTop: '17.5%'}}
+                                style={{ marginTop: '17.5%' }}
                               />
                             </div>
                           </div>
@@ -664,7 +664,7 @@ const Samunnati_Farmer_Loan = () => {
                               <button
                                 className="btn btn-primary"
                                 style={{ float: "right", backgroundColor: '#064420', marginTop: '10%', width: '100%' }}
-                                onClick={() => {handleShowRepaymentConfirmation()}}
+                                onClick={() => { handleShowRepaymentConfirmation() }}
                               >
                                 Submit
                               </button>
@@ -697,7 +697,7 @@ const Samunnati_Farmer_Loan = () => {
                               <button
                                 className="btn btn-primary"
                                 style={{ float: "right", backgroundColor: '#064420', marginTop: '10%', width: '100%' }}
-                                onClick={() => {handleCloseRepaymentConfirmation()}}
+                                onClick={() => { handleCloseRepaymentConfirmation() }}
                               >
                                 No
                               </button>
@@ -708,10 +708,10 @@ const Samunnati_Farmer_Loan = () => {
                     </div>
                   </TabContent>
                   <TabContent id="tab2" activeTab={activeTab}>
-                    <div 
+                    <div
                       className="form-group"
                       style={{
-                        width: '20%', 
+                        width: '20%',
                         marginBottom: '1%',
                         borderRadius: '5px',
                       }}
@@ -884,13 +884,13 @@ const Samunnati_Farmer_Loan = () => {
                         </div>
                       </div>
                     </div>
-                    
+
                   </TabContent>
                   <TabContent id="tab3" activeTab={activeTab}>
-                    <div 
+                    <div
                       className="form-group"
                       style={{
-                        width: '20%', 
+                        width: '20%',
                         marginBottom: '1%',
                         borderRadius: '5px',
                       }}
@@ -1067,11 +1067,11 @@ const Samunnati_Farmer_Loan = () => {
                               show={showPendLoanApp}
                               onHide={handleClosePendLoanApp}
                               scrollable={true}
-                              // contentClassName="modal-height"
+                            // contentClassName="modal-height"
                             >
                               <Modal.Header closeButton>Loan Window Application</Modal.Header>
                               <Modal.Body>
-                              {step === 0 && (
+                                {step === 0 && (
                                   <div className="row">
                                     <div className="col">
                                       <form>
@@ -1121,20 +1121,20 @@ const Samunnati_Farmer_Loan = () => {
                                                 <div className="col-lg-12">
                                                   {(("Create" && step < 6) ||
                                                     ("Create" && step < 5)) && (
-                                                    <button
-                                                      className="btn btn-success"
-                                                      onClick={() => setStep((p) => p + 1)}
-                                                      style={{
-                                                        marginTop: "1rem",
-                                                        backgroundColor: "#064420",
-                                                        width: "20%",
-                                                        position: "relative",
-                                                        float: "right",
-                                                      }}
-                                                    >
-                                                      Next
-                                                    </button>
-                                                  )}
+                                                      <button
+                                                        className="btn btn-success"
+                                                        onClick={() => setStep((p) => p + 1)}
+                                                        style={{
+                                                          marginTop: "1rem",
+                                                          backgroundColor: "#064420",
+                                                          width: "20%",
+                                                          position: "relative",
+                                                          float: "right",
+                                                        }}
+                                                      >
+                                                        Next
+                                                      </button>
+                                                    )}
                                                 </div>
                                               </div>
                                             </div>
@@ -1283,42 +1283,42 @@ const Samunnati_Farmer_Loan = () => {
                                                 </div>
                                               </div>
                                               <div
-                                              className="row m-2"
-                                              style={{
-                                                justifyContent: "space-between",
-                                                padding: "0 10px",
-                                              }}
-                                            >
-                                              {step > 0 && (
-                                                <button
-                                                  className="btn btn-success"
-                                                  onClick={() => setStep((p) => p - 1)}
-                                                  style={{
-                                                    marginTop: "1rem",
-                                                    backgroundColor: "#064420",
-                                                    width: "20%",
-                                                  }}
-                                                >
-                                                  Back
-                                                </button>
-                                              )}
-                                              {(("Create" && step < 6) ||
-                                                ("Create" && step < 5)) && (
-                                                <button
-                                                  className="btn btn-success"
-                                                  onClick={() => setStep((p) => p + 1)}
-                                                  style={{
-                                                    marginTop: "1rem",
-                                                    backgroundColor: "#064420",
-                                                    width: "20%",
-                                                    position: "relative",
-                                                    float: "right",
-                                                  }}
-                                                >
-                                                  Next
-                                                </button>
-                                              )}
-                                            </div>
+                                                className="row m-2"
+                                                style={{
+                                                  justifyContent: "space-between",
+                                                  padding: "0 10px",
+                                                }}
+                                              >
+                                                {step > 0 && (
+                                                  <button
+                                                    className="btn btn-success"
+                                                    onClick={() => setStep((p) => p - 1)}
+                                                    style={{
+                                                      marginTop: "1rem",
+                                                      backgroundColor: "#064420",
+                                                      width: "20%",
+                                                    }}
+                                                  >
+                                                    Back
+                                                  </button>
+                                                )}
+                                                {(("Create" && step < 6) ||
+                                                  ("Create" && step < 5)) && (
+                                                    <button
+                                                      className="btn btn-success"
+                                                      onClick={() => setStep((p) => p + 1)}
+                                                      style={{
+                                                        marginTop: "1rem",
+                                                        backgroundColor: "#064420",
+                                                        width: "20%",
+                                                        position: "relative",
+                                                        float: "right",
+                                                      }}
+                                                    >
+                                                      Next
+                                                    </button>
+                                                  )}
+                                              </div>
                                             </div>
                                           </label>
                                         </div>
@@ -1340,31 +1340,31 @@ const Samunnati_Farmer_Loan = () => {
                                     <div className="col">
                                       <div className="form">
                                         <label className="form-label select-label">
-                                          <div className="">                                
+                                          <div className="">
                                             <div className="row m-2">
-                                                <div className="col-lg-6">
-                                                  <label>List of Directors</label>
-                                                </div>
-                                                <div className="col-lg-6 text-center">
-                                                  <button
-                                                    className="py-0.5"
-                                                    style={{
-                                                      backgroundColor: "#064420",
-                                                      color: "#fff",
-                                                      alignItems: "center",
-                                                      borderRadius: "5px",
-                                                      border: "none",
-                                                      padding: "5px 10px",
-                                                      width: "30%",
-                                                      fontSize: ".75rem",
-                                                      lineHeight: "1rem",
-                                                      textAlign: "center",
-                                                    }}
-                                                  >
-                                                    View
-                                                  </button>
-                                                </div>
+                                              <div className="col-lg-6">
+                                                <label>List of Directors</label>
                                               </div>
+                                              <div className="col-lg-6 text-center">
+                                                <button
+                                                  className="py-0.5"
+                                                  style={{
+                                                    backgroundColor: "#064420",
+                                                    color: "#fff",
+                                                    alignItems: "center",
+                                                    borderRadius: "5px",
+                                                    border: "none",
+                                                    padding: "5px 10px",
+                                                    width: "30%",
+                                                    fontSize: ".75rem",
+                                                    lineHeight: "1rem",
+                                                    textAlign: "center",
+                                                  }}
+                                                >
+                                                  View
+                                                </button>
+                                              </div>
+                                            </div>
                                             {[...Array(noOfRows)].map((element, index) => {
                                               return (
                                                 <>
@@ -1441,20 +1441,20 @@ const Samunnati_Farmer_Loan = () => {
                                               )}
                                               {(("Create" && step < 6) ||
                                                 ("Create" && step < 5)) && (
-                                                <button
-                                                  className="btn btn-success"
-                                                  onClick={() => setStep((p) => p + 1)}
-                                                  style={{
-                                                    marginTop: "1rem",
-                                                    backgroundColor: "#064420",
-                                                    width: "20%",
-                                                    position: "relative",
-                                                    float: "right",
-                                                  }}
-                                                >
-                                                  Next
-                                                </button>
-                                              )}
+                                                  <button
+                                                    className="btn btn-success"
+                                                    onClick={() => setStep((p) => p + 1)}
+                                                    style={{
+                                                      marginTop: "1rem",
+                                                      backgroundColor: "#064420",
+                                                      width: "20%",
+                                                      position: "relative",
+                                                      float: "right",
+                                                    }}
+                                                  >
+                                                    Next
+                                                  </button>
+                                                )}
                                             </div>
                                           </div>
                                         </label>
@@ -1501,7 +1501,7 @@ const Samunnati_Farmer_Loan = () => {
                                                     View
                                                   </button>
                                                 </div>
-                                              </div>                                  
+                                              </div>
                                               <div className="row m-2">
                                                 <div className="col-lg-6">
                                                   <label>Brief Profile of the Promoting Organization</label>
@@ -1577,29 +1577,29 @@ const Samunnati_Farmer_Loan = () => {
                                                   </div>
                                                 </div>
                                                 <div className="row m-2">
-                                                <div className="col-lg-6">
-                                                  <label>Fertilizer Licences</label>
+                                                  <div className="col-lg-6">
+                                                    <label>Fertilizer Licences</label>
+                                                  </div>
+                                                  <div className="col-lg-6 text-center">
+                                                    <button
+                                                      className="py-0.5"
+                                                      style={{
+                                                        backgroundColor: "#064420",
+                                                        color: "#fff",
+                                                        alignItems: "center",
+                                                        borderRadius: "5px",
+                                                        border: "none",
+                                                        padding: "5px 10px",
+                                                        width: "30%",
+                                                        fontSize: ".75rem",
+                                                        lineHeight: "1rem",
+                                                        textAlign: "center",
+                                                      }}
+                                                    >
+                                                      View
+                                                    </button>
+                                                  </div>
                                                 </div>
-                                                <div className="col-lg-6 text-center">
-                                                  <button
-                                                    className="py-0.5"
-                                                    style={{
-                                                      backgroundColor: "#064420",
-                                                      color: "#fff",
-                                                      alignItems: "center",
-                                                      borderRadius: "5px",
-                                                      border: "none",
-                                                      padding: "5px 10px",
-                                                      width: "30%",
-                                                      fontSize: ".75rem",
-                                                      lineHeight: "1rem",
-                                                      textAlign: "center",
-                                                    }}
-                                                  >
-                                                    View
-                                                  </button>
-                                                </div>
-                                              </div>
                                               </div>
                                               <div
                                                 className="row m-2"
@@ -1623,20 +1623,20 @@ const Samunnati_Farmer_Loan = () => {
                                                 )}
                                                 {(("Create" && step < 6) ||
                                                   ("Create" && step < 5)) && (
-                                                  <button
-                                                    className="btn btn-success"
-                                                    onClick={() => setStep((p) => p + 1)}
-                                                    style={{
-                                                      marginTop: "1rem",
-                                                      backgroundColor: "#064420",
-                                                      width: "20%",
-                                                      position: "relative",
-                                                      float: "right",
-                                                    }}
-                                                  >
-                                                    Next
-                                                  </button>
-                                                )}
+                                                    <button
+                                                      className="btn btn-success"
+                                                      onClick={() => setStep((p) => p + 1)}
+                                                      style={{
+                                                        marginTop: "1rem",
+                                                        backgroundColor: "#064420",
+                                                        width: "20%",
+                                                        position: "relative",
+                                                        float: "right",
+                                                      }}
+                                                    >
+                                                      Next
+                                                    </button>
+                                                  )}
                                               </div>
                                             </div>
                                           </label>
@@ -1875,20 +1875,20 @@ const Samunnati_Farmer_Loan = () => {
                                                 )}
                                                 {(("Create" && step < 6) ||
                                                   ("Create" && step < 5)) && (
-                                                  <button
-                                                    className="btn btn-success"
-                                                    onClick={() => setStep((p) => p + 1)}
-                                                    style={{
-                                                      marginTop: "1rem",
-                                                      backgroundColor: "#064420",
-                                                      width: "20%",
-                                                      position: "relative",
-                                                      float: "right",
-                                                    }}
-                                                  >
-                                                    Next
-                                                  </button>
-                                                )}
+                                                    <button
+                                                      className="btn btn-success"
+                                                      onClick={() => setStep((p) => p + 1)}
+                                                      style={{
+                                                        marginTop: "1rem",
+                                                        backgroundColor: "#064420",
+                                                        width: "20%",
+                                                        position: "relative",
+                                                        float: "right",
+                                                      }}
+                                                    >
+                                                      Next
+                                                    </button>
+                                                  )}
                                               </div>
                                             </div>
                                           </label>
@@ -1915,7 +1915,7 @@ const Samunnati_Farmer_Loan = () => {
                                             <div className="">
                                               <div className="row m-2">
                                                 <div className="col-lg-6">
-                                                  <label>Product Wise Break Up of Revenues</label>
+                                                  <label>Product wise break up of revenues (2 fiscal)</label>
                                                 </div>
                                                 <div className="col-lg-6 text-center">
                                                   <button
@@ -1987,7 +1987,7 @@ const Samunnati_Farmer_Loan = () => {
                                               </div>
                                               <div className="row m-2">
                                                 <div className="col-lg-6">
-                                                  <label>Top 5 Suppliers/Vintage</label>
+                                                  <label>Top 5 Suppliers/Vintage (last 6 months)</label>
                                                 </div>
                                                 <div className="col-lg-6 text-center">
                                                   <button
@@ -2011,7 +2011,7 @@ const Samunnati_Farmer_Loan = () => {
                                               </div>
                                               <div className="row m-2">
                                                 <div className="col-lg-6">
-                                                  <label>Top 5 Buyers/Vintage</label>
+                                                  <label>Top 5 Buyers/Vintage (last 6 months)</label>
                                                 </div>
                                                 <div className="col-lg-6 text-center">
                                                   <button
@@ -2035,7 +2035,7 @@ const Samunnati_Farmer_Loan = () => {
                                               </div>
                                               <div className="row m-2">
                                                 <div className="col-lg-6">
-                                                  <label>Sanction Limit & O/sv for both WC & TL</label>
+                                                  <label>Sanction Limit & O/s for both WC & TL</label>
                                                 </div>
                                                 <div className="col-lg-6 text-center">
                                                   <button
@@ -2126,42 +2126,42 @@ const Samunnati_Farmer_Loan = () => {
                                                   </button>
                                                 )}
                                                 {(("Create" && step < 6) ||
-                                                ("Create" && step < 5)) && (
-                                                // <button
-                                                //   className="btn btn-success"
-                                                //   onClick={(e) => changeLoanStatus(e, currentPendLoanApp)}
-                                                //   style={{
-                                                //     marginTop: "1rem",
-                                                //     backgroundColor: "#064420",
-                                                //     width: "100%",
-                                                //     position: "relative",
-                                                //     float: "right",
-                                                //     marginTop: '5%'
-                                                //   }}
-                                                // >
-                                                //   Update Loan Status
-                                                // </button>
-                                                <div className="row">
-                                                <div className="col-lg-12">
-                                                  <select
-                                                    className="form-control"
-                                                    onChange={(e) => changeLoanStatus(e, currentPendLoanApp)}
-                                                    style={{
-                                                      marginTop: "1rem",
-                                                      width: "100%",
-                                                      position: "relative",
-                                                      float: "right",
-                                                      // eslint-disable-next-line no-dupe-keys
-                                                      marginTop: '5%',
-                                                    }}
-                                                  >
-                                                    <option value="Pending">Change Loan Window Status</option>
-                                                    <option value="Approved">Approve Window</option>
-                                                    <option value="Rejected">Reject Window</option>
-                                                  </select>
-                                                </div>
-                                              </div>
-                                              )}
+                                                  ("Create" && step < 5)) && (
+                                                    // <button
+                                                    //   className="btn btn-success"
+                                                    //   onClick={(e) => changeLoanStatus(e, currentPendLoanApp)}
+                                                    //   style={{
+                                                    //     marginTop: "1rem",
+                                                    //     backgroundColor: "#064420",
+                                                    //     width: "100%",
+                                                    //     position: "relative",
+                                                    //     float: "right",
+                                                    //     marginTop: '5%'
+                                                    //   }}
+                                                    // >
+                                                    //   Update Loan Status
+                                                    // </button>
+                                                    <div className="row">
+                                                      <div className="col-lg-12">
+                                                        <select
+                                                          className="form-control"
+                                                          onChange={(e) => changeLoanStatus(e, currentPendLoanApp)}
+                                                          style={{
+                                                            marginTop: "1rem",
+                                                            width: "100%",
+                                                            position: "relative",
+                                                            float: "right",
+                                                            // eslint-disable-next-line no-dupe-keys
+                                                            marginTop: '5%',
+                                                          }}
+                                                        >
+                                                          <option value="Pending">Change Loan Window Status</option>
+                                                          <option value="Approved">Approve Window</option>
+                                                          <option value="Rejected">Reject Window</option>
+                                                        </select>
+                                                      </div>
+                                                    </div>
+                                                  )}
                                               </div>
                                             </div>
                                           </label>
@@ -2242,7 +2242,7 @@ const Samunnati_Farmer_Loan = () => {
                                               <input
                                                 type="number"
                                                 className="form-control"
-                                                // onInput={(e) => {setGrantedAmount(e.target.value)}}
+                                              // onInput={(e) => {setGrantedAmount(e.target.value)}}
                                               />
                                             </div>
                                           </div>
@@ -2280,7 +2280,7 @@ const Samunnati_Farmer_Loan = () => {
                                                   handleShowConfirmApprove();
                                                 }}
                                                 style={{ float: "right", backgroundColor: '#064420' }}
-                                                // disabled={grantedAmount == 0 || newRepaymentStructure == ""}
+                                              // disabled={grantedAmount == 0 || newRepaymentStructure == ""}
                                               >
                                                 Approve Loan
                                               </button>
@@ -2363,7 +2363,7 @@ const Samunnati_Farmer_Loan = () => {
                                               <input
                                                 type="text"
                                                 className="form-control"
-                                                // onInput={(e) => {setRejectionReason(e.target.value)}}
+                                              // onInput={(e) => {setRejectionReason(e.target.value)}}
                                               />
                                             </div>
                                           </div>
@@ -2377,7 +2377,7 @@ const Samunnati_Farmer_Loan = () => {
                                                   handleShowConfirmReject();
                                                 }}
                                                 style={{ float: "right", backgroundColor: '#064420' }}
-                                                // disabled={rejectionReason == ""}
+                                              // disabled={rejectionReason == ""}
                                               >
                                                 Reject Loan
                                               </button>
@@ -2395,7 +2395,7 @@ const Samunnati_Farmer_Loan = () => {
                             <Modal show={showConfirmApprove} onHide={handleCloseConfirmApprove}>
                               <Modal.Header closeButton>Confirm Approve Farmer Loan Window Application</Modal.Header>
                               <Modal.Body>
-                              <div className="row">
+                                <div className="row">
                                   <div className="col-lg-12">
                                     <label>Are you sure you want to approve this farmer loan window application?</label>
                                   </div>

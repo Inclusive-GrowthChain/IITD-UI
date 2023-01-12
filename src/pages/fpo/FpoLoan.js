@@ -31,6 +31,7 @@ const approvedloanList = [
     amount: "1000000",
     tenure: "12",
     purpose: "Purpose 1",
+    farmerName: "Raj kumar",
   },
   {
     id: "L 2",
@@ -45,6 +46,7 @@ const approvedloanList = [
     amount: "1000000",
     tenure: "12",
     purpose: "Purpose 2",
+    farmerName: "Yashodha",
   },
   {
     id: "L 3",
@@ -59,6 +61,7 @@ const approvedloanList = [
     amount: "1000000",
     tenure: "12",
     purpose: "Purpose 3",
+    farmerName: "Mark",
   },
 ]
 
@@ -134,6 +137,81 @@ const pendingloanList = [
   },
 ]
 
+const loanWindow = [
+  {
+    id: "Sum-TW-1",
+    amount: "1000",
+    tenure: "tenure 1",
+  },
+  {
+    id: "Sum-TW-2",
+    amount: "5000",
+    tenure: "tenure 2",
+  },
+  {
+    id: "Sum-TW-3",
+    amount: "4000",
+    tenure: "tenure 3",
+  },
+]
+
+function LoanWindowTable({ onClick }) {
+  return (
+    <table className="table table-borderless">
+      <thead
+        style={{
+          color: "#064420",
+          fontSize: "17px",
+          verticalAlign: "top",
+          textAlign: "center",
+          fontWeight: "600",
+        }}
+      >
+        <tr>
+          <td>Loan window Id</td>
+          <td>Loan window amount</td>
+          <td>Loan window tenure</td>
+          <td>Status</td>
+        </tr>
+      </thead>
+      <tbody
+        style={{
+          color: "#000",
+          fontSize: "16px",
+          fontWeight: "500",
+          textAlign: "center",
+        }}
+      >
+        {loanWindow.map((loan) => (
+          <tr key={loan.id}>
+            <td>{loan.id}</td>
+            <td>{loan.amount}</td>
+            <td>{loan.amount}</td>
+            <td>
+              <button
+                style={{
+                  backgroundColor: "#064420",
+                  color: "#fff",
+                  alignItems: "center",
+                  borderRadius: "5px",
+                  border: "none",
+                  padding: "0.25rem 1rem",
+                  width: "fit-content",
+                  fontSize: ".75rem",
+                  lineHeight: "1rem",
+                }}
+                onClick={onClick}
+              >
+                view
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+}
+
 const FpoLoan = ({ props }) => {
   const [showAttachPaymentImg, setShowAttachPaymentImg] = useState(false)
   const [showAttachInvoiceImg, setShowAttachInvoiceImg] = useState(false)
@@ -165,7 +243,7 @@ const FpoLoan = ({ props }) => {
   const handleCloseApplyLoan = () => setShowApplyLoan(false)
   const handleCloseRepayment = () => setShowRepayment(false)
   const handleShowApplyLoan = () => setShowApplyLoan(true)
-  const handleShowRepayment = () => setShowRepayment(true)
+  // const handleShowRepayment = () => setShowRepayment(true)
   const handleCloseConfirm = () => setShowConfirm(false)
   const handleShowConfirm = () => setShowConfirm(true)
   const handleShowApp = () => setShowApp(true)
@@ -218,22 +296,33 @@ const FpoLoan = ({ props }) => {
       <div className="homeContainer">
         <Sidebar />
         <main id="main_container" className="main_container container-fluid">
-          <div className="">
-            <h3>Loan Information</h3>
+          <div className="d-flex align-items-center">
+            <h3 className="flex-grow-1">Loan Information</h3>
+
+            <button
+              className="loan_btn"
+              style={{ width: "220px", marginRight: "1rem", fontSize: "14px" }}
+              onClick={() => {
+                handleShowApp()
+                setWindowId(generateRandomWindowID())
+              }}
+            >
+              Apply for Loan Window
+            </button>
+
+            <button
+              className="loan_btn"
+              style={{ width: "280px", fontSize: "14px" }}
+              onClick={() => {
+                setWindowId(generateRandomWindowID())
+                handleShowAdd()
+              }}
+            >
+              Apply for Farmer Loan Window
+            </button>
           </div>
 
           <div className="list_container">
-            <div className="loan_wrapper">
-              <button
-                className="loan_btn"
-                onClick={() => {
-                  handleShowApp()
-                  setWindowId(generateRandomWindowID())
-                }}
-              >
-                Apply for Loan Window
-              </button>
-            </div>
             <div className="tabs mt-5">
               <button
                 className={`tab ${checkActive(1, "active")}`}
@@ -252,6 +341,7 @@ const FpoLoan = ({ props }) => {
                 Farmer Loan
               </button>
             </div>
+
             <div className="panels">
               <div className={`panel ${checkActive(1, "active")}`}>
                 <button
@@ -297,13 +387,20 @@ const FpoLoan = ({ props }) => {
                       >
                         Pending Loans
                       </button>
+                      <button
+                        className={toggleState === 4 ? "tabloan active-tab" : "tabloan"}
+                        onClick={() => toggleTab(4)}
+                        style={{ fontSize: "15px" }}
+                      >
+                        Loan Window
+                      </button>
                     </div>
 
                     <div className="content_tab">
                       <div
                         className={
                           toggleState === 1
-                            ? "content1  active_content"
+                            ? "content1 active_content"
                             : "content1"
                         }
                       >
@@ -320,7 +417,7 @@ const FpoLoan = ({ props }) => {
                               <th>Name of FPO</th>
                               <th>FPO Contact</th>
                               <th>Granted Loan Amount</th>
-                              <th>Repayment Structure</th>
+                              <th>Farmer Name</th>
                               <th>Loan Details</th>
                             </tr>
                           </thead>
@@ -337,27 +434,7 @@ const FpoLoan = ({ props }) => {
                                 <td>{item.name_fpo}</td>
                                 <td>{item.fpo_contact}</td>
                                 <td>{item.granted_loan}</td>
-                                <td>
-                                  <button
-                                    style={{
-                                      backgroundColor: "#064420",
-                                      color: "#fff",
-                                      alignItems: "center",
-                                      borderRadius: "5px",
-                                      border: "none",
-                                      padding: "0.25rem 1rem",
-                                      width: "fit-content",
-                                      fontSize: ".75rem",
-                                      lineHeight: "1rem",
-                                    }}
-                                    onClick={() => {
-                                      setCurrentLoan(item)
-                                      handleShowRepayment()
-                                    }}
-                                  >
-                                    view
-                                  </button>
-                                </td>
+                                <td>{item.farmerName}</td>
                                 <td>
                                   <button
                                     style={{
@@ -498,10 +575,25 @@ const FpoLoan = ({ props }) => {
                           </tbody>
                         </table>
                       </div>
+
+                      <div
+                        className={
+                          toggleState === 4
+                            ? "content1 active_content"
+                            : "content1"
+                        }
+                      >
+                        <LoanWindowTable
+                          onClick={() => {
+                            handleShowApp()
+                            setWindowId(generateRandomWindowID())
+                          }}
+                        />
+                      </div>
                     </div>
                   </div>
-
                 </div>
+
                 <div className="card_wrapper">
                   <div className="tabs_wrapper">
                     <ul className="nav-tab">
@@ -524,6 +616,12 @@ const FpoLoan = ({ props }) => {
                         activeTab={activeTab}
                         setActiveTab={setActiveTab}
                       />
+                      <TabNavItem
+                        title="Loan Window"
+                        id="tab4"
+                        activeTab={activeTab}
+                        setActiveTab={setActiveTab}
+                      />
                     </ul>
                     <div className="outlet">
                       <TabContent id="tab1" activeTab={activeTab}>
@@ -540,7 +638,7 @@ const FpoLoan = ({ props }) => {
                               <th>Name of FPO</th>
                               <th>FPO Contact</th>
                               <th>Granted Loan Amount</th>
-                              <th>Repayment Structure</th>
+                              <th>Farmer Name</th>
                               <th>Loan Details</th>
                             </tr>
                           </thead>
@@ -557,27 +655,7 @@ const FpoLoan = ({ props }) => {
                                 <td>{item.name_fpo}</td>
                                 <td>{item.fpo_contact}</td>
                                 <td>{item.granted_loan}</td>
-                                <td>
-                                  <button
-                                    style={{
-                                      backgroundColor: "#064420",
-                                      color: "#fff",
-                                      alignItems: "center",
-                                      borderRadius: "5px",
-                                      border: "none",
-                                      padding: "0.25rem 1rem",
-                                      width: "fit-content",
-                                      fontSize: ".75rem",
-                                      lineHeight: "1rem",
-                                    }}
-                                    onClick={() => {
-                                      setCurrentLoan(item)
-                                      handleShowRepayment()
-                                    }}
-                                  >
-                                    view
-                                  </button>
-                                </td>
+                                <td>{item.farmerName}</td>
                                 <td>
                                   <button
                                     style={{
@@ -706,34 +784,30 @@ const FpoLoan = ({ props }) => {
                           </tbody>
                         </table>
                       </TabContent>
+                      <TabContent id="tab4" activeTab={activeTab}>
+                        <LoanWindowTable
+                          onClick={() => {
+                            handleShowApp()
+                            setWindowId(generateRandomWindowID())
+                          }}
+                        />
+                      </TabContent>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div className={`panel ${checkActive(2, "active")}`}>
-                <button
-                  className=""
-                  style={{
-                    backgroundColor: "#064420",
-                    padding: "5px 5px",
-                    position: "relative",
-                    float: "right",
-                    right: "50px",
-                    bottom: "54px",
-                    color: "#fff",
-                    width: "17%",
-                    borderRadius: "5px",
-                  }}
-                  onClick={() => {
-                    setWindowId(generateRandomWindowID())
-                    handleShowAdd()
-                  }}
-                >
-                  Apply for Farmer Loan Window
-                </button>
-
-                <FPOLoanTab />
+                <FPOLoanTab
+                  Comp={
+                    <LoanWindowTable
+                      onClick={() => {
+                        setWindowId(generateRandomWindowID())
+                        handleShowAdd()
+                      }}
+                    />
+                  }
+                />
               </div>
             </div>
           </div>
