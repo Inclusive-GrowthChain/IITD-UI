@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
@@ -346,12 +345,6 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                 >
                   Loans Approved by Samunnati
                 </button>
-                {/* <button
-                  className={`tab ${checkActive(2, "active")}`}
-                  onClick={() => handleClick(2)}
-                >
-                  Loans Approved by FPO
-                </button> */}
                 <button
                   className={`tab ${checkActive(2, "active")}`}
                   onClick={() => handleClick(2)}
@@ -1367,7 +1360,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                         </div>
                                         <div className="row m-2">
                                           <div className="col-lg-6">
-                                            <label>Aadhar Card Image</label>
+                                            <label>Aadhar Card</label>
                                           </div>
                                           <div className="col-lg-6">
                                             <button
@@ -1400,7 +1393,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                                         </div>
                                         <div className="row m-2">
                                           <div className="col-lg-6">
-                                            <label>PAN Card Image</label>
+                                            <label>PAN Card</label>
                                           </div>
                                           <div className="col-lg-6">
                                             <button
@@ -2095,7 +2088,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                         <Modal.Body>
                           <img
                             src={logo}
-                            alt="Payment Image"
+                            alt="Payment"
                             style={{ width: "100%", height: "100%" }}
                           />
                         </Modal.Body>

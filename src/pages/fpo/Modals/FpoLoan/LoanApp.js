@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 
-function LoanApplication({
+function LoanApp({
   currentLoan, showRejectionLoan,
   confirmPaymentImg, handleShowPaymentImg,
   handleCloseRejectionLoan
@@ -160,4 +160,4 @@ function LoanApplication({
   )
 }
 
-export default LoanApplication
+export default LoanApp

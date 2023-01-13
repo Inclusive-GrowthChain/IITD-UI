@@ -11,7 +11,7 @@ import RepaymentStructure from "./Modals/FpoLoan/RepaymentStructure";
 import DocumentsCollected2 from "./Modals/FpoLoan/DocumentsCollected2";
 import DocumentsCollected from "./Modals/FpoLoan/DocumentsCollected";
 import LoanApplication2 from "./Modals/FpoLoan/LoanApplication2";
-import LoanApplication from "./Modals/FpoLoan/LoanApplication";
+import LoanApplication from "./Modals/FpoLoan/LoanApp";
 import PaymentProof from "./Modals/FpoLoan/PaymentProof";
 import LoanDetails from "./Modals/FpoLoan/LoanDetails";
 import Invoice from "./Modals/FpoLoan/Invoice";
