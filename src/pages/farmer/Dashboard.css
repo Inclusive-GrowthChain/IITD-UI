@@ -11,6 +11,7 @@ color: 064420
   color: #555;
   background-color: #064420;
 }
+
 .wrapper {
   width: 100%;
   display: flex;
@@ -19,25 +20,30 @@ color: 064420
   padding-left: 25px;
   flex-flow: row-reverse;
 }
+
 .items {
   display: flex;
   align-items: center;
   padding: 0 20px;
 }
+
 .item {
   display: flex;
   align-items: center;
   margin-right: 20px;
 }
-.center > ul > li > .icon {
+
+.center>ul>li>.icon {
   font-size: 16px;
   color: #000;
   position: relative;
   left: 15px;
 }
+
 .icons {
   color: #fff;
 }
+
 .avatar {
   width: 30px;
   height: 30px;
@@ -60,7 +66,7 @@ color: 064420
   padding: 0px 10px;
 }
 
-.sidebar-wrapper > .center > ul {
+.sidebar-wrapper>.center>ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -76,17 +82,20 @@ color: 064420
   align-items: center;
   background-color: #064420;
 }
+
 .logo {
   position: relative;
   left: 20px;
 }
-.logo > span {
+
+.logo>span {
   font-size: 18px;
   color: #fff;
   position: relative;
   left: 5px;
   top: 2px;
 }
+
 .center {
   padding-left: 10px;
   margin-top: 4rem;
@@ -100,7 +109,7 @@ color: 064420
   margin-bottom: 5px;
 }
 
-.sidebar-wrapper > .center > ul > .data_wrapper {
+.sidebar-wrapper>.center>ul>.data_wrapper {
   padding: 0 10px;
   cursor: pointer;
   text-decoration: none;
@@ -109,25 +118,29 @@ color: 064420
   font-weight: 500;
 }
 
-.sidebar-wrapper > .center > ul > .data_wrapper > span {
+.sidebar-wrapper>.center>ul>.data_wrapper>span {
   font-size: 16px;
   font-weight: 500;
   color: #000;
   margin-left: 10px;
 }
-.sidebar-wrapper > .center > ul > .data_wrapper > .icon {
+
+.sidebar-wrapper>.center>ul>.data_wrapper>.icon {
   color: #000;
   position: relative;
   font-size: 1.5rem;
 }
-.sidebar-wrapper > .center > ul > .data_wrapper:hover {
+
+.sidebar-wrapper>.center>ul>.data_wrapper:hover {
   background-color: rgba(145, 158, 171, 0.08);
 }
+
 ul a.active {
   background-color: #fdfaf6;
   box-shadow: 0px 1.6px 3.6px rgb(0 0 0 / 13%), 0px 0px 2.9px rgb(0 0 0 / 11%);
   border-left: solid;
 }
+
 /*------ sidebar end ------*/
 span {
   font-size: 13px;
@@ -135,36 +148,42 @@ span {
   color: #888;
   margin-left: 10px;
 }
+
 .farmer {
   display: flex;
 }
+
 .farmerContainer {
   flex: 6;
 }
+
 .itemContainer {
   padding: 20px;
   background-color: #e9ecef;
   height: 575px;
 }
+
 .list_title {
   font-weight: 500;
   color: grey;
   margin-bottom: 15px;
 }
+
 .loan__contant {
   margin: 25px 40px;
 }
 
-.list_title > .history__content > thead {
+.list_title>.history__content>thead {
   font-size: 15px;
   padding: 0 10px;
 }
 
-.list_title > .history__content {
+.list_title>.history__content {
   background-color: #fff;
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
   padding: 5px;
 }
+
 /*-- dashboard card --*/
 
 .list_title,
@@ -175,24 +194,28 @@ span {
   font-weight: 800;
   color: rgb(33, 37, 41);
 }
+
 .list_title,
 .card_title {
   color: #218f2c;
   font-weight: 600;
   font-size: 18px;
 }
+
 .list_title,
 .dash__card,
 .card__content {
   font-size: 13px;
   font-weight: 600;
 }
+
 .list_title,
 .dash__card,
 .card-text {
   font-size: 13px;
   font-weight: 600;
 }
+
 .dash__card {
   position: relative;
   display: flex;
@@ -203,6 +226,7 @@ span {
   box-shadow: 0px 1.6px 3.6px rgb(0 0 0 / 13%), 0px 0px 2.9px rgb(0 0 0 / 11%);
   height: 100%;
 }
+
 .dash__card1 {
   /* width: 40%; */
   position: relative;
@@ -214,6 +238,7 @@ span {
   box-shadow: 0px 1.6px 3.6px rgb(0 0 0 / 13%), 0px 0px 2.9px rgb(0 0 0 / 11%);
   height: 100%;
 }
+
 .dash__card2 {
   /* width: 40%; */
   position: relative;
@@ -237,6 +262,7 @@ span {
   height: 100%;
   /* width: 580px; */
 }
+
 .card2 {
   position: relative;
   /* left: 240px; */
@@ -248,6 +274,7 @@ span {
   box-shadow: 0px 1.6px 3.6px rgb(0 0 0 / 13%), 0px 0px 2.9px rgb(0 0 0 / 11%);
   height: 100%;
 }
+
 /** end --*/
 
 /*-- loan information --*/
@@ -256,9 +283,10 @@ span {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
+
 /*-- end -**/
 
-.list_title > div > .button {
+.list_title>div>.button {
   background-color: #17b169;
   color: #fff;
   width: 30%;
@@ -268,7 +296,7 @@ span {
   border-radius: 5px;
 }
 
-.list_title > .card_text {
+.list_title>.card_text {
   color: #000;
   font-weight: bold;
 }
@@ -278,7 +306,7 @@ p.card_text.card-text {
   font-weight: bold;
 }
 
-.setting_data > .setting_content {
+.setting_data>.setting_content {
   width: 50%;
   height: 65vh;
   padding: 10px;
@@ -286,7 +314,7 @@ p.card_text.card-text {
   border-radius: 5px;
 }
 
-.setting_data > .seting_btn {
+.setting_data>.seting_btn {
   display: flex;
   position: relative;
   margin: 2rem 14rem;
@@ -303,17 +331,19 @@ p.card_text.card-text {
 }
 
 /*-- loan button --*/
-.list_title > .loan_button {
+.list_title>.loan_button {
   background-color: #064420;
   border: none;
   width: 10%;
   float: right;
   position: relative;
 }
+
 .btn:first-child:hover,
-:not(.btn-check) + .btn:hover {
+:not(.btn-check)+.btn:hover {
   background-color: none;
 }
+
 /*-- end --*/
 
 /*--- price store ---*/
@@ -338,6 +368,7 @@ button#controlled-tab-example-tab-profile {
   border-bottom: 3px solid green;
   color: #000;
 }
+
 button#controlled-tab-example-tab-contact {
   background: none;
   border: none;
@@ -392,6 +423,7 @@ button#controlled-tab-example-tab-contact {
   transition-duration: 1s;
   transform: scale(1.08);
 }
+
 /*-- end --*/
 
 /*---- setting css ---*/
@@ -415,7 +447,7 @@ button#controlled-tab-example-tab-contact {
   justify-content: center;
 }
 
-.profile_title > p {
+.profile_title>p {
   background: none;
   border: none;
   margin-right: 2rem;
@@ -478,7 +510,7 @@ ul.nav-tab {
   align-items: center;
 }
 
-.tabs_wrapper > ul.nav-tab > li {
+.tabs_wrapper>ul.nav-tab>li {
   padding: 10px 10px;
   list-style: none;
   font-size: 16px;
@@ -497,7 +529,7 @@ ul.nav-tab1 {
   justify-content: center;
 }
 
-.tabs_wrapper > ul.nav-tab1 > li {
+.tabs_wrapper>ul.nav-tab1>li {
   padding: 10px 10px;
   /* margin: 0; */
   list-style: none;
@@ -526,19 +558,19 @@ ul.nav-tab1 li.active {
   min-height: 150px;
 }
 
-.card_content > p {
+.card_content>p {
   font-size: 12px;
   font-weight: 400;
 }
 
-.card_wrapper > .card_button > button#btn-1 {
+.card_wrapper>.card_button>button#btn-1 {
   background: none;
   border: none;
   font-size: 12px;
   text-transform: uppercase;
 }
 
-#btn-1 > .btn-icon {
+#btn-1>.btn-icon {
   font-size: 20px;
   position: relative;
   bottom: 1px;
@@ -550,6 +582,7 @@ ul.nav-tab1 li.active {
   font-size: 12px;
   justify-content: space-between;
 }
+
 /*--- end ---*/
 
 /*--- setting css ---*/
@@ -566,15 +599,13 @@ ul.nav-tab1 li.active {
   ##Device = Most of the Smartphones Mobiles (Portrait)
   ##Screen = B/w 320px to 479px
 */
-@media (min-width: 320px) and (max-width: 480px) {
-}
+@media (min-width: 320px) and (max-width: 480px) {}
 
 /* 
   ##Device = Tablets, Ipads (portrait)
   ##Screen = B/w 768px to 1024px
 */
-@media (min-width: 768px) and (max-width: 1024px) {
-}
+@media (min-width: 768px) and (max-width: 1024px) {}
 
 /* 
   ##Device = Laptops, Desktops
@@ -584,6 +615,7 @@ ul.nav-tab1 li.active {
   .sidebar-wrapper {
     height: 929px;
   }
+
   .itemContainer {
     height: 876px;
     padding: 25px 0;
@@ -594,13 +626,15 @@ ul.nav-tab1 li.active {
   ##Device = Laptops, Desktops
   ##LargeScreen 4K = B/w 1930px to 2048px
 */
-@media (min-width: 1930px) and (max-width: 2048px)  {
+@media (min-width: 1930px) and (max-width: 2048px) {
   .sidebar-wrapper {
     height: 989px;
   }
+
   .itemContainer {
     height: 989px;
     padding: 25px 0;
   }
 }
+
 /*------------media query end --------------*/

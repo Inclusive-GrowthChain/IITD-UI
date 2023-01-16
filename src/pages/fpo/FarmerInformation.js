@@ -1,17 +1,15 @@
-import React from "react";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useNavigate } from 'react-router-dom';
+
+import TabInfo from "./TabContent/TabInfo";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import "./style.css";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {useNavigate} from 'react-router-dom';
-import TabInfo from "./TabContent/TabInfo";
 
 const FarmerInformation = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const handleClick = () => {
-    navigate('/fpo/farmer', {replace: true});
-  };
+  const handleClick = () => navigate('/fpo/farmer', { replace: true })
 
   return (
     <div className="home">

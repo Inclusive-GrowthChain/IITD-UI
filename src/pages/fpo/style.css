@@ -3,11 +3,13 @@
   display: flex;
   flex-direction: column;
 }
+
 .homeContainer {
   display: flex;
   flex: 1;
   margin-top: -1px;
 }
+
 /*------------------- navbar css start ------------------------*/
 .navbar_wrapper {
   height: 51px;
@@ -18,28 +20,34 @@
   justify-content: space-between;
   padding: 0 20px;
 }
+
 .navbar_wrapper .logo_img {
   position: relative;
   /* left: 20px; */
 }
+
 .nav_items .nav_icons {
   color: #fff;
 }
+
 .navbar_wrapper .logo_img span {
   font-size: 18px;
   color: #fff;
   text-transform: uppercase;
 }
+
 .navbar_wrapper .nav_items {
   display: flex;
   align-items: center;
 }
-.logo_img > span {
+
+.logo_img>span {
   font-size: 18px;
   color: #fff;
   position: relative;
   top: 2px;
 }
+
 /*------------------- sidebar css start ------------------------*/
 .sidebar_wrapper {
   width: 270px;
@@ -55,7 +63,8 @@
   margin-top: 3rem;
   padding: 0px 10px;
 }
-.sidebar_content > ul {
+
+.sidebar_content>ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -64,7 +73,8 @@
   flex-direction: column;
   transition: none;
 }
-.sidebar_wrapper > .sidebar_content > ul > .sidebar_data {
+
+.sidebar_wrapper>.sidebar_content>ul>.sidebar_data {
   padding: 0 10px;
   cursor: pointer;
   text-decoration: none;
@@ -72,25 +82,30 @@
   font-size: 18px;
   font-weight: 500;
 }
-.sidebar_wrapper > .sidebar_content > ul > .sidebar_data > span {
+
+.sidebar_wrapper>.sidebar_content>ul>.sidebar_data>span {
   font-size: 14px;
   font-weight: 500;
   color: #000;
   margin-left: 10px;
 }
-.sidebar_wrapper > .sidebar_content > ul > .sidebar_data > .icon {
+
+.sidebar_wrapper>.sidebar_content>ul>.sidebar_data>.icon {
   color: #000;
   position: relative;
   font-size: 20px;
 }
-.sidebar_wrapper > .sidebar_content > ul > .sidebar_data:hover {
+
+.sidebar_wrapper>.sidebar_content>ul>.sidebar_data:hover {
   background-color: rgba(145, 158, 171, 0.08);
 }
+
 ul a.active {
   background-color: #eee;
   /* box-shadow: 0px 1.6px 3.6px rgb(0 0 0 / 13%), 0px 0px 2.9px rgb(0 0 0 / 11%); */
   border-left: 4px solid #064420;
 }
+
 /*------------------- main container css start ------------------------*/
 .home .main_container {
   width: 100%;
@@ -98,36 +113,43 @@ ul a.active {
   background-color: #e9ecef;
   height: 918px;
 }
-.main_container > div > h3 {
+
+.main_container>div>h3 {
   font-size: 22px;
   font-weight: 800;
   color: rgb(33, 37, 41);
 }
+
 .list_container {
   border-radius: 10px;
 }
+
 .loan__contant {
   margin: 25px 40px;
 }
+
 .search {
   width: 40%;
   position: relative;
   left: 25rem;
   bottom: 45px;
 }
-.search > .search_input {
+
+.search>.search_input {
   width: 65%;
   height: 50px;
   border: 1px solid #a5a29f;
   padding: 0 40px;
   /* border-radius: 10px; */
 }
+
 .search_icon {
   position: relative;
   left: 10px;
   bottom: 2.3rem;
   cursor: pointer;
 }
+
 /* .search > .search_input:hover {
   border: 2px solid #0dcaf0;
 } */
@@ -137,6 +159,7 @@ ul a.active {
 .tabs {
   display: flex;
 }
+
 .tab {
   align-items: center;
   margin: 0px 20px;
@@ -146,6 +169,7 @@ ul a.active {
   font-weight: 600;
   font-size: 17px;
 }
+
 /* .tab:not(:last-child) {
   border-bottom: 1px solid steelblue;  
 } */
@@ -154,13 +178,16 @@ ul a.active {
   border-bottom: solid;
   font-weight: bold;
 }
+
 .panel {
   display: none;
   padding: 15px 0;
 }
+
 .panel.active {
   display: block;
 }
+
 .card_table {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
   background-color: #fff;
@@ -169,6 +196,7 @@ ul a.active {
   overflow-y: scroll;
   height: 60vh;
 }
+
 .card_table::-webkit-scrollbar {
   width: 10px;
 }
@@ -187,24 +215,29 @@ ul a.active {
 .card_table::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
 .card_table1 {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
   background-color: #fff;
   border-radius: 10px;
 }
+
 .info_btn {
   border: none;
   background: none;
   text-decoration: none;
   color: #000;
 }
+
 .info_btn:hover {
   color: #218f2c;
 }
-.back_btn > button > .btn_icon {
+
+.back_btn>button>.btn_icon {
   font-size: 16px;
 }
-.back_btn > button {
+
+.back_btn>button {
   background-color: #064420;
   border: none;
   border-radius: 10px;
@@ -222,6 +255,7 @@ ul a.active {
 .bloc-tabs {
   display: flex;
 }
+
 .tabs-1 {
   padding: 10px 0px;
   text-align: center;
@@ -247,24 +281,30 @@ ul a.active {
   height: 5px;
   background: rgb(88, 147, 241);
 }
+
 button {
   border: none;
 }
+
 .content-tabs {
   flex-grow: 1;
 }
+
 .content {
   width: 100%;
   height: 100%;
   display: none;
   margin-top: 10px;
 }
+
 .content h2 {
   padding: 0px 0 5px 0px;
 }
+
 .active-content {
   display: block;
 }
+
 /*----------Loaninfotab end -----------------*/
 
 /*------------- FPOLoanTab css --------------*/
@@ -275,6 +315,7 @@ button {
 .bloc-tab {
   display: flex;
 }
+
 .tabloan {
   padding: 10px 0px;
   text-align: center;
@@ -299,30 +340,37 @@ button {
   height: 5px;
   background: rgb(88, 147, 241);
 }
+
 button {
   border: none;
 }
+
 .content_tab {
   flex-grow: 1;
 }
+
 .content1 {
   width: 100%;
   height: 100%;
   display: none;
   margin-top: 10px;
 }
+
 .content1 h2 {
   padding: 0px 0 5px 0px;
 }
+
 .active_content {
   display: block;
 }
+
 /*---------- FPOLoanTab css end -----------------*/
 
 /*----- farmer information page tab css -----*/
 .dropdown_btn {
   width: 30%;
 }
+
 /*---- end css -----*/
 
 /*---- setting css ---*/
@@ -346,7 +394,7 @@ button {
   justify-content: center;
 }
 
-.profile_title > p {
+.profile_title>p {
   background: none;
   border: none;
   margin-right: 2rem;
@@ -358,6 +406,7 @@ button {
   border-radius: 5px; */
   cursor: pointer;
 }
+
 .TabContent {
   font-size: 18px;
   font-weight: 400;
@@ -378,13 +427,15 @@ button {
 ul.nav-tab1 li.active {
   color: #218f2c;
 }
-.tabs_wrapper > ul.nav-tab1 > li {
+
+.tabs_wrapper>ul.nav-tab1>li {
   padding: 10px 10px;
   /* margin: 0; */
   list-style: none;
   font-size: 18px;
   cursor: pointer;
 }
+
 .setting_card::-webkit-scrollbar {
   width: 10px;
 }
@@ -411,16 +462,20 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
+
 table thead {
   border-bottom: 1px solid #d3c6c6;
 }
+
 table caption {
   font-size: 1.5em;
   margin: 0.5em 0 0.75em;
 }
+
 table tr {
   padding: 0.35em;
 }
+
 /* table tr:nth-child(even) {
   background: #f8f8f8;
 } */
@@ -429,21 +484,25 @@ table td {
   padding: 0.525em 0.5em;
   text-align: center;
 }
+
 table th {
   color: #064420;
 }
+
 table td {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 table tr:hover {
   background-color: #f8f8f8;
 }
 
-table > .table_btn:hover {
+table>.table_btn:hover {
   background-color: #218f2c;
 }
+
 /*table css end */
 
 /*---------------------- fpo store css ---------------------*/
@@ -462,6 +521,7 @@ table > .table_btn:hover {
 .store_tabs {
   display: flex;
 }
+
 .store-tab {
   align-items: center;
   margin: 0px 20px;
@@ -471,6 +531,7 @@ table > .table_btn:hover {
   font-weight: 700;
   font-size: 17px;
 }
+
 /* .tab:not(:last-child) {
   border-bottom: 1px solid steelblue;  
 } */
@@ -479,17 +540,20 @@ table > .table_btn:hover {
   border-bottom: solid;
   font-weight: bold;
 }
+
 .panel {
   display: none;
   padding: 15px 0;
 }
+
 .panel.active {
   display: block;
 }
+
 /* .modal-popup {
   position: sticky;
 } */
-.card-image > .edit_image {
+.card-image>.edit_image {
   position: relative;
   color: #000;
   cursor: pointer;
@@ -499,11 +563,13 @@ table > .table_btn:hover {
   display: block;
   top: -265px;
 }
+
 .store_price {
   display: flex;
   justify-content: space-between;
   padding: 0 15px;
 }
+
 .store-card {
   width: 30rem;
   background-color: #fff;
@@ -512,28 +578,34 @@ table > .table_btn:hover {
   border-radius: 10px;
   box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
 }
-.card-image > img {
+
+.card-image>img {
   width: 30rem;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
+
 .store-card-text {
   padding: 0 10px;
 }
+
 .store-card-text,
 h5 {
   margin-top: 15px;
 }
+
 .store-card-footer {
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
   margin-top: 35px;
 }
+
 .store-card-title,
 p {
   font-size: 18px;
 }
+
 /*---------------------- css end ---------------------------*/
 
 /*---------------------- fpo lab testing css ---------------------*/
@@ -548,9 +620,11 @@ p {
   float: right;
   right: 50px;
 }
+
 .card-details-header {
   font-size: 15px;
 }
+
 .card-details-button {
   margin-top: 20px;
   padding: 10px 10px;
@@ -559,10 +633,12 @@ p {
   background-color: #fff;
   border-radius: 10px;
 }
-.card-details-header > span {
+
+.card-details-header>span {
   color: red;
   font-size: 17px;
 }
+
 /*---------------------- css end ---------------------------*/
 
 /*---------------------- fpo loan css ---------------------*/
@@ -577,6 +653,7 @@ p {
   float: right;
   right: 50px;
 }
+
 /*---------------------- css end ---------------------------*/
 
 .toggle-switch {
@@ -586,9 +663,11 @@ p {
   height: 25px;
   top: 20px;
 }
+
 .toggle-switch input[type="checkbox"] {
   display: none;
 }
+
 .toggle-switch .switch {
   position: absolute;
   cursor: pointer;
@@ -600,6 +679,7 @@ p {
   left: 0;
   transition: background-color 0.2s ease;
 }
+
 .toggle-switch .switch::before {
   position: absolute;
   content: "";
@@ -611,11 +691,13 @@ p {
   border-radius: 50%;
   transition: transform 0.3s ease;
 }
-.toggle-switch input[type="checkbox"]:checked + .switch::before {
+
+.toggle-switch input[type="checkbox"]:checked+.switch::before {
   transform: translateX(25px);
   background-color: #fff;
 }
-.toggle-switch input[type="checkbox"]:checked + .switch {
+
+.toggle-switch input[type="checkbox"]:checked+.switch {
   background-color: #336699;
 }
 
@@ -628,6 +710,7 @@ p {
   .sidebar_wrapper {
     height: 920px;
   }
+
   .home .main_container {
     height: 950px;
   }
@@ -641,8 +724,10 @@ p {
   .sidebar_wrapper {
     height: 920px;
   }
+
   .home .main_container {
     height: 920px;
   }
 }
+
 /*------------- media query end ---------------*/

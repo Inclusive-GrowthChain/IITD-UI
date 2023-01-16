@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { MenuItem } from "@mui/material";
-import Select from '@mui/material/Select';
 import Modal from "react-bootstrap/Modal";
 import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
 
@@ -20,8 +18,7 @@ const labelArray = [
   "Verify Payment",
 ];
 
-const CorporateCustomer = ({ alert }) => {
-  const [multiSelectReportName, setMultiSelectReportName] = useState([]);
+const CorporateCustomer = () => {
   const [showTranscation, setShowTransaction] = useState(false)
   const [showConfirmBox, setShowConfirmBox] = useState(false)
   const [currentStep, updateCurrentStep] = useState(1)
@@ -64,15 +61,6 @@ const CorporateCustomer = ({ alert }) => {
     e.preventDefault();
     setShowConfirmBox(false);
     setShowBid(false);
-  };
-
-  const onMultiSelectReportNameChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setMultiSelectReportName(
-      typeof value === 'string' ? value.split(',') : value,
-    );
   }
 
   return (
@@ -177,105 +165,10 @@ const CorporateCustomer = ({ alert }) => {
                                   lineHeight: "1rem",
                                   color: "#fff",
                                 }}
-                                onClick={() => {
-                                  handleShowBid();
-                                }}
+                                onClick={handleShowBid}
                               >
                                 Place a Bid
                               </button>
-                              <div>
-                                <Modal
-                                  // size="sm"
-                                  show={showBid}
-                                  onHide={handleCloseBid}
-                                >
-                                  <Modal.Header closeButton>
-                                    Place a Bid
-                                  </Modal.Header>
-                                  <Modal.Body>
-                                    <div className="bid_title">
-                                      <div className="row">
-                                        <div className="col-6">
-                                          <label>Enter the Price/kg</label>
-                                        </div>
-                                        <div className="col-6">
-                                          <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Enter thr price"
-                                          />
-                                        </div>
-                                      </div>
-                                      <div>
-                                        <div className="row m-1">
-                                          <button
-                                            className="mt-4"
-                                            style={{
-                                              backgroundColor: "#064420",
-                                              alignItems: "center",
-                                              borderRadius: "5px",
-                                              border: "none",
-                                              padding: "0.25rem 1rem",
-                                              color: "#fff",
-                                            }}
-                                            onClick={(e) => {
-                                              confirmBid(e);
-                                            }}
-                                          >
-                                            Submit
-                                          </button>
-                                          <Modal
-                                            show={showConfirmBox}
-                                            onHide={handleCloseConfirmBox}
-                                          >
-                                            <Modal.Body
-                                              closeButton
-                                              style={{
-                                                position: "absolute",
-                                                top: "4rem",
-                                                left: "6rem",
-                                                width: "60%",
-                                                height: "150px",
-                                                timer: "1500",
-                                                backgroundColor: "#e9ecef",
-                                                color: "#000",
-                                                textAlign: "center",
-                                              }}
-                                            >
-                                              <div
-                                                style={{
-                                                  dispalay: "flex",
-                                                  alignItems: "center",
-                                                }}
-                                              >
-                                                <CheckCircleTwoToneIcon />
-                                                <p className="text-center">
-                                                  Are you confirm this order!
-                                                </p>
-                                                <button
-                                                  style={{
-                                                    backgroundColor: "#064420",
-                                                    alignItems: "center",
-                                                    borderRadius: "5px",
-                                                    border: "none",
-                                                    padding: "0.25rem 1rem",
-                                                    color: "#fff",
-                                                  }}
-                                                  onClick={(e) => {
-                                                    placeBid(e)
-                                                  }}
-                                                >
-                                                  Confirm
-                                                </button>
-                                              </div>
-                                            </Modal.Body>
-                                          </Modal>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </Modal.Body>
-                                </Modal>
-                              </div>
                             </td>
                           </tr>
                           <tr>
@@ -382,42 +275,6 @@ const CorporateCustomer = ({ alert }) => {
                               >
                                 view
                               </button>
-
-                              <Modal
-                                className="progressModal"
-                                size="lg"
-                                show={showCustomer}
-                                onHide={handleCloseCustomer}
-                                style={{ height: "100%" }}
-                              >
-                                <Modal.Header closeButton>
-                                  Bid Status
-                                </Modal.Header>
-                                <Modal.Body>
-                                  <ProgressBar
-                                    page={page}
-                                    labelArray={labelArray}
-                                    currentStep={currentStep}
-                                    updateStep={updateStep}
-                                  />
-                                  {
-                                    {
-                                      pageone: (
-                                        <PageOne onButtonClick={nextPage} />
-                                      ),
-                                      pagetwo: (
-                                        <PageTwo onButtonClick={nextPage} />
-                                      ),
-                                      pagethree: (
-                                        <PageThree onButtonClick={nextPage} />
-                                      ),
-                                      pagefour: (
-                                        <PageFour onButtonClick={nextPage} canEdit={canEdit} />
-                                      ),
-                                    }[page]
-                                  }
-                                </Modal.Body>
-                              </Modal>
                             </td>
                           </tr>
                           <tr>
@@ -505,83 +362,6 @@ const CorporateCustomer = ({ alert }) => {
                               >
                                 view
                               </button>
-                              <div>
-                                <Modal
-                                  // size="sm"
-                                  show={showTranscation}
-                                  onHide={handleCloseTransaction}
-                                >
-                                  <Modal.Header closeButton>
-                                    Completed Transactions
-                                  </Modal.Header>
-                                  <Modal.Body>
-                                    <div className="bid_title">
-                                      <div className="row">
-                                        <div className="col-lg-6">
-                                          <label>Bid Id</label>
-                                        </div>
-                                        <div className="col-lg-6">
-                                          <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="1234"
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="row">
-                                        <div className="col-lg-6">
-                                          <label>
-                                            Name of Corporate Customer
-                                          </label>
-                                        </div>
-                                        <div className="col-lg-6">
-                                          <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="abcd"
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="row">
-                                        <div className="col-lg-6">
-                                          <label>Date of Invoice</label>
-                                        </div>
-                                        <div className="col-lg-6">
-                                          <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="01-05-2021"
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="row">
-                                        <div className="col-lg-6">
-                                          <label>Invoice Number</label>
-                                        </div>
-                                        <div className="col-lg-6">
-                                          <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="2314"
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="row">
-                                        <div className="col-lg-6">
-                                          <label>Total Amount</label>
-                                        </div>
-                                        <div className="col-lg-6">
-                                          <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="200"
-                                          />
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </Modal.Body>
-                                </Modal>
-                              </div>
                             </td>
                           </tr>
                           <tr>
@@ -620,8 +400,209 @@ const CorporateCustomer = ({ alert }) => {
         </main>
       </div>
 
+      <Modal
+        className="progressModal"
+        size="lg"
+        show={showCustomer}
+        onHide={handleCloseCustomer}
+        style={{ height: "100%" }}
+      >
+        <Modal.Header closeButton>
+          Bid Status
+        </Modal.Header>
+        <Modal.Body>
+          <ProgressBar
+            page={page}
+            labelArray={labelArray}
+            currentStep={currentStep}
+            updateStep={updateStep}
+          />
+          {
+            {
+              pageone: (
+                <PageOne onButtonClick={nextPage} />
+              ),
+              pagetwo: (
+                <PageTwo onButtonClick={nextPage} />
+              ),
+              pagethree: (
+                <PageThree onButtonClick={nextPage} />
+              ),
+              pagefour: (
+                <PageFour onButtonClick={nextPage} canEdit={canEdit} />
+              ),
+            }[page]
+          }
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        // size="sm"
+        show={showTranscation}
+        onHide={handleCloseTransaction}
+      >
+        <Modal.Header closeButton>
+          Completed Transactions
+        </Modal.Header>
+        <Modal.Body>
+          <div className="bid_title">
+            <div className="row">
+              <div className="col-lg-6">
+                <label>Bid Id</label>
+              </div>
+              <div className="col-lg-6">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="1234"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-6">
+                <label>
+                  Name of Corporate Customer
+                </label>
+              </div>
+              <div className="col-lg-6">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="abcd"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-6">
+                <label>Date of Invoice</label>
+              </div>
+              <div className="col-lg-6">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="01-05-2021"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-6">
+                <label>Invoice Number</label>
+              </div>
+              <div className="col-lg-6">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="2314"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-6">
+                <label>Total Amount</label>
+              </div>
+              <div className="col-lg-6">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="200"
+                />
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        // size="sm"
+        show={showBid}
+        onHide={handleCloseBid}
+      >
+        <Modal.Header closeButton>
+          Place a Bid
+        </Modal.Header>
+        <Modal.Body>
+          <div className="bid_title">
+            <div className="row">
+              <div className="col-6">
+                <label>Enter the Price/kg</label>
+              </div>
+              <div className="col-6">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter thr price"
+                />
+              </div>
+            </div>
+            <div>
+              <div className="row m-1">
+                <button
+                  className="mt-4"
+                  style={{
+                    backgroundColor: "#064420",
+                    alignItems: "center",
+                    borderRadius: "5px",
+                    border: "none",
+                    padding: "0.25rem 1rem",
+                    color: "#fff",
+                  }}
+                  onClick={confirmBid}
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        show={showConfirmBox}
+        onHide={handleCloseConfirmBox}
+      >
+        <Modal.Body
+          closeButton
+          style={{
+            position: "absolute",
+            top: "4rem",
+            left: "6rem",
+            width: "60%",
+            height: "150px",
+            timer: "1500",
+            backgroundColor: "#e9ecef",
+            color: "#000",
+            textAlign: "center",
+          }}
+        >
+          <div
+            style={{
+              dispalay: "flex",
+              alignItems: "center",
+            }}
+          >
+            <CheckCircleTwoToneIcon />
+            <p className="text-center">
+              Are you confirm this order!
+            </p>
+            <button
+              style={{
+                backgroundColor: "#064420",
+                alignItems: "center",
+                borderRadius: "5px",
+                border: "none",
+                padding: "0.25rem 1rem",
+                color: "#fff",
+              }}
+              onClick={placeBid}
+            >
+              Confirm
+            </button>
+          </div>
+        </Modal.Body>
+      </Modal>
+
       <Modal show={showStartBid} onHide={handleCloseStartBid}>
-        <Modal.Header closeButton>Start Bid Information</Modal.Header>
+        <Modal.Header closeButton>Bid Information</Modal.Header>
         <Modal.Body>
           <div className="row">
             <div className="col">
@@ -649,8 +630,8 @@ const CorporateCustomer = ({ alert }) => {
                         <select
                           className="form-control"
                           name="category"
-                        // value={category}
-                        // onChange={(e) => setCategory(e.target.value)}
+                          value="1"
+                          disabled
                         >
                           <option value="0">Select Type</option>
                           <option value="1">Kusmi</option>
@@ -666,6 +647,8 @@ const CorporateCustomer = ({ alert }) => {
                         <select
                           className="form-control"
                           name="category"
+                          value="3"
+                          disabled
                         >
                           <option value="0">Select Tree</option>
                           <option value="1">Kusum</option>
@@ -683,6 +666,8 @@ const CorporateCustomer = ({ alert }) => {
                         <select
                           className="form-control"
                           name="category"
+                          value="2"
+                          disabled
                         >
                           <option value="0">Select Origin</option>
                           <option value="1">Jharkhand</option>
@@ -697,7 +682,7 @@ const CorporateCustomer = ({ alert }) => {
                         <label>Seedlac Content</label>
                       </div>
                       <div className="col-lg-6">
-                        <input className="form-control" type="number" />
+                        <input className="form-control" type="number" value="11" disabled />
                       </div>
                     </div>
                     <div className="row m-2">
@@ -705,7 +690,7 @@ const CorporateCustomer = ({ alert }) => {
                         <label>Fresh Resin Content</label>
                       </div>
                       <div className="col-lg-6">
-                        <input className="form-control" type="number" />
+                        <input className="form-control" type="number" value="11" disabled />
                       </div>
                     </div>
                     <div className="row m-2">
@@ -713,7 +698,7 @@ const CorporateCustomer = ({ alert }) => {
                         <label>Quantity</label>
                       </div>
                       <div className="col-lg-6">
-                        <input className="form-control" type="number" />
+                        <input className="form-control" type="number" value="11" disabled />
                       </div>
                     </div>
                     <div className="row m-2">
@@ -721,7 +706,7 @@ const CorporateCustomer = ({ alert }) => {
                         <label>Date of Supply</label>
                       </div>
                       <div className="col-lg-6">
-                        <input className="form-control" type="date" />
+                        <input className="form-control" type="text" value="2.1.23" disabled />
                       </div>
                     </div>
                     <div className="row m-2">
@@ -729,7 +714,7 @@ const CorporateCustomer = ({ alert }) => {
                         <label>End Date for Bidding</label>
                       </div>
                       <div className="col-lg-6">
-                        <input className="form-control" type="date" />
+                        <input className="form-control" type="text" value="2.1.23" disabled />
                       </div>
                     </div>
                     <div className="row m-2">
@@ -737,18 +722,13 @@ const CorporateCustomer = ({ alert }) => {
                         <label>Required Test Reports</label>
                       </div>
                       <div className="col-lg-12">
-                        <Select
+                        <select
                           className="form-control"
-                          name="category"
-                          labelId="demo-multiple-name-label"
-                          id="demo-multiple-name"
-                          multiple
-                          value={multiSelectReportName}
-                          onChange={onMultiSelectReportNameChange}
+                          value="0"
+                          disabled
                         >
-                          <MenuItem value="0">Chowri</MenuItem>
-                          <MenuItem value="1">Panna</MenuItem>
-                        </Select>
+                          <option value="1">Chowri, Panna</option>
+                        </select>
                       </div>
                     </div>
                     <div className="row m-2">
@@ -756,7 +736,7 @@ const CorporateCustomer = ({ alert }) => {
                         <label>Remarks</label>
                       </div>
                       <div className="col-lg-12">
-                        <textarea className="form-control" />
+                        <textarea className="form-control" value="Some remark" disabled />
                       </div>
                     </div>
                   </div>

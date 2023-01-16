@@ -1,48 +1,35 @@
-import React, { useState } from "react";
-import "../style.css";
+import { useState } from "react";
+import HighlightOffTwoToneIcon from "@mui/icons-material/HighlightOffTwoTone";
 import LoanInfoTab from "./LoanInfoTab";
 import Modal from "react-bootstrap/Modal";
-import HighlightOffTwoToneIcon from "@mui/icons-material/HighlightOffTwoTone";
 
 const TabInfo = () => {
-  const [activeIndex, setActiveIndex] = useState(1);
-  const handleClick = (index) => setActiveIndex(index);
+  const [showConfirmPurchase, setShowConfirmPurchase] = useState(false)
+  const [showPurchaseDetails, setShowPurchaseDetails] = useState(false)
+  const [showAddPurchase, setShowAddPurchase] = useState(false)
+  const [showSaleDetails, setShowSaleDetails] = useState(false)
+  const [showConfirmSale, setShowConfirmSale] = useState(false)
+  const [noOfPurchaseRows, setNoOfPurchaseRows] = useState(1)
+  const [noOfSaleRows, setNoOfSaleRows] = useState(1)
+  const [showAddSale, setShowAddSale] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(1)
+
   const checkActive = (index, className) =>
-    activeIndex === index ? className : "";
+    activeIndex === index ? className : ""
 
-  const [showAddPurchase, setShowAddPurchase] = useState(false);
-  const [showPurchaseDetails, setShowPurchaseDetails] = useState(false);
-  const [showSaleDetails, setShowSaleDetails] = useState(false);
-  const [showConfirmPurchase, setShowConfirmPurchase] = useState(false);
-  const [showConfirmSale, setShowConfirmSale] = useState(false);
-  const handleShowAddPurchase = () => {
-    setShowAddPurchase(true);
-  };
-  const handleShowConfirmPurchase = () => {
-    setShowConfirmPurchase(true);
-  };
-  const handleShowConfirmSale = () => {
-    setShowConfirmSale(true);
-  };
-  const handleCloseAddPurchase = () => setShowAddPurchase(false);
-  const handleCloseConfirmPurchase = () => setShowConfirmPurchase(false);
-  const handleCloseConfirmSale = () => setShowConfirmSale(false);
-
-  const [showAddSale, setShowAddSale] = useState(false);
-  const handleShowAddSale = () => {
-    setShowAddSale(true);
-  };
-  const handleCloseAddSale = () => setShowAddSale(false);
-
-  const handleShowPurchaseDetails = () => setShowPurchaseDetails(true);
-  const handleClosePurchaseDetails = () => setShowPurchaseDetails(false);
-
-  const handleShowSaleDetails = () => setShowSaleDetails(true);
-  const handleCloseSaleDetails = () => setShowSaleDetails(false);
-
-  // Add purchase item details
-  const [noOfPurchaseRows, setNoOfPurchaseRows] = useState(1);
-  const [noOfSaleRows, setNoOfSaleRows] = useState(1);
+  const handleCloseConfirmPurchase = () => setShowConfirmPurchase(false)
+  const handleClosePurchaseDetails = () => setShowPurchaseDetails(false)
+  const handleShowConfirmPurchase = () => setShowConfirmPurchase(true)
+  const handleShowPurchaseDetails = () => setShowPurchaseDetails(true)
+  const handleCloseConfirmSale = () => setShowConfirmSale(false)
+  const handleCloseAddPurchase = () => setShowAddPurchase(false)
+  const handleCloseSaleDetails = () => setShowSaleDetails(false)
+  const handleShowAddPurchase = () => setShowAddPurchase(true)
+  const handleShowSaleDetails = () => setShowSaleDetails(true)
+  const handleShowConfirmSale = () => setShowConfirmSale(true)
+  const handleCloseAddSale = () => setShowAddSale(false)
+  const handleShowAddSale = () => setShowAddSale(true)
+  const handleClick = i => setActiveIndex(i)
 
   return (
     <>
@@ -72,6 +59,7 @@ const TabInfo = () => {
           Sale History
         </button>
       </div>
+
       <div className="panels">
         <div className={`panel ${checkActive(1, "active")}`}>
           <div className="card_table">
@@ -240,15 +228,15 @@ const TabInfo = () => {
             </div>
           </div>
         </div>
+
         <div className={`panel ${checkActive(2, "active")}`}>
           <LoanInfoTab />
         </div>
+
         <div className={`panel ${checkActive(3, "active")}`}>
           <div>
             <button
-              onClick={() => {
-                handleShowAddPurchase();
-              }}
+              onClick={handleShowAddPurchase}
               style={{
                 backgroundColor: "#064420",
                 border: "none",
@@ -262,231 +250,8 @@ const TabInfo = () => {
             >
               Add Purchase
             </button>
-            <div>
-              <Modal
-                show={showAddPurchase}
-                size="xl"
-                onHide={handleCloseAddPurchase}
-              >
-                <Modal.Header closeButton>Purchase History</Modal.Header>
-                <Modal.Body>
-                  <div className="card_table1 table-responsive">
-                    <table>
-                      <thead
-                        style={{
-                          color: "green",
-                          fontSize: "17px",
-                          verticalAlign: "top",
-                          fontWeight: "bold",
-                          borderBottom: "1px solid #c7ccd1",
-                        }}
-                      >
-                        <tr>
-                          <th>Purchase Id</th>
-                          <th>Date of Purchase</th>
-                          <th>Item Name</th>
-                          <th>Quantity</th>
-                          <th>Rate/Unit</th>
-                          <th>Amount</th>
-                          <th>Remarks</th>
-                        </tr>
-                      </thead>
-                      <tbody
-                        style={{
-                          color: "#000",
-                          fontSize: "15px",
-                          fontWeight: "500",
-                          // textAlign: "center",
-                        }}
-                      >
-                        {[...Array(noOfPurchaseRows)].map(
-                          (elementInArray, index) => {
-                            return (
-                              <tr key={index}>
-                                <td>
-                                  <input
-                                    type="text"
-                                    placeholder="SAM107254367"
-                                    style={{ width: "130px" }}
-                                  />
-                                </td>
-                                <td>
-                                  <input
-                                    type="text"
-                                    placeholder="17-02-22"
-                                    style={{ width: "130px" }}
-                                  />
-                                </td>
-                                <td>
-                                  <select
-                                    style={{ width: "70%" }}
-                                    className="select form-control-sm"
-                                    required
-                                    name="Less than 25 lakhs"
-                                    data-mdb-filter="true"
-                                    data-mdb-validation="true"
-                                    data-mdb-valid-feedback=" "
-                                    data-mdb-container=".modal"
-                                    data-mdb-invalid-feedback=" "
-                                    data-mdb-option-height="50"
-                                  >
-                                    <option value="select">Select</option>
-                                    <option value="">Nylon Bag</option>
-                                    <option value="">--</option>
-                                  </select>
-                                </td>
-                                <td>
-                                  <input
-                                    type="text"
-                                    placeholder="2 kg"
-                                    style={{ width: "130px" }}
-                                  />
-                                </td>
-                                <td>
-                                  <input
-                                    type="text"
-                                    placeholder="3"
-                                    style={{ width: "130px" }}
-                                  />
-                                </td>
-                                <td>
-                                  <input
-                                    type="text"
-                                    placeholder="520"
-                                    style={{ width: "130px" }}
-                                  />
-                                </td>
-                                <td>
-                                  <input
-                                    type="text"
-                                    placeholder="Remarks"
-                                    style={{ width: "130px" }}
-                                  />
-                                </td>
-                                <td>
-                                  <HighlightOffTwoToneIcon
-                                    onClick={() =>
-                                      setNoOfPurchaseRows(noOfPurchaseRows - 1)
-                                    }
-                                    style={{
-                                      cursor: "pointer",
-                                    }}
-                                  />
-                                </td>
-                              </tr>
-                            );
-                          }
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                  <div className="purchase-add-button mt-4">
-                    <button
-                      onClick={() => {
-                        handleShowAddPurchase();
-                        setNoOfPurchaseRows(noOfPurchaseRows + 1);
-                      }}
-                      style={{
-                        backgroundColor: "#064420",
-                        border: "none",
-                        borderRadius: "10px",
-                        padding: "10px 15px",
-                        color: "#fff",
-                        fontSize: "12px",
-                        marginBottom: "15px",
-                      }}
-                    >
-                      Add Details
-                    </button>
-                    <div
-                      style={{
-                        display: "flex",
-                        position: "relative",
-                        float: "right",
-                      }}
-                    >
-                      <label>Total Sum :</label>
-                      <input
-                        type="text"
-                        placeholder=""
-                        style={{
-                          width: "130px",
-                          padding: "0 10px",
-                          marginLeft: "10px",
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      position: "relative",
-                      float: "right",
-                      right: "30px",
-                      top: "10px",
-                    }}
-                  >
-                    <button
-                      style={{
-                        backgroundColor: "#064420",
-                        border: "none",
-                        borderRadius: "10px",
-                        padding: "10px 15px",
-                        color: "#fff",
-                        fontSize: "15px",
-                        marginBottom: "15px",
-                      }}
-                      onClick={() => {
-                        handleShowConfirmPurchase();
-                      }}
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </Modal.Body>
-              </Modal>
-            </div>
           </div>
-          <div>
-            <Modal
-              show={showConfirmPurchase}
-              onHide={handleCloseConfirmPurchase}
-            >
-              <Modal.Header closeButton>Confirm Purchase History</Modal.Header>
-              <Modal.Body>
-                <p>Are you confirm?</p>
-                <div style={{ display: "flex", justifyContent: "space-between"}} >
-                  <button
-                    style={{
-                      backgroundColor: "#064420",
-                      border: "none",
-                      borderRadius: "5px",
-                      padding: "10px 15px",
-                      color: "#fff",
-                      fontSize: "15px",
-                      width: "20%",
-                      marginBottom: "15px",
-                    }}
-                  >
-                    Yes
-                  </button>
-                  <button
-                    style={{
-                      backgroundColor: "#064420",
-                      border: "none",
-                      borderRadius: "5px",
-                      padding: "10px 15px",
-                      color: "#fff",
-                      fontSize: "15px",
-                      width: "20%",
-                      marginBottom: "15px",
-                    }}
-                  >
-                    No
-                  </button>
-                </div>
-              </Modal.Body>
-            </Modal>
-          </div>
+
           <div className="card_table1">
             <div className=" table-responsive">
               <table>
@@ -531,9 +296,7 @@ const TabInfo = () => {
                           lineHeight: "1rem",
                           color: "#fff",
                         }}
-                        onClick={() => {
-                          handleShowPurchaseDetails();
-                        }}
+                        onClick={handleShowPurchaseDetails}
                       >
                         View
                       </button>
@@ -556,9 +319,7 @@ const TabInfo = () => {
                           lineHeight: "1rem",
                           color: "#fff",
                         }}
-                        onClick={() => {
-                          handleShowPurchaseDetails();
-                        }}
+                        onClick={handleShowPurchaseDetails}
                       >
                         View
                       </button>
@@ -569,57 +330,7 @@ const TabInfo = () => {
             </div>
           </div>
         </div>
-        {/*view button modal*/}
-        <div>
-          <Modal
-            show={showPurchaseDetails}
-            size="lg"
-            onHide={handleClosePurchaseDetails}
-          >
-            <Modal.Header closeButton>Purchase History</Modal.Header>
-            <Modal.Body>
-              <div className="card_table1 table-responsive">
-                <table>
-                  <thead
-                    style={{
-                      color: "green",
-                      fontSize: "17px",
-                      verticalAlign: "top",
-                      fontWeight: "bold",
-                      borderBottom: "1px solid #c7ccd1",
-                    }}
-                  >
-                    <tr>
-                      <th>Purchase Id</th>
-                      <th>Date of Purchase</th>
-                      <th>Item Name</th>
-                      <th>Quantity</th>
-                      <th>Rate/Unit</th>
-                      <th>Amount</th>
-                    </tr>
-                  </thead>
-                  <tbody
-                    style={{
-                      color: "#000",
-                      fontSize: "15px",
-                      fontWeight: "500",
-                      // textAlign: "center",
-                    }}
-                  >
-                    <tr>
-                      <td>SAM107254367</td>
-                      <td>17-02-22</td>
-                      <td>Nylon Bag</td>
-                      <td>2 kg</td>
-                      <td>2</td>
-                      <td>520</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </Modal.Body>
-          </Modal>
-        </div>
+
         <div className={`panel ${checkActive(4, "active")}`}>
           <div>
             <button
@@ -637,226 +348,8 @@ const TabInfo = () => {
             >
               Add Sale
             </button>
-            <div>
-              <Modal show={showAddSale} size="xl" onHide={handleCloseAddSale}>
-                <Modal.Header closeButton>Sale History</Modal.Header>
-                <Modal.Body>
-                  <div className="card_table1 table-responsive">
-                    <table>
-                      <thead
-                        style={{
-                          color: "green",
-                          fontSize: "17px",
-                          verticalAlign: "top",
-                          fontWeight: "bold",
-                          borderBottom: "1px solid #c7ccd1",
-                        }}
-                      >
-                        <tr>
-                          <th>Sale Id</th>
-                          <th>Date of Sale</th>
-                          <th>Type of Lac</th>
-                          <th>Quantity</th>
-                          <th>Rate/Unit</th>
-                          <th>Amount</th>
-                          <th>Remarks</th>
-                        </tr>
-                      </thead>
-                      <tbody
-                        style={{
-                          color: "#000",
-                          fontSize: "15px",
-                          fontWeight: "500",
-                          // textAlign: "center",
-                        }}
-                      >
-                        {[...Array(noOfSaleRows)].map(
-                          (elementInArray, index) => {
-                            return (
-                              <tr key={index}>
-                                <td>
-                                  <input
-                                    type="text"
-                                    placeholder="SAM107254367"
-                                    style={{ width: "130px" }}
-                                  />
-                                </td>
-                                <td>
-                                  <input
-                                    type="text"
-                                    placeholder="17-02-22"
-                                    style={{ width: "130px" }}
-                                  />
-                                </td>
-                                <td>
-                                  <select
-                                    style={{ width: "70%" }}
-                                    className="select form-control-sm"
-                                    required
-                                    name="Less than 25 lakhs"
-                                    data-mdb-filter="true"
-                                    data-mdb-validation="true"
-                                    data-mdb-valid-feedback=" "
-                                    data-mdb-container=".modal"
-                                    data-mdb-invalid-feedback=" "
-                                    data-mdb-option-height="50"
-                                  >
-                                    <option value="select">Select</option>
-                                    <option value="">Stick Lac</option>
-                                    <option value="">Shellac Lac</option>
-                                  </select>
-                                </td>
-                                <td>
-                                  <input
-                                    type="text"
-                                    placeholder="2 kg"
-                                    style={{ width: "130px" }}
-                                  />
-                                </td>
-                                <td>
-                                  <input
-                                    type="text"
-                                    placeholder="3"
-                                    style={{ width: "130px" }}
-                                  />
-                                </td>
-                                <td>
-                                  <input
-                                    type="text"
-                                    placeholder="520"
-                                    style={{ width: "130px" }}
-                                  />
-                                </td>
-                                <td>
-                                  <input
-                                    type="text"
-                                    placeholder="Remarks"
-                                    style={{ width: "130px" }}
-                                  />
-                                </td>
-                                <td>
-                                  <HighlightOffTwoToneIcon
-                                    onClick={() =>
-                                      setNoOfSaleRows(noOfSaleRows - 1)
-                                    }
-                                    style={{
-                                      cursor: "pointer",
-                                    }}
-                                  />
-                                </td>
-                              </tr>
-                            );
-                          }
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                  <div className="purchase-add-button mt-4">
-                    <button
-                      onClick={() => {
-                        handleShowAddSale();
-                        setNoOfSaleRows(noOfSaleRows + 1);
-                      }}
-                      style={{
-                        backgroundColor: "#064420",
-                        border: "none",
-                        borderRadius: "10px",
-                        padding: "10px 15px",
-                        color: "#fff",
-                        fontSize: "12px",
-                        marginBottom: "15px",
-                      }}
-                    >
-                      Add Details
-                    </button>
-                    <div
-                      style={{
-                        display: "flex",
-                        position: "relative",
-                        float: "right",
-                      }}
-                    >
-                      <label>Total Sum :</label>
-                      <input
-                        type="text"
-                        style={{
-                          width: "130px",
-                          padding: "0 10px",
-                          marginLeft: "10px",
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      position: "relative",
-                      float: "right",
-                      right: "30px",
-                      top: "10px",
-                    }}
-                  >
-                    <button
-                      style={{
-                        backgroundColor: "#064420",
-                        border: "none",
-                        borderRadius: "10px",
-                        padding: "10px 15px",
-                        color: "#fff",
-                        fontSize: "15px",
-                        marginBottom: "15px",
-                      }}
-                      onClick={() => {
-                        handleShowConfirmSale();
-                      }}
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </Modal.Body>
-              </Modal>
-            </div>
           </div>
-          <div>
-            <Modal
-              show={showConfirmSale}
-              onHide={handleCloseConfirmSale}
-            >
-              <Modal.Header closeButton>Confirm Sale History</Modal.Header>
-              <Modal.Body>
-                <p>Are you confirm?</p>
-                <div style={{ display: "flex", justifyContent: "space-between"}} >
-                  <button
-                    style={{
-                      backgroundColor: "#064420",
-                      border: "none",
-                      borderRadius: "5px",
-                      padding: "10px 15px",
-                      color: "#fff",
-                      fontSize: "15px",
-                      width: "20%",
-                      marginBottom: "15px",
-                    }}
-                  >
-                    Yes
-                  </button>
-                  <button
-                    style={{
-                      backgroundColor: "#064420",
-                      border: "none",
-                      borderRadius: "5px",
-                      padding: "10px 15px",
-                      color: "#fff",
-                      fontSize: "15px",
-                      width: "20%",
-                      marginBottom: "15px",
-                    }}
-                  >
-                    No
-                  </button>
-                </div>
-              </Modal.Body>
-            </Modal>
-          </div>
+
           <div className="card_table1">
             <div className=" table-responsive">
               <table>
@@ -900,9 +393,7 @@ const TabInfo = () => {
                           lineHeight: "1rem",
                           color: "#fff",
                         }}
-                        onClick={() => {
-                          handleShowSaleDetails();
-                        }}
+                        onClick={handleShowSaleDetails}
                       >
                         View
                       </button>
@@ -925,9 +416,7 @@ const TabInfo = () => {
                           lineHeight: "1rem",
                           color: "#fff",
                         }}
-                        onClick={() => {
-                          handleShowSaleDetails();
-                        }}
+                        onClick={handleShowSaleDetails}
                       >
                         View
                       </button>
@@ -950,9 +439,7 @@ const TabInfo = () => {
                           lineHeight: "1rem",
                           color: "#fff",
                         }}
-                        onClick={() => {
-                          handleShowSaleDetails();
-                        }}
+                        onClick={handleShowSaleDetails}
                       >
                         View
                       </button>
@@ -962,60 +449,545 @@ const TabInfo = () => {
               </table>
             </div>
           </div>
-          <div>
-            <Modal
-              show={showSaleDetails}
-              size="lg"
-              onHide={handleCloseSaleDetails}
-            >
-              <Modal.Header closeButton>Sale History</Modal.Header>
-              <Modal.Body>
-                <div className="card_table1 table-responsive">
-                  <table>
-                    <thead
-                      style={{
-                        color: "green",
-                        fontSize: "17px",
-                        verticalAlign: "top",
-                        fontWeight: "bold",
-                        borderBottom: "1px solid #c7ccd1",
-                      }}
-                    >
-                      <tr>
-                        <th>Sale Id</th>
-                        <th>Date of Sale</th>
-                        <th>Type of Lac</th>
-                        <th>Quantity</th>
-                        <th>Rate/Unit</th>
-                        <th>Amount</th>
-                      </tr>
-                    </thead>
-                    <tbody
-                      style={{
-                        color: "#000",
-                        fontSize: "15px",
-                        fontWeight: "500",
-                        // textAlign: "center",
-                      }}
-                    >
-                      <tr>
-                        <td>SAM107254367</td>
-                        <td>17-02-22</td>
-                        <td>Stick Lac</td>
-                        <td>2 kg</td>
-                        <td>2</td>
-                        <td>520</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </Modal.Body>
-            </Modal>
-          </div>
         </div>
       </div>
-    </>
-  );
-};
 
-export default TabInfo;
+      <Modal
+        show={showConfirmPurchase}
+        onHide={handleCloseConfirmPurchase}
+      >
+        <Modal.Header closeButton>Confirm Purchase History</Modal.Header>
+        <Modal.Body>
+          <p>Are you confirm?</p>
+          <div style={{ display: "flex", justifyContent: "space-between" }} >
+            <button
+              style={{
+                backgroundColor: "#064420",
+                border: "none",
+                borderRadius: "5px",
+                padding: "10px 15px",
+                color: "#fff",
+                fontSize: "15px",
+                width: "20%",
+                marginBottom: "15px",
+              }}
+            >
+              Yes
+            </button>
+            <button
+              style={{
+                backgroundColor: "#064420",
+                border: "none",
+                borderRadius: "5px",
+                padding: "10px 15px",
+                color: "#fff",
+                fontSize: "15px",
+                width: "20%",
+                marginBottom: "15px",
+              }}
+            >
+              No
+            </button>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        show={showPurchaseDetails}
+        size="lg"
+        onHide={handleClosePurchaseDetails}
+      >
+        <Modal.Header closeButton>Purchase History</Modal.Header>
+        <Modal.Body>
+          <div className="card_table1 table-responsive">
+            <table>
+              <thead
+                style={{
+                  color: "green",
+                  fontSize: "17px",
+                  verticalAlign: "top",
+                  fontWeight: "bold",
+                  borderBottom: "1px solid #c7ccd1",
+                }}
+              >
+                <tr>
+                  <th>Purchase Id</th>
+                  <th>Date of Purchase</th>
+                  <th>Item Name</th>
+                  <th>Quantity</th>
+                  <th>Rate/Unit</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody
+                style={{
+                  color: "#000",
+                  fontSize: "15px",
+                  fontWeight: "500",
+                  // textAlign: "center",
+                }}
+              >
+                <tr>
+                  <td>SAM107254367</td>
+                  <td>17-02-22</td>
+                  <td>Nylon Bag</td>
+                  <td>2 kg</td>
+                  <td>2</td>
+                  <td>520</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={showAddSale} size="xl" onHide={handleCloseAddSale}>
+        <Modal.Header closeButton>Sale History</Modal.Header>
+        <Modal.Body>
+          <div className="card_table1 table-responsive">
+            <table>
+              <thead
+                style={{
+                  color: "green",
+                  fontSize: "17px",
+                  verticalAlign: "top",
+                  fontWeight: "bold",
+                  borderBottom: "1px solid #c7ccd1",
+                }}
+              >
+                <tr>
+                  <th>Sale Id</th>
+                  <th>Date of Sale</th>
+                  <th>Type of Lac</th>
+                  <th>Quantity</th>
+                  <th>Rate/Unit</th>
+                  <th>Amount</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+              <tbody
+                style={{
+                  color: "#000",
+                  fontSize: "15px",
+                  fontWeight: "500",
+                  // textAlign: "center",
+                }}
+              >
+                {[...Array(noOfSaleRows)].map(
+                  (elementInArray, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="SAM107254367"
+                            style={{ width: "130px" }}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="17-02-22"
+                            style={{ width: "130px" }}
+                          />
+                        </td>
+                        <td>
+                          <select
+                            style={{ width: "70%" }}
+                            className="select form-control-sm"
+                            required
+                            name="Less than 25 lakhs"
+                            data-mdb-filter="true"
+                            data-mdb-validation="true"
+                            data-mdb-valid-feedback=" "
+                            data-mdb-container=".modal"
+                            data-mdb-invalid-feedback=" "
+                            data-mdb-option-height="50"
+                          >
+                            <option value="select">Select</option>
+                            <option value="">Stick Lac</option>
+                            <option value="">Shellac Lac</option>
+                          </select>
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="2 kg"
+                            style={{ width: "130px" }}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="3"
+                            style={{ width: "130px" }}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="520"
+                            style={{ width: "130px" }}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="Remarks"
+                            style={{ width: "130px" }}
+                          />
+                        </td>
+                        <td>
+                          <HighlightOffTwoToneIcon
+                            onClick={() =>
+                              setNoOfSaleRows(noOfSaleRows - 1)
+                            }
+                            style={{
+                              cursor: "pointer",
+                            }}
+                          />
+                        </td>
+                      </tr>
+                    )
+                  }
+                )}
+              </tbody>
+            </table>
+          </div>
+          <div className="purchase-add-button mt-4">
+            <button
+              onClick={() => {
+                handleShowAddSale()
+                setNoOfSaleRows(noOfSaleRows + 1)
+              }}
+              style={{
+                backgroundColor: "#064420",
+                border: "none",
+                borderRadius: "10px",
+                padding: "10px 15px",
+                color: "#fff",
+                fontSize: "12px",
+                marginBottom: "15px",
+              }}
+            >
+              Add Details
+            </button>
+            <div
+              style={{
+                display: "flex",
+                position: "relative",
+                float: "right",
+              }}
+            >
+              <label>Total Sum :</label>
+              <input
+                type="text"
+                style={{
+                  width: "130px",
+                  padding: "0 10px",
+                  marginLeft: "10px",
+                }}
+              />
+            </div>
+          </div>
+          <div
+            style={{
+              position: "relative",
+              float: "right",
+              right: "30px",
+              top: "10px",
+            }}
+          >
+            <button
+              style={{
+                backgroundColor: "#064420",
+                border: "none",
+                borderRadius: "10px",
+                padding: "10px 15px",
+                color: "#fff",
+                fontSize: "15px",
+                marginBottom: "15px",
+              }}
+              onClick={handleShowConfirmSale}
+            >
+              Submit
+            </button>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        show={showConfirmSale}
+        onHide={handleCloseConfirmSale}
+      >
+        <Modal.Header closeButton>Confirm Sale History</Modal.Header>
+        <Modal.Body>
+          <p>Are you confirm?</p>
+          <div style={{ display: "flex", justifyContent: "space-between" }} >
+            <button
+              style={{
+                backgroundColor: "#064420",
+                border: "none",
+                borderRadius: "5px",
+                padding: "10px 15px",
+                color: "#fff",
+                fontSize: "15px",
+                width: "20%",
+                marginBottom: "15px",
+              }}
+            >
+              Yes
+            </button>
+            <button
+              style={{
+                backgroundColor: "#064420",
+                border: "none",
+                borderRadius: "5px",
+                padding: "10px 15px",
+                color: "#fff",
+                fontSize: "15px",
+                width: "20%",
+                marginBottom: "15px",
+              }}
+            >
+              No
+            </button>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        show={showSaleDetails}
+        size="lg"
+        onHide={handleCloseSaleDetails}
+      >
+        <Modal.Header closeButton>Sale History</Modal.Header>
+        <Modal.Body>
+          <div className="card_table1 table-responsive">
+            <table>
+              <thead
+                style={{
+                  color: "green",
+                  fontSize: "17px",
+                  verticalAlign: "top",
+                  fontWeight: "bold",
+                  borderBottom: "1px solid #c7ccd1",
+                }}
+              >
+                <tr>
+                  <th>Sale Id</th>
+                  <th>Date of Sale</th>
+                  <th>Type of Lac</th>
+                  <th>Quantity</th>
+                  <th>Rate/Unit</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody
+                style={{
+                  color: "#000",
+                  fontSize: "15px",
+                  fontWeight: "500",
+                  // textAlign: "center",
+                }}
+              >
+                <tr>
+                  <td>SAM107254367</td>
+                  <td>17-02-22</td>
+                  <td>Stick Lac</td>
+                  <td>2 kg</td>
+                  <td>2</td>
+                  <td>520</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        show={showAddPurchase}
+        size="xl"
+        onHide={handleCloseAddPurchase}
+      >
+        <Modal.Header closeButton>Purchase History</Modal.Header>
+        <Modal.Body>
+          <div className="card_table1 table-responsive">
+            <table>
+              <thead
+                style={{
+                  color: "green",
+                  fontSize: "17px",
+                  verticalAlign: "top",
+                  fontWeight: "bold",
+                  borderBottom: "1px solid #c7ccd1",
+                }}
+              >
+                <tr>
+                  <th>Purchase Id</th>
+                  <th>Date of Purchase</th>
+                  <th>Item Name</th>
+                  <th>Quantity</th>
+                  <th>Rate/Unit</th>
+                  <th>Amount</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+              <tbody
+                style={{
+                  color: "#000",
+                  fontSize: "15px",
+                  fontWeight: "500",
+                  // textAlign: "center",
+                }}
+              >
+                {[...Array(noOfPurchaseRows)].map(
+                  (elementInArray, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="SAM107254367"
+                            style={{ width: "130px" }}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="17-02-22"
+                            style={{ width: "130px" }}
+                          />
+                        </td>
+                        <td>
+                          <select
+                            style={{ width: "70%" }}
+                            className="select form-control-sm"
+                            required
+                            name="Less than 25 lakhs"
+                            data-mdb-filter="true"
+                            data-mdb-validation="true"
+                            data-mdb-valid-feedback=" "
+                            data-mdb-container=".modal"
+                            data-mdb-invalid-feedback=" "
+                            data-mdb-option-height="50"
+                          >
+                            <option value="select">Select</option>
+                            <option value="">Nylon Bag</option>
+                            <option value="">--</option>
+                          </select>
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="2 kg"
+                            style={{ width: "130px" }}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="3"
+                            style={{ width: "130px" }}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="520"
+                            style={{ width: "130px" }}
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            placeholder="Remarks"
+                            style={{ width: "130px" }}
+                          />
+                        </td>
+                        <td>
+                          <HighlightOffTwoToneIcon
+                            onClick={() =>
+                              setNoOfPurchaseRows(noOfPurchaseRows - 1)
+                            }
+                            style={{
+                              cursor: "pointer",
+                            }}
+                          />
+                        </td>
+                      </tr>
+                    )
+                  }
+                )}
+              </tbody>
+            </table>
+          </div>
+          <div className="purchase-add-button mt-4">
+            <button
+              onClick={() => {
+                handleShowAddPurchase()
+                setNoOfPurchaseRows(noOfPurchaseRows + 1)
+              }}
+              style={{
+                backgroundColor: "#064420",
+                border: "none",
+                borderRadius: "10px",
+                padding: "10px 15px",
+                color: "#fff",
+                fontSize: "12px",
+                marginBottom: "15px",
+              }}
+            >
+              Add Details
+            </button>
+            <div
+              style={{
+                display: "flex",
+                position: "relative",
+                float: "right",
+              }}
+            >
+              <label>Total Sum :</label>
+              <input
+                type="text"
+                placeholder=""
+                style={{
+                  width: "130px",
+                  padding: "0 10px",
+                  marginLeft: "10px",
+                }}
+              />
+            </div>
+          </div>
+          <div
+            style={{
+              position: "relative",
+              float: "right",
+              right: "30px",
+              top: "10px",
+            }}
+          >
+            <button
+              style={{
+                backgroundColor: "#064420",
+                border: "none",
+                borderRadius: "10px",
+                padding: "10px 15px",
+                color: "#fff",
+                fontSize: "15px",
+                marginBottom: "15px",
+              }}
+              onClick={() => {
+                handleShowConfirmPurchase()
+              }}
+            >
+              Submit
+            </button>
+          </div>
+        </Modal.Body>
+      </Modal>
+    </>
+  )
+}
+
+export default TabInfo

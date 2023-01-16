@@ -137,78 +137,48 @@ const pendingloanList = [
   },
 ]
 
-const loanWindow = [
-  {
-    id: "Sum-TW-1",
-    amount: "1000",
-    tenure: "tenure 1",
-  },
-  {
-    id: "Sum-TW-2",
-    amount: "5000",
-    tenure: "tenure 2",
-  },
-  {
-    id: "Sum-TW-3",
-    amount: "4000",
-    tenure: "tenure 3",
-  },
-]
-
 function LoanWindowTable({ onClick }) {
   return (
-    <table className="table table-borderless">
-      <thead
-        style={{
-          color: "#064420",
-          fontSize: "17px",
-          verticalAlign: "top",
-          textAlign: "center",
-          fontWeight: "600",
-        }}
-      >
-        <tr>
-          <td>Loan window Id</td>
-          <td>Loan window amount</td>
-          <td>Loan window tenure</td>
-          <td>Status</td>
-        </tr>
-      </thead>
-      <tbody
-        style={{
-          color: "#000",
-          fontSize: "16px",
-          fontWeight: "500",
-          textAlign: "center",
-        }}
-      >
-        {loanWindow.map((loan) => (
-          <tr key={loan.id}>
-            <td>{loan.id}</td>
-            <td>{loan.amount}</td>
-            <td>{loan.amount}</td>
-            <td>
-              <button
-                style={{
-                  backgroundColor: "#064420",
-                  color: "#fff",
-                  alignItems: "center",
-                  borderRadius: "5px",
-                  border: "none",
-                  padding: "0.25rem 1rem",
-                  width: "fit-content",
-                  fontSize: ".75rem",
-                  lineHeight: "1rem",
-                }}
-                onClick={onClick}
-              >
-                view
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div>
+      <div className="d-flex align-items-center" style={{ gap: "1rem" }}>
+        <label style={{ width: "180px" }}>Loan window Id</label>
+        <span>:</span>
+        <input type="text" className="px-2 py-1 border-0" value="Sum-TW-1" disabled />
+      </div>
+
+      <div className="d-flex align-items-center" style={{ gap: "1rem" }}>
+        <label style={{ width: "180px" }}>Loan window amount</label>
+        <span>:</span>
+        <input type="text" className="px-2 py-1 border-0" value="5,00,000" disabled />
+      </div>
+
+      <div className="d-flex align-items-center" style={{ gap: "1rem" }}>
+        <label style={{ width: "180px" }}>Loan window tenure</label>
+        <span>:</span>
+        <input type="text" className="px-2 py-1 border-0" value="tenure-1" disabled />
+      </div>
+
+      <div className="d-flex align-items-center" style={{ gap: "1rem" }}>
+        <label style={{ width: "180px" }}>Status</label>
+        <span>:</span>
+        <button
+          style={{
+            backgroundColor: "#064420",
+            color: "#fff",
+            alignItems: "center",
+            borderRadius: "5px",
+            border: "none",
+            padding: "0.25rem 1rem",
+            width: "fit-content",
+            fontSize: ".75rem",
+            lineHeight: "1rem",
+          }}
+          onClick={onClick}
+        >
+          View
+        </button>
+      </div>
+    </div>
   )
 }
 
@@ -299,7 +269,7 @@ const FpoLoan = ({ props }) => {
           <div className="d-flex align-items-center">
             <h3 className="flex-grow-1">Loan Information</h3>
 
-            <button
+            {/* <button
               className="loan_btn"
               style={{ width: "220px", marginRight: "1rem", fontSize: "14px" }}
               onClick={() => {
@@ -308,7 +278,7 @@ const FpoLoan = ({ props }) => {
               }}
             >
               Apply for Loan Window
-            </button>
+            </button> */}
 
             <button
               className="loan_btn"

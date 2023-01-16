@@ -1,16 +1,16 @@
 import React, { useState } from "react";
+import Modal from "react-bootstrap/Modal";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import "./style.css";
-import Modal from "react-bootstrap/Modal";
 
 const FarmerInformation = () => {
+  const [activeIndex, setActiveIndex] = useState(1);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [activeIndex, setActiveIndex] = useState(1);
   const handleClick = (index) => setActiveIndex(index);
   const checkActive = (index, className) =>
     activeIndex === index ? className : "";
@@ -43,7 +43,7 @@ const FarmerInformation = () => {
                 </div>
                 <div className="panels">
                   <div className={`panel ${checkActive(1, "active")}`}>
-                    <button className="lab_btn" onClick={handleShow} style={{marginTop: '-2%'}}>
+                    <button className="lab_btn" onClick={handleShow} style={{ marginTop: '-2%' }}>
                       Apply for Sample Test
                     </button>
                     <div className="store_list">
@@ -130,7 +130,7 @@ const FarmerInformation = () => {
                                       <input
                                         className="form-control"
                                         type="text"
-                                        placeholder="Amount"
+                                        placeholder="Number"
                                       />
                                     </div>
                                   </div>
@@ -169,7 +169,7 @@ const FarmerInformation = () => {
                                     </div>
                                   </div>
                                   <div className="row m-2">
-                                    <button className="btn btn-success" style={{backgroundColor: "#064420"}}>
+                                    <button className="btn btn-success" style={{ backgroundColor: "#064420" }}>
                                       Submit
                                     </button>
                                   </div>
@@ -180,7 +180,7 @@ const FarmerInformation = () => {
                         </Modal.Body>
                       </Modal>
                     </div>
-                    <div className="card_table1" style={{marginTop: '2%'}}>
+                    <div className="card_table1" style={{ marginTop: '2%' }}>
                       <div className=" table-responsive">
                         <table>
                           <thead
