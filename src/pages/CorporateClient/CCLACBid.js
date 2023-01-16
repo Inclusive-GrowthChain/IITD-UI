@@ -249,8 +249,11 @@ const Corporate_Client_Lac_Bidding = () => {
   const handleCloseStartBid = () => setShowStartBid(false)
   const handleShowBidStatus = () => setShowBidStatus(true)
   const handleCloseCustomer = () => setShowCustomer(false)
-  const nextPage = (page) => setPage(page)
-  const nextPage2 = (page) => setPage2(page)
+  const nextPage = (p) => setPage(p)
+  const nextPage2 = (p) => {
+    console.log(p)
+    setPage2(p)
+  }
   const updateStep = (step) => updateCurrentStep(step)
 
   const handleCloseBidStatus = () => {
@@ -492,7 +495,10 @@ const Corporate_Client_Lac_Bidding = () => {
         </div>
       </div>
 
-      <Modal show={showConfirmBox} onHide={handleCloseConfirmBox}>
+      <Modal
+        show={showConfirmBox}
+        onHide={handleCloseConfirmBox}
+      >
         <Modal.Header closeButton>Confirm Order</Modal.Header>
         <Modal.Body>
           <p>
@@ -510,7 +516,10 @@ const Corporate_Client_Lac_Bidding = () => {
         </Modal.Body>
       </Modal>
 
-      <Modal show={showStartBid} onHide={handleCloseStartBid}>
+      <Modal
+        show={showStartBid}
+        onHide={handleCloseStartBid}
+      >
         <Modal.Header closeButton>Start Bid</Modal.Header>
         <Modal.Body>
           <div className="row">
@@ -668,7 +677,12 @@ const Corporate_Client_Lac_Bidding = () => {
         </Modal.Body>
       </Modal>
 
-      <Modal show={showBidStatus} onHide={handleCloseBidStatus} className="progressModal" size="lg">
+      <Modal
+        show={showBidStatus}
+        onHide={handleCloseBidStatus}
+        className="progressModal"
+        size="lg"
+      >
         <Modal.Header closeButton>Bid Status</Modal.Header>
         <Modal.Body style={{ padding: '1.25rem' }}>
           <MultiStepProgressBar page={page} />
@@ -701,14 +715,10 @@ const Corporate_Client_Lac_Bidding = () => {
             currentStep={currentStep}
             updateStep={updateStep}
           />
-          {
-            {
-              pageone: <FPOPageOne onButtonClick={nextPage2} />,
-              pagetwo: <FPOPageTwo onButtonClick={nextPage2} />,
-              pagethree: <FPOPageThree onButtonClick={nextPage2} />,
-              pagefour: <FPOPageFour onButtonClick={nextPage2} canEdit={false} />,
-            }[page]
-          }
+          {page === "pageone" && <FPOPageOne onButtonClick={nextPage2} />}
+          {page === "pagetwo" && <FPOPageTwo onButtonClick={nextPage2} />}
+          {page === "pagethree" && <FPOPageThree onButtonClick={nextPage2} />}
+          {page === "pagefour" && <FPOPageFour onButtonClick={nextPage2} canEdit={false} />}
         </Modal.Body>
       </Modal>
     </div>

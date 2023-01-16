@@ -41,7 +41,10 @@ const PageFour = ({ onButtonClick, canEdit = true }) => {
             }}
           >
             <button
-              onClick={() => onButtonClick("pagethree")}
+              onClick={(e) => {
+                e.preventDefault()
+                onButtonClick("pagethree")
+              }}
               style={{ backgroundColor: "white" }}
             >
               <ArrowBackIosIcon />

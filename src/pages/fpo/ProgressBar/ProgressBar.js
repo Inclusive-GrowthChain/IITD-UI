@@ -3,7 +3,7 @@ import "./ProgressBar.css";
 import { ProgressBar, Step } from "react-step-progress-bar";
 
 const StepProgressBar = ({ page, onPageNumberClick }) => {
-  var stepPercentage = 0;
+  let stepPercentage = 0;
   if (page === "pageone") {
     stepPercentage = 16;
   } else if (page === "pagetwo") {

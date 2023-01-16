@@ -33,19 +33,19 @@ const PageTwo = ({ onButtonClick }) => {
       style={{ maxWidth: "100%", margin: "auto" }}
     >
       <form className="measure">
-      <div>
-            <h5
-              className="mt-5"
-              style={{
-                padding: "10px 18px",
-                color: "rgb(33, 143, 44)",
-                fontWeight: "700",
-                textDecoration: "underline",
-              }}
-            >
-              Upload Test Certificate
-            </h5>
-          </div>
+        <div>
+          <h5
+            className="mt-5"
+            style={{
+              padding: "10px 18px",
+              color: "rgb(33, 143, 44)",
+              fontWeight: "700",
+              textDecoration: "underline",
+            }}
+          >
+            Upload Test Certificate
+          </h5>
+        </div>
         <div className="form" style={{ marginTop: "3%" }}>
           <div
             style={{
@@ -56,7 +56,10 @@ const PageTwo = ({ onButtonClick }) => {
             }}
           >
             <button
-              onClick={() => onButtonClick("pageone")}
+              onClick={(e) => {
+                e.preventDefault()
+                onButtonClick("pageone")
+              }}
               style={{ backgroundColor: "white" }}
             >
               <ArrowBackIosIcon />
@@ -71,14 +74,16 @@ const PageTwo = ({ onButtonClick }) => {
             }}
           >
             <button
-              onClick={() => onButtonClick("pagethree")}
+              onClick={(e) => {
+                e.preventDefault()
+                onButtonClick("pagethree")
+              }}
               style={{ backgroundColor: "white" }}
-              // disabled={!orderPlaced}
             >
               <ArrowForwardIosIcon />
             </button>
           </div>
-          
+
           <div className="row m-2">
             <div className="col-lg-6">
               <label>FPO ID</label>

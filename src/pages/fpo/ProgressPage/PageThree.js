@@ -52,7 +52,10 @@ const PageThree = ({ onButtonClick }) => {
             }}
           >
             <button
-              onClick={() => onButtonClick("pagetwo")}
+              onClick={(e) => {
+                e.preventDefault()
+                onButtonClick("pagetwo")
+              }}
               style={{ backgroundColor: "white" }}
             >
               <ArrowBackIosIcon />
@@ -67,9 +70,11 @@ const PageThree = ({ onButtonClick }) => {
             }}
           >
             <button
-              onClick={() => onButtonClick("pagefour")}
+              onClick={(e) => {
+                e.preventDefault()
+                onButtonClick("pagefour")
+              }}
               style={{ backgroundColor: "white" }}
-              // disabled={!orderPlaced}
             >
               <ArrowForwardIosIcon />
             </button>

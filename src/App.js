@@ -48,7 +48,7 @@ import SamunnatiFPOInfo from "./pages/Samunnati/FpoInfo";
 import SammunatiFPOPage from "./pages/Samunnati/FpoPage";
 import SammunatiSupport from "./pages/Samunnati/Support";
 
-import CorporateClientLacBidding from "./pages/CorporateClient/ccLacBidding";
+import CorporateClientLacBidding from "./pages/CorporateClient/CCLACBid";
 import CorporateClientSettings from "./pages/CorporateClient/Settings";
 import CorporateSupport from "./pages/CorporateClient/Support";
 

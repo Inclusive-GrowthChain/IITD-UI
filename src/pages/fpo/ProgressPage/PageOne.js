@@ -48,9 +48,12 @@ const PageOne = ({ onButtonClick }) => {
           }}
         >
           <button
-            onClick={() => onButtonClick("pagetwo")}
+            onClick={(e) => {
+              e.preventDefault()
+              onButtonClick("pagetwo")
+            }}
             style={{ backgroundColor: "white" }}
-            disabled=""
+          // disabled=""
           >
             <ArrowForwardIosIcon />
           </button>
