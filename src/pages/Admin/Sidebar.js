@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";

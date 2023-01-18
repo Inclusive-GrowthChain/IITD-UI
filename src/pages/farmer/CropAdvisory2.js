@@ -54,66 +54,7 @@ const CropAdvisory2 = () => {
                   Crop Advisory
                 </h3>
               </div>
-              <div>
-                <Modal show={showAddCA} onHide={handleCAClose}>
-                  <Modal.Header closeButton>Add Crop Advisory</Modal.Header>
-                  <Modal.Body>
-                    <div className="row">
-                      <div className="col">
-                        <form>
-                          <div className="form">
-                            <div className="card p-2">
-                              <div className="row m-2">
-                                <div className="col-lg-6">
-                                  <label>Crop Advisory ID</label>
-                                </div>
-                                <div className="col-lg-12">
-                                  <input
-                                    className="form-control"
-                                    type="text"
-                                    value={"CA12345"}
-                                    disabled
-                                  />
-                                </div>
-                              </div>
-                              <div className="row m-2">
-                                <div className="col-lg-6">
-                                  <label>Title</label>
-                                </div>
-                                <div className="col-lg-12">
-                                  <input className="form-control" type="text" />
-                                </div>
-                              </div>
-                              <div className="row m-2">
-                                <div className="col-lg-6">
-                                  <label>Content</label>
-                                </div>
-                                <div className="col-lg-12">
-                                  <textarea
-                                    className="form-control"
-                                    style={{ height: "200%" }}
-                                  />
-                                </div>
-                              </div>
-                              <div className="row m-2">
-                                <button
-                                  className="btn btn-success"
-                                  style={{
-                                    marginTop: "5rem",
-                                    backgroundColor: "#064420",
-                                  }}
-                                >
-                                  Submit
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </Modal.Body>
-                </Modal>
-              </div>
+
               {caList.map((ca, ind) => (
                 <div>
                   <div className="card_wrapper">
@@ -134,78 +75,11 @@ const CropAdvisory2 = () => {
                         <ChevronRightIcon className="btn-icon" />
                       </button>
                     </div>
-                    <Modal show={showModal} onHide={handleClose}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>{currentCA.title}</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body style={{ height: "10rem" }}>
-                        <textarea
-                          className="form-control"
-                          style={{ height: "100%" }}
-                        >
-                          {currentCA.description}
-                        </textarea>
-                      </Modal.Body>
-                    </Modal>
                     <hr />
                     <div className="card__footer text-muted">
                       <p> 2 months ago</p>
                       <p> 19/08/2022</p>
                     </div>
-                  </div>
-                  <div>
-                    <Modal show={showEditCA} onHide={handleEditCAClose}>
-                      <Modal.Header closeButton>
-                        Edit Crop Advisory
-                      </Modal.Header>
-                      <Modal.Body>
-                        <div className="row">
-                          <div className="col">
-                            <form>
-                              <div className="form">
-                                <div className="card p-2">
-                                  <div className="row m-2">
-                                    <div className="col-lg-6">
-                                      <label>Title</label>
-                                    </div>
-                                    <div className="col-lg-12">
-                                      <input
-                                        className="form-control"
-                                        type="text"
-                                        defaultValue={currentCA.title}
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="row m-2">
-                                    <div className="col-lg-6">
-                                      <label>Content</label>
-                                    </div>
-                                    <div className="col-lg-12">
-                                      <textarea
-                                        className="form-control"
-                                        style={{ height: "200%" }}
-                                        defaultValue={currentCA.description}
-                                      />
-                                    </div>
-                                  </div>
-                                  <div className="row m-2">
-                                    <button
-                                      className="btn btn-success"
-                                      style={{
-                                        marginTop: "5rem",
-                                        backgroundColor: "#064420",
-                                      }}
-                                    >
-                                      Submit
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </Modal.Body>
-                    </Modal>
                   </div>
                 </div>
               ))}
@@ -213,6 +87,134 @@ const CropAdvisory2 = () => {
           </div>
         </div>
       </div>
+
+      <Modal show={showEditCA} onHide={handleEditCAClose}>
+        <Modal.Header closeButton>
+          Edit Crop Advisory
+        </Modal.Header>
+
+        <Modal.Body>
+          <div className="row">
+            <div className="col">
+              <form>
+                <div className="form">
+                  <div className="card p-2">
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Title</label>
+                      </div>
+                      <div className="col-lg-12">
+                        <input
+                          className="form-control"
+                          type="text"
+                          defaultValue={currentCA.title}
+                        />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Content</label>
+                      </div>
+                      <div className="col-lg-12">
+                        <textarea
+                          className="form-control"
+                          style={{ height: "200%" }}
+                          defaultValue={currentCA.description}
+                        />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <button
+                        className="btn btn-success"
+                        style={{
+                          marginTop: "5rem",
+                          backgroundColor: "#064420",
+                        }}
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>{currentCA.title}</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body style={{ height: "10rem" }}>
+          <textarea
+            className="form-control"
+            style={{ height: "100%" }}
+          >
+            {currentCA.description}
+          </textarea>
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={showAddCA} onHide={handleCAClose}>
+        <Modal.Header closeButton>Add Crop Advisory</Modal.Header>
+        <Modal.Body>
+          <div className="row">
+            <div className="col">
+              <form>
+                <div className="form">
+                  <div className="card p-2">
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Crop Advisory ID</label>
+                      </div>
+                      <div className="col-lg-12">
+                        <input
+                          className="form-control"
+                          type="text"
+                          value={"CA12345"}
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Title</label>
+                      </div>
+                      <div className="col-lg-12">
+                        <input className="form-control" type="text" />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Content</label>
+                      </div>
+                      <div className="col-lg-12">
+                        <textarea
+                          className="form-control"
+                          style={{ height: "200%" }}
+                        />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <button
+                        className="btn btn-success"
+                        style={{
+                          marginTop: "5rem",
+                          backgroundColor: "#064420",
+                        }}
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

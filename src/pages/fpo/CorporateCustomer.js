@@ -9,7 +9,6 @@ import PageThree from "./ProgressPage/PageThree";
 import PageFour from "./ProgressPage/PageFour";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import "./style.css";
 
 const labelArray = [
   "Bid Information",

@@ -5,7 +5,6 @@ import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
 import logo from "../../assets/img/logo.png";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import "./style.css";
 
 const repaymentList = [
   {

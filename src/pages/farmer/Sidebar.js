@@ -1,5 +1,3 @@
-import React from "react";
-import "./Dashboard.css";
 import { NavLink } from "react-router-dom";
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
 import LocalGroceryStoreTwoToneIcon from '@mui/icons-material/LocalGroceryStoreTwoTone';

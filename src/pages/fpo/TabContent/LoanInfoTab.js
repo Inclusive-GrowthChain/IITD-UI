@@ -1,27 +1,20 @@
 import { useState } from "react";
-import "../style.css";
 import Modal from "react-bootstrap/Modal";
 import logo from "../../../assets/img/logo.png";
 
 function LoanInfoTab() {
+  const [showRepayment, setShowRepayment] = useState(false);
   const [toggleState, setToggleState] = useState(1);
-
-  const toggleTab = (index) => {
-    setToggleState(index);
-  };
-
+  const [showImg, setShowImg] = useState(false);
   const [show, setShow] = useState(false);
 
+  const toggleTab = (index) => setToggleState(index)
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [showRepayment, setShowRepayment] = useState(false);
-  const handleShowRepayment = () => {
-    setShowRepayment(true);
-  };
+  const handleShowRepayment = () => setShowRepayment(true)
   const handleCloseRepayment = () => setShowRepayment(false);
 
-  const [showImg, setShowImg] = useState(false);
   const handleShowImg = () => setShowImg(true);
   const handleCloseImg = () => setShowImg(false);
 
@@ -108,123 +101,10 @@ function LoanInfoTab() {
                           fontSize: ".75rem",
                           lineHeight: "1rem",
                         }}
-                        onClick={() => {
-                          handleShowRepayment();
-                        }}
+                        onClick={handleShowRepayment}
                       >
                         View
                       </button>
-                      <div>
-                        <Modal
-                          size="xl"
-                          show={showRepayment}
-                          onHide={handleCloseRepayment}
-                        >
-                          <Modal.Header closeButton>
-                            Repayment Structure
-                          </Modal.Header>
-                          <Modal.Body>
-                            <div className="repayment_title">
-                              <div className="row">
-                                <div className="col-lg-6">
-                                  <div className="row">
-                                    <div className="col-6">
-                                      <strong>Loan ID : </strong>
-                                    </div>
-                                    <div className="col-6">
-                                      <span>12345</span>
-                                    </div>
-                                    <div className="col-6">
-                                      <strong>FPO Name : </strong>
-                                    </div>
-                                    <div className="col-6">
-                                      <span>abcd</span>
-                                    </div>
-                                    <div className="col-6">
-                                      <strong>Loan Amount : </strong>
-                                    </div>
-                                    <div className="col-6">
-                                      <span>400</span>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="col-lg-6">
-                                  <div className="row">
-                                    <div className="col-6">
-                                      <strong>Loan Period in Years : </strong>
-                                    </div>
-                                    <div className="col-6">
-                                      <span>1</span>
-                                    </div>
-                                    <div className="col-6">
-                                      <strong>No of Payment Per Year : </strong>
-                                    </div>
-                                    <div className="col-6">
-                                      <span>1</span>
-                                    </div>
-                                    <div className="col-6">
-                                      <strong>Annual Interest Rate : </strong>
-                                    </div>
-                                    <div className="col-6">
-                                      <span>14%</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="mt-5">
-                              <table style={{ border: "1px solid #eee" }}>
-                                <thead style={{ backgroundColor: "#eee" }}>
-                                  <tr>
-                                    <th>Payment Number</th>
-                                    <th>Payment Date</th>
-                                    <th>Principle Amount</th>
-                                    <th>Interest Amount</th>
-                                    <th>Status</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>123456</td>
-                                    <td>12-09-2021</td>
-                                    <td>400</td>
-                                    <td>14%</td>
-                                    <td>status</td>
-                                  </tr>
-                                  <tr>
-                                    <td>123456</td>
-                                    <td>12-09-2021</td>
-                                    <td>400</td>
-                                    <td>14%</td>
-                                    <td>status</td>
-                                  </tr>
-                                  <tr>
-                                    <td>123456</td>
-                                    <td>12-09-2021</td>
-                                    <td>400</td>
-                                    <td>14%</td>
-                                    <td>status</td>
-                                  </tr>
-                                  <tr>
-                                    <td>123456</td>
-                                    <td>12-09-2021</td>
-                                    <td>400</td>
-                                    <td>14%</td>
-                                    <td>status</td>
-                                  </tr>
-                                  <tr>
-                                    <td>123456</td>
-                                    <td>12-09-2021</td>
-                                    <td>400</td>
-                                    <td>14%</td>
-                                    <td>status</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </Modal.Body>
-                        </Modal>
-                      </div>
                     </td>
                     <td>
                       <button
@@ -266,123 +146,10 @@ function LoanInfoTab() {
                           fontSize: ".75rem",
                           lineHeight: "1rem",
                         }}
-                        onClick={() => {
-                          handleShowRepayment();
-                        }}
+                        onClick={handleShowRepayment}
                       >
                         View
                       </button>
-                      <div>
-                        <Modal
-                          size="xl"
-                          show={showRepayment}
-                          onHide={handleCloseRepayment}
-                        >
-                          <Modal.Header closeButton>
-                            Repayment Structure
-                          </Modal.Header>
-                          <Modal.Body>
-                            <div className="repayment_title">
-                              <div className="row">
-                                <div className="col-lg-6">
-                                  <div className="row">
-                                    <div className="col-6">
-                                      <strong>Loan ID : </strong>
-                                    </div>
-                                    <div className="col-6">
-                                      <span>12345</span>
-                                    </div>
-                                    <div className="col-6">
-                                      <strong>FPO Name : </strong>
-                                    </div>
-                                    <div className="col-6">
-                                      <span>abcd</span>
-                                    </div>
-                                    <div className="col-6">
-                                      <strong>Loan Amount : </strong>
-                                    </div>
-                                    <div className="col-6">
-                                      <span>400</span>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="col-lg-6">
-                                  <div className="row">
-                                    <div className="col-6">
-                                      <strong>Loan Period in Years : </strong>
-                                    </div>
-                                    <div className="col-6">
-                                      <span>1</span>
-                                    </div>
-                                    <div className="col-6">
-                                      <strong>No of Payment Per Year : </strong>
-                                    </div>
-                                    <div className="col-6">
-                                      <span>1</span>
-                                    </div>
-                                    <div className="col-6">
-                                      <strong>Annual Interest Rate : </strong>
-                                    </div>
-                                    <div className="col-6">
-                                      <span>14%</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="mt-5">
-                              <table style={{ border: "1px solid #eee" }}>
-                                <thead style={{ backgroundColor: "#eee" }}>
-                                  <tr>
-                                    <th>Payment Number</th>
-                                    <th>Payment Date</th>
-                                    <th>Principle Amount</th>
-                                    <th>Interest Amount</th>
-                                    <th>Status</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>123456</td>
-                                    <td>12-09-2021</td>
-                                    <td>400</td>
-                                    <td>14%</td>
-                                    <td>status</td>
-                                  </tr>
-                                  <tr>
-                                    <td>123456</td>
-                                    <td>12-09-2021</td>
-                                    <td>400</td>
-                                    <td>14%</td>
-                                    <td>status</td>
-                                  </tr>
-                                  <tr>
-                                    <td>123456</td>
-                                    <td>12-09-2021</td>
-                                    <td>400</td>
-                                    <td>14%</td>
-                                    <td>status</td>
-                                  </tr>
-                                  <tr>
-                                    <td>123456</td>
-                                    <td>12-09-2021</td>
-                                    <td>400</td>
-                                    <td>14%</td>
-                                    <td>status</td>
-                                  </tr>
-                                  <tr>
-                                    <td>123456</td>
-                                    <td>12-09-2021</td>
-                                    <td>400</td>
-                                    <td>14%</td>
-                                    <td>status</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </Modal.Body>
-                        </Modal>
-                      </div>
                     </td>
                     <td>
                       <button
@@ -517,302 +284,6 @@ function LoanInfoTab() {
                       >
                         View
                       </button>
-                      <div>
-                        <Modal show={show} onHide={handleClose}>
-                          <Modal.Header closeButton>
-                            Loan Application
-                          </Modal.Header>
-                          <Modal.Body>
-                            <div className="row ">
-                              <div className="col">
-                                <form>
-                                  <div className="form">
-                                    <div className="card p-2">
-                                      <div className="row m-2">
-                                        <div className="col-lg-6">
-                                          <label>Name as per PAN</label>
-                                        </div>
-                                        <div className="col-lg-6">
-                                          <input
-                                            className="form-control"
-                                            type="text"
-                                            value={"Name"}
-                                            disabled
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="row m-2">
-                                        <div className="col-lg-6">
-                                          <label>Email</label>
-                                        </div>
-                                        <div className="col-lg-6">
-                                          <input
-                                            className="form-control"
-                                            type="email"
-                                            value={"Email"}
-                                            disabled
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="row m-2">
-                                        <div className="col-lg-6">
-                                          <label>Mobile</label>
-                                        </div>
-                                        <div className="col-lg-6">
-                                          <input
-                                            className="form-control"
-                                            type="number"
-                                            value={"1234567890"}
-                                            disabled
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="row m-2">
-                                        <div className="col-lg-6">
-                                          <label>Aadhaar Number</label>
-                                        </div>
-                                        <div className="col-lg-6">
-                                          <input
-                                            className="form-control"
-                                            type="number"
-                                            value={"1234567890"}
-                                            disabled
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="row m-2">
-                                        <div className="col-lg-6">
-                                          <label>PAN Card Number</label>
-                                        </div>
-                                        <div className="col-lg-6">
-                                          <input
-                                            className="form-control"
-                                            type="number"
-                                            value={"1234567890"}
-                                            disabled
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="row m-2">
-                                        <div className="col-lg-6">
-                                          <label>Address</label>
-                                        </div>
-                                        <div className="col-lg-6">
-                                          <input
-                                            className="form-control"
-                                            type="text"
-                                            value={"Address"}
-                                            disabled
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="row m-2">
-                                        <div className="col-lg-6">
-                                          <label>Income Type</label>
-                                        </div>
-                                        <div className="col-lg-6">
-                                          <input
-                                            className="form-control"
-                                            type="text"
-                                            value={"Income Type"}
-                                            disabled
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="row m-2">
-                                        <div className="col-lg-6">
-                                          <label>Amount Required</label>
-                                        </div>
-                                        <div className="col-lg-6">
-                                          <input
-                                            className="form-control"
-                                            type="number"
-                                            value={"100000"}
-                                            disabled
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="row m-2">
-                                        <div className="col-lg-6">
-                                          <label>Date of Birth</label>
-                                        </div>
-                                        <div className="col-lg-6">
-                                          <input
-                                            className="form-control"
-                                            type="date"
-                                            value={"2021-10-10"}
-                                            disabled
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="row m-2">
-                                        <div className="col-lg-6">
-                                          <label>Land Owned</label>
-                                        </div>
-                                        <div className="col-lg-6">
-                                          <input
-                                            className="form-control"
-                                            type="text"
-                                            value={"Land Owned"}
-                                            disabled
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="row m-2">
-                                        <div className="col-lg-6">
-                                          <label>Reason for loan</label>
-                                        </div>
-                                        <div className="col-lg-6">
-                                          <input
-                                            className="form-control"
-                                            type="text"
-                                            value={"Reason"}
-                                            disabled
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="row m-2">
-                                        <div className="col-12 col-md-6">
-                                          <label className="form-label">
-                                            Aadhar Picture
-                                          </label>
-                                          <button
-                                            className="py-0.5"
-                                            style={{
-                                              backgroundColor: "#064420",
-                                              color: "#fff",
-                                              alignItems: "center",
-                                              borderRadius: "5px",
-                                              border: "none",
-                                              padding: "5px 10px",
-                                              width: "100%",
-                                              fontSize: ".75rem",
-                                              lineHeight: "1.7rem",
-                                            }}
-                                            onClick={(e) => {
-                                              e.preventDefault();
-                                              handleShowImg();
-                                            }}
-                                          >
-                                            View
-                                          </button>
-                                        </div>
-                                        <div className="col-12 col-md-6">
-                                          <label className="form-label">
-                                            PAN Card Picture
-                                          </label>
-                                          <button
-                                            className="py-0.5"
-                                            style={{
-                                              backgroundColor: "#064420",
-                                              color: "#fff",
-                                              alignItems: "center",
-                                              borderRadius: "5px",
-                                              border: "none",
-                                              padding: "5px 10px",
-                                              width: "100%",
-                                              fontSize: ".75rem",
-                                              lineHeight: "1.7rem",
-                                            }}
-                                            onClick={(e) => {
-                                              e.preventDefault();
-                                              handleShowImg();
-                                            }}
-                                          >
-                                            View
-                                          </button>
-                                        </div>
-                                      </div>
-                                      <div className="row m-2">
-                                        <div className="col-12 col-md-6">
-                                          <label className="form-label">
-                                            Bank Statements
-                                          </label>
-                                          <button
-                                            className="py-0.5"
-                                            style={{
-                                              backgroundColor: "#064420",
-                                              color: "#fff",
-                                              alignItems: "center",
-                                              borderRadius: "5px",
-                                              border: "none",
-                                              padding: "5px 10px",
-                                              width: "100%",
-                                              fontSize: ".75rem",
-                                              lineHeight: "1.7rem",
-                                            }}
-                                            onClick={(e) => {
-                                              e.preventDefault();
-                                              handleShowImg();
-                                            }}
-                                          >
-                                            View
-                                          </button>
-                                        </div>
-                                        <div className="col-12 col-md-6">
-                                          <label className="form-label">
-                                            Address Proof
-                                          </label>
-                                          <button
-                                            className="py-0.5"
-                                            style={{
-                                              backgroundColor: "#064420",
-                                              color: "#fff",
-                                              alignItems: "center",
-                                              borderRadius: "5px",
-                                              border: "none",
-                                              padding: "5px 10px",
-                                              width: "100%",
-                                              fontSize: ".75rem",
-                                              lineHeight: "1.7rem",
-                                            }}
-                                            onClick={(e) => {
-                                              e.preventDefault();
-                                              handleShowImg();
-                                            }}
-                                          >
-                                            View
-                                          </button>
-                                        </div>
-                                      </div>
-                                      <div className="row m-2">
-                                        <div className="col-md-6">
-                                          <button className="btn btn-success w-100" style={{backgroundColor: "#064420", marginTop: "3rem"}}>
-                                            Approve
-                                          </button>
-                                        </div>
-                                        <div className="col-md-6">
-                                          <button className="btn btn-success w-100" style={{backgroundColor: "#064420", marginTop: "3rem"}}>
-                                            Reject
-                                          </button>
-                                        </div>
-                                      </div>
-                                      <div className="row m-2">
-                                        <button className="btn btn-success" style={{backgroundColor: "#064420"}}>
-                                          Submit
-                                        </button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
-                          </Modal.Body>
-                        </Modal>
-                      </div>
-                      <div>
-                      <Modal show={showImg} onHide={handleCloseImg}>
-                        <Modal.Header closeButton>Img</Modal.Header>
-                        <Modal.Body>
-                    
-                          <img
-                            src={logo}
-                            alt="Payment"
-                            style={{ width: "100%", height: "100%" }}
-                          />
-                        </Modal.Body>
-                      </Modal>
-                    </div>
                     </td>
                     <td>
                       <button
@@ -959,6 +430,520 @@ function LoanInfoTab() {
           </div>
         </div>
       </div>
+
+      <Modal
+        size="xl"
+        show={showRepayment}
+        onHide={handleCloseRepayment}
+      >
+        <Modal.Header closeButton>
+          Repayment Structure
+        </Modal.Header>
+        <Modal.Body>
+          <div className="repayment_title">
+            <div className="row">
+              <div className="col-lg-6">
+                <div className="row">
+                  <div className="col-6">
+                    <strong>Loan ID : </strong>
+                  </div>
+                  <div className="col-6">
+                    <span>12345</span>
+                  </div>
+                  <div className="col-6">
+                    <strong>FPO Name : </strong>
+                  </div>
+                  <div className="col-6">
+                    <span>abcd</span>
+                  </div>
+                  <div className="col-6">
+                    <strong>Loan Amount : </strong>
+                  </div>
+                  <div className="col-6">
+                    <span>400</span>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-6">
+                <div className="row">
+                  <div className="col-6">
+                    <strong>Loan Period in Years : </strong>
+                  </div>
+                  <div className="col-6">
+                    <span>1</span>
+                  </div>
+                  <div className="col-6">
+                    <strong>No of Payment Per Year : </strong>
+                  </div>
+                  <div className="col-6">
+                    <span>1</span>
+                  </div>
+                  <div className="col-6">
+                    <strong>Annual Interest Rate : </strong>
+                  </div>
+                  <div className="col-6">
+                    <span>14%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="mt-5">
+            <table style={{ border: "1px solid #eee" }}>
+              <thead style={{ backgroundColor: "#eee" }}>
+                <tr>
+                  <th>Payment Number</th>
+                  <th>Payment Date</th>
+                  <th>Principle Amount</th>
+                  <th>Interest Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>123456</td>
+                  <td>12-09-2021</td>
+                  <td>400</td>
+                  <td>14%</td>
+                  <td>status</td>
+                </tr>
+                <tr>
+                  <td>123456</td>
+                  <td>12-09-2021</td>
+                  <td>400</td>
+                  <td>14%</td>
+                  <td>status</td>
+                </tr>
+                <tr>
+                  <td>123456</td>
+                  <td>12-09-2021</td>
+                  <td>400</td>
+                  <td>14%</td>
+                  <td>status</td>
+                </tr>
+                <tr>
+                  <td>123456</td>
+                  <td>12-09-2021</td>
+                  <td>400</td>
+                  <td>14%</td>
+                  <td>status</td>
+                </tr>
+                <tr>
+                  <td>123456</td>
+                  <td>12-09-2021</td>
+                  <td>400</td>
+                  <td>14%</td>
+                  <td>status</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          Loan Application
+        </Modal.Header>
+        <Modal.Body>
+          <div className="row ">
+            <div className="col">
+              <form>
+                <div className="form">
+                  <div className="card p-2">
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Name as per PAN</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          value={"Name"}
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Email</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input
+                          className="form-control"
+                          type="email"
+                          value={"Email"}
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Mobile</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input
+                          className="form-control"
+                          type="number"
+                          value={"1234567890"}
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Aadhaar Number</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input
+                          className="form-control"
+                          type="number"
+                          value={"1234567890"}
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>PAN Card Number</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input
+                          className="form-control"
+                          type="number"
+                          value={"1234567890"}
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Address</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          value={"Address"}
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Income Type</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          value={"Income Type"}
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Amount Required</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input
+                          className="form-control"
+                          type="number"
+                          value={"100000"}
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Date of Birth</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input
+                          className="form-control"
+                          type="date"
+                          value={"2021-10-10"}
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Land Owned</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          value={"Land Owned"}
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-lg-6">
+                        <label>Reason for loan</label>
+                      </div>
+                      <div className="col-lg-6">
+                        <input
+                          className="form-control"
+                          type="text"
+                          value={"Reason"}
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-12 col-md-6">
+                        <label className="form-label">
+                          Aadhar Picture
+                        </label>
+                        <button
+                          className="py-0.5"
+                          style={{
+                            backgroundColor: "#064420",
+                            color: "#fff",
+                            alignItems: "center",
+                            borderRadius: "5px",
+                            border: "none",
+                            padding: "5px 10px",
+                            width: "100%",
+                            fontSize: ".75rem",
+                            lineHeight: "1.7rem",
+                          }}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleShowImg();
+                          }}
+                        >
+                          View
+                        </button>
+                      </div>
+                      <div className="col-12 col-md-6">
+                        <label className="form-label">
+                          PAN Card Picture
+                        </label>
+                        <button
+                          className="py-0.5"
+                          style={{
+                            backgroundColor: "#064420",
+                            color: "#fff",
+                            alignItems: "center",
+                            borderRadius: "5px",
+                            border: "none",
+                            padding: "5px 10px",
+                            width: "100%",
+                            fontSize: ".75rem",
+                            lineHeight: "1.7rem",
+                          }}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleShowImg();
+                          }}
+                        >
+                          View
+                        </button>
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-12 col-md-6">
+                        <label className="form-label">
+                          Bank Statements
+                        </label>
+                        <button
+                          className="py-0.5"
+                          style={{
+                            backgroundColor: "#064420",
+                            color: "#fff",
+                            alignItems: "center",
+                            borderRadius: "5px",
+                            border: "none",
+                            padding: "5px 10px",
+                            width: "100%",
+                            fontSize: ".75rem",
+                            lineHeight: "1.7rem",
+                          }}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleShowImg();
+                          }}
+                        >
+                          View
+                        </button>
+                      </div>
+                      <div className="col-12 col-md-6">
+                        <label className="form-label">
+                          Address Proof
+                        </label>
+                        <button
+                          className="py-0.5"
+                          style={{
+                            backgroundColor: "#064420",
+                            color: "#fff",
+                            alignItems: "center",
+                            borderRadius: "5px",
+                            border: "none",
+                            padding: "5px 10px",
+                            width: "100%",
+                            fontSize: ".75rem",
+                            lineHeight: "1.7rem",
+                          }}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleShowImg();
+                          }}
+                        >
+                          View
+                        </button>
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <div className="col-md-6">
+                        <button className="btn btn-success w-100" style={{ backgroundColor: "#064420", marginTop: "3rem" }}>
+                          Approve
+                        </button>
+                      </div>
+                      <div className="col-md-6">
+                        <button className="btn btn-success w-100" style={{ backgroundColor: "#064420", marginTop: "3rem" }}>
+                          Reject
+                        </button>
+                      </div>
+                    </div>
+                    <div className="row m-2">
+                      <button className="btn btn-success" style={{ backgroundColor: "#064420" }}>
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={showImg} onHide={handleCloseImg}>
+        <Modal.Header closeButton>Img</Modal.Header>
+        <Modal.Body>
+
+          <img
+            src={logo}
+            alt="Payment"
+            style={{ width: "100%", height: "100%" }}
+          />
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        size="xl"
+        show={showRepayment}
+        onHide={handleCloseRepayment}
+      >
+        <Modal.Header closeButton>
+          Repayment Structure
+        </Modal.Header>
+        <Modal.Body>
+          <div className="repayment_title">
+            <div className="row">
+              <div className="col-lg-6">
+                <div className="row">
+                  <div className="col-6">
+                    <strong>Loan ID : </strong>
+                  </div>
+                  <div className="col-6">
+                    <span>12345</span>
+                  </div>
+                  <div className="col-6">
+                    <strong>FPO Name : </strong>
+                  </div>
+                  <div className="col-6">
+                    <span>abcd</span>
+                  </div>
+                  <div className="col-6">
+                    <strong>Loan Amount : </strong>
+                  </div>
+                  <div className="col-6">
+                    <span>400</span>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-6">
+                <div className="row">
+                  <div className="col-6">
+                    <strong>Loan Period in Years : </strong>
+                  </div>
+                  <div className="col-6">
+                    <span>1</span>
+                  </div>
+                  <div className="col-6">
+                    <strong>No of Payment Per Year : </strong>
+                  </div>
+                  <div className="col-6">
+                    <span>1</span>
+                  </div>
+                  <div className="col-6">
+                    <strong>Annual Interest Rate : </strong>
+                  </div>
+                  <div className="col-6">
+                    <span>14%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="mt-5">
+            <table style={{ border: "1px solid #eee" }}>
+              <thead style={{ backgroundColor: "#eee" }}>
+                <tr>
+                  <th>Payment Number</th>
+                  <th>Payment Date</th>
+                  <th>Principle Amount</th>
+                  <th>Interest Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>123456</td>
+                  <td>12-09-2021</td>
+                  <td>400</td>
+                  <td>14%</td>
+                  <td>status</td>
+                </tr>
+                <tr>
+                  <td>123456</td>
+                  <td>12-09-2021</td>
+                  <td>400</td>
+                  <td>14%</td>
+                  <td>status</td>
+                </tr>
+                <tr>
+                  <td>123456</td>
+                  <td>12-09-2021</td>
+                  <td>400</td>
+                  <td>14%</td>
+                  <td>status</td>
+                </tr>
+                <tr>
+                  <td>123456</td>
+                  <td>12-09-2021</td>
+                  <td>400</td>
+                  <td>14%</td>
+                  <td>status</td>
+                </tr>
+                <tr>
+                  <td>123456</td>
+                  <td>12-09-2021</td>
+                  <td>400</td>
+                  <td>14%</td>
+                  <td>status</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

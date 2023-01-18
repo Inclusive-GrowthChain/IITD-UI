@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import "./Dashboard.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from 'react-router-dom';
 import TabNavItem from "../../pages/farmer/Tabs/TabNavItem";

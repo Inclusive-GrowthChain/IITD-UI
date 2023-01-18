@@ -1,5 +1,3 @@
-import React from "react";
-import "./Dashboard.css";
 import { NavLink } from "react-router-dom";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import logo from "../../assets/img/logo.png";

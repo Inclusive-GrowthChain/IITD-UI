@@ -1,64 +1,66 @@
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from "react-router-dom";
 
-import Login from "./components/Auth/Login";
-import Register from "./components/Auth/Register";
+const Register = lazy(() => import("./components/Auth/Register"))
+const Login = lazy(() => import("./components/Auth/Login"))
 
-import TransactionHistory from "./pages/farmer/TransactionHistory";
-import TrainingUpdate from "./pages/farmer/TrainingUpdate";
-import CropAdvisory2 from "./pages/farmer/CropAdvisory2";
-import SellingPrice from "./pages/farmer/SellingPrice";
-import CropAdvisory from "./pages/farmer/CropAdvisory";
-import Dashboard from "./pages/farmer/Dashboard";
-import Settings from "./pages/farmer/Settings";
-import Support from "./pages/farmer/Support";
-import Store from "./pages/farmer/Store";
-import Loan from "./pages/farmer/Loan";
+const TransactionHistory = lazy(() => import("./pages/farmer/TransactionHistory"))
+const TrainingUpdate = lazy(() => import("./pages/farmer/TrainingUpdate"))
+const CropAdvisory2 = lazy(() => import("./pages/farmer/CropAdvisory2"))
+const SellingPrice = lazy(() => import("./pages/farmer/SellingPrice"))
+const CropAdvisory = lazy(() => import("./pages/farmer/CropAdvisory"))
+const Dashboard = lazy(() => import("./pages/farmer/Dashboard"))
+const Settings = lazy(() => import("./pages/farmer/Settings"))
+const Support = lazy(() => import("./pages/farmer/Support"))
+const Store = lazy(() => import("./pages/farmer/Store"))
+const Loan = lazy(() => import("./pages/farmer/Loan"))
 
-import FarmerInformation from "./pages/fpo/FarmerInformation";
-import CorporateCustomer from "./pages/fpo/CorporateCustomer";
-import LacProcurement from "./pages/fpo/LacProcurement";
-import FpoDashboard from "./pages/fpo/FpoDashboard";
-import FarmerPage from "./pages/fpo/FarmerPage";
-import LabTesting from "./pages/fpo/LabTesting";
-import FarmerLoan from "./pages/fpo/FarmerLoan";
-import FpoStore from "./pages/fpo/FpoStore";
-import Supports from "./pages/fpo/Supports";
-import FpoLoan from "./pages/fpo/FpoLoan";
-import Setting from "./pages/fpo/Setting";
+const FarmerInformation = lazy(() => import("./pages/fpo/FarmerInformation"))
+const CorporateCustomer = lazy(() => import("./pages/fpo/CorporateCustomer"))
+const LacProcurement = lazy(() => import("./pages/fpo/LacProcurement"))
+const FpoDashboard = lazy(() => import("./pages/fpo/FpoDashboard"))
+const FarmerPage = lazy(() => import("./pages/fpo/FarmerPage"))
+const LabTesting = lazy(() => import("./pages/fpo/LabTesting"))
+const FarmerLoan = lazy(() => import("./pages/fpo/FarmerLoan"))
+const FpoStore = lazy(() => import("./pages/fpo/FpoStore"))
+const Supports = lazy(() => import("./pages/fpo/Supports"))
+const FpoLoan = lazy(() => import("./pages/fpo/FpoLoan"))
+const Setting = lazy(() => import("./pages/fpo/Setting"))
 
-import CorporateClient from "./pages/Admin/CorporateClient";
-import AdminDashboard from "./pages/Admin/AdminDashboard";
-import Samunnati from "./pages/Admin/Samunnati";
-import Farmer from "./pages/Admin/Farmer";
-import NISA from "./pages/Admin/NISA";
-import FPO from "./pages/Admin/FPO";
+const CorporateClient = lazy(() => import("./pages/Admin/CorporateClient"))
+const AdminDashboard = lazy(() => import("./pages/Admin/AdminDashboard"))
+const Samunnati = lazy(() => import("./pages/Admin/Samunnati"))
+const Farmer = lazy(() => import("./pages/Admin/Farmer"))
+const NISA = lazy(() => import("./pages/Admin/NISA"))
+const FPO = lazy(() => import("./pages/Admin/FPO"))
 
-import NISATrainingUpdate from "./pages/NISA/TrainingUpdate";
-import NISACropAdvisory from "./pages/NISA/CropAdvisory";
-import NISALabTesting from "./pages/NISA/LabTesting";
-import NISASettings from "./pages/NISA/Settings";
-import NISASupport from "./pages/NISA/Supports";
+const NISATrainingUpdate = lazy(() => import("./pages/NISA/TrainingUpdate"))
+const NISACropAdvisory = lazy(() => import("./pages/NISA/CropAdvisory"))
+const NISALabTesting = lazy(() => import("./pages/NISA/LabTesting"))
+const NISASettings = lazy(() => import("./pages/NISA/Settings"))
+const NISASupport = lazy(() => import("./pages/NISA/Supports"))
 
-import SammunatiFarmerSubLoanPage from "./pages/Samunnati/FarmerSubLoanPage";
-import SammunatiFPOSubLoanPage from "./pages/Samunnati/FpoSubLoanPage";
-import SamunnatiFarmerLoan from "./pages/Samunnati/FarmerLoan";
-import SammunatiSettings from "./pages/Samunnati/Settings";
-import SamunnatiFPOLoan from "./pages/Samunnati/FpoLoan";
-import SamunnatiFPOInfo from "./pages/Samunnati/FpoInfo";
-import SammunatiFPOPage from "./pages/Samunnati/FpoPage";
-import SammunatiSupport from "./pages/Samunnati/Support";
+const SammunatiFarmerSubLoanPage = lazy(() => import("./pages/Samunnati/FarmerSubLoanPage"))
+const SammunatiFPOSubLoanPage = lazy(() => import("./pages/Samunnati/FpoSubLoanPage"))
+const SamunnatiFarmerLoan = lazy(() => import("./pages/Samunnati/FarmerLoan"))
+const SammunatiSettings = lazy(() => import("./pages/Samunnati/Settings"))
+const SamunnatiFPOLoan = lazy(() => import("./pages/Samunnati/FpoLoan"))
+const SamunnatiFPOInfo = lazy(() => import("./pages/Samunnati/FpoInfo"))
+const SammunatiFPOPage = lazy(() => import("./pages/Samunnati/FpoPage"))
+const SammunatiSupport = lazy(() => import("./pages/Samunnati/Support"))
 
-import CorporateClientLacBidding from "./pages/CorporateClient/CCLACBid";
-import CorporateClientSettings from "./pages/CorporateClient/Settings";
-import CorporateSupport from "./pages/CorporateClient/Support";
+const CorporateClientLacBidding = lazy(() => import("./pages/CorporateClient/CCLACBid"))
+const CorporateClientSettings = lazy(() => import("./pages/CorporateClient/Settings"))
+const CorporateSupport = lazy(() => import("./pages/CorporateClient/Support"))
+
 
 function App() {
   return (
-    <div className="App">
+    <Suspense fallback={<div>Loading....</div>}>
       <Routes>
         {/* Farmer login & Signup route */}
         <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<Register />} />
+        <Route path="signup" element={<Register />} />
 
         {/* farmer route */}
         <Route path="/farmer/dashboard" element={<Dashboard />} />
@@ -115,7 +117,7 @@ function App() {
         <Route path="/corporate-client/support" element={<CorporateSupport />} />
         <Route path="/corporate-client/settings" element={<CorporateClientSettings />} />
       </Routes>
-    </div>
+    </Suspense>
   );
 }
 

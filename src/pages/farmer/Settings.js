@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import "./Dashboard.css";
+import { useState } from "react";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 
@@ -7,18 +6,6 @@ import TabNavItem from "../../pages/farmer/Tabs/TabNavItem";
 import TabContent from "../../pages/farmer/Tabs/TabContent";
 
 const Settings = () => {
-  // const [profile, setProfile] = useState(true);
-  // const [password, setPassword] = useState(false);
-
-  // const profileHandler = () => {
-  //   setProfile(true);
-  //   setPassword(false);
-  // };
-  // const passwordHandler = () => {
-  //   setProfile(false);
-  //   setPassword(true);
-  // };
-
   const [activeTab, setActiveTab] = useState("tab1");
 
   return (
@@ -41,7 +28,7 @@ const Settings = () => {
                 <div className="col">
                   <div
                     className="card shadow border-start-primary py-2"
-                    style={{ backgroundColor: "#f6f6f7",  }}
+                    style={{ backgroundColor: "#f6f6f7", }}
                   >
                     <div className="card-body">
                       <div className="row">

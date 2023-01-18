@@ -5,7 +5,6 @@ import TabContent from "../../pages/farmer/Tabs/TabContent";
 import FPOLoanTab from "./TabContent/FPOLoanTab";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import "./style.css";
 
 import RepaymentStructure from "./Modals/FpoLoan/RepaymentStructure";
 import DocumentsCollected2 from "./Modals/FpoLoan/DocumentsCollected2";

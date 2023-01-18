@@ -1,29 +1,23 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
-import Select from '@mui/material/Select';
-import { MenuItem } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-import { Today } from "@mui/icons-material";
+import { useState } from "react";
 import logo from "../../../assets/img/logo.png";
 import Modal from "react-bootstrap/Modal";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-const PageFour = ({onButtonClick}) => {
+const fpoInvoice = {
+  id: 1,
+  name: "FPO 1",
+  village: "Village 1",
+  phoneNumber: "1234567890",
+  invoiceNo: "1234567890",
+  invoiceDate: "12/12/2021",
+  amount: "100000",
+};
+
+const PageFour = ({ onButtonClick }) => {
   const [showInvoice, setShowInvoice] = useState(false);
   const [showReject, setShowReject] = useState(false);
   const [showApprove, setShowApprove] = useState(false);
-
-  const fpoInvoice = {
-    id: 1,
-    name: "FPO 1",
-    village: "Village 1",
-    phoneNumber: "1234567890",
-    invoiceNo : "1234567890",
-    invoiceDate : "12/12/2021",
-    amount : "100000",
-  };
 
   const handleShowInvoice = () => setShowInvoice(true);
   const handleCloseInvoice = () => setShowInvoice(false);
@@ -48,7 +42,7 @@ const PageFour = ({onButtonClick}) => {
       style={{ maxWidth: "100%", margin: "auto" }}
     >
       <form className="measure">
-      <div>
+        <div>
           <h5
             className="mt-5"
             style={{
@@ -61,16 +55,16 @@ const PageFour = ({onButtonClick}) => {
             Payment Invoice Details
           </h5>
         </div>
-        <div className="form" style={{marginTop: '3%'}}>
+        <div className="form" style={{ marginTop: '3%' }}>
           <div style={{
             position: "relative",
             float: "left",
             left: "-0.781rem",
             top: "7rem",
-            }}>
+          }}>
             <button
               onClick={() => onButtonClick("pagethree")}
-              style={{backgroundColor: 'white'}}
+              style={{ backgroundColor: 'white' }}
             >
               <ArrowBackIosIcon />
             </button>
@@ -80,26 +74,26 @@ const PageFour = ({onButtonClick}) => {
             float: "right",
             right: "-0.781rem",
             top: "7rem",
-            }}>
+          }}>
             <button
               onClick={() => onButtonClick("pagefive")}
-              style={{backgroundColor: 'white'}}
-              // disabled={!orderPlaced}
+              style={{ backgroundColor: 'white' }}
+            // disabled={!orderPlaced}
             >
               <ArrowForwardIosIcon />
             </button>
           </div>
           <div className="row m-2">
-            <div className="col-lg-6" style={{marginLeft: '-2.5%'}}>
+            <div className="col-lg-6" style={{ marginLeft: '-2.5%' }}>
               <label>FPO ID</label>
             </div>
-            <div className="col-lg-6" style={{marginLeft: '2.5%'}}>
-              <input 
-                className="form-control" 
-                type="text" 
+            <div className="col-lg-6" style={{ marginLeft: '2.5%' }}>
+              <input
+                className="form-control"
+                type="text"
                 disabled={true}
                 value={fpoInvoice.id}
-                style={{width: '105%'}}
+                style={{ width: '105%' }}
               />
             </div>
           </div>
@@ -108,9 +102,9 @@ const PageFour = ({onButtonClick}) => {
               <label>FPO Name</label>
             </div>
             <div className="col-lg-6">
-              <input 
-                className="form-control" 
-                type="text" 
+              <input
+                className="form-control"
+                type="text"
                 disabled={true}
                 value={fpoInvoice.name}
               />
@@ -121,9 +115,9 @@ const PageFour = ({onButtonClick}) => {
               <label>FPO Phone Number</label>
             </div>
             <div className="col-lg-6">
-              <input 
-                className="form-control" 
-                type="text" 
+              <input
+                className="form-control"
+                type="text"
                 disabled={true}
                 value={fpoInvoice.phoneNumber}
               />
@@ -134,9 +128,9 @@ const PageFour = ({onButtonClick}) => {
               <label>Amount</label>
             </div>
             <div className="col-lg-6">
-              <input 
-                className="form-control" 
-                type="text" 
+              <input
+                className="form-control"
+                type="text"
                 disabled={true}
                 value={fpoInvoice.amount}
               />
@@ -147,9 +141,9 @@ const PageFour = ({onButtonClick}) => {
               <label>Date of Payment</label>
             </div>
             <div className="col-lg-6">
-              <input 
-                className="form-control" 
-                type="text" 
+              <input
+                className="form-control"
+                type="text"
                 disabled={true}
                 value={fpoInvoice.invoiceDate}
               />
@@ -181,23 +175,12 @@ const PageFour = ({onButtonClick}) => {
               </button>
             </div>
           </div>
-          <div>
-            <Modal show={showInvoice} onHide={handleCloseInvoice}>
-              <Modal.Header closeButton>Invoice</Modal.Header>
-              <Modal.Body>
-                <img
-                  src={logo}
-                  alt="Payment Image"
-                  style={{ width: "100%", height: "100%" }}
-                />
-              </Modal.Body>
-            </Modal>
-          </div>
+
           <div className="row m-2">
             <div className="col-lg-6">
-              <button 
-                className="btn btn-success" 
-                style={{marginTop: '5rem', backgroundColor: '#064420'}}
+              <button
+                className="btn btn-success"
+                style={{ marginTop: '5rem', backgroundColor: '#064420' }}
                 onClick={(e) => {
                   e.preventDefault();
                   handleShowReject()
@@ -206,10 +189,10 @@ const PageFour = ({onButtonClick}) => {
                 Reject
               </button>
             </div>
-            <div className="col-lg-6" style={{display: "flex", justifyContent: "flex-end"}}>
-              <button 
-                className="btn btn-success" 
-                style={{marginTop: '5rem', backgroundColor: '#064420'}}
+            <div className="col-lg-6" style={{ display: "flex", justifyContent: "flex-end" }}>
+              <button
+                className="btn btn-success"
+                style={{ marginTop: '5rem', backgroundColor: '#064420' }}
                 onClick={(e) => {
                   e.preventDefault();
                   handleShowApprove()
@@ -219,66 +202,55 @@ const PageFour = ({onButtonClick}) => {
               </button>
             </div>
           </div>
-          <div>
-            <Modal show={showReject} onHide={handleCloseReject}>
-              <Modal.Header closeButton>Invoice</Modal.Header>
-              <Modal.Body>
-                <p>
-                  Are you sure you want to reject the invoice?
-                </p>
-                <div className="col-lg-12" style={{display: "flex", justifyContent: "flex-end"}}>
-                  <button 
-                    className="btn btn-success" 
-                    style={{backgroundColor: '#064420'}}
-                    onClick={(e) => confirmReject(e)}
-                  >
-                    Reject
-                  </button>
-                </div>
-              </Modal.Body>
-            </Modal>
-          </div>
-          <div>
-            <Modal show={showApprove} onHide={handleCloseApprove}>
-              <Modal.Header closeButton>Invoice</Modal.Header>
-              <Modal.Body>
-                <p>
-                  Are you sure you want to approve the invoice?
-                </p>
-                <div className="col-lg-12" style={{display: "flex", justifyContent: "flex-end"}}>
-                  <button 
-                    className="btn btn-success" 
-                    style={{backgroundColor: '#064420'}}
-                    onClick={(e) => confirmApprove(e)}
-                  >
-                    Approve
-                  </button>
-                </div>
-              </Modal.Body>
-            </Modal>
-          </div>
-          {/* <div className="row m-2">
-            <div className="col-lg-6">
-              <button 
-                className="btn btn-success" 
-                style={{marginTop: '5rem', backgroundColor: '#064420'}}
-                onClick={() => onButtonClick("pagethree")}
-              >
-                Back
-              </button>
-            </div>
-            <div className="col-lg-6" style={{display: "flex", justifyContent: "flex-end"}}>
-              <button 
-                className="btn btn-success" 
-                style={{marginTop: '5rem', backgroundColor: '#064420'}}
-                onClick={() => onButtonClick("pagefive")}
-              >
-                Next
-              </button>
-            </div>
-          </div> */}
         </div>
       </form>
+
+      <Modal show={showInvoice} onHide={handleCloseInvoice}>
+        <Modal.Header closeButton>Invoice</Modal.Header>
+        <Modal.Body>
+          <img
+            src={logo}
+            alt="Payment"
+            style={{ width: "100%", height: "100%" }}
+          />
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={showReject} onHide={handleCloseReject}>
+        <Modal.Header closeButton>Invoice</Modal.Header>
+        <Modal.Body>
+          <p>
+            Are you sure you want to reject the invoice?
+          </p>
+          <div className="col-lg-12" style={{ display: "flex", justifyContent: "flex-end" }}>
+            <button
+              className="btn btn-success"
+              style={{ backgroundColor: '#064420' }}
+              onClick={(e) => confirmReject(e)}
+            >
+              Reject
+            </button>
+          </div>
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={showApprove} onHide={handleCloseApprove}>
+        <Modal.Header closeButton>Invoice</Modal.Header>
+        <Modal.Body>
+          <p>
+            Are you sure you want to approve the invoice?
+          </p>
+          <div className="col-lg-12" style={{ display: "flex", justifyContent: "flex-end" }}>
+            <button
+              className="btn btn-success"
+              style={{ backgroundColor: '#064420' }}
+              onClick={(e) => confirmApprove(e)}
+            >
+              Approve
+            </button>
+          </div>
+        </Modal.Body>
+      </Modal>
     </main>
   );
 };

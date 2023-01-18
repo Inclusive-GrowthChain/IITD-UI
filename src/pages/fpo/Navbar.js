@@ -1,5 +1,3 @@
-import React from "react";
-import "./style.css";
 import logo from "../../assets/img/logo.png";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -28,8 +26,8 @@ const Navbar = () => {
       <div className="nav_items">
         <PersonIcon className="nav_icons" />
         <DropdownButton id="dropdown-item-button" title="">
-        <Link to="/fpo/settings" style={{ textDecoration: "none" }}>
-          <Dropdown.Item as="button">Profile</Dropdown.Item>
+          <Link to="/fpo/settings" style={{ textDecoration: "none" }}>
+            <Dropdown.Item as="button">Profile</Dropdown.Item>
           </Link>
           <Dropdown.Item as="button" onClick={logout}>
             Logout

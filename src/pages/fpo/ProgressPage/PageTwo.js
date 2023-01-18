@@ -2,29 +2,27 @@ import React, { useState } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
+const fpo = {
+  id: 1,
+  amount: 2000,
+  name: "FPO",
+  village: "Village",
+  phoneNumber: "98213XXXXX",
+  reportsReqd: [
+    {
+      reportName: "Chowri",
+      reportReqd: true,
+    },
+  ],
+};
+
 const PageTwo = ({ onButtonClick }) => {
   const [selectedFile, setSelectedFile] = useState();
-  // const [errorMsg, setErrorMsg] = useState(false);
-  // const [isSuccess, setIsSuccess] = useState(false);
 
   const handleFileChange = (event) => {
     if (event.target.files.length > 0) {
       setSelectedFile(event.target.files[0]);
     }
-  };
-
-  const fpo = {
-    id: 1,
-    amount: 2000,
-    name: "FPO",
-    village: "Village",
-    phoneNumber: "98213XXXXX",
-    reportsReqd: [
-      {
-        reportName: "Chowri",
-        reportReqd: true,
-      },
-    ],
   };
 
   return (

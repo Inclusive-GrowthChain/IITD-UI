@@ -1,5 +1,3 @@
-import React from "react";
-import "./style.css";
 import { NavLink } from "react-router-dom";
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
 import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";

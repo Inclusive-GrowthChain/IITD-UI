@@ -1,6 +1,3 @@
-import React from "react";
-import "./ProgressBar.css";
-
 export default function Step(props) {
   return (
     <div className={"stepBlock" + (props.selected ? " selected" : "")}>

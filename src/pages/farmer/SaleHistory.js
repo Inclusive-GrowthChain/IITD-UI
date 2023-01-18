@@ -1,5 +1,3 @@
-import React from "react";
-import "./Dashboard.css";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 
@@ -57,7 +55,7 @@ function SaleHistory() {
                           <img
                             src="https://3.imimg.com/data3/TM/JM/ETO-196508/1-294285-full-images-stick-lac-1081592-500x500.jpg"
                             alt=""
-                            style={{ width: '50px', height: '50px',}}
+                            style={{ width: '50px', height: '50px', }}
                           />
                         </td>
                         <td>02</td>
@@ -69,10 +67,10 @@ function SaleHistory() {
                       <tr>
                         <td>14-05-2022</td>
                         <td>
-                        <img
+                          <img
                             src="https://img1.exportersindia.com/product_images/bc-full/dir_103/3083471/seedlac-1521434846-3729373.jpg"
                             alt=""
-                            style={{ width: '50px', height: '50px',}}
+                            style={{ width: '50px', height: '50px', }}
                           />
                         </td>
                         <td>02</td>
@@ -84,10 +82,10 @@ function SaleHistory() {
                       <tr>
                         <td>14-05-2022</td>
                         <td>
-                        <img
+                          <img
                             src="https://5.imimg.com/data5/WH/TW/MY-1496311/shellac-processed-versatile-lac-golden-kusmi-500x500.jpg"
                             alt=""
-                            style={{ width: '50px', height: '50px',}}
+                            style={{ width: '50px', height: '50px', }}
                           />
                         </td>
                         <td>02</td>

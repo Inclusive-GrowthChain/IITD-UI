@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 const Samunnati = () => {
-
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -19,7 +18,7 @@ const Samunnati = () => {
         <div className="itemContainer">
           <div className="list_title">
             <div className="">
-            <Button
+              <Button
                 className="loan_button mb-3"
                 onClick={handleShow}
                 style={{
@@ -93,7 +92,7 @@ const Samunnati = () => {
                           </div>
                         </div>
                         <div className="row mb-2">
-                        <div className="col-12 col-md-6">
+                          <div className="col-12 col-md-6">
                             <label className="form-label">Fax</label>
                             <input type="text" className="form-control" />
                           </div>
@@ -110,7 +109,7 @@ const Samunnati = () => {
                             />
                           </div>
                         </div>
-                        
+
                         <div className="row mb-2">
                           <div className="col">
                             <button

@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import TabInfo from "./TabContent/TabInfo";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import "./style.css";
 
 const FarmerInformation = () => {
   const navigate = useNavigate()

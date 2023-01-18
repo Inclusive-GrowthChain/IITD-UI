@@ -1,53 +1,51 @@
-import React from "react";
-import "./Dashboard.css";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
 
-const Samunnati_FPO_Info = () => {
-  const fpoList = [
-    {
-        id: 1,
-        name: "FPO 1",
-        ceoName: "CEO 1",
-        phone: "1234567890",
-        email: "fpo1@gmail.com",
-        location: "Location 1",
-    },
-    {
-        id: 2,
-        name: "FPO 2",
-        ceoName: "CEO 2",
-        phone: "1234567890",
-        email: "fpo2@gmail.com",
-        location: "Location 2",
-    },
-    {
-        id: 3,
-        name: "FPO 3",
-        ceoName: "CEO 3",
-        phone: "1234567890",
-        email: "fpo3@gmail.com",
-        location: "Location 3",
-    },
-    {
-        id: 4,
-        name: "FPO 4",
-        ceoName: "CEO 4",
-        phone: "1234567890",
-        email: "fpo4@gmail.com",
-        location: "Location 4",
-    },
-    {
-        id: 5,
-        name: "FPO 5",
-        ceoName: "CEO 5",
-        phone: "1234567890",
-        email: "fpo5@gmail.com",
-        location: "Location 5",
-    },
-  ];
+const fpoList = [
+  {
+    id: 1,
+    name: "FPO 1",
+    ceoName: "CEO 1",
+    phone: "1234567890",
+    email: "fpo1@gmail.com",
+    location: "Location 1",
+  },
+  {
+    id: 2,
+    name: "FPO 2",
+    ceoName: "CEO 2",
+    phone: "1234567890",
+    email: "fpo2@gmail.com",
+    location: "Location 2",
+  },
+  {
+    id: 3,
+    name: "FPO 3",
+    ceoName: "CEO 3",
+    phone: "1234567890",
+    email: "fpo3@gmail.com",
+    location: "Location 3",
+  },
+  {
+    id: 4,
+    name: "FPO 4",
+    ceoName: "CEO 4",
+    phone: "1234567890",
+    email: "fpo4@gmail.com",
+    location: "Location 4",
+  },
+  {
+    id: 5,
+    name: "FPO 5",
+    ceoName: "CEO 5",
+    phone: "1234567890",
+    email: "fpo5@gmail.com",
+    location: "Location 5",
+  },
+];
 
+const Samunnati_FPO_Info = () => {
   return (
     <div className="sammunati">
       <Sidebar />
@@ -104,9 +102,9 @@ const Samunnati_FPO_Info = () => {
                               <td>
                                 <Link to="/samunnati/fpo-page"
                                   className="data_wrapper"
-                                  style={{color: "#000", textDecoration: "none"}}
+                                  style={{ color: "#000", textDecoration: "none" }}
                                   onClick={() => {
-                                    localStorage.setItem("fpoId", fpo.id);                                    
+                                    localStorage.setItem("fpoId", fpo.id);
                                   }}
                                 >
                                   {fpo.name}

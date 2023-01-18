@@ -1,60 +1,55 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import Select from '@mui/material/Select';
-import { MenuItem } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-import { Today } from "@mui/icons-material";
 import Modal from "react-bootstrap/Modal";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-const PageTwo = ({onButtonClick}) => {
+let fpoBids = [
+  {
+    id: 1,
+    amount: 100000,
+    name: "FPO 1",
+    village: "Village 1",
+    phoneNumber: "1234567890",
+    orderPlaced: false
+  },
+  {
+    id: 2,
+    amount: 100000,
+    name: "FPO 2",
+    village: "Village 2",
+    phoneNumber: "1234567890",
+    orderPlaced: false
+  },
+  {
+    id: 3,
+    amount: 80000,
+    name: "FPO 3",
+    village: "Village 3",
+    phoneNumber: "1234567890",
+    orderPlaced: false
+  },
+  {
+    id: 4,
+    amount: 120000,
+    name: "FPO 4",
+    village: "Village 4",
+    phoneNumber: "1234567890",
+    orderPlaced: false
+  },
+  {
+    id: 5,
+    amount: 110000,
+    name: "FPO 5",
+    village: "Village 5",
+    phoneNumber: "1234567890",
+    orderPlaced: false
+  },
+];
+
+const PageTwo = ({ onButtonClick }) => {
   const [showConfirmBox, setShowConfirmBox] = useState(false);
   const [currentFPO, setCurrentFPO] = useState({});
   const [orderPlaced, setOrderPlaced] = useState(false);
-
-  let fpoBids = [
-    {
-      id: 1,
-      amount: 100000,
-      name: "FPO 1",
-      village: "Village 1",
-      phoneNumber: "1234567890",
-      orderPlaced: false
-    },
-    {
-      id: 2,
-      amount: 100000,
-      name: "FPO 2",
-      village: "Village 2",
-      phoneNumber: "1234567890",
-      orderPlaced: false
-    },
-    {
-      id: 3,
-      amount: 80000,
-      name: "FPO 3",
-      village: "Village 3",
-      phoneNumber: "1234567890",
-      orderPlaced: false
-    },
-    {
-      id: 4,
-      amount: 120000,
-      name: "FPO 4",
-      village: "Village 4",
-      phoneNumber: "1234567890",
-      orderPlaced: false
-    },
-    {
-      id: 5,
-      amount: 110000,
-      name: "FPO 5",
-      village: "Village 5",
-      phoneNumber: "1234567890",
-      orderPlaced: false
-    },
-  ];
 
   const confirmOrder = (e) => {
     e.preventDefault();
@@ -78,7 +73,7 @@ const PageTwo = ({onButtonClick}) => {
         orderPlaced = true;
       }
     });
-    if(currentFPO.orderPlaced) {
+    if (currentFPO.orderPlaced) {
       orderPlaced = true;
     }
     setOrderPlaced(orderPlaced);
@@ -86,7 +81,7 @@ const PageTwo = ({onButtonClick}) => {
 
   useEffect(() => {
     checkOrderPlaced();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fpoBids, currentFPO]);
 
   return (
@@ -95,7 +90,7 @@ const PageTwo = ({onButtonClick}) => {
       style={{ maxWidth: "100%", margin: "auto" }}
     >
       <form className="measure">
-      <div>
+        <div>
           <h5
             className="mt-5"
             style={{
@@ -108,16 +103,16 @@ const PageTwo = ({onButtonClick}) => {
             Place Order
           </h5>
         </div>
-        <div className="form" style={{marginTop: '3%'}}>
+        <div className="form" style={{ marginTop: '3%' }}>
           <div style={{
             position: "relative",
             float: "left",
             left: "-0.781rem",
             top: "4rem",
-            }}>
+          }}>
             <button
               onClick={() => onButtonClick("pageone")}
-              style={{backgroundColor: 'white'}}
+              style={{ backgroundColor: 'white' }}
             >
               <ArrowBackIosIcon />
             </button>
@@ -127,10 +122,10 @@ const PageTwo = ({onButtonClick}) => {
             float: "right",
             right: "-0.781rem",
             top: "4rem",
-            }}>
+          }}>
             <button
               onClick={() => onButtonClick("pagethree")}
-              style={{backgroundColor: 'white'}}
+              style={{ backgroundColor: 'white' }}
               disabled={!orderPlaced}
             >
               <ArrowForwardIosIcon />
@@ -185,7 +180,7 @@ const PageTwo = ({onButtonClick}) => {
                           confirmOrder(e);
                         }}
                         disabled={orderPlaced}
-                        className="btn btn-success" 
+                        className="btn btn-success"
                       >
                         Place Order
                       </button>
@@ -195,46 +190,24 @@ const PageTwo = ({onButtonClick}) => {
               </tbody>
             </table>
           </div>
-          <div>
-            <Modal show={showConfirmBox} onHide={handleCloseConfirmBox}>
-              <Modal.Header closeButton>Confirm Order</Modal.Header>
-              <Modal.Body>
-                <p>
-                  Are you sure you want to place order with FPO {currentFPO.id} for {currentFPO.amount} rupees?
-                </p>
-                <div className="col-lg-12" style={{display: "flex", justifyContent: "flex-end"}}>
-                  <button 
-                    className="btn btn-success" 
-                    style={{backgroundColor: '#064420'}}
-                    onClick={(e) => placeOrder(e)}
-                  >
-                    Confirm
-                  </button>
-                </div>
-              </Modal.Body>
-            </Modal>
-          </div>
-          {/* <div className="row m-2">
-            <div className="col-lg-6">
-              <button 
-                className="btn btn-success" 
-                style={{marginTop: '5rem', backgroundColor: '#064420'}}
-                onClick={() => onButtonClick("pageone")}
-              >
-                Back
-              </button>
-            </div>
-            <div className="col-lg-6" style={{display: "flex", justifyContent: "flex-end"}}>
-              <button 
-                className="btn btn-success" 
-                style={{marginTop: '5rem', backgroundColor: '#064420'}}
-                onClick={() => onButtonClick("pagethree")}
-                disabled={!orderPlaced}
-              >
-                Next
-              </button>
-            </div>
-          </div> */}
+
+          <Modal show={showConfirmBox} onHide={handleCloseConfirmBox}>
+            <Modal.Header closeButton>Confirm Order</Modal.Header>
+            <Modal.Body>
+              <p>
+                Are you sure you want to place order with FPO {currentFPO.id} for {currentFPO.amount} rupees?
+              </p>
+              <div className="col-lg-12" style={{ display: "flex", justifyContent: "flex-end" }}>
+                <button
+                  className="btn btn-success"
+                  style={{ backgroundColor: '#064420' }}
+                  onClick={(e) => placeOrder(e)}
+                >
+                  Confirm
+                </button>
+              </div>
+            </Modal.Body>
+          </Modal>
         </div>
       </form>
     </main>

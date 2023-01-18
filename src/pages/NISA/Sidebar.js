@@ -1,5 +1,3 @@
-import React from "react";
-import "./styles.css";
 import { NavLink } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import FileCopyOutlinedIcon from '@mui/icons-material/FileCopyOutlined';
@@ -24,23 +22,23 @@ const Sidebar = () => {
         <ul>
           <NavLink to="/nisa/crop-advisory" className={"sidebar_data"}>
             <DashboardIcon className="icon" />
-              <span>Crop Advisory</span>
+            <span>Crop Advisory</span>
           </NavLink>
           <NavLink to="/nisa/training" className={"sidebar_data"}>
             <FileCopyOutlinedIcon className="icon" />
-              <span>Training Programs</span>
+            <span>Training Programs</span>
           </NavLink>
           <NavLink to="/nisa/lab-testing" className={"sidebar_data"}>
             <ScienceTwoToneIcon className="icon" />
-              <span>Lab Testing</span>
+            <span>Lab Testing</span>
           </NavLink>
           <NavLink to="/nisa/support" className={"sidebar_data"}>
             <ScienceTwoToneIcon className="icon" />
-              <span>Support</span>
+            <span>Support</span>
           </NavLink>
           <NavLink to="/nisa/settings" className={"sidebar_data"}>
             <SettingsOutlinedIcon className="icon" />
-              <span>Settings</span>
+            <span>Settings</span>
           </NavLink>
         </ul>
       </div>

@@ -1,13 +1,143 @@
 import React, { useState, useEffect } from "react";
-import "./Dashboard.css";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-// import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import TabNavItem from "../../pages/farmer/Tabs/TabNavItem";
 import TabContent from "../../pages/farmer/Tabs/TabContent";
 import { Link } from "react-router-dom";
-// import logo from "../../assets/img/logo.png";
+
+const approvedLoanList = [
+  {
+    loanId: 1,
+    fpoId: 'F111111',
+    fpoName: "FPO 1",
+    contact: "1234567890",
+    dateOfApp: "2021-10-10",
+    requestedAmount: "100000",
+    grantedAmount: "100000",
+    reasonForRejection: "",
+    status: "Approved",
+    numberOfRequests: '2',
+  },
+  {
+    loanId: 3,
+    fpoId: 'F333333',
+    fpoName: "FPO 3",
+    contact: "1234567890",
+    dateOfApp: "2021-10-10",
+    requestedAmount: "100000",
+    grantedAmount: "100000",
+    reasonForRejection: "",
+    status: "Approved",
+    numberOfRequests: '2',
+  },
+  {
+    loanId: 4,
+    fpoId: 'F444444',
+    fpoName: "FPO 4",
+    contact: "1234567890",
+    dateOfApp: "2021-10-10",
+    requestedAmount: "100000",
+    grantedAmount: "50000",
+    reasonForRejection: "",
+    status: "Approved",
+    numberOfRequests: '2',
+  },
+  {
+    loanId: 8,
+    fpoId: 'F888888',
+    fpoName: "FPO 8",
+    contact: "1234567890",
+    dateOfApp: "2021-10-10",
+    requestedAmount: "100000",
+    grantedAmount: "80000",
+    reasonForRejection: "",
+    status: "Approved",
+    numberOfRequests: '2',
+  },
+  {
+    loanId: 9,
+    fpoId: 'F999999',
+    fpoName: "FPO 9",
+    contact: "1234567890",
+    dateOfApp: "2021-10-10",
+    requestedAmount: "100000",
+    grantedAmount: "70000",
+    reasonForRejection: "",
+    status: "Approved",
+    numberOfRequests: '2',
+  },
+];
+
+const rejectedLoanList = [
+  {
+    loanId: 5,
+    fpoId: 'F555555',
+    fpoName: "FPO 5",
+    contact: "1234567890",
+    dateOfApp: "2021-10-10",
+    requestedAmount: "100000",
+    grantedAmount: "",
+    reasonForRejection: "Not eligible",
+    status: "Rejected",
+    numberOfRequests: '2',
+  },
+  {
+    loanId: 7,
+    fpoId: 'F777777',
+    fpoName: "FPO 7",
+    contact: "1234567890",
+    dateOfApp: "2021-10-10",
+    requestedAmount: "100000",
+    grantedAmount: "",
+    reasonForRejection: "Not eligible",
+    status: "Rejected",
+    numberOfRequests: '2',
+  },
+  {
+    loanI: 10,
+    fpoId: 'F101010',
+    fpoName: "FPO 10",
+    contact: "1234567890",
+    dateOfApp: "2021-10-10",
+    requestedAmount: "100000",
+    grantedAmount: "",
+    reasonForRejection: "Not eligible",
+    status: "Rejected",
+    numberOfRequests: '2',
+  },
+];
+
+const pendingLoanList = [
+  {
+    loanId: 2,
+    fpoId: 'F222222',
+    fpoName: 'FPO 2',
+    contact: '1234567890',
+    dateOfApp: '2021-10-10',
+    requestedAmount: '100000',
+    grantedAmount: "",
+    reasonForRejection: "",
+    status: 'Pending',
+    numberOfRequests: '2',
+    windowId: 'W545454',
+    tenure: '12',
+  },
+  {
+    loanId: 6,
+    fpoId: 'F666666',
+    fpoName: 'FPO 6',
+    contact: '1234567890',
+    dateOfApp: '2021-10-10',
+    requestedAmount: '100000',
+    grantedAmount: "",
+    reasonForRejection: "",
+    status: 'Pending',
+    numberOfRequests: '2',
+    windowId: 'W222222',
+    tenure: '12',
+  },
+];
 
 const Samunnati_FPO_Loan = () => {
   const [showRepaymentStructure, setshowRepaymentStructure] = useState(false);
@@ -23,155 +153,31 @@ const Samunnati_FPO_Loan = () => {
   const [filteredPendingLoanList, setFilteredPendingLoanList] = useState([]);
   const [showRepaymentStatus, setShowRepaymentStatus] = useState(false);
   const [showRepaymentConfirmation, setShowRepaymentConfirmation] = useState(false);
+  const [activeTab, setActiveTab] = useState("tab1");
+  const [step, setStep] = useState(0);
+  const [noOfRows] = useState(1);
 
-  const approvedLoanList = [
-    {
-      loanId: 1,
-      fpoId: 'F111111',
-      fpoName: "FPO 1",
-      contact: "1234567890",
-      dateOfApp: "2021-10-10",
-      requestedAmount: "100000",
-      grantedAmount: "100000",
-      reasonForRejection: "",
-      status: "Approved",
-      numberOfRequests: '2',
-    },
-    {
-      loanId: 3,
-      fpoId: 'F333333',
-      fpoName: "FPO 3",
-      contact: "1234567890",
-      dateOfApp: "2021-10-10",
-      requestedAmount: "100000",
-      grantedAmount: "100000",
-      reasonForRejection: "",
-      status: "Approved",
-      numberOfRequests: '2',
-    },
-    {
-      loanId: 4,
-      fpoId: 'F444444',
-      fpoName: "FPO 4",
-      contact: "1234567890",
-      dateOfApp: "2021-10-10",
-      requestedAmount: "100000",
-      grantedAmount: "50000",
-      reasonForRejection: "",
-      status: "Approved",
-      numberOfRequests: '2',
-    },
-    {
-      loanId: 8,
-      fpoId: 'F888888',
-      fpoName: "FPO 8",
-      contact: "1234567890",
-      dateOfApp: "2021-10-10",
-      requestedAmount: "100000",
-      grantedAmount: "80000",
-      reasonForRejection: "",
-      status: "Approved",
-      numberOfRequests: '2',
-    },
-    {
-      loanId: 9,
-      fpoId: 'F999999',
-      fpoName: "FPO 9",
-      contact: "1234567890",
-      dateOfApp: "2021-10-10",
-      requestedAmount: "100000",
-      grantedAmount: "70000",
-      reasonForRejection: "",
-      status: "Approved",
-      numberOfRequests: '2',
-    },
-  ];
-
-  const rejectedLoanList = [
-    {
-      loanId: 5,
-      fpoId: 'F555555',
-      fpoName: "FPO 5",
-      contact: "1234567890",
-      dateOfApp: "2021-10-10",
-      requestedAmount: "100000",
-      grantedAmount: "",
-      reasonForRejection: "Not eligible",
-      status: "Rejected",
-      numberOfRequests: '2',
-    },
-    {
-      loanId: 7,
-      fpoId: 'F777777',
-      fpoName: "FPO 7",
-      contact: "1234567890",
-      dateOfApp: "2021-10-10",
-      requestedAmount: "100000",
-      grantedAmount: "",
-      reasonForRejection: "Not eligible",
-      status: "Rejected",
-      numberOfRequests: '2',
-    },
-    {
-      loanI: 10,
-      fpoId: 'F101010',
-      fpoName: "FPO 10",
-      contact: "1234567890",
-      dateOfApp: "2021-10-10",
-      requestedAmount: "100000",
-      grantedAmount: "",
-      reasonForRejection: "Not eligible",
-      status: "Rejected",
-      numberOfRequests: '2',
-    },
-  ];
-
-  const pendingLoanList = [
-    {
-      loanId: 2,
-      fpoId: 'F222222',
-      fpoName: 'FPO 2',
-      contact: '1234567890',
-      dateOfApp: '2021-10-10',
-      requestedAmount: '100000',
-      grantedAmount: "",
-      reasonForRejection: "",
-      status: 'Pending',
-      numberOfRequests: '2',
-      windowId: 'W545454',
-      tenure: '12',
-    },
-    {
-      loanId: 6,
-      fpoId: 'F666666',
-      fpoName: 'FPO 6',
-      contact: '1234567890',
-      dateOfApp: '2021-10-10',
-      requestedAmount: '100000',
-      grantedAmount: "",
-      reasonForRejection: "",
-      status: 'Pending',
-      numberOfRequests: '2',
-      windowId: 'W222222',
-      tenure: '12',
-    },
-  ];
+  useEffect(() => {
+    searchLoans();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchText]);
 
   const handleShowRepaymentStructure = () => setshowRepaymentStructure(true);
   const handleCloseRepaymentStructure = () => setshowRepaymentStructure(false);
   const handleShowRejLoanApp = () => setShowRejLoanApp(true);
   const handleCloseRejLoanApp = () => setShowRejLoanApp(false);
+  const handleClosePendLoanApp = () => setShowPendLoanApp(false);
+  const handleCloseApproveForm = () => setShowApproveForm(false);
+  const handleCloseRejectForm = () => setShowRejectForm(false);
+  const handleShowRepaymentStatus = () => setShowRepaymentStatus(true);
+  const handleCloseRepaymentStatus = () => setShowRepaymentStatus(false);
+  const handleShowRepaymentConfirmation = () => setShowRepaymentConfirmation(true);
+  const handleCloseRepaymentConfirmation = () => setShowRepaymentConfirmation(false);
+
   const handleShowPendLoanApp = () => {
     setShowPendLoanApp(true);
     setStep(0);
   };
-  const handleClosePendLoanApp = () => setShowPendLoanApp(false);
-  // eslint-disable-next-line no-unused-vars
-  const handleShowApproveForm = () => setShowApproveForm(true);
-  const handleCloseApproveForm = () => setShowApproveForm(false);
-  // eslint-disable-next-line no-unused-vars
-  const handleShowRejectForm = () => setShowRejectForm(true);
-  const handleCloseRejectForm = () => setShowRejectForm(false);
 
   const changeLoanStatus = (e, loanApp) => {
     e.preventDefault();
@@ -220,23 +226,6 @@ const Samunnati_FPO_Loan = () => {
     setFilteredRejectedLoanList(filteredRejectedLoans);
     setFilteredPendingLoanList(filteredPendingLoans);
   };
-
-  const [step, setStep] = useState(0);
-
-  // eslint-disable-next-line no-unused-vars
-  const [noOfRows, setNoOfRows] = useState(1);
-
-  const handleShowRepaymentStatus = () => setShowRepaymentStatus(true);
-  const handleCloseRepaymentStatus = () => setShowRepaymentStatus(false);
-  const handleShowRepaymentConfirmation = () => setShowRepaymentConfirmation(true);
-  const handleCloseRepaymentConfirmation = () => setShowRepaymentConfirmation(false);
-
-  const [activeTab, setActiveTab] = useState("tab1");
-
-  useEffect(() => {
-    searchLoans();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchText]);
 
   return (
     <div className="sammunati">

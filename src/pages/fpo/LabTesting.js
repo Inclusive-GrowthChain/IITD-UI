@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import "./style.css";
 
 const FarmerInformation = () => {
   const [activeIndex, setActiveIndex] = useState(1);

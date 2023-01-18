@@ -119,54 +119,54 @@ const PageFour = ({ onButtonClick, canEdit = true }) => {
                     Submit
                   </button>
                 }
-                <Modal
-                  // size="sm"
-                  show={showPayment}
-                  onHide={handleClosePayment}
-                >
-                  <Modal.Header closeButton>Place a Bid</Modal.Header>
-                  <Modal.Body>
-                    <div className="bid_title">
-                      <div className="row">
-                        <div className="col-6">
-                          <label>Enter the Price/kg</label>
-                        </div>
-                        <div className="col-6">
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Enter thr price"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="row m-1">
-                          <button
-                            className="mt-4"
-                            style={{
-                              backgroundColor: "#064420",
-                              alignItems: "center",
-                              borderRadius: "5px",
-                              border: "none",
-                              padding: "0.25rem 1rem",
-                              color: "#fff",
-                            }}
-                            onClick={() => {
-                              alert.show("your amount!");
-                            }}
-                          >
-                            Submit
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </Modal.Body>
-                </Modal>
               </div>
             </div>
           </div>
         </div>
       </form>
+
+      <Modal
+        show={showPayment}
+        onHide={handleClosePayment}
+      >
+        <Modal.Header closeButton>Place a Bid</Modal.Header>
+        <Modal.Body>
+          <div className="bid_title">
+            <div className="row">
+              <div className="col-6">
+                <label>Enter the Price/kg</label>
+              </div>
+              <div className="col-6">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter thr price"
+                />
+              </div>
+            </div>
+            <div>
+              <div className="row m-1">
+                <button
+                  className="mt-4"
+                  style={{
+                    backgroundColor: "#064420",
+                    alignItems: "center",
+                    borderRadius: "5px",
+                    border: "none",
+                    padding: "0.25rem 1rem",
+                    color: "#fff",
+                  }}
+                  onClick={() => {
+                    alert.show("your amount!");
+                  }}
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </main>
   );
 };

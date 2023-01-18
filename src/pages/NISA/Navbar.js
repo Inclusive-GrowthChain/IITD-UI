@@ -1,5 +1,3 @@
-import React from "react";
-import "./styles.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import PersonIcon from "@mui/icons-material/Person";

@@ -1,293 +1,91 @@
-/* eslint-disable no-unused-vars */
-import React, {useState, useEffect} from "react";
+import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import "./Dashboard.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import TabNavItem from "../../pages/farmer/Tabs/TabNavItem";
 import TabContent from "../../pages/farmer/Tabs/TabContent";
-// import Modal from "react-bootstrap/Modal";
-// import logo from "../../assets/img/logo.png";
-// import Button from "react-bootstrap/Button";
+
+const completedLoanList = [
+  {
+    id: 1,
+    dateOfApp: "2021-10-10",
+    loanAmount: "100000",
+  },
+  {
+    id: 2,
+    dateOfApp: "2021-10-10",
+    loanAmount: "100000",
+  },
+  {
+    id: 3,
+    dateOfApp: "2021-10-10",
+    loanAmount: "100000",
+  },
+  {
+    id: 4,
+    dateOfApp: "2021-10-10",
+    loanAmount: "100000",
+  },
+];
+
+const ongoingLoanList = [
+  {
+    id: 1,
+    dateOfApp: "2021-10-10",
+    loanAmount: "100000",
+    outstandingAmount: "90000",
+    nextPaymentAmount: "10000",
+    nextPaymentDate: "2021-10-10",
+  },
+  {
+    id: 2,
+    dateOfApp: "2021-10-10",
+    loanAmount: "100000",
+    outstandingAmount: "90000",
+    nextPaymentAmount: "10000",
+    nextPaymentDate: "2021-10-10",
+  },
+  {
+    id: 3,
+    dateOfApp: "2021-10-10",
+    loanAmount: "100000",
+    outstandingAmount: "90000",
+    nextPaymentAmount: "10000",
+    nextPaymentDate: "2021-10-10",
+  },
+];
+
+const pendingLoanList = [
+  {
+    id: 1,
+    dateOfApp: "2021-10-10",
+    loanAmount: "100000",
+  },
+  {
+    id: 2,
+    dateOfApp: "2021-10-10",
+    loanAmount: "100000",
+  },
+];
 
 const Sammunati_FPO_Page = () => {
+  const [activeTab, setActiveTab] = useState("tab1");
+  const [fpoId] = useState(localStorage.getItem("fpoId"));
+
   const navigate = useNavigate();
 
   const handleClick = () => {
     localStorage.removeItem("fpoId");
-    navigate('/samunnati/fpo-info', {replace: true});
+    navigate('/samunnati/fpo-info', { replace: true });
   };
-
-  const [showNewTest, setShowNewTest] = useState(false);
-  const [showApp, setShowApp] = useState(false);
-  const [currentApp, setCurrentApp] = useState({});
-  const [showFirstAppForm, setShowFirstAppForm] = useState(true);
-  const [showPaymentImg, setShowPaymentImg] = useState(false);
-  const [showLacSampleImg, setShowLacSampleImg] = useState(false);
-  const [showCertificateImg, setShowCertificateImg] = useState(false);
-  const [appList, setAppList] = useState([]);
-  const [testList, setTestList] = useState([]);
-  const [fpoId, setFpoId] = useState(localStorage.getItem("fpoId"));
-
-  const tempTestList = [
-    {
-      id: 1,
-      category: "Shellac / Seedlac",
-      test: "Hot Alcohol Insoluble",
-      minQuantity: "100",
-      fee: "1000",
-      reportingPeriod: "2",
-    },
-    {
-      id: 2,
-      category: "Bleached Lac",
-      test: "Hot Alcohol Insoluble",
-      minQuantity: "100",
-      fee: "1000",
-      reportingPeriod: "2",
-    },
-    {
-      id: 3,
-      category: "Lac Dye",
-      test: "Presence of Azo Group",
-      minQuantity: "100",
-      fee: "1000",
-      reportingPeriod: "2",
-    },
-    {
-      id: 4,
-      category: "Shellac Wax",
-      test: "Percentage of Loading",
-      minQuantity: "100",
-      fee: "1000",
-      reportingPeriod: "2",
-    },
-    {
-      id: 5,
-      category: "Shellac / Seedlac",
-      test: "Hot Alcohol Insoluble",
-      minQuantity: "100",
-      fee: "1000",
-      reportingPeriod: "2",
-    },
-    {
-      id: 6,
-      category: "Lac Dye",
-      test: "Presence of Azo Group",
-      minQuantity: "100",
-      fee: "1000",
-      reportingPeriod: "2",
-    },
-    {
-      id: 7,
-      category: "Shellac Wax",
-      test: "Percentage of Loading",
-      minQuantity: "100",
-      fee: "1000",
-      reportingPeriod: "2",
-    },
-  ];
-
-  const tempAppList = [
-    {
-      id: 1,
-      fpoName: "FPO",
-      fpoContact: "1234567890",
-      sampleID: 1,
-      refNo: "123456",
-      dateOfApp: "2022-10-10",
-      testCategory: "Shellac / Seedlac",
-      test: "Hot Alcohol Insoluble",
-      amount: "200",
-      remarks: "Remarks",
-      paymentRefNo: "123456",
-    },
-    {
-      id: 2,
-      fpoName: "FPO",
-      fpoContact: "1234567890",
-      sampleID: 2,
-      refNo: "123456",
-      dateOfApp: "2019-10-10",
-      testCategory: "Bleached Lac",
-      test: "Hot Alcohol Insoluble",
-      amount: "200",
-      remarks: "Remarks",
-      paymentRefNo: "123456",
-    },
-    {
-      id: 3,
-      fpoName: "FPO",
-      fpoContact: "1234567890",
-      sampleID: 3,
-      refNo: "123456",
-      dateOfApp: "2021-10-10",
-      testCategory: "Lac Dye",
-      test: "Presence of Azo Group",
-      amount: "200",
-      remarks: "Remarks",
-      paymentRefNo: "123456",
-    },
-    {
-      id: 4,
-      fpoName: "FPO",
-      fpoContact: "1234567890",
-      sampleID: 4,
-      refNo: "123456",
-      dateOfApp: "2021-10-12",
-      testCategory: "Shellac Wax",
-      test: "Percentage of Loading",
-      amount: "200",
-      remarks: "Remarks",
-      paymentRefNo: "123456",
-    },
-    {
-      id: 5,
-      fpoName: "FPO",
-      fpoContact: "1234567890",
-      sampleID: 5,
-      refNo: "123456",
-      dateOfApp: "2021-10-10",
-      testCategory: "Shellac / Seedlac",
-      test: "Hot Alcohol Insoluble",
-      amount: "200",
-      remarks: "Remarks",
-      paymentRefNo: "123456",
-    },
-    {
-      id: 6,
-      fpoName: "FPO",
-      fpoContact: "1234567890",
-      sampleID: 6,
-      refNo: "123456",
-      dateOfApp: "2011-10-10",
-      testCategory: "Lac Dye",
-      test: "Presence of Azo Group",
-      amount: "200",
-      remarks: "Remarks",
-      paymentRefNo: "123456",
-    },
-    {
-      id: 7,
-      fpoName: "FPO",
-      fpoContact: "1234567890",
-      sampleID: 7,
-      refNo: "123456",
-      dateOfApp: "2012-12-10",
-      testCategory: "Shellac Wax",
-      test: "Percentage of Loading",
-      amount: "200",
-      remarks: "Remarks",
-      paymentRefNo: "123456",
-    },
-  ];
-
-  const completedLoanList = [
-    {
-      id: 1,
-      dateOfApp: "2021-10-10",
-      loanAmount: "100000",
-    },
-    {
-      id: 2,
-      dateOfApp: "2021-10-10",
-      loanAmount: "100000",
-    },
-    {
-      id: 3,
-      dateOfApp: "2021-10-10",
-      loanAmount: "100000",
-    },
-    {
-      id: 4,
-      dateOfApp: "2021-10-10",
-      loanAmount: "100000",
-    },
-  ];
-    
-  const ongoingLoanList = [
-    {
-      id: 1,
-      dateOfApp: "2021-10-10",
-      loanAmount: "100000",
-      outstandingAmount: "90000",
-      nextPaymentAmount: "10000",
-      nextPaymentDate: "2021-10-10",
-    },
-    {
-      id: 2,
-      dateOfApp: "2021-10-10",
-      loanAmount: "100000",
-      outstandingAmount: "90000",
-      nextPaymentAmount: "10000",
-      nextPaymentDate: "2021-10-10",
-    },
-    {
-      id: 3,
-      dateOfApp: "2021-10-10",
-      loanAmount: "100000",
-      outstandingAmount: "90000",
-      nextPaymentAmount: "10000",
-      nextPaymentDate: "2021-10-10",
-    },
-  ];
-
-  const pendingLoanList = [
-    {
-      id: 1,
-      dateOfApp: "2021-10-10",
-      loanAmount: "100000",
-    },
-    {
-      id: 2,
-      dateOfApp: "2021-10-10",
-      loanAmount: "100000",
-    },
-  ];
-
-  const handleNewTestClose = () => setShowNewTest(false);
-  const handleNewTestShow = () => setShowNewTest(true);
-  const handleShowApp = () => {
-    setShowApp(true);
-    setShowFirstAppForm(true);
-  };
-  const handleCloseApp = () => setShowApp(false);
-  const handleShowPaymentImg = () => setShowPaymentImg(true);
-  const handleClosePaymentImg = () => setShowPaymentImg(false);
-  const handleShowLacSampleImg = () => setShowLacSampleImg(true);
-  const handleCloseLacSampleImg = () => setShowLacSampleImg(false);
-  const handleShowCertificateImg = () => setShowCertificateImg(true);
-  const handleCloseCertificateImg = () => setShowCertificateImg(false);
-
-  const sortApp = () => {
-    const sortedApp = tempAppList.sort((a, b) => {
-      return a.dateOfApp < b.dateOfApp ? 1 : -1;
-    });
-    setAppList(sortedApp);
-  };
-
-  const sortTestList = () => {
-    const sortedTestList = tempTestList.sort((a, b) => {
-      return a.category > b.category ? 1 : -1;
-    });
-    setTestList(sortedTestList);
-  };
-
-  const [activeTab, setActiveTab] = useState("tab1");
-
-  useEffect(()=>{
-    sortApp();
-    sortTestList();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div className="home">
       <Navbar />
-      <div className="homeContainer" style={{marginTop: "-3.188rem"}}>
+      <div className="homeContainer" style={{ marginTop: "-3.188rem" }}>
         <Sidebar />
-        <main id="main_container" className="main_container container-fluid" style={{marginTop: "3.188rem"}}>
+        <main id="main_container" className="main_container container-fluid" style={{ marginTop: "3.188rem" }}>
           <div className="">
             <h3 className="mb-4">FPO Page</h3>
           </div>
@@ -301,7 +99,7 @@ const Sammunati_FPO_Page = () => {
                   <div className="container-fluid">
                     <div className="tabs_wrapper">
                       <ul className="nav-tab">
-                      <TabNavItem
+                        <TabNavItem
                           title="Profile"
                           id="tab1"
                           activeTab={activeTab}

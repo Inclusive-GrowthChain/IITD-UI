@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Dashboard.css";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import Button from "react-bootstrap/Button";
@@ -8,6 +7,38 @@ import logo from "../../assets/img/logo.png";
 import TabNavItem from "../../pages/farmer/Tabs/TabNavItem";
 import TabContent from "../../pages/farmer/Tabs/TabContent";
 import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
+
+const farmerDetails = {
+  name: "Farmer",
+  gender: "Male",
+  mobile: "1234567890",
+  dob: "2021-10-10",
+  age: "30",
+  idProofType: "Aadhar",
+  idProofNo: "1234567890",
+  addressProofType: "Aadhar",
+  addressProofNo: "1234567890",
+  fpoName: "FPO 1",
+  bankName: "B 1",
+  accountNo: "1234567890",
+  ifsc: "1234567890",
+  branchName: "Br 1",
+  fatherName: "Farmer Father",
+  motherName: "Farmer Mother",
+  doorNo: "D 1",
+  streetName: "S 1",
+  village: "V 1",
+  taluk: "T 1",
+  district: "D 1",
+  state: "S 1",
+  pincode: "123456",
+  occupation: "Farmer",
+  education: "E 1",
+  natureOfPlace: "N 1",
+  residence: "R 1",
+  caste: "C 1",
+  religion: "Rg 1",
+};
 
 const Loan = () => {
   const [showLoanApp, setShowLoanApp] = useState(false);
@@ -29,7 +60,7 @@ const Loan = () => {
   const handleShowRepaymentLoan = () => {
     setShowRepaymentLoan(true);
   };
-  
+
   const handleCloseGrantedLoanApplication = () => setShowGrantedLoanApplication(false);
   const handleShowGrantedLoanApplication = () => setShowGrantedLoanApplication(true);
 
@@ -75,38 +106,6 @@ const Loan = () => {
   const randomlyGenerateLoanId = () => {
     const randomId = "L" + Math.floor(Math.random() * 1000000);
     setLoanId(randomId);
-  };
-
-  const farmerDetails = {
-    name: "Farmer",
-    gender: "Male",
-    mobile: "1234567890",
-    dob: "2021-10-10",
-    age: "30",
-    idProofType: "Aadhar",
-    idProofNo: "1234567890",
-    addressProofType: "Aadhar",
-    addressProofNo: "1234567890",
-    fpoName: "FPO 1",
-    bankName: "B 1",
-    accountNo: "1234567890",
-    ifsc: "1234567890",
-    branchName: "Br 1",
-    fatherName: "Farmer Father",
-    motherName: "Farmer Mother",
-    doorNo: "D 1",
-    streetName: "S 1",
-    village: "V 1",
-    taluk: "T 1",
-    district: "D 1",
-    state: "S 1",
-    pincode: "123456",
-    occupation: "Farmer",
-    education: "E 1",
-    natureOfPlace: "N 1",
-    residence: "R 1",
-    caste: "C 1",
-    religion: "Rg 1",
   };
 
   return (
@@ -261,20 +260,20 @@ const Loan = () => {
                                     <div className="col-lg-12">
                                       {(("Create" && step < 6) ||
                                         ("Create" && step < 5)) && (
-                                        <button
-                                          className="btn btn-success"
-                                          onClick={() => setStep((p) => p + 1)}
-                                          style={{
-                                            marginTop: "20px",
-                                            backgroundColor: "#064420",
-                                            width: "20%",
-                                            position: "relative",
-                                            float: "right",
-                                          }}
-                                        >
-                                          Next
-                                        </button>
-                                      )}
+                                          <button
+                                            className="btn btn-success"
+                                            onClick={() => setStep((p) => p + 1)}
+                                            style={{
+                                              marginTop: "20px",
+                                              backgroundColor: "#064420",
+                                              width: "20%",
+                                              position: "relative",
+                                              float: "right",
+                                            }}
+                                          >
+                                            Next
+                                          </button>
+                                        )}
                                     </div>
                                   </div>
                                 </div>
@@ -405,20 +404,20 @@ const Loan = () => {
                                   )}
                                   {(("Create" && step < 6) ||
                                     ("Create" && step < 5)) && (
-                                    <button
-                                      className="btn btn-success"
-                                      onClick={() => setStep((p) => p + 1)}
-                                      style={{
-                                        marginTop: "1rem",
-                                        backgroundColor: "#064420",
-                                        width: "20%",
-                                        position: "relative",
-                                        float: "right",
-                                      }}
-                                    >
-                                      Next
-                                    </button>
-                                  )}
+                                      <button
+                                        className="btn btn-success"
+                                        onClick={() => setStep((p) => p + 1)}
+                                        style={{
+                                          marginTop: "1rem",
+                                          backgroundColor: "#064420",
+                                          width: "20%",
+                                          position: "relative",
+                                          float: "right",
+                                        }}
+                                      >
+                                        Next
+                                      </button>
+                                    )}
                                 </div>
                               </div>
                             </label>
@@ -546,20 +545,20 @@ const Loan = () => {
                                     )}
                                     {(("Create" && step < 6) ||
                                       ("Create" && step < 5)) && (
-                                      <button
-                                        className="btn btn-success"
-                                        onClick={() => setStep((p) => p + 1)}
-                                        style={{
-                                          marginTop: "1rem",
-                                          backgroundColor: "#064420",
-                                          width: "20%",
-                                          position: "relative",
-                                          float: "right",
-                                        }}
-                                      >
-                                        Next
-                                      </button>
-                                    )}
+                                        <button
+                                          className="btn btn-success"
+                                          onClick={() => setStep((p) => p + 1)}
+                                          style={{
+                                            marginTop: "1rem",
+                                            backgroundColor: "#064420",
+                                            width: "20%",
+                                            position: "relative",
+                                            float: "right",
+                                          }}
+                                        >
+                                          Next
+                                        </button>
+                                      )}
                                   </div>
                                 </div>
                               </label>
@@ -701,20 +700,20 @@ const Loan = () => {
                                     )}
                                     {(("Create" && step < 6) ||
                                       ("Create" && step < 5)) && (
-                                      <button
-                                        className="btn btn-success"
-                                        onClick={() => setStep((p) => p + 1)}
-                                        style={{
-                                          marginTop: "1rem",
-                                          backgroundColor: "#064420",
-                                          width: "20%",
-                                          position: "relative",
-                                          float: "right",
-                                        }}
-                                      >
-                                        Next
-                                      </button>
-                                    )}
+                                        <button
+                                          className="btn btn-success"
+                                          onClick={() => setStep((p) => p + 1)}
+                                          style={{
+                                            marginTop: "1rem",
+                                            backgroundColor: "#064420",
+                                            width: "20%",
+                                            position: "relative",
+                                            float: "right",
+                                          }}
+                                        >
+                                          Next
+                                        </button>
+                                      )}
                                   </div>
                                 </div>
                               </label>
@@ -924,22 +923,22 @@ const Loan = () => {
                                     )}
                                     {(("Create" && step < 6) ||
                                       ("Create" && step < 5)) && (
-                                      <button
-                                        className="btn btn-success"
-                                        onClick={(e) => {
-                                          confirmBid(e);
-                                        }}
-                                        style={{
-                                          marginTop: "1rem",
-                                          backgroundColor: "#064420",
-                                          width: "20%",
-                                          position: "relative",
-                                          float: "right",
-                                        }}
-                                      >
-                                        Submit
-                                      </button>
-                                    )}
+                                        <button
+                                          className="btn btn-success"
+                                          onClick={(e) => {
+                                            confirmBid(e);
+                                          }}
+                                          style={{
+                                            marginTop: "1rem",
+                                            backgroundColor: "#064420",
+                                            width: "20%",
+                                            position: "relative",
+                                            float: "right",
+                                          }}
+                                        >
+                                          Submit
+                                        </button>
+                                      )}
                                     <Modal
                                       show={showConfirmBox}
                                       onHide={handleCloseConfirmBox}
@@ -1769,20 +1768,20 @@ const Loan = () => {
                                               <div className="col-lg-12">
                                                 {(("Create" && step < 6) ||
                                                   ("Create" && step < 5)) && (
-                                                  <button
-                                                    className="btn btn-success"
-                                                    onClick={() => setStep((p) => p + 1)}
-                                                    style={{
-                                                      marginTop: "20px",
-                                                      backgroundColor: "#064420",
-                                                      width: "20%",
-                                                      position: "relative",
-                                                      float: "right",
-                                                    }}
-                                                  >
-                                                    Next
-                                                  </button>
-                                                )}
+                                                    <button
+                                                      className="btn btn-success"
+                                                      onClick={() => setStep((p) => p + 1)}
+                                                      style={{
+                                                        marginTop: "20px",
+                                                        backgroundColor: "#064420",
+                                                        width: "20%",
+                                                        position: "relative",
+                                                        float: "right",
+                                                      }}
+                                                    >
+                                                      Next
+                                                    </button>
+                                                  )}
                                               </div>
                                             </div>
                                           </div>
@@ -1920,20 +1919,20 @@ const Loan = () => {
                                             )}
                                             {(("Create" && step < 6) ||
                                               ("Create" && step < 5)) && (
-                                              <button
-                                                className="btn btn-success"
-                                                onClick={() => setStep((p) => p + 1)}
-                                                style={{
-                                                  marginTop: "1rem",
-                                                  backgroundColor: "#064420",
-                                                  width: "20%",
-                                                  position: "relative",
-                                                  float: "right",
-                                                }}
-                                              >
-                                                Next
-                                              </button>
-                                            )}
+                                                <button
+                                                  className="btn btn-success"
+                                                  onClick={() => setStep((p) => p + 1)}
+                                                  style={{
+                                                    marginTop: "1rem",
+                                                    backgroundColor: "#064420",
+                                                    width: "20%",
+                                                    position: "relative",
+                                                    float: "right",
+                                                  }}
+                                                >
+                                                  Next
+                                                </button>
+                                              )}
                                           </div>
                                         </div>
                                       </label>
@@ -1946,7 +1945,7 @@ const Loan = () => {
                                     >
                                       <Modal.Header closeButton>Aadhar Card</Modal.Header>
                                       <Modal.Body>
-                                        <img src={logo} alt="Aadhar Card" style={{ width: "100%", height: "100%"}} />
+                                        <img src={logo} alt="Aadhar Card" style={{ width: "100%", height: "100%" }} />
                                       </Modal.Body>
                                     </Modal>
                                     <Modal
@@ -1955,7 +1954,7 @@ const Loan = () => {
                                     >
                                       <Modal.Header closeButton>PAN Card</Modal.Header>
                                       <Modal.Body>
-                                        <img src={logo} alt="PAN Card" style={{ width: "100%", height: "100%"}} />
+                                        <img src={logo} alt="PAN Card" style={{ width: "100%", height: "100%" }} />
                                       </Modal.Body>
                                     </Modal>
                                   </div>
@@ -2054,20 +2053,20 @@ const Loan = () => {
                                               )}
                                               {(("Create" && step < 6) ||
                                                 ("Create" && step < 5)) && (
-                                                <button
-                                                  className="btn btn-success"
-                                                  onClick={() => setStep((p) => p + 1)}
-                                                  style={{
-                                                    marginTop: "1rem",
-                                                    backgroundColor: "#064420",
-                                                    width: "20%",
-                                                    position: "relative",
-                                                    float: "right",
-                                                  }}
-                                                >
-                                                  Next
-                                                </button>
-                                              )}
+                                                  <button
+                                                    className="btn btn-success"
+                                                    onClick={() => setStep((p) => p + 1)}
+                                                    style={{
+                                                      marginTop: "1rem",
+                                                      backgroundColor: "#064420",
+                                                      width: "20%",
+                                                      position: "relative",
+                                                      float: "right",
+                                                    }}
+                                                  >
+                                                    Next
+                                                  </button>
+                                                )}
                                             </div>
                                           </div>
                                         </label>
@@ -2169,20 +2168,20 @@ const Loan = () => {
                                               )}
                                               {(("Create" && step < 6) ||
                                                 ("Create" && step < 5)) && (
-                                                <button
-                                                  className="btn btn-success"
-                                                  onClick={() => setStep((p) => p + 1)}
-                                                  style={{
-                                                    marginTop: "1rem",
-                                                    backgroundColor: "#064420",
-                                                    width: "20%",
-                                                    position: "relative",
-                                                    float: "right",
-                                                  }}
-                                                >
-                                                  Next
-                                                </button>
-                                              )}
+                                                  <button
+                                                    className="btn btn-success"
+                                                    onClick={() => setStep((p) => p + 1)}
+                                                    style={{
+                                                      marginTop: "1rem",
+                                                      backgroundColor: "#064420",
+                                                      width: "20%",
+                                                      position: "relative",
+                                                      float: "right",
+                                                    }}
+                                                  >
+                                                    Next
+                                                  </button>
+                                                )}
                                             </div>
                                           </div>
                                         </label>
@@ -2284,20 +2283,20 @@ const Loan = () => {
                                               )}
                                               {(("Create" && step < 6) ||
                                                 ("Create" && step < 5)) && (
-                                                <button
-                                                  className="btn btn-success"
-                                                  onClick={() => setStep((p) => p + 1)}
-                                                  style={{
-                                                    marginTop: "1rem",
-                                                    backgroundColor: "#064420",
-                                                    width: "20%",
-                                                    position: "relative",
-                                                    float: "right",
-                                                  }}
-                                                >
-                                                  Next
-                                                </button>
-                                              )}
+                                                  <button
+                                                    className="btn btn-success"
+                                                    onClick={() => setStep((p) => p + 1)}
+                                                    style={{
+                                                      marginTop: "1rem",
+                                                      backgroundColor: "#064420",
+                                                      width: "20%",
+                                                      position: "relative",
+                                                      float: "right",
+                                                    }}
+                                                  >
+                                                    Next
+                                                  </button>
+                                                )}
                                               <Modal
                                                 show={showConfirmBox}
                                                 onHide={handleCloseConfirmBox}
@@ -2337,117 +2336,117 @@ const Loan = () => {
                                 </div>
                               )}
                               {
-                              step === 5 && (
-                                <div className="row ">
-                                  <div className="col">
-                                    <form>
-                                      <div className="form">
-                                        <div className="card p-2">
-                                          <div className="row m-2">
-                                            <div className="col-md-6">
-                                              <label className="form-label">
-                                                Samunnati Payment Proof
-                                              </label>
+                                step === 5 && (
+                                  <div className="row ">
+                                    <div className="col">
+                                      <form>
+                                        <div className="form">
+                                          <div className="card p-2">
+                                            <div className="row m-2">
+                                              <div className="col-md-6">
+                                                <label className="form-label">
+                                                  Samunnati Payment Proof
+                                                </label>
+                                              </div>
+                                              <div className="col-md-6">
+                                                <button
+                                                  className="py-0.5"
+                                                  style={{
+                                                    backgroundColor: "#064420",
+                                                    color: "#fff",
+                                                    alignItems: "center",
+                                                    borderRadius: "5px",
+                                                    border: "none",
+                                                    padding: "5px 10px",
+                                                    width: "100%",
+                                                    fontSize: ".75rem",
+                                                    lineHeight: "1.7rem",
+                                                  }}
+                                                  onClick={(e) => {
+                                                    e.preventDefault();
+                                                    handleShowSamunnatiPaymentProof();
+                                                  }}
+                                                >
+                                                  View
+                                                </button>
+                                              </div>
                                             </div>
-                                            <div className="col-md-6">
+                                            <div className="row m-2">
+                                              <div className="col-md-6">
+                                                <label className="form-label">
+                                                  Interest Rate (%)
+                                                </label>
+                                              </div>
+                                              <div className="col-md-6">
+                                                <input
+                                                  type="number"
+                                                  className="form-control"
+                                                  value={12}
+                                                  disabled
+                                                />
+                                              </div>
+                                            </div>
+                                            <div className="row m-2">
+                                              <div className="col-md-6">
+                                                <label className="form-label">
+                                                  Amount (in Rs.)
+                                                </label>
+                                              </div>
+                                              <div className="col-md-6">
+                                                <input
+                                                  type="number"
+                                                  className="form-control"
+                                                  value={100000}
+                                                  disabled
+                                                />
+                                              </div>
+                                            </div>
+                                            <div className="row m-2">
+                                              <div className="col-md-6">
+                                                <label className="form-label">
+                                                  Tenure (in months)
+                                                </label>
+                                              </div>
+                                              <div className="col-md-6">
+                                                <input
+                                                  type="number"
+                                                  className="form-control"
+                                                  value={12}
+                                                  disabled
+                                                />
+                                              </div>
+                                            </div>
+                                            <div className="row m-2">
                                               <button
-                                                className="py-0.5"
+                                                className="btn btn-success"
+                                                onClick={() => setStep((p) => p - 1)}
                                                 style={{
+                                                  marginTop: "1rem",
                                                   backgroundColor: "#064420",
-                                                  color: "#fff",
-                                                  alignItems: "center",
-                                                  borderRadius: "5px",
-                                                  border: "none",
-                                                  padding: "5px 10px",
-                                                  width: "100%",
-                                                  fontSize: ".75rem",
-                                                  lineHeight: "1.7rem",
-                                                }}
-                                                onClick={(e) => {
-                                                  e.preventDefault();
-                                                  handleShowSamunnatiPaymentProof();
+                                                  width: "20%",
                                                 }}
                                               >
-                                                View
+                                                Back
                                               </button>
                                             </div>
-                                          </div>
-                                          <div className="row m-2">
-                                            <div className="col-md-6">
-                                              <label className="form-label">
-                                                Interest Rate (%)
-                                              </label>
+                                            <div>
+                                              <Modal
+                                                show={showSamunnatiPaymentProof}
+                                                onHide={handleCloseSamunnatiPaymentProof}
+                                              >
+                                                <Modal.Header closeButton>Samunnati Payment Proof</Modal.Header>
+                                                <Modal.Body>
+                                                  <img src={logo} alt="Samunnati Payment Proof" style={{ width: "100%", height: "100%" }} />
+                                                </Modal.Body>
+                                              </Modal>
                                             </div>
-                                            <div className="col-md-6">
-                                              <input
-                                                type="number"
-                                                className="form-control"
-                                                value={12}
-                                                disabled
-                                              />
-                                            </div>
-                                          </div>
-                                          <div className="row m-2">
-                                            <div className="col-md-6">
-                                              <label className="form-label">
-                                                Amount (in Rs.)
-                                              </label>
-                                            </div>
-                                            <div className="col-md-6">
-                                              <input
-                                                type="number"
-                                                className="form-control"
-                                                value={100000}
-                                                disabled
-                                              />
-                                            </div>
-                                          </div>
-                                          <div className="row m-2">
-                                            <div className="col-md-6">
-                                              <label className="form-label">
-                                                Tenure (in months)
-                                              </label>
-                                            </div>
-                                            <div className="col-md-6">
-                                              <input
-                                                type="number"
-                                                className="form-control"
-                                                value={12}
-                                                disabled
-                                              />
-                                            </div>
-                                          </div>
-                                          <div className="row m-2">
-                                            <button
-                                              className="btn btn-success"
-                                              onClick={() => setStep((p) => p - 1)}
-                                              style={{
-                                                marginTop: "1rem",
-                                                backgroundColor: "#064420",
-                                                width: "20%",
-                                              }}
-                                            >
-                                              Back
-                                            </button>
-                                          </div>
-                                          <div>
-                                            <Modal
-                                              show={showSamunnatiPaymentProof}
-                                              onHide={handleCloseSamunnatiPaymentProof}
-                                            >
-                                              <Modal.Header closeButton>Samunnati Payment Proof</Modal.Header>
-                                              <Modal.Body>
-                                                <img src={logo} alt="Samunnati Payment Proof" style={{ width: "100%", height: "100%"}} />
-                                              </Modal.Body>
-                                            </Modal>
                                           </div>
                                         </div>
-                                      </div>
-                                    </form>
+                                      </form>
+                                    </div>
                                   </div>
-                                </div>
-                              )
-                            }
+                                )
+                              }
                             </Modal.Body>
                           </Modal>
                         </div>
@@ -3098,20 +3097,20 @@ const Loan = () => {
                                             <div className="col-lg-12">
                                               {(("Create" && step < 6) ||
                                                 ("Create" && step < 5)) && (
-                                                <button
-                                                  className="btn btn-success"
-                                                  onClick={() => setStep((p) => p + 1)}
-                                                  style={{
-                                                    marginTop: "20px",
-                                                    backgroundColor: "#064420",
-                                                    width: "20%",
-                                                    position: "relative",
-                                                    float: "right",
-                                                  }}
-                                                >
-                                                  Next
-                                                </button>
-                                              )}
+                                                  <button
+                                                    className="btn btn-success"
+                                                    onClick={() => setStep((p) => p + 1)}
+                                                    style={{
+                                                      marginTop: "20px",
+                                                      backgroundColor: "#064420",
+                                                      width: "20%",
+                                                      position: "relative",
+                                                      float: "right",
+                                                    }}
+                                                  >
+                                                    Next
+                                                  </button>
+                                                )}
                                             </div>
                                           </div>
                                         </div>
@@ -3249,20 +3248,20 @@ const Loan = () => {
                                           )}
                                           {(("Create" && step < 6) ||
                                             ("Create" && step < 5)) && (
-                                            <button
-                                              className="btn btn-success"
-                                              onClick={() => setStep((p) => p + 1)}
-                                              style={{
-                                                marginTop: "1rem",
-                                                backgroundColor: "#064420",
-                                                width: "20%",
-                                                position: "relative",
-                                                float: "right",
-                                              }}
-                                            >
-                                              Next
-                                            </button>
-                                          )}
+                                              <button
+                                                className="btn btn-success"
+                                                onClick={() => setStep((p) => p + 1)}
+                                                style={{
+                                                  marginTop: "1rem",
+                                                  backgroundColor: "#064420",
+                                                  width: "20%",
+                                                  position: "relative",
+                                                  float: "right",
+                                                }}
+                                              >
+                                                Next
+                                              </button>
+                                            )}
                                         </div>
                                       </div>
                                     </label>
@@ -3275,7 +3274,7 @@ const Loan = () => {
                                   >
                                     <Modal.Header closeButton>Aadhar Card</Modal.Header>
                                     <Modal.Body>
-                                      <img src={logo} alt="Aadhar Card" style={{ width: "100%", height: "100%"}} />
+                                      <img src={logo} alt="Aadhar Card" style={{ width: "100%", height: "100%" }} />
                                     </Modal.Body>
                                   </Modal>
                                   <Modal
@@ -3284,7 +3283,7 @@ const Loan = () => {
                                   >
                                     <Modal.Header closeButton>PAN Card</Modal.Header>
                                     <Modal.Body>
-                                      <img src={logo} alt="PAN Card" style={{ width: "100%", height: "100%"}} />
+                                      <img src={logo} alt="PAN Card" style={{ width: "100%", height: "100%" }} />
                                     </Modal.Body>
                                   </Modal>
                                 </div>
@@ -3383,20 +3382,20 @@ const Loan = () => {
                                             )}
                                             {(("Create" && step < 6) ||
                                               ("Create" && step < 5)) && (
-                                              <button
-                                                className="btn btn-success"
-                                                onClick={() => setStep((p) => p + 1)}
-                                                style={{
-                                                  marginTop: "1rem",
-                                                  backgroundColor: "#064420",
-                                                  width: "20%",
-                                                  position: "relative",
-                                                  float: "right",
-                                                }}
-                                              >
-                                                Next
-                                              </button>
-                                            )}
+                                                <button
+                                                  className="btn btn-success"
+                                                  onClick={() => setStep((p) => p + 1)}
+                                                  style={{
+                                                    marginTop: "1rem",
+                                                    backgroundColor: "#064420",
+                                                    width: "20%",
+                                                    position: "relative",
+                                                    float: "right",
+                                                  }}
+                                                >
+                                                  Next
+                                                </button>
+                                              )}
                                           </div>
                                         </div>
                                       </label>
@@ -3498,20 +3497,20 @@ const Loan = () => {
                                             )}
                                             {(("Create" && step < 6) ||
                                               ("Create" && step < 5)) && (
-                                              <button
-                                                className="btn btn-success"
-                                                onClick={() => setStep((p) => p + 1)}
-                                                style={{
-                                                  marginTop: "1rem",
-                                                  backgroundColor: "#064420",
-                                                  width: "20%",
-                                                  position: "relative",
-                                                  float: "right",
-                                                }}
-                                              >
-                                                Next
-                                              </button>
-                                            )}
+                                                <button
+                                                  className="btn btn-success"
+                                                  onClick={() => setStep((p) => p + 1)}
+                                                  style={{
+                                                    marginTop: "1rem",
+                                                    backgroundColor: "#064420",
+                                                    width: "20%",
+                                                    position: "relative",
+                                                    float: "right",
+                                                  }}
+                                                >
+                                                  Next
+                                                </button>
+                                              )}
                                           </div>
                                         </div>
                                       </label>

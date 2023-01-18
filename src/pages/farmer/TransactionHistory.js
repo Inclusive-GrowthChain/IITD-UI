@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import "./Dashboard.css";
+import { useState } from "react";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 
@@ -9,13 +8,8 @@ import SecondTab from "./AllTabs/SecondTab";
 const TransactionHistory = () => {
   const [activeTab, setActiveTab] = useState("tab1");
 
-  const handleTab1 = () => {
-    setActiveTab("tab1");
-  };
-
-  const handleTab2 = () => {
-    setActiveTab("tab2");
-  };
+  const handleTab1 = () => setActiveTab("tab1")
+  const handleTab2 = () => setActiveTab("tab2")
 
   return (
     <div className="farmer">

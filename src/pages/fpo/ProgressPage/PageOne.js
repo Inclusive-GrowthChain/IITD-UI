@@ -1,44 +1,12 @@
-import React from "react";
-// import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const PageOne = ({ onButtonClick }) => {
-  // const [edit, setEdit] = useState(false);
-  // const [canEdit, setCanEdit] = useState(false);
-
-  // const handleEdit = (e) => {
-  //   e.preventDefault();
-  //   setEdit(true);
-  // }
-
-  // useEffect(() => {
-  //   if (bid) {
-  //     bid.endDate > new Date().toISOString().split("T")[0] ? setCanEdit(true) : setCanEdit(false);
-  //   }
-  // }, [bid]);
-
   return (
     <main
       className="pt5 black-80 center"
       style={{ maxWidth: "100%", margin: "auto" }}
     >
       <form className="measure">
-        {/* {
-          canEdit && (
-            <div style={{
-              position: "relative",
-              float: "right",
-              right: "18px",
-              top: "-3rem",
-              }}>
-            <button 
-              onClick={handleEdit}
-              style={{backgroundColor: 'white'}}>
-              <EditIcon />
-            </button>
-          </div>
-          )
-        } */}
         <div
           style={{
             position: "relative",
@@ -53,7 +21,6 @@ const PageOne = ({ onButtonClick }) => {
               onButtonClick("pagetwo")
             }}
             style={{ backgroundColor: "white" }}
-          // disabled=""
           >
             <ArrowForwardIosIcon />
           </button>

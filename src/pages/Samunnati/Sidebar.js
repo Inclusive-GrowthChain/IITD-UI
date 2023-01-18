@@ -1,7 +1,4 @@
 import { Link } from "react-router-dom";
-// import DashboardIcon from "@mui/icons-material/Dashboard";
-// import FileCopyOutlinedIcon from '@mui/icons-material/FileCopyOutlined';
-// import ScienceTwoToneIcon from '@mui/icons-material/ScienceTwoTone';
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import logo from "../../assets/img/logo.png";
 import Badge from '@mui/material/Badge';

@@ -2,9 +2,7 @@ import React, { useState } from "react"
 import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone"
 import { NavLink } from "react-router-dom"
 import Modal from "react-bootstrap/Modal"
-
 import logo from "../../../assets/img/logo.png"
-import "../style.css"
 
 const approvedMembershipList = [
   {

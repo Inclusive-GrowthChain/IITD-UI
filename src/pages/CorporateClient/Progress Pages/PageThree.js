@@ -1,31 +1,30 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState } from "react";
 import logo from "../../../assets/img/logo.png";
 import Modal from "react-bootstrap/Modal";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-const PageThree = ({onButtonClick}) => {
+const fpo = {
+  id: 1,
+  amount: 100000,
+  name: "FPO 1",
+  village: "Village 1",
+  phoneNumber: "1234567890",
+  reportsReqd: [
+    {
+      reportName: "Chowri",
+      reportReqd: true,
+    },
+    {
+      reportName: "Panna",
+      reportReqd: true,
+    },
+  ],
+};
+
+const PageThree = ({ onButtonClick }) => {
   const [showReport, setShowReport] = useState(false);
   const [currentReport, setCurrentReport] = useState({});
-
-  const fpo = {
-    id: 1,
-    amount: 100000,
-    name: "FPO 1",
-    village: "Village 1",
-    phoneNumber: "1234567890",
-    reportsReqd: [        
-      {
-        reportName: "Chowri",
-        reportReqd: true,
-      },
-      {
-        reportName: "Panna",
-        reportReqd: true,
-      },
-    ],
-  };
 
   const handleShowReport = () => setShowReport(true);
   const handleCloseReport = () => setShowReport(false);
@@ -36,7 +35,7 @@ const PageThree = ({onButtonClick}) => {
       style={{ maxWidth: "100%", margin: "auto" }}
     >
       <form className="measure">
-      <div>
+        <div>
           <h5
             className="mt-5"
             style={{
@@ -49,16 +48,16 @@ const PageThree = ({onButtonClick}) => {
             Verify Test Certificate
           </h5>
         </div>
-        <div className="form" style={{marginTop: '3%'}}>
+        <div className="form" style={{ marginTop: '3%' }}>
           <div style={{
             position: "relative",
             float: "left",
             left: "-0.781rem",
             top: "7rem",
-            }}>
+          }}>
             <button
               onClick={() => onButtonClick("pagetwo")}
-              style={{backgroundColor: 'white'}}
+              style={{ backgroundColor: 'white' }}
             >
               <ArrowBackIosIcon />
             </button>
@@ -68,26 +67,26 @@ const PageThree = ({onButtonClick}) => {
             float: "right",
             right: "-0.781rem",
             top: "7rem",
-            }}>
+          }}>
             <button
               onClick={() => onButtonClick("pagefour")}
-              style={{backgroundColor: 'white'}}
-              // disabled={!orderPlaced}
+              style={{ backgroundColor: 'white' }}
+            // disabled={!orderPlaced}
             >
               <ArrowForwardIosIcon />
             </button>
           </div>
           <div className="row m-2">
-            <div className="col-lg-6" style={{marginLeft: '-2.5%'}}>
+            <div className="col-lg-6" style={{ marginLeft: '-2.5%' }}>
               <label>FPO ID</label>
             </div>
-            <div className="col-lg-6" style={{marginLeft: '2.5%'}}>
-              <input 
-                className="form-control" 
-                type="text" 
+            <div className="col-lg-6" style={{ marginLeft: '2.5%' }}>
+              <input
+                className="form-control"
+                type="text"
                 disabled={true}
                 value={fpo.id}
-                style={{width: '105%'}}
+                style={{ width: '105%' }}
               />
             </div>
           </div>
@@ -96,9 +95,9 @@ const PageThree = ({onButtonClick}) => {
               <label>FPO Name</label>
             </div>
             <div className="col-lg-6">
-              <input 
-                className="form-control" 
-                type="text" 
+              <input
+                className="form-control"
+                type="text"
                 disabled={true}
                 value={fpo.name}
               />
@@ -109,9 +108,9 @@ const PageThree = ({onButtonClick}) => {
               <label>FPO Phone Number</label>
             </div>
             <div className="col-lg-6">
-              <input 
-                className="form-control" 
-                type="text" 
+              <input
+                className="form-control"
+                type="text"
                 disabled={true}
                 value={fpo.phoneNumber}
               />
@@ -122,9 +121,9 @@ const PageThree = ({onButtonClick}) => {
               <label>Bid Amount</label>
             </div>
             <div className="col-lg-6">
-              <input 
-                className="form-control" 
-                type="text" 
+              <input
+                className="form-control"
+                type="text"
                 disabled={true}
                 value={fpo.amount}
               />
@@ -163,40 +162,19 @@ const PageThree = ({onButtonClick}) => {
               )
             ))
           }
-          <div>
-            <Modal show={showReport} onHide={handleCloseReport}>
-              <Modal.Header closeButton>{currentReport.reportName} Report</Modal.Header>
-              <Modal.Body>
-                <img
-                  src={logo}
-                  alt="Payment Image"
-                  style={{ width: "100%", height: "100%" }}
-                />
-              </Modal.Body>
-            </Modal>
-          </div>
-          {/* <div className="row m-2">
-            <div className="col-lg-6">
-              <button 
-                className="btn btn-success" 
-                style={{marginTop: '5rem', backgroundColor: '#064420'}}
-                onClick={() => onButtonClick("pagetwo")}
-              >
-                Back
-              </button>
-            </div>
-            <div className="col-lg-6" style={{display: "flex", justifyContent: "flex-end"}}>
-              <button 
-                className="btn btn-success" 
-                style={{marginTop: '5rem', backgroundColor: '#064420'}}
-                onClick={() => onButtonClick("pagefour")}
-              >
-                Next
-              </button>
-            </div>
-          </div> */}
         </div>
       </form>
+
+      <Modal show={showReport} onHide={handleCloseReport}>
+        <Modal.Header closeButton>{currentReport.reportName} Report</Modal.Header>
+        <Modal.Body>
+          <img
+            src={logo}
+            alt="Payment"
+            style={{ width: "100%", height: "100%" }}
+          />
+        </Modal.Body>
+      </Modal>
     </main>
   );
 };

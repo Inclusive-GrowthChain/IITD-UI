@@ -1,7 +1,5 @@
-import React from "react";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import "./styles.css";
 
 const Supports = () => {
   return (

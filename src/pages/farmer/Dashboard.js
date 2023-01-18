@@ -1,6 +1,5 @@
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import "./Dashboard.css";
 
 import ImageSlider from "./SliderImage/ImageSlider";
 import { SliderData } from "./SliderImage/SliderData";

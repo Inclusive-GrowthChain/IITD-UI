@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
-import "./style.css";
 import Modal from "react-bootstrap/Modal";
 import StoreModal from "./Modal/StoreModal";
 
@@ -38,7 +37,7 @@ const FpoStore = () => {
                       <div className="col">
                         <form>
                           <div className="p-2">
-                          <div className="row m-2">
+                            <div className="row m-2">
                               <div className="col-lg-6">
                                 <label>Item ID</label>
                               </div>
@@ -119,7 +118,7 @@ const FpoStore = () => {
                               </div>
                             </div>
                             <div className="row m-2">
-                              <button className="btn btn-success" style={{backgroundColor: "#064420"}}>
+                              <button className="btn btn-success" style={{ backgroundColor: "#064420" }}>
                                 Submit
                               </button>
                             </div>
