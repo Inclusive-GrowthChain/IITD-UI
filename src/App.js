@@ -5,12 +5,12 @@ import Loader from './comp/Common/Loader';
 const Register = lazy(() => import("./components/Auth/Register"))
 const Login = lazy(() => import("./components/Auth/Login"))
 
-const TransactionHistory = lazy(() => import("./pages/farmer/TransactionHistory"))
-const TrainingUpdate = lazy(() => import("./pages/farmer/TrainingUpdate"))
-const CropAdvisory2 = lazy(() => import("./pages/farmer/CropAdvisory2"))
+const FarmerTransactionHistory = lazy(() => import("./comp/Farmer/TransactionHistory"))
+const FarmerTrainingUpdate = lazy(() => import("./comp/Farmer//TrainingUpdate"))
+const FarmerCropAdvisory2 = lazy(() => import("./comp/Farmer/CropAdvisory2"))
+const FarmerDashboard = lazy(() => import("./comp/Farmer/DashBoard"))
 const SellingPrice = lazy(() => import("./pages/farmer/SellingPrice"))
 const CropAdvisory = lazy(() => import("./pages/farmer/CropAdvisory"))
-const Dashboard = lazy(() => import("./pages/farmer/Dashboard"))
 const Settings = lazy(() => import("./pages/farmer/Settings"))
 const Support = lazy(() => import("./pages/farmer/Support"))
 const Store = lazy(() => import("./pages/farmer/Store"))
@@ -70,17 +70,20 @@ function App() {
         <Route path="signup" element={<Register />} />
 
         {/* farmer route */}
-        <Route path="farmer" element={<FarmerWrapper />} />
-        <Route path="/farmer/dashboard" element={<Dashboard />} />
+        <Route path="farmer" element={<FarmerWrapper />}>
+          <Route path="transaction-history" element={<FarmerTransactionHistory />} />
+          <Route path="crop-advisory2" element={<FarmerCropAdvisory2 />} />
+          <Route path="training" element={<FarmerTrainingUpdate />} />
+          <Route path="dashboard" element={<FarmerDashboard />} />
+        </Route>
+
         <Route path="/farmer/loan" element={<Loan />} />
         <Route path="/farmer/store" element={<Store />} />
         <Route path="/farmer/selling-price" element={<SellingPrice />} />
-        <Route path="/farmer/transaction-history" element={<TransactionHistory />} />
         <Route path="/farmer/settings" element={<Settings />} />
         <Route path="/farmer/support" element={<Support />} />
         <Route path="/farmer/crop-advisory" element={<CropAdvisory />} />
-        <Route path="/farmer/training" element={<TrainingUpdate />} />
-        <Route path="/farmer/crop-advisory2" element={<CropAdvisory2 />} />
+
 
         {/* FPO route */}
         <Route path="fpo" element={<FpoWrapper />} />
