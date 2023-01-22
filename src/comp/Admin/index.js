@@ -19,7 +19,7 @@ const list = [
   {
     title: "IINRG",
     icon: <CreditScoreIcon className="icon" />,
-    to: '/admin/iinrg'
+    to: '/admin/nisa'
   },
   {
     title: "Samunnati",

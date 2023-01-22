@@ -5,15 +5,15 @@ import Loader from './comp/Common/Loader';
 const Register = lazy(() => import("./components/Auth/Register"))
 const Login = lazy(() => import("./components/Auth/Login"))
 
+const TemplateSupport = lazy(() => import("./comp/Template/Support"))
+
 const FarmerTransactionHistory = lazy(() => import("./comp/Farmer/TransactionHistory"))
 const FarmerTrainingUpdate = lazy(() => import("./comp/Farmer//TrainingUpdate"))
 const FarmerCropAdvisory2 = lazy(() => import("./comp/Farmer/CropAdvisory2"))
+const FarmerSellingPrice = lazy(() => import("./comp/Farmer/SellingPrice"))
 const FarmerDashboard = lazy(() => import("./comp/Farmer/DashBoard"))
-const SellingPrice = lazy(() => import("./pages/farmer/SellingPrice"))
-const CropAdvisory = lazy(() => import("./pages/farmer/CropAdvisory"))
-const Settings = lazy(() => import("./pages/farmer/Settings"))
-const Support = lazy(() => import("./pages/farmer/Support"))
-const Store = lazy(() => import("./pages/farmer/Store"))
+const FarmerSettings = lazy(() => import("./comp/Farmer/Settings"))
+const FarmerStore = lazy(() => import("./comp/Farmer/Store"))
 const Loan = lazy(() => import("./pages/farmer/Loan"))
 const FarmerWrapper = lazy(() => import("./comp/Farmer"))
 
@@ -30,19 +30,18 @@ const FpoLoan = lazy(() => import("./pages/fpo/FpoLoan"))
 const Setting = lazy(() => import("./pages/fpo/Setting"))
 const FpoWrapper = lazy(() => import("./comp/Fpo"))
 
-const CorporateClient = lazy(() => import("./pages/Admin/CorporateClient"))
-const AdminDashboard = lazy(() => import("./pages/Admin/AdminDashboard"))
-const Samunnati = lazy(() => import("./pages/Admin/Samunnati"))
-const Farmer = lazy(() => import("./pages/Admin/Farmer"))
-const NISA = lazy(() => import("./pages/Admin/NISA"))
-const FPO = lazy(() => import("./pages/Admin/FPO"))
+const AdminCorporateClient = lazy(() => import("./comp/Admin/CorporateClient"))
+const AdminDashboard = lazy(() => import("./comp/Admin/Dashboard"))
+const AdminSamunnati = lazy(() => import("./comp/Admin/Samunnati"))
+const AdminFarmer = lazy(() => import("./comp/Admin/Farmer"))
+const AdminNISA = lazy(() => import("./comp/Admin/NISA"))
+const AdminFPO = lazy(() => import("./comp/Admin/FPO"))
 const AdminWrapper = lazy(() => import("./comp/Admin"))
 
-const NISATrainingUpdate = lazy(() => import("./pages/NISA/TrainingUpdate"))
-const NISACropAdvisory = lazy(() => import("./pages/NISA/CropAdvisory"))
+const NisaTrainingUpdate = lazy(() => import("./comp/Nisa/TrainingUpdate"))
+const NisaCropAdvisory = lazy(() => import("./comp/Nisa/CropAdvisory"))
 const NISALabTesting = lazy(() => import("./pages/NISA/LabTesting"))
-const NISASettings = lazy(() => import("./pages/NISA/Settings"))
-const NISASupport = lazy(() => import("./pages/NISA/Supports"))
+const NisaSettings = lazy(() => import("./comp/Nisa/Settings"))
 const NisaWrapper = lazy(() => import("./comp/Nisa"))
 
 const SammunatiFarmerSubLoanPage = lazy(() => import("./pages/Samunnati/FarmerSubLoanPage"))
@@ -55,9 +54,8 @@ const SammunatiFPOPage = lazy(() => import("./pages/Samunnati/FpoPage"))
 const SammunatiSupport = lazy(() => import("./pages/Samunnati/Support"))
 const SamunnatiWrapper = lazy(() => import("./comp/Samunnati"))
 
-const CorporateClientLacBidding = lazy(() => import("./pages/CorporateClient/CCLACBid"))
-const CorporateClientSettings = lazy(() => import("./pages/CorporateClient/Settings"))
-const CorporateSupport = lazy(() => import("./pages/CorporateClient/Support"))
+const CorporateClientLacBidding = lazy(() => import("./comp/CorporateClient/Bidding"))
+const CorporateClientSettings = lazy(() => import("./comp/CorporateClient/Settings"))
 const CorporateClientWrapper = lazy(() => import("./comp/CorporateClient"))
 
 
@@ -73,16 +71,15 @@ function App() {
         <Route path="farmer" element={<FarmerWrapper />}>
           <Route path="transaction-history" element={<FarmerTransactionHistory />} />
           <Route path="crop-advisory2" element={<FarmerCropAdvisory2 />} />
+          <Route path="selling-price" element={<FarmerSellingPrice />} />
           <Route path="training" element={<FarmerTrainingUpdate />} />
           <Route path="dashboard" element={<FarmerDashboard />} />
+          <Route path="settings" element={<FarmerSettings />} />
+          <Route path="support" element={<TemplateSupport />} />
+          <Route path="store" element={<FarmerStore />} />
         </Route>
 
         <Route path="/farmer/loan" element={<Loan />} />
-        <Route path="/farmer/store" element={<Store />} />
-        <Route path="/farmer/selling-price" element={<SellingPrice />} />
-        <Route path="/farmer/settings" element={<Settings />} />
-        <Route path="/farmer/support" element={<Support />} />
-        <Route path="/farmer/crop-advisory" element={<CropAdvisory />} />
 
 
         {/* FPO route */}
@@ -99,22 +96,28 @@ function App() {
         <Route path="/fpo/support" element={<Supports />} />
         <Route path="/fpo/settings" element={<Setting />} />
 
+
         {/* Admin route */}
-        <Route path="admin" element={<AdminWrapper />} />
-        <Route path="/admin/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/farmer" element={<Farmer />} />
-        <Route path="/admin/fpo" element={<FPO />} />
-        <Route path="/admin/nisa" element={<NISA />} />
-        <Route path="/admin/samunnati" element={<Samunnati />} />
-        <Route path="/admin/corporate-client" element={<CorporateClient />} />
+        <Route path="admin" element={<AdminWrapper />}>
+          <Route path="corporate-client" element={<AdminCorporateClient />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="samunnati" element={<AdminSamunnati />} />
+          <Route path="farmer" element={<AdminFarmer />} />
+          <Route path="nisa" element={<AdminNISA />} />
+          <Route path="fpo" element={<AdminFPO />} />
+        </Route>
+
 
         {/* NISA route */}
-        <Route path="nisa" element={<NisaWrapper />} />
-        <Route path="/nisa/crop-advisory" element={<NISACropAdvisory />} />
-        <Route path="/nisa/training" element={<NISATrainingUpdate />} />
+        <Route path="nisa" element={<NisaWrapper />}>
+          <Route path="crop-advisory" element={<NisaCropAdvisory />} />
+          <Route path="training" element={<NisaTrainingUpdate />} />
+          <Route path="settings" element={<NisaSettings />} />
+          <Route path="support" element={<TemplateSupport />} />
+        </Route>
+
         <Route path="/nisa/lab-testing" element={<NISALabTesting />} />
-        <Route path="/nisa/support" element={<NISASupport />} />
-        <Route path="/nisa/settings" element={<NISASettings />} />
+
 
         {/* Samunnati route */}
         <Route path="samunnati" element={<SamunnatiWrapper />} />
@@ -127,14 +130,16 @@ function App() {
         <Route path="/samunnati/samunnati-support" element={<SammunatiSupport />} />
         <Route path="/samunnati/samunnati-settings" element={<SammunatiSettings />} />
 
+
         {/* Corporate Client route */}
-        <Route path="corporate-client" element={<CorporateClientWrapper />} />
-        <Route path="/corporate-client/lac-bidding" element={<CorporateClientLacBidding />} />
-        <Route path="/corporate-client/support" element={<CorporateSupport />} />
-        <Route path="/corporate-client/settings" element={<CorporateClientSettings />} />
+        <Route path="corporate-client" element={<CorporateClientWrapper />}>
+          <Route path="lac-bidding" element={<CorporateClientLacBidding />} />
+          <Route path="settings" element={<CorporateClientSettings />} />
+          <Route path="support" element={<TemplateSupport />} />
+        </Route>
       </Routes>
     </Suspense>
-  );
+  )
 }
 
-export default App;
+export default App
