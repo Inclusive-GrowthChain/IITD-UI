@@ -77,9 +77,8 @@ function App() {
           <Route path="settings" element={<FarmerSettings />} />
           <Route path="support" element={<TemplateSupport />} />
           <Route path="store" element={<FarmerStore />} />
+          <Route path="loan" element={<Loan />} />
         </Route>
-
-        <Route path="/farmer/loan" element={<Loan />} />
 
 
         {/* FPO route */}
