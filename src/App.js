@@ -2,8 +2,8 @@ import { lazy, Suspense } from 'react';
 import { Route, Routes } from "react-router-dom";
 import Loader from './comp/Common/Loader';
 
-const Register = lazy(() => import("./components/Auth/Register"))
-const Login = lazy(() => import("./components/Auth/Login"))
+const Register = lazy(() => import("./comp/Auth/Register"))
+const Login = lazy(() => import("./comp/Auth/Login"))
 
 const TemplateSupport = lazy(() => import("./comp/Template/Support"))
 
