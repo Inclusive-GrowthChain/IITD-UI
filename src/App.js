@@ -14,7 +14,7 @@ const FarmerSellingPrice = lazy(() => import("./comp/Farmer/SellingPrice"))
 const FarmerDashboard = lazy(() => import("./comp/Farmer/DashBoard"))
 const FarmerSettings = lazy(() => import("./comp/Farmer/Settings"))
 const FarmerStore = lazy(() => import("./comp/Farmer/Store"))
-const Loan = lazy(() => import("./pages/farmer/Loan"))
+const FarmerLoan = lazy(() => import("./comp/Farmer/Loan"))
 const FarmerWrapper = lazy(() => import("./comp/Farmer"))
 
 const FarmerInformation = lazy(() => import("./pages/fpo/FarmerInformation"))
@@ -23,7 +23,7 @@ const LacProcurement = lazy(() => import("./pages/fpo/LacProcurement"))
 const FpoDashboard = lazy(() => import("./pages/fpo/FpoDashboard"))
 const FarmerPage = lazy(() => import("./pages/fpo/FarmerPage"))
 const LabTesting = lazy(() => import("./pages/fpo/LabTesting"))
-const FarmerLoan = lazy(() => import("./pages/fpo/FarmerLoan"))
+const FpoFarmerLoan = lazy(() => import("./pages/fpo/FarmerLoan"))
 const FpoStore = lazy(() => import("./pages/fpo/FpoStore"))
 const Supports = lazy(() => import("./pages/fpo/Supports"))
 const FpoLoan = lazy(() => import("./pages/fpo/FpoLoan"))
@@ -40,7 +40,7 @@ const AdminWrapper = lazy(() => import("./comp/Admin"))
 
 const NisaTrainingUpdate = lazy(() => import("./comp/Nisa/TrainingUpdate"))
 const NisaCropAdvisory = lazy(() => import("./comp/Nisa/CropAdvisory"))
-const NISALabTesting = lazy(() => import("./pages/NISA/LabTesting"))
+const NisaLabTesting = lazy(() => import("./comp/Nisa/LabTesting"))
 const NisaSettings = lazy(() => import("./comp/Nisa/Settings"))
 const NisaWrapper = lazy(() => import("./comp/Nisa"))
 
@@ -77,7 +77,7 @@ function App() {
           <Route path="settings" element={<FarmerSettings />} />
           <Route path="support" element={<TemplateSupport />} />
           <Route path="store" element={<FarmerStore />} />
-          <Route path="loan" element={<Loan />} />
+          <Route path="loan" element={<FarmerLoan />} />
         </Route>
 
 
@@ -89,7 +89,7 @@ function App() {
         <Route path="/fpo/fpo-store" element={<FpoStore />} />
         <Route path="/fpo/lac-procurement" element={<LacProcurement />} />
         <Route path="/fpo/labtesting" element={<LabTesting />} />
-        <Route path="/fpo/farmerloan" element={<FarmerLoan />} />
+        <Route path="/fpo/farmerloan" element={<FpoFarmerLoan />} />
         <Route path="/fpo/fpoloan" element={<FpoLoan />} />
         <Route path="/fpo/corporate-customer" element={<CorporateCustomer />} />
         <Route path="/fpo/support" element={<Supports />} />
@@ -110,12 +110,11 @@ function App() {
         {/* NISA route */}
         <Route path="nisa" element={<NisaWrapper />}>
           <Route path="crop-advisory" element={<NisaCropAdvisory />} />
+          <Route path="lab-testing" element={<NisaLabTesting />} />
           <Route path="training" element={<NisaTrainingUpdate />} />
           <Route path="settings" element={<NisaSettings />} />
           <Route path="support" element={<TemplateSupport />} />
         </Route>
-
-        <Route path="/nisa/lab-testing" element={<NISALabTesting />} />
 
 
         {/* Samunnati route */}
