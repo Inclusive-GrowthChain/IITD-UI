@@ -17,11 +17,11 @@ const FarmerStore = lazy(() => import("./comp/Farmer/Store"))
 const FarmerLoan = lazy(() => import("./comp/Farmer/Loan"))
 const FarmerWrapper = lazy(() => import("./comp/Farmer"))
 
-const FarmerInformation = lazy(() => import("./pages/fpo/FarmerInformation"))
+const FpoFarmerInfo = lazy(() => import("./comp/Fpo/FarmerInfo"))
 const CorporateCustomer = lazy(() => import("./pages/fpo/CorporateCustomer"))
 const LacProcurement = lazy(() => import("./pages/fpo/LacProcurement"))
-const FpoDashboard = lazy(() => import("./pages/fpo/FpoDashboard"))
-const FarmerPage = lazy(() => import("./pages/fpo/FarmerPage"))
+const FpoDashboard = lazy(() => import("./comp/Fpo/Dashboard"))
+const FpoFarmer = lazy(() => import("./comp/Fpo/Farmer"))
 const LabTesting = lazy(() => import("./pages/fpo/LabTesting"))
 const FpoFarmerLoan = lazy(() => import("./pages/fpo/FarmerLoan"))
 const FpoStore = lazy(() => import("./pages/fpo/FpoStore"))
@@ -82,10 +82,12 @@ function App() {
 
 
         {/* FPO route */}
-        <Route path="fpo" element={<FpoWrapper />} />
-        <Route path="/fpo/dashboard" element={<FpoDashboard />} />
-        <Route path="/fpo/farmer" element={<FarmerPage />} />
-        <Route path="/fpo/farmer-information" element={<FarmerInformation />} />
+        <Route path="fpo" element={<FpoWrapper />}>
+          <Route path="farmer-information" element={<FpoFarmerInfo />} />
+          <Route path="dashboard" element={<FpoDashboard />} />
+          <Route path="farmer" element={<FpoFarmer />} />
+        </Route>
+
         <Route path="/fpo/fpo-store" element={<FpoStore />} />
         <Route path="/fpo/lac-procurement" element={<LacProcurement />} />
         <Route path="/fpo/labtesting" element={<LabTesting />} />
