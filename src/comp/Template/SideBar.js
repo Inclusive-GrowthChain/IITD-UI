@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 function SideBar({ list = [] }) {
   return (
-    <div className="sidebar_wrapper">
+    <div className="sidebar_wrapper app-sidebar">
       <div className="sidebar_content">
         <ul>
           {

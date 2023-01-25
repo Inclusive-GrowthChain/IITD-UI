@@ -4,16 +4,10 @@ import Nav from "./Nav";
 
 function AppWrapper({ title = "", list = [] }) {
   return (
-    <div className="App">
-      <div className="farmer">
-        <SideBar list={list} />
-
-        <div className="farmerContainer">
-          <Nav title={title} />
-
-          <Outlet />
-        </div>
-      </div>
+    <div className="app-wrapper">
+      <Nav title={title} />
+      <SideBar list={list} />
+      <Outlet />
     </div>
   )
 }

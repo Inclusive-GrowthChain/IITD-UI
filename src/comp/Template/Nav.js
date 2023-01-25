@@ -15,7 +15,7 @@ function Nav({ title }) {
   }
 
   return (
-    <div className="navbar_wrapper">
+    <div className="navbar_wrapper app-nav">
       <div className="logo_img">
         <img src={logo} alt="logo" style={{ width: "35px", height: "35px" }} />
         <span>{title}</span>

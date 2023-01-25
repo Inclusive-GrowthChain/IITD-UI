@@ -1,0 +1,25 @@
+.app-wrapper {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "nav nav"
+    "sidebar content"
+  ;
+
+  overflow: hidden;
+  height: 100vh;
+}
+
+.app-nav {
+  grid-area: nav;
+}
+
+.app-sidebar {
+  grid-area: sidebar;
+}
+
+.app-wrapper>*:nth-child(3) {
+  grid-area: content;
+  overflow: auto;
+}
