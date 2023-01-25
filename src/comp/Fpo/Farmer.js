@@ -2,10 +2,89 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import SearchTwoToneIcon from "@mui/icons-material/SearchTwoTone";
 
-import ApplicationDetails from "./Modals/Farmer/ApplicationDetails";
+import ApplicationDetails from "./Modals/ApplicationDetails";
 import Submited from "./Modals/Submited";
 import Aadhar from "./Modals/Aadhar";
 import Pan from "./Modals/Pan";
+
+const approvedMembershipList = [
+  {
+    loanId: 1,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+  {
+    loanId: 3,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+  {
+    loanId: 4,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+  {
+    loanId: 8,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+  {
+    loanId: 9,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+]
+
+const rejectedMembershipList = [
+  {
+    loanId: 5,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+  {
+    loanId: 7,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+  {
+    loanI: 10,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+]
+
+const pendingMembershipList = [
+  {
+    loanId: 2,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+  {
+    loanId: 6,
+    farmerName: "Farmer 1",
+    village: "Hyderabad",
+    contact: "1234567890",
+    aadhaar: "12345XXXXX",
+  },
+]
 
 function Farmer() {
   const [showLoanApplicationDetails, setShowLoanApplicationDetails] = useState(false)

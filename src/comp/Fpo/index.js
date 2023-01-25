@@ -22,7 +22,7 @@ const list = [
   {
     title: "FPO Store",
     icon: <LocalGroceryStoreTwoToneIcon className="icon" />,
-    to: '/fpo/fpo-store'
+    to: '/fpo/store'
   },
   {
     title: "Lac Procurement",

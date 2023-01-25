@@ -1,4 +1,5 @@
 import Modal from "react-bootstrap/Modal";
+import logo from "../../../../assets/img/logo.png";
 
 function Img({ showImg, handleCloseImg }) {
   return (

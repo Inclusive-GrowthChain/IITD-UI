@@ -2,7 +2,7 @@ import { useState } from "react";
 import HighlightOffTwoToneIcon from "@mui/icons-material/HighlightOffTwoTone";
 import Modal from "react-bootstrap/Modal";
 
-function SaleHistory({ showAddSale, handleCloseAddSale, handleShowConfirmSale }) {
+function SaleHistory({ showAddSale, handleCloseAddSale, handleShowAddSale, handleShowConfirmSale }) {
   const [noOfSaleRows, setNoOfSaleRows] = useState(1)
 
   return (

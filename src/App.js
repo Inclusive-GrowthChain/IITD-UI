@@ -17,17 +17,17 @@ const FarmerStore = lazy(() => import("./comp/Farmer/Store"))
 const FarmerLoan = lazy(() => import("./comp/Farmer/Loan"))
 const FarmerWrapper = lazy(() => import("./comp/Farmer"))
 
-const FpoFarmerInfo = lazy(() => import("./comp/Fpo/FarmerInfo"))
 const CorporateCustomer = lazy(() => import("./pages/fpo/CorporateCustomer"))
-const LacProcurement = lazy(() => import("./pages/fpo/LacProcurement"))
-const FpoDashboard = lazy(() => import("./comp/Fpo/Dashboard"))
-const FpoFarmer = lazy(() => import("./comp/Fpo/Farmer"))
-const LabTesting = lazy(() => import("./pages/fpo/LabTesting"))
 const FpoFarmerLoan = lazy(() => import("./pages/fpo/FarmerLoan"))
-const FpoStore = lazy(() => import("./pages/fpo/FpoStore"))
-const Supports = lazy(() => import("./pages/fpo/Supports"))
 const FpoLoan = lazy(() => import("./pages/fpo/FpoLoan"))
 const Setting = lazy(() => import("./pages/fpo/Setting"))
+
+const FpoLacProcurement = lazy(() => import("./comp/Fpo/LacProcurement"))
+const FpoLabTesting = lazy(() => import("./comp/Fpo/LabTesting"))
+const FpoFarmerInfo = lazy(() => import("./comp/Fpo/FarmerInfo"))
+const FpoDashboard = lazy(() => import("./comp/Fpo/Dashboard"))
+const FpoFarmer = lazy(() => import("./comp/Fpo/Farmer"))
+const FpoStore = lazy(() => import("./comp/Fpo/Store"))
 const FpoWrapper = lazy(() => import("./comp/Fpo"))
 
 const AdminCorporateClient = lazy(() => import("./comp/Admin/CorporateClient"))
@@ -51,7 +51,6 @@ const SammunatiSettings = lazy(() => import("./pages/Samunnati/Settings"))
 const SamunnatiFPOLoan = lazy(() => import("./pages/Samunnati/FpoLoan"))
 const SamunnatiFPOInfo = lazy(() => import("./pages/Samunnati/FpoInfo"))
 const SammunatiFPOPage = lazy(() => import("./pages/Samunnati/FpoPage"))
-const SammunatiSupport = lazy(() => import("./pages/Samunnati/Support"))
 const SamunnatiWrapper = lazy(() => import("./comp/Samunnati"))
 
 const CorporateClientLacBidding = lazy(() => import("./comp/CorporateClient/Bidding"))
@@ -84,17 +83,17 @@ function App() {
         {/* FPO route */}
         <Route path="fpo" element={<FpoWrapper />}>
           <Route path="farmer-information" element={<FpoFarmerInfo />} />
+          <Route path="lac-procurement" element={<FpoLacProcurement />} />
+          <Route path="lab-testing" element={<FpoLabTesting />} />
           <Route path="dashboard" element={<FpoDashboard />} />
+          <Route path="support" element={<TemplateSupport />} />
           <Route path="farmer" element={<FpoFarmer />} />
+          <Route path="store" element={<FpoStore />} />
         </Route>
 
-        <Route path="/fpo/fpo-store" element={<FpoStore />} />
-        <Route path="/fpo/lac-procurement" element={<LacProcurement />} />
-        <Route path="/fpo/labtesting" element={<LabTesting />} />
         <Route path="/fpo/farmerloan" element={<FpoFarmerLoan />} />
         <Route path="/fpo/fpoloan" element={<FpoLoan />} />
         <Route path="/fpo/corporate-customer" element={<CorporateCustomer />} />
-        <Route path="/fpo/support" element={<Supports />} />
         <Route path="/fpo/settings" element={<Setting />} />
 
 
@@ -120,14 +119,16 @@ function App() {
 
 
         {/* Samunnati route */}
-        <Route path="samunnati" element={<SamunnatiWrapper />} />
+        <Route path="samunnati" element={<SamunnatiWrapper />}>
+          <Route path="support" element={<TemplateSupport />} />
+        </Route>
+
         <Route path="/samunnati/fpo-loan" element={<SamunnatiFPOLoan />} />
         <Route path="/samunnati/fpo-info" element={<SamunnatiFPOInfo />} />
         <Route path="/samunnati/fpo-page" element={<SammunatiFPOPage />} />
         <Route path="/samunnati/fpo-subloan" element={<SammunatiFPOSubLoanPage />} />
         <Route path="/samunnati/farmer-loan" element={<SamunnatiFarmerLoan />} />
         <Route path="/samunnati/farmer-subloan" element={<SammunatiFarmerSubLoanPage />} />
-        <Route path="/samunnati/samunnati-support" element={<SammunatiSupport />} />
         <Route path="/samunnati/samunnati-settings" element={<SammunatiSettings />} />
 
 

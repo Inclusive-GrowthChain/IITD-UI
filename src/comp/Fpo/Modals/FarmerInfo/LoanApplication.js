@@ -1,3 +1,4 @@
+import Modal from "react-bootstrap/Modal";
 
 function LoanApplication({ show, handleShowImg, handleClose }) {
   return (

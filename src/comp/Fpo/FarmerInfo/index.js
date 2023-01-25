@@ -797,6 +797,7 @@ function FarmerInformation() {
 
       <SaleHistory
         showAddSale={showAddSale}
+        handleShowAddSale={handleShowAddSale}
         handleCloseAddSale={handleCloseAddSale}
         handleShowConfirmSale={handleShowConfirmSale}
       />
