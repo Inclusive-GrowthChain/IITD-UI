@@ -57,6 +57,10 @@ const CorporateClientLacBidding = lazy(() => import("./comp/CorporateClient/Bidd
 const CorporateClientSettings = lazy(() => import("./comp/CorporateClient/Settings"))
 const CorporateClientWrapper = lazy(() => import("./comp/CorporateClient"))
 
+const IITDhanbadDashboard = lazy(() => import("./comp/IITDhanbad/Dashboard"))
+const IITDhanbadUsers = lazy(() => import("./comp/IITDhanbad/Users"))
+const IITDhanbadSettings = lazy(() => import("./comp/IITDhanbad/Settings"))
+const IITDhanbadWrapper = lazy(() => import("./comp/IITDhanbad"))
 
 function App() {
   return (
@@ -67,7 +71,7 @@ function App() {
         <Route path="signup" element={<Register />} />
 
         {/* farmer route */}
-        <Route path="farmer" element={<FarmerWrapper />}>
+        <Route path="farmer" element={<FarmerWrapper />}>farmer/selling-price
           <Route path="transaction-history" element={<FarmerTransactionHistory />} />
           <Route path="crop-advisory2" element={<FarmerCropAdvisory2 />} />
           <Route path="selling-price" element={<FarmerSellingPrice />} />
@@ -138,6 +142,15 @@ function App() {
           <Route path="settings" element={<CorporateClientSettings />} />
           <Route path="support" element={<TemplateSupport />} />
         </Route>
+
+        {/* IIT Dhanbad route */}
+        <Route path="iit-dhanbad" element={<IITDhanbadWrapper />}>
+          <Route path="dashboard" element={<IITDhanbadDashboard />} />
+          <Route path="users" element={<IITDhanbadUsers />} />
+          <Route path="settings" element={<IITDhanbadSettings />} />
+          <Route path="support" element={<TemplateSupport />} />
+        </Route>
+
       </Routes>
     </Suspense>
   )
