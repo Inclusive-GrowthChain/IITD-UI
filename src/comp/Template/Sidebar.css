@@ -1,0 +1,15 @@
+/* Responsiveness */
+
+@media screen and (max-width: 768px) {
+  .sidebar_titles {
+      display: none;
+  }
+
+  .sidebar_wrapper {
+      width: 70px;
+  }
+
+  .app-wrapper {
+      grid-template-columns: 70px 1fr;
+  }
+}

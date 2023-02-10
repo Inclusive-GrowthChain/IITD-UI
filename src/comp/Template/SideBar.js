@@ -1,9 +1,12 @@
 import { NavLink } from "react-router-dom";
+import { Row, Col } from "react-bootstrap";
+
+import "./Sidebar.css";
 
 function SideBar({ list = [] }) {
   return (
-    <div className="sidebar_wrapper app-sidebar">
-      <div className="sidebar_content">
+    <Row className="sidebar_wrapper app-sidebar">
+      <Col className="sidebar_content">
         <ul>
           {
             list.map(l => (
@@ -13,13 +16,13 @@ function SideBar({ list = [] }) {
                 className="sidebar_data"
               >
                 {l.icon}
-                <span>{l.title}</span>
+                <span className="sidebar_titles">{l.title}</span>
               </NavLink>
             ))
           }
         </ul>
-      </div>
-    </div>
+      </Col>
+    </Row>
   )
 }
 

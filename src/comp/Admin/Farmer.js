@@ -2,6 +2,8 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import AddFarmer from "./Modals/AddFarmer";
 
+import "./admin.css";
+
 const Farmer = () => {
   const [show, setShow] = useState(false)
 
@@ -47,6 +49,66 @@ const Farmer = () => {
                 <tbody>
                   <tr>
                     <td>1</td>
+                    <td>15478932</td>
+                    <td>Dinesh kumar</td>
+                    <td>Male</td>
+                    <td>14-05-2021</td>
+                    <td>98745XXXXX</td>
+                    <td>
+                      Churchu Nari Urja Farmer Producer Company Limited
+                    </td>
+                    <td>-</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>15478932</td>
+                    <td>Dinesh kumar</td>
+                    <td>Male</td>
+                    <td>14-05-2021</td>
+                    <td>98745XXXXX</td>
+                    <td>
+                      Churchu Nari Urja Farmer Producer Company Limited
+                    </td>
+                    <td>-</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>15478932</td>
+                    <td>Dinesh kumar</td>
+                    <td>Male</td>
+                    <td>14-05-2021</td>
+                    <td>98745XXXXX</td>
+                    <td>
+                      Churchu Nari Urja Farmer Producer Company Limited
+                    </td>
+                    <td>-</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>15478932</td>
+                    <td>Dinesh kumar</td>
+                    <td>Male</td>
+                    <td>14-05-2021</td>
+                    <td>98745XXXXX</td>
+                    <td>
+                      Churchu Nari Urja Farmer Producer Company Limited
+                    </td>
+                    <td>-</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>15478932</td>
+                    <td>Dinesh kumar</td>
+                    <td>Male</td>
+                    <td>14-05-2021</td>
+                    <td>98745XXXXX</td>
+                    <td>
+                      Churchu Nari Urja Farmer Producer Company Limited
+                    </td>
+                    <td>-</td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
                     <td>15478932</td>
                     <td>Dinesh kumar</td>
                     <td>Male</td>

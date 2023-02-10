@@ -199,8 +199,8 @@ ul a.active {
 .itemContainer,
 .item_Container {
   padding: 20px;
-  background-color: #e9ecef;
-  height: 575px;
+  background-color: #fff;
+  height: 100vh;
 }
 
 .iinrg {
@@ -271,8 +271,8 @@ ul a.active {
 
 .itemContainer {
   padding: 20px;
-  background-color: #e9ecef;
-  height: 575px;
+  background-color: #fff;
+  height: 100vh;
 }
 
 .list_title {
