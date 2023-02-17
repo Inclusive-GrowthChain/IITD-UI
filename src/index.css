@@ -63,7 +63,7 @@ body::-webkit-scrollbar-thumb:hover {
   font-weight: bold;
 }
 
-.header>.header_wrapper>.logo {
+.header>.header_wrapper>.logo_container>.logo {
   width: 65px;
   height: 65px;
   position: relative;
@@ -442,7 +442,7 @@ div>label {
     left: -3rem;
   }
 
-  .header>.header_wrapper>.logo {
+  .header>.header_wrapper>.logo_container>.logo {
     width: 35px;
     height: 35px;
     position: relative;

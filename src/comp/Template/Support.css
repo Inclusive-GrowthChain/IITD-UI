@@ -1,0 +1,11 @@
+@media screen and (max-width: 767px) {
+    .setting_data>.setting_content {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .setting_data>.setting_content {
+        width: 80%;
+    }
+}

@@ -1,3 +1,5 @@
+import "./Support.css";
+
 function Support() {
   return (
     <div className="itemContainer">

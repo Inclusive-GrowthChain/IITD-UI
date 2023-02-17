@@ -1,0 +1,139 @@
+.logo_container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.logo_text {
+    position: relative;
+    top: 5px;
+    left: 185px;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.375rem;
+    font-weight: bold;
+}
+
+.hamburger_menu {
+    display: block;
+    margin-left: 5vw;
+    top: -1vh;
+    cursor: pointer;
+    z-index: 6;
+    position: absolute;
+}
+
+.hamburger_menu_line {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px;
+    transition: all 0.3s ease-in;
+}
+
+.hamburger_menu_list {
+    position: absolute;
+    top: 12vh;
+    left: 50%;
+    transform: translate(-50%);
+    list-style: none;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    background-color: rgb(226, 226, 226);
+    z-index: 5;
+    /* transition: all 0.3s ease-in; */
+}
+
+.hamburger_menu_list_scrolled {
+    position: fixed;
+    top: 12vh;
+    left: 50%;
+    transform: translate(-50%);
+    list-style: none;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    background-color: rgb(226, 226, 226, 1);
+    z-index: 5;
+    /* transition: all 0.3s ease-in; */
+}
+
+.hamburger_menu_list_item {
+    cursor: pointer;
+    margin-top: 2rem;
+    margin-bottom: 60px;
+}
+
+.hamburger_menu_list_item_drop {
+    cursor: pointer;
+    margin-top: 1rem;
+    margin-bottom: 30px;
+}
+
+.hamburger_nav_item_a {
+    color: #004c90;
+    text-decoration: none;
+    margin-right: 1rem;
+    padding: 30px 20px 30px 20px;
+    font-size: 1.8vh;
+    font-weight: 600;
+    transition: all 0.35s ease-in;
+}
+
+.hamburger_menu_list_line {
+    width: 0%;
+    height: 0px;
+    background-color: rgb(226, 226, 226, 0);
+    /* margin: 5px; */
+    margin-top: 20px;
+    transition: all 0.3s ease-in;
+    display: hidden;
+}
+
+.hamburger_menu_list_item_icon {
+    width: 5vw;
+    height: 5vw;
+    color: #fff;
+}
+
+@media screen and (min-width: 768px) {
+    .hamburger_menu {
+        display: none;
+    }
+
+    .header_wrapper_menu_container {
+        left: 38em;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .fullwidth_menu, #fullwidth_menu {
+        display: none;
+    }
+
+    .logo_container {
+        top: -8px;
+    }
+    
+    .logo {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .logo_text {
+        font-size: 20px;
+        left: 0;
+    }
+
+    .header_wrapper {
+        justify-content: space-between;
+        width: 60%;
+        margin: auto;
+    }
+
+    .hamburger_menu {
+        top: -22.5px;
+    }
+}

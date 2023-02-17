@@ -6,6 +6,7 @@ import LockSharpIcon from "@mui/icons-material/LockSharp";
 import Dropdown from "react-bootstrap/Dropdown";
 
 import logo from "../../assets/img/logo.png";
+import "./Login.css";
 
 import CorporateClientSignup from "./Modals/CorporateClientSignup";
 import SamunnatiSignup from "./Modals/SamunnatiSignup";
@@ -22,6 +23,11 @@ const Login = () => {
     username: "",
     password: "",
   })
+  const [hamburgerOpen, setHamburgerOpen] = useState(false)
+  const [isOpenHamburgerSamunnati, setIsOpenHamburgerSamunnati] = useState(false)
+  const [isOpenHamburgerCorporate, setIsOpenHamburgerCorporate] = useState(false)
+  const [isOpenHamburgerIinrg, setIsOpenHamburgerIinrg] = useState(false)
+  const [isOpenHamburgerFpo, setIsOpenHamburgerFpo] = useState(false)
 
   const navigate = useNavigate()
 
@@ -59,20 +65,22 @@ const Login = () => {
     <div className="auth-bg">
       <div className="header">
         <div className="header_wrapper">
-          <img src={logo} className="logo" alt="logo" />
-          <h2>iit dhanbad</h2>
+          <div className="logo_container">
+            <img src={logo} className="logo" alt="logo" />
+            <p className="logo_text">IIT DHANBAD</p>
+          </div>
           <div
             style={{
               position: "relative",
-              left: "38em",
               backgroundColor: "green",
               color: "#fff",
               border: "none",
               cursor: "pointer",
               borderRadius: "20px",
             }}
+            className="header_wrapper_menu_container"
           >
-            <Dropdown>
+            <Dropdown className="fullwidth_menu">
               <Dropdown.Toggle variant="success" id="dropdown-basic">
                 Organization Signup
               </Dropdown.Toggle>
@@ -92,9 +100,48 @@ const Login = () => {
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
+
+            <div className="hamburger_menu" onClick={() => setHamburgerOpen(!hamburgerOpen)}>
+              <div className="hamburger_menu_line"></div>
+              <div className="hamburger_menu_line"></div>
+              <div className="hamburger_menu_line"></div>
+            </div>
+            {
+              hamburgerOpen && (
+                <div className="hamburger_container">
+                  <div className="hamburger_menu_wrapper_item">
+                    <Dropdown>
+                      <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        Organization Signup
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => setIsOpenHamburgerFpo(true)}>
+                          FPO
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => setIsOpenHamburgerIinrg(true)}>
+                          NISA
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => setIsOpenHamburgerSamunnati(true)}>
+                          Samunnati
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => setIsOpenHamburgerCorporate(true)}>
+                          Corporate Client
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </div>
+                  <div className="hamburger_menu_wrapper_item">
+                    <Link to="/signup" className="account_wrapper">
+                      Farmer Signup
+                    </Link>
+                  </div>
+                </div>
+              )
+            }
           </div>
 
-          <Link to="/signup" className="account_wrapper">
+          <Link to="/signup" className="account_wrapper" id="fullwidth_menu">
             Farmer Signup
           </Link>
         </div>
