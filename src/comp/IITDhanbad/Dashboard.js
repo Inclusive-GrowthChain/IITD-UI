@@ -13,6 +13,7 @@ import Chip from '@mui/material/Chip';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import fpoList from './UsersList/FPOlist';
+import "./IITDhanbad.css";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -56,14 +57,15 @@ const Dashboard = () => {
           <div className="row">
             <div className="col">
               <div className="card shadow">
-                <div className="card-body col-3">
-                  <div className="">
+                <div className="card-body col-4">
+                  <div className="filterHeading">
                     <p style={{ color: '#000', fontSize: '20px' }}>Filter</p>
                   </div>
                   <div>
                     <Autocomplete
                       multiple
                       id="checkboxes-tags-demo"
+                      className='fpoNameFilter'
                       options={fpoList}
                       disableCloseOnSelect
                       getOptionLabel={(option) => option.name}
@@ -78,7 +80,7 @@ const Dashboard = () => {
                           {option.name}
                         </li>
                       )}
-                      style={{ width: 500 }}
+                      // style={{ width: 500 }}
                       renderInput={(params) => (
                         <TextField {...params} label="FPO" placeholder="Search for FPO Name" />
                       )}
@@ -99,11 +101,12 @@ const Dashboard = () => {
                       width='450'
                       height='300'
                       options={options2}
+                      className="histogram"
                     />
                     <div className="card-body">
                       <div className="row">
                         <div className="col">
-                          <h4 style={{ color: '#000' }}>Aggregated Sales of FPO</h4>
+                          <p className="graphHeading" style={{ color: '#000', fontSize: '1.5rem' }}>Aggregated Sales of FPO</p>
                         </div>
                       </div>
                     </div>
@@ -119,11 +122,12 @@ const Dashboard = () => {
                       width='450'
                       height='300'
                       options={options2}
+                      className="histogram"
                     />
                     <div className="card-body">
                       <div className="row">
                         <div className="col">
-                          <h4 style={{ color: '#000' }}>Individual Sales of {currentFPO}</h4>
+                          <p className="graphHeading" style={{ color: '#000', fontSize: '1.5rem' }}>Individual Sales of {currentFPO}</p>
                         </div>
                       </div>
                     </div>
@@ -141,11 +145,12 @@ const Dashboard = () => {
                       width='450'
                       height='300'
                       options={options2}
+                      className="histogram"
                     />
                     <div className="card-body">
                       <div className="row">
                         <div className="col">
-                          <h4 style={{ color: '#000' }}>Aggregated Purchases of FPO</h4>
+                          <p className="graphHeading" style={{ color: '#000', fontSize: '1.5rem' }}>Aggregated Purchases of FPO</p>
                         </div>
                       </div>
                     </div>
@@ -161,11 +166,12 @@ const Dashboard = () => {
                       width='450'
                       height='300'
                       options={options2}
+                      className="histogram"
                     />
                     <div className="card-body">
                       <div className="row">
                         <div className="col">
-                          <h4 style={{ color: '#000' }}>Individual Purchases of {currentFPO}</h4>
+                          <p className="graphHeading" style={{ color: '#000', fontSize: '1.5rem' }}>Individual Purchases of {currentFPO}</p>
                         </div>
                       </div>
                     </div>
@@ -183,11 +189,12 @@ const Dashboard = () => {
                       width='450'
                       height='300'
                       options={options2}
+                      className="histogram"
                     />
                     <div className="card-body">
                       <div className="row">
                         <div className="col">
-                          <h4 style={{ color: '#000' }}>Aggregated Lac Inventory of FPO</h4>
+                          <p className="graphHeading" style={{ color: '#000', fontSize: '1.5rem' }}>Aggregated Lac Inventory of FPO</p>
                         </div>
                       </div>
                     </div>
@@ -203,11 +210,12 @@ const Dashboard = () => {
                       width='450'
                       height='300'
                       options={options2}
+                      className="histogram"
                     />
                     <div className="card-body">
                       <div className="row">
                         <div className="col">
-                          <h4 style={{ color: '#000' }}>Individual Lac Inventory of {currentFPO}</h4>
+                          <p className="graphHeading" style={{ color: '#000', fontSize: '1.5rem' }}>Individual Lac Inventory of {currentFPO}</p>
                         </div>
                       </div>
                     </div>

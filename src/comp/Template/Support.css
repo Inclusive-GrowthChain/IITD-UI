@@ -2,10 +2,28 @@
     .setting_data>.setting_content {
         width: 100%;
     }
+
+    .setting_data>.seting_btn {
+        margin: auto;
+        padding: 5px 25px;
+        background-color: #064420;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+    }
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (min-width: 768px) and (max-width: 1400px) {
     .setting_data>.setting_content {
         width: 80%;
+    }
+
+    .setting_data>.seting_btn {
+        margin: auto;
+        padding: 5px 25px;
+        background-color: #064420;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
     }
 }

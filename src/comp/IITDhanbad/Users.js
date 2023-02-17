@@ -8,6 +8,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import users from "./UsersList/Userlist";
 import { userTypes } from "./UsersList/Userlist";
+import "./IITDhanbad.css";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -74,7 +75,7 @@ const Users = () => {
             </h3>
           </div>
           <div>
-            <FormControl sx={{ m: 1, width: 300 }}>
+            <FormControl sx={{ m: 1, width: '20%' }} className='userTypeFilterForm'>
               <InputLabel id="demo-multiple-name-label">Filter by User Type</InputLabel>
               <Select
                 labelId="demo-multiple-name-label"
