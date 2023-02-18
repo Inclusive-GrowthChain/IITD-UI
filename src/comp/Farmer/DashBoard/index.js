@@ -4,6 +4,8 @@ import { SliderData } from "./SliderData";
 import ImageSliders from "./ImageSliders";
 import { SliderContent } from "./SliderContent";
 
+import "../Farmer.css";
+
 function Dashboard() {
   return (
     <div className="itemContainer">
@@ -13,11 +15,11 @@ function Dashboard() {
             <h3 className="dash__heading mb-4">Dashboard</h3>
           </div>
           <div className="row">
-            <div className="col-lg-4 col-md-4 col-12">
+            <div className="col-lg-4 col-md-6 col-12">
               <div className="mb-2 p-3 dash__card">
-                <h5 className="card_title text-center">
+                <p className="card_title text-center">
                   Training Programs
-                </h5>
+                </p>
                 <div className="card-text">
                   <table className="table table-borderless">
                     <thead>
@@ -49,16 +51,16 @@ function Dashboard() {
               </div>
             </div>
 
-            <div className="col-lg-4 col-md-4 col-12">
+            <div className="col-lg-4 col-md-6 col-12">
               <div className="mb-2 p-3 dash__card">
-                <h5 className="card_title text-center">Current Weather</h5>
+                <p className="card_title text-center">Current Weather</p>
                 <div className="card-text">
                   <table className="table table-borderless">
                     <thead className="">
                       <tr>
                         <th>Temperature</th>
                         <th>Humadity</th>
-                        <th>rainfall</th>
+                        <th>Rainfall</th>
                       </tr>
                     </thead>
                     <tbody className="fw-light fs-10">
@@ -87,9 +89,9 @@ function Dashboard() {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 col-md-4 col-12">
+            <div className="col-lg-4 col-md-6 col-12">
               <div className="mb-2 p-3 dash__card">
-                <h5 className="card_title text-center">Crop Advisory</h5>
+                <p className="card_title text-center">Crop Advisory</p>
                 <div className="card-text">
                   <table className="table table-borderless">
                     <thead className="">
@@ -120,25 +122,25 @@ function Dashboard() {
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 col-md-4 col-12">
+            <div className="col-lg-4 col-md-6 col-12">
               <div className="mb-2 mt-2 p-3 dash__card">
-                <h5 className="card_title text-center">Store</h5>
+                <p className="card_title text-center">Store</p>
                 <div>
                   <ImageSlider slides={SliderData} />
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 col-md-4 col-12 ">
+            <div className="col-lg-4 col-md-6 col-12 ">
               <div className="mb-2 mt-2 p-3 dash__card">
-                <h5 className="card_title text-center">Selling Price</h5>
+                <p className="card_title text-center">Selling Price</p>
                 <div>
                   <ImageSliders slides={SliderContent} />
                 </div>
               </div>
             </div>
-            <div className="col-lg-4 col-md-4 col-12">
+            <div className="col-lg-4 col-md-6 col-12">
               <div className="mb-2 mt-2 p-3 dash__card">
-                <h5 className="card_title text-center">Loan Updates</h5>
+                <p className="card_title text-center">Loan Updates</p>
                 <div className="card-text">
                   <table className="table table-borderless">
                     <thead>

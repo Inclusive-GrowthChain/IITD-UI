@@ -7,6 +7,8 @@ import AddADescription from "./Modals/AddCADescription";
 import EditCA from "./Modals/EditCA";
 import AddCA from "./Modals/AddCA";
 
+import "./Nisa.css"
+
 const caList = [
   {
     id: 1,
@@ -43,7 +45,7 @@ const CropAdvisory = () => {
     <div className="item_Container">
       <div className="list_title">
         <div className="crop__title container-fluid">
-          <div className="d-sm-flex justify-content-between align-items-center mb-4">
+          <div className="crop_container d-sm-flex justify-content-between align-items-center" style={{marginBottom: '50px'}}>
             <h3
               className="text-dark mb-0"
               style={{
@@ -69,6 +71,7 @@ const CropAdvisory = () => {
                   backgroundColor: "#064420",
                   border: "none",
                   width: "fit-content",
+                  marginTop: "50px",
                 }}
                 onClick={handleCAShow}
               >
@@ -77,7 +80,7 @@ const CropAdvisory = () => {
             </div>
           </div>
           {caList.map((ca, ind) => (
-            <div>
+            <div className="card_container">
               <div className="card_wrapper">
                 <div
                   className="card_title mb-2 text-black text-bold"

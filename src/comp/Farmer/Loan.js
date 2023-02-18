@@ -221,7 +221,7 @@ const Loan = () => {
               </TabContent>
 
               <TabContent id="tab2" activeTab={activeTab}>
-                <div className="row">
+                <div className="row" style={{marginBottom: '50px'}}>
                   <div className="col">
                     <div className="card shadow">
                       <div className="table-responsive">

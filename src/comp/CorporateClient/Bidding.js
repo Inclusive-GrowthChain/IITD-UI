@@ -7,6 +7,8 @@ import BidStatus2 from "./Modals/BidStatus2";
 import BidStatus from "./Modals/BidStatus";
 import StartBid from "./Modals/StartBid";
 
+import "./CorporateClient.css";
+
 const activeBidList = [
   {
     id: "B123456",

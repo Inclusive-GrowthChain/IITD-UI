@@ -19,7 +19,7 @@ function Store() {
           </div>
           <div className="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4">
             <div className="col">
-              <div className="card">
+              <div className="card" style={{marginBottom: '50px'}}>
                 <img
                   style={{ height: "280px", objectFit: "contain" }}
                   src={Nylonbag}
@@ -62,7 +62,7 @@ function Store() {
               </div>
             </div>
             <div className="col">
-              <div className="card">
+              <div className="card" style={{marginBottom: '50px'}}>
                 <img
                   style={{ height: "280px", objectFit: "contain" }}
                   src="https://my-test-11.slatic.net/p/486223832ffd2e9a31da49d2f5299e07.png"
@@ -105,7 +105,7 @@ function Store() {
               </div>
             </div>
             <div className="col">
-              <div className="card">
+              <div className="card" style={{marginBottom: '50px'}}>
                 <i className="bi bi-heart-fill"></i>
                 <img
                   style={{ height: "280px", objectFit: "contain" }}

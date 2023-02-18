@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 
 import SellProduce from "./Modals/SellingPrice/SellProduce";
 
+import "./Farmer.css";
+
 function SellingPrice() {
   const [activeTab, setActiveTab] = useState("tab1");
   const [showLacForm, setShowLacForm] = useState(false);
@@ -277,7 +279,7 @@ function SellingPrice() {
                   </div>
                 </div>
                 <div>
-                  <SellProduce 
+                  <SellProduce
                     showLacForm={showLacForm}
                     handleCloseLacForm={handleCloseLacForm}
                     date={date}
