@@ -5,6 +5,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import EditTraining from "./Modals/EditTraining";
 import AddTraing from "./Modals/AddTraing";
 
+import "./Nisa.css";
+
 const tpList = [
   {
     id: 1,
@@ -87,7 +89,7 @@ const TrainingUpdate = () => {
               Training Programs
             </h3>
             <div
-              className="list__btn"
+              className="list__btn tp__btn"
               style={{
                 position: "relative",
                 float: "right",
@@ -108,7 +110,7 @@ const TrainingUpdate = () => {
               </Button>
             </div>
           </div>
-          <div className="card shadow">
+          <div className="tp_container card shadow">
             <div
               className="table-responsive"
               style={{ padding: "1rem 1rem" }}

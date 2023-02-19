@@ -8,6 +8,8 @@ import AddNewTest from "./Modals/LabTest/AddNewTest";
 import LacSample from "./Modals/LabTest/LacSample";
 import Payment from "./Modals/LabTest/Payment";
 
+import "./Nisa.css";
+
 const testList = [
   {
     id: 1,
@@ -400,7 +402,7 @@ const LabTesting = () => {
                   <div className="row">
                     <div className="col">
                       <div
-                        className="list__btn"
+                        className="list__btn lt__btn"
                         style={{
                           position: "relative",
                           float: "right",
@@ -421,7 +423,7 @@ const LabTesting = () => {
                         </Button>
                       </div>
                       <div
-                        className="card shadow"
+                        className="lt_container card shadow"
                         style={{ marginTop: "40px" }}
                       >
                         <div className="table-responsive">
