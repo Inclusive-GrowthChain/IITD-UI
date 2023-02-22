@@ -52,10 +52,18 @@ body::-webkit-scrollbar-thumb:hover {
   top: 5px;
 }
 
-.header h2 {
+.header_wrapper_2 {
   position: relative;
-  top: 5px;
-  left: 185px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: right;
+  top: -65px;
+  height: 80px;
+  z-index: 98;
+}
+
+.header>.header_wrapper>.logo_container {
+  position: relative;
   color: #fff;
   text-align: center;
   text-transform: uppercase;
@@ -67,20 +75,71 @@ body::-webkit-scrollbar-thumb:hover {
   width: 65px;
   height: 65px;
   position: relative;
-  left: 170px;
+  left: -10px;
 }
 
-.header>.header_wrapper>.account_wrapper {
+.header>.header_wrapper_2>.account_wrapper, .header>.header_wrapper_3>.hamburger_container>.hamburger_menu_wrapper_item>.account_wrapper {
   position: relative;
-  left: 40rem;
   text-decoration: none;
   color: #fff;
-  background-color: #16944b;
+  background-color: #25864d;
   padding: 7px 10px;
-  border-radius: 10px;
+  border-radius: 8px;
   width: 150px;
-  height: 40px;
+  height: 38px;
   text-align: center;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+  margin-right: 20px;
+  top: -20px;
+}
+
+.header>.header_wrapper_3>.hamburger_container>.hamburger_menu_wrapper_item>.account_wrapper {
+  top: 0;
+}
+
+.header>.header_wrapper_2>.account_wrapper>.account_wrapper_link, .header>.header_wrapper_3>.hamburger_container>.hamburger_menu_wrapper_item>.account_wrapper>.account_wrapper_link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.header>.header_wrapper_2>.account_wrapper:hover {
+  background-color: #117039;
+  transition: all 0.3s ease-in;
+}
+
+.header_wrapper_3 {
+  display: flex;
+  align-items: left;
+  justify-content: flex-start;
+  position: relative;
+  top: -145px;
+  height: 150px;
+}
+
+.header_wrapper_3>.hamburger_menu {
+  position: relative;
+  top: 25px;
+  left: 20px;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.hamburger_container {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #064420;
+  z-index: 99;
+  padding: 0 20px;
+}
+
+.hamburger_menu_wrapper_item {
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .left-side {
@@ -436,6 +495,14 @@ div>label {
     top: 15px;
   }
 
+  .header_wrapper_3 {
+    top: -45px;
+  }
+
+  .header_wrapper_3>.hamburger_menu {
+    top: 45px;
+  }
+
   .header h2 {
     font-size: 11px;
     position: relative;
@@ -446,10 +513,10 @@ div>label {
     width: 35px;
     height: 35px;
     position: relative;
-    left: -3.5rem;
+    left: -0.5rem;
   }
 
-  .header>.header_wrapper>.account_wrapper {
+  .header>.header_wrapper_2>.account_wrapper {
     position: relative;
     left: 3.5rem;
     top: 2px;
@@ -487,14 +554,24 @@ div>label {
   }
 }
 
+@media (min-width: 481px) and (max-width: 767px) {
+  .widget_auth {
+    width: 80%;
+    padding: 0 10px;
+  }
+
+  .hamburger_container {
+    top: 80px;
+  }
+}
+
 /* 
   ##Device = Tablets, Ipads (portrait)
   ##Screen = B/w 768px to 1024px
 */
 @media (min-width: 768px) and (max-width: 1024px) {
-  .header>.header_wrapper>.account_wrapper {
-    position: relative;
-    left: 12rem;
+  .hamburger_container {
+    top: 80px;
   }
 
   .widget_auth {
@@ -513,9 +590,8 @@ div>label {
     min-height: 929px;
   }
 
-  .header>.header_wrapper>.account_wrapper {
-    position: relative;
-    left: 40rem;
+  .hamburger_container {
+    top: 80px;
   }
 
   .left-side {

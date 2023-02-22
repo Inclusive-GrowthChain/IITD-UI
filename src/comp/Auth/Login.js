@@ -63,7 +63,7 @@ const Login = () => {
 
   return (
     <div className="auth-bg">
-      <div className="header">
+      {/* <div className="header">
         <div className="header_wrapper">
           <div className="logo_container">
             <img src={logo} className="logo" alt="logo" />
@@ -144,6 +144,96 @@ const Login = () => {
           <Link to="/signup" className="account_wrapper" id="fullwidth_menu">
             Farmer Signup
           </Link>
+        </div>
+      </div> */}
+
+      <div className="header">
+        <div className="header_wrapper">
+          <div className="logo_container">
+            <img src={logo} className="logo" alt="logo" />
+            IIT DHANBAD
+          </div>
+        </div>
+        <div className="header_wrapper_2">
+          <div
+            style={{
+              position: "relative",
+              backgroundColor: "green",
+              color: "#fff",
+              border: "none",
+              cursor: "pointer",
+              borderRadius: "20px",
+              marginRight: "20px",
+              top: "-20px",
+            }}
+            className="header_wrapper_menu_container"
+          >
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                Organization Signup
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => setIsOpenFpo(true)}>
+                  FPO
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setIsOpenIinrg(true)}>
+                  NISA
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setIsOpenSamunnati(true)}>
+                  Samunnati
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => setIsOpenCorporate(true)}>
+                  Corporate Client
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+          <div className="account_wrapper">
+            <Link to="/signup" className="account_wrapper_link" style={{ textDecoration: 'none', color: '#fff' }}>
+              Farmer Signup
+            </Link>
+          </div>
+        </div>
+        <div className="header_wrapper_3">
+          <div className="hamburger_menu" onClick={() => setHamburgerOpen(!hamburgerOpen)}>
+            <div className="hamburger_menu_line"></div>
+            <div className="hamburger_menu_line"></div>
+            <div className="hamburger_menu_line"></div>
+          </div>
+          {
+            hamburgerOpen && (
+              <div className="hamburger_container">
+                <div className="hamburger_menu_wrapper_item">
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                      Organization Signup
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item onClick={() => setIsOpenHamburgerFpo(true)}>
+                        FPO
+                      </Dropdown.Item>
+                      <Dropdown.Item onClick={() => setIsOpenHamburgerIinrg(true)}>
+                        NISA
+                      </Dropdown.Item>
+                      <Dropdown.Item onClick={() => setIsOpenHamburgerSamunnati(true)}>
+                        Samunnati
+                      </Dropdown.Item>
+                      <Dropdown.Item onClick={() => setIsOpenHamburgerCorporate(true)}>
+                        Corporate Client
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </div>
+                <div className="hamburger_menu_wrapper_item">
+                  <Link to="/signup" className="account_wrapper">
+                    Farmer Signup
+                  </Link>
+                </div>
+              </div>
+            )
+          }
         </div>
       </div>
 
