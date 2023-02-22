@@ -2,10 +2,11 @@ import { NavLink } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 
 import "./Sidebar.css";
+import { useEffect, useState } from "react";
 
-function SideBar({ list = [] }) {
+function SideBar({ list = [], showSidebar }) {
   return (
-    <Row className="sidebar_wrapper app-sidebar">
+    <Row className="sidebar_wrapper app-sidebar" style={{display: showSidebar ? 'block' : 'none'}}>
       <Col className="sidebar_content">
         <ul>
           {

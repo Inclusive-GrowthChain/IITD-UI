@@ -17,6 +17,7 @@
 
 .app-sidebar {
   grid-area: sidebar;
+  z-index: 99;
 }
 
 .app-wrapper>*:nth-child(3) {

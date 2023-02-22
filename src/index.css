@@ -498,7 +498,7 @@ div>label {
   }
 
   .widget_auth {
-    width: 60%;
+    width: 70%;
     padding: 0 40px;
   }
 }
@@ -516,11 +516,6 @@ div>label {
   .header>.header_wrapper>.account_wrapper {
     position: relative;
     left: 40rem;
-  }
-
-  .widget_auth {
-    width: 27%;
-    height: 530px;
   }
 
   .left-side {
@@ -552,5 +547,19 @@ div>label {
   .footer {
     position: relative;
     top: 10rem;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1520px) {
+  .widget_auth {
+    width: 50%;
+    height: 530px;
+  }
+}
+
+@media (min-width: 1521px) and (max-width: 1920px) {
+  .widget_auth {
+    width: 27%;
+    height: 530px;
   }
 }

@@ -43,7 +43,6 @@
     height: auto;
     background-color: rgb(226, 226, 226);
     z-index: 5;
-    /* transition: all 0.3s ease-in; */
 }
 
 .hamburger_menu_list_scrolled {
@@ -57,7 +56,6 @@
     height: auto;
     background-color: rgb(226, 226, 226, 1);
     z-index: 5;
-    /* transition: all 0.3s ease-in; */
 }
 
 .hamburger_menu_list_item {
