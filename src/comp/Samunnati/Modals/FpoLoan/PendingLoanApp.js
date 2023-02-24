@@ -68,6 +68,7 @@ function PendingLoanApp({ showPendLoanApp, handleClosePendLoanApp, step, setStep
                                   marginTop: "1rem",
                                   backgroundColor: "#064420",
                                   width: "20%",
+                                  minWidth: "80px",
                                   position: "relative",
                                   float: "right",
                                 }}
@@ -237,6 +238,7 @@ function PendingLoanApp({ showPendLoanApp, handleClosePendLoanApp, step, setStep
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                             }}
                           >
                             Back
@@ -251,6 +253,7 @@ function PendingLoanApp({ showPendLoanApp, handleClosePendLoanApp, step, setStep
                                 marginTop: "1rem",
                                 backgroundColor: "#064420",
                                 width: "20%",
+                                minWidth: "80px",
                                 position: "relative",
                                 float: "right",
                               }}
@@ -374,6 +377,7 @@ function PendingLoanApp({ showPendLoanApp, handleClosePendLoanApp, step, setStep
                             marginTop: "1rem",
                             backgroundColor: "#064420",
                             width: "20%",
+                            minWidth: "80px",
                           }}
                         >
                           Back
@@ -388,6 +392,7 @@ function PendingLoanApp({ showPendLoanApp, handleClosePendLoanApp, step, setStep
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                               position: "relative",
                               float: "right",
                             }}
@@ -556,6 +561,7 @@ function PendingLoanApp({ showPendLoanApp, handleClosePendLoanApp, step, setStep
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                             }}
                           >
                             Back
@@ -570,6 +576,7 @@ function PendingLoanApp({ showPendLoanApp, handleClosePendLoanApp, step, setStep
                                 marginTop: "1rem",
                                 backgroundColor: "#064420",
                                 width: "20%",
+                                minWidth: "80px",
                                 position: "relative",
                                 float: "right",
                               }}
@@ -808,6 +815,7 @@ function PendingLoanApp({ showPendLoanApp, handleClosePendLoanApp, step, setStep
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                             }}
                           >
                             Back
@@ -822,6 +830,7 @@ function PendingLoanApp({ showPendLoanApp, handleClosePendLoanApp, step, setStep
                                 marginTop: "1rem",
                                 backgroundColor: "#064420",
                                 width: "20%",
+                                minWidth: "80px",
                                 position: "relative",
                                 float: "right",
                               }}
@@ -1060,6 +1069,7 @@ function PendingLoanApp({ showPendLoanApp, handleClosePendLoanApp, step, setStep
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                             }}
                           >
                             Back
@@ -1073,12 +1083,11 @@ function PendingLoanApp({ showPendLoanApp, handleClosePendLoanApp, step, setStep
                                   className="form-control"
                                   onChange={(e) => changeLoanStatus(e, currentPendLoanApp)}
                                   style={{
-                                    marginTop: "1rem",
                                     width: "100%",
                                     position: "relative",
                                     float: "right",
                                     // eslint-disable-next-line no-dupe-keys
-                                    marginTop: '5%',
+                                    marginTop: '50px',
                                   }}
                                 >
                                   <option value="Pending">Change Loan Window Status</option>

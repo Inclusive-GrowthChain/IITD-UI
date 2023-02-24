@@ -274,8 +274,9 @@ const Samunnati_FPO_Loan = () => {
                 <div
                   className="form-group"
                   style={{
-                    width: '20%',
-                    marginBottom: '1%',
+                    width: '100%',
+                    maxWidth: '300px',
+                    marginBottom: '20px',
                     borderRadius: '5px',
                   }}
                 >
@@ -287,6 +288,7 @@ const Samunnati_FPO_Loan = () => {
                       color: "#000",
                       fontSize: "16px",
                       fontWeight: "500",
+                      width: "100%"
                     }}
                     onChange={(e) => {
                       setSearchText(e.target.value);
@@ -410,8 +412,9 @@ const Samunnati_FPO_Loan = () => {
                 <div
                   className="form-group"
                   style={{
-                    width: '20%',
-                    marginBottom: '1%',
+                    width: '100%',
+                    maxWidth: '300px',
+                    marginBottom: '20px',
                     borderRadius: '5px',
                   }}
                 >
@@ -514,8 +517,9 @@ const Samunnati_FPO_Loan = () => {
                 <div
                   className="form-group"
                   style={{
-                    width: '20%',
-                    marginBottom: '1%',
+                    width: '100%',
+                    maxWidth: '300px',
+                    marginBottom: '20px',
                     borderRadius: '5px',
                   }}
                 >

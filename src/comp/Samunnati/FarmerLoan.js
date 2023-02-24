@@ -278,8 +278,9 @@ const Samunnati_Farmer_Loan = () => {
                 <div
                   className="form-group"
                   style={{
-                    width: '20%',
-                    marginBottom: '1%',
+                    width: '100%',
+                    maxWidth: '300px',
+                    marginBottom: '20px',
                     borderRadius: '5px',
                   }}
                 >
@@ -392,8 +393,9 @@ const Samunnati_Farmer_Loan = () => {
                 <div
                   className="form-group"
                   style={{
-                    width: '20%',
-                    marginBottom: '1%',
+                    width: '100%',
+                    maxWidth: '300px',
+                    marginBottom: '20px',
                     borderRadius: '5px',
                   }}
                 >
@@ -489,8 +491,9 @@ const Samunnati_Farmer_Loan = () => {
                 <div
                   className="form-group"
                   style={{
-                    width: '20%',
-                    marginBottom: '1%',
+                    width: '100%',
+                    maxWidth: '300px',
+                    marginBottom: '20px',
                     borderRadius: '5px',
                   }}
                 >

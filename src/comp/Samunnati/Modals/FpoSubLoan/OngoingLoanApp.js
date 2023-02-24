@@ -4,7 +4,7 @@ function OngoingLoanApp({ showOngoingLoanDetails, handleCloseOngoingLoanDetails,
   return (
     <Modal show={showOngoingLoanDetails} onHide={handleCloseOngoingLoanDetails} size='xl'>
       <Modal.Header closeButton>Loan/Transaction Details</Modal.Header>
-      <Modal.Body>
+      <Modal.Body style={{overflowY: 'auto'}}>
         <div className="row ">
           <div className="col">
             <form>

@@ -153,6 +153,7 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                                   marginTop: "20px",
                                   backgroundColor: "#064420",
                                   width: "20%",
+                                  minWidth: "80px",
                                   position: "relative",
                                   float: "right",
                                 }}
@@ -322,6 +323,7 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                             marginTop: "1rem",
                             backgroundColor: "#064420",
                             width: "20%",
+                            minWidth: "80px",
                           }}
                         >
                           Back
@@ -336,6 +338,7 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                               position: "relative",
                               float: "right",
                             }}
@@ -476,6 +479,7 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                             }}
                           >
                             Back
@@ -490,6 +494,7 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                                 marginTop: "1rem",
                                 backgroundColor: "#064420",
                                 width: "20%",
+                                minWidth: "80px",
                                 position: "relative",
                                 float: "right",
                               }}
@@ -631,6 +636,7 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                             }}
                           >
                             Back
@@ -645,6 +651,7 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                                 marginTop: "1rem",
                                 backgroundColor: "#064420",
                                 width: "20%",
+                                minWidth: "80px",
                                 position: "relative",
                                 float: "right",
                               }}
@@ -799,6 +806,7 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                             }}
                           >
                             Back
