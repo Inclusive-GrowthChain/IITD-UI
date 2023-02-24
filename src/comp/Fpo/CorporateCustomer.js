@@ -58,7 +58,7 @@ const CorporateCustomer = () => {
   }
 
   return (
-    <main id="main_container" className="main_container container-fluid">
+    <main id="main_container" className="main_container container-fluid itemContainer">
       <div className="">
         <h3 className="mb-4">Corporate Customer Information</h3>
       </div>

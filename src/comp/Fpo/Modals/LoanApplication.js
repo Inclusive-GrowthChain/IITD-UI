@@ -114,6 +114,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                                   marginTop: "20px",
                                   backgroundColor: "#064420",
                                   width: "20%",
+                                  minWidth: "80px",
                                   position: "relative",
                                   float: "right",
                                 }}
@@ -249,6 +250,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                             marginTop: "1rem",
                             backgroundColor: "#064420",
                             width: "20%",
+                            minWidth: "80px",
                           }}
                         >
                           Back
@@ -265,6 +267,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                               position: "relative",
                               float: "right",
                             }}
@@ -373,6 +376,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                             }}
                           >
                             Back
@@ -389,6 +393,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                                 marginTop: "1rem",
                                 backgroundColor: "#064420",
                                 width: "20%",
+                                minWidth: "80px",
                                 position: "relative",
                                 float: "right",
                               }}
@@ -492,6 +497,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                             }}
                           >
                             Back
@@ -508,6 +514,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                                 marginTop: "1rem",
                                 backgroundColor: "#064420",
                                 width: "20%",
+                                minWidth: "80px",
                                 position: "relative",
                                 float: "right",
                               }}
@@ -615,6 +622,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                             }}
                           >
                             Back
@@ -631,6 +639,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                                 marginTop: "1rem",
                                 backgroundColor: "#064420",
                                 width: "20%",
+                                minWidth: "80px",
                                 position: "relative",
                                 float: "right",
                               }}
@@ -736,6 +745,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           marginTop: "1rem",
                           backgroundColor: "#064420",
                           width: "20%",
+                          minWidth: "80px",
                         }}
                       >
                         Back

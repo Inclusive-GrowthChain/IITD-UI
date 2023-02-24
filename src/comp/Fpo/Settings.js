@@ -7,7 +7,7 @@ const Settings = () => {
   const [activeTab, setActiveTab] = useState("tab1");
 
   return (
-    <main id="main_container" className="main_container container-fluid">
+    <main id="main_container" className="main_container container-fluid itemContainer">
       <div className="list_title">
         <div className="settings_wrapper">
           <div className="d-sm-flex justify-content-between align-items-center mb-4">
@@ -18,7 +18,7 @@ const Settings = () => {
               Profile
             </h3>
           </div>
-          <div className="row">
+          <div className="row" style={{marginBottom: '40px'}}>
             <div className="col">
               <div
                 className="setting_card shadow border-start-primary py-2"
@@ -56,9 +56,9 @@ const Settings = () => {
                     </ul>
                     {/* <div className="profile_title">
                       </div> */}
-                    <div className="outlet">
+                    <div className="outlet" style={{marginBottom: '30px'}}>
                       <TabContent id="tab1" className="setting_content" activeTab={activeTab}>
-                        <div >
+                        <div>
                           <div className="card-body">
                             <form>
                               <div className="pl-lg-4">

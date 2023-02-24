@@ -10,7 +10,7 @@ function RepaymentStructure({ showRepaymentForm, handleCloseRepaymentForm, repay
         <Modal.Header closeButton>
           Repayment Structure
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body style={{overflowY: 'auto'}}>
           <div className="repayment_title">
             <div className="row">
               <div className="col-lg-6">

@@ -11,6 +11,8 @@ import Img from "./Modals/FarmerInfo/Img";
 import InterestRate from "./Modals/InterestRate";
 import AggRepaymentStructure from "./Modals/AggRepaymentStructure";
 
+import "./Fpo.css";
+
 const repaymentList = [
   {
     id: "1",
@@ -195,7 +197,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
   }
 
   return (
-    <main id="main_container" className="main_container container-fluid">
+    <main id="main_container" className="main_container container-fluid itemContainer">
       <div className="">
         <h3 className="mb-4">Farmer Loan Information</h3>
       </div>
@@ -207,15 +209,16 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
             borderRadius: "5px",
             position: "absolute",
             // float: "right",
-            right: "400px",
+            right: "10%",
             top: "120px",
           }}
+          className="list_container_inner"
         >
           <h3
             style={{
               fontSize: "15px",
               position: "fixed",
-              right: "310px",
+              right: "5.5%",
             }}
           >
             {textState}
@@ -273,7 +276,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
           </div>
           <div className="panels">
             <div className={`panel ${checkActive(1, "active")}`}>
-              <div className="card_table1">
+              <div className="card_table2">
                 <div className=" table-responsive">
                   <table>
                     <thead
@@ -364,7 +367,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
             </div>
 
             <div className={`panel ${checkActive(2, "active")}`}>
-              <div className="card_table1">
+              <div className="card_table2">
                 <div className=" table-responsive">
                   <table>
                     <thead

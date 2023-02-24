@@ -91,6 +91,7 @@ const PageFour = ({ onButtonClick, canEdit = true }) => {
                     border: "none",
                     padding: "5px 15px",
                     width: "20%",
+                    minWidth: "80px",
                     fontSize: ".85rem",
                     lineHeight: "1rem",
                     color: "#fff",

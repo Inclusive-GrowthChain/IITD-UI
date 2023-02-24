@@ -110,6 +110,7 @@ function ApplicationDetails({
                                   marginTop: "20px",
                                   backgroundColor: "#064420",
                                   width: "20%",
+                                  minWidth: "80px",
                                   position: "relative",
                                   float: "right",
                                 }}
@@ -205,6 +206,7 @@ function ApplicationDetails({
                             marginTop: "1rem",
                             backgroundColor: "#064420",
                             width: "20%",
+                            minWidth: "80px",
                           }}
                         >
                           Back
@@ -219,6 +221,7 @@ function ApplicationDetails({
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                               position: "relative",
                               float: "right",
                             }}
@@ -295,6 +298,7 @@ function ApplicationDetails({
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                             }}
                           >
                             Back
@@ -309,6 +313,7 @@ function ApplicationDetails({
                                 marginTop: "1rem",
                                 backgroundColor: "#064420",
                                 width: "20%",
+                                minWidth: "80px",
                                 position: "relative",
                                 float: "right",
                               }}
@@ -410,6 +415,7 @@ function ApplicationDetails({
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                             }}
                           >
                             Back
@@ -424,6 +430,7 @@ function ApplicationDetails({
                                 marginTop: "1rem",
                                 backgroundColor: "#064420",
                                 width: "20%",
+                                minWidth: "80px",
                                 position: "relative",
                                 float: "right",
                               }}
@@ -477,6 +484,7 @@ function ApplicationDetails({
                               marginTop: "1rem",
                               backgroundColor: "#064420",
                               width: "20%",
+                              minWidth: "80px",
                             }}
                           >
                             Back

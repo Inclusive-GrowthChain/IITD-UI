@@ -45,13 +45,14 @@ const LacProcurement = () => {
               <div className="store-modal">
                 <div className="container-fluid">
                   <div className="row">
-                    <div className="col-12 col-sm-4">
+                    <div className="col-12 col-md-6 col-xl-4">
                       <div className="store-card mt-4">
                         <div className="card-image">
                           <img
                             src="http://3.bp.blogspot.com/-TJ6Oh6-8h1w/UVNthg6cQzI/AAAAAAAADOc/hGfyrvUHzSc/s1600/lac3.jpg"
                             alt=""
                             height={280}
+                            className="store_img"
                           />
                           <DriveFileRenameOutlineOutlinedIcon
                             className="edit_image"
@@ -73,13 +74,14 @@ const LacProcurement = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="col-12 col-sm-4">
+                    <div className="col-12 col-md-6 col-xl-4">
                       <div className="store-card mt-4">
                         <div className="card-image">
                           <img
                             src="https://img3.exportersindia.com/product_images/bc-full/2018/9/1491297/seedlac-shellac-1536140025-4266463.jpg"
                             alt=""
                             height={280}
+                            className="store_img"
                           />
                           <DriveFileRenameOutlineOutlinedIcon
                             className="edit_image"
@@ -101,13 +103,14 @@ const LacProcurement = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="col-12 col-sm-4">
+                    <div className="col-12 col-md-6 col-xl-4">
                       <div className="store-card mt-4">
                         <div className="card-image">
                           <img
                             src="https://5.imimg.com/data5/WH/TW/MY-1496311/shellac-processed-versatile-lac-golden-kusmi-500x500.jpg"
                             alt=""
                             height={280}
+                            className="store_img"
                           />
                           <DriveFileRenameOutlineOutlinedIcon
                             className="edit_image"
@@ -135,13 +138,14 @@ const LacProcurement = () => {
             </div>
 
             <div className={`panel ${checkActive(2, "active")}`}>
-              <div className="col-12 col-sm-4">
+              <div className="col-12 col-md-6 col-xl-4">
                 <div className="store-card mt-4">
                   <div className="card-image">
                     <img
                       src="https://5.imimg.com/data5/WH/TW/MY-1496311/shellac-processed-versatile-lac-golden-kusmi-500x500.jpg"
                       alt=""
                       height={280}
+                      className="store_img"
                     />
                     <DriveFileRenameOutlineOutlinedIcon
                       className="edit_image"

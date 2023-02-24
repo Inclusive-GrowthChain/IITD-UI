@@ -1,0 +1,54 @@
+@media screen and (max-width: 768px) {
+  .tab {
+    margin: 0 2%;
+    padding: 2px 0;
+    font-weight: 600 ;
+    font-size: 12px;
+  }
+
+  .store-tab {
+    margin: 0 2%;
+    padding: 2px 0;
+    font-weight: 600 ;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+}
+
+@media screen and (min-width: 968px) and (max-width: 1500px) {
+  .lab_btn {
+    top: 0;
+  }
+
+  .card_table1 {
+    margin-top: 7.5%;
+  }
+}
+
+@media screen and (min-width: 568px) and (max-width: 968px) {
+  .lab_btn {
+    top: 0;
+  }
+
+  .card_table1 {
+    margin-top: 12.5%;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .lab_btn {
+    margin-top: 40px;
+  }
+
+  .card_table1 {
+    margin-top: 25%;
+  }
+
+  .list_container_inner {
+    top: 160px !important;
+  }
+
+  .tabs {
+    margin-top: 100px !important;    
+  }
+}

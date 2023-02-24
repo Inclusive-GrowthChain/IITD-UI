@@ -7,6 +7,8 @@ import Submited from "./Modals/Submited";
 import Aadhar from "./Modals/Aadhar";
 import Pan from "./Modals/Pan";
 
+import "./Fpo.css";
+
 const approvedMembershipList = [
   {
     loanId: 1,
@@ -106,7 +108,7 @@ function Farmer() {
   const handleClosePanCardImg = () => setShowPanCardImg(false)
 
   return (
-    <main id="main_container" className="main_container container-fluid">
+    <main id="main_container" className="main_container container-fluid itemContainer">
       <div className="">
         <h3>Farmer Information</h3>
       </div>
@@ -299,6 +301,7 @@ function Farmer() {
                                 border: "none",
                                 padding: "5px 10px",
                                 width: "20%",
+                                minWidth: "80px",
                                 fontSize: ".75rem",
                                 lineHeight: "1rem",
                               }}
@@ -308,7 +311,7 @@ function Farmer() {
                             </button>
                           </td>
                           <td>
-                            <button className="dropdown_btn text-center">
+                            <button className="dropdown_btn text-center" style={{width: '80%', minWidth: '100px'}}>
                               <select className="form-select" required="">
                                 <option value="select">Select</option>
                                 <option value="">Approve</option>

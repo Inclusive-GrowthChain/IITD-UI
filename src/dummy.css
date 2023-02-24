@@ -778,14 +778,16 @@ ul.nav-tab1 li.active {
 }
 
 .search {
-  width: 40%;
+  width: 100%;
+  max-width: 400px;
   position: relative;
-  left: 25rem;
-  bottom: 45px;
+  display: flex;
+  align-items: center;
+  top: 30px;
 }
 
 .search>.search_input {
-  width: 65%;
+  width: 100%;
   height: 50px;
   border: 1px solid #a5a29f;
   padding: 0 15px;
@@ -793,13 +795,17 @@ ul.nav-tab1 li.active {
 
 .search_icon {
   position: relative;
-  left: 24.5rem;
-  bottom: 2.3rem;
   cursor: pointer;
+  left: -30px;
+}
+
+.list_tab {
+  margin-top: 50px;
 }
 
 .tabs {
   display: flex;
+  width: 100%;
 }
 
 .tab {
@@ -852,10 +858,11 @@ ul.nav-tab1 li.active {
   background: #555;
 }
 
-.card_table1 {
+.card_table1, .card_table2 {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
   background-color: #fff;
   border-radius: 10px;
+  margin-top: 3%;
 }
 
 .info_btn {
@@ -1016,17 +1023,20 @@ ul.nav-tab1 li.active {
 .store_btn {
   background-color: #064420;
   width: 8%;
+  min-width: 100px;
   color: #fff;
   border: none;
   padding: 5px 5px;
   border-radius: 5px;
   position: relative;
   float: right;
-  right: 62px;
+  /* right: 62px; */
+  top: -10px
 }
 
 .store_tabs {
   display: flex;
+  width: 100%;
 }
 
 .store-tab {
@@ -1072,12 +1082,17 @@ ul.nav-tab1 li.active {
 }
 
 .store-card {
-  width: 30rem;
+  width: 100%;
   background-color: #fff;
   height: auto;
   max-height: 500px;
   border-radius: 10px;
   box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+}
+
+.store_img {
+  width: 100% !important;
+  object-fit: cover;  
 }
 
 .card-image>img {
@@ -1107,7 +1122,7 @@ ul.nav-tab1 li.active {
 
 .lab_btn {
   background-color: #064420;
-  width: 14%;
+  width: 200px;
   color: #fff;
   border: none;
   padding: 5px 5px;
@@ -1115,6 +1130,7 @@ ul.nav-tab1 li.active {
   position: relative;
   float: right;
   right: 50px;
+  top: -30px;
 }
 
 .card-details-header {
@@ -1125,6 +1141,7 @@ ul.nav-tab1 li.active {
   margin-top: 20px;
   padding: 10px 10px;
   width: 50%;
+  min-width: 300px;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
   background-color: #fff;
   border-radius: 10px;

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import LabSampleTest from "./Modals/LabSampleTest";
 
+import "./Fpo.css";
+
 const style = {
   backgroundColor: "#064420",
   color: "#fff",
@@ -26,7 +28,7 @@ const FarmerInformation = () => {
     activeIndex === index ? className : "";
 
   return (
-    <main id="main_container" className="main_container container-fluid">
+    <main id="main_container" className="main_container container-fluid itemContainer">
       <div className="">
         <h3 className="mb-4">Lab Test Information</h3>
       </div>
@@ -49,7 +51,7 @@ const FarmerInformation = () => {
             </div>
             <div className="panels">
               <div className={`panel ${checkActive(1, "active")}`}>
-                <button className="lab_btn" onClick={handleShow} style={{ marginTop: '-2%' }}>
+                <button className="lab_btn" onClick={handleShow}>
                   Apply for Sample Test
                 </button>
 
@@ -60,7 +62,7 @@ const FarmerInformation = () => {
                   />
                 </div>
 
-                <div className="card_table1" style={{ marginTop: '2%' }}>
+                <div className="card_table1">
                   <div className=" table-responsive">
                     <table>
                       <thead
@@ -195,7 +197,7 @@ const FarmerInformation = () => {
                 </div>
               </div>
               <div className={`panel ${checkActive(2, "active")}`}>
-                <div className="card_table1">
+                <div className="card_table2">
                   <div className=" table-responsive">
                     <table>
                       <thead
@@ -247,7 +249,7 @@ const FarmerInformation = () => {
                     </table>
                   </div>
                 </div>
-                <div className="card-details-button">
+                <div className="card-details-button" style={{marginBottom: '40px'}}>
                   <div className="card-details-header">
                     <span>* GST 18% extra</span> <br />
                     Payment Details: Payments for testing charges may be

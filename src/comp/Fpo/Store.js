@@ -2,6 +2,8 @@ import { useState } from "react";
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import FpoStore from "./Modals/FpoStore";
 
+import "./Fpo.css";
+
 const Store = () => {
   const [show, setShow] = useState(false);
 
@@ -14,7 +16,7 @@ const Store = () => {
     activeIndex === index ? className : "";
 
   return (
-    <main id="main_container" className="main_container container-fluid">
+    <main id="main_container" className="main_container container-fluid itemContainer">
       <div className="">
         <h3 className="mb-4">FPO Store Information</h3>
       </div>
@@ -50,13 +52,14 @@ const Store = () => {
               <div className="store-modal">
                 <div className="container-fluid">
                   <div className="row">
-                    <div className="col-12 col-sm-4">
+                    <div className="col-12 col-md-6 col-xl-4">
                       <div className="store-card mt-4">
                         <div className="card-image">
                           <img
                             src="http://3.bp.blogspot.com/-TJ6Oh6-8h1w/UVNthg6cQzI/AAAAAAAADOc/hGfyrvUHzSc/s1600/lac3.jpg"
                             alt=""
                             height={280}
+                            className="store_img"
                           />
                           <DriveFileRenameOutlineOutlinedIcon className="edit_image" onClick={handleShow} />
                         </div>
@@ -75,13 +78,14 @@ const Store = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="col-12 col-sm-4">
+                    <div className="col-12 col-md-6 col-xl-4">
                       <div className="store-card mt-4">
                         <div className="card-image">
                           <img
                             src="https://img3.exportersindia.com/product_images/bc-full/2018/9/1491297/seedlac-shellac-1536140025-4266463.jpg"
                             alt=""
                             height={280}
+                            className="store_img"
                           />
                           <DriveFileRenameOutlineOutlinedIcon className="edit_image" onClick={handleShow} />
                         </div>
@@ -100,13 +104,14 @@ const Store = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="col-12 col-sm-4">
+                    <div className="col-12 col-md-6 col-xl-4" style={{marginBottom: '40px'}}>
                       <div className="store-card mt-4">
                         <div className="card-image">
                           <img
                             src="https://5.imimg.com/data5/WH/TW/MY-1496311/shellac-processed-versatile-lac-golden-kusmi-500x500.jpg"
                             alt=""
                             height={280}
+                            className="store_img"
                           />
                           <DriveFileRenameOutlineOutlinedIcon className="edit_image" onClick={handleShow} />
                         </div>
