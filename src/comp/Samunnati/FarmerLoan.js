@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Modal from "react-bootstrap/Modal";
 import TabNavItem from "./Tabs/TabNavItem";
 import TabContent from "./Tabs/TabContent";
 import { Link } from "react-router-dom";

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Modal from "react-bootstrap/Modal";
 import RepaymentStructure from "./Modals/RepaymentStructure";
 import AddRepayment from "./Modals/AddRepayment";
 import RepaymentConfirm from "./Modals/RepaymentConfirm";

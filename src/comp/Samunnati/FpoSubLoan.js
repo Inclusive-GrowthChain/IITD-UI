@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Modal from "react-bootstrap/Modal";
 import TabNavItem from "./Tabs/TabNavItem";
 import TabContent from "./Tabs/TabContent";
 import PendingLoanApp from "./Modals/FpoSubLoan/PendingLoanApp";
