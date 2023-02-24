@@ -17,10 +17,10 @@ const FarmerStore = lazy(() => import("./comp/Farmer/Store"))
 const FarmerLoan = lazy(() => import("./comp/Farmer/Loan"))
 const FarmerWrapper = lazy(() => import("./comp/Farmer"))
 
-const CorporateCustomer = lazy(() => import("./pages/fpo/CorporateCustomer"))
-const FpoFarmerLoan = lazy(() => import("./pages/fpo/FarmerLoan"))
+const FpoCorporateCustomer = lazy(() => import("./comp/Fpo/CorporateCustomer"))
+const FpoFarmerLoan = lazy(() => import("./comp/Fpo/FarmerLoan"))
 const FpoLoan = lazy(() => import("./pages/fpo/FpoLoan"))
-const Setting = lazy(() => import("./pages/fpo/Setting"))
+const FpoSetting = lazy(() => import("./comp/Fpo/Settings"))
 
 const FpoLacProcurement = lazy(() => import("./comp/Fpo/LacProcurement"))
 const FpoLabTesting = lazy(() => import("./comp/Fpo/LabTesting"))
@@ -44,13 +44,13 @@ const NisaLabTesting = lazy(() => import("./comp/Nisa/LabTesting"))
 const NisaSettings = lazy(() => import("./comp/Nisa/Settings"))
 const NisaWrapper = lazy(() => import("./comp/Nisa"))
 
-const SammunatiFarmerSubLoanPage = lazy(() => import("./pages/Samunnati/FarmerSubLoanPage"))
-const SammunatiFPOSubLoanPage = lazy(() => import("./pages/Samunnati/FpoSubLoanPage"))
-const SamunnatiFarmerLoan = lazy(() => import("./pages/Samunnati/FarmerLoan"))
-const SammunatiSettings = lazy(() => import("./pages/Samunnati/Settings"))
-const SamunnatiFPOLoan = lazy(() => import("./pages/Samunnati/FpoLoan"))
-const SamunnatiFPOInfo = lazy(() => import("./pages/Samunnati/FpoInfo"))
-const SammunatiFPOPage = lazy(() => import("./pages/Samunnati/FpoPage"))
+const SammunatiFarmerSubLoanPage = lazy(() => import("./comp/Samunnati/FarmerSubLoan"))
+const SammunatiFPOSubLoan = lazy(() => import("./comp/Samunnati/FpoSubLoan"))
+const SamunnatiFarmerLoan = lazy(() => import("./comp/Samunnati/FarmerLoan"))
+const SammunatiSettings = lazy(() => import("./comp/Samunnati/Settings"))
+const SamunnatiFPOLoan = lazy(() => import("./comp/Samunnati/FpoLoan"))
+const SamunnatiFPOInfo = lazy(() => import("./comp/Samunnati/FpoInfo"))
+const SammunatiFPOPage = lazy(() => import("./comp/Samunnati/FpoPage"))
 const SamunnatiWrapper = lazy(() => import("./comp/Samunnati"))
 
 const CorporateClientLacBidding = lazy(() => import("./comp/CorporateClient/Bidding"))
@@ -71,7 +71,7 @@ function App() {
         <Route path="signup" element={<Register />} />
 
         {/* farmer route */}
-        <Route path="farmer" element={<FarmerWrapper />}>farmer/selling-price
+        <Route path="farmer" element={<FarmerWrapper />}>
           <Route path="transaction-history" element={<FarmerTransactionHistory />} />
           <Route path="crop-advisory2" element={<FarmerCropAdvisory2 />} />
           <Route path="selling-price" element={<FarmerSellingPrice />} />
@@ -92,13 +92,13 @@ function App() {
           <Route path="dashboard" element={<FpoDashboard />} />
           <Route path="support" element={<TemplateSupport />} />
           <Route path="farmer" element={<FpoFarmer />} />
+          <Route path="corporate-customer" element={<FpoCorporateCustomer />} />
+          <Route path="farmerloan" element={<FpoFarmerLoan />} />
           <Route path="store" element={<FpoStore />} />
+          <Route path="settings" element={<FpoSetting />} />
         </Route>
 
-        <Route path="/fpo/farmerloan" element={<FpoFarmerLoan />} />
         <Route path="/fpo/fpoloan" element={<FpoLoan />} />
-        <Route path="/fpo/corporate-customer" element={<CorporateCustomer />} />
-        <Route path="/fpo/settings" element={<Setting />} />
 
 
         {/* Admin route */}
@@ -125,16 +125,15 @@ function App() {
         {/* Samunnati route */}
         <Route path="samunnati" element={<SamunnatiWrapper />}>
           <Route path="support" element={<TemplateSupport />} />
+          <Route path="fpo-loan" element={<SamunnatiFPOLoan />} />
+          <Route path="fpo-info" element={<SamunnatiFPOInfo />} />
+          <Route path="farmer-loan" element={<SamunnatiFarmerLoan />} />
+          <Route path="fpo-subloan" element={<SammunatiFPOSubLoan />} />
+          <Route path="farmer-subloan" element={<SammunatiFarmerSubLoanPage />} />
+          <Route path="fpo-page" element={<SammunatiFPOPage />} />
+          <Route path="settings" element={<SammunatiSettings />} />
         </Route>
-
-        <Route path="/samunnati/fpo-loan" element={<SamunnatiFPOLoan />} />
-        <Route path="/samunnati/fpo-info" element={<SamunnatiFPOInfo />} />
-        <Route path="/samunnati/fpo-page" element={<SammunatiFPOPage />} />
-        <Route path="/samunnati/fpo-subloan" element={<SammunatiFPOSubLoanPage />} />
-        <Route path="/samunnati/farmer-loan" element={<SamunnatiFarmerLoan />} />
-        <Route path="/samunnati/farmer-subloan" element={<SammunatiFarmerSubLoanPage />} />
-        <Route path="/samunnati/samunnati-settings" element={<SammunatiSettings />} />
-
+        
 
         {/* Corporate Client route */}
         <Route path="corporate-client" element={<CorporateClientWrapper />}>
