@@ -18,16 +18,15 @@ const FarmerLoan = lazy(() => import("./comp/Farmer/Loan"))
 const FarmerWrapper = lazy(() => import("./comp/Farmer"))
 
 const FpoCorporateCustomer = lazy(() => import("./comp/Fpo/CorporateCustomer"))
-const FpoFarmerLoan = lazy(() => import("./comp/Fpo/FarmerLoan"))
-const FpoLoan = lazy(() => import("./pages/fpo/FpoLoan"))
-const FpoSetting = lazy(() => import("./comp/Fpo/Settings"))
-
 const FpoLacProcurement = lazy(() => import("./comp/Fpo/LacProcurement"))
 const FpoLabTesting = lazy(() => import("./comp/Fpo/LabTesting"))
+const FpoFarmerLoan = lazy(() => import("./comp/Fpo/FarmerLoan"))
 const FpoFarmerInfo = lazy(() => import("./comp/Fpo/FarmerInfo"))
 const FpoDashboard = lazy(() => import("./comp/Fpo/Dashboard"))
+const FpoSetting = lazy(() => import("./comp/Fpo/Settings"))
 const FpoFarmer = lazy(() => import("./comp/Fpo/Farmer"))
 const FpoStore = lazy(() => import("./comp/Fpo/Store"))
+const FpoLoan = lazy(() => import("./comp/Fpo/Loan"))
 const FpoWrapper = lazy(() => import("./comp/Fpo"))
 
 const AdminCorporateClient = lazy(() => import("./comp/Admin/CorporateClient"))
@@ -66,7 +65,6 @@ function App() {
   return (
     <Suspense fallback={<Loader wrapperCls='h-screen' />}>
       <Routes>
-        {/* Farmer login & Signup route */}
         <Route path="/" element={<Login />} />
         <Route path="signup" element={<Register />} />
 
@@ -83,23 +81,20 @@ function App() {
           <Route path="loan" element={<FarmerLoan />} />
         </Route>
 
-
         {/* FPO route */}
         <Route path="fpo" element={<FpoWrapper />}>
+          <Route path="corporate-customer" element={<FpoCorporateCustomer />} />
           <Route path="farmer-information" element={<FpoFarmerInfo />} />
           <Route path="lac-procurement" element={<FpoLacProcurement />} />
           <Route path="lab-testing" element={<FpoLabTesting />} />
+          <Route path="farmerloan" element={<FpoFarmerLoan />} />
           <Route path="dashboard" element={<FpoDashboard />} />
+          <Route path="settings" element={<FpoSetting />} />
           <Route path="support" element={<TemplateSupport />} />
           <Route path="farmer" element={<FpoFarmer />} />
-          <Route path="corporate-customer" element={<FpoCorporateCustomer />} />
-          <Route path="farmerloan" element={<FpoFarmerLoan />} />
+          <Route path="fpoloan" element={<FpoLoan />} />
           <Route path="store" element={<FpoStore />} />
-          <Route path="settings" element={<FpoSetting />} />
         </Route>
-
-        <Route path="/fpo/fpoloan" element={<FpoLoan />} />
-
 
         {/* Admin route */}
         <Route path="admin" element={<AdminWrapper />}>
@@ -111,7 +106,6 @@ function App() {
           <Route path="fpo" element={<AdminFPO />} />
         </Route>
 
-
         {/* NISA route */}
         <Route path="nisa" element={<NisaWrapper />}>
           <Route path="crop-advisory" element={<NisaCropAdvisory />} />
@@ -120,7 +114,6 @@ function App() {
           <Route path="settings" element={<NisaSettings />} />
           <Route path="support" element={<TemplateSupport />} />
         </Route>
-
 
         {/* Samunnati route */}
         <Route path="samunnati" element={<SamunnatiWrapper />}>
@@ -133,7 +126,6 @@ function App() {
           <Route path="fpo-page" element={<SammunatiFPOPage />} />
           <Route path="settings" element={<SammunatiSettings />} />
         </Route>
-        
 
         {/* Corporate Client route */}
         <Route path="corporate-client" element={<CorporateClientWrapper />}>
@@ -149,7 +141,6 @@ function App() {
           <Route path="settings" element={<IITDhanbadSettings />} />
           <Route path="support" element={<TemplateSupport />} />
         </Route>
-
       </Routes>
     </Suspense>
   )

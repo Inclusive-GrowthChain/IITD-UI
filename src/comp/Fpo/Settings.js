@@ -1,7 +1,5 @@
 import { useState } from "react";
-
-import TabNavItem from "./Tabs/TabNavItem";
-import TabContent from "./Tabs/TabContent";
+import { TabNavItem, TabContent } from "../UIComp/Tabs";
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -18,7 +16,7 @@ const Settings = () => {
               Profile
             </h3>
           </div>
-          <div className="row" style={{marginBottom: '40px'}}>
+          <div className="row" style={{ marginBottom: '40px' }}>
             <div className="col">
               <div
                 className="setting_card shadow border-start-primary py-2"
@@ -56,7 +54,7 @@ const Settings = () => {
                     </ul>
                     {/* <div className="profile_title">
                       </div> */}
-                    <div className="outlet" style={{marginBottom: '30px'}}>
+                    <div className="outlet" style={{ marginBottom: '30px' }}>
                       <TabContent id="tab1" className="setting_content" activeTab={activeTab}>
                         <div>
                           <div className="card-body">
