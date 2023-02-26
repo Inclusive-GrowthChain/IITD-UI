@@ -14,7 +14,7 @@ const LacProcurement = () => {
     activeIndex === index ? className : "";
 
   return (
-    <main id="main_container" className="main_container container-fluid">
+    <main id="main_container" className="main_container container-fluid itemContainer">
       <div className="">
         <h3 className="mb-4">Procurement Information</h3>
       </div>

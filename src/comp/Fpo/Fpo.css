@@ -13,6 +13,14 @@
     font-size: 14px;
     margin-top: 10px;
   }
+
+  .loan_btn_container {
+    margin-top: 40px;
+  }
+
+  .card_wrapper {
+    margin-top: 20px;
+  }
 }
 
 @media screen and (min-width: 968px) and (max-width: 1500px) {

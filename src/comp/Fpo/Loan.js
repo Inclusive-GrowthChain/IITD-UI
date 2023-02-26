@@ -12,6 +12,8 @@ import LoanDetails from "./Modals/FpoLoan/LoanDetails";
 import Invoice from "./Modals/FpoLoan/Invoice";
 import Confirm from "./Modals/FpoLoan/Confirm";
 
+import "./Fpo.css";
+
 const approvedloanList = [
   {
     id: "L 1",
@@ -252,13 +254,13 @@ const Loan = ({ props }) => {
 
   return (
     <>
-      <main id="main_container" className="main_container container-fluid">
+      <main id="main_container" className="main_container container-fluid itemContainer">
         <div className="d-flex align-items-center">
           <h3 className="flex-grow-1">Loan Information</h3>
-
+        </div>
+        <div className="d-flex loan_btn_container">
           <button
             className="loan_btn"
-            style={{ width: "280px", fontSize: "14px" }}
             onClick={() => {
               setWindowId(generateRandomWindowID())
               handleShowAdd()
@@ -290,60 +292,62 @@ const Loan = ({ props }) => {
           </div>
 
           <div className="panels">
-            <div className={`panel ${checkActive(1, "active")}`}>
+            <div>
               <button
                 className="loan-btn"
                 style={{
                   backgroundColor: "#064420",
                   width: "14%",
+                  minWidth: "150px",
                   color: "#fff",
                   border: "none",
                   padding: "5px 5px",
                   borderRadius: "5px",
                   position: "relative",
                   float: "right",
-                  top: "25px",
+                  top: "-25px",
                   right: "50px",
                 }}
                 onClick={handleShowApplyLoan}
               >
                 Apply for Loan
               </button>
-
-              <div className="card_wrapper">
+            </div>
+            <div className={`panel ${checkActive(1, "active")}`} style={{ marginTop: '40px' }}>
+              <div className="card_wrapper" style={{marginTop: "0"}}>
                 <div className="card_content">
                   <div style={{ display: "flex" }}>
                     <button
                       className={toggleState === 1 ? "tab active" : "tab"}
                       onClick={() => toggleTab(1)}
-                      style={{ fontSize: "15px" }}
+                      style={{ padding: "8px" }}
                     >
                       Approved Loans
                     </button>
                     <button
                       className={toggleState === 2 ? "tab active" : "tab"}
                       onClick={() => toggleTab(2)}
-                      style={{ fontSize: "15px" }}
+                      style={{ padding: "8px" }}
                     >
                       Rejected Loans
                     </button>
                     <button
                       className={toggleState === 3 ? "tab active" : "tab"}
                       onClick={() => toggleTab(3)}
-                      style={{ fontSize: "15px" }}
+                      style={{ padding: "8px" }}
                     >
                       Pending Loans
                     </button>
                     <button
                       className={toggleState === 4 ? "tab active" : "tab"}
                       onClick={() => toggleTab(4)}
-                      style={{ fontSize: "15px" }}
+                      style={{ padding: "8px" }}
                     >
                       Loan Window
                     </button>
                   </div>
 
-                  <div className="panels">
+                  <div className="panels" style={{ overflowY: "auto" }}>
                     <div className={toggleState === 1 ? "panel active" : "panel"}>
                       <table className="table-borderless">
                         <thead
@@ -518,7 +522,7 @@ const Loan = ({ props }) => {
               </div>
             </div>
 
-            <div className={`panel ${checkActive(2, "active")}`}>
+            <div className={`panel ${checkActive(2, "active")}`} style={{ marginTop: '40px' }}>
               <FPOLoanTab
                 Comp={
                   <LoanWindowTable
