@@ -13,21 +13,27 @@ import SamunnatiSignup from "./Modals/SamunnatiSignup";
 import NisaSignup from "./Modals/NisaSignup";
 import FpoSignup from "./Modals/FpoSignup";
 
+const navigationList = {
+  fpo: "farmer",
+  nisa: "crop-advisory",
+  admin: "farmer",
+  farmer: "dashboard",
+  samunnati: "fpo-loan",
+  "iitd-dhanbad": "dashboard",
+  "corporate-client": "lac-bidding",
+}
+
 const Login = () => {
   const [isOpenSamunnati, setIsOpenSamunnati] = useState(false)
   const [isOpenCorporate, setIsOpenCorporate] = useState(false)
   const [passwordShown, setPasswordShown] = useState(false)
+  const [hamburgerOpen, setHamburgerOpen] = useState(false)
   const [isOpenIinrg, setIsOpenIinrg] = useState(false)
   const [isOpenFpo, setIsOpenFpo] = useState(false)
   const [details, setDetails] = useState({
     username: "",
     password: "",
   })
-  const [hamburgerOpen, setHamburgerOpen] = useState(false)
-  const [isOpenHamburgerSamunnati, setIsOpenHamburgerSamunnati] = useState(false)
-  const [isOpenHamburgerCorporate, setIsOpenHamburgerCorporate] = useState(false)
-  const [isOpenHamburgerIinrg, setIsOpenHamburgerIinrg] = useState(false)
-  const [isOpenHamburgerFpo, setIsOpenHamburgerFpo] = useState(false)
 
   const navigate = useNavigate()
 
@@ -38,122 +44,19 @@ const Login = () => {
     }))
   }
 
-  const onSubmit = () => {
-    if (details.username === "farmer" && details.password === "farmer") {
-      navigate("/farmer/dashboard")
-    }
-    if (details.username === "fpo" && details.password === "fpo") {
-      navigate("/fpo/farmer")
-    }
-    if (details.username === "nisa" && details.password === "nisa") {
-      navigate("/nisa/crop-advisory")
-    }
-    if (details.username === "samunnati" && details.password === "samunnati") {
-      navigate("/samunnati/fpo-loan")
-    }
-    if (
-      details.username === "corporate_client" &&
-      details.password === "corporate_client"
-    ) {
-      navigate("/corporate-client/lac-bidding")
-    }
-    if (details.username === "admin" && details.password === "admin") {
-      navigate("/admin/farmer")
-    }
-    if (details.username === "iit_dhanbad" && details.password === "iit_dhanbad") {
-      navigate("/iit-dhanbad/dashboard")
-    }
+  const onSubmit = e => {
+    e.preventDefault()
 
+    if (details.username !== details.password) return;
+
+    let to = navigationList[details.username]
+    if (to) navigate(`/${details.username}/${to}`)
   }
 
   const togglePasswordVisibility = () => setPasswordShown(passwordShown ? false : true)
 
   return (
     <div className="auth-bg">
-      {/* <div className="header">
-        <div className="header_wrapper">
-          <div className="logo_container">
-            <img src={logo} className="logo" alt="logo" />
-            <p className="logo_text">IIT DHANBAD</p>
-          </div>
-          <div
-            style={{
-              position: "relative",
-              backgroundColor: "green",
-              color: "#fff",
-              border: "none",
-              cursor: "pointer",
-              borderRadius: "20px",
-            }}
-            className="header_wrapper_menu_container"
-          >
-            <Dropdown className="fullwidth_menu">
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Organization Signup
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={() => setIsOpenFpo(true)}>
-                  FPO
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => setIsOpenIinrg(true)}>
-                  NISA
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => setIsOpenSamunnati(true)}>
-                  Samunnati
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => setIsOpenCorporate(true)}>
-                  Corporate Client
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-
-            <div className="hamburger_menu" onClick={() => setHamburgerOpen(!hamburgerOpen)}>
-              <div className="hamburger_menu_line"></div>
-              <div className="hamburger_menu_line"></div>
-              <div className="hamburger_menu_line"></div>
-            </div>
-            {
-              hamburgerOpen && (
-                <div className="hamburger_container">
-                  <div className="hamburger_menu_wrapper_item">
-                    <Dropdown>
-                      <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        Organization Signup
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => setIsOpenHamburgerFpo(true)}>
-                          FPO
-                        </Dropdown.Item>
-                        <Dropdown.Item onClick={() => setIsOpenHamburgerIinrg(true)}>
-                          NISA
-                        </Dropdown.Item>
-                        <Dropdown.Item onClick={() => setIsOpenHamburgerSamunnati(true)}>
-                          Samunnati
-                        </Dropdown.Item>
-                        <Dropdown.Item onClick={() => setIsOpenHamburgerCorporate(true)}>
-                          Corporate Client
-                        </Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </div>
-                  <div className="hamburger_menu_wrapper_item">
-                    <Link to="/signup" className="account_wrapper">
-                      Farmer Signup
-                    </Link>
-                  </div>
-                </div>
-              )
-            }
-          </div>
-
-          <Link to="/signup" className="account_wrapper" id="fullwidth_menu">
-            Farmer Signup
-          </Link>
-        </div>
-      </div> */}
-
       <div className="header">
         <div className="header_wrapper">
           <div className="logo_container">
@@ -218,16 +121,16 @@ const Login = () => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                      <Dropdown.Item onClick={() => setIsOpenHamburgerFpo(true)}>
+                      <Dropdown.Item onClick={() => setIsOpenFpo(true)}>
                         FPO
                       </Dropdown.Item>
-                      <Dropdown.Item onClick={() => setIsOpenHamburgerIinrg(true)}>
+                      <Dropdown.Item onClick={() => setIsOpenIinrg(true)}>
                         NISA
                       </Dropdown.Item>
-                      <Dropdown.Item onClick={() => setIsOpenHamburgerSamunnati(true)}>
+                      <Dropdown.Item onClick={() => setIsOpenSamunnati(true)}>
                         Samunnati
                       </Dropdown.Item>
-                      <Dropdown.Item onClick={() => setIsOpenHamburgerCorporate(true)}>
+                      <Dropdown.Item onClick={() => setIsOpenCorporate(true)}>
                         Corporate Client
                       </Dropdown.Item>
                     </Dropdown.Menu>

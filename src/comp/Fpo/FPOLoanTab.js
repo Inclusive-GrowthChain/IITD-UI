@@ -1,15 +1,12 @@
 import { useState } from "react";
-import Modal from "react-bootstrap/Modal";
-import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
 import RepaymentStructure from "./Modals/FpoLoan/RepaymentStructure";
 import ApproveLoanApp from "./Modals/FpoLoan/ApproveLoanApp";
 import RejectLoanApp from "./Modals/FpoLoan/RejectLoanApp";
 import ConfirmLoanStatus from "./Modals/FpoLoan/ConfirmLoanStatus";
 import LoanApplication from "./Modals/FpoLoan/LoanApplication";
+import ConfirmBox from "./Modals/ConfirmBox";
 import Aadhar from "./Modals/Aadhar";
 import Pan from "./Modals/Pan";
-import logo from "../../assets/img/logo.png";
-import ConfirmBox from "./Modals/ConfirmBox";
 
 function FpoLoanTab({ Comp }) {
   const [showConfirmLoanStatus, setShowConfirmLoanStatus] = useState(false)
@@ -55,7 +52,7 @@ function FpoLoanTab({ Comp }) {
 
   return (
     <div className="loan_fpo">
-      <div className="aggregate_repayment_container" style={{width: "100%", display: "flex", justifyContent: "flex-end"}}>
+      <div className="aggregate_repayment_container" style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}>
         <button
           style={{
             color: "white",
@@ -405,7 +402,7 @@ function FpoLoanTab({ Comp }) {
       />
 
     </div>
-  );
+  )
 }
 
 export default FpoLoanTab;
