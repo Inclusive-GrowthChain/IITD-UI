@@ -57,6 +57,13 @@ const Login = () => {
     ) {
       navigate("/corporate-client/lac-bidding")
     }
+    if (details.username === "admin" && details.password === "admin") {
+      navigate("/admin/farmer")
+    }
+    if (details.username === "iit_dhanbad" && details.password === "iit_dhanbad") {
+      navigate("/iit-dhanbad/dashboard")
+    }
+
   }
 
   const togglePasswordVisibility = () => setPasswordShown(passwordShown ? false : true)
