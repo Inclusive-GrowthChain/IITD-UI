@@ -19,7 +19,7 @@ const navigationList = {
   admin: "farmer",
   farmer: "dashboard",
   samunnati: "fpo-loan",
-  "iitd-dhanbad": "dashboard",
+  "iit-dhanbad": "dashboard",
   "corporate-client": "lac-bidding",
 }
 
