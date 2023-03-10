@@ -190,11 +190,13 @@ const Loan = ({ props }) => {
   const [currentLoan, setCurrentLoan] = useState({})
   const [activeIndex, setActiveIndex] = useState(1)
   const [toggleState, setToggleState] = useState(1)
+  const [toggleState2, setToggleState2] = useState(1)
   const [windowId, setWindowId] = useState("")
   const [noOfRows, setNoOfRows] = useState(1)
   const [showApp, setShowApp] = useState(false)
   const [showAdd, setShowAdd] = useState(false)
   const [step, setStep] = useState(0)
+  const [activeTab, setActiveTab] = useState(1)
 
   const checkActive = (index, className) => activeIndex === index ? className : ""
 
@@ -216,6 +218,7 @@ const Loan = ({ props }) => {
   const handleSubmit = () => alert("you are successfully submitted")
   const handleClick = (index) => setActiveIndex(index)
   const toggleTab = (index) => setToggleState(index)
+  const toggleTab2 = (index) => setToggleState2(index)
 
   const handleCloseApp = () => {
     setShowApp(false)
@@ -266,7 +269,9 @@ const Loan = ({ props }) => {
               handleShowAdd()
             }}
           >
-            Apply for Farmer Loan Window
+            {
+              activeTab === 1 ? "Apply for Working Capital Loan" : "Apply for Farmer Loan"
+            }
           </button>
         </div>
 
@@ -276,6 +281,7 @@ const Loan = ({ props }) => {
               className={`tab ${checkActive(1, "active")}`}
               onClick={() => {
                 handleClick(1)
+                setActiveTab(1)
               }}
             >
               Working Capital Loan
@@ -285,6 +291,7 @@ const Loan = ({ props }) => {
               className={`tab ${checkActive(2, "active")}`}
               onClick={() => {
                 handleClick(2)
+                setActiveTab(2)
               }}
             >
               Farmer Loan
@@ -510,6 +517,212 @@ const Loan = ({ props }) => {
                     </div>
 
                     <div className={toggleState === 4 ? "panel active" : "panel"}>
+                      <LoanWindowTable
+                        onClick={() => {
+                          handleShowApp()
+                          setWindowId(generateRandomWindowID())
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="card_wrapper" style={{marginTop: "0"}}>
+                <div className="card_content">
+                  <div style={{ display: "flex" }}>
+                    <button
+                      className={toggleState2 === 1 ? "tab active" : "tab"}
+                      onClick={() => toggleTab2(1)}
+                      style={{ padding: "8px" }}
+                    >
+                      Approved Loans
+                    </button>
+                    <button
+                      className={toggleState2 === 2 ? "tab active" : "tab"}
+                      onClick={() => toggleTab2(2)}
+                      style={{ padding: "8px" }}
+                    >
+                      Rejected Loans
+                    </button>
+                    <button
+                      className={toggleState2 === 3 ? "tab active" : "tab"}
+                      onClick={() => toggleTab2(3)}
+                      style={{ padding: "8px" }}
+                    >
+                      Pending Loans
+                    </button>
+                    <button
+                      className={toggleState2 === 4 ? "tab active" : "tab"}
+                      onClick={() => toggleTab2(4)}
+                      style={{ padding: "8px" }}
+                    >
+                      Loan Window
+                    </button>
+                  </div>
+
+                  <div className="panels" style={{ overflowY: "auto" }}>
+                    <div className={toggleState2 === 1 ? "panel active" : "panel"}>
+                      <table className="table-borderless">
+                        <thead
+                          style={{
+                            color: "#064420",
+                            fontSize: "17px",
+                            verticalAlign: "top",
+                          }}
+                        >
+                          <tr>
+                            <th>Date of Loan Approval</th>
+                            <th>Name of FPO</th>
+                            <th>FPO Contact</th>
+                            <th>Granted Loan Amount</th>
+                            <th>Farmer Name</th>
+                            <th>Loan Details</th>
+                          </tr>
+                        </thead>
+                        <tbody
+                          style={{
+                            color: "#000",
+                            fontSize: "15px",
+                            fontWeight: "500",
+                          }}
+                        >
+                          {approvedloanList.map((item) => (
+                            <tr key={item.id}>
+                              <td>{item.Loan_approval}</td>
+                              <td>{item.name_fpo}</td>
+                              <td>{item.fpo_contact}</td>
+                              <td>{item.granted_loan}</td>
+                              <td>{item.farmerName}</td>
+                              <td>
+                                <button
+                                  style={{
+                                    backgroundColor: "#064420",
+                                    color: "#fff",
+                                    alignItems: "center",
+                                    borderRadius: "5px",
+                                    border: "none",
+                                    padding: "0.25rem 1rem",
+                                    width: "fit-content",
+                                    fontSize: ".75rem",
+                                    lineHeight: "1rem",
+                                  }}
+                                  onClick={() => {
+                                    setCurrentLoan(item)
+                                    handleShowLoanDetails()
+                                  }}
+                                >
+                                  view
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div className={toggleState2 === 2 ? "panel active" : "panel"}>
+                      <table className="table table-borderless">
+                        <thead
+                          style={{
+                            color: "#064420",
+                            fontSize: "18px",
+                            verticalAlign: "top",
+                            textAlign: "center",
+                            fontWeight: 600,
+                          }}
+                        >
+                          <tr>
+                            <td>Date of Application</td>
+                            <td>Name of FPO</td>
+                            <td>Contact No.</td>
+                            <td>Requested Loan Amount</td>
+                            <td>Loan Application</td>
+                            <td>Reason for Rejection</td>
+                          </tr>
+                        </thead>
+                        <tbody
+                          style={{
+                            color: "#000",
+                            fontSize: "16px",
+                            fontWeight: "500",
+                            textAlign: "center",
+                          }}
+                        >
+                          {rejectedloanList.map((id) => (
+                            <tr>
+                              <td>{id.dateOfApp}</td>
+                              <td>{id.fpoName}</td>
+                              <td>{id.contact}</td>
+                              <td>{id.requestedAmount}</td>
+                              <td>
+                                <button
+                                  style={{
+                                    backgroundColor: "#064420",
+                                    color: "#fff",
+                                    alignItems: "center",
+                                    borderRadius: "5px",
+                                    border: "none",
+                                    padding: "0.25rem 1rem",
+                                    width: "fit-content",
+                                    fontSize: ".75rem",
+                                    lineHeight: "1rem",
+                                  }}
+                                  onClick={() => {
+                                    setCurrentLoan(id)
+                                    handleShowRejectionLoan()
+                                  }}
+                                >
+                                  view
+                                </button>
+                              </td>
+                              <td>{id.reasonForRejection}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div className={toggleState2 === 3 ? "panel active" : "panel"}>
+                      <table className="table table-borderless">
+                        <thead
+                          style={{
+                            color: "#064420",
+                            fontSize: "17px",
+                            verticalAlign: "top",
+                            textAlign: "center",
+                            fontWeight: "600",
+                          }}
+                        >
+                          <tr>
+                            <td>Date of Application</td>
+                            <td>Name of FPO</td>
+                            <td>Contact No.</td>
+                            <td>Requested Loan Amount</td>
+                            <td>Loan Application</td>
+                          </tr>
+                        </thead>
+                        <tbody
+                          style={{
+                            color: "#000",
+                            fontSize: "16px",
+                            fontWeight: "500",
+                            textAlign: "center",
+                          }}
+                        >
+                          {pendingloanList.map((id) => (
+                            <tr>
+                              <td>{id.dateOfApp}</td>
+                              <td>{id.fpoName}</td>
+                              <td>{id.contact}</td>
+                              <td>{id.requestedAmount}</td>
+                              <td>pending</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div className={toggleState2 === 4 ? "panel active" : "panel"}>
                       <LoanWindowTable
                         onClick={() => {
                           handleShowApp()

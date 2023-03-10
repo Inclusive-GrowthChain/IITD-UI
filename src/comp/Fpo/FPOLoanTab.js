@@ -18,6 +18,7 @@ function FpoLoanTab({ Comp }) {
   const [showConfirmBox, setShowConfirmBox] = useState(false)
   const [showPanCardImg, setShowPanCardImg] = useState(false)
   const [toggleState, setToggleState] = useState(1)
+  const [toggleState2, setToggleState2] = useState(1)
   const [step, setStep] = useState(0)
 
   const handleCloseConfirmLoanStatus = () => setShowConfirmLoanStatus(false)
@@ -34,6 +35,7 @@ function FpoLoanTab({ Comp }) {
   const handleCloseConfirmBox = () => setShowConfirmBox(false)
   const handleShowPanCardImg = () => setShowPanCardImg(true)
   const toggleTab = (index) => setToggleState(index)
+  const toggleTab2 = (index) => setToggleState2(index)
 
   const changeLoanStatus = (e) => {
     e.preventDefault()
@@ -346,6 +348,287 @@ function FpoLoanTab({ Comp }) {
             </div>
 
             <div className={toggleState === 4 ? "panel active" : "panel"}>
+              {Comp}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="card_wrapper">
+        <div className="card_content">
+          <div style={{ display: "flex" }}>
+            <button
+              className={toggleState2 === 1 ? "tab active" : "tab"}
+              onClick={() => toggleTab2(1)}
+              style={{ width: "200px" }}
+            >
+              Approved Application
+            </button>
+            <button
+              className={toggleState2 === 2 ? "tab active" : "tab"}
+              onClick={() => toggleTab2(2)}
+              style={{ width: "200px" }}
+            >
+              Applications History
+            </button>
+            <button
+              className={toggleState2 === 3 ? "tab active" : "tab"}
+              onClick={() => toggleTab2(3)}
+              style={{ width: "200px" }}
+            >
+              Applications in Process
+            </button>
+            <button
+              className={toggleState2 === 4 ? "tab active" : "tab"}
+              onClick={() => toggleTab2(4)}
+              style={{ width: "200px" }}
+            >
+              Loan Window
+            </button>
+          </div>
+
+          <div className="panels" style={{ overflowY: "auto" }}>
+            <div className={toggleState2 === 1 ? "panel active" : "panel"}>
+              <table>
+                <thead
+                  style={{
+                    color: "#00A877",
+                    fontSize: "17px",
+                    verticalAlign: "top",
+                    fontWeight: "bold",
+                  }}
+                >
+                  <tr>
+                    <th>Date of Application</th>
+                    <th>Date of Approved</th>
+                    <th>Subscription Tenure</th>
+                    <th>Amount</th>
+                    <th>Interest Rate</th>
+                    <th>Repayment Structure</th>
+                    <th>Loan Details</th>
+                  </tr>
+                </thead>
+                <tbody
+                  style={{
+                    color: "#000",
+                    fontSize: "15px",
+                    fontWeight: "500",
+                  }}
+                >
+                  <tr>
+                    <td>12-03-2022</td>
+                    <td>12-03-2022</td>
+                    <td>subscription</td>
+                    <td> 5000</td>
+                    <td>14%</td>
+                    <td>
+                      <button
+                        className="py-0.5"
+                        style={{
+                          backgroundColor: "#064420",
+                          color: "#fff",
+                          alignItems: "center",
+                          borderRadius: "5px",
+                          border: "none",
+                          padding: "5px 10px",
+                          width: "fit-content",
+                          fontSize: ".75rem",
+                          lineHeight: "1rem",
+                        }}
+                        onClick={handleShowRepaymentAmount}
+                      >
+                        View
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        className="py-0.5"
+                        style={{
+                          backgroundColor: "#064420",
+                          color: "#fff",
+                          alignItems: "center",
+                          borderRadius: "5px",
+                          border: "none",
+                          padding: "5px 10px",
+                          width: "fit-content",
+                          fontSize: ".75rem",
+                          lineHeight: "1rem",
+                        }}
+                        onClick={handleShowLoanApplication}
+                      >
+                        View
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>12-03-2022</td>
+                    <td>12-03-2022</td>
+                    <td>subscription</td>
+                    <td> 5000</td>
+                    <td>14%</td>
+                    <td>
+                      <button
+                        className="py-0.5"
+                        style={{
+                          backgroundColor: "#064420",
+                          color: "#fff",
+                          alignItems: "center",
+                          borderRadius: "5px",
+                          border: "none",
+                          padding: "5px 10px",
+                          width: "fit-content",
+                          fontSize: ".75rem",
+                          lineHeight: "1rem",
+                        }}
+                        onClick={handleShowRepaymentAmount}
+                      >
+                        View
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        className="py-0.5"
+                        style={{
+                          backgroundColor: "#064420",
+                          color: "#fff",
+                          alignItems: "center",
+                          borderRadius: "5px",
+                          border: "none",
+                          padding: "5px 10px",
+                          width: "fit-content",
+                          fontSize: ".75rem",
+                          lineHeight: "1rem",
+                        }}
+                        onClick={handleShowLoanApplication}
+                      >
+                        View
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className={toggleState2 === 2 ? "panel active" : "panel"}>
+              <table>
+                <thead
+                  style={{
+                    color: "#00A877",
+                    fontSize: "17px",
+                    verticalAlign: "top",
+                    fontWeight: "bold",
+                    borderBottom: "1px solid #c7ccd1",
+                  }}
+                >
+                  <tr>
+                    <th>Loan Id</th>
+                    <th>Loan Application Date</th>
+                    <th>Loan Amount</th>
+                    <th>Loan Date</th>
+                    <th>Outstanding Amount</th>
+                    <th>Next Payment Amount</th>
+                    <th>Next Payment Date</th>
+                  </tr>
+                </thead>
+                <tbody
+                  style={{
+                    color: "#000",
+                    fontSize: "15px",
+                    fontWeight: "500",
+                    // textAlign: "center",
+                  }}
+                >
+                  <tr>
+                    <td>2022-800-07</td>
+                    <td>01-05-2022</td>
+                    <td>₹ 98765</td>
+                    <td> 13-07-2022</td>
+                    <td>₹ 3778</td>
+                    <td>₹ 761434</td>
+                    <td> 24-09-2022</td>
+                  </tr>
+                  <tr>
+                    <td>2022-800-07</td>
+                    <td>01-05-2022</td>
+                    <td>₹ 98765</td>
+                    <td> 13-07-2022</td>
+                    <td>₹ 3778</td>
+                    <td>₹ 761434</td>
+                    <td> 24-09-2022</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className={toggleState2 === 3 ? "panel active" : "panel"}>
+              <table>
+                <thead
+                  style={{
+                    color: "#00A877",
+                    fontSize: "17px",
+                    verticalAlign: "top",
+                    fontWeight: "bold",
+                    borderBottom: "1px solid #c7ccd1",
+                  }}
+                >
+                  <tr>
+                    <th>Loan Id</th>
+                    <th>Loan Application Date</th>
+                    <th>Loan Amount</th>
+                    <th>Loan Application</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody
+                  style={{
+                    color: "#000",
+                    fontSize: "15px",
+                    fontWeight: "500",
+                    // textAlign: "center",
+                  }}
+                >
+                  <tr>
+                    <td>2022-64-07</td>
+                    <td>02-05-2022</td>
+                    <td>₹ 7345</td>
+                    <td>
+                      <button
+                        className="py-0.5"
+                        style={{
+                          backgroundColor: "#064420",
+                          color: "#fff",
+                          alignItems: "center",
+                          borderRadius: "5px",
+                          border: "none",
+                          padding: "5px 10px",
+                          width: "fit-content",
+                          fontSize: ".75rem",
+                          lineHeight: "1rem",
+                        }}
+                        onClick={handleShowLoanApplication}
+                      >
+                        View
+                      </button>
+                    </td>
+                    <td>
+                      <div>
+                        <select
+                          className="form-control"
+                          onChange={(e) => changeLoanStatus(e)}
+                        >
+                          <option value="Pending">Change Loan Status</option>
+                          <option value="Approved">
+                            Approve and Forward to Samunnati
+                          </option>
+                          <option value="Rejected">Reject</option>
+                        </select>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className={toggleState2 === 4 ? "panel active" : "panel"}>
               {Comp}
             </div>
           </div>
