@@ -270,7 +270,7 @@ const Loan = ({ props }) => {
             }}
           >
             {
-              activeTab === 1 ? "Apply for Working Capital Loan" : "Apply for Farmer Loan"
+              activeTab === 1 ? "Apply for Working Capital Loan Window" : "Apply for Farmer Loan"
             }
           </button>
         </div>
