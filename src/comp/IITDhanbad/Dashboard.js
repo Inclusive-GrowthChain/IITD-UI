@@ -2,32 +2,129 @@ import React, { useState } from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import Histogram from 'react-chart-histogram';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import fpoList from './UsersList/FPOlist';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import "./IITDhanbad.css";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const Dashboard = () => {
-  // const [aggregated, setAggregated] = useState(true);
-  // const [individual, setIndividual] = useState(false);
-  const currentFPO = useState([]);
-
-  const labels = ['2016', '2017', '2018'];
-  const data = [324, 45, 672];
-  const options2 = { fillColor: '#FFFFFF', strokeColor: '#0000FF' };
-
   const [selectedFpo, setSelectedFpo] = useState([]);
 
   const handleClearFilters = () => {
     setSelectedFpo([]);
   };
 
+  const sales = [
+    {
+      year: 2015,
+      amount: 3,
+    },
+    {
+      year: 2016,
+      amount: 4,
+    },
+    {
+      year: 2017,
+      amount: 3,
+    },
+    {
+      year: 2018,
+      amount: 5,
+    },
+    {
+      year: 2019,
+      amount: 6,
+    },
+    {
+      year: 2020,
+      amount: 7,
+    },
+    {
+      year: 2021,
+      amount: 8,
+    },
+    {
+      year: 2022,
+      amount: 7,
+    },
+  ];
+
+  const purchases = [
+    {
+      year: 2015,
+      amount: 3,
+    },
+    {
+      year: 2016,
+      amount: 4,
+    },
+    {
+      year: 2017,
+      amount: 3,
+    },
+    {
+      year: 2018,
+      amount: 5,
+    },
+    {
+      year: 2019,
+      amount: 6,
+    },
+    {
+      year: 2020,
+      amount: 7,
+    },
+    {
+      year: 2021,
+      amount: 8,
+    },
+    {
+      year: 2022,
+      amount: 7,
+    },
+  ];
+
+  const inventory = [
+    {
+      year: 2015,
+      amount: 3,
+    },
+    {
+      year: 2016,
+      amount: 4,
+    },
+    {
+      year: 2017,
+      amount: 3,
+    },
+    {
+      year: 2018,
+      amount: 5,
+    },
+    {
+      year: 2019,
+      amount: 6,
+    },
+    {
+      year: 2020,
+      amount: 7,
+    },
+    {
+      year: 2021,
+      amount: 8,
+    },
+    {
+      year: 2022,
+      amount: 7,
+    },
+  ];
+
   return (
-    <div className="itemContainer" style={{ height: '675px' }}>
+    <div className="itemContainer">
       <div className="list_title">
         <div className="container-fluid">
           <div className="d-sm-flex justify-content-between align-items-center mb-4">
@@ -72,13 +169,11 @@ const Dashboard = () => {
                       onChange={(event, value) => {
                         setSelectedFpo(value);
                       }}
-                      // style={{ width: 500 }}
                       renderInput={(params) => (
                         <TextField {...params} label="FPO" placeholder="Search for FPO Name" />
                       )}
                     />
                   </div>
-                  {/* clear filters button */}
                   <div className="row">
                     <div className="col">
                       <button
@@ -95,138 +190,99 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4 mt-2">
+          <div className="row row-cols-1 row-cols-xl-3 row-cols-lg-2 g-4 mt-2">
             <div className="col">
-              {
-                currentFPO === 'All' && (
-                  <div className="card" style={{ paddingTop: '1rem', paddingLeft: '1rem', paddingRight: '2rem' }}>
-                    <Histogram
-                      xLabels={labels}
-                      yValues={data}
-                      width='450'
-                      height='300'
-                      options={options2}
-                      className="histogram"
-                    />
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col">
-                          <p className="graphHeading" style={{ color: '#000', fontSize: '1.5rem' }}>Aggregated Sales of FPO</p>
-                        </div>
-                      </div>
+              <div className="card" style={{ paddingTop: '1rem', paddingLeft: '1rem', paddingRight: '2rem' }}>
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col">
+                      <p className="graphHeading" style={{ color: '#000', fontSize: '1.2rem', textAlign: 'center' }}>Sales (in lakh Rs.) per year</p>
                     </div>
                   </div>
-                )
-              }
-              {
-                currentFPO !== 'All' && (
-                  <div className="card" style={{ paddingTop: '1rem', paddingLeft: '1rem', paddingRight: '2rem' }}>
-                    <Histogram
-                      xLabels={labels}
-                      yValues={data}
-                      width='450'
-                      height='300'
-                      options={options2}
-                      className="histogram"
-                    />
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col">
-                          <p className="graphHeading" style={{ color: '#000', fontSize: '1.5rem' }}>Individual Sales of {currentFPO}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )
-              }
+                </div>
+                <ResponsiveContainer width='99%' height={300}>
+                  <BarChart
+                    className='graph'
+                    width={500}
+                    height={300}
+                    data={sales}
+                    margin={{
+                      top: 5,
+                      right: 30,
+                      left: 20,
+                      bottom: 5,
+                    }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="year" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="amount" barSize={15} fill="#105bc4" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
             <div className="col">
-              {
-                currentFPO === 'All' && (
-                  <div className="card" style={{ paddingTop: '1rem', paddingLeft: '1rem', paddingRight: '2rem' }}>
-                    <Histogram
-                      xLabels={labels}
-                      yValues={data}
-                      width='450'
-                      height='300'
-                      options={options2}
-                      className="histogram"
-                    />
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col">
-                          <p className="graphHeading" style={{ color: '#000', fontSize: '1.5rem' }}>Aggregated Purchases of FPO</p>
-                        </div>
-                      </div>
+              <div className="card" style={{ paddingTop: '1rem', paddingLeft: '1rem', paddingRight: '2rem' }}>
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col">
+                      <p className="graphHeading" style={{ color: '#000', fontSize: '1.2rem', textAlign: 'center' }}>Purchases (in lakh Rs.) per year</p>
                     </div>
                   </div>
-                )
-              }
-              {
-                currentFPO !== 'All' && (
-                  <div className="card" style={{ paddingTop: '1rem', paddingLeft: '1rem', paddingRight: '2rem' }}>
-                    <Histogram
-                      xLabels={labels}
-                      yValues={data}
-                      width='450'
-                      height='300'
-                      options={options2}
-                      className="histogram"
-                    />
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col">
-                          <p className="graphHeading" style={{ color: '#000', fontSize: '1.5rem' }}>Individual Purchases of {currentFPO}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )
-              }
+                </div>
+                <ResponsiveContainer width='99%' height={300}>
+                  <BarChart
+                    className='graph'
+                    width={500}
+                    height={300}
+                    data={purchases}
+                    margin={{
+                      top: 5,
+                      right: 30,
+                      left: 20,
+                      bottom: 5,
+                    }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="year" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="amount" barSize={15} fill="#105bc4" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
             <div className="col">
-              {
-                currentFPO === 'All' && (
-                  <div className="card" style={{ paddingTop: '1rem', paddingLeft: '1rem', paddingRight: '2rem' }}>
-                    <Histogram
-                      xLabels={labels}
-                      yValues={data}
-                      width='450'
-                      height='300'
-                      options={options2}
-                      className="histogram"
-                    />
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col">
-                          <p className="graphHeading" style={{ color: '#000', fontSize: '1.5rem' }}>Aggregated Lac Inventory of FPO</p>
-                        </div>
-                      </div>
+              <div className="card" style={{ paddingTop: '1rem', paddingLeft: '1rem', paddingRight: '2rem', marginBottom: '100px' }}>
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col">
+                      <p className="graphHeading" style={{ color: '#000', fontSize: '1.2rem', textAlign: 'center' }}>Lac Inventory (in tonnes)</p>
                     </div>
                   </div>
-                )
-              }
-              {
-                currentFPO !== 'All' && (
-                  <div className="card" style={{ paddingTop: '1rem', paddingLeft: '1rem', paddingRight: '2rem' }}>
-                    <Histogram
-                      xLabels={labels}
-                      yValues={data}
-                      width='450'
-                      height='300'
-                      options={options2}
-                      className="histogram"
-                    />
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col">
-                          <p className="graphHeading" style={{ color: '#000', fontSize: '1.5rem' }}>Individual Lac Inventory of {currentFPO}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )
-              }
+                </div>
+                <ResponsiveContainer width='99%' height={300}>
+                  <BarChart
+                    className='graph'
+                    width={500}
+                    height={300}
+                    data={inventory}
+                    margin={{
+                      top: 5,
+                      right: 30,
+                      left: 20,
+                      bottom: 5,
+                    }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="year" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="amount" barSize={15} fill="#105bc4" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </div>
         </div>
