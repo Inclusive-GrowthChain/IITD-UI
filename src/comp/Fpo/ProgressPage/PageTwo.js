@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
@@ -16,7 +16,7 @@ const fpo = {
   ],
 };
 
-const PageTwo = ({ onButtonClick }) => {
+const PageTwo = ({ onButtonClick, bid }) => {
   const [selectedFile, setSelectedFile] = useState();
 
   const handleFileChange = (event) => {
@@ -91,7 +91,7 @@ const PageTwo = ({ onButtonClick }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={fpo.id}
+                value={bid.bids.find((item) => item.userId == localStorage.getItem("userId")).fpoId}
                 style={{ width: "105%" }}
               />
             </div>
@@ -105,7 +105,7 @@ const PageTwo = ({ onButtonClick }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={fpo.name}
+                value={bid.bids.find((item) => item.userId === localStorage.getItem("userId")).fpoName}
               />
             </div>
           </div>
@@ -118,7 +118,7 @@ const PageTwo = ({ onButtonClick }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={fpo.phoneNumber}
+                value={bid.bids.find((item) => item.userId === localStorage.getItem("userId")).fpoPhone}
               />
             </div>
           </div>
@@ -131,24 +131,78 @@ const PageTwo = ({ onButtonClick }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={fpo.amount}
+                value={bid.bids.find((item) => item.userId === localStorage.getItem("userId")).bidAmount}
               />
             </div>
           </div>
+          {
+            bid.status == "on-going" && (
+              <div className="row m-2">
+                <div className="col-lg-6">
+                  <label>Required Test Reports</label>
+                </div>
+                <div className="col-lg-6">
+                  <input
+                    type="file"
+                    name="file"
+                    multiple={true}
+                    onClick={() => {
+                      handleFileChange();
+                      selectedFile();
+                    }}
+                  />
+                </div>
+              </div>
+            )
+          }
+          {
+            bid.status != "on-going" && (
+              <div className="row m-2">
+                <div className="col-lg-6">
+                  <label>Required Test Reports</label>
+                </div>
+                <div className="col-lg-6">
+                  <button
+                    className=""
+                    type="button"
+                    style={{
+                      marginLeft: "3%",
+                      position: "relative",
+                      top: "7px",
+                      backgroundColor: "#064420",
+                      textAlign: "center",
+                      borderRadius: "5px",
+                      border: "none",
+                      padding: "5px 15px",
+                      width: "20%",
+                      minWidth: "80px",
+                      fontSize: ".85rem",
+                      lineHeight: "1rem",
+                      color: "#fff",
+                    }}
+                  >
+                    view
+                  </button>
+                </div>
+              </div>
+            )
+          }
           <div className="row m-2">
-            <div className="col-lg-6">
-              <label>Required Test Reports</label>
-            </div>
-            <div className="col-lg-6">
-              <input
-                type="file"
-                name="file"
-                multiple={true}
-                onClick={() => {
-                  handleFileChange();
-                  selectedFile();
+            <div className="col-lg-12">
+              <button
+                className="btn btn-success"
+                style={{
+                  marginTop: "1rem",
+                  backgroundColor: "#064420",
+                  width: "96%",
                 }}
-              />
+                onClick={() => {
+                  // onSubmit();
+                  // handleShowPayment();
+                }}
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>

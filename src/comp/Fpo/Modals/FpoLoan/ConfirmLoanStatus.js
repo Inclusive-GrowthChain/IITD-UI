@@ -39,6 +39,7 @@ function ConfirmLoanStatus({ showConfirmLoanStatus, handleCloseConfirmLoanStatus
               padding: "0.25rem 1rem",
               color: "#fff",
             }}
+            onClick={handleCloseConfirmLoanStatus}
           >
             No
           </button>

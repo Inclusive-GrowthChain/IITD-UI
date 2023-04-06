@@ -2,9 +2,62 @@ import { useState } from 'react';
 import { MenuItem } from "@mui/material";
 import Select from '@mui/material/Select';
 import Modal from "react-bootstrap/Modal";
+import axios from 'axios';
+import ConfirmOrder from './ConfirmOrder';
 
-function StartBid({ showStartBid, confirmBid, handleCloseStartBid, generateRandomBidID }) {
+function StartBid({ showStartBid, handleCloseStartBid }) {
   const [multiSelectReportName, setMultiSelectReportName] = useState([])
+  const [bidId, setBidId] = useState("B1234")
+  const [lacStrainType, setLacStrainType] = useState("")
+  const [sourceOfTree, setSourceOfTree] = useState("")
+  const [origin, setOrigin] = useState("")
+  const [seedlacContent, setSeedlacContent] = useState("")
+  const [freshResinContent, setFreshResinContent] = useState("")
+  const [quantity, setQuantity] = useState(0)
+  const [dateOfSupply, setDateOfSupply] = useState("")
+  const [endDateForBidding, setEndDateForBidding] = useState("")
+  const [remarks, setRemarks] = useState("")
+  const [showConfirmBox, setShowConfirmBox] = useState(false)
+
+  const onChangeBidId = (e) => {
+    setBidId(e.target.value)
+  }
+
+  const onChangeLacStrainType = (e) => {
+    setLacStrainType(e.target.value)
+  }
+
+  const onChangeSourceOfTree = (e) => {
+    setSourceOfTree(e.target.value)
+  }
+
+  const onChangeOrigin = (e) => {
+    setOrigin(e.target.value)
+  }
+
+  const onChangeSeedlacContent = (e) => {
+    setSeedlacContent(e.target.value)
+  }
+
+  const onChangeFreshResinContent = (e) => {
+    setFreshResinContent(e.target.value)
+  }
+
+  const onChangeQuantity = (e) => {
+    setQuantity(e.target.value)
+  }
+
+  const onChangeDateOfSupply = (e) => {
+    setDateOfSupply(e.target.value)
+  }
+
+  const onChangeEndDateForBidding = (e) => {
+    setEndDateForBidding(e.target.value)
+  }
+
+  const onChangeRemarks = (e) => {
+    setRemarks(e.target.value)
+  }
 
   const onMultiSelectReportNameChange = (event) => {
     const {
@@ -13,6 +66,33 @@ function StartBid({ showStartBid, confirmBid, handleCloseStartBid, generateRando
     setMultiSelectReportName(
       typeof value === 'string' ? value.split(',') : value,
     )
+  }
+
+  const resetInputs = () => {
+    setBidId("")
+    setLacStrainType("")
+    setSourceOfTree("")
+    setOrigin("")
+    setSeedlacContent("")
+    setFreshResinContent("")
+    setQuantity(0)
+    setDateOfSupply("")
+    setEndDateForBidding("")
+    setRemarks("")
+    setMultiSelectReportName([])
+  }
+
+  const confirmBid = (e) => {
+    e.preventDefault()
+    setShowConfirmBox(true)
+  }
+
+  const handleCloseConfirmBox = () => {
+    setShowConfirmBox(false)
+  }
+
+  const placeBid = () => {
+    setShowConfirmBox(false)
   }
 
   return (
@@ -35,7 +115,7 @@ function StartBid({ showStartBid, confirmBid, handleCloseStartBid, generateRando
                       <input
                         type="text"
                         className="form-control"
-                        value={generateRandomBidID()}
+                        value={bidId}
                         disabled
                       />
                     </div>
@@ -48,12 +128,11 @@ function StartBid({ showStartBid, confirmBid, handleCloseStartBid, generateRando
                       <select
                         className="form-control"
                         name="category"
-                      // value={category}
-                      // onChange={(e) => setCategory(e.target.value)}
+                        onChange={onChangeLacStrainType}
                       >
                         <option value="0">Select Type</option>
-                        <option value="1">Kusmi</option>
-                        <option value="2">Rangeeni</option>
+                        <option value="Kusmi">Kusmi</option>
+                        <option value="Rangeeni">Rangeeni</option>
                       </select>
                     </div>
                   </div>
@@ -65,6 +144,7 @@ function StartBid({ showStartBid, confirmBid, handleCloseStartBid, generateRando
                       <select
                         className="form-control"
                         name="category"
+                        onChange={onChangeSourceOfTree}
                       >
                         <option value="0">Select Tree</option>
                         <option value="1">Kusum</option>
@@ -82,12 +162,13 @@ function StartBid({ showStartBid, confirmBid, handleCloseStartBid, generateRando
                       <select
                         className="form-control"
                         name="category"
+                        onChange={onChangeOrigin}
                       >
                         <option value="0">Select Origin</option>
-                        <option value="1">Jharkhand</option>
-                        <option value="2">Chattisgarh</option>
-                        <option value="3">MP</option>
-                        <option value="4">Mednapore</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Chattisgarh">Chattisgarh</option>
+                        <option value="MP">MP</option>
+                        <option value="Mednapore">Mednapore</option>
                       </select>
                     </div>
                   </div>
@@ -96,7 +177,7 @@ function StartBid({ showStartBid, confirmBid, handleCloseStartBid, generateRando
                       <label>Seedlac Content</label>
                     </div>
                     <div className="col-lg-6">
-                      <input className="form-control" type="number" />
+                      <input className="form-control" type="text" onChange={onChangeSeedlacContent} />
                     </div>
                   </div>
                   <div className="row m-2">
@@ -104,7 +185,7 @@ function StartBid({ showStartBid, confirmBid, handleCloseStartBid, generateRando
                       <label>Fresh Resin Content</label>
                     </div>
                     <div className="col-lg-6">
-                      <input className="form-control" type="number" />
+                      <input className="form-control" type="text" onChange={onChangeFreshResinContent} />
                     </div>
                   </div>
                   <div className="row m-2">
@@ -112,7 +193,7 @@ function StartBid({ showStartBid, confirmBid, handleCloseStartBid, generateRando
                       <label>Quantity</label>
                     </div>
                     <div className="col-lg-6">
-                      <input className="form-control" type="number" />
+                      <input className="form-control" type="number" onChange={onChangeQuantity} />
                     </div>
                   </div>
                   <div className="row m-2">
@@ -120,7 +201,7 @@ function StartBid({ showStartBid, confirmBid, handleCloseStartBid, generateRando
                       <label>Date of Supply</label>
                     </div>
                     <div className="col-lg-6">
-                      <input className="form-control" type="date" />
+                      <input className="form-control" type="date" onChange={onChangeDateOfSupply} />
                     </div>
                   </div>
                   <div className="row m-2">
@@ -128,7 +209,7 @@ function StartBid({ showStartBid, confirmBid, handleCloseStartBid, generateRando
                       <label>End Date for Bidding</label>
                     </div>
                     <div className="col-lg-6">
-                      <input className="form-control" type="date" />
+                      <input className="form-control" type="date" onChange={onChangeEndDateForBidding} />
                     </div>
                   </div>
                   <div className="row m-2">
@@ -145,8 +226,8 @@ function StartBid({ showStartBid, confirmBid, handleCloseStartBid, generateRando
                         value={multiSelectReportName}
                         onChange={onMultiSelectReportNameChange}
                       >
-                        <MenuItem value="0">Chowri</MenuItem>
-                        <MenuItem value="1">Panna</MenuItem>
+                        <MenuItem value="Chowri">Chowri</MenuItem>
+                        <MenuItem value="Panna">Panna</MenuItem>
                       </Select>
                     </div>
                   </div>
@@ -157,6 +238,7 @@ function StartBid({ showStartBid, confirmBid, handleCloseStartBid, generateRando
                     <div className="col-lg-12">
                       <textarea className="form-control"
                         style={{ height: "200%" }}
+                        onChange={onChangeRemarks}
                       />
                     </div>
                   </div>
@@ -164,7 +246,10 @@ function StartBid({ showStartBid, confirmBid, handleCloseStartBid, generateRando
                     <button
                       className="btn btn-success"
                       style={{ marginTop: '5rem', backgroundColor: '#064420' }}
-                      onClick={confirmBid}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        confirmBid(e);
+                      }}
                     >
                       Submit
                     </button>
@@ -174,6 +259,22 @@ function StartBid({ showStartBid, confirmBid, handleCloseStartBid, generateRando
             </form>
           </div>
         </div>
+        <ConfirmOrder
+          placeBid={placeBid}
+          showConfirmBox={showConfirmBox}
+          handleCloseConfirmBox={handleCloseConfirmBox}
+          bidId={bidId}
+          lacStrainType={lacStrainType}
+          sourceOfTree={sourceOfTree}
+          origin={origin}
+          seedlacContent={seedlacContent}
+          freshResinContent={freshResinContent}
+          quantity={quantity}
+          dateOfSupply={dateOfSupply}
+          endDateForBidding={endDateForBidding}
+          multiSelectReportName={multiSelectReportName}
+          remarks={remarks}
+        />
       </Modal.Body>
     </Modal>
   )

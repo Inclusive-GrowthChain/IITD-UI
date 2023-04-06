@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 
-function RepaymentStructure({ showRepaymentForm, handleCloseRepaymentForm, repaymentList, handleShowConfirmPayment }) {
+function RepaymentStructure({ showRepaymentForm, handleCloseRepaymentForm, repaymentList, handleShowConfirmPayment, currentLoan, currentLoanWindow }) {
   return (
     <Modal
         size="xl"
@@ -19,25 +19,25 @@ function RepaymentStructure({ showRepaymentForm, handleCloseRepaymentForm, repay
                     <strong>Loan ID : </strong>
                   </div>
                   <div className="col-6">
-                    <span>12345</span>
+                    <span>{currentLoan.loanId}</span>
                   </div>
                   <div className="col-6">
                     <strong>Farmer Name : </strong>
                   </div>
                   <div className="col-6">
-                    <span>abcd</span>
+                    <span>???</span>
                   </div>
                   <div className="col-6">
                     <strong>FPO Name : </strong>
                   </div>
                   <div className="col-6">
-                    <span>abcd</span>
+                    <span>{currentLoanWindow.fpoName}</span>
                   </div>
                   <div className="col-6">
                     <strong>Loan Amount : </strong>
                   </div>
                   <div className="col-6">
-                    <span>400</span>
+                    <span>{currentLoan.grantedAmount}</span>
                   </div>
                 </div>
               </div>
@@ -47,19 +47,19 @@ function RepaymentStructure({ showRepaymentForm, handleCloseRepaymentForm, repay
                     <strong>Loan Period in Months : </strong>
                   </div>
                   <div className="col-6">
-                    <span>1</span>
+                    <span>{currentLoan.loanTenure}</span>
                   </div>
                   <div className="col-6">
                     <strong>No of Repayment : </strong>
                   </div>
                   <div className="col-6">
-                    <span>1</span>
+                    <span>{currentLoan.loanTenure}</span>
                   </div>
                   <div className="col-6">
                     <strong>Annual Interest Rate : </strong>
                   </div>
                   <div className="col-6">
-                    <span>14%</span>
+                    <span>{currentLoan.intrest}%</span>
                   </div>
                 </div>
               </div>
@@ -80,11 +80,11 @@ function RepaymentStructure({ showRepaymentForm, handleCloseRepaymentForm, repay
                 </tr>
               </thead>
               <tbody>
-                {repaymentList.map((item) => (
-                  <tr key={item.id}>
-                    <td>{item.sno}</td>
-                    <td>{item.scheduled_repayment}</td>
-                    <td>{item.scheduled_emi}</td>
+                {currentLoan.repaymentStructure.map((item) => (
+                  <tr>
+                    <td>{item.id}</td>
+                    <td>{item.repaymentDate}</td>
+                    <td>{item.emi}</td>
                     <td>
                       <button
                         style={{

@@ -1,6 +1,94 @@
 import Modal from "react-bootstrap/Modal";
+import { useState } from "react";
+import axios from "axios";
 
-function LoanApplication2({ showApplyLoan, confirmBid, handleCloseApplyLoan }) {
+function LoanApplication2({ showApplyLoan, handleCloseApplyLoan, loanWindow }) {
+  const [loanId, setLoanId] = useState("LOAN0001");
+  const [nameOfPayee, setNameOfPayee] = useState("");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [ifscNumber, setIfscNumber] = useState("");
+  const [bankName, setBankName] = useState("");
+  const [amount, setAmount] = useState(0);
+  const [interest, setInterest] = useState(12);
+  const [tenure, setTenure] = useState(0);
+  const [purpose, setPurpose] = useState("");
+
+  const onChangeNameOfPayee = (e) => {
+    setNameOfPayee(e.target.value);
+  };
+
+  const onChangeAccountNumber = (e) => {
+    setAccountNumber(e.target.value);
+  };
+
+  const onChangeIfscNumber = (e) => {
+    setIfscNumber(e.target.value);
+  };
+
+  const onChangeBankName = (e) => {
+    setBankName(e.target.value);
+  };
+
+  const onChangeAmount = (e) => {
+    setAmount(e.target.value);
+  };
+
+  const onChangeInterest = (e) => {
+    setInterest(e.target.value);
+  };
+
+  const onChangeTenure = (e) => {
+    setTenure(e.target.value);
+  };
+
+  const onChangePurpose = (e) => {
+    setPurpose(e.target.value);
+  };
+
+  const resetInputs = () => {
+    setNameOfPayee("");
+    setAccountNumber("");
+    setIfscNumber("");
+    setBankName("");
+    setAmount(0);
+    setInterest(0);
+    setTenure(0);
+    setPurpose("");
+  };
+
+  const applyForLoan = async () => {
+    if (nameOfPayee == "" || accountNumber == "" || ifscNumber == "" || bankName == "" || amount == 0 || interest == 0 || tenure == 0 || purpose == "") {
+      alert("Please fill all details and try again");
+      return;
+    }
+
+    const newLoan = {
+      "loanWindowId": loanWindow.windowId,
+      "loanId": loanId,
+      "payeeName": nameOfPayee,
+      "accountNumber": accountNumber,
+      "ifscNumber": ifscNumber,
+      "bankName": bankName,
+      "requestedAmount": amount,
+      "intrest": interest,
+      "loanTenure": tenure,
+      "invoice": "doc-1678828880007-578095983.jpg",
+      "purpose": purpose,
+    };
+
+    await axios
+      .post(`http://13.232.131.203:3000/api/loanwindow/${loanWindow.id}/loan`, newLoan)
+      .then((response) => {
+        console.log(response.data);
+        resetInputs();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    window.location.reload();
+  }
+
   return (
     <Modal
       show={showApplyLoan}
@@ -21,7 +109,7 @@ function LoanApplication2({ showApplyLoan, confirmBid, handleCloseApplyLoan }) {
                       <input
                         type="text"
                         className="form-control"
-                        value={"W123456"}
+                        value={loanWindow.windowId}
                         disabled
                       />
                     </div>
@@ -35,6 +123,8 @@ function LoanApplication2({ showApplyLoan, confirmBid, handleCloseApplyLoan }) {
                         type="text"
                         className="form-control"
                         placeholder="Loan Id"
+                        value={loanId}
+                        disabled
                       />
                     </div>
                   </div>
@@ -46,6 +136,7 @@ function LoanApplication2({ showApplyLoan, confirmBid, handleCloseApplyLoan }) {
                       <input
                         type="text"
                         className="form-control"
+                        onChange={onChangeNameOfPayee}
                       />
                     </div>
                   </div>
@@ -57,6 +148,7 @@ function LoanApplication2({ showApplyLoan, confirmBid, handleCloseApplyLoan }) {
                       <input
                         type="text"
                         className="form-control"
+                        onChange={onChangeAccountNumber}
                       />
                     </div>
                   </div>
@@ -68,6 +160,7 @@ function LoanApplication2({ showApplyLoan, confirmBid, handleCloseApplyLoan }) {
                       <input
                         type="number"
                         className="form-control"
+                        onChange={onChangeIfscNumber}
                       />
                     </div>
                   </div>
@@ -79,6 +172,7 @@ function LoanApplication2({ showApplyLoan, confirmBid, handleCloseApplyLoan }) {
                       <input
                         type="text"
                         className="form-control"
+                        onChange={onChangeBankName}
                       />
                     </div>
                   </div>
@@ -88,8 +182,9 @@ function LoanApplication2({ showApplyLoan, confirmBid, handleCloseApplyLoan }) {
                     </div>
                     <div className="col-lg-6">
                       <input
-                        type="text"
+                        type="number"
                         className="form-control"
+                        onChange={onChangeAmount}
                       />
                     </div>
                   </div>
@@ -101,7 +196,7 @@ function LoanApplication2({ showApplyLoan, confirmBid, handleCloseApplyLoan }) {
                       <input
                         type="text"
                         className="form-control"
-                        value={12}
+                        value={interest}
                         disabled
                       />
                     </div>
@@ -114,6 +209,7 @@ function LoanApplication2({ showApplyLoan, confirmBid, handleCloseApplyLoan }) {
                       <input
                         type="text"
                         className="form-control"
+                        onChange={onChangeTenure}
                       />
                     </div>
                   </div>
@@ -136,6 +232,7 @@ function LoanApplication2({ showApplyLoan, confirmBid, handleCloseApplyLoan }) {
                       <input
                         type="text"
                         className="form-control"
+                        onChange={onChangePurpose}
                       />
                     </div>
                   </div>
@@ -148,7 +245,10 @@ function LoanApplication2({ showApplyLoan, confirmBid, handleCloseApplyLoan }) {
                           backgroundColor: "#064420",
                           border: "none",
                         }}
-                        onClick={confirmBid}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          applyForLoan();
+                        }}
                       >
                         Submit
                       </button>

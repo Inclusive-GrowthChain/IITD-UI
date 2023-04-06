@@ -7,7 +7,7 @@ import AppWrapper from "../Template/AppWrapper";
 const list = [
   {
     title: "FPO Loan",
-    icon: <Badge badgeContent={10} color="success"><CreditScoreIcon className="icon" /></Badge>,
+    icon: <Badge badgeContent={localStorage.getItem("FpoLoanRequests")} color="success"><CreditScoreIcon className="icon" /></Badge>,
     to: '/samunnati/fpo-loan'
   },
   {
@@ -17,7 +17,7 @@ const list = [
   },
   {
     title: "Farmer Loan",
-    icon: <Badge badgeContent={0} color="success"><CreditScoreIcon className="icon" /></Badge>,
+    icon: <Badge badgeContent={localStorage.getItem("FarmerLoanRequests")} color="success"><CreditScoreIcon className="icon" /></Badge>,
     to: '/samunnati/farmer-loan'
   },
   {

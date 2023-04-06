@@ -1,6 +1,6 @@
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-const PageOne = ({ onButtonClick }) => {
+const PageOne = ({ onButtonClick, bid }) => {
   return (
     <main
       className="pt5 black-80 center"
@@ -48,7 +48,7 @@ const PageOne = ({ onButtonClick }) => {
                 type="text"
                 className="form-control"
                 value=""
-                placeholder="B12342"
+                placeholder={bid.bidId}
                 disabled
               />
             </div>
@@ -58,16 +58,13 @@ const PageOne = ({ onButtonClick }) => {
               <label>Lac Strain Type</label>
             </div>
             <div className="col-lg-6">
-              <select
+              <input
+                type="text"
                 className="form-control"
-                name="category"
-                disabled={true}
-                placeholder="kusmi"
-              >
-                <option value="0">select</option>
-                <option value="1">Kusmi</option>
-                <option value="2">Rangeeni</option>
-              </select>
+                value=""
+                placeholder={bid.lacStrainType}
+                disabled
+              />
             </div>
           </div>
           <div className="row m-2">
@@ -75,18 +72,13 @@ const PageOne = ({ onButtonClick }) => {
               <label>Source of Tree</label>
             </div>
             <div className="col-lg-6">
-              <select
+              <input
+                type="text"
                 className="form-control"
-                name="category"
-                disabled={true}
-                placeholder="kusum"
-              >
-                <option value="0">select</option>
-                <option value="1">Kusum</option>
-                <option value="2">Ber</option>
-                <option value="3">Palash</option>
-                <option value="4">Other</option>
-              </select>
+                value=""
+                placeholder={bid.sourceTree}
+                disabled
+              />
             </div>
           </div>
           <div className="row m-2">
@@ -94,18 +86,13 @@ const PageOne = ({ onButtonClick }) => {
               <label>Origin</label>
             </div>
             <div className="col-lg-6">
-              <select
+              <input
+                type="text"
                 className="form-control"
-                name="category"
-                disabled={true}
-                placeholder="Jharkhand"
-              >
-                <option value="0">select</option>
-                <option value="1">Jharkhand</option>
-                <option value="2">Chattisgarh</option>
-                <option value="3">MP</option>
-                <option value="4">Mednapore</option>
-              </select>
+                value=""
+                placeholder={bid.origin}
+                disabled
+              />
             </div>
           </div>
           <div className="row m-2">
@@ -115,10 +102,10 @@ const PageOne = ({ onButtonClick }) => {
             <div className="col-lg-6">
               <input
                 className="form-control"
-                type="number"
+                type="text"
                 disabled={true}
                 value=""
-                placeholder="100"
+                placeholder={bid.seedLacContent}
               />
             </div>
           </div>
@@ -129,10 +116,10 @@ const PageOne = ({ onButtonClick }) => {
             <div className="col-lg-6">
               <input
                 className="form-control"
-                type="number"
+                type="text"
                 disabled={true}
                 value=""
-                placeholder="100"
+                placeholder={bid.freshResinContent}
               />
             </div>
           </div>
@@ -146,7 +133,7 @@ const PageOne = ({ onButtonClick }) => {
                 type="number"
                 disabled={true}
                 value=""
-                placeholder="200"
+                placeholder={bid.quantity}
               />
             </div>
           </div>
@@ -157,10 +144,10 @@ const PageOne = ({ onButtonClick }) => {
             <div className="col-lg-6">
               <input
                 className="form-control"
-                type="date"
+                type="text"
                 disabled={true}
                 value=""
-                placeholder="10-10-2021"
+                placeholder={bid.supplyDate}
               />
             </div>
           </div>
@@ -171,10 +158,10 @@ const PageOne = ({ onButtonClick }) => {
             <div className="col-lg-6">
               <input
                 className="form-control"
-                type="date"
+                type="text"
                 disabled={true}
                 value=""
-                placeholder="10-10-2022"
+                placeholder={bid.bidEndDate}
               />
             </div>
           </div>
@@ -190,7 +177,7 @@ const PageOne = ({ onButtonClick }) => {
                     className="form-control"
                     value=""
                     disabled
-                    placeholder="Chowri"
+                    placeholder={Array.isArray(bid.reportsRequired) ? bid.reportsRequired.join(', ') : ''}
                   />
                 </div>
               </div>

@@ -101,7 +101,7 @@ const PageFour = ({ onButtonClick, canEdit = true }) => {
                 </button>
               </div>
             </div>
-            <div className="row m-2">
+            {/* <div className="row m-2">
               <div className="col-lg-12">
                 {
                   canEdit &&
@@ -121,7 +121,7 @@ const PageFour = ({ onButtonClick, canEdit = true }) => {
                   </button>
                 }
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </form>

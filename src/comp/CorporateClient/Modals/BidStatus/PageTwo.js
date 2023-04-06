@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-let fpoBids = [
+let tempFpoBids = [
   {
     id: 1,
     amount: 100000,
@@ -46,7 +46,7 @@ let fpoBids = [
   },
 ];
 
-const PageTwo = ({ onButtonClick }) => {
+const PageTwo = ({ onButtonClick, fpoBids }) => {
   const [showConfirmBox, setShowConfirmBox] = useState(false);
   const [currentFPO, setCurrentFPO] = useState({});
   const [orderPlaced, setOrderPlaced] = useState(false);
@@ -68,7 +68,7 @@ const PageTwo = ({ onButtonClick }) => {
 
   const checkOrderPlaced = () => {
     let orderPlaced = false;
-    fpoBids.forEach((fpo) => {
+    tempFpoBids.forEach((fpo) => {
       if (fpo.orderPlaced) {
         orderPlaced = true;
       }
@@ -82,7 +82,7 @@ const PageTwo = ({ onButtonClick }) => {
   useEffect(() => {
     checkOrderPlaced();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fpoBids, currentFPO]);
+  }, [tempFpoBids, currentFPO]);
 
   return (
     <main
@@ -126,7 +126,7 @@ const PageTwo = ({ onButtonClick }) => {
             <button
               onClick={() => onButtonClick("pagethree")}
               style={{ backgroundColor: 'white' }}
-              disabled={!orderPlaced}
+              // disabled={!orderPlaced}
             >
               <ArrowForwardIosIcon />
             </button>
@@ -158,10 +158,10 @@ const PageTwo = ({ onButtonClick }) => {
               >
                 {fpoBids.map((fpo) => (
                   <tr>
-                    <td>{fpo.id}</td>
+                    <td>{fpo.fpoId}</td>
                     <td>{fpo.name}</td>
                     <td>{fpo.phoneNumber}</td>
-                    <td>{fpo.amount}</td>
+                    <td>{fpo.bidAmount}</td>
                     <td>
                       <button
                         style={{
@@ -195,7 +195,7 @@ const PageTwo = ({ onButtonClick }) => {
             <Modal.Header closeButton>Confirm Order</Modal.Header>
             <Modal.Body>
               <p>
-                Are you sure you want to place order with FPO {currentFPO.id} for {currentFPO.amount} rupees?
+                Are you sure you want to place order with FPO {currentFPO.id} for {currentFPO.bidAmount} rupees?
               </p>
               <div className="col-lg-12" style={{ display: "flex", justifyContent: "flex-end" }}>
                 <button

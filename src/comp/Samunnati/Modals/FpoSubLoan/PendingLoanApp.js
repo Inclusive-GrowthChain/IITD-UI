@@ -31,7 +31,7 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.id}
+                        value={currentLoan.loanId}
                         disabled
                       />
                     </div>
@@ -57,7 +57,7 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.accountNo}
+                        value={currentLoan.accountNumber}
                         disabled
                       />
                     </div>
@@ -68,9 +68,9 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                     </div>
                     <div className="col-lg-6">
                       <input
-                        type="number"
+                        type="text"
                         className="form-control"
-                        value={currentLoan.ifsc}
+                        value={currentLoan.ifscNumber}
                         disabled
                       />
                     </div>
@@ -96,7 +96,7 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.loanAmount}
+                        value={currentLoan.requestedAmount}
                         disabled
                       />
                     </div>
@@ -109,7 +109,7 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.interest}
+                        value={currentLoan.intrest}
                         disabled
                       />
                     </div>
@@ -122,7 +122,7 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.tenure}
+                        value={currentLoan.loanTenure}
                         disabled
                       />
                     </div>

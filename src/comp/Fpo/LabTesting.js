@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LabSampleTest from "./Modals/LabSampleTest";
+import axios from "axios";
 
 import "./Fpo.css";
 
@@ -19,6 +20,8 @@ const style = {
 const FarmerInformation = () => {
   const [activeIndex, setActiveIndex] = useState(1);
   const [show, setShow] = useState(false);
+  const [appList, setAppList] = useState([]);
+  const [testList, setTestList] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -26,6 +29,32 @@ const FarmerInformation = () => {
   const handleClick = (index) => setActiveIndex(index);
   const checkActive = (index, className) =>
     activeIndex === index ? className : "";
+
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+    axios
+      .get("http://13.232.131.203:3000/api/nisa/lactest")
+      .then((response) => {
+        console.log(response.data.data);
+        setAppList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+    axios
+      .get("http://13.232.131.203:3000/api/nisa/lac-test")
+      .then((response) => {
+        console.log(response.data.data);
+        setTestList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <main id="main_container" className="main_container container-fluid itemContainer">
@@ -92,105 +121,43 @@ const FarmerInformation = () => {
                           fontWeight: "500",
                         }}
                       >
-                        <tr>
-                          <td>SAX34265</td>
-                          <td>132768954</td>
-                          <td>12-02-2021</td>
-                          <td>Shellac Lac</td>
-                          <td>Cold Alcohol Insoluble</td>
-                          <td>₹ 400</td>
-                          <td>
-                            <button
-                              className="py-0.5"
-                              style={style}
-                            >
-                              View
-                            </button>
-                          </td>
-                          <td>
-                            <button
-                              className="py-0.5"
-                              style={style}
-                            >
-                              View
-                            </button>
-                          </td>
-                          <td>Good</td>
-                          <td>
-                            <button
-                              className="py-0.5"
-                              style={style}
-                            >
-                              View
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>SAX34265</td>
-                          <td>132768954</td>
-                          <td>12-02-2021</td>
-                          <td>Shellac Lac</td>
-                          <td>Cold Alcohol Insoluble</td>
-                          <td>₹ 400</td>
-                          <td>
-                            <button
-                              className="py-0.5"
-                              style={style}
-                            >
-                              View
-                            </button>
-                          </td>
-                          <td>
-                            <button
-                              className="py-0.5"
-                              style={style}
-                            >
-                              View
-                            </button>
-                          </td>
-                          <td>Good</td>
-                          <td>
-                            <button
-                              className="py-0.5"
-                              style={style}
-                            >
-                              View
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>SAX34265</td>
-                          <td>132768954</td>
-                          <td>12-02-2021</td>
-                          <td>Shellac Lac</td>
-                          <td>Cold Alcohol Insoluble</td>
-                          <td>₹ 400</td>
-                          <td>
-                            <button
-                              className="py-0.5"
-                              style={style}
-                            >
-                              View
-                            </button>
-                          </td>
-                          <td>
-                            <button
-                              className="py-0.5"
-                              style={style}
-                            >
-                              View
-                            </button>
-                          </td>
-                          <td>Good</td>
-                          <td>
-                            <button
-                              className="py-0.5"
-                              style={style}
-                            >
-                              View
-                            </button>
-                          </td>
-                        </tr>
+                        {
+                          appList.map((app, index) => (
+                            <tr>
+                              <td>{app.sampleId}</td>
+                              <td>{app.referenceNo}</td>
+                              <td>{app.dateOfApplication}</td>
+                              <td>{app.category}</td>
+                              <td>{app.testName}</td>
+                              <td>₹ {app.amount}</td>
+                              <td>
+                                <button
+                                  className="py-0.5"
+                                  style={style}
+                                >
+                                  View
+                                </button>
+                              </td>
+                              <td>
+                                <button
+                                  className="py-0.5"
+                                  style={style}
+                                >
+                                  View
+                                </button>
+                              </td>
+                              <td>{app.remarks}</td>
+                              <td>
+                                <button
+                                  className="py-0.5"
+                                  style={style}
+                                >
+                                  View
+                                </button>
+                              </td>
+                            </tr>
+                          ))
+                        }
                       </tbody>
                     </table>
                   </div>
@@ -224,32 +191,22 @@ const FarmerInformation = () => {
                           fontWeight: "500",
                         }}
                       >
-                        <tr>
-                          <td>SAX34265</td>
-                          <td>2</td>
-                          <td>100</td>
-                          <td>₹ 400</td>
-                          <td>2</td>
-                        </tr>
-                        <tr>
-                          <td>SAX34265</td>
-                          <td>2</td>
-                          <td>100</td>
-                          <td>₹ 400</td>
-                          <td>2</td>
-                        </tr>
-                        <tr>
-                          <td>SAX34265</td>
-                          <td>2</td>
-                          <td>100</td>
-                          <td>₹ 400</td>
-                          <td>2</td>
-                        </tr>
+                        {
+                          testList.map((test, index) => (
+                            <tr>
+                              <td>{test.category}</td>
+                              <td>{test.testName}</td>
+                              <td>{test.minRequiredQuantity}</td>
+                              <td>₹ {test.testFee}</td>
+                              <td>{test.reportingPeriod}</td>
+                            </tr>
+                          ))
+                        }
                       </tbody>
                     </table>
                   </div>
                 </div>
-                <div className="card-details-button" style={{marginBottom: '40px'}}>
+                <div className="card-details-button" style={{ marginBottom: '40px' }}>
                   <div className="card-details-header">
                     <span>* GST 18% extra</span> <br />
                     Payment Details: Payments for testing charges may be

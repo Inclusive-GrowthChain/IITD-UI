@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 
-function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowConfirmLoanStatus, confirmLoan }) {
+function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowConfirmLoanStatus, confirmLoanStatus, currentLoan, currentLoanWindow }) {
   return (
     <Modal
       show={showApprovedLoan}
@@ -19,7 +19,7 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
                       <label>Loan ID</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>Loan ID</label>
+                      <label>{currentLoan.loanId}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -27,7 +27,7 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
                       <label>FPO Name</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>FPO 2</label>
+                      <label>{currentLoanWindow.fpoName}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -35,7 +35,7 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
                       <label>Contact No.</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>1234567890</label>
+                      <label>{currentLoanWindow.contactNo}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -43,7 +43,7 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
                       <label>Date of Application</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>12-01-2021</label>
+                      <label>{currentLoan.createdAt && currentLoan.createdAt.substring(0, 10)}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -51,7 +51,7 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
                       <label>Loan Requested Amount</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>400000</label>
+                      <label>{currentLoan.requestedAmount}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -59,7 +59,7 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
                       <label>Loan Tenure (months)</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>2</label>
+                      <label>{currentLoan.loanTenure}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -67,7 +67,7 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
                       <label>Interest Rate (%)</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>12</label>
+                      <label>{currentLoan.intrest}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -79,10 +79,11 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
                           backgroundColor: "#064420",
                           border: "none",
                         }}
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.preventDefault();
                           handleShowConfirmLoanStatus();
                           // confirmStatus();
-                          confirmLoan();
+                          confirmLoanStatus(e);
                         }}
                       >
                         Approve Loan

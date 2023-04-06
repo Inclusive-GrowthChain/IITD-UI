@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TabNavItem from "../../pages/farmer/Tabs/TabNavItem";
 import TabContent from "../../pages/farmer/Tabs/TabContent";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
 
 import SellProduce from "./Modals/SellingPrice/SellProduce";
 
@@ -10,6 +11,7 @@ import "./Farmer.css";
 function SellingPrice() {
   const [activeTab, setActiveTab] = useState("tab1");
   const [showLacForm, setShowLacForm] = useState(false);
+  const [itemList, setItemList] = useState([]);
 
   const handleShowLacForm = () => setShowLacForm(true);
   const handleCloseLacForm = () => setShowLacForm(false);
@@ -20,6 +22,19 @@ function SellingPrice() {
   let year = newDate.getFullYear();
   if (date <= 9) date = "0" + date;
   if (month <= 9) month = "0" + month;
+
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+    axios
+      .get("http://13.232.131.203:3000/api/fpo/lac")
+      .then((response) => {
+        console.log(response.data.data);
+        setItemList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div className="itemContainer">
@@ -81,135 +96,53 @@ function SellingPrice() {
             <div className="outlet">
               <TabContent id="tab1" activeTab={activeTab}>
                 <div className="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4">
-                  <div className="col">
-                    <div className="card">
-                      <img
-                        src="https://3.imimg.com/data3/TM/JM/ETO-196508/1-294285-full-images-stick-lac-1081592-500x500.jpg"
-                        className="card-img-top"
-                        alt=""
-                        style={{ height: "280px", objectFit: "cover" }}
-                      />
-                      <div className="card-body">
-                        <div className="row">
-                          <div className="col">
-                            <h4>Stick Lac</h4>
-                          </div>
-                        </div>
-                        <div className="row mt-2">
-                          <div className="col-7">
+                  {
+                    itemList.map((item, index) => (
+                      <div className="col">
+                        <div className="card">
+                          <img
+                            src="https://3.imimg.com/data3/TM/JM/ETO-196508/1-294285-full-images-stick-lac-1081592-500x500.jpg"
+                            className="card-img-top"
+                            alt=""
+                            style={{ height: "280px", objectFit: "cover" }}
+                          />
+                          <div className="card-body">
                             <div className="row">
                               <div className="col">
-                                <h5>Market Price</h5>
+                                <h4>Stick Lac</h4>
                               </div>
                             </div>
-                            <div className="row">
-                              <div className="col">
-                                <span>500</span>
+                            <div className="row mt-2">
+                              <div className="col-7">
+                                <div className="row">
+                                  <div className="col">
+                                    <h5>Market Price</h5>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col">
+                                    <span>500</span>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                          <div className="col-5">
-                            <div className="row">
-                              <div className="col">
-                                <h5>FPO Price</h5>
-                              </div>
-                            </div>
-                            <div className="row">
-                              <div className="col">
-                                <span>500</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col">
-                    <div className="card">
-                      <img
-                        src="https://img3.exportersindia.com/product_images/bc-full/2018/9/1491297/seedlac-shellac-1536140025-4266463.jpg"
-                        className="card-img-top"
-                        alt=""
-                        style={{ height: "280px", objectFit: "cover" }}
-                      />
-                      <div className="card-body">
-                        <div className="row">
-                          <div className="col">
-                            <h4>Stick Lac</h4>
-                          </div>
-                        </div>
-                        <div className="row mt-2">
-                          <div className="col-7">
-                            <div className="row">
-                              <div className="col">
-                                <h5>Market Price</h5>
-                              </div>
-                            </div>
-                            <div className="row">
-                              <div className="col">
-                                <span>500</span>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-5">
-                            <div className="row">
-                              <div className="col">
-                                <h5>FPO Price</h5>
-                              </div>
-                            </div>
-                            <div className="row">
-                              <div className="col">
-                                <span>500</span>
+                              <div className="col-5">
+                                <div className="row">
+                                  <div className="col">
+                                    <h5>FPO Price</h5>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col">
+                                    <span>500</span>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="col">
-                    <div className="card">
-                      <img
-                        src="https://5.imimg.com/data5/WH/TW/MY-1496311/shellac-processed-versatile-lac-golden-kusmi-500x500.jpg"
-                        className="card-img-top"
-                        alt=""
-                        style={{ height: "280px", objectFit: "cover" }}
-                      />
-                      <div className="card-body">
-                        <div className="row">
-                          <div className="col">
-                            <h4>Stick Lac</h4>
-                          </div>
-                        </div>
-                        <div className="row mt-2">
-                          <div className="col-7">
-                            <div className="row">
-                              <div className="col">
-                                <h5>Market Price</h5>
-                              </div>
-                            </div>
-                            <div className="row">
-                              <div className="col">
-                                <span>500</span>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-5">
-                            <div className="row">
-                              <div className="col">
-                                <h5>FPO Price</h5>
-                              </div>
-                            </div>
-                            <div className="row">
-                              <div className="col">
-                                <span>500</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    ))
+                  }
                 </div>
               </TabContent>
               <TabContent id="tab2" activeTab={activeTab}>

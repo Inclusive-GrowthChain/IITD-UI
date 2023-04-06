@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 
-function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step, setStep, currentFarmer, handleShowAadharCardImg, handleShowPanCardImg, handleShowImg }) {
+function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step, setStep, currentLoan, handleShowAadharCardImg, handleShowPanCardImg, handleShowImg, currentLoanWindow }) {
   return (
     <Modal
       show={showLoanApplication}
@@ -22,7 +22,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Loan ID</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>112345</label>
+                          <label>{currentLoan.loanId}</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -700,7 +700,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                         <input
                           type="number"
                           className="form-control"
-                          value={currentFarmer.interest}
+                          value={currentLoan.interest}
                           disabled
                         />
                       </div>
@@ -715,7 +715,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                         <input
                           type="number"
                           className="form-control"
-                          value={currentFarmer.amount}
+                          value={currentLoan.amount}
                           disabled
                         />
                       </div>
@@ -730,7 +730,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                         <input
                           type="number"
                           className="form-control"
-                          value={currentFarmer.tenure}
+                          value={currentLoan.tenure}
                           disabled
                         />
                       </div>

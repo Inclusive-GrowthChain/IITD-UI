@@ -1,36 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import EditCropAdvisory from "./Modals/CropAdvisory/EditCropAdvisory";
 import AddCropAdvisory from "./Modals/CropAdvisory/AddCropAdvisory";
-import AddDescription from "./Modals/CropAdvisory/AddDescription";
+import ReadMore from "./Modals/CropAdvisory/ReadMore";
+import axios from "axios";
 
-const caList = [
-  {
-    id: 1,
-    title: "Title1",
-    description: "Description1",
-  },
-  {
-    id: 2,
-    title: "Title2",
-    description: "Description2",
-  },
-]
-
-const CropAdvisory2 = () => {
-  const [showEditCA, setShowEditCA] = useState(false)
-  const [showModal, setShowModal] = useState(false)
-  const [showAddCA, setShowAddCA] = useState(false)
+const CropAdvisory2 = () => {  
+  const [showModal, setShowModal] = useState(false)  
   const [currentCA, setCurrentCA] = useState({})
+  const [caList, setCaList] = useState([])
 
   const handleClose = () => setShowModal(false)
-  const handleCAClose = () => setShowAddCA(false)
-  const handleEditCAClose = () => setShowEditCA(false)
 
-  const handleShow = (ind) => {
+  const handleShow = (ca) => {
     setShowModal(true)
-    setCurrentCA(caList[ind])
+    setCurrentCA(ca)
   }
+
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+    axios
+      .get("http://13.232.131.203:3000/api/nisa/crop-advisory")
+      .then((response) => {
+        console.log(response.data.data);
+        setCaList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <>
@@ -61,11 +59,11 @@ const CropAdvisory2 = () => {
                   </div>
                   <div className="card_content">
                     <p style={{ fontSize: "20px" }}>
-                      {ca.description.substring(0, 100)}
+                      {ca.content.substring(0, 100)}
                     </p>
                   </div>
                   <div className="card_button d-flex">
-                    <button id="btn-1" onClick={() => handleShow(ind)}>
+                    <button id="btn-1" onClick={() => handleShow(ca)}>
                       Read More
                       <ChevronRightIcon className="btn-icon" />
                     </button>
@@ -82,21 +80,10 @@ const CropAdvisory2 = () => {
         </div>
       </div>
 
-      <EditCropAdvisory
-        currentCA={currentCA}
-        showEditCA={showEditCA}
-        handleEditCAClose={handleEditCAClose}
-      />
-
-      <AddDescription
+      <ReadMore
         currentCA={currentCA}
         showModal={showModal}
         handleClose={handleClose}
-      />
-
-      <AddCropAdvisory
-        showAddCA={showAddCA}
-        handleCAClose={handleCAClose}
       />
     </>
   )

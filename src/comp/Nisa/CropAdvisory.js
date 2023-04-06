@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -6,27 +6,16 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import AddADescription from "./Modals/AddCADescription";
 import EditCA from "./Modals/EditCA";
 import AddCA from "./Modals/AddCA";
+import axios from 'axios';
 
 import "./Nisa.css"
-
-const caList = [
-  {
-    id: 1,
-    title: "Title1",
-    description: "Description 1",
-  },
-  {
-    id: 2,
-    title: "Title2",
-    description: "Description2",
-  },
-];
 
 const CropAdvisory = () => {
   const [showEditCA, setShowEditCA] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [showAddCA, setShowAddCA] = useState(false)
   const [currentCA, setCurrentCA] = useState({})
+  const [caList, setCaList] = useState([])
 
   const handleClose = () => setShowModal(false)
   const handleShow = (ind) => {
@@ -41,10 +30,23 @@ const CropAdvisory = () => {
     setCurrentCA(caList[ind])
   }
 
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+    axios
+      .get("http://13.232.131.203:3000/api/nisa/crop-advisory")
+      .then((response) => {
+        console.log(response.data.data);
+        setCaList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="item_Container">
       <div className="list_title">
-        <div className="crop__title container-fluid">
+        <div className="crop__title container-fluid" style={{marginBottom: '100px'}}>
           <div className="crop_container d-sm-flex justify-content-between align-items-center" style={{marginBottom: '50px'}}>
             <h3
               className="text-dark mb-0"
@@ -105,7 +107,7 @@ const CropAdvisory = () => {
                 </div>
                 <div className="card_content">
                   <p style={{ fontSize: "20px" }}>
-                    {ca.description.substring(0, 100)}
+                    {ca.content.substring(0, 100)}
                   </p>
                 </div>
                 <div className="card_button d-flex">
@@ -116,8 +118,8 @@ const CropAdvisory = () => {
                 </div>
                 <hr />
                 <div className="card__footer text-muted">
-                  <p> 2 months ago</p>
-                  <p> 19/08/2022</p>
+                  <p>Created: {ca.createdAt}</p>
+                  <p>Last updated: {ca.updatedAt}</p>
                 </div>
               </div>
             </div>
@@ -135,6 +137,9 @@ const CropAdvisory = () => {
         currentCA={currentCA}
         showEditCA={showEditCA}
         handleEditCAClose={handleEditCAClose}
+        ca_id={currentCA._id}
+        cur_title={currentCA.title}
+        cur_content={currentCA.content}
       />
 
       <AddCA

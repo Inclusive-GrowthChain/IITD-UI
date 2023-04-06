@@ -12,7 +12,7 @@ const fpoInvoice = {
   amount: "3000",
 };
 
-const PageThree = ({ onButtonClick }) => {
+const PageThree = ({ onButtonClick, bid }) => {
   const [selectedFile, setSelectedFile] = useState();
 
   const handleFileChange = (event) => {
@@ -73,6 +73,7 @@ const PageThree = ({ onButtonClick }) => {
                 onButtonClick("pagefour")
               }}
               style={{ backgroundColor: "white" }}
+              disabled={bid.status == "on-going"}
             >
               <ArrowForwardIosIcon />
             </button>
@@ -87,7 +88,7 @@ const PageThree = ({ onButtonClick }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={fpoInvoice.id}
+                value={bid.bids.find((item) => item.userId === localStorage.getItem("userId")).fpoId}
                 style={{ width: "105%" }}
               />
             </div>
@@ -101,7 +102,7 @@ const PageThree = ({ onButtonClick }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={fpoInvoice.name}
+                value={bid.bids.find((item) => item.userId === localStorage.getItem("userId")).fpoName}
               />
             </div>
           </div>
@@ -114,7 +115,7 @@ const PageThree = ({ onButtonClick }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={fpoInvoice.phoneNumber}
+                value={bid.bids.find((item) => item.userId === localStorage.getItem("userId")).fpoPhone}
               />
             </div>
           </div>
@@ -127,7 +128,7 @@ const PageThree = ({ onButtonClick }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={fpoInvoice.amount}
+                value={bid.bids.find((item) => item.userId === localStorage.getItem("userId")).bidAmount}
               />
             </div>
           </div>
@@ -144,20 +145,74 @@ const PageThree = ({ onButtonClick }) => {
               />
             </div>
           </div>
+          {
+            bid.status == "on-going" && (
+              <div className="row m-2">
+                <div className="col-lg-6">
+                  <label>Upload Invoice</label>
+                </div>
+                <div className="col-lg-6">
+                  <input
+                    type="file"
+                    name="file"
+                    multiple={true}
+                    onClick={() => {
+                      handleFileChange();
+                      selectedFile();
+                    }}
+                  />
+                </div>
+              </div>
+            )
+          }
+          {
+            bid.status != "on-going" && (
+              <div className="row m-2">
+                <div className="col-lg-6">
+                  <label>Invoice</label>
+                </div>
+                <div className="col-lg-6">
+                  <button
+                    className=""
+                    type="button"
+                    style={{
+                      marginLeft: "3%",
+                      position: "relative",
+                      top: "7px",
+                      backgroundColor: "#064420",
+                      textAlign: "center",
+                      borderRadius: "5px",
+                      border: "none",
+                      padding: "5px 15px",
+                      width: "20%",
+                      minWidth: "80px",
+                      fontSize: ".85rem",
+                      lineHeight: "1rem",
+                      color: "#fff",
+                    }}
+                  >
+                    view
+                  </button>
+                </div>
+              </div>
+            )
+          }
           <div className="row m-2">
-            <div className="col-lg-6">
-              <label>Upload Invoice</label>
-            </div>
-            <div className="col-lg-6">
-              <input
-                type="file"
-                name="file"
-                multiple={true}
-                onClick={() => {
-                  handleFileChange();
-                  selectedFile();
+            <div className="col-lg-12">
+              <button
+                className="btn btn-success"
+                style={{
+                  marginTop: "1rem",
+                  backgroundColor: "#064420",
+                  width: "96%",
                 }}
-              />
+                onClick={() => {
+                  // onSubmit();
+                  // handleShowPayment();
+                }}
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>

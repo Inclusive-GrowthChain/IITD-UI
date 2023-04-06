@@ -1,6 +1,53 @@
 import { Modal } from "react-bootstrap";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-function EditCA({ currentCA, showEditCA, handleEditCAClose }) {
+function EditCA({ currentCA, showEditCA, handleEditCAClose, ca_id, cur_title, cur_content }) {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  useEffect(() => {
+    setTitle(cur_title);
+    setContent(cur_content);
+  }, [cur_title, cur_content]);
+
+  const onChangeTitle = (e) => {
+    setTitle(e.target.value);
+  }
+  
+  const onChangeContent = (e) => {
+    setContent(e.target.value);
+  }
+
+  const resetInputs = () => {
+    setTitle("");
+    setContent("");
+  }
+
+  const editCropAdvisory = async () => {
+    if(title=="" || content=="") {
+      alert("Please fill all details and try again");
+      return;
+    }
+
+    const newCA = {
+      "title": title,
+      "content": content
+    };
+    
+    await axios
+      .put(`http://13.232.131.203:3000/api/nisa/crop-advisory/${ca_id}`, newCA)
+      .then((response) => {
+        console.log(response.data);
+        resetInputs();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    window.location.reload();
+  }
+
   return (
     <Modal
       show={showEditCA}
@@ -25,6 +72,7 @@ function EditCA({ currentCA, showEditCA, handleEditCAClose }) {
                         className="form-control"
                         type="text"
                         defaultValue={currentCA.title}
+                        onChange={onChangeTitle}
                       />
                     </div>
                   </div>
@@ -36,7 +84,8 @@ function EditCA({ currentCA, showEditCA, handleEditCAClose }) {
                       <textarea
                         className="form-control"
                         style={{ height: "200%" }}
-                        defaultValue={currentCA.description}
+                        defaultValue={currentCA.content}
+                        onChange={onChangeContent}
                       />
                     </div>
                   </div>
@@ -46,6 +95,10 @@ function EditCA({ currentCA, showEditCA, handleEditCAClose }) {
                       style={{
                         marginTop: "5rem",
                         backgroundColor: "#064420",
+                      }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        editCropAdvisory();
                       }}
                     >
                       Submit

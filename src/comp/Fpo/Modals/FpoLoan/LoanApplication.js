@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 
-function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step, setStep, handleShowAadharCardImg, handleShowPanCardImg }) {
+function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step, setStep, handleShowAadharCardImg, handleShowPanCardImg, currentLoan, currentloanWindow }) {
   return (
     <Modal show={showLoanApplication} onHide={handleCloseLoanApplication}>
       <Modal.Header closeButton>Loan Application</Modal.Header>
@@ -17,7 +17,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Loan ID</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>112345</label>
+                          <label>{currentLoan.loanId}</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -25,7 +25,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>FPO Name</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>FPO 1</label>
+                          <label>{currentloanWindow.fpoName}</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -33,7 +33,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Bank Name</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>SBI</label>
+                          <label>{currentLoan.bankName}</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -41,7 +41,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Account Number</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>1234567890</label>
+                          <label>{currentLoan.accountNumber}</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -49,7 +49,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Bank IFSC</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>23423XXXX</label>
+                          <label>{currentLoan.ifscNumber}</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -57,7 +57,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Branch Name</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>Branch Name</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -65,7 +65,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Applicant Name</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>N 1</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -73,7 +73,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Loan Requested Amount</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>200000</label>
+                          <label>{currentLoan.requestedAmount}</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -81,7 +81,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Applicant Gender</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>Male</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -89,7 +89,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Applicant Mobile Number</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>1234567890</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -131,7 +131,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                         <label>Applicant DOB</label>
                       </div>
                       <div className="col-lg-6">
-                        <label>07-04-2000</label>
+                        <label>???</label>
                       </div>
                     </div>
                     <div className="row m-2">
@@ -139,7 +139,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                         <label>Applicant Age</label>
                       </div>
                       <div className="col-lg-6">
-                        <label>22</label>
+                        <label>???</label>
                       </div>
                     </div>
                     <div className="row m-2">
@@ -147,7 +147,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                         <label>Aadhard Card Number</label>
                       </div>
                       <div className="col-lg-6">
-                        <label>1234567890</label>
+                        <label>???</label>
                       </div>
                     </div>
                     <div className="row m-2">
@@ -180,7 +180,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                         <label>PAN Card Number</label>
                       </div>
                       <div className="col-lg-6">
-                        <label>1234567890</label>
+                        <label>???</label>
                       </div>
                     </div>
                     <div className="row m-2">
@@ -212,14 +212,14 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                       <div className="col-lg-6">
                         <label>Co-Applicant Name</label>
                       </div>
-                      <div className="col-lg-6">FPO 3</div>
+                      <div className="col-lg-6">???</div>
                     </div>
                     <div className="row m-2">
                       <div className="col-lg-6">
                         <label>Co-Applicant Gender</label>
                       </div>
                       <div className="col-lg-6">
-                        <label>Male</label>
+                        <label>???</label>
                       </div>
                     </div>
                     <div
@@ -282,7 +282,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Co-Applicant DOB</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>02-03-2000</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -290,7 +290,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Co-Applicant Age</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>22</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -298,7 +298,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Relationship with Applicant</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>Son</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -306,7 +306,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Applicant Father Name</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>Father Name</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -314,7 +314,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Applicant Mother Name</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>Mother Name</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -322,7 +322,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Door Number</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>24/H</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -330,7 +330,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Street Name</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>Jv Colony</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -338,7 +338,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Village</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>Hyderabad</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div
@@ -399,7 +399,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Taluk</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>Taluk</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -407,7 +407,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>District</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>district</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -415,7 +415,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>State</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>Telangana</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -423,7 +423,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Pin Code</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>50XXXXX</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -431,7 +431,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Occupation</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>occupation</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -439,7 +439,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Education</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>12th</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -447,7 +447,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Nature of Place</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>Hyderabad</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -455,7 +455,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Residence</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>Hyderabad</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div
@@ -516,7 +516,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Land Holding</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>Land</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -524,7 +524,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Type of Land Holding</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>XXXXXXXX</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -532,7 +532,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Caste</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>XXXXXXX</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -540,7 +540,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Religion</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>XXXXXXXX</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -548,7 +548,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Monthly HH Income</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>XXXXXXX</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -556,7 +556,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Monthly HH Expenses</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>XXXXXXX</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -564,7 +564,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Loan Purpose</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>XXXXXXX</label>
+                          <label>{currentLoan.purpose}</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -572,7 +572,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Loan Tenure (Months)</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>3 months</label>
+                          <label>???</label>
                         </div>
                       </div>
                       <div

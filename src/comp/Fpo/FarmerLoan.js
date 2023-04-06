@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RepaymentStructure from "./Modals/RepaymentStructure";
 import AddRepayment from "./Modals/AddRepayment";
 import RepaymentConfirm from "./Modals/RepaymentConfirm";
@@ -10,6 +10,7 @@ import ConfirmApproveLoanApp from "./Modals/ConfirmApproveLoanApp";
 import Img from "./Modals/FarmerInfo/Img";
 import InterestRate from "./Modals/InterestRate";
 import AggRepaymentStructure from "./Modals/AggRepaymentStructure";
+import axios from "axios";
 
 import "./Fpo.css";
 
@@ -138,13 +139,15 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
   const [showAggRepayment, setShowAggRepayment] = useState(false)
   const [showPanCardImg, setShowPanCardImg] = useState(false)
   const [showConfirmBox, setShowConfirmBox] = useState(false)
-  const [currentFarmer, setCurrentFarmer] = useState({})
   const [showInterest, setShowInterest] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
   const [activeIndex, setActiveIndex] = useState(1)
   const [textState, setTextState] = useState("")
   const [showImg, setShowImg] = useState(false)
   const [step, setStep] = useState(0)
+  const [loanWindowList, setLoanWindowList] = useState([])
+  const [currentLoan, setCurrentLoan] = useState({})
+  const [currentLoanWindow, setCurrentLoanWindow] = useState({})
 
   const checkActive = (index, className) =>
     activeIndex === index ? className : ""
@@ -196,6 +199,19 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
     )
   }
 
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+    axios
+      .get("http://13.232.131.203:3000/api/loanwindow?windowType=farmer")
+      .then((response) => {
+        console.log(response.data.data);
+        setLoanWindowList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <main id="main_container" className="main_container container-fluid itemContainer">
       <div className="">
@@ -208,7 +224,6 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
             padding: "5px 5px",
             borderRadius: "5px",
             position: "absolute",
-            // float: "right",
             right: "10%",
             top: "120px",
           }}
@@ -305,61 +320,69 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                         fontWeight: "500",
                       }}
                     >
-                      {farmerList.map((farmer) => {
-                        return (
-                          <tr>
-                            <td>{farmer.id}</td>
-                            <td>{farmer.name}</td>
-                            <td>{farmer.loanId}</td>
-                            <td>{farmer.loanAppDate}</td>
-                            <td>{farmer.loanAmount}</td>
-                            <td>
-                              <button
-                                className="py-0.5"
-                                style={{
-                                  backgroundColor: "#064420",
-                                  color: "#fff",
-                                  alignItems: "center",
-                                  borderRadius: "5px",
-                                  border: "none",
-                                  padding: "5px 10px",
-                                  width: "fit-content",
-                                  fontSize: ".75rem",
-                                  lineHeight: "1rem",
-                                }}
-                                onClick={() => {
-                                  handleShowRepaymentForm()
-                                }}
-                              >
-                                View
-                              </button>
-                            </td>
-                            <td>
-                              <button
-                                className="py-0.5"
-                                style={{
-                                  backgroundColor: "#064420",
-                                  color: "#fff",
-                                  alignItems: "center",
-                                  borderRadius: "5px",
-                                  border: "none",
-                                  padding: "5px 10px",
-                                  width: "fit-content",
-                                  fontSize: ".75rem",
-                                  lineHeight: "1rem",
-                                }}
-                                onClick={() => {
-                                  setCurrentFarmer(farmer)
-                                  setStep(0)
-                                  handleShowLoanApplication()
-                                }}
-                              >
-                                View
-                              </button>
-                            </td>
-                          </tr>
-                        )
-                      })}
+                      {loanWindowList && loanWindowList.map((loanWindow) => (
+                        <>
+                          {
+                            loanWindow && loanWindow.loans && loanWindow.loans.filter((loan) => loan.status == "approved").map((loan) => {
+                              return (
+                                <tr>
+                                  <td>???</td>
+                                  <td>???</td>
+                                  <td>{loan.loanId}</td>
+                                  <td>{loan.createdAt && loan.createdAt.substring(0, 10)}</td>
+                                  <td>{loan.grantedAmount}</td>
+                                  <td>
+                                    <button
+                                      className="py-0.5"
+                                      style={{
+                                        backgroundColor: "#064420",
+                                        color: "#fff",
+                                        alignItems: "center",
+                                        borderRadius: "5px",
+                                        border: "none",
+                                        padding: "5px 10px",
+                                        width: "fit-content",
+                                        fontSize: ".75rem",
+                                        lineHeight: "1rem",
+                                      }}
+                                      onClick={() => {
+                                        setCurrentLoan(loan)
+                                        setCurrentLoanWindow(loanWindow)
+                                        handleShowRepaymentForm()
+                                      }}
+                                    >
+                                      View
+                                    </button>
+                                  </td>
+                                  <td>
+                                    <button
+                                      className="py-0.5"
+                                      style={{
+                                        backgroundColor: "#064420",
+                                        color: "#fff",
+                                        alignItems: "center",
+                                        borderRadius: "5px",
+                                        border: "none",
+                                        padding: "5px 10px",
+                                        width: "fit-content",
+                                        fontSize: ".75rem",
+                                        lineHeight: "1rem",
+                                      }}
+                                      onClick={() => {
+                                        setCurrentLoan(loan)
+                                        setStep(0)
+                                        handleShowLoanApplication()
+                                      }}
+                                    >
+                                      View
+                                    </button>
+                                  </td>
+                                </tr>
+                              )
+                            })
+                          }
+                        </>
+                      ))}
                     </tbody>
                   </table>
                 </div>
@@ -434,6 +457,8 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
         handleCloseRepaymentForm={handleCloseRepaymentForm}
         repaymentList={repaymentList}
         handleShowConfirmPayment={handleShowConfirmPayment}
+        currentLoan={currentLoan}
+        currentLoanWindow={currentLoanWindow}
       />
 
       <AddRepayment
@@ -453,12 +478,13 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
       <LoanApplication
         showLoanApplication={showLoanApplication}
         handleCloseLoanApplication={handleCloseLoanApplication}
-        step={step}
+        step={step} 
         setStep={setStep}
-        currentFarmer={currentFarmer}
+        currentLoan={currentLoan}
         handleShowAadharCardImg={handleShowAadharCardImg}
         handleShowPanCardImg={handleShowPanCardImg}
         handleShowImg={handleShowImg}
+        currentLoanWindow={currentLoanWindow}
       />
 
       <Aadhar
@@ -501,7 +527,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
         showAggRepayment={showAggRepayment}
         handleCloseAggRepayment={handleCloseAggRepayment}
       />
-      
+
     </main>
   )
 }

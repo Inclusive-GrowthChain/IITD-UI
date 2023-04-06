@@ -3,7 +3,7 @@ import { SliderData } from "./SliderData";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
-const ImageSlider = ({ slides }) => {
+const ImageSlider = ({ slides, itemList }) => {
   const [current, setCurrent] = useState(0);
   const length = slides.length;
 

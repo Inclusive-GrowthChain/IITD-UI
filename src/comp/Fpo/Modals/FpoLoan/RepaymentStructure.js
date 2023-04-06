@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 
-function RepaymentStructure({ showRepayment, handleCloseRepayment }) {
+function RepaymentStructure({ showRepayment, handleCloseRepayment, currentLoan, currentLoanWindow }) {
   return (
     <Modal
       size="xl"
@@ -10,7 +10,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment }) {
       <Modal.Header closeButton>
         Repayment Structure
       </Modal.Header>
-      <Modal.Body style={{overflowY: "auto"}}>
+      <Modal.Body style={{ overflowY: "auto" }}>
         <div className="repayment_title">
           <div className="row">
             <div className="col-lg-6">
@@ -19,7 +19,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment }) {
                   <strong>Loan ID : </strong>
                 </div>
                 <div className="col-6">
-                  <span>12345</span>
+                  <span>{currentLoan && currentLoan.loanId}</span>
                 </div>
                 <div className="col-6">
                   <strong>
@@ -27,13 +27,13 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment }) {
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>abcd</span>
+                  <span>???</span>
                 </div>
                 <div className="col-6">
                   <strong>FPO Name : </strong>
                 </div>
                 <div className="col-6">
-                  <span>abcd</span>
+                  <span>{currentLoanWindow && currentLoanWindow.fpoName}</span>
                 </div>
                 <div className="col-6">
                   <strong>
@@ -41,7 +41,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment }) {
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>400</span>
+                  <span>{currentLoan && currentLoan.grantedAmount}</span>
                 </div>
               </div>
             </div>
@@ -53,7 +53,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment }) {
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>1</span>
+                  <span>{currentLoan && currentLoan.loanTenure}</span>
                 </div>
                 <div className="col-6">
                   <strong>
@@ -61,7 +61,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment }) {
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>1</span>
+                  <span>{currentLoan && currentLoan.loanTenure}</span>
                 </div>
                 <div className="col-6">
                   <strong>
@@ -69,7 +69,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment }) {
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>14%</span>
+                  <span>{currentLoan && currentLoan.intrest}%</span>
                 </div>
               </div>
             </div>
@@ -94,38 +94,18 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment }) {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>12-10-2021</td>
-                <td>100000</td>
-                <td>21-10-2021</td>
-                <td>4000000</td>
-                <td>3000000</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>12-10-2021</td>
-                <td>100000</td>
-                <td>21-10-2021</td>
-                <td>4000000</td>
-                <td>3000000</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>12-10-2021</td>
-                <td>100000</td>
-                <td>21-10-2021</td>
-                <td>4000000</td>
-                <td>3000000</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>12-10-2021</td>
-                <td>100000</td>
-                <td>21-10-2021</td>
-                <td>4000000</td>
-                <td>3000000</td>
-              </tr>
+              {
+                currentLoan && currentLoan.repaymentStructure && currentLoan.repaymentStructure.map((repayment) => (
+                  <tr>
+                    <td>{repayment.id}</td>
+                    <td>{repayment.repaymentDate}</td>
+                    <td>{repayment.emi}</td>
+                    <td>???</td>
+                    <td>???</td>
+                    <td>{repayment.balance}</td>
+                  </tr>
+                ))
+              }
             </tbody>
           </table>
         </div>

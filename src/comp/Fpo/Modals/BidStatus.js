@@ -5,7 +5,7 @@ import PageTwo from "../ProgressPage/PageTwo";
 import PageThree from "../ProgressPage/PageThree";
 import PageFour from "../ProgressPage/PageFour";
 
-function BidStatus({ showCustomer, handleCloseCustomer, page, labelArray, currentStep, updateStep, canEdit, nextPage }) {
+function BidStatus({ showCustomer, handleCloseCustomer, page, labelArray, currentStep, updateStep, canEdit, nextPage, bid }) {
   return (
     <Modal
       className="progressModal"
@@ -27,16 +27,16 @@ function BidStatus({ showCustomer, handleCloseCustomer, page, labelArray, curren
         {
           {
             pageone: (
-              <PageOne onButtonClick={nextPage} />
+              <PageOne onButtonClick={nextPage} bid={bid} />
             ),
             pagetwo: (
-              <PageTwo onButtonClick={nextPage} />
+              <PageTwo onButtonClick={nextPage} bid={bid} />
             ),
             pagethree: (
-              <PageThree onButtonClick={nextPage} />
+              <PageThree onButtonClick={nextPage} bid={bid} />
             ),
             pagefour: (
-              <PageFour onButtonClick={nextPage} canEdit={canEdit} />
+              <PageFour onButtonClick={nextPage} canEdit={canEdit} bid={bid} />
             ),
           }[page]
         }

@@ -1,6 +1,42 @@
 import Modal from "react-bootstrap/Modal";
+import axios from "axios";
+import { useState } from "react";
 
 function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentLoan, handleClosePendingLoanDetails }) {
+  const [reason, setReason] = useState("");
+
+  const onChangeReason = (e) => {
+    setReason(e.target.value);
+  };
+
+  const resetInputs = () => {
+    setReason("");
+  };
+
+  const rejectLoan = async () => {
+    if(reason=="") {
+      alert("Please fill all details and try again");
+      return;
+    }
+
+    const newLoan = {
+      "status": "rejected",
+      "reason": reason
+    };
+    
+    await axios
+      .put(`http://13.232.131.203:3000/api/loanwindow/${currentLoan.windowId}/loan/${currentLoan.id}/approval`, newLoan)
+      .then((response) => {
+        console.log(response.data);
+        resetInputs();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    window.location.reload();
+  }
+
   return (
     <Modal show={showRejectForm} onHide={handleCloseRejectForm}>
       <Modal.Header closeButton>Reject Loan Application</Modal.Header>
@@ -18,7 +54,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentLoan, han
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.dateOfApp}
+                        value={currentLoan.createdAt && currentLoan.createdAt.substring(0, 10)}
                         disabled
                       />
                     </div>
@@ -31,7 +67,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentLoan, han
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.loanAmount}
+                        value={currentLoan.requestedAmount}
                         disabled
                       />
                     </div>
@@ -44,6 +80,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentLoan, han
                       <input
                         type="text"
                         className="form-control"
+                        onChange={onChangeReason}
                       />
                     </div>
                   </div>
@@ -53,6 +90,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentLoan, han
                         className="btn btn-primary"
                         onClick={(e) => {
                           e.preventDefault();
+                          rejectLoan();
                           handleCloseRejectForm();
                           handleClosePendingLoanDetails();
                         }}

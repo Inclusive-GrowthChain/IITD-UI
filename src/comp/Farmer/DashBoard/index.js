@@ -5,8 +5,53 @@ import ImageSliders from "./ImageSliders";
 import { SliderContent } from "./SliderContent";
 
 import "../Farmer.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function Dashboard() {
+  const [caList, setCaList] = useState([]);
+  const [tpList, setTpList] = useState([]);
+  const [storeItemList, setStoreItemList] = useState([]);
+
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+    axios
+      .get("http://13.232.131.203:3000/api/nisa/crop-advisory")
+      .then((response) => {
+        console.log(response.data.data);
+        setCaList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+    axios
+      .get("http://13.232.131.203:3000/api/nisa/traning")
+      .then((response) => {
+        console.log(response.data.data);
+        setTpList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+    axios
+      .get("http://13.232.131.203:3000/api/fpo/product")
+      .then((response) => {
+        console.log(response.data.data);
+        setStoreItemList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="itemContainer">
       <div className="list_title">
@@ -29,22 +74,14 @@ function Dashboard() {
                       </tr>
                     </thead>
                     <tbody className="fw-light fs-10">
-                      <tr>
-                        <td>14-07-22</td>
-                        <td>--</td>
-                      </tr>
-                      <tr>
-                        <td>14-07-22</td>
-                        <td>--</td>
-                      </tr>
-                      <tr>
-                        <td>14-07-22</td>
-                        <td>--</td>
-                      </tr>
-                      <tr>
-                        <td>14-07-22</td>
-                        <td>--</td>
-                      </tr>
+                      {
+                        tpList.slice(0, 4).map((tp) => (
+                          <tr>
+                            <td>{tp.createdAt.substring(0, 10)}</td>
+                            <td>{tp.courseName}</td>
+                          </tr>
+                        ))
+                      }
                     </tbody>
                   </table>
                 </div>
@@ -101,22 +138,13 @@ function Dashboard() {
                       </tr>
                     </thead>
                     <tbody className="fw-light fs-10">
-                      <tr>
-                        <td>14-07-22</td>
-                        <td>September week update</td>
-                      </tr>
-                      <tr>
-                        <td>14-07-22</td>
-                        <td>September week update</td>
-                      </tr>
-                      <tr>
-                        <td>14-07-22</td>
-                        <td>September week update</td>
-                      </tr>
-                      <tr>
-                        <td>14-07-22</td>
-                        <td>September week update</td>
-                      </tr>
+                      {
+                        caList.slice(0, 4).map((ca) => (
+                          <tr>
+                            <td>{ca.createdAt.substring(0, 10)}</td>
+                            <td>{ca.title}</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 </div>
@@ -126,7 +154,7 @@ function Dashboard() {
               <div className="mb-2 mt-2 p-3 dash__card">
                 <p className="card_title text-center">Store</p>
                 <div>
-                  <ImageSlider slides={SliderData} />
+                  <ImageSlider slides={SliderData} itemList={storeItemList}/>
                 </div>
               </div>
             </div>

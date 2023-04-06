@@ -1,6 +1,12 @@
+import { useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 
-function RepaymentStructure({ showRepaymentStructure, handleCloseRepaymentStructure, handleShowRepaymentStatus }) {
+function RepaymentStructure({ showRepaymentStructure, handleCloseRepaymentStructure, handleShowRepaymentStatus, currentLoan }) {
+
+  useEffect(() => {
+    console.log(currentLoan)
+  }, [currentLoan]);
+
   return (
     <Modal
       size="xl"
@@ -10,23 +16,23 @@ function RepaymentStructure({ showRepaymentStructure, handleCloseRepaymentStruct
       <Modal.Header closeButton>
         Repayment Structure
       </Modal.Header>
-      <Modal.Body style={{overflowY: 'auto'}}>
+      <Modal.Body style={{ overflowY: 'auto' }}>
         <div>
           <div className="repayment_title">
             <div className="row">
               <div className="col-lg-6">
                 <div className="row">
-                  <div className="col-6">
+                  <div className="col-4">
                     <strong>Loan ID : </strong>
                   </div>
-                  <div className="col-6">
-                    <span>12345</span>
+                  <div className="col-8">
+                    <span>{currentLoan.id}</span>
                   </div>
                   <div className="col-6">
                     <strong>FPO Name : </strong>
                   </div>
                   <div className="col-6">
-                    <span>abcd</span>
+                    <span>{currentLoan.fpoName}</span>
                   </div>
                   <div className="col-6">
                     <strong>
@@ -34,7 +40,7 @@ function RepaymentStructure({ showRepaymentStructure, handleCloseRepaymentStruct
                     </strong>
                   </div>
                   <div className="col-6">
-                    <span>400</span>
+                    <span>{currentLoan.grantedAmount}</span>
                   </div>
                 </div>
               </div>
@@ -46,7 +52,7 @@ function RepaymentStructure({ showRepaymentStructure, handleCloseRepaymentStruct
                     </strong>
                   </div>
                   <div className="col-6">
-                    <span>1</span>
+                    <span>{currentLoan.windowPeriod}</span>
                   </div>
                   <div className="col-6">
                     <strong>
@@ -54,7 +60,7 @@ function RepaymentStructure({ showRepaymentStructure, handleCloseRepaymentStruct
                     </strong>
                   </div>
                   <div className="col-6">
-                    <span>1</span>
+                    <span>{currentLoan.windowPeriod}</span>
                   </div>
                   <div className="col-6">
                     <strong>
@@ -62,7 +68,7 @@ function RepaymentStructure({ showRepaymentStructure, handleCloseRepaymentStruct
                     </strong>
                   </div>
                   <div className="col-6">
-                    <span>14%</span>
+                    <span>{currentLoan.intrest}%</span>
                   </div>
                 </div>
               </div>
@@ -86,146 +92,38 @@ function RepaymentStructure({ showRepaymentStructure, handleCloseRepaymentStruct
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>12-10-2021</td>
-                  <td>100000</td>
-                  <td>
-                    <button
-                      style={{
-                        color: "blue",
-                        alignItems: "center",
-                        borderRadius: "5px",
-                        border: "none",
-                        padding: "0.25rem 1rem",
-                        width: "100%",
-                        fontSize: "1rem",
-                        lineHeight: "2rem",
-                        textDecoration: "underline",
-                        backgroundColor: "rgb(255, 255, 255, 0)",
-                      }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleShowRepaymentStatus();
-                      }}
-                    >
-                      Repayment
-                    </button>
-                  </td>
-                  <td>90000</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>12-10-2021</td>
-                  <td>100000</td>
-                  <td>
-                    <button
-                      style={{
-                        color: "blue",
-                        alignItems: "center",
-                        borderRadius: "5px",
-                        border: "none",
-                        padding: "0.25rem 1rem",
-                        width: "100%",
-                        fontSize: "1rem",
-                        lineHeight: "2rem",
-                        textDecoration: "underline",
-                        backgroundColor: "rgb(255, 255, 255, 0)",
-                      }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleShowRepaymentStatus();
-                      }}
-                    >
-                      Repayment
-                    </button>
-                  </td>
-                  <td>90000</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>12-10-2021</td>
-                  <td>100000</td>
-                  <td>
-                    <button
-                      style={{
-                        color: "blue",
-                        alignItems: "center",
-                        borderRadius: "5px",
-                        border: "none",
-                        padding: "0.25rem 1rem",
-                        width: "100%",
-                        fontSize: "1rem",
-                        lineHeight: "2rem",
-                        textDecoration: "underline",
-                        backgroundColor: "rgb(255, 255, 255, 0)",
-                      }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleShowRepaymentStatus();
-                      }}
-                    >
-                      Repayment
-                    </button>
-                  </td>
-                  <td>90000</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>12-10-2021</td>
-                  <td>100000</td>
-                  <td>
-                    <button
-                      style={{
-                        color: "blue",
-                        alignItems: "center",
-                        borderRadius: "5px",
-                        border: "none",
-                        padding: "0.25rem 1rem",
-                        width: "100%",
-                        fontSize: "1rem",
-                        lineHeight: "2rem",
-                        textDecoration: "underline",
-                        backgroundColor: "rgb(255, 255, 255, 0)",
-                      }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleShowRepaymentStatus();
-                      }}
-                    >
-                      Repayment
-                    </button>
-                  </td>
-                  <td>90000</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>12-10-2021</td>
-                  <td>100000</td>
-                  <td>
-                    <button
-                      style={{
-                        color: "blue",
-                        alignItems: "center",
-                        borderRadius: "5px",
-                        border: "none",
-                        padding: "0.25rem 1rem",
-                        width: "100%",
-                        fontSize: "1rem",
-                        lineHeight: "2rem",
-                        textDecoration: "underline",
-                        backgroundColor: "rgb(255, 255, 255, 0)",
-                      }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleShowRepaymentStatus();
-                      }}
-                    >
-                      Repayment
-                    </button>
-                  </td>
-                  <td>90000</td>
-                </tr>
+                {
+                  currentLoan.windowRepaymentStructure && currentLoan.windowRepaymentStructure.map((window) => (
+                    <tr>
+                      <td>{window.id}</td>
+                      <td>{window.repaymentDate}</td>
+                      <td>{window.emi}</td>
+                      <td>
+                        <button
+                          style={{
+                            color: "blue",
+                            alignItems: "center",
+                            borderRadius: "5px",
+                            border: "none",
+                            padding: "0.25rem 1rem",
+                            width: "100%",
+                            fontSize: "1rem",
+                            lineHeight: "2rem",
+                            textDecoration: "underline",
+                            backgroundColor: "rgb(255, 255, 255, 0)",
+                          }}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleShowRepaymentStatus();
+                          }}
+                        >
+                          Repayment
+                        </button>
+                      </td>
+                      <td>{window.balance}</td>
+                    </tr>
+                  ))
+                }
               </tbody>
             </table>
           </div>

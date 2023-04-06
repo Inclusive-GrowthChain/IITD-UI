@@ -1,19 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
-import FpoStore from "./Modals/FpoStore";
+import AddFpoStore from "./Modals/AddFpoStore";
+import EditFpoStore from "./Modals/EditFpoStore";
+import axios from "axios";
 
 import "./Fpo.css";
 
 const Store = () => {
-  const [show, setShow] = useState(false);
+  const [showAdd, setShowAdd] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const [itemList, setItemList] = useState([]);
+  const [currentItem, setCurrentItem] = useState({});
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleCloseAdd = () => setShowAdd(false);
+  const handleCloseEdit = () => setShowEdit(false);
+  const handleShowAdd = () => setShowAdd(true);
+  const handleShowEdit = () => setShowEdit(true);
 
   const [activeIndex, setActiveIndex] = useState(1);
   const handleClick = (index) => setActiveIndex(index);
   const checkActive = (index, className) =>
     activeIndex === index ? className : "";
+
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+    axios
+      .get("http://13.232.131.203:3000/api/fpo/product")
+      .then((response) => {
+        console.log(response.data.data);
+        setItemList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+  }, []);
 
   return (
     <main id="main_container" className="main_container container-fluid itemContainer">
@@ -22,13 +43,13 @@ const Store = () => {
       </div>
       <div className="list_container">
         <div className="store_wrapper">
-          <button className="store_btn" onClick={handleShow}>
+          <button className="store_btn" onClick={handleShowAdd}>
             Add Item
           </button>
           <div className="store_list">
-            <FpoStore
-              show={show}
-              handleClose={handleClose}
+            <AddFpoStore
+              show={showAdd}
+              handleClose={handleCloseAdd}
             />
           </div>
         </div>
@@ -52,92 +73,93 @@ const Store = () => {
               <div className="store-modal">
                 <div className="container-fluid">
                   <div className="row">
-                    <div className="col-12 col-md-6 col-xl-4">
-                      <div className="store-card mt-4">
-                        <div className="card-image">
-                          <img
-                            src="http://3.bp.blogspot.com/-TJ6Oh6-8h1w/UVNthg6cQzI/AAAAAAAADOc/hGfyrvUHzSc/s1600/lac3.jpg"
-                            alt=""
-                            height={280}
-                            className="store_img"
-                          />
-                          <DriveFileRenameOutlineOutlinedIcon className="edit_image" onClick={handleShow} />
-                        </div>
-                        <div className="store-card-text">
-                          <h5>Stick Lac</h5>
-                        </div>
-                        <div className="store-card-footer">
-                          <div className="store-card-title">
-                            <h5>Market Price</h5>
-                            <p>₹ 460</p>
+                    {itemList.filter((item) => item.isAvailable === true).map((item, index) => (
+                      <div className="col-12 col-md-6 col-xl-4">
+                        <div className="store-card mt-4">
+                          <div className="card-image">
+                            <img
+                              src={item.imageUrl}
+                              alt=""
+                              height={280}
+                              className="store_img"
+                            />
+                            <DriveFileRenameOutlineOutlinedIcon className="edit_image" onClick={() => {
+                              handleShowEdit();
+                              setCurrentItem(item);
+                            }} />
                           </div>
-                          <div className="store-card-title">
-                            <h5>FPO Price</h5>
-                            <p>₹ 500</p>
+                          <div className="store-card-text">
+                            <h5>{item.productName}</h5>
                           </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-12 col-md-6 col-xl-4">
-                      <div className="store-card mt-4">
-                        <div className="card-image">
-                          <img
-                            src="https://img3.exportersindia.com/product_images/bc-full/2018/9/1491297/seedlac-shellac-1536140025-4266463.jpg"
-                            alt=""
-                            height={280}
-                            className="store_img"
-                          />
-                          <DriveFileRenameOutlineOutlinedIcon className="edit_image" onClick={handleShow} />
-                        </div>
-                        <div className="store-card-text">
-                          <h5>Seed Lac</h5>
-                        </div>
-                        <div className="store-card-footer">
-                          <div className="store-card-title">
-                            <h5>Market Price</h5>
-                            <p>₹ 460</p>
-                          </div>
-                          <div className="store-card-title">
-                            <h5>FPO Price</h5>
-                            <p>₹ 500</p>
+                          <div className="store-card-footer">
+                            <div className="store-card-title">
+                              <h5>Market Price</h5>
+                              <p>₹ {item.marketPrice}</p>
+                            </div>
+                            <div className="store-card-title">
+                              <h5>FPO Price</h5>
+                              <p>₹ {item.fpoPrice}</p>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="col-12 col-md-6 col-xl-4" style={{marginBottom: '40px'}}>
-                      <div className="store-card mt-4">
-                        <div className="card-image">
-                          <img
-                            src="https://5.imimg.com/data5/WH/TW/MY-1496311/shellac-processed-versatile-lac-golden-kusmi-500x500.jpg"
-                            alt=""
-                            height={280}
-                            className="store_img"
-                          />
-                          <DriveFileRenameOutlineOutlinedIcon className="edit_image" onClick={handleShow} />
-                        </div>
-                        <div className="store-card-text">
-                          <h5>Shellac Lac</h5>
-                        </div>
-                        <div className="store-card-footer">
-                          <div className="store-card-title">
-                            <h5>Market Price</h5>
-                            <p>₹ 460</p>
-                          </div>
-                          <div className="store-card-title">
-                            <h5>FPO Price</h5>
-                            <p>₹ 500</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>
             </div>
-            <div className={`panel ${checkActive(2, "active")}`}></div>
+            <div className={`panel ${checkActive(2, "active")}`}>
+              <div className="store-modal">
+                <div className="container-fluid">
+                  <div className="row">
+                    {itemList.filter((item) => item.isAvailable === false).map((item, index) => (
+                      <div className="col-12 col-md-6 col-xl-4">
+                        <div className="store-card mt-4">
+                          <div className="card-image">
+                            <img
+                              src={item.imageUrl}
+                              alt=""
+                              height={280}
+                              className="store_img"
+                            />
+                            <DriveFileRenameOutlineOutlinedIcon className="edit_image" onClick={handleShowEdit} />
+                          </div>
+                          <div className="store-card-text">
+                            <h5>{item.productName}</h5>
+                          </div>
+                          <div className="store-card-footer">
+                            <div className="store-card-title">
+                              <h5>Market Price</h5>
+                              <p>₹ {item.marketPrice}</p>
+                            </div>
+                            <div className="store-card-title">
+                              <h5>FPO Price</h5>
+                              <p>₹ {item.fpoPrice}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <EditFpoStore
+        show={showEdit}
+        handleClose={handleCloseEdit}
+        item_id={currentItem._id}
+        cur_productId={currentItem.productId}
+        cur_name={currentItem.productName}
+        cur_marketPrice={currentItem.marketPrice}
+        cur_fpoPrice={currentItem.fpoPrice}
+        cur_image={currentItem.imageUrl}
+        cur_isAvailable={currentItem.isAvailable}
+      />
+
     </main>
   )
 }

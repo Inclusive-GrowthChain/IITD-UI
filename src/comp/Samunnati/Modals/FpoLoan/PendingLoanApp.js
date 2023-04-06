@@ -27,7 +27,7 @@ function PendingLoanApp({ showPendLoanApp, handleClosePendLoanApp, step, setStep
                             type="text"
                             className="form-control"
                             disabled
-                            value={"W123456"}
+                            value={currentPendLoanApp.windowId}
                           />
                         </div>
                       </div>
@@ -40,7 +40,7 @@ function PendingLoanApp({ showPendLoanApp, handleClosePendLoanApp, step, setStep
                             type="text"
                             className="form-control"
                             disabled
-                            value={1000000}
+                            value={currentPendLoanApp.requestedAmount}
                           />
                         </div>
                       </div>
@@ -53,7 +53,7 @@ function PendingLoanApp({ showPendLoanApp, handleClosePendLoanApp, step, setStep
                             type="text"
                             className="form-control"
                             disabled
-                            value={1}
+                            value={currentPendLoanApp.windowPeriod}
                           />
                         </div>
                       </div>

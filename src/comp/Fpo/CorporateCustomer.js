@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BidStatus from "./Modals/BidStatus";
 import CompletedTransactions from "./Modals/CompletedTransactions";
 import PlaceBid from "./Modals/PlaceBid";
 import BidConfirm from "./Modals/BidConfirm";
 import BidInformation from "./Modals/BidInformation";
+import axios from "axios";
 
 const labelArray = [
   "Bid Information",
@@ -22,6 +23,8 @@ const CorporateCustomer = () => {
   const [showBid, setShowBid] = useState(false)
   const [canEdit, setCanEdit] = useState(false)
   const [page, setPage] = useState("pageone")
+  const [bidList, setBidList] = useState([]);
+  const [currentBid, setCurrentBid] = useState({});
 
   const checkActive = (index, className) =>
     activeIndex === index ? className : "";
@@ -56,6 +59,19 @@ const CorporateCustomer = () => {
     setShowConfirmBox(false);
     setShowBid(false);
   }
+
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+    axios
+      .get("http://13.232.131.203:3000/api/auction")
+      .then((response) => {
+        console.log(response.data.data);
+        setBidList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <main id="main_container" className="main_container container-fluid itemContainer">
@@ -99,10 +115,6 @@ const CorporateCustomer = () => {
                     >
                       <tr>
                         <th>Bid Id</th>
-                        <th>
-                          Name of Corporate <br />
-                          Customer
-                        </th>
                         <th>Quantity</th>
                         <th>Date of Supply</th>
                         <th>End Date of Bidding</th>
@@ -115,94 +127,60 @@ const CorporateCustomer = () => {
                         color: "#000",
                         fontSize: "15px",
                         fontWeight: "500",
-                        // textAlign: "center",
                       }}
                     >
-                      <tr>
-                        <td>1</td>
-                        <td>abcd</td>
-                        <td>2</td>
-                        <td>02-01-2021</td>
-                        <td>01-05-2022</td>
-                        <td>
-                          <button
-                            style={{
-                              backgroundColor: "#064420",
-                              alignItems: "center",
-                              borderRadius: "5px",
-                              border: "none",
-                              padding: "0.25rem 1rem",
-                              width: "fit-content",
-                              fontSize: ".75rem",
-                              lineHeight: "1rem",
-                              color: "#fff",
-                            }}
-                            onClick={handleShowStartBid}
-                          >
-                            View
-                          </button>
-                        </td>
-                        <td>
-                          <button
-                            style={{
-                              backgroundColor: "#064420",
-                              alignItems: "center",
-                              borderRadius: "5px",
-                              border: "none",
-                              padding: "0.25rem 1rem",
-                              width: "fit-content",
-                              fontSize: ".75rem",
-                              lineHeight: "1rem",
-                              color: "#fff",
-                            }}
-                            onClick={handleShowBid}
-                          >
-                            Place a Bid
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>abcd</td>
-                        <td>2</td>
-                        <td>02-01-2021</td>
-                        <td>01-05-2022</td>
-                        <td>
-                          <button
-                            style={{
-                              backgroundColor: "#064420",
-                              alignItems: "center",
-                              borderRadius: "5px",
-                              border: "none",
-                              padding: "0.25rem 1rem",
-                              width: "fit-content",
-                              fontSize: ".75rem",
-                              lineHeight: "1rem",
-                              color: "#fff",
-                            }}
-                            onClick={handleShowStartBid}
-                          >
-                            View
-                          </button>
-                        </td>
-                        <td>
-                          <button
-                            style={{
-                              backgroundColor: "#064420",
-                              alignItems: "center",
-                              borderRadius: "5px",
-                              border: "none",
-                              padding: "0.25rem 1rem",
-                              width: "fit-content",
-                              fontSize: ".75rem",
-                              lineHeight: "1rem",
-                              color: "#fff",
-                            }}
-                          >
-                            Place a Bid
-                          </button>
-                        </td>
-                      </tr>
+                      {
+                        bidList.map((item, index) => (
+                          <tr>
+                            <td>{item.bidId}</td>
+                            <td>{item.quantity}</td>
+                            <td>{item.supplyDate}</td>
+                            <td>{item.bidEndDate}</td>
+                            <td>
+                              <button
+                                style={{
+                                  backgroundColor: "#064420",
+                                  alignItems: "center",
+                                  borderRadius: "5px",
+                                  border: "none",
+                                  padding: "0.25rem 1rem",
+                                  width: "fit-content",
+                                  fontSize: ".75rem",
+                                  lineHeight: "1rem",
+                                  color: "#fff",
+                                }}
+                                onClick={() => {
+                                  setCurrentBid(item);
+                                  handleShowStartBid();
+                                }}
+                              >
+                                View
+                              </button>
+                            </td>
+                            <td>
+                              <button
+                                style={{
+                                  backgroundColor: "#064420",
+                                  alignItems: "center",
+                                  borderRadius: "5px",
+                                  border: "none",
+                                  padding: "0.25rem 1rem",
+                                  width: "fit-content",
+                                  fontSize: ".75rem",
+                                  lineHeight: "1rem",
+                                  color: "#fff",
+                                }}
+                                onClick={() => {
+                                  setCurrentBid(item);
+                                  handleShowBid();
+                                }}
+                              >
+                                Place a Bid
+                              </button>
+                            </td>
+                          </tr>
+                        ))
+                      }
                     </tbody>
                   </table>
                 </div>
@@ -222,10 +200,6 @@ const CorporateCustomer = () => {
                     >
                       <tr>
                         <th>Bid Id</th>
-                        <th>
-                          Name of Corporate <br />
-                          Customer
-                        </th>
                         <th>Bid Price</th>
                         <th>Quantity</th>
                         <th>Date of Supply</th>
@@ -238,60 +212,42 @@ const CorporateCustomer = () => {
                         color: "#000",
                         fontSize: "15px",
                         fontWeight: "500",
-                        // textAlign: "center",
                       }}
                     >
-                      <tr>
-                        <td>1</td>
-                        <td>abcd</td>
-                        <td>2000</td>
-                        <td>2</td>
-                        <td>01-05-2021</td>
-                        <td>01-05-2022</td>
-                        <td>
-                          <button
-                            style={{
-                              backgroundColor: "#064420",
-                              alignItems: "center",
-                              borderRadius: "5px",
-                              border: "none",
-                              padding: "0.25rem 1rem",
-                              width: "fit-content",
-                              fontSize: ".75rem",
-                              lineHeight: "1rem",
-                              color: "#fff",
-                            }}
-                            onClick={handleShowCustomer}
-                          >
-                            view
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>abcd</td>
-                        <td>2000</td>
-                        <td>2</td>
-                        <td>01-05-2021</td>
-                        <td>01-05-2022</td>
-                        <td>
-                          <button
-                            style={{
-                              backgroundColor: "#064420",
-                              alignItems: "center",
-                              borderRadius: "5px",
-                              border: "none",
-                              padding: "0.25rem 1rem",
-                              width: "fit-content",
-                              fontSize: ".75rem",
-                              lineHeight: "1rem",
-                              color: "#fff",
-                            }}
-                          >
-                            view
-                          </button>
-                        </td>
-                      </tr>
+                      {
+                        bidList
+                          .filter((item) => item.status == "on-going" && item.bids.some((bid) => bid.userId === localStorage.getItem("userId")))
+                          .map((item, index) => (
+                            <tr>
+                              <td>{item.bidId}</td>
+                              <td>{item.bids.find((bid) => bid.userId === localStorage.getItem("userId")).bidAmount}</td>
+                              <td>{item.quantity}</td>
+                              <td>{item.supplyDate}</td>
+                              <td>{item.bidEndDate}</td>
+                              <td>
+                                <button
+                                  style={{
+                                    backgroundColor: "#064420",
+                                    alignItems: "center",
+                                    borderRadius: "5px",
+                                    border: "none",
+                                    padding: "0.25rem 1rem",
+                                    width: "fit-content",
+                                    fontSize: ".75rem",
+                                    lineHeight: "1rem",
+                                    color: "#fff",
+                                  }}
+                                  onClick={() => {
+                                    setCurrentBid(item);
+                                    handleShowCustomer();
+                                  }}
+                                >
+                                  view
+                                </button>
+                              </td>
+                            </tr>
+                          ))
+                      }
                     </tbody>
                   </table>
                 </div>
@@ -311,10 +267,6 @@ const CorporateCustomer = () => {
                     >
                       <tr>
                         <th>Bid Id</th>
-                        <th>
-                          Name of Corporate <br />
-                          Customer
-                        </th>
                         <th>Date of Invoice</th>
                         <th>Invoice Number</th>
                         <th>Total Amount</th>
@@ -326,59 +278,36 @@ const CorporateCustomer = () => {
                         color: "#000",
                         fontSize: "15px",
                         fontWeight: "500",
-                        // textAlign: "center",
                       }}
                     >
-                      <tr>
-                        <td>1</td>
-                        <td>abcd</td>
-                        <td>02-01-2021</td>
-                        <td>12345</td>
-                        <td>200</td>
-                        <td>
-                          <button
-                            style={{
-                              backgroundColor: "#064420",
-                              alignItems: "center",
-                              borderRadius: "5px",
-                              border: "none",
-                              padding: "0.25rem 1rem",
-                              width: "fit-content",
-                              fontSize: ".75rem",
-                              lineHeight: "1rem",
-                              color: "#fff",
-                            }}
-                            onClick={handleShowTransaction}
-                          >
-                            view
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>abcd</td>
-                        <td>02-01-2021</td>
-                        <td>12345</td>
-                        <td>300</td>
-                        <td>
-                          <button
-                            style={{
-                              backgroundColor: "#064420",
-                              alignItems: "center",
-                              borderRadius: "5px",
-                              border: "none",
-                              padding: "0.25rem 1rem",
-                              width: "fit-content",
-                              fontSize: ".75rem",
-                              lineHeight: "1rem",
-                              color: "#fff",
-                            }}
-                            onClick={handleShowTransaction}
-                          >
-                            view
-                          </button>
-                        </td>
-                      </tr>
+                      {
+                        bidList.filter((bid) => bid.status != "on-going").map((bid, index) => (
+                          <tr>
+                            <td>{bid.bidId}</td>
+                            <td>02-01-2021</td>
+                            <td>12345</td>
+                            <td>200</td>
+                            <td>
+                              <button
+                                style={{
+                                  backgroundColor: "#064420",
+                                  alignItems: "center",
+                                  borderRadius: "5px",
+                                  border: "none",
+                                  padding: "0.25rem 1rem",
+                                  width: "fit-content",
+                                  fontSize: ".75rem",
+                                  lineHeight: "1rem",
+                                  color: "#fff",
+                                }}
+                                onClick={handleShowTransaction}
+                              >
+                                view
+                              </button>
+                            </td>
+                          </tr>
+                        ))
+                      }
                     </tbody>
                   </table>
                 </div>
@@ -397,6 +326,7 @@ const CorporateCustomer = () => {
         updateStep={updateStep}
         nextPage={nextPage}
         canEdit={canEdit}
+        bid={currentBid}
       />
 
       <CompletedTransactions
@@ -408,6 +338,7 @@ const CorporateCustomer = () => {
         showBid={showBid}
         handleCloseBid={handleCloseBid}
         confirmBid={confirmBid}
+        bid={currentBid}
       />
 
       <BidConfirm
@@ -419,6 +350,7 @@ const CorporateCustomer = () => {
       <BidInformation
         showStartBid={showStartBid}
         handleCloseStartBid={handleCloseStartBid}
+        bid={currentBid}
       />
 
     </main>

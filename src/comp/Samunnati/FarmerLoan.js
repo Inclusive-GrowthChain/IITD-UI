@@ -11,137 +11,7 @@ import ConfirmReject from "./Modals/FarmerLoan/ConfirmReject";
 import RepaymentStructure from "./Modals/FarmerLoan/RepaymentStructure";
 import RepaymentStatus from "./Modals/FarmerLoan/RepaymentStatus";
 import RepaymentConfirm from "./Modals/FarmerLoan/RepaymentConfirm";
-
-const approvedLoanList = [
-  {
-    loanId: 1,
-    fpoId: 'F111111',
-    fpoName: "FPO 1",
-    contact: "1234567890",
-    dateOfApp: "2021-10-10",
-    requestedAmount: "100000",
-    grantedAmount: "100000",
-    reasonForRejection: "",
-    status: "Approved",
-    numberOfRequests: '2',
-  },
-  {
-    loanId: 3,
-    fpoId: 'F333333',
-    fpoName: "FPO 3",
-    contact: "1234567890",
-    dateOfApp: "2021-10-10",
-    requestedAmount: "100000",
-    grantedAmount: "100000",
-    reasonForRejection: "",
-    status: "Approved",
-    numberOfRequests: '2',
-  },
-  {
-    loanId: 4,
-    fpoId: 'F444444',
-    fpoName: "FPO 4",
-    contact: "1234567890",
-    dateOfApp: "2021-10-10",
-    requestedAmount: "100000",
-    grantedAmount: "50000",
-    reasonForRejection: "",
-    status: "Approved",
-    numberOfRequests: '2',
-  },
-  {
-    loanId: 8,
-    fpoId: 'F888888',
-    fpoName: "FPO 8",
-    contact: "1234567890",
-    dateOfApp: "2021-10-10",
-    requestedAmount: "100000",
-    grantedAmount: "80000",
-    reasonForRejection: "",
-    status: "Approved",
-    numberOfRequests: '2',
-  },
-  {
-    loanId: 9,
-    fpoId: 'F999999',
-    fpoName: "FPO 9",
-    contact: "1234567890",
-    dateOfApp: "2021-10-10",
-    requestedAmount: "100000",
-    grantedAmount: "70000",
-    reasonForRejection: "",
-    status: "Approved",
-    numberOfRequests: '2',
-  },
-];
-
-const rejectedLoanList = [
-  {
-    loanId: 5,
-    fpoId: 'F555555',
-    fpoName: "FPO 5",
-    contact: "1234567890",
-    dateOfApp: "2021-10-10",
-    requestedAmount: "100000",
-    grantedAmount: "",
-    reasonForRejection: "Not eligible",
-    status: "Rejected",
-    numberOfRequests: '2',
-  },
-  {
-    loanId: 7,
-    fpoId: 'F777777',
-    fpoName: "FPO 7",
-    contact: "1234567890",
-    dateOfApp: "2021-10-10",
-    requestedAmount: "100000",
-    grantedAmount: "",
-    reasonForRejection: "Not eligible",
-    status: "Rejected",
-    numberOfRequests: '2',
-  },
-  {
-    loanI: 10,
-    fpoId: 'F101010',
-    fpoName: "FPO 10",
-    contact: "1234567890",
-    dateOfApp: "2021-10-10",
-    requestedAmount: "100000",
-    grantedAmount: "",
-    reasonForRejection: "Not eligible",
-    status: "Rejected",
-    numberOfRequests: '2',
-  },
-];
-
-const pendingLoanList = [
-  {
-    loanId: 2,
-    fpoId: 'F222222',
-    fpoName: "FPO 2",
-    contact: "1234567890",
-    dateOfApp: "2021-10-10",
-    requestedAmount: "100000",
-    grantedAmount: "",
-    reasonForRejection: "",
-    status: "Pending",
-    tenure: 12,
-    interest: 12,
-  },
-  {
-    loanId: 6,
-    fpoId: 'F666666',
-    fpoName: "FPO 6",
-    contact: "1234567890",
-    dateOfApp: "2021-10-10",
-    requestedAmount: "100000",
-    grantedAmount: "",
-    reasonForRejection: "",
-    status: "Pending",
-    tenure: 12,
-    interest: 12,
-  },
-];
+import axios from "axios";
 
 const Samunnati_Farmer_Loan = () => {
   const [showRepaymentStructure, setshowRepaymentStructure] = useState(false);
@@ -152,9 +22,6 @@ const Samunnati_Farmer_Loan = () => {
   const [showApproveForm, setShowApproveForm] = useState(false);
   const [showRejectForm, setShowRejectForm] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const [filteredApprovedLoanList, setFilteredApprovedLoanList] = useState([]);
-  const [filteredRejectedLoanList, setFilteredRejectedLoanList] = useState([]);
-  const [filteredPendingLoanList, setFilteredPendingLoanList] = useState([]);
   const [showRepaymentStatus, setShowRepaymentStatus] = useState(false);
   const [showRepaymentConfirmation, setShowRepaymentConfirmation] = useState(false);
   const [showConfirmApprove, setShowConfirmApprove] = useState(false);
@@ -162,6 +29,9 @@ const Samunnati_Farmer_Loan = () => {
   const [activeTab, setActiveTab] = useState("tab1");
   const [step, setStep] = useState(0);
   const [noOfRows] = useState(1);
+  const [farmerLoanWindowList, setFarmerLoanWindowList] = useState([]);
+  const [filteredFarmerLoanWindowList, setFilteredFarmerLoanWindowList] = useState([]);
+  const [currentLoan, setCurrentLoan] = useState({});
 
   const handleShowRepaymentStructure = () => setshowRepaymentStructure(true);
   const handleCloseRepaymentStructure = () => setshowRepaymentStructure(false);
@@ -181,9 +51,34 @@ const Samunnati_Farmer_Loan = () => {
   const handleCloseRepaymentConfirmation = () => setShowRepaymentConfirmation(false);
 
   useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+    axios
+      .get("http://13.232.131.203:3000/api/loanwindow?windowType=farmer")
+      .then((response) => {
+        console.log(response.data.data);
+        setFarmerLoanWindowList(response.data.data);
+        var numFarmerPendingRequests = 0;
+        response.data.data.forEach((loanWindow) => {
+          loanWindow.loans.forEach((loan) => {
+            if (loanWindow.status === "approved" && loan.status === "in-process" && loan.fpoApprovalStatus === "approved") {
+              alert(loan);
+              console.log(loan);
+              numFarmerPendingRequests++;
+              console.log(numFarmerPendingRequests);
+            }
+          });
+        });
+        localStorage.setItem("FarmerLoanRequests", numFarmerPendingRequests);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
     searchLoans();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchText]);
+  }, [farmerLoanWindowList, searchText]);
 
   const changeLoanStatus = (e, loanApp) => {
     e.preventDefault();
@@ -212,27 +107,17 @@ const Samunnati_Farmer_Loan = () => {
   };
 
   const searchLoans = () => {
-    const filteredApprovedLoans = approvedLoanList.filter((loan) => {
+    if (!searchText) {
+      setFilteredFarmerLoanWindowList(farmerLoanWindowList);
+      return;
+    }
+    const filteredLoanWindows = farmerLoanWindowList.filter((loanWindow) => {
       return (
-        loan.fpoId.toLowerCase().includes(searchText.toLowerCase()) ||
-        loan.fpoName.toLowerCase().includes(searchText.toLowerCase())
+        loanWindow.fpoName.toLowerCase().includes(searchText.toLowerCase()) ||
+        loanWindow.fpoId.toLowerCase().includes(searchText.toLowerCase())
       );
     });
-    const filteredRejectedLoans = rejectedLoanList.filter((loan) => {
-      return (
-        loan.fpoId.toLowerCase().includes(searchText.toLowerCase()) ||
-        loan.fpoName.toLowerCase().includes(searchText.toLowerCase())
-      );
-    });
-    const filteredPendingLoans = pendingLoanList.filter((loan) => {
-      return (
-        loan.fpoId.toLowerCase().includes(searchText.toLowerCase()) ||
-        loan.fpoName.toLowerCase().includes(searchText.toLowerCase())
-      );
-    });
-    setFilteredApprovedLoanList(filteredApprovedLoans);
-    setFilteredRejectedLoanList(filteredRejectedLoans);
-    setFilteredPendingLoanList(filteredPendingLoans);
+    setFilteredFarmerLoanWindowList(filteredLoanWindows);
   };
 
   return (
@@ -330,12 +215,12 @@ const Samunnati_Farmer_Loan = () => {
                               fontWeight: "500",
                             }}
                           >
-                            {filteredApprovedLoanList.map((app) => (
+                            {filteredFarmerLoanWindowList.filter((app) => app.status=="approved").map((app) => (
                               <tr>
-                                <td>{app.dateOfApp}</td>
+                                <td>{app.approvalDate.substring(0, 10)}</td>
                                 <td>{app.fpoId}</td>
                                 <td>{app.fpoName}</td>
-                                <td>{app.contact}</td>
+                                <td>{app.contactNo}</td>
                                 <td>{app.grantedAmount}</td>
                                 <td>
                                   <button
@@ -350,12 +235,15 @@ const Samunnati_Farmer_Loan = () => {
                                       fontSize: ".75rem",
                                       lineHeight: "1rem",
                                     }}
-                                    onClick={handleShowRepaymentStructure}
+                                    onClick={() => {
+                                      setCurrentLoan(app);
+                                      handleShowRepaymentStructure();
+                                    }}
                                   >
                                     view
                                   </button>
                                 </td>
-                                <td>{app.numberOfRequests}</td>
+                                <td>{app.loans.filter((loan) => loan.status=="pending").length}</td>
                                 <td>
                                   <Link to="/samunnati/farmer-subloan"
                                     className="data_wrapper"
@@ -373,7 +261,8 @@ const Samunnati_Farmer_Loan = () => {
                                       fontWeight: "400"
                                     }}
                                     onClick={() => {
-                                      localStorage.setItem("fpoId", app.fpoId);
+                                      // localStorage.setItem("fpoId", app.fpoId);
+                                      localStorage.setItem("loanWindowId", app.id);
                                     }}
                                   >
                                     view
@@ -447,12 +336,12 @@ const Samunnati_Farmer_Loan = () => {
                             }}
                           >
                             {
-                              filteredRejectedLoanList.map((app) => (
+                              filteredFarmerLoanWindowList.filter((app) => app.status=="rejected").map((app) => (
                                 <tr>
-                                  <td>{app.dateOfApp}</td>
+                                  <td>{app.dateOfApplication}</td>
                                   <td>{app.fpoId}</td>
                                   <td>{app.fpoName}</td>
-                                  <td>{app.contact}</td>
+                                  <td>{app.contactNo}</td>
                                   <td>{app.requestedAmount}</td>
                                   <td>
                                     <button
@@ -475,7 +364,7 @@ const Samunnati_Farmer_Loan = () => {
                                       view
                                     </button>
                                   </td>
-                                  <td>{app.reasonForRejection}</td>
+                                  <td>{app.reason}</td>
                                 </tr>
                               ))
                             }
@@ -546,13 +435,13 @@ const Samunnati_Farmer_Loan = () => {
                             }}
                           >
                             {
-                              filteredPendingLoanList.map((app) => {
+                              filteredFarmerLoanWindowList.filter((app) => app.status=="pending").map((app) => {
                                 return (
                                   <tr>
-                                    <td>{app.dateOfApp}</td>
+                                    <td>{app.dateOfApplication}</td>
                                     <td>{app.fpoId}</td>
                                     <td>{app.fpoName}</td>
-                                    <td>{app.contact}</td>
+                                    <td>{app.contactNo}</td>
                                     <td>{app.requestedAmount}</td>
                                     <td>
                                       <button
@@ -612,6 +501,8 @@ const Samunnati_Farmer_Loan = () => {
         handleCloseApproveForm={handleCloseApproveForm}
         currentPendLoanApp={currentPendLoanApp}
         handleShowConfirmApprove={handleShowConfirmApprove}
+        showConfirmApprove={showConfirmApprove}
+        handleCloseConfirmApprove={handleCloseConfirmApprove}
       />
 
       <RejectLoanApp
@@ -619,26 +510,29 @@ const Samunnati_Farmer_Loan = () => {
         handleCloseRejectForm={handleCloseRejectForm}
         currentPendLoanApp={currentPendLoanApp}
         handleShowConfirmReject={handleShowConfirmReject}
+        showConfirmReject={showConfirmReject}
+        handleCloseConfirmReject={handleCloseConfirmReject}
       />
 
-      <ConfirmApprove
+      {/* <ConfirmApprove
         showConfirmApprove={showConfirmApprove}
         handleCloseConfirmApprove={handleCloseConfirmApprove}
         currentPendLoanApp={currentPendLoanApp}
         approveLoan={approveLoan}
-      />
+      /> */}
 
-      <ConfirmReject
+      {/* <ConfirmReject
         showConfirmReject={showConfirmReject}
         handleCloseConfirmReject={handleCloseConfirmReject}
         currentPendLoanApp={currentPendLoanApp}
         rejectLoan={rejectLoan}
-      />
+      /> */}
 
       <RepaymentStructure
         showRepaymentStructure={showRepaymentStructure}
         handleCloseRepaymentStructure={handleCloseRepaymentStructure}
         handleShowRepaymentStatus={handleShowRepaymentStatus}
+        currentLoan={currentLoan}
       />
 
       <RepaymentStatus

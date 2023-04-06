@@ -1,136 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
 
 import { TabNavItem, TabContent } from "../UIComp/Tabs";
-import ConfirmOrder from "./Modals/ConfirmOrder";
 import BidStatus2 from "./Modals/BidStatus2";
 import BidStatus from "./Modals/BidStatus";
 import StartBid from "./Modals/StartBid";
 
 import "./CorporateClient.css";
-
-const activeBidList = [
-  {
-    id: "B123456",
-    startDate: "2021-10-10",
-    endDate: "2023-10-10",
-    status: "Active",
-    lacStrainType: "Kusmi",
-    treeSource: "Kusum",
-    origin: "Jharkhand",
-    reportsReqd: [
-      {
-        reportName: "Chowri",
-        reportReqd: true,
-      },
-      {
-        reportName: "Panna",
-        reportReqd: true,
-      },
-    ],
-    seedlacContent: 100,
-    freshResinContent: 100,
-    quantity: 200,
-    supplyDate: "2021-10-10",
-    remarks: "Remark 1",
-  },
-  {
-    id: "B767622",
-    startDate: "2020-10-10",
-    endDate: "2021-10-10",
-    status: "Active",
-    lacStrainType: "Rangeeni",
-    treeSource: "Ber",
-    origin: "Chattisgarh",
-    reportsReqd: [
-      {
-        reportName: "Chowri",
-        reportReqd: false,
-      },
-      {
-        reportName: "Panna",
-        reportReqd: true,
-      },
-    ],
-    seedlacContent: 100,
-    freshResinContent: 100,
-    quantity: 200,
-    supplyDate: "2021-10-10",
-    remarks: "Remark 2",
-  },
-  {
-    id: "B989898",
-    startDate: "2020-10-10",
-    endDate: "2022-10-10",
-    status: "Active",
-    lacStrainType: "Kusmi",
-    treeSource: "Palash",
-    origin: "MP",
-    reportsReqd: [
-      {
-        reportName: "Chowri",
-        reportReqd: true,
-      },
-      {
-        reportName: "Panna",
-        reportReqd: false,
-      },
-    ],
-    seedlacContent: 100,
-    freshResinContent: 100,
-    quantity: 200,
-    supplyDate: "2021-10-10",
-    remarks: "Remark 3",
-  },
-  {
-    id: "B555555",
-    startDate: "2020-10-10",
-    endDate: "2021-10-10",
-    status: "Active",
-    lacStrainType: "Rangeeni",
-    treeSource: "Kusum",
-    origin: "Jharkhand",
-    reportsReqd: [
-      {
-        reportName: "Chowri",
-        reportReqd: true,
-      },
-      {
-        reportName: "Panna",
-        reportReqd: true,
-      },
-    ],
-    seedlacContent: 100,
-    freshResinContent: 100,
-    quantity: 200,
-    supplyDate: "2021-10-10",
-    remarks: "Remark 4",
-  },
-  {
-    id: "B987654",
-    startDate: "2021-10-10",
-    endDate: "2023-10-10",
-    status: "Active",
-    lacStrainType: "Kusmi",
-    treeSource: "Kusum",
-    origin: "Jharkhand",
-    reportsReqd: [
-      {
-        reportName: "Chowri",
-        reportReqd: false,
-      },
-      {
-        reportName: "Panna",
-        reportReqd: true,
-      },
-    ],
-    seedlacContent: 100,
-    freshResinContent: 100,
-    quantity: 200,
-    supplyDate: "2021-10-10",
-    remarks: "Remark 5",
-  },
-]
 
 const purchaseHistory = [
   {
@@ -214,7 +91,6 @@ const purchaseHistory = [
 ]
 
 const Bidding = () => {
-  const [showConfirmBox, setShowConfirmBox] = useState(false)
   const [showBidStatus, setShowBidStatus] = useState(false)
   const [showStartBid, setShowStartBid] = useState(false)
   const [showCustomer, setShowCustomer] = useState(false)
@@ -223,6 +99,7 @@ const Bidding = () => {
   const [currentStep, updateCurrentStep] = useState(1)
   const [page2, setPage2] = useState("pageone")
   const [page, setPage] = useState("pageone")
+  const [bidList, setBidList] = useState([]);
 
   const handleShowStartBid = () => setShowStartBid(true)
   const handleCloseStartBid = () => setShowStartBid(false)
@@ -240,29 +117,18 @@ const Bidding = () => {
     setPage("pageone")
   }
 
-  const generateRandomBidID = () => {
-    let bidValue = 'B' + (Math.floor(100000 + Math.random() * 900000))
-    // eslint-disable-next-line eqeqeq
-    if (activeBidList.find((bid) => bid.id == bidValue)) {
-      generateRandomBidID()
-    }
-    return bidValue
-  }
-
-  const confirmBid = (e) => {
-    e.preventDefault()
-    setShowConfirmBox(true)
-  }
-
-  const handleCloseConfirmBox = () => {
-    setShowConfirmBox(false)
-  }
-
-  const placeBid = (e) => {
-    e.preventDefault()
-    setShowConfirmBox(false)
-    setShowStartBid(false)
-  }
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+    axios
+      .get("http://13.232.131.203:3000/api/auction")
+      .then((response) => {
+        console.log(response.data.data);
+        setBidList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <>
@@ -348,11 +214,11 @@ const Bidding = () => {
                                 fontWeight: "500",
                               }}
                             >
-                              {activeBidList.map((bid) => (
+                              {bidList.filter((bid) => bid.status == "on-going").map((bid) => (
                                 <tr>
-                                  <td>{bid.id}</td>
+                                  <td>{bid.bidId}</td>
                                   <td>{bid.startDate}</td>
-                                  <td>{bid.endDate}</td>
+                                  <td>{bid.bidEndDate}</td>
                                   <td>
                                     <button
                                       style={{
@@ -421,21 +287,24 @@ const Bidding = () => {
                               }}
                             >
                               {
-                                purchaseHistory.map((purchase) => (
+                                bidList.map((bid) => (
                                   <tr>
-                                    <td>{purchase.bidID}</td>
-                                    <td>{purchase.fpoID}</td>
-                                    <td>{purchase.fpoName}</td>
-                                    <td>{purchase.lacStrainType}</td>
-                                    <td>{purchase.treeSource}</td>
-                                    <td>{purchase.origin}</td>
-                                    <td>{purchase.seedlacContent}</td>
-                                    <td>{purchase.freshResinContent}</td>
-                                    <td>{purchase.quantity}</td>
-                                    <td>{purchase.amount}</td>
+                                    <td>{bid.bidId}</td>
+                                    <td>{bid.fpoID}</td>
+                                    <td>{bid.fpoName}</td>
+                                    <td>{bid.lacStrainType}</td>
+                                    <td>{bid.sourceTree}</td>
+                                    <td>{bid.origin}</td>
+                                    <td>{bid.seedLacContent}</td>
+                                    <td>{bid.freshResinContent}</td>
+                                    <td>{bid.quantity}</td>
+                                    <td>{bid.bidAmount}</td>
                                     <td>
                                       <button
-                                        onClick={() => setShowCustomer(true)}
+                                        onClick={() => {
+                                          setCurrentBid(bid);
+                                          setShowBidStatus(true);
+                                        }}
                                         style={{
                                           backgroundColor: "#064420",
                                           color: "#fff",
@@ -461,17 +330,9 @@ const Bidding = () => {
         </div>
       </div>
 
-      <ConfirmOrder
-        placeBid={placeBid}
-        showConfirmBox={showConfirmBox}
-        handleCloseConfirmBox={handleCloseConfirmBox}
-      />
-
       <StartBid
         showStartBid={showStartBid}
-        generateRandomBidID={generateRandomBidID}
         handleCloseStartBid={handleCloseStartBid}
-        confirmBid={confirmBid}
       />
 
       <BidStatus
@@ -480,6 +341,7 @@ const Bidding = () => {
         showBidStatus={showBidStatus}
         handleCloseBidStatus={handleCloseBidStatus}
         nextPage={nextPage}
+        fpoBids={currentBid.bids}
       />
 
       <BidStatus2

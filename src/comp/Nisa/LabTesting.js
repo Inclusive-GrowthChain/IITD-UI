@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 
 import { TabNavItem, TabContent } from "../UIComp/Tabs";
@@ -7,162 +7,9 @@ import Certificate from "./Modals/LabTest/Certificate";
 import AddNewTest from "./Modals/LabTest/AddNewTest";
 import LacSample from "./Modals/LabTest/LacSample";
 import Payment from "./Modals/LabTest/Payment";
+import axios from "axios";
 
 import "./Nisa.css";
-
-const testList = [
-  {
-    id: 1,
-    loanId: "LD 1234",
-    category: "Shellac / Seedlac",
-    test: "Hot Alcohol Insoluble",
-    minQuantity: "100",
-    fee: "1000",
-    reportingPeriod: "2",
-  },
-  {
-    id: 2,
-    category: "Bleached Lac",
-    test: "Hot Alcohol Insoluble",
-    minQuantity: "100",
-    fee: "1000",
-    reportingPeriod: "2",
-  },
-  {
-    id: 3,
-    category: "Lac Dye",
-    test: "Presence of Azo Group",
-    minQuantity: "100",
-    fee: "1000",
-    reportingPeriod: "2",
-  },
-  {
-    id: 4,
-    category: "Shellac Wax",
-    test: "Percentage of Loading",
-    minQuantity: "100",
-    fee: "1000",
-    reportingPeriod: "2",
-  },
-  {
-    id: 5,
-    category: "Shellac / Seedlac",
-    test: "Hot Alcohol Insoluble",
-    minQuantity: "100",
-    fee: "1000",
-    reportingPeriod: "2",
-  },
-  {
-    id: 6,
-    category: "Lac Dye",
-    test: "Presence of Azo Group",
-    minQuantity: "100",
-    fee: "1000",
-    reportingPeriod: "2",
-  },
-  {
-    id: 7,
-    category: "Shellac Wax",
-    test: "Percentage of Loading",
-    minQuantity: "100",
-    fee: "1000",
-    reportingPeriod: "2",
-  },
-]
-
-const tempAppList = [
-  {
-    id: 1,
-    fpoName: "FPO",
-    fpoContact: "1234567890",
-    sampleID: 1,
-    refNo: "123456",
-    dateOfApp: "2021-10-10",
-    testCategory: "Shellac / Seedlac",
-    test: "Hot Alcohol Insoluble",
-    amount: "200",
-    remarks: "Remarks",
-    paymentRefNo: "123456",
-  },
-  {
-    id: 2,
-    fpoName: "FPO",
-    fpoContact: "1234567890",
-    sampleID: 2,
-    refNo: "123456",
-    dateOfApp: "2021-10-10",
-    testCategory: "Bleached Lac",
-    test: "Hot Alcohol Insoluble",
-    amount: "200",
-    remarks: "Remarks",
-    paymentRefNo: "123456",
-  },
-  {
-    id: 3,
-    fpoName: "FPO",
-    fpoContact: "1234567890",
-    sampleID: 3,
-    refNo: "123456",
-    dateOfApp: "2021-10-10",
-    testCategory: "Lac Dye",
-    test: "Presence of Azo Group",
-    amount: "200",
-    remarks: "Remarks",
-    paymentRefNo: "123456",
-  },
-  {
-    id: 4,
-    fpoName: "FPO",
-    fpoContact: "1234567890",
-    sampleID: 4,
-    refNo: "123456",
-    dateOfApp: "2021-10-10",
-    testCategory: "Shellac Wax",
-    test: "Percentage of Loading",
-    amount: "200",
-    remarks: "Remarks",
-    paymentRefNo: "123456",
-  },
-  {
-    id: 5,
-    fpoName: "FPO",
-    fpoContact: "1234567890",
-    sampleID: 5,
-    refNo: "123456",
-    dateOfApp: "2021-10-10",
-    testCategory: "Shellac / Seedlac",
-    test: "Hot Alcohol Insoluble",
-    amount: "200",
-    remarks: "Remarks",
-    paymentRefNo: "123456",
-  },
-  {
-    id: 6,
-    fpoName: "FPO",
-    fpoContact: "1234567890",
-    sampleID: 6,
-    refNo: "123456",
-    dateOfApp: "2021-10-10",
-    testCategory: "Lac Dye",
-    test: "Presence of Azo Group",
-    amount: "200",
-    remarks: "Remarks",
-    paymentRefNo: "123456",
-  },
-  {
-    id: 7,
-    fpoName: "FPO",
-    fpoContact: "1234567890",
-    sampleID: 7,
-    refNo: "123456",
-    dateOfApp: "2021-10-10",
-    testCategory: "Shellac Wax",
-    test: "Percentage of Loading",
-    amount: "200",
-    remarks: "Remarks",
-    paymentRefNo: "123456",
-  },
-].sort((a, b) => a.testCategory > b.testCategory ? 1 : -1)
 
 const style = {
   backgroundColor: "#064420",
@@ -185,6 +32,8 @@ const LabTesting = () => {
   const [currentApp, setCurrentApp] = useState({})
   const [activeTab, setActiveTab] = useState("tab1")
   const [showApp, setShowApp] = useState(false)
+  const [testList, setTestList] = useState([])
+  const [appList, setAppList] = useState([])
 
   const handleCloseApp = () => setShowApp(false)
   const handleNewTestShow = () => setShowNewTest(true)
@@ -200,6 +49,32 @@ const LabTesting = () => {
     setShowApp(true)
     setShowFirstAppForm(true)
   }
+
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+    axios
+      .get("http://13.232.131.203:3000/api/nisa/lac-test")
+      .then((response) => {
+        console.log(response.data.data);
+        setTestList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+    axios
+      .get("http://13.232.131.203:3000/api/nisa/lactest")
+      .then((response) => {
+        console.log(response.data.data);
+        setAppList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <>
@@ -274,12 +149,12 @@ const LabTesting = () => {
                                 fontWeight: "500",
                               }}
                             >
-                              {tempAppList.map((app, i) => (
+                              {appList.filter((app) => app.applicationStatus === "in-process").map((app, i) => (
                                 <tr key={i}>
-                                  <td>{app.sampleID}</td>
-                                  <td>{app.dateOfApp}</td>
-                                  <td>{app.testCategory}</td>
-                                  <td>{app.test}</td>
+                                  <td>{app.sampleId}</td>
+                                  <td>{app.dateOfApplication}</td>
+                                  <td>{app.category}</td>
+                                  <td>{app.testName}</td>
                                   <td>{app.amount}</td>
                                   <td>
                                     <button
@@ -355,13 +230,13 @@ const LabTesting = () => {
                                 textAlign: "center",
                               }}
                             >
-                              {tempAppList.map((item, i) => (
+                              {appList.filter((app) => app.applicationStatus === "completed").map((item, i) => (
                                 <tr key={i}>
-                                  <td>{item.sampleID}</td>
-                                  <td>{item.refNo}</td>
-                                  <td>{item.dateOfApp}</td>
-                                  <td>{item.testCategory}</td>
-                                  <td>{item.test}</td>
+                                  <td>{item.sampleId}</td>
+                                  <td>{item.referenceNo}</td>
+                                  <td>{item.dateOfApplication}</td>
+                                  <td>{item.category}</td>
+                                  <td>{item.testName}</td>
                                   <td>{item.amount}</td>
                                   <td>
                                     <button
@@ -439,7 +314,7 @@ const LabTesting = () => {
                             >
                               <tr>
                                 <td>Test Category</td>
-                                <td>Test</td>
+                                <td>Test Name</td>
                                 <td>
                                   Min. Quantity of required sample (grams)
                                 </td>
@@ -458,9 +333,9 @@ const LabTesting = () => {
                               {testList.map((test, i) => (
                                 <tr key={i}>
                                   <td>{test.category}</td>
-                                  <td>{test.test}</td>
-                                  <td>{test.minQuantity}</td>
-                                  <td>{test.fee}</td>
+                                  <td>{test.testName}</td>
+                                  <td>{test.minRequiredQuantity}</td>
+                                  <td>{test.testFee}</td>
                                   <td>{test.reportingPeriod}</td>
                                 </tr>
                               ))}

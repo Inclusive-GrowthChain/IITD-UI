@@ -14,6 +14,7 @@ import ApproveLoanApp from "./Modals/FarmerSubLoan/ApproveLoanApp";
 import RejectLoanApp from "./Modals/FarmerSubLoan/RejectLoanApp";
 import ConfirmApprove from "./Modals/FarmerSubLoan/ConfirmApprove";
 import ConfirmReject from "./Modals/FarmerSubLoan/ConfirmReject";
+import axios from "axios";
 
 const completedLoanList = [
   {
@@ -342,8 +343,10 @@ const Sammunati_Farmer_SubLoan_Page = () => {
   const [showConfirmReject, setShowConfirmReject] = useState(false);
   const [showAadharCardImg, setShowAadharCardImg] = useState(false);
   const [showPanCardImg, setShowPanCardImg] = useState(false);
-  const [fpoId] = useState(localStorage.getItem("fpoId"));
+  // const [fpoId] = useState(localStorage.getItem("fpoId"));
   const [activeTab, setActiveTab] = useState("tab1");
+  const [loanWindow, setLoanWindow] = useState([]);
+  const [loanWindowId, setLoanWindowId] = useState(localStorage.getItem("loanWindowId"));
 
   const handleCloseApproveForm = () => setShowApproveForm(false);
   const handleCloseRejectForm = () => setShowRejectForm(false);
@@ -416,6 +419,20 @@ const Sammunati_Farmer_SubLoan_Page = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentLoan]);
 
+  useEffect(() => {
+    async function fetchLoanWindow() {
+      try {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+        const response = await axios.get("http://13.232.131.203:3000/api/loanwindow?windowType=farmer");
+        const loanWindow = response.data.data.filter((item) => item.id == loanWindowId)[0];
+        setLoanWindow(loanWindow);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchLoanWindow();
+  }, []);
+
   return (
     <main id="main_container" className="main_container container-fluid" style={{ marginTop: "3.188rem" }}>
       <div className="">
@@ -478,7 +495,7 @@ const Sammunati_Farmer_SubLoan_Page = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        {fpoId}
+                                        fpoId
                                       </label>
                                     </div>
                                   </div>
@@ -494,7 +511,7 @@ const Sammunati_Farmer_SubLoan_Page = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        FPO-{fpoId}-Name
+                                        FPO-fpoId-Name
                                       </label>
                                     </div>
                                   </div>
@@ -510,7 +527,7 @@ const Sammunati_Farmer_SubLoan_Page = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        FPO-{fpoId}-Phone
+                                        FPO-fpoId-Phone
                                       </label>
                                     </div>
                                   </div>
@@ -526,7 +543,7 @@ const Sammunati_Farmer_SubLoan_Page = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        FPO-{fpoId}-Email
+                                        FPO-fpoId-Email
                                       </label>
                                     </div>
                                   </div>
@@ -542,7 +559,7 @@ const Sammunati_Farmer_SubLoan_Page = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        FPO-{fpoId}-Location
+                                        FPO-fpoId-Location
                                       </label>
                                     </div>
                                   </div>
@@ -603,14 +620,14 @@ const Sammunati_Farmer_SubLoan_Page = () => {
                                   }}
                                 >
                                   {
-                                    completedLoanList.map((loan, i) => (
+                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.status == "completed").map((loan, i) => (
                                       <tr>
-                                        <td>{loan.id}</td>
+                                        <td>{loan.loanId}</td>
                                         <td>Farmer-{i}</td>
                                         <td>{loan.farmerName}</td>
                                         <td>{loan.farmerContact}</td>
-                                        <td>{loan.dateOfApp}</td>
-                                        <td>{loan.loanAmount}</td>
+                                        <td>{loan.createdAt.substring(0, 10)}</td>
+                                        <td>{loan.grantedAmount}</td>
                                         <td>
                                           <button
                                             style={{
@@ -684,16 +701,16 @@ const Sammunati_Farmer_SubLoan_Page = () => {
                                   }}
                                 >
                                   {
-                                    ongoingLoanList.map((loan, i) => {
+                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.status == "approved").map((loan, i) => {
                                       return (
                                         <tr>
-                                          <td>{loan.id}</td>
+                                          <td>{loan.loanId}</td>
                                           <td>Farmer-{i}</td>
                                           <td>{loan.farmerName}</td>
                                           <td>{loan.farmerContact}</td>
-                                          <td>{loan.dateOfApp}</td>
-                                          <td>{loan.loanAmount}</td>
-                                          <td>{loan.tenure}</td>
+                                          <td>{loan.approvalAt.substring(0, 10)}</td>
+                                          <td>{loan.grantedAmount}</td>
+                                          <td>{loan.loanTenure}</td>
                                         </tr>
                                       )
                                     })
@@ -746,14 +763,14 @@ const Sammunati_Farmer_SubLoan_Page = () => {
                                   }}
                                 >
                                   {
-                                    pendingLoanList.map((loan, i) => {
+                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.fpoApprovalStatus == "approved" && loan.status == "in-process").map((loan, i) => {
                                       return (
                                         <tr>
-                                          <td>{loan.id}</td>
+                                          <td>{loan.loanId}</td>
                                           <td>Farmer-{i}</td>
                                           <td>{loan.farmerName}</td>
                                           <td>{loan.contact}</td>
-                                          <td>{loan.dateOfApp}</td>
+                                          <td>{loan.createdAt.substring(0, 10)}</td>
                                           <td>{loan.requestedAmount}</td>
                                           <td>
                                             <button
@@ -850,6 +867,9 @@ const Sammunati_Farmer_SubLoan_Page = () => {
         handleCloseApproveForm={handleCloseApproveForm}
         currentPendLoan={currentPendLoan}
         handleShowConfirmApprove={handleShowConfirmApprove}
+        showConfirmApprove={showConfirmApprove}
+        handleCloseConfirmApprove={handleCloseConfirmApprove}
+        handleClosePendingLoanDetails={handleClosePendingLoanDetails}
       />
 
       <RejectLoanApp
@@ -859,12 +879,12 @@ const Sammunati_Farmer_SubLoan_Page = () => {
         handleShowConfirmReject={handleShowConfirmReject}
       />
 
-      <ConfirmApprove
+      {/* <ConfirmApprove
         showConfirmApprove={showConfirmApprove}
         handleCloseConfirmApprove={handleCloseConfirmApprove}
         handleCloseApproveForm={handleCloseApproveForm}
         handleClosePendingLoanDetails={handleClosePendingLoanDetails}
-      />
+      /> */}
 
       <ConfirmReject
         showConfirmReject={showConfirmReject}

@@ -1,6 +1,6 @@
 import { Modal } from "react-bootstrap";
 
-function AddDescription({ currentCA, showModal, handleClose }) {
+function ReadMore({ currentCA, showModal, handleClose }) {
   return (
     <Modal show={showModal} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -11,12 +11,13 @@ function AddDescription({ currentCA, showModal, handleClose }) {
         <textarea
           className="form-control"
           style={{ height: "100%" }}
+          readOnly
         >
-          {currentCA.description}
+          {currentCA.content}
         </textarea>
       </Modal.Body>
     </Modal>
   )
 }
 
-export default AddDescription
+export default ReadMore

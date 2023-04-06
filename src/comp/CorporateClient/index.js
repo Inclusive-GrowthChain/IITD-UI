@@ -7,17 +7,17 @@ const list = [
   {
     title: "Lac Bidding",
     icon: <CreditScoreIcon />,
-    to: '/corporate-client/lac-bidding'
+    to: '/corporateclient/lac-bidding'
   },
   {
     title: "Support",
     icon: <HelpTwoToneIcon />,
-    to: '/corporate-client/support'
+    to: '/corporateclient/support'
   },
   {
     title: "Settings",
     icon: <SettingsOutlinedIcon />,
-    to: '/corporate-client/settings'
+    to: '/corporateclient/settings'
   },
 ]
 

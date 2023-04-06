@@ -5,11 +5,11 @@ const PageOne = ({ onButtonClick, bid }) => {
   const [canEdit, setCanEdit] = useState(false);
   const [edit] = useState(false);
 
-  useEffect(() => {
-    if (bid) {
-      bid.endDate > new Date().toISOString().split("T")[0] ? setCanEdit(true) : setCanEdit(false);
-    }
-  }, [bid]);
+  // useEffect(() => {
+  //   if (bid) {
+  //     bid.bidEndDate > new Date().toISOString().split("T")[0] ? setCanEdit(true) : setCanEdit(false);
+  //   }
+  // }, [bid]);
 
   return (
     <main
@@ -39,7 +39,7 @@ const PageOne = ({ onButtonClick, bid }) => {
           <button
             onClick={() => onButtonClick("pagetwo")}
             style={{ backgroundColor: 'white' }}
-            disabled={canEdit}
+            // disabled={canEdit}
           >
             <ArrowForwardIosIcon />
           </button>
@@ -53,7 +53,7 @@ const PageOne = ({ onButtonClick, bid }) => {
               <input
                 type="text"
                 className="form-control"
-                value={bid.id}
+                value={bid.bidId}
                 disabled
               />
             </div>
@@ -90,21 +90,21 @@ const PageOne = ({ onButtonClick, bid }) => {
                 name="category"
                 disabled={true}
               >
-                <option value="0">{bid.treeSource}</option>
+                <option value="0">{bid.sourceTree}</option>
                 {
-                  bid.treeSource !== "Kusum" &&
+                  bid.sourceTree !== "Kusum" &&
                   <option value="1">Kusum</option>
                 }
                 {
-                  bid.treeSource !== "Ber" &&
+                  bid.sourceTree !== "Ber" &&
                   <option value="2">Ber</option>
                 }
                 {
-                  bid.treeSource !== "Palash" &&
+                  bid.sourceTree !== "Palash" &&
                   <option value="3">Palash</option>
                 }
                 {
-                  bid.treeSource !== "Other" &&
+                  bid.sourceTree !== "Other" &&
                   <option value="4">Other</option>
                 }
               </select>
@@ -147,9 +147,9 @@ const PageOne = ({ onButtonClick, bid }) => {
             <div className="col-lg-6">
               <input
                 className="form-control"
-                type="number"
+                type="text"
                 disabled={true}
-                value={bid.seedlacContent}
+                value={bid.seedLacContent}
               />
             </div>
           </div>
@@ -160,7 +160,7 @@ const PageOne = ({ onButtonClick, bid }) => {
             <div className="col-lg-6">
               <input
                 className="form-control"
-                type="number"
+                type="text"
                 disabled={true}
                 value={bid.freshResinContent}
               />
@@ -201,7 +201,7 @@ const PageOne = ({ onButtonClick, bid }) => {
                 className="form-control"
                 type="date"
                 disabled={true}
-                value={bid.endDate}
+                value={bid.bidEndDate}
               />
             </div>
           </div>
@@ -212,15 +212,14 @@ const PageOne = ({ onButtonClick, bid }) => {
             <div className="col-lg-12">
               {
                 !edit && (
-                  bid.reportsReqd
-                    .filter(f => f.report.reportReqd)
+                  bid.reportsRequired
                     .map((report) => (
                       <div className="row">
                         <div className="col-lg-12">
                           <input
                             type="text"
                             className="form-control"
-                            value={report.reportName}
+                            value={report}
                             disabled
                           />
                         </div>

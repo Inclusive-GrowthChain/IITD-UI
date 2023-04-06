@@ -1,6 +1,13 @@
 import Modal from "react-bootstrap/Modal";
+import { useState } from "react";
 
-function RejectLoanApp({ showRejectedLoan, handleCloseRejectedLoan, handleShowConfirmLoanStatus, confirmLoan }) {
+function RejectLoanApp({ showRejectedLoan, handleCloseRejectedLoan, handleShowConfirmLoanStatus, confirmLoanStatus, currentLoan, currentLoanWindow }) {
+  const [reason, setReason] = useState("");
+
+  const onChangeReason = (e) => {
+    setReason(e.target.value);
+  };
+
   return (
     <Modal show={showRejectedLoan} onHide={handleCloseRejectedLoan}>
       <Modal.Header closeButton>Reject Loan Application</Modal.Header>
@@ -15,7 +22,7 @@ function RejectLoanApp({ showRejectedLoan, handleCloseRejectedLoan, handleShowCo
                       <label>FPO Name</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>FPO 2</label>
+                      <label>{currentLoanWindow && currentLoanWindow.fpoName}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -23,7 +30,7 @@ function RejectLoanApp({ showRejectedLoan, handleCloseRejectedLoan, handleShowCo
                       <label>Contact No.</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>1234567890</label>
+                      <label>{currentLoanWindow && currentLoanWindow.contactNo}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -31,7 +38,7 @@ function RejectLoanApp({ showRejectedLoan, handleCloseRejectedLoan, handleShowCo
                       <label>Date of Application</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>12-01-2021</label>
+                      <label>{currentLoan && currentLoan.createdAt && currentLoan.createdAt.substring(0, 10)}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -39,7 +46,7 @@ function RejectLoanApp({ showRejectedLoan, handleCloseRejectedLoan, handleShowCo
                       <label>Requested Amount</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>200000</label>
+                      <label>{currentLoan && currentLoan.requestedAmount}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -47,7 +54,7 @@ function RejectLoanApp({ showRejectedLoan, handleCloseRejectedLoan, handleShowCo
                       <label>Reason for Rejection</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>Reason</label>
+                      <input type="text" className="form-control" onChange={onChangeReason}/>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -59,10 +66,10 @@ function RejectLoanApp({ showRejectedLoan, handleCloseRejectedLoan, handleShowCo
                           backgroundColor: "#064420",
                           border: "none",
                         }}
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.preventDefault();
                           handleShowConfirmLoanStatus();
-                          // confirmStatus();
-                          confirmLoan();
+                          confirmLoanStatus(e, reason);
                         }}
                       >
                         Reject Loan

@@ -4,6 +4,7 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import PersonSharpIcon from "@mui/icons-material/PersonSharp";
 import LockSharpIcon from "@mui/icons-material/LockSharp";
 import Dropdown from "react-bootstrap/Dropdown";
+import axios from "axios";
 
 import logo from "../../assets/img/logo.png";
 import "./Login.css";
@@ -20,7 +21,7 @@ const navigationList = {
   farmer: "dashboard",
   samunnati: "fpo-loan",
   "iit-dhanbad": "dashboard",
-  "corporate-client": "lac-bidding",
+  "corporateclient": "lac-bidding",
 }
 
 const Login = () => {
@@ -31,7 +32,7 @@ const Login = () => {
   const [isOpenIinrg, setIsOpenIinrg] = useState(false)
   const [isOpenFpo, setIsOpenFpo] = useState(false)
   const [details, setDetails] = useState({
-    username: "",
+    userName: "",
     password: "",
   })
 
@@ -47,10 +48,20 @@ const Login = () => {
   const onSubmit = e => {
     e.preventDefault()
 
-    if (details.username !== details.password) return;
-
-    let to = navigationList[details.username]
-    if (to) navigate(`/${details.username}/${to}`)
+    axios
+      .post("http://13.232.131.203:3000/api/login", details)
+      .then((response) => {
+        console.log(response.data);
+        console.log(response.data.token);
+        localStorage.setItem("access_token", response.data.token);
+        localStorage.setItem("userId", response.data.data._id);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+        let to = navigationList[response.data.data.type]
+        if (to) navigate(`/${response.data.data.type}/${to}`)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   const togglePasswordVisibility = () => setPasswordShown(passwordShown ? false : true)
@@ -155,13 +166,13 @@ const Login = () => {
             </div>
 
             <div className="input_text">
-              <label>Username</label>
+              <label>UserName</label>
               <input
                 className=""
                 type="text"
-                placeholder="username"
-                name="username"
-                value={details.username}
+                placeholder="userName"
+                name="userName"
+                value={details.userName}
                 onChange={onChange}
               />
               <PersonSharpIcon

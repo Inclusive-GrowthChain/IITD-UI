@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 
-function BidInformation({ showStartBid, handleCloseStartBid }) {
+function BidInformation({ showStartBid, handleCloseStartBid, bid }) {
   return (
     <Modal show={showStartBid} onHide={handleCloseStartBid}>
       <Modal.Header closeButton>Bid Information</Modal.Header>
@@ -18,7 +18,7 @@ function BidInformation({ showStartBid, handleCloseStartBid }) {
                       <input
                         type="text"
                         className="form-control"
-                        value={12346}
+                        value={bid.bidId}
                         disabled
                       />
                     </div>
@@ -27,55 +27,39 @@ function BidInformation({ showStartBid, handleCloseStartBid }) {
                     <div className="col-lg-6">
                       <label>Lac Strain Type</label>
                     </div>
-                    <div className="col-lg-12">
-                      <select
+                    <div className="col-lg-6">
+                      <input
+                        type="text"
                         className="form-control"
-                        name="category"
-                        value="1"
+                        value={bid.lacStrainType}
                         disabled
-                      >
-                        <option value="0">Select Type</option>
-                        <option value="1">Kusmi</option>
-                        <option value="2">Rangeeni</option>
-                      </select>
+                      />
                     </div>
                   </div>
                   <div className="row m-2">
                     <div className="col-lg-6">
                       <label>Source of Tree</label>
                     </div>
-                    <div className="col-lg-12">
-                      <select
+                    <div className="col-lg-6">
+                      <input
+                        type="text"
                         className="form-control"
-                        name="category"
-                        value="3"
+                        value={bid.sourceTree}
                         disabled
-                      >
-                        <option value="0">Select Tree</option>
-                        <option value="1">Kusum</option>
-                        <option value="2">Ber</option>
-                        <option value="3">Palash</option>
-                        <option value="4">Other</option>
-                      </select>
+                      />
                     </div>
                   </div>
                   <div className="row m-2">
                     <div className="col-lg-6">
                       <label>Origin</label>
                     </div>
-                    <div className="col-lg-12">
-                      <select
+                    <div className="col-lg-6">
+                      <input
+                        type="text"
                         className="form-control"
-                        name="category"
-                        value="2"
+                        value={bid.origin}
                         disabled
-                      >
-                        <option value="0">Select Origin</option>
-                        <option value="1">Jharkhand</option>
-                        <option value="2">Chattisgarh</option>
-                        <option value="3">MP</option>
-                        <option value="4">Mednapore</option>
-                      </select>
+                      />
                     </div>
                   </div>
                   <div className="row m-2">
@@ -83,7 +67,7 @@ function BidInformation({ showStartBid, handleCloseStartBid }) {
                       <label>Seedlac Content</label>
                     </div>
                     <div className="col-lg-6">
-                      <input className="form-control" type="number" value="11" disabled />
+                      <input className="form-control" type="text" value={bid.seedLacContent} disabled />
                     </div>
                   </div>
                   <div className="row m-2">
@@ -91,7 +75,7 @@ function BidInformation({ showStartBid, handleCloseStartBid }) {
                       <label>Fresh Resin Content</label>
                     </div>
                     <div className="col-lg-6">
-                      <input className="form-control" type="number" value="11" disabled />
+                      <input className="form-control" type="text" value={bid.freshResinContent} disabled />
                     </div>
                   </div>
                   <div className="row m-2">
@@ -99,7 +83,7 @@ function BidInformation({ showStartBid, handleCloseStartBid }) {
                       <label>Quantity</label>
                     </div>
                     <div className="col-lg-6">
-                      <input className="form-control" type="number" value="11" disabled />
+                      <input className="form-control" type="number" value={bid.quantity} disabled />
                     </div>
                   </div>
                   <div className="row m-2">
@@ -107,7 +91,7 @@ function BidInformation({ showStartBid, handleCloseStartBid }) {
                       <label>Date of Supply</label>
                     </div>
                     <div className="col-lg-6">
-                      <input className="form-control" type="text" value="2.1.23" disabled />
+                      <input className="form-control" type="text" value={bid.supplyDate} disabled />
                     </div>
                   </div>
                   <div className="row m-2">
@@ -115,21 +99,15 @@ function BidInformation({ showStartBid, handleCloseStartBid }) {
                       <label>End Date for Bidding</label>
                     </div>
                     <div className="col-lg-6">
-                      <input className="form-control" type="text" value="2.1.23" disabled />
+                      <input className="form-control" type="text" value={bid.bidEndDate} disabled />
                     </div>
                   </div>
                   <div className="row m-2">
                     <div className="col-lg-6">
                       <label>Required Test Reports</label>
                     </div>
-                    <div className="col-lg-12">
-                      <select
-                        className="form-control"
-                        value="0"
-                        disabled
-                      >
-                        <option value="1">Chowri, Panna</option>
-                      </select>
+                    <div className="col-lg-6">
+                      <input className="form-control" type="text" value={Array.isArray(bid.reportsRequired) ? bid.reportsRequired.join(', ') : ''} disabled />
                     </div>
                   </div>
                   <div className="row m-2">
@@ -137,7 +115,7 @@ function BidInformation({ showStartBid, handleCloseStartBid }) {
                       <label>Remarks</label>
                     </div>
                     <div className="col-lg-12">
-                      <textarea className="form-control" value="Some remark" disabled />
+                      <textarea className="form-control" value={bid.remarks} disabled />
                     </div>
                   </div>
                 </div>

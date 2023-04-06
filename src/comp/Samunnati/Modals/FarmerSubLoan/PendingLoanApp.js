@@ -20,7 +20,7 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                           <input
                             type="text"
                             className="form-control"
-                            value={currentPendLoan.id}
+                            value={currentPendLoan.loanId}
                             disabled
                           />
                         </div>
@@ -59,7 +59,7 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                           <input
                             type="text"
                             className="form-control"
-                            value={currentPendLoan.accountNo}
+                            value={currentPendLoan.accountNumber}
                             disabled
                           />
                         </div>
@@ -72,7 +72,7 @@ function PendingLoanApp({ showPendingLoanDetails, handleClosePendingLoanDetails,
                           <input
                             type="text"
                             className="form-control"
-                            value={currentPendLoan.ifsc}
+                            value={currentPendLoan.ifscNumber}
                             disabled
                           />
                         </div>

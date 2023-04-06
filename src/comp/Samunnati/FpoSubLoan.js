@@ -11,79 +11,7 @@ import OngoingLoanApp from "./Modals/FpoSubLoan/OngoingLoanApp";
 import RepaymentStatus from "./Modals/FpoSubLoan/RepaymentStatus";
 import RepaymentConfirm from "./Modals/FpoLoan/RepaymentConfirm";
 import CompletedLoanApp from "./Modals/FpoSubLoan/CompletedLoanApp";
-
-const completedLoanList = [
-  {
-    id: "L 1",
-    dateOfApp: "2021-10-10",
-    loanAmount: "100000",
-    transactionID: "T 1",
-    lastPaymentDate: "2022-10-10",
-  },
-  {
-    id: "L 2",
-    dateOfApp: "2021-10-10",
-    loanAmount: "100000",
-    transactionID: "T 2",
-    lastPaymentDate: "2022-10-10",
-  },
-  {
-    id: "L 3",
-    dateOfApp: "2021-10-10",
-    loanAmount: "100000",
-    transactionID: "T 3",
-    lastPaymentDate: "2022-10-10",
-  },
-  {
-    id: "L 4",
-    dateOfApp: "2021-10-10",
-    loanAmount: "100000",
-    transactionID: "T 4",
-    lastPaymentDate: "2022-10-10",
-  },
-]
-
-const ongoingLoanList = [
-  {
-    id: "L 1",
-    payeeName: "P 1",
-    accountNo: "1234567890",
-    ifsc: "1234567890",
-    amount: "1000000",
-    tenure: "12",
-    purpose: "Purpose 1",
-    dateOfApproval: "2021-10-10",
-    outstandingAmount: "90000",
-    nextPaymentAmount: "10000",
-    nextPaymentDate: "2021-10-10",
-  },
-  {
-    id: "L 2",
-    payeeName: "P 2",
-    accountNo: "1234567890",
-    ifsc: "1234567890",
-    amount: "1000000",
-    tenure: "12",
-    purpose: "Purpose 2",
-    dateOfApproval: "2021-10-10",
-    outstandingAmount: "90000",
-    nextPaymentAmount: "10000",
-    nextPaymentDate: "2021-10-10",
-  },
-  {
-    id: "L 3",
-    payeeName: "P 3",
-    accountNo: "1234567890",
-    ifsc: "1234567890",
-    amount: "1000000",
-    tenure: "12",
-    purpose: "Purpose 3",
-    dateOfApproval: "2021-10-10",
-    outstandingAmount: "90000",
-    nextPaymentAmount: "10000",
-    nextPaymentDate: "2021-10-10",
-  },
-]
+import axios from 'axios';
 
 const completedTransactionDetails = [
   {
@@ -167,35 +95,6 @@ const requestedTransactionDetails = [
   },
 ]
 
-const pendingLoanList = [
-  {
-    id: "L 1",
-    dateOfApp: "2021-10-10",
-    loanAmount: "100000",
-    windowId: "W123456",
-    payeeName: "P 1",
-    accountNo: "1234567890",
-    ifsc: "1234567890",
-    bankName: "B 1",
-    interest: "12",
-    tenure: "12",
-    purpose: "Purpose 1",
-  },
-  {
-    id: "L 2",
-    dateOfApp: "2021-10-10",
-    loanAmount: "100000",
-    windowId: "W654321",
-    payeeName: "P 2",
-    accountNo: "1234567890",
-    ifsc: "1234567890",
-    bankName: "B 2",
-    interest: "12",
-    tenure: "12",
-    purpose: "Purpose 2",
-  },
-]
-
 const Sammunati_FPO_SubLoan_Page = () => {
   const [showRepaymentConfirmation, setShowRepaymentConfirmation] = useState(false)
   const [showCompletedLoanDetails, setShowCompletedLoanDetails] = useState(false)
@@ -211,7 +110,23 @@ const Sammunati_FPO_SubLoan_Page = () => {
   const [activeTab, setActiveTab] = useState("tab1")
   const [thirdPage, setThirdPage] = useState(false)
   const [firstPage, setFirstPage] = useState(true)
-  const [fpoId] = useState(localStorage.getItem("fpoId"))
+  // const [fpoId] = useState(localStorage.getItem("fpoId"))
+  const [loanWindow, setLoanWindow] = useState({});
+  const [loanWindowId, setLoanWindowId] = useState(localStorage.getItem("loanWindowId"));
+
+  useEffect(() => {
+    async function fetchLoanWindow() {
+      try {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+        const response = await axios.get("http://13.232.131.203:3000/api/loanwindow?windowType=fpo");
+        const loanWindow = response.data.data.filter((item) => item.id == loanWindowId)[0];
+        setLoanWindow(loanWindow);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchLoanWindow();
+  }, []);
 
   const navigate = useNavigate()
 
@@ -339,7 +254,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        {fpoId}
+                                        {loanWindow.fpoId}
                                       </label>
                                     </div>
                                   </div>
@@ -355,7 +270,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        FPO-{fpoId}-Name
+                                        FPO-fpoId-Name
                                       </label>
                                     </div>
                                   </div>
@@ -371,7 +286,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        FPO-{fpoId}-Phone
+                                        FPO-fpoId-Phone
                                       </label>
                                     </div>
                                   </div>
@@ -387,7 +302,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        FPO-{fpoId}-Email
+                                        FPO-fpoId-Email
                                       </label>
                                     </div>
                                   </div>
@@ -403,7 +318,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        FPO-{fpoId}-Location
+                                        FPO-fpoId-Location
                                       </label>
                                     </div>
                                   </div>
@@ -419,7 +334,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        100000
+                                        {loanWindow.grantedAmount}
                                       </label>
                                     </div>
                                   </div>
@@ -461,10 +376,10 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                   }}
                                 >
                                   {
-                                    completedLoanList.map((loan) => (
+                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.status=="completed").map((loan) => (
                                       <tr>
-                                        <td>{loan.id}</td>
-                                        <td>{loan.dateOfApp}</td>
+                                        <td>{loan.loanId}</td>
+                                        <td>{loan.createdAt.substring(0, 10)}</td>
                                         <td>{loan.loanAmount}</td>
                                         <td>
                                           <button
@@ -497,7 +412,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                           </div>
                           <div style={{ marginTop: '2%' }}>
                             <p>
-                              Remaining Loan Window: 60000
+                              Remaining Loan Window: {loanWindow.grantedAmount-loanWindow.consumedWindowLoanAmount}
                             </p>
                           </div>
                         </div>
@@ -540,12 +455,12 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                   }}
                                 >
                                   {
-                                    ongoingLoanList.map((loan) => {
+                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.status=="approved").map((loan) => {
                                       return (
                                         <tr>
-                                          <td>{loan.id}</td>
-                                          <td>{loan.dateOfApproval}</td>
-                                          <td>{loan.amount}</td>
+                                          <td>{loan.loanId}</td>
+                                          <td>{loan.approvalAt.substring(0, 10)}</td>
+                                          <td>{loan.grantedAmount}</td>
                                           <td>{loan.outstandingAmount}</td>
                                           <td>{loan.nextPaymentAmount}</td>
                                           <td>{loan.nextPaymentDate}</td>
@@ -581,7 +496,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                           </div>
                           <div style={{ marginTop: '2%' }}>
                             <p>
-                              Total amount to be paid in next installment: 30000
+                              Total amount to be paid in next installment: ???
                             </p>
                           </div>
                         </div>
@@ -620,12 +535,12 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                   }}
                                 >
                                   {
-                                    pendingLoanList.map((loan) => {
+                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.status == "in-process").map((loan) => {
                                       return (
                                         <tr>
-                                          <td>{loan.id}</td>
-                                          <td>{loan.dateOfApp}</td>
-                                          <td>{loan.loanAmount}</td>
+                                          <td>{loan.loanId}</td>
+                                          <td>{loan.createdAt.substring(0, 10)}</td>
+                                          <td>{loan.requestedAmount}</td>
                                           <td>
                                             <button
                                               style={{
@@ -726,7 +641,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
         currentLoan={currentLoan}
         firstPage={firstPage}
         setFirstPage={setFirstPage}
-        fpoId={fpoId}
+        fpoId={loanWindow.fpoId}
         handleShowPaymentProof={handleShowPaymentProof}
         currentTransaction={currentTransaction}
       />

@@ -1,6 +1,50 @@
 import { Modal } from "react-bootstrap";
+import axios from "axios";
+import { useState } from "react";
 
 function AddCA({ showAddCA, handleCAClose }) {
+  const [cropAdvisoryId, setCropAdvisoryId] = useState("CA012");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  const onChangeTitle = (e) => {
+    setTitle(e.target.value);
+  }
+  
+  const onChangeContent = (e) => {
+    setContent(e.target.value);
+  }
+
+  const resetInputs = () => {
+    setTitle("");
+    setContent("");
+  }
+
+  const addCropAdvisory = async () => {
+    if(title=="" || content=="") {
+      alert("Please fill all details and try again");
+      return;
+    }
+
+    const newCA = {
+      "cropAdvisoryId": cropAdvisoryId,
+      "title": title,
+      "content": content
+    };
+    
+    await axios
+      .post("http://13.232.131.203:3000/api/nisa/crop-advisory", newCA)
+      .then((response) => {
+        console.log(response.data);
+        resetInputs();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    window.location.reload();
+  }
+
   return (
     <Modal
       show={showAddCA}
@@ -22,7 +66,7 @@ function AddCA({ showAddCA, handleCAClose }) {
                       <input
                         className="form-control"
                         type="text"
-                        value={"CA12345"}
+                        value={cropAdvisoryId}
                         disabled
                       />
                     </div>
@@ -32,7 +76,7 @@ function AddCA({ showAddCA, handleCAClose }) {
                       <label>Title</label>
                     </div>
                     <div className="col-lg-12">
-                      <input className="form-control" type="text" />
+                      <input className="form-control" type="text" onChange={onChangeTitle}/>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -43,6 +87,7 @@ function AddCA({ showAddCA, handleCAClose }) {
                       <textarea
                         className="form-control"
                         style={{ height: "200%" }}
+                        onChange={onChangeContent}
                       />
                     </div>
                   </div>
@@ -52,6 +97,11 @@ function AddCA({ showAddCA, handleCAClose }) {
                       style={{
                         marginTop: "5rem",
                         backgroundColor: "#064420",
+                      }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        addCropAdvisory();
+                        handleCAClose();
                       }}
                     >
                       Submit

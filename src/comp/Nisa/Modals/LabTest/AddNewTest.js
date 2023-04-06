@@ -1,6 +1,71 @@
 import Modal from "react-bootstrap/Modal";
+import { useState } from "react";
+import axios from "axios";
 
 function AddNewTest({ showNewTest, handleNewTestClose }) {
+  const [testId, setTestId] = useState("Test1");
+  const [category, setCategory] = useState("");
+  const [testName, setTestName] = useState("");
+  const [minQuantity, setMinQuantity] = useState(0);
+  const [fee, setFee] = useState(0);
+  const [reportingPeriod, setReportingPeriod] = useState(0);
+
+  const onChangeCategory = (e) => {
+    setCategory(e.target.value);
+  }
+
+  const onChangeTestName = (e) => {
+    setTestName(e.target.value);
+  }
+
+  const onChangeMinQuantity = (e) => {
+    setMinQuantity(e.target.value);
+  }
+
+  const onChangeFee = (e) => {
+    setFee(e.target.value);
+  }
+
+  const onChangeReportingPeriod = (e) => {
+    setReportingPeriod(e.target.value);
+  }
+
+  const resetInputs = () => {
+    setCategory("");
+    setTestName("");
+    setMinQuantity(0);
+    setFee(0);
+    setReportingPeriod(0);
+  }
+
+  const addNewTest = async () => {
+    if(category=="" || testName=="" || minQuantity=="" || fee=="" || reportingPeriod=="") {
+      alert("Please fill all details and try again");
+      return;
+    }
+
+    const newTest = {
+      "testId": testId,
+      "category": category,
+      "testName": testName,
+      "minRequiredQuantity": minQuantity,
+      "testFee": fee,
+      "reportingPeriod": reportingPeriod
+    };
+    
+    await axios
+      .post("http://13.232.131.203:3000/api/nisa/lac-test", newTest)
+      .then((response) => {
+        console.log(response.data);
+        resetInputs();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    window.location.reload();
+  }
+
   return (
     <Modal
       show={showNewTest}
@@ -23,7 +88,7 @@ function AddNewTest({ showNewTest, handleNewTestClose }) {
                       <input
                         className="form-control"
                         type="text"
-                        value={"LD12345"}
+                        value={testId}
                         disabled
                       />
                     </div>
@@ -36,34 +101,34 @@ function AddNewTest({ showNewTest, handleNewTestClose }) {
                       <select
                         className="form-control"
                         name="category"
+                        onChange={onChangeCategory}
                       >
                         <option value="0">
                           Select Category
                         </option>
-                        <option value="1">
-                          Shellac / Seedlac / By-product
-                          of Lac
+                        <option value="Shellac / Seedlac / By-product of Lac">
+                          Shellac / Seedlac / By-product of Lac
                         </option>
-                        <option value="2">
+                        <option value="Bleached Lac">
                           Bleached Lac
                         </option>
-                        <option value="3">Lac Dye</option>
-                        <option value="4">
+                        <option value="Lac Dye">Lac Dye</option>
+                        <option value="Shellac Wax">
                           Shellac Wax
                         </option>
-                        <option value="5">
+                        <option value="Aleuritic Acid">
                           Aleuritic Acid
                         </option>
-                        <option value="6">
+                        <option value="Hydrolysed Lac">
                           Hydrolysed Lac
                         </option>
-                        <option value="7">
+                        <option value="Sealing Wax">
                           Sealing Wax
                         </option>
-                        <option value="8">
+                        <option value="Gasket Shellac Compound">
                           Gasket Shellac Compound
                         </option>
-                        <option value="9">
+                        <option value="Organic Substance">
                           Organic Substance
                         </option>
                       </select>
@@ -71,12 +136,13 @@ function AddNewTest({ showNewTest, handleNewTestClose }) {
                   </div>
                   <div className="row m-2">
                     <div className="col-lg-6">
-                      <label>Test</label>
+                      <label>Test Name</label>
                     </div>
                     <div className="col-lg-6">
                       <input
                         className="form-control"
                         type="text"
+                        onChange={onChangeTestName}
                       />
                     </div>
                   </div>
@@ -92,6 +158,7 @@ function AddNewTest({ showNewTest, handleNewTestClose }) {
                         className="form-control"
                         type="number"
                         style={{ height: "4rem" }}
+                        onChange={onChangeMinQuantity}
                       />
                     </div>
                   </div>
@@ -103,6 +170,7 @@ function AddNewTest({ showNewTest, handleNewTestClose }) {
                       <input
                         className="form-control"
                         type="number"
+                        onChange={onChangeFee}
                       />
                     </div>
                   </div>
@@ -116,6 +184,7 @@ function AddNewTest({ showNewTest, handleNewTestClose }) {
                       <input
                         className="form-control"
                         type="number"
+                        onChange={onChangeReportingPeriod}
                       />
                     </div>
                   </div>
@@ -125,6 +194,10 @@ function AddNewTest({ showNewTest, handleNewTestClose }) {
                       style={{
                         marginTop: "1rem",
                         backgroundColor: "#064420",
+                      }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        addNewTest();
                       }}
                     >
                       Submit

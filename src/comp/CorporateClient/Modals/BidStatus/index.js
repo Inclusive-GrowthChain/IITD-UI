@@ -6,7 +6,7 @@ import PageFive from "./PageFive";
 import PageOne from "./PageOne";
 import PageTwo from "./PageTwo";
 
-function BidStatus({ page, showBidStatus, nextPage, currentBid, handleCloseBidStatus }) {
+function BidStatus({ page, showBidStatus, nextPage, currentBid, handleCloseBidStatus, fpoBids }) {
   return (
     <Modal
       show={showBidStatus}
@@ -20,7 +20,7 @@ function BidStatus({ page, showBidStatus, nextPage, currentBid, handleCloseBidSt
         {
           {
             pageone: <PageOne onButtonClick={nextPage} bid={currentBid} />,
-            pagetwo: <PageTwo onButtonClick={nextPage} />,
+            pagetwo: <PageTwo onButtonClick={nextPage} fpoBids={fpoBids}/>,
             pagethree: <PageThree onButtonClick={nextPage} />,
             pagefour: <PageFour onButtonClick={nextPage} />,
             pagefive: <PageFive onButtonClick={nextPage} closeBidStatus={handleCloseBidStatus} />,

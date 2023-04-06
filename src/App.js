@@ -98,7 +98,7 @@ function App() {
 
         {/* Admin route */}
         <Route path="admin" element={<AdminWrapper />}>
-          <Route path="corporate-client" element={<AdminCorporateClient />} />
+          <Route path="corporateclient" element={<AdminCorporateClient />} />
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="samunnati" element={<AdminSamunnati />} />
           <Route path="farmer" element={<AdminFarmer />} />
@@ -128,7 +128,7 @@ function App() {
         </Route>
 
         {/* Corporate Client route */}
-        <Route path="corporate-client" element={<CorporateClientWrapper />}>
+        <Route path="corporateclient" element={<CorporateClientWrapper />}>
           <Route path="lac-bidding" element={<CorporateClientLacBidding />} />
           <Route path="settings" element={<CorporateClientSettings />} />
           <Route path="support" element={<TemplateSupport />} />

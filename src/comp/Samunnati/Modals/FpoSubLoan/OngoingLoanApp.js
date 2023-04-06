@@ -20,7 +20,7 @@ function OngoingLoanApp({ showOngoingLoanDetails, handleCloseOngoingLoanDetails,
                           <input
                             type="text"
                             className="form-control"
-                            value={currentLoan.id}
+                            value={currentLoan.loanId}
                             disabled
                           />
                         </div>
@@ -46,7 +46,7 @@ function OngoingLoanApp({ showOngoingLoanDetails, handleCloseOngoingLoanDetails,
                           <input
                             type="text"
                             className="form-control"
-                            value={currentLoan.accountNo}
+                            value={currentLoan.accountNumber}
                             disabled
                           />
                         </div>
@@ -59,7 +59,7 @@ function OngoingLoanApp({ showOngoingLoanDetails, handleCloseOngoingLoanDetails,
                           <input
                             type="text"
                             className="form-control"
-                            value={currentLoan.ifsc}
+                            value={currentLoan.ifscNumber}
                             disabled
                           />
                         </div>
@@ -72,7 +72,7 @@ function OngoingLoanApp({ showOngoingLoanDetails, handleCloseOngoingLoanDetails,
                           <input
                             type="text"
                             className="form-control"
-                            value={currentLoan.amount}
+                            value={currentLoan.grantedAmount}
                             disabled
                           />
                         </div>
@@ -85,7 +85,7 @@ function OngoingLoanApp({ showOngoingLoanDetails, handleCloseOngoingLoanDetails,
                           <input
                             type="text"
                             className="form-control"
-                            value={currentLoan.tenure}
+                            value={currentLoan.loanTenure}
                             disabled
                           />
                         </div>

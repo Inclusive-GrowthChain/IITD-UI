@@ -31,7 +31,7 @@ function RejectedLoanApp({ showRejLoanApp, handleCloseRejLoanApp, currentRejLoan
                       <input
                         type="text"
                         className="form-control"
-                        value={currentRejLoanApp.contact}
+                        value={currentRejLoanApp.contactNo}
                         disabled
                       />
                     </div>
@@ -44,7 +44,7 @@ function RejectedLoanApp({ showRejLoanApp, handleCloseRejLoanApp, currentRejLoan
                       <input
                         type="text"
                         className="form-control"
-                        value={currentRejLoanApp.dateOfApp}
+                        value={currentRejLoanApp.dateOfApplication}
                         disabled
                       />
                     </div>
@@ -70,7 +70,7 @@ function RejectedLoanApp({ showRejLoanApp, handleCloseRejLoanApp, currentRejLoan
                       <input
                         type="text"
                         className="form-control"
-                        value={currentRejLoanApp.reasonForRejection}
+                        value={currentRejLoanApp.reason}
                         disabled
                       />
                     </div>

@@ -1,3 +1,6 @@
+import { useState, useEffect } from "react"
+import axios from "axios"
+
 const data = [
   {
     id: "TC-1",
@@ -42,6 +45,21 @@ const data = [
 ]
 
 function TrainingUpdate() {
+  const [tpList, setTpList] = useState([]);
+
+  useEffect(() => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+    axios
+      .get("http://13.232.131.203:3000/api/nisa/traning")
+      .then((response) => {
+        console.log(response.data.data);
+        setTpList(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="itemContainer">
       <div className="list_title">
@@ -88,16 +106,16 @@ function TrainingUpdate() {
                   }}
                 >
                   {
-                    data.map(d => (
-                      <tr key={d.id}>
-                        <td>{d.id}</td>
-                        <td>{d.courseName}</td>
-                        <td>{d.courseStartDate}</td>
-                        <td>{d.duration}</td>
-                        <td>{d.applicationStartDate}</td>
-                        <td>{d.applicationEndDate}</td>
-                        <td>{d.fee}</td>
-                        <td>{d.remarks}</td>
+                    tpList.map(tp => (
+                      <tr key={tp.id}>
+                        <td>{tp.traningId}</td>
+                        <td>{tp.courseName}</td>
+                        <td>{tp.courseStartDate}</td>
+                        <td>{tp.duration}</td>
+                        <td>{tp.applicationStartDate}</td>
+                        <td>{tp.applicationEndDate}</td>
+                        <td>{tp.fee}</td>
+                        <td>{tp.remarks}</td>
                       </tr>
                     ))
                   }
