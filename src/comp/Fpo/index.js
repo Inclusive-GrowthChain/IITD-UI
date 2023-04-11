@@ -9,11 +9,11 @@ import HelpTwoToneIcon from '@mui/icons-material/HelpTwoTone';
 import AppWrapper from "../Template/AppWrapper";
 
 const list = [
-  {
-    title: "Dashboard",
-    icon: <HomeTwoToneIcon className="icon" />,
-    to: '/fpo/dashboard'
-  },
+  // {
+  //   title: "Dashboard",
+  //   icon: <HomeTwoToneIcon className="icon" />,
+  //   to: '/fpo/dashboard'
+  // },
   {
     title: "Farmer",
     icon: <AssignmentIndOutlinedIcon className="icon" />,

@@ -88,7 +88,7 @@ function App() {
           <Route path="lac-procurement" element={<FpoLacProcurement />} />
           <Route path="lab-testing" element={<FpoLabTesting />} />
           <Route path="farmerloan" element={<FpoFarmerLoan />} />
-          <Route path="dashboard" element={<FpoDashboard />} />
+          {/* <Route path="dashboard" element={<FpoDashboard />} /> */}
           <Route path="settings" element={<FpoSetting />} />
           <Route path="support" element={<TemplateSupport />} />
           <Route path="farmer" element={<FpoFarmer />} />
