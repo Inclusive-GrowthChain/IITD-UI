@@ -1,3 +1,12 @@
+/* root constants */
+:root {
+  --toastify-icon-color-success: #5DC90A;
+  --toastify-text-color-light: #6C6D6D;  
+  --toastify-toast-min-height: 34px;
+  --toastify-toast-width: 100vw;
+}
+
+/* app */
 .app-wrapper {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -23,4 +32,28 @@
 .app-wrapper>*:nth-child(3) {
   grid-area: content;
   overflow: auto;
+}
+
+/* Toastify Confiuration */
+.Toastify__toast {
+  @apply w-fit px-1 py-2 rounded-full;
+  margin: 0 auto .8rem;
+  font-size: 14px;
+}
+
+.Toastify__toast-icon {
+  margin-inline-end: 6px;
+}
+
+.Toastify__toast-icon svg {
+  height: 18px;
+  width: 18px;
+}
+
+.Toastify__toast-body {
+  padding: 0 6px;
+}
+
+.Toastify__close-button {
+  display: none;
 }
