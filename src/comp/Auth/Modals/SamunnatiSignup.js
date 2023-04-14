@@ -69,7 +69,7 @@ function SamunnatiSignup({ show, close }) {
   };
 
   const addSamunnati = async () => {
-    if(!userName || !password || !address || !city || !state || !pinCode || !contactNumber || !email || !website || !licenseKey) {
+    if (!userName || !password || !address || !city || !state || !pinCode || !contactNumber || !email || !website || !licenseKey) {
       alert("Please fill all details and try again");
       return;
     }
@@ -86,7 +86,7 @@ function SamunnatiSignup({ show, close }) {
       "website": website,
       "licenseKey": licenseKey
     };
-    
+
     await axios
       .post("http://13.232.131.203:3000/api/signup/samunnati", newSamunnati)
       .then((response) => {
@@ -105,25 +105,25 @@ function SamunnatiSignup({ show, close }) {
       <Modal.Header closeButton>Samunnati Signup</Modal.Header>
       <Modal.Body>
         <div className="samunnati_signup">
-        <form>
+          <form>
             <div className="row mb-2">
               <div className="col-12 col-md-6">
                 <label className="form-label">Username *</label>
-                <input type="text" className="form-control" required="" onChange={onChangeUserName}/>
+                <input type="text" className="form-control" required="" onChange={onChangeUserName} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">Password *</label>
-                <input type="password" className="form-control" onChange={onChangePassword}/>
+                <input type="password" className="form-control" onChange={onChangePassword} />
               </div>
             </div>
             <div className="row mb-2">
               <div className="col-12 col-md-6">
                 <label className="form-label">Address *</label>
-                <input type="text" className="form-control" required="" onChange={onChangeAddress}/>
+                <input type="text" className="form-control" required="" onChange={onChangeAddress} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">City *</label>
-                <input type="text" className="form-control" onChange={onChangeCity}/>
+                <input type="text" className="form-control" onChange={onChangeCity} />
               </div>
             </div>
             <div className="row mb-2">
@@ -131,33 +131,33 @@ function SamunnatiSignup({ show, close }) {
                 <label className="form-label">State *</label>
                 <select className="form-select" value={state} onChange={onChangeState}>
                   {states.map((state) => (
-                    <option value={state}>{state}</option>
+                    <option key={state} value={state}>{state}</option>
                   ))}
                 </select>
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">PinCode *</label>
-                <input className="form-control" type="text" required="" onChange={onChangePinCode}/>
+                <input className="form-control" type="text" required="" onChange={onChangePinCode} />
               </div>
             </div>
             <div className="row mb-2">
               <div className="col-12 col-md-6">
                 <label className="form-label">Contact Number *</label>
-                <input type="text" className="form-control" onChange={onChangeContactNumber}/>
+                <input type="text" className="form-control" onChange={onChangeContactNumber} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">Email *</label>
-                <input type="text" className="form-control" onChange={onChangeEmail}/>
+                <input type="text" className="form-control" onChange={onChangeEmail} />
               </div>
             </div>
             <div className="row mb-2">
               <div className="col-12 col-md-6">
                 <label className="form-label">Website *</label>
-                <input type="text" className="form-control" onChange={onChangeWebsite}/>
+                <input type="text" className="form-control" onChange={onChangeWebsite} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">License Key *</label>
-                <input type="text" className="form-control" required="" onChange={onChangeLicenseKey}/>
+                <input type="text" className="form-control" required="" onChange={onChangeLicenseKey} />
               </div>
             </div>
             <div className="row mt-2">

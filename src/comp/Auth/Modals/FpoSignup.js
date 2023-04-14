@@ -188,19 +188,19 @@ function FpoSignup({ show, close }) {
       .post("http://13.232.131.203:3000/api/document", formData)
       .then((response) => {
         console.log(response.data);
-        if(imageName === "Pan Card") {
+        if (imageName === "Pan Card") {
           setPanImageId(response.data.data.docId);
         }
-        if(imageName === "Passbook") {
+        if (imageName === "Passbook") {
           setPassbookImageId(response.data.data.docId);
         }
-        if(imageName === "Bylaws") {
+        if (imageName === "Bylaws") {
           setBylawsImageId(response.data.data.docId);
         }
-        if(imageName === "Incorporation Certifcate") {
+        if (imageName === "Incorporation Certifcate") {
           setIncorporationCertifcateImageId(response.data.data.docId);
         }
-        if(imageName === "GST Certificate") {
+        if (imageName === "GST Certificate") {
           setGstCertificateId(response.data.data.docId);
         }
       })
@@ -210,7 +210,7 @@ function FpoSignup({ show, close }) {
   };
 
   const addFpo = async () => {
-    if(!fpoName || !userName || !password || !address || !city || !state || !pinCode || !contactNumber || !email || !website || !dateOfIncorporation || !panNumber || !panImage || !registrationNumber || !shareholderNumber || !bankName || !bankAccountNumber || !ifscCode || !passbookImage || !directorName || !directorContactNumber || !directorGender || !bylawsImage || !incorporationCertifcateImage || !gstCertificate || !licenseKey) {
+    if (!fpoName || !userName || !password || !address || !city || !state || !pinCode || !contactNumber || !email || !website || !dateOfIncorporation || !panNumber || !panImage || !registrationNumber || !shareholderNumber || !bankName || !bankAccountNumber || !ifscCode || !passbookImage || !directorName || !directorContactNumber || !directorGender || !bylawsImage || !incorporationCertifcateImage || !gstCertificate || !licenseKey) {
       alert("Please fill all details and try again");
       return;
     }
@@ -249,7 +249,7 @@ function FpoSignup({ show, close }) {
       "gstCertificate": gstCertificateId,
       "licenseKey": licenseKey
     };
-    
+
     await axios
       .post("http://13.232.131.203:3000/api/signup/fpo", newFpo)
       .then((response) => {
@@ -272,61 +272,61 @@ function FpoSignup({ show, close }) {
             <div className="row mb-2">
               <div className="col-12 col-md-6">
                 <label className="form-label">Name of FPO *</label>
-                <input type="text" className="form-control" required="" onChange={onChangeFpoName}/>
+                <input type="text" className="form-control" required="" onChange={onChangeFpoName} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">Username *</label>
-                <input type="text" className="form-control" onChange={onChangeUserName}/>
+                <input type="text" className="form-control" onChange={onChangeUserName} />
               </div>
             </div>
             <div className="row mb-2">
               <div className="col-12 col-md-6">
                 <label className="form-label">Password *</label>
-                <input type="password" className="form-control" required="" onChange={onChangePassword}/>
+                <input type="password" className="form-control" required="" onChange={onChangePassword} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">Address *</label>
-                <input type="text" className="form-control" onChange={onChangeAddress}/>
+                <input type="text" className="form-control" onChange={onChangeAddress} />
               </div>
             </div>
             <div className="row mb-2">
               <div className="col-12 col-md-6">
                 <label className="form-label">City *</label>
-                <input className="form-control" type="text" required="" onChange={onChangeCity}/>
+                <input className="form-control" type="text" required="" onChange={onChangeCity} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">State *</label>
                 <select className="form-select" value={state} onChange={onChangeState}>
                   {states.map((state) => (
-                    <option value={state}>{state}</option>
+                    <option key={state} value={state}>{state}</option>
                   ))}
                 </select>
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">PinCode *</label>
-                <input className="form-control" type="text" required="" onChange={onChangePinCode}/>
+                <input className="form-control" type="text" required="" onChange={onChangePinCode} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">Contact Number *</label>
-                <input className="form-control" type="text" required="" onChange={onChangeContactNumber}/>
+                <input className="form-control" type="text" required="" onChange={onChangeContactNumber} />
               </div>
             </div>
             <div className="row mb-2">
               <div className="col-12 col-md-6">
                 <label className="form-label">Email *</label>
-                <input type="text" className="form-control" onChange={onChangeEmail}/>
+                <input type="text" className="form-control" onChange={onChangeEmail} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">Website *</label>
-                <input type="text" className="form-control" onChange={onChangeWebsite}/>
+                <input type="text" className="form-control" onChange={onChangeWebsite} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">Date of InCorporation *</label>
-                <input type="date" className="form-control" onChange={onChangeDateOfIncorporation}/>
+                <input type="date" className="form-control" onChange={onChangeDateOfIncorporation} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">PAN Number *</label>
-                <input type="text" className="form-control" onChange={onChangePanNumber}/>
+                <input type="text" className="form-control" onChange={onChangePanNumber} />
               </div>
             </div>
             <div className="row mb-2">
@@ -342,26 +342,26 @@ function FpoSignup({ show, close }) {
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">Registration Number *</label>
-                <input type="text" className="form-control" onChange={onChangeRegistrationNumber}/>
+                <input type="text" className="form-control" onChange={onChangeRegistrationNumber} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">No of ShareHolders *</label>
-                <input type="text" className="form-control" required="" onChange={onChangeShareholderNumber}/>
+                <input type="text" className="form-control" required="" onChange={onChangeShareholderNumber} />
               </div>
             </div>
             <div className="row mb-2">
               <h5 className="mt-3">Bank Details</h5>
               <div className="col-12 col-md-6">
                 <label className="form-label">Bank Name *</label>
-                <input type="text" className="form-control" onChange={onChangeBankName}/>
+                <input type="text" className="form-control" onChange={onChangeBankName} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">Account Number *</label>
-                <input type="text" className="form-control" required="" onChange={onChangeBankAccountNumber}/>
+                <input type="text" className="form-control" required="" onChange={onChangeBankAccountNumber} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">IFSC Number *</label>
-                <input type="text" className="form-control" required="" onChange={onChangeIfscCode}/>
+                <input type="text" className="form-control" required="" onChange={onChangeIfscCode} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">
@@ -380,11 +380,11 @@ function FpoSignup({ show, close }) {
               <h5 className="mt-3">Director Details</h5>
               <div className="col-12 col-md-6">
                 <label className="form-label">Name *</label>
-                <input type="text" className="form-control" onChange={onChangeDirectorName}/>
+                <input type="text" className="form-control" onChange={onChangeDirectorName} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">Mobile Number *</label>
-                <input type="text" className="form-control" required="" onChange={onChangeDirectorContactNumber}/>
+                <input type="text" className="form-control" required="" onChange={onChangeDirectorContactNumber} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">Gender *</label>
@@ -432,7 +432,7 @@ function FpoSignup({ show, close }) {
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">License Key *</label>
-                <input type="text" className="form-control" required="" onChange={onChangeLicenseKey}/>
+                <input type="text" className="form-control" required="" onChange={onChangeLicenseKey} />
               </div>
             </div>
             <div className="row mt-2">

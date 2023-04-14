@@ -87,7 +87,7 @@ function CorporateClientSignup({ show, close }) {
   };
 
   const addCorporateClient = async () => {
-    if(!clientName || !userName || !password || !address || !city || !state || !pinCode || !contactNumber || !ciNumber || !email || !website || !gstNumber || !licenseKey) {
+    if (!clientName || !userName || !password || !address || !city || !state || !pinCode || !contactNumber || !ciNumber || !email || !website || !gstNumber || !licenseKey) {
       alert("Please fill all details and try again");
       return;
     }
@@ -107,7 +107,7 @@ function CorporateClientSignup({ show, close }) {
       "gstNumber": gstNumber,
       "licenseKey": licenseKey
     };
-    
+
     await axios
       .post("http://13.232.131.203:3000/api/signup/corporateclient", newCorporateClient)
       .then((response) => {
@@ -130,69 +130,69 @@ function CorporateClientSignup({ show, close }) {
             <div className="row mb-2">
               <div className="col-12 col-md-6">
                 <label className="form-label">Client Name *</label>
-                <input type="text" className="form-control" required="" onChange={onChangeClientName}/>
+                <input type="text" className="form-control" required="" onChange={onChangeClientName} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">Username *</label>
-                <input type="text" className="form-control" required="" onChange={onChangeUserName}/>
+                <input type="text" className="form-control" required="" onChange={onChangeUserName} />
               </div>
             </div>
             <div className="row mb-2">
               <div className="col-12 col-md-6">
                 <label className="form-label">Password *</label>
-                <input type="password" className="form-control" onChange={onChangePassword}/>
+                <input type="password" className="form-control" onChange={onChangePassword} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">Address *</label>
-                <input type="text" className="form-control" required="" onChange={onChangeAddress}/>
+                <input type="text" className="form-control" required="" onChange={onChangeAddress} />
               </div>
             </div>
             <div className="row mb-2">
-            <div className="col-12 col-md-6">
+              <div className="col-12 col-md-6">
                 <label className="form-label">City *</label>
-                <input type="text" className="form-control" onChange={onChangeCity}/>
+                <input type="text" className="form-control" onChange={onChangeCity} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">State *</label>
                 <select className="form-select" value={state} onChange={onChangeState}>
                   {states.map((state) => (
-                    <option value={state}>{state}</option>
+                    <option key={state} value={state}>{state}</option>
                   ))}
                 </select>
               </div>
             </div>
             <div className="row mb-2">
-            <div className="col-12 col-md-6">
+              <div className="col-12 col-md-6">
                 <label className="form-label">PinCode *</label>
-                <input className="form-control" type="text" required="" onChange={onChangePinCode}/>
+                <input className="form-control" type="text" required="" onChange={onChangePinCode} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">Contact Number *</label>
-                <input type="text" className="form-control" onChange={onChangeContactNumber}/>
+                <input type="text" className="form-control" onChange={onChangeContactNumber} />
               </div>
             </div>
             <div className="row mb-2">
               <div className="col-12 col-md-6">
                 <label className="form-label">CI Number *</label>
-                <input type="text" className="form-control" onChange={onChangeCiNumber}/>
+                <input type="text" className="form-control" onChange={onChangeCiNumber} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">Email *</label>
-                <input type="text" className="form-control" onChange={onChangeEmail}/>
+                <input type="text" className="form-control" onChange={onChangeEmail} />
               </div>
             </div>
             <div className="row mb-2">
-            <div className="col-12 col-md-6">
+              <div className="col-12 col-md-6">
                 <label className="form-label">Website *</label>
-                <input type="text" className="form-control" onChange={onChangeWebsite}/>
+                <input type="text" className="form-control" onChange={onChangeWebsite} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">GST Number *</label>
-                <input type="text" className="form-control" required="" onChange={onChangeGstNumber}/>
+                <input type="text" className="form-control" required="" onChange={onChangeGstNumber} />
               </div>
               <div className="col-12 col-md-6">
                 <label className="form-label">License Key *</label>
-                <input type="text" className="form-control" required="" onChange={onChangeLicenseKey}/>
+                <input type="text" className="form-control" required="" onChange={onChangeLicenseKey} />
               </div>
             </div>
             <div className="row mt-2">
