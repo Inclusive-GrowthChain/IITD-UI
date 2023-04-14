@@ -4,6 +4,9 @@ export const root = {
 
 const endPoints = {
   login: '/login',
+  fpoSignup: "/signup/fpo",
+
+  uploadImg: '/document',
 
 }
 

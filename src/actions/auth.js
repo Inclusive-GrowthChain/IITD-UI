@@ -16,3 +16,11 @@ export function login(data) {
     data
   })
 }
+
+export function fpoSignup(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.fpoSignup,
+    data
+  })
+}
