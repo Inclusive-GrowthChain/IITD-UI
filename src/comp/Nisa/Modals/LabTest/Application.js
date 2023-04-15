@@ -52,7 +52,7 @@ function Application({ currentApp, showApp, showFirstAppForm, setShowFirstAppFor
                         <input
                           type="text"
                           className="form-control"
-                          value={currentApp.sampleID}
+                          value={currentApp.sampleId}
                           disabled
                         />
                       </div>
@@ -67,7 +67,7 @@ function Application({ currentApp, showApp, showFirstAppForm, setShowFirstAppFor
                         <input
                           type="text"
                           className="form-control"
-                          value={currentApp.dateOfApp}
+                          value={currentApp.dateOfApplication}
                           disabled
                         />
                       </div>
@@ -80,7 +80,7 @@ function Application({ currentApp, showApp, showFirstAppForm, setShowFirstAppFor
                         <input
                           type="text"
                           className="form-control"
-                          value={currentApp.testCategory}
+                          value={currentApp.category}
                           disabled
                         />
                       </div>
@@ -93,7 +93,7 @@ function Application({ currentApp, showApp, showFirstAppForm, setShowFirstAppFor
                         <input
                           type="text"
                           className="form-control"
-                          value={currentApp.test}
+                          value={currentApp.testName}
                           disabled
                         />
                       </div>

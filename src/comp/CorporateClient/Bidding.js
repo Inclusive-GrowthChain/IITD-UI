@@ -344,7 +344,7 @@ const Bidding = () => {
         fpoBids={currentBid.bids}
       />
 
-      <BidStatus2
+      {/* <BidStatus2
         page={page}
         page2={page2}
         currentStep={currentStep}
@@ -352,7 +352,7 @@ const Bidding = () => {
         handleCloseCustomer={handleCloseCustomer}
         updateStep={updateStep}
         nextPage2={nextPage2}
-      />
+      /> */}
     </>
   )
 }

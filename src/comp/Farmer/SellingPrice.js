@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import TabNavItem from "../../pages/farmer/Tabs/TabNavItem";
-import TabContent from "../../pages/farmer/Tabs/TabContent";
+import TabNavItem from "./Tabs/TabNavItem";
+import TabContent from "./Tabs/TabContent";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 

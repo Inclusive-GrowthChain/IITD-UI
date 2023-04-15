@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from 'react-router-dom';
-import TabNavItem from "../../pages/farmer/Tabs/TabNavItem";
-import TabContent from "../../pages/farmer/Tabs/TabContent";
+import TabNavItem from "./Tabs/TabNavItem";
+import TabContent from "./Tabs/TabContent";
 
 const completedLoanList = [
   {

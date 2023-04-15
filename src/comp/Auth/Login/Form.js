@@ -55,6 +55,11 @@ function Form() {
       localStorage.setItem("userId", data.data._id)
       setTokenToApp(data.token)
       let to = navigationList[data.data.type]
+      if(data.data.type === "lendingpartner") {
+        to = navigationList["samunnati"]
+        navigate(`/samunnati/${to}`)
+        return
+      }
       if (to) navigate(`/${data.data.type}/${to}`)
     }
   })

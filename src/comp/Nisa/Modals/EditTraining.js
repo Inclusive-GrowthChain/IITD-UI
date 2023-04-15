@@ -163,7 +163,7 @@ function EditTraining({ currentTP, showEditTP, handleEditTPClose, t_id, cur_trai
                     <div className="col-lg-12">
                       <textarea className="form-control"
                         style={{ height: "200%" }}
-                        defaultValue={100}
+                        defaultValue={currentTP.remarks}
                         onChange={onChangeRemarks}
                       />
                     </div>

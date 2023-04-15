@@ -118,8 +118,8 @@ const CropAdvisory = () => {
                 </div>
                 <hr />
                 <div className="card__footer text-muted">
-                  <p>Created: {ca.createdAt}</p>
-                  <p>Last updated: {ca.updatedAt}</p>
+                  <p>Created: {ca.createdAt.substring(0, 10)}</p>
+                  <p>Last updated: {ca.updatedAt.substring(0, 10)}</p>
                 </div>
               </div>
             </div>
