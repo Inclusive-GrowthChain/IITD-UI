@@ -8,6 +8,8 @@ const endPoints = {
 
   uploadImg: '/document',
 
+  // Nisa
+  getLactTest: "/nisa/lac-test",
 }
 
 export default endPoints

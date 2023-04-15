@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Button from "react-bootstrap/Button";
+
+import { getLacTest } from "../../actions/nisa";
 
 import { TabNavItem, TabContent } from "../UIComp/Tabs";
 import Application from "./Modals/LabTest/Application";
@@ -32,8 +35,14 @@ const LabTesting = () => {
   const [currentApp, setCurrentApp] = useState({})
   const [activeTab, setActiveTab] = useState("tab1")
   const [showApp, setShowApp] = useState(false)
-  const [testList, setTestList] = useState([])
   const [appList, setAppList] = useState([])
+
+  const { data: testList } = useQuery({
+    queryKey: ["lac-test"],
+    queryFn: getLacTest,
+  })
+
+  console.log(testList)
 
   const handleCloseApp = () => setShowApp(false)
   const handleNewTestShow = () => setShowNewTest(true)
@@ -49,19 +58,6 @@ const LabTesting = () => {
     setShowApp(true)
     setShowFirstAppForm(true)
   }
-
-  useEffect(() => {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
-    axios
-      .get("http://13.232.131.203:3000/api/nisa/lac-test")
-      .then((response) => {
-        console.log(response.data.data);
-        setTestList(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
   useEffect(() => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
@@ -330,7 +326,7 @@ const LabTesting = () => {
                                 textAlign: "center",
                               }}
                             >
-                              {testList.map((test, i) => (
+                              {testList?.data?.map((test, i) => (
                                 <tr key={i}>
                                   <td>{test.category}</td>
                                   <td>{test.testName}</td>
