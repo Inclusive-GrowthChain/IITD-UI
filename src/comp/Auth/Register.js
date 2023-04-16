@@ -1,8 +1,12 @@
-import { Link } from "react-router-dom";
-import states from '../../constants/states';
+import { useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+
+import { errorNotify } from "../../utils/toastifyHlp";
 import { farmerSignup } from "../../actions/auth";
+import states from '../../constants/states';
+
 import FormHelp from "./Modals/FormHelp";
 
 const btnStyle = {
@@ -10,7 +14,7 @@ const btnStyle = {
   marginTop: "10px",
   color: "#fff",
   alignItems: "center",
-  width: "20%",
+  width: "100%",
   fontSize: "15px",
 }
 
@@ -39,9 +43,10 @@ const fieldSet1 = [
   {
     name: "age",
     label: "Age",
+    disabled: true,
   },
   {
-    gender: "gender",
+    name: "gender",
     label: "Gender",
     isSelect: true,
     options: [{ val: "male", label: "Male" }, { val: "female", label: "Female" }]
@@ -152,7 +157,7 @@ function Register() {
   const {
     register, setValue,
     formState: { errors },
-    handleSubmit, reset,
+    handleSubmit, reset, watch,
     clearErrors
   } = useForm({
     defaultValues: {
@@ -190,24 +195,33 @@ function Register() {
     }
   });
 
-  // const handleAge = (e) => {
-  //   const dob = new Date(e.target.value)
-  //   const today = new Date()
-  //   let temp = today.getFullYear() - dob.getFullYear()
-  //   const m = today.getMonth() - dob.getMonth()
-  //   if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
-  //     temp--
-  //   }
-  //   setAge(temp)
-  // }
+  const dob = watch("dateOfBirth")
+
+  useEffect(() => {
+    if (dob) {
+      const dobVal = new Date(dob)
+      const today = new Date()
+      let temp = today.getFullYear() - dobVal.getFullYear()
+      const m = today.getMonth() - dobVal.getMonth()
+      if (m < 0 || (m === 0 && today.getDate() < dobVal.getDate())) {
+        temp--
+      }
+
+      setValue("age", temp)
+    }
+  }, [dob, setValue])
 
   const { mutate } = useMutation({
     mutationFn: farmerSignup,
     onSuccess: () => {
       reset()
-      close()
     }
   })
+
+  const onSubmit = data => {
+    if (Number(data.age) < 1) return errorNotify("Please select valid DOB")
+    mutate(data)
+  }
 
   return (
     <div id="main-registration-container">
@@ -215,7 +229,7 @@ function Register() {
         <h3>Farmer Signup</h3>
         <div className="card-body">
           <div className="container">
-            <form onSubmit={handleSubmit(mutate)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="row mb-2">
                 <FormHelp
                   fields={fieldSet1}
@@ -228,21 +242,12 @@ function Register() {
 
               <div className="row mb-2">
                 <div className="col">
-                  <Link to="/">
-                    <button
-                      type="button"
-                      className="btn btn-block shadow"
-                      style={{
-                        backgroundColor: "#064420",
-                        marginTop: "10px",
-                        color: "#fff",
-                        alignItems: "center",
-                        width: "100%",
-                        fontSize: "13px",
-                      }}
-                    >
-                      Login
-                    </button>
+                  <Link
+                    to="/"
+                    className="btn btn-block shadow"
+                    style={btnStyle}
+                  >
+                    Login
                   </Link>
                 </div>
                 <div className="col">

@@ -7,7 +7,7 @@ const errorStyle = { fontSize: "12px", marginTop: "2px", marginBottom: 0 }
 function Input({
   label = "", type = "text", register, name = "",
   validation = {}, error = {}, options = [],
-  isSelect = false,
+  isSelect = false, ...rest
 }) {
   const id = useId()
 
@@ -25,6 +25,7 @@ function Input({
           id={id}
           className="form-select"
           {...register(name, validation)}
+          {...rest}
         >
           {
             options.map(op => (
@@ -42,6 +43,7 @@ function Input({
             id={id}
             type={type}
             className="form-control"
+            {...rest}
             {...register(name, validation)}
           />
       }
@@ -119,7 +121,7 @@ function FormHelp({ fields = [], register, errors, setValue, clearErrors }) {
               error={errors[f.name]}
               register={register}
               setValue={setValue}
-              validation={{ required: `${f.label} is required` }}
+              validation={{ required: `${f.label} is required`, ...f.validation }}
               clearErrors={clearErrors}
             />
           }
@@ -129,7 +131,7 @@ function FormHelp({ fields = [], register, errors, setValue, clearErrors }) {
             key={f.name}
             error={errors[f.name]}
             register={register}
-            validation={{ required: `${f.label} is required` }}
+            validation={{ required: `${f.label} is required`, ...f.validation }}
           />
         })
       }

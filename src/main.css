@@ -36,9 +36,11 @@
 
 /* Toastify Confiuration */
 .Toastify__toast {
-  @apply w-fit px-1 py-2 rounded-full;
   margin: 0 auto .8rem;
   font-size: 14px;
+  width: fit-content;
+  padding: 8px 4px;
+  border-radius: 100px;
 }
 
 .Toastify__toast-icon {
