@@ -24,3 +24,35 @@ export function fpoSignup(data) {
     data
   })
 }
+
+export function nisaSignup(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.nisaSignup,
+    data
+  })
+}
+
+export function samunnatiSignup(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.samunnatiSignup,
+    data
+  })
+}
+
+export function corporateClientSignup(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.corporateClientSignup,
+    data
+  })
+}
+
+export function farmerSignup(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.farmerSignup,
+    data
+  })
+}

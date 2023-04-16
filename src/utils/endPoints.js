@@ -5,6 +5,10 @@ export const root = {
 const endPoints = {
   login: '/login',
   fpoSignup: "/signup/fpo",
+  nisaSignup: "/signup/nisa",
+  samunnatiSignup: "/signup/samunnati",
+  corporateClientSignup: "/signup/corporateclient",
+  farmerSignup: "/signup/farmer",
 
   uploadImg: '/document',
 
