@@ -38,7 +38,7 @@ const LabTesting = () => {
   const [appList, setAppList] = useState([])
 
   const { data: testList } = useQuery({
-    queryKey: ["lac-test"],
+    queryKey: ["nisa/lac-test"],
     queryFn: getLacTest,
   })
 

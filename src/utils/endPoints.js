@@ -13,7 +13,10 @@ const endPoints = {
   uploadImg: '/document',
 
   // Nisa
-  getLactTest: "/nisa/lac-test",
+  nisa: {
+    getLactTest: "/nisa/lac-test",
+    getCropAdvisory: "/nisa/crop-advisory"
+  },
 }
 
 export default endPoints

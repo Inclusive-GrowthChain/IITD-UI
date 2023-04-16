@@ -1,8 +1,7 @@
 function Loader({ wrapperCls = '', loaderCls = '' }) {
   return (
-    <div className={`dc ${wrapperCls}`}>
+    <div className={`loader-wrapper ${wrapperCls}`}>
       <div className={`loader ${loaderCls} `}>
-        Loader...
       </div>
     </div>
   )

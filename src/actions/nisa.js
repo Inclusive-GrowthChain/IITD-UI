@@ -3,7 +3,12 @@ import endPoints from '../utils/endPoints';
 
 export function getLacTest() {
   return sendApiReq({
-    url: endPoints.getLactTest,
+    url: endPoints.nisa.getLactTest,
   })
 }
 
+export function getCropAdvisory() {
+  return sendApiReq({
+    url: endPoints.nisa.getCropAdvisory,
+  })
+}
