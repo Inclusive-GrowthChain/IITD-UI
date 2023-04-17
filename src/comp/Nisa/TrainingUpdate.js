@@ -1,39 +1,28 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Button from "react-bootstrap/Button";
+
 import EditIcon from '@mui/icons-material/Edit';
 
-import EditTraining from "./Modals/EditTraining";
+import { getTraining } from "../../actions/nisa";
+
 import AddTraing from "./Modals/AddTraing";
-import axios from "axios";
+import Loader from "../Common/Loader";
 
 import "./Nisa.css";
 
 const TrainingUpdate = () => {
-  const [showAddTP, setShowAddTP] = useState(false);
-  const [showEditTP, setShowEditTP] = useState(false);
-  const [currentTP, setCurrentTP] = useState({});
-  const [tpList, setTpList] = useState([]);
+  const [modal, setModal] = useState({ state: false, data: {} })
 
-  const handleTPClose = () => setShowAddTP(false);
-  const handleTPShow = () => setShowAddTP(true);
-  const handleEditTPClose = () => setShowEditTP(false);
-  const handleEditTPShow = (ind) => {
-    setShowEditTP(true);
-    setCurrentTP(tpList[ind]);
-  };
+  const { isLoading, data } = useQuery({
+    queryKey: ["nisa/traning"],
+    queryFn: getTraining
+  })
 
-  useEffect(() => {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
-    axios
-      .get("http://13.232.131.203:3000/api/nisa/traning")
-      .then((response) => {
-        console.log(response.data.data);
-        setTpList(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  const updateModal = (state, val) => setModal({ state, data: val })
+  const closeModal = () => setModal({ state: "", data: {} })
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <div className="item_Container">
@@ -66,7 +55,7 @@ const TrainingUpdate = () => {
                   border: "none",
                   width: "fit-content",
                 }}
-                onClick={handleTPShow}
+                onClick={() => updateModal("add", {})}
               >
                 Add Training Program
               </Button>
@@ -95,16 +84,17 @@ const TrainingUpdate = () => {
                     <td>Remarks</td>
                   </tr>
                 </thead>
-                {
-                  tpList.map((tp, ind) => (
-                    <tbody
-                      style={{
-                        color: "#000",
-                        fontSize: "16px",
-                        fontWeight: "500",
-                      }}
-                    >
-                      <tr>
+
+                <tbody
+                  style={{
+                    color: "#000",
+                    fontSize: "16px",
+                    fontWeight: "500",
+                  }}
+                >
+                  {
+                    data.data.map(tp => (
+                      <tr key={tp._id}>
                         <td>{tp.courseName}</td>
                         <td>{tp.courseStartDate}</td>
                         <td>{tp.duration}</td>
@@ -114,40 +104,31 @@ const TrainingUpdate = () => {
                         <td>{tp.remarks}</td>
                         <td>
                           <button
-                            onClick={() => handleEditTPShow(ind)}
-                            style={{ backgroundColor: 'white' }}>
+                            onClick={() => updateModal("edit", tp)}
+                            className="bg-white"
+                          >
                             <EditIcon />
                           </button>
                         </td>
                       </tr>
-                    </tbody>
-                  ))
-                }
+                    ))
+                  }
+                </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
 
-      <EditTraining
-        currentTP={currentTP}
-        showEditTP={showEditTP}
-        handleEditTPClose={handleEditTPClose}
-        t_id={currentTP._id}
-        trainingId={currentTP.traningId}
-        cur_courseName={currentTP.courseName}
-        cur_courseStartDate={currentTP.courseStartDate}
-        cur_duration={currentTP.duration}
-        cur_applicationStartDate={currentTP.applicationStartDate}
-        cur_applicationEndDate={currentTP.applicationEndDate}
-        cur_fee={currentTP.fee}
-        cur_remarks={currentTP.remarks}
-      />
-
-      <AddTraing
-        showAddTP={showAddTP}
-        handleTPClose={handleTPClose}
-      />
+      {
+        modal.state &&
+        <AddTraing
+          show
+          data={modal.data}
+          isEdit={modal.state === "edit"}
+          handleClose={closeModal}
+        />
+      }
     </div>
   );
 }

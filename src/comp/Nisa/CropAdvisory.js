@@ -88,7 +88,7 @@ const CropAdvisory = () => {
                   >
                     <button
                       onClick={() => updateModal("edit", ca)}
-                      style={{ backgroundColor: "white" }}
+                      className="bg-white"
                     >
                       <EditIcon />
                     </button>

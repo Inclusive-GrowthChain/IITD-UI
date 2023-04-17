@@ -1,179 +1,162 @@
-import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
 import { Modal } from "react-bootstrap";
-import axios from "axios";
 
-function AddTraing({ showAddTP, handleTPClose }) {
-  const [trainingId, setTrainingId] = useState("TRAN004");
-  const [courseName, setCourseName] = useState("");
-  const [courseStartDate, setCourseStartDate] = useState("");
-  const [duration, setDuration] = useState("");
-  const [appStartDate, setAppStartDate] = useState("");
-  const [appEndDate, setAppEndDate] = useState("");
-  const [fee, setFee] = useState(0);
-  const [remarks, setRemarks] = useState("");
+import { errorNotify } from "../../../utils/toastifyHlp";
+import { addTraining, editTraining } from "../../../actions/nisa";
 
-  const onChangeCourseName = (e) => {
-    setCourseName(e.target.value);
-  }
+const errStyle = { fontSize: "12px", margin: 0 }
+const textAreaStyle = { resize: "none", height: "150px" }
 
-  const onChangeCourseStartDate = (e) => {
-    setCourseStartDate(e.target.value);
-  }
+const list = [
+  {
+    label: "Training ID",
+    name: "traningId",
+    disabled: true
+  },
+  {
+    label: "Training Course Name",
+    name: "courseName",
+  },
+  {
+    label: "Course Start Date",
+    name: "courseStartDate",
+    type: "date",
+  },
+  {
+    label: "Duration",
+    name: "duration",
+  },
+  {
+    label: "Application Start Date",
+    name: "applicationStartDate",
+    type: "date",
+  },
+  {
+    label: "Application End Date",
+    name: "applicationEndDate",
+    type: "date",
+  },
+  {
+    label: "Fee (in Rs.)",
+    name: "fee",
+    type: "number",
+  },
+]
 
-  const onChangeDuration = (e) => {
-    setDuration(e.target.value);
-  }
+function Input({
+  label = "", name = "",
+  type = "text", disabled = false,
+  register, errors,
+}) {
+  return (
+    <div className="row m-2">
+      <div className="col-lg-6">
+        <label>{label}</label>
+      </div>
+      <div className="col-lg-6">
+        <input
+          className="form-control"
+          type={type}
+          {...register(name, {
+            required: `${label} is required`
+          })}
+          disabled={disabled}
+        />
+        {
+          errors[name] &&
+          <p className="text-danger" style={errStyle}>
+            {errors[name].message}
+          </p>
+        }
+      </div>
+    </div>
+  )
+}
 
-  const onChangeAppStartDate = (e) => {
-    setAppStartDate(e.target.value);
-  }
+function AddTraing({ data, show, isEdit, handleClose }) {
+  const queryClient = useQueryClient()
+  const { register, formState: { errors }, handleSubmit, reset } = useForm({
+    defaultValues: {
+      traningId: isEdit ? data._id : "TRAN004",
+      courseName: isEdit ? data.courseName : "",
+      courseStartDate: isEdit ? data.courseStartDate : "",
+      duration: isEdit ? data.duration : "",
+      applicationStartDate: isEdit ? data.applicationStartDate : "",
+      applicationEndDate: isEdit ? data.applicationEndDate : "",
+      fee: isEdit ? data.fee : "",
+      remarks: isEdit ? data.remarks : "",
+    }
+  })
 
-  const onChangeAppEndDate = (e) => {
-    setAppEndDate(e.target.value);
-  }
+  const { mutate, isLoading } = useMutation({
+    mutationFn: isEdit ? editTraining : addTraining,
+    onSuccess: () => {
+      queryClient.invalidateQueries("nisa/traning")
+      reset()
+      handleClose()
+    }
+  })
 
-  const onChangeFee = (e) => {
-    setFee(e.target.value);
-  }
-
-  const onChangeRemarks = (e) => {
-    setRemarks(e.target.value);
-  }
-
-  const resetInputs = () => {
-    setCourseName("");
-    setCourseStartDate("");
-    setDuration("");
-    setAppStartDate("");
-    setAppEndDate("");
-    setFee(0);
-    setRemarks("");
-  }
-
-  const addTrainingProgram = async () => {
-    if(courseName=="" || courseStartDate=="" || duration=="" || appStartDate=="" || appEndDate=="" || fee=="" || remarks=="") {
-      alert("Please fill all details and try again");
-      return;
+  const onSubmit = data => {
+    if (new Date(data.appStartDate).getTime() > new Date(data.appEndDate).getTime()) {
+      return errorNotify("Application start date cannot be greater than application end date")
     }
 
-    if(appStartDate > appEndDate) {
-      alert("Application start date cannot be greater than application end date");
-      return;
+    if (Number(data.fee) < 0) {
+      return errorNotify("Fee cannot be negative")
     }
 
-    if(fee < 0) {
-      alert("Fee cannot be negative");
-      return;
-    }
-
-    const newTP = {
-      "traningId": trainingId,
-      "courseName": courseName,
-      "courseStartDate": courseStartDate,
-      "duration": duration,
-      "applicationStartDate": appStartDate,
-      "applicationEndDate": appEndDate,
-      "fee": fee,
-      "remarks": remarks,
-    };
-    
-    await axios
-      .post("http://13.232.131.203:3000/api/nisa/traning", newTP)
-      .then((response) => {
-        console.log(response.data);
-        resetInputs();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    window.location.reload();
+    mutate(data)
   }
 
   return (
-    <Modal show={showAddTP} onHide={handleTPClose}>
-      <Modal.Header closeButton>Add Training Program</Modal.Header>
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>{isEdit ? "Edit" : "Add"} Training Program</Modal.Header>
       <Modal.Body>
         <div className="row">
           <div className="col">
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="form">
                 <div className="card p-2">
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Training ID</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input className="form-control" type="text" value={trainingId} disabled />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Training Course Name</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input className="form-control" type="text" onChange={onChangeCourseName}/>
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Course Start Date</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input className="form-control" type="date" onChange={onChangeCourseStartDate}/>
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Duration</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input className="form-control" type="text" onChange={onChangeDuration}/>
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Application Start Date</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input className="form-control" type="date" onChange={onChangeAppStartDate}/>
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Application End Date</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input className="form-control" type="date" onChange={onChangeAppEndDate}/>
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Fee (in Rs.)</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input className="form-control" type="number" onChange={onChangeFee}/>
-                    </div>
-                  </div>
+                  {
+                    list.map(l => (
+                      <Input
+                        key={l.name}
+                        {...l}
+                        register={register}
+                        errors={errors}
+                      />
+                    ))
+                  }
+
                   <div className="row m-2">
                     <div className="col-lg-6">
                       <label>Remarks</label>
                     </div>
                     <div className="col-lg-12">
-                      <textarea className="form-control"
-                        style={{ height: "200%" }}
-                        onChange={onChangeRemarks}
+                      <textarea
+                        className="form-control"
+                        style={textAreaStyle}
+                        {...register("remarks", {
+                          required: "Remark is required"
+                        })}
                       />
+                      {
+                        errors.remarks &&
+                        <p className="text-danger" style={errStyle}>
+                          {errors.remarks.message}
+                        </p>
+                      }
                     </div>
                   </div>
+
                   <div className="row m-2">
                     <button
+                      type="submit"
+                      style={{ marginTop: '1rem', backgroundColor: '#064420' }}
+                      disabled={isLoading}
                       className="btn btn-success"
-                      style={{ marginTop: '5rem', backgroundColor: '#064420' }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        addTrainingProgram();
-                      }}
                     >
                       Submit
                     </button>

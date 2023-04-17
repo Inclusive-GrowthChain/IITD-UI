@@ -14,8 +14,9 @@ const endPoints = {
 
   // Nisa
   nisa: {
-    getLactTest: "/nisa/lac-test",
-    getCropAdvisory: "/nisa/crop-advisory"
+    cropAdvisory: "/nisa/crop-advisory",
+    lactTest: "/nisa/lac-test",
+    training: "/nisa/traning",
   },
 }
 

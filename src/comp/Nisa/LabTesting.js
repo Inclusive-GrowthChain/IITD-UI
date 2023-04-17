@@ -42,8 +42,6 @@ const LabTesting = () => {
     queryFn: getLacTest,
   })
 
-  console.log(testList)
-
   const handleCloseApp = () => setShowApp(false)
   const handleNewTestShow = () => setShowNewTest(true)
   const handleNewTestClose = () => setShowNewTest(false)
