@@ -1,25 +1,25 @@
 import { Modal } from "react-bootstrap";
 
-function AddCADescription({ currentCA, showModal, handleClose }) {
+function ViewCADescription({ data, show, handleClose }) {
   return (
     <Modal
-      show={showModal}
+      show={show}
       onHide={handleClose}
     >
       <Modal.Header closeButton>
-        <Modal.Title>{currentCA.title}</Modal.Title>
+        <Modal.Title>{data.title}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body style={{ height: "10rem" }}>
         <textarea
           className="form-control"
           style={{ height: "100%" }}
+          defaultValue={data.content}
         >
-          {currentCA.description}
         </textarea>
       </Modal.Body>
     </Modal>
   )
 }
 
-export default AddCADescription
+export default ViewCADescription

@@ -7,36 +7,22 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import { getCropAdvisory } from "../../actions/nisa";
 
-import AddADescription from "./Modals/AddCADescription";
+import ViewCADescription from "./Modals/ViewCADescription";
 import Loader from "../Common/Loader";
-import EditCA from "./Modals/EditCA";
 import AddCA from "./Modals/AddCA";
 
 import "./Nisa.css";
 
 const CropAdvisory = () => {
-  const [showEditCA, setShowEditCA] = useState(false)
-  const [showModal, setShowModal] = useState(false)
-  const [showAddCA, setShowAddCA] = useState(false)
-  const [currentCA, setCurrentCA] = useState({})
+  const [modal, setModal] = useState({ state: false, data: {} })
 
   const { isLoading, data } = useQuery({
     queryKey: ["nisa/crop-advisory"],
     queryFn: getCropAdvisory
   })
 
-  const handleClose = () => setShowModal(false)
-  const handleShow = (ca) => {
-    setShowModal(true)
-    setCurrentCA(ca)
-  }
-  const handleCAClose = () => setShowAddCA(false)
-  const handleCAShow = () => setShowAddCA(true)
-  const handleEditCAClose = () => setShowEditCA(false)
-  const handleEditCAShow = (ca) => {
-    setShowEditCA(true)
-    setCurrentCA(ca)
-  }
+  const updateModal = (state, val) => setModal({ state, data: val })
+  const closeModal = () => setModal({ state: "", data: {} })
 
   if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
@@ -72,7 +58,7 @@ const CropAdvisory = () => {
                   width: "fit-content",
                   marginTop: "50px",
                 }}
-                onClick={handleCAShow}
+                onClick={() => updateModal("add", {})}
               >
                 Add Crop Advisory
               </Button>
@@ -101,7 +87,7 @@ const CropAdvisory = () => {
                     }}
                   >
                     <button
-                      onClick={() => handleEditCAShow(ca)}
+                      onClick={() => updateModal("edit", ca)}
                       style={{ backgroundColor: "white" }}
                     >
                       <EditIcon />
@@ -113,7 +99,7 @@ const CropAdvisory = () => {
                     </p>
                   </div>
                   <div className="card_button d-flex">
-                    <button id="btn-1" onClick={() => handleShow(ca)}>
+                    <button id="btn-1" onClick={() => updateModal("readMore", ca)}>
                       Read More
                       <ChevronRightIcon className="btn-icon" />
                     </button>
@@ -130,25 +116,21 @@ const CropAdvisory = () => {
         </div>
       </div>
 
-      <AddADescription
-        showModal={showModal}
-        currentCA={currentCA}
-        handleClose={handleClose}
+      <ViewCADescription
+        show={modal.state === "readMore"}
+        data={modal.data}
+        handleClose={closeModal}
       />
 
-      <EditCA
-        currentCA={currentCA}
-        showEditCA={showEditCA}
-        handleEditCAClose={handleEditCAClose}
-        ca_id={currentCA._id}
-        cur_title={currentCA.title}
-        cur_content={currentCA.content}
-      />
-
-      <AddCA
-        showAddCA={showAddCA}
-        handleCAClose={handleCAClose}
-      />
+      {
+        (modal.state === "add" || modal.state === "edit") &&
+        <AddCA
+          show
+          data={modal.data}
+          isEdit={modal.state === "edit"}
+          handleClose={closeModal}
+        />
+      }
     </div>
   )
 }

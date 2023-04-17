@@ -1,61 +1,42 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
 import { Modal } from "react-bootstrap";
-import axios from "axios";
-import { useState } from "react";
 
-function AddCA({ showAddCA, handleCAClose }) {
-  const [cropAdvisoryId, setCropAdvisoryId] = useState("CA012");
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+import { addCropAdvisory, editCropAdvisory } from '../../../actions/nisa';
 
-  const onChangeTitle = (e) => {
-    setTitle(e.target.value);
-  }
-  
-  const onChangeContent = (e) => {
-    setContent(e.target.value);
-  }
+const errStyle = { fontSize: "12px", margin: 0 }
+const textAreaStyle = { resize: "none", height: "150px" }
 
-  const resetInputs = () => {
-    setTitle("");
-    setContent("");
-  }
-
-  const addCropAdvisory = async () => {
-    if(title=="" || content=="") {
-      alert("Please fill all details and try again");
-      return;
+function AddCA({ data, show, isEdit, handleClose }) {
+  const queryClient = useQueryClient()
+  const { register, formState: { errors }, handleSubmit, reset } = useForm({
+    defaultValues: {
+      cropAdvisoryId: isEdit ? data._id : "CA012",
+      content: isEdit ? data.content : "",
+      title: isEdit ? data.title : "",
     }
+  })
 
-    const newCA = {
-      "cropAdvisoryId": cropAdvisoryId,
-      "title": title,
-      "content": content
-    };
-    
-    await axios
-      .post("http://13.232.131.203:3000/api/nisa/crop-advisory", newCA)
-      .then((response) => {
-        console.log(response.data);
-        resetInputs();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    window.location.reload();
-  }
+  const { mutate, isLoading } = useMutation({
+    mutationFn: isEdit ? editCropAdvisory : addCropAdvisory,
+    onSuccess: () => {
+      queryClient.invalidateQueries("nisa/crop-advisory")
+      reset()
+      handleClose()
+    }
+  })
 
   return (
     <Modal
-      show={showAddCA}
-      onHide={handleCAClose}
+      show={show}
+      onHide={handleClose}
     >
-      <Modal.Header closeButton>Add Crop Advisory</Modal.Header>
+      <Modal.Header closeButton>{isEdit ? "Edit" : "Add"} Crop Advisory</Modal.Header>
 
       <Modal.Body>
         <div className="row">
           <div className="col">
-            <form>
+            <form onSubmit={handleSubmit(mutate)}>
               <div className="form">
                 <div className="card p-2">
                   <div className="row m-2">
@@ -66,19 +47,33 @@ function AddCA({ showAddCA, handleCAClose }) {
                       <input
                         className="form-control"
                         type="text"
-                        value={cropAdvisoryId}
+                        {...register("cropAdvisoryId")}
                         disabled
                       />
                     </div>
                   </div>
+
                   <div className="row m-2">
                     <div className="col-lg-6">
                       <label>Title</label>
                     </div>
                     <div className="col-lg-12">
-                      <input className="form-control" type="text" onChange={onChangeTitle}/>
+                      <input
+                        type="text"
+                        className="form-control"
+                        {...register("title", {
+                          required: "Title id required"
+                        })}
+                      />
+                      {
+                        errors.title &&
+                        <p className="text-danger" style={errStyle}>
+                          {errors.title.message}
+                        </p>
+                      }
                     </div>
                   </div>
+
                   <div className="row m-2">
                     <div className="col-lg-6">
                       <label>Content</label>
@@ -86,23 +81,29 @@ function AddCA({ showAddCA, handleCAClose }) {
                     <div className="col-lg-12">
                       <textarea
                         className="form-control"
-                        style={{ height: "200%" }}
-                        onChange={onChangeContent}
-                      />
+                        style={textAreaStyle}
+                        {...register("content", {
+                          required: "Content id required"
+                        })}
+                      ></textarea>
+                      {
+                        errors.content &&
+                        <p className="text-danger" style={errStyle}>
+                          {errors.content.message}
+                        </p>
+                      }
                     </div>
                   </div>
+
                   <div className="row m-2">
                     <button
                       className="btn btn-success"
+                      type="submit"
                       style={{
-                        marginTop: "5rem",
+                        marginTop: "2rem",
                         backgroundColor: "#064420",
                       }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        addCropAdvisory();
-                        handleCAClose();
-                      }}
+                      disabled={isLoading}
                     >
                       Submit
                     </button>

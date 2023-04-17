@@ -12,3 +12,19 @@ export function getCropAdvisory() {
     url: endPoints.nisa.getCropAdvisory,
   })
 }
+
+export function addCropAdvisory(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.nisa.getCropAdvisory,
+    data
+  })
+}
+
+export function editCropAdvisory(data) {
+  return sendApiReq({
+    method: "put",
+    url: endPoints.nisa.getCropAdvisory + `/${data.cropAdvisoryId}`,
+    data
+  })
+}
