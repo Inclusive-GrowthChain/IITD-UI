@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-import TabNavItem from "./Tabs/TabNavItem";
-import TabContent from "./Tabs/TabContent";
 import { Link } from "react-router-dom";
+
+import { TabNavItem, TabContent } from "../UIComp/Tabs";
+import RepaymentStructure from "./Modals/FarmerLoan/RepaymentStructure";
+import RepaymentConfirm from "./Modals/FarmerLoan/RepaymentConfirm";
 import RejectedLoanApp from "./Modals/FarmerLoan/RejectedLoanApp";
+import RepaymentStatus from "./Modals/FarmerLoan/RepaymentStatus";
 import PendingLoanApp from "./Modals/FarmerLoan/PendingLoanApp";
 import ApproveLoanApp from "./Modals/FarmerLoan/ApproveLoanApp";
 import RejectLoanApp from "./Modals/FarmerLoan/RejectLoanApp";
-import ConfirmApprove from "./Modals/FarmerLoan/ConfirmApprove";
-import ConfirmReject from "./Modals/FarmerLoan/ConfirmReject";
-import RepaymentStructure from "./Modals/FarmerLoan/RepaymentStructure";
-import RepaymentStatus from "./Modals/FarmerLoan/RepaymentStatus";
-import RepaymentConfirm from "./Modals/FarmerLoan/RepaymentConfirm";
 import axios from "axios";
 
 const Samunnati_Farmer_Loan = () => {
@@ -92,19 +90,19 @@ const Samunnati_Farmer_Loan = () => {
     }
   };
 
-  const approveLoan = (e) => {
-    e.preventDefault();
-    setShowApproveForm(false);
-    handleCloseConfirmApprove();
-    handleClosePendLoanApp();
-  };
+  // const approveLoan = (e) => {
+  //   e.preventDefault();
+  //   setShowApproveForm(false);
+  //   handleCloseConfirmApprove();
+  //   handleClosePendLoanApp();
+  // };
 
-  const rejectLoan = (e) => {
-    e.preventDefault();
-    setShowRejectForm(false);
-    handleCloseConfirmReject();
-    handleClosePendLoanApp();
-  };
+  // const rejectLoan = (e) => {
+  //   e.preventDefault();
+  //   setShowRejectForm(false);
+  //   handleCloseConfirmReject();
+  //   handleClosePendLoanApp();
+  // };
 
   const searchLoans = () => {
     if (!searchText) {
@@ -215,7 +213,7 @@ const Samunnati_Farmer_Loan = () => {
                               fontWeight: "500",
                             }}
                           >
-                            {filteredFarmerLoanWindowList.filter((app) => app.status=="approved").map((app) => (
+                            {filteredFarmerLoanWindowList.filter((app) => app.status === "approved").map((app) => (
                               <tr>
                                 <td>{app.approvalDate.substring(0, 10)}</td>
                                 <td>{app.fpoId}</td>
@@ -243,7 +241,7 @@ const Samunnati_Farmer_Loan = () => {
                                     view
                                   </button>
                                 </td>
-                                <td>{app.loans.filter((loan) => loan.status=="pending").length}</td>
+                                <td>{app.loans.filter((loan) => loan.status === "pending").length}</td>
                                 <td>
                                   <Link to="/samunnati/farmer-subloan"
                                     className="data_wrapper"
@@ -336,7 +334,7 @@ const Samunnati_Farmer_Loan = () => {
                             }}
                           >
                             {
-                              filteredFarmerLoanWindowList.filter((app) => app.status=="rejected").map((app) => (
+                              filteredFarmerLoanWindowList.filter((app) => app.status === "rejected").map((app) => (
                                 <tr>
                                   <td>{app.dateOfApplication}</td>
                                   <td>{app.fpoId}</td>
@@ -435,7 +433,7 @@ const Samunnati_Farmer_Loan = () => {
                             }}
                           >
                             {
-                              filteredFarmerLoanWindowList.filter((app) => app.status=="pending").map((app) => {
+                              filteredFarmerLoanWindowList.filter((app) => app.status === "pending").map((app) => {
                                 return (
                                   <tr>
                                     <td>{app.dateOfApplication}</td>
@@ -479,7 +477,7 @@ const Samunnati_Farmer_Loan = () => {
           </div>
         </div>
       </div>
-      
+
       <RejectedLoanApp
         showRejLoanApp={showRejLoanApp}
         handleCloseRejLoanApp={handleCloseRejLoanApp}

@@ -13,8 +13,6 @@ import Invoice from "./Modals/FpoLoan/Invoice";
 import Confirm from "./Modals/FpoLoan/Confirm";
 import axios from "axios";
 
-import "./Fpo.css";
-
 function LoanWindowTable({ onClick, loanWindow }) {
   return (
     <div>
@@ -77,7 +75,6 @@ const Loan = ({ props }) => {
   const [showAdd, setShowAdd] = useState(false)
   const [step, setStep] = useState(0)
   const [activeTab, setActiveTab] = useState(1)
-  const [fpoId, setFpoId] = useState(localStorage.getItem("userId"))
   const [loanWindowList, setLoanWindowList] = useState([])
   const [activeLoanWindow, setActiveLoanWindow] = useState({})
 
@@ -136,7 +133,7 @@ const Loan = ({ props }) => {
       try {
         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
         const response = await axios.get("http://13.232.131.203:3000/api/loanwindow?windowType=fpo");
-        const loanWindow = response.data.data.filter((item) => item.fpoId == fpoId);
+        const loanWindow = response.data.data.filter((item) => item.fpoId === localStorage.getItem("userId"));
         setLoanWindowList(loanWindow);
         setToggleStateList(Array(loanWindow.length).fill(1));
         setActiveLoanWindow(loanWindow.reduce((prev, current) => (prev.createdAt > current.createdAt) ? prev : current));
@@ -280,7 +277,7 @@ const Loan = ({ props }) => {
                                 fontWeight: "500",
                               }}
                             >
-                              {loanWindow.loans && loanWindow.loans.filter((loan) => loan.status=="approved").map((loan) => (
+                              {loanWindow.loans && loanWindow.loans.filter((loan) => loan.status === "approved").map((loan) => (
                                 <tr>
                                   <td>{loan.approvalAt.substring(0, 10)}</td>
                                   <td>{loanWindow.fpoName}</td>
@@ -342,7 +339,7 @@ const Loan = ({ props }) => {
                                 textAlign: "center",
                               }}
                             >
-                              {loanWindow.loans && loanWindow.loans.filter((loan) => loan.status=="rejected").map((loan) => (
+                              {loanWindow.loans && loanWindow.loans.filter((loan) => loan.status === "rejected").map((loan) => (
                                 <tr>
                                   <td>{loan.createdAt.substring(0, 10)}</td>
                                   <td>{loanWindow.fpoName}</td>
@@ -403,7 +400,7 @@ const Loan = ({ props }) => {
                                 textAlign: "center",
                               }}
                             >
-                              {loanWindow.loans && loanWindow.loans.filter((loan) => loan.status=="in-process").map((loan) => (
+                              {loanWindow.loans && loanWindow.loans.filter((loan) => loan.status === "in-process").map((loan) => (
                                 <tr>
                                   <td>{loan.createdAt.substring(0, 10)}</td>
                                   <td>{loanWindow.fpoName}</td>

@@ -4,7 +4,6 @@ import { SliderData } from "./SliderData";
 import ImageSliders from "./ImageSliders";
 import { SliderContent } from "./SliderContent";
 
-import "../Farmer.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -154,7 +153,7 @@ function Dashboard() {
               <div className="mb-2 mt-2 p-3 dash__card">
                 <p className="card_title text-center">Store</p>
                 <div>
-                  <ImageSlider slides={SliderData} itemList={storeItemList}/>
+                  <ImageSlider slides={SliderData} itemList={storeItemList} />
                 </div>
               </div>
             </div>

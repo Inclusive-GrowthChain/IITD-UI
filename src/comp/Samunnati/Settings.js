@@ -1,7 +1,5 @@
 import { useState } from "react";
-
-import TabNavItem from "./Tabs/TabNavItem";
-import TabContent from "./Tabs/TabContent";
+import { TabNavItem, TabContent } from "../UIComp/Tabs";
 
 const Sammunati_Settings = () => {
   const [activeTab, setActiveTab] = useState("tab1");

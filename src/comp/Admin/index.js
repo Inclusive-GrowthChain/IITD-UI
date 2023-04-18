@@ -4,6 +4,7 @@ import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AppWrapper from "../Template/AppWrapper";
+import "./admin.css";
 
 const list = [
   {

@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import TabNavItem from "./Tabs/TabNavItem";
-import TabContent from "./Tabs/TabContent";
-import PendingLoanApp from "./Modals/FpoSubLoan/PendingLoanApp";
-import PaymentProof from "./Modals/FpoSubLoan/PaymentProof";
-import ApproveLoanApp from "./Modals/FpoSubLoan/ApproveLoanApp";
-import RejectLoanApp from "./Modals/FpoSubLoan/RejectLoanApp";
-import OngoingLoanApp from "./Modals/FpoSubLoan/OngoingLoanApp";
-import RepaymentStatus from "./Modals/FpoSubLoan/RepaymentStatus";
-import RepaymentConfirm from "./Modals/FpoLoan/RepaymentConfirm";
+
+import { TabNavItem, TabContent } from "../UIComp/Tabs";
 import CompletedLoanApp from "./Modals/FpoSubLoan/CompletedLoanApp";
+import RepaymentConfirm from "./Modals/FpoLoan/RepaymentConfirm";
+import RepaymentStatus from "./Modals/FpoSubLoan/RepaymentStatus";
+import OngoingLoanApp from "./Modals/FpoSubLoan/OngoingLoanApp";
+import ApproveLoanApp from "./Modals/FpoSubLoan/ApproveLoanApp";
+import PendingLoanApp from "./Modals/FpoSubLoan/PendingLoanApp";
+import RejectLoanApp from "./Modals/FpoSubLoan/RejectLoanApp";
+import PaymentProof from "./Modals/FpoSubLoan/PaymentProof";
 import axios from 'axios';
 
 const completedTransactionDetails = [
@@ -110,16 +111,15 @@ const Sammunati_FPO_SubLoan_Page = () => {
   const [activeTab, setActiveTab] = useState("tab1")
   const [thirdPage, setThirdPage] = useState(false)
   const [firstPage, setFirstPage] = useState(true)
-  // const [fpoId] = useState(localStorage.getItem("fpoId"))
   const [loanWindow, setLoanWindow] = useState({});
-  const [loanWindowId, setLoanWindowId] = useState(localStorage.getItem("loanWindowId"));
 
   useEffect(() => {
     async function fetchLoanWindow() {
       try {
         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
         const response = await axios.get("http://13.232.131.203:3000/api/loanwindow?windowType=fpo");
-        const loanWindow = response.data.data.filter((item) => item.id == loanWindowId)[0];
+        const loanWindowId = localStorage.getItem("loanWindowId")
+        const loanWindow = response.data.data.filter((item) => item.id === loanWindowId)[0];
         setLoanWindow(loanWindow);
       } catch (error) {
         console.log(error);
@@ -376,7 +376,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                   }}
                                 >
                                   {
-                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.status=="completed").map((loan) => (
+                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.status === "completed").map((loan) => (
                                       <tr>
                                         <td>{loan.loanId}</td>
                                         <td>{loan.createdAt.substring(0, 10)}</td>
@@ -412,7 +412,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                           </div>
                           <div style={{ marginTop: '2%' }}>
                             <p>
-                              Remaining Loan Window: {loanWindow.grantedAmount-loanWindow.consumedWindowLoanAmount}
+                              Remaining Loan Window: {loanWindow.grantedAmount - loanWindow.consumedWindowLoanAmount}
                             </p>
                           </div>
                         </div>
@@ -455,7 +455,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                   }}
                                 >
                                   {
-                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.status=="approved").map((loan) => {
+                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.status === "approved").map((loan) => {
                                       return (
                                         <tr>
                                           <td>{loan.loanId}</td>
@@ -535,7 +535,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
                                   }}
                                 >
                                   {
-                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.status == "in-process").map((loan) => {
+                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.status === "in-process").map((loan) => {
                                       return (
                                         <tr>
                                           <td>{loan.loanId}</td>
@@ -635,7 +635,7 @@ const Sammunati_FPO_SubLoan_Page = () => {
         handleCloseRepaymentStatus={handleCloseRepaymentStatus}
       />
 
-      <CompletedLoanApp 
+      <CompletedLoanApp
         showCompletedLoanDetails={showCompletedLoanDetails}
         handleCloseCompletedLoanDetails={handleCloseCompletedLoanDetails}
         currentLoan={currentLoan}

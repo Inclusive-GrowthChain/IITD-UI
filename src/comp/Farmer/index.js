@@ -8,6 +8,7 @@ import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
 import HelpTwoToneIcon from '@mui/icons-material/HelpTwoTone';
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AppWrapper from "../Template/AppWrapper";
+import "./Farmer.css";
 
 const list = [
   {

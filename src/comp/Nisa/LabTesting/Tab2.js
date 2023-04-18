@@ -38,9 +38,9 @@ function Tab2({ data = [], style, updateModal }) {
               <tbody style={tbodyStyle}>
                 {
                   data
-                    .filter((app) => app.applicationStatus === "completed")
-                    .map((item, i) => (
-                      <tr key={i}>
+                    .filter(app => app.applicationStatus === "completed")
+                    .map(item => (
+                      <tr key={item.id}>
                         <td>{item.sampleId}</td>
                         <td>{item.referenceNo}</td>
                         <td>{item.dateOfApplication}</td>

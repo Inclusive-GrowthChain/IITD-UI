@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import BidStatus from "./Modals/BidStatus";
 import CompletedTransactions from "./Modals/CompletedTransactions";
-import PlaceBid from "./Modals/PlaceBid";
-import BidConfirm from "./Modals/BidConfirm";
 import BidInformation from "./Modals/BidInformation";
+import BidConfirm from "./Modals/BidConfirm";
+import BidStatus from "./Modals/BidStatus";
+import PlaceBid from "./Modals/PlaceBid";
 import axios from "axios";
 
 const labelArray = [
@@ -216,7 +216,7 @@ const CorporateCustomer = () => {
                     >
                       {
                         bidList
-                          .filter((item) => item.status == "on-going" && item.bids.some((bid) => bid.userId === localStorage.getItem("userId")))
+                          .filter((item) => item.status === "on-going" && item.bids.some((bid) => bid.userId === localStorage.getItem("userId")))
                           .map((item, index) => (
                             <tr>
                               <td>{item.bidId}</td>
@@ -281,7 +281,7 @@ const CorporateCustomer = () => {
                       }}
                     >
                       {
-                        bidList.filter((bid) => bid.status != "on-going").map((bid, index) => (
+                        bidList.filter((bid) => bid.status !== "on-going").map((bid, index) => (
                           <tr>
                             <td>{bid.bidId}</td>
                             <td>02-01-2021</td>

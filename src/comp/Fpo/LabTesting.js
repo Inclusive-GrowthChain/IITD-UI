@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import LabSampleTest from "./Modals/LabSampleTest";
 import axios from "axios";
 
-import "./Fpo.css";
-
 const style = {
   backgroundColor: "#064420",
   color: "#fff",

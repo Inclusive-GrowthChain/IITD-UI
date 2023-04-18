@@ -7,8 +7,6 @@ import Submited from "./Modals/Submited";
 import Aadhar from "./Modals/Aadhar";
 import Pan from "./Modals/Pan";
 
-import "./Fpo.css";
-
 const approvedMembershipList = [
   {
     loanId: 1,
@@ -311,7 +309,7 @@ function Farmer() {
                             </button>
                           </td>
                           <td>
-                            <button className="dropdown_btn text-center" style={{width: '80%', minWidth: '100px'}}>
+                            <button className="dropdown_btn text-center" style={{ width: '80%', minWidth: '100px' }}>
                               <select className="form-select" required="">
                                 <option value="select">Select</option>
                                 <option value="">Approve</option>

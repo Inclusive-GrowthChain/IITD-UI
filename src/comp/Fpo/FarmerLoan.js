@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
+import ConfirmApproveLoanApp from "./Modals/ConfirmApproveLoanApp";
+import AggRepaymentStructure from "./Modals/AggRepaymentStructure";
 import RepaymentStructure from "./Modals/RepaymentStructure";
-import AddRepayment from "./Modals/AddRepayment";
 import RepaymentConfirm from "./Modals/RepaymentConfirm";
 import LoanApplication from "./Modals/LoanApplication";
-import Aadhar from "./Modals/Aadhar";
-import Pan from "./Modals/Pan";
-import ConfirmBox from "./Modals/ConfirmBox";
-import ConfirmApproveLoanApp from "./Modals/ConfirmApproveLoanApp";
-import Img from "./Modals/FarmerInfo/Img";
 import InterestRate from "./Modals/InterestRate";
-import AggRepaymentStructure from "./Modals/AggRepaymentStructure";
+import AddRepayment from "./Modals/AddRepayment";
+import ConfirmBox from "./Modals/ConfirmBox";
+import Aadhar from "./Modals/Aadhar";
+import Img from "./Modals/FarmerInfo/Img";
+import Pan from "./Modals/Pan";
 import axios from "axios";
-
-import "./Fpo.css";
 
 const repaymentList = [
   {
@@ -47,88 +45,88 @@ const repaymentList = [
   },
 ]
 
-const farmerList = [
-  {
-    id: "F 1",
-    name: "Farmer Name",
-    loanId: "L 1",
-    loanAppDate: "12-08-2021",
-    loanAmount: "10000",
-    status: "Approval Pending",
-    email: "Email",
-    mobile: "1234567890",
-    aadharNo: "1234567890",
-    panNo: "1234567890",
-    address: "Address",
-    incomeType: "Income",
-    dob: "2022-10-10",
-    landOwned: "Land",
-    loanReason: "Reason",
-    interest: 12,
-    amount: 1000000,
-    tenure: 12,
-  },
-  {
-    id: "F 2",
-    name: "Farmer Name",
-    loanId: "L 2",
-    loanAppDate: "12-08-2021",
-    loanAmount: "10000",
-    status: "Approval Pending",
-    email: "Email",
-    mobile: "1234567890",
-    aadharNo: "1234567890",
-    panNo: "1234567890",
-    address: "Address",
-    incomeType: "Income",
-    dob: "2022-10-10",
-    landOwned: "Land",
-    loanReason: "Reason",
-    interest: 12,
-    amount: 1000000,
-    tenure: 12,
-  },
-  {
-    id: "F 3",
-    name: "Farmer Name",
-    loanId: "L 3",
-    loanAppDate: "12-08-2021",
-    loanAmount: "10000",
-    status: "Approved",
-    email: "Email",
-    mobile: "1234567890",
-    aadharNo: "1234567890",
-    panNo: "1234567890",
-    address: "Address",
-    incomeType: "Income",
-    dob: "2022-10-10",
-    landOwned: "Land",
-    loanReason: "Reason",
-    interest: 12,
-    amount: 1000000,
-    tenure: 12,
-  },
-  {
-    id: "F 4",
-    name: "Farmer Name",
-    loanId: "L 4",
-    loanAppDate: "12-08-2021",
-    loanAmount: "10000",
-    status: "Approved",
-    email: "Email",
-    mobile: "1234567890",
-    aadharNo: "1234567890",
-    panNo: "1234567890",
-    address: "Address",
-    incomeType: "Income",
-    dob: "2022-10-10",
-    landOwned: "Land",
-    loanReason: "Reason",
-    interest: 12,
-    amount: 1000000,
-    tenure: 12,
-  },
-]
+// const farmerList = [
+//   {
+//     id: "F 1",
+//     name: "Farmer Name",
+//     loanId: "L 1",
+//     loanAppDate: "12-08-2021",
+//     loanAmount: "10000",
+//     status: "Approval Pending",
+//     email: "Email",
+//     mobile: "1234567890",
+//     aadharNo: "1234567890",
+//     panNo: "1234567890",
+//     address: "Address",
+//     incomeType: "Income",
+//     dob: "2022-10-10",
+//     landOwned: "Land",
+//     loanReason: "Reason",
+//     interest: 12,
+//     amount: 1000000,
+//     tenure: 12,
+//   },
+//   {
+//     id: "F 2",
+//     name: "Farmer Name",
+//     loanId: "L 2",
+//     loanAppDate: "12-08-2021",
+//     loanAmount: "10000",
+//     status: "Approval Pending",
+//     email: "Email",
+//     mobile: "1234567890",
+//     aadharNo: "1234567890",
+//     panNo: "1234567890",
+//     address: "Address",
+//     incomeType: "Income",
+//     dob: "2022-10-10",
+//     landOwned: "Land",
+//     loanReason: "Reason",
+//     interest: 12,
+//     amount: 1000000,
+//     tenure: 12,
+//   },
+//   {
+//     id: "F 3",
+//     name: "Farmer Name",
+//     loanId: "L 3",
+//     loanAppDate: "12-08-2021",
+//     loanAmount: "10000",
+//     status: "Approved",
+//     email: "Email",
+//     mobile: "1234567890",
+//     aadharNo: "1234567890",
+//     panNo: "1234567890",
+//     address: "Address",
+//     incomeType: "Income",
+//     dob: "2022-10-10",
+//     landOwned: "Land",
+//     loanReason: "Reason",
+//     interest: 12,
+//     amount: 1000000,
+//     tenure: 12,
+//   },
+//   {
+//     id: "F 4",
+//     name: "Farmer Name",
+//     loanId: "L 4",
+//     loanAppDate: "12-08-2021",
+//     loanAmount: "10000",
+//     status: "Approved",
+//     email: "Email",
+//     mobile: "1234567890",
+//     aadharNo: "1234567890",
+//     panNo: "1234567890",
+//     address: "Address",
+//     incomeType: "Income",
+//     dob: "2022-10-10",
+//     landOwned: "Land",
+//     loanReason: "Reason",
+//     interest: 12,
+//     amount: 1000000,
+//     tenure: 12,
+//   },
+// ]
 
 const FarmerLoan = ({ isToggled, onToggle }) => {
   const [showLoanApplication, setShowLoanApplication] = useState(false)
@@ -323,7 +321,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                       {loanWindowList && loanWindowList.map((loanWindow) => (
                         <>
                           {
-                            loanWindow && loanWindow.loans && loanWindow.loans.filter((loan) => loan.status == "approved").map((loan) => {
+                            loanWindow && loanWindow.loans && loanWindow.loans.filter((loan) => loan.status === "approved").map((loan) => {
                               return (
                                 <tr>
                                   <td>???</td>
@@ -478,7 +476,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
       <LoanApplication
         showLoanApplication={showLoanApplication}
         handleCloseLoanApplication={handleCloseLoanApplication}
-        step={step} 
+        step={step}
         setStep={setStep}
         currentLoan={currentLoan}
         handleShowAadharCardImg={handleShowAadharCardImg}
@@ -527,7 +525,6 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
         showAggRepayment={showAggRepayment}
         handleCloseAggRepayment={handleCloseAggRepayment}
       />
-
     </main>
   )
 }

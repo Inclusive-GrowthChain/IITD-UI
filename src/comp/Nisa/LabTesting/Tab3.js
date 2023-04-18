@@ -64,8 +64,8 @@ function Tab3({ data = [], updateModal }) {
               </thead>
               <tbody style={tbodyStyle}>
                 {
-                  data.map((test, i) => (
-                    <tr key={i}>
+                  data.map(test => (
+                    <tr key={test._id}>
                       <td>{test.category}</td>
                       <td>{test.testName}</td>
                       <td>{test.minRequiredQuantity}</td>

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import TabNavItem from "./Tabs/TabNavItem";
-import TabContent from "./Tabs/TabContent";
 import { Link } from "react-router-dom";
+
+import { TabNavItem, TabContent } from "../UIComp/Tabs";
 import RepaymentStructure from "./Modals/FpoLoan/RepaymentStructure";
-import Repayment from "./Modals/FpoLoan/Repayment";
 import RepaymentConfirm from "./Modals/FpoLoan/RepaymentConfirm";
 import RejectedLoanApp from "./Modals/FpoLoan/RejectedLoanApp";
 import PendingLoanApp from "./Modals/FpoLoan/PendingLoanApp";
 import ApproveLoanApp from "./Modals/FpoLoan/ApproveLoanApp";
 import RejectLoanApp from "./Modals/FpoLoan/RejectLoanApp";
+import Repayment from "./Modals/FpoLoan/Repayment";
 import axios from "axios";
 
 const Samunnati_FPO_Loan = () => {
@@ -201,7 +201,7 @@ const Samunnati_FPO_Loan = () => {
                               fontWeight: "500",
                             }}
                           >
-                            {filteredFpoLoanWindowList.filter((app) => app.status == "approved").map((app) => (
+                            {filteredFpoLoanWindowList.filter((app) => app.status === "approved").map((app) => (
                               <tr>
                                 <td>{app.approvalDate.substring(0, 10)}</td>
                                 <td>{app.fpoId}</td>
@@ -229,7 +229,7 @@ const Samunnati_FPO_Loan = () => {
                                     view
                                   </button>
                                 </td>
-                                <td>{app.loans.filter((loan) => loan.status == "in-process").length}</td>
+                                <td>{app.loans.filter((loan) => loan.status === "in-process").length}</td>
                                 <td>
                                   <Link to="/samunnati/fpo-subloan"
                                     className="data_wrapper"
@@ -342,7 +342,7 @@ const Samunnati_FPO_Loan = () => {
                             }}
                           >
                             {
-                              filteredFpoLoanWindowList.filter((app) => app.status == "rejected").map((app) => (
+                              filteredFpoLoanWindowList.filter((app) => app.status === "rejected").map((app) => (
                                 <tr>
                                   <td>{app.dateOfApplication}</td>
                                   <td>{app.fpoId}</td>
@@ -448,7 +448,7 @@ const Samunnati_FPO_Loan = () => {
                             }}
                           >
                             {
-                              filteredFpoLoanWindowList.filter((app) => app.status == "pending").map((app) => {
+                              filteredFpoLoanWindowList.filter((app) => app.status === "pending").map((app) => {
                                 return (
                                   <tr>
                                     <td>{app.dateOfApplication}</td>

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import EditCropAdvisory from "./Modals/CropAdvisory/EditCropAdvisory";
-import AddCropAdvisory from "./Modals/CropAdvisory/AddCropAdvisory";
+// import EditCropAdvisory from "./Modals/CropAdvisory/EditCropAdvisory";
+// import AddCropAdvisory from "./Modals/CropAdvisory/AddCropAdvisory";
 import ReadMore from "./Modals/CropAdvisory/ReadMore";
 import axios from "axios";
 
-const CropAdvisory2 = () => {  
-  const [showModal, setShowModal] = useState(false)  
+const CropAdvisory2 = () => {
+  const [showModal, setShowModal] = useState(false)
   const [currentCA, setCurrentCA] = useState({})
   const [caList, setCaList] = useState([])
 

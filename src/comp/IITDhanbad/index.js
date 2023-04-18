@@ -1,9 +1,9 @@
 import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTone';
 import FileCopyOutlinedIcon from '@mui/icons-material/FileCopyOutlined';
-import ScienceTwoToneIcon from '@mui/icons-material/ScienceTwoTone';
 import HelpTwoToneIcon from '@mui/icons-material/HelpTwoTone';
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AppWrapper from "../Template/AppWrapper";
+import "./IITDhanbad.css";
 
 const list = [
   {

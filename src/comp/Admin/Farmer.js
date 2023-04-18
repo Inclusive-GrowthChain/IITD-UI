@@ -2,8 +2,6 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import AddFarmer from "./Modals/AddFarmer";
 
-import "./admin.css";
-
 const Farmer = () => {
   const [show, setShow] = useState(false)
 

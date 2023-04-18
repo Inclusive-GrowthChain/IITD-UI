@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
-import AddFpoStore from "./Modals/AddFpoStore";
 import EditFpoStore from "./Modals/EditFpoStore";
+import AddFpoStore from "./Modals/AddFpoStore";
 import axios from "axios";
-
-import "./Fpo.css";
 
 const Store = () => {
   const [showAdd, setShowAdd] = useState(false);

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import RepaymentStructure from "./Modals/FpoLoan/RepaymentStructure";
-import ApproveLoanApp from "./Modals/FpoLoan/ApproveLoanApp";
-import RejectLoanApp from "./Modals/FpoLoan/RejectLoanApp";
 import ConfirmLoanStatus from "./Modals/FpoLoan/ConfirmLoanStatus";
 import LoanApplication from "./Modals/FpoLoan/LoanApplication";
+import ApproveLoanApp from "./Modals/FpoLoan/ApproveLoanApp";
+import RejectLoanApp from "./Modals/FpoLoan/RejectLoanApp";
 import ConfirmBox from "./Modals/ConfirmBox";
 import Aadhar from "./Modals/Aadhar";
 import Pan from "./Modals/Pan";
@@ -19,7 +19,6 @@ function FpoLoanTab({ Comp }) {
   const [showConfirmBox, setShowConfirmBox] = useState(false)
   const [showPanCardImg, setShowPanCardImg] = useState(false)
   const [toggleStateList, setToggleStateList] = useState([])
-  const [fpoId, setFpoId] = useState(localStorage.getItem("userId"))
   const [loanWindowList, setLoanWindowList] = useState([])
   const [activeLoanWindow, setActiveLoanWindow] = useState({})
   const [step, setStep] = useState(0)
@@ -56,9 +55,9 @@ function FpoLoanTab({ Comp }) {
 
   const confirmLoan = async (e, reason) => {
     e.preventDefault()
-    if(reason) {
+    if (reason) {
       rejectLoan();
-    } 
+    }
     else {
       approveLoan();
     }
@@ -68,7 +67,7 @@ function FpoLoanTab({ Comp }) {
     const newLoan = {
       "fpoApprovalStatus": "approved"
     };
-    
+
     await axios
       .put(`http://13.232.131.203:3000/api/loanwindow/${activeLoanWindow.id}/loan/${currentLoan.id}/approval`, newLoan)
       .then((response) => {
@@ -86,7 +85,7 @@ function FpoLoanTab({ Comp }) {
       "fpoApprovalStatus": "rejected",
       "reason": reason
     };
-    
+
     await axios
       .put(`http://13.232.131.203:3000/api/loanwindow/${activeLoanWindow.id}/loan/${currentLoan.id}/approval`, newLoan)
       .then((response) => {
@@ -104,7 +103,7 @@ function FpoLoanTab({ Comp }) {
       try {
         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
         const response = await axios.get("http://13.232.131.203:3000/api/loanwindow?windowType=farmer");
-        const loanWindow = response.data.data.filter((item) => item.fpoId == fpoId);
+        const loanWindow = response.data.data.filter((item) => item.fpoId === localStorage.getItem("userId"));
         setLoanWindowList(loanWindow);
         setToggleStateList(Array(loanWindow.length).fill(1));
         setActiveLoanWindow(loanWindow.reduce((prev, current) => (prev.createdAt > current.createdAt) ? prev : current));
@@ -205,7 +204,7 @@ function FpoLoanTab({ Comp }) {
                       }}
                     >
                       {
-                        loanWindow.loans && loanWindow.loans.filter((loan) => loan.status == "approved").map((loan) => (
+                        loanWindow.loans && loanWindow.loans.filter((loan) => loan.status === "approved").map((loan) => (
                           <tr>
                             <td>{loan.createdAt && loan.createdAt.substring(0, 10)}</td>
                             <td>{loan.fpoApprovalAt && loan.fpoApprovalAt.substring(0, 10)}</td>
@@ -333,7 +332,7 @@ function FpoLoanTab({ Comp }) {
                       }}
                     >
                       {
-                        loanWindow.loans && loanWindow.loans.filter((loan) => loan.fpoApprovalStatus == "in-process").map((loan) => (
+                        loanWindow.loans && loanWindow.loans.filter((loan) => loan.fpoApprovalStatus === "in-process").map((loan) => (
                           <tr>
                             <td>{loan.loanId}</td>
                             <td>{loan.createdAt && loan.createdAt.substring(0, 10)}</td>

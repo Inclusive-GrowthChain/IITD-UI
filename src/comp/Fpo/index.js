@@ -4,9 +4,10 @@ import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTo
 import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
 import PaymentsTwoToneIcon from '@mui/icons-material/PaymentsTwoTone';
 import ScienceTwoToneIcon from '@mui/icons-material/ScienceTwoTone';
-import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
+// import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
 import HelpTwoToneIcon from '@mui/icons-material/HelpTwoTone';
 import AppWrapper from "../Template/AppWrapper";
+import "./Fpo.css";
 
 const list = [
   // {

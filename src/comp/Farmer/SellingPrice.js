@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import TabNavItem from "./Tabs/TabNavItem";
-import TabContent from "./Tabs/TabContent";
 import Button from "react-bootstrap/Button";
-import axios from "axios";
 
+import { TabNavItem, TabContent } from "../UIComp/Tabs";
 import SellProduce from "./Modals/SellingPrice/SellProduce";
-
-import "./Farmer.css";
+import axios from "axios";
 
 function SellingPrice() {
   const [activeTab, setActiveTab] = useState("tab1");

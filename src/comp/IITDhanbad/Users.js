@@ -1,14 +1,12 @@
-import react, { useState, useEffect } from 'react';
-import { Theme, useTheme } from '@mui/material/styles';
+import { useState, useEffect } from 'react';
+import { useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 
-import users from "./UsersList/Userlist";
-import { userTypes } from "./UsersList/Userlist";
-import "./IITDhanbad.css";
+import users, { userTypes } from "./UsersList/Userlist";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;

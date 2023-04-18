@@ -1,119 +1,119 @@
 import React, { useState, useEffect } from "react";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from 'react-router-dom';
-import TabNavItem from "./Tabs/TabNavItem";
-import TabContent from "./Tabs/TabContent";
+
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
+import { TabNavItem, TabContent } from "../UIComp/Tabs";
 import CompletedLoanApp from "./Modals/FarmerSubLoan/CompletedLoanApp";
-import PaymentProof from "./Modals/FpoSubLoan/PaymentProof";
 import OngoingLoanApp from "./Modals/FarmerSubLoan/OngoingLoanApp";
 import PendingLoanApp from "./Modals/FarmerSubLoan/PendingLoanApp";
-import Aadhar from "../Fpo/Modals/Aadhar";
-import Pan from "../Fpo/Modals/Pan";
-import ConfirmBox from "../Fpo/Modals/ConfirmBox";
 import ApproveLoanApp from "./Modals/FarmerSubLoan/ApproveLoanApp";
 import RejectLoanApp from "./Modals/FarmerSubLoan/RejectLoanApp";
-import ConfirmApprove from "./Modals/FarmerSubLoan/ConfirmApprove";
 import ConfirmReject from "./Modals/FarmerSubLoan/ConfirmReject";
+import PaymentProof from "./Modals/FpoSubLoan/PaymentProof";
+import ConfirmBox from "../Fpo/Modals/ConfirmBox";
+import Aadhar from "../Fpo/Modals/Aadhar";
+import Pan from "../Fpo/Modals/Pan";
 import axios from "axios";
 
-const completedLoanList = [
-  {
-    id: "L 1",
-    farmerID: "F 1",
-    farmerName: "Farmer 1",
-    farmerContact: "1234567890",
-    aadhar: "1234567890",
-    pan: "1234567890",
-    dateOfApp: "2021-10-10",
-    loanAmount: "100000",
-    transactionID: "T 1",
-    lastPaymentDate: "2022-10-10",
-  },
-  {
-    id: "L 2",
-    farmerID: "F 2",
-    farmerName: "Farmer 2",
-    farmerContact: "1234567890",
-    aadhar: "1234567890",
-    pan: "1234567890",
-    dateOfApp: "2021-10-10",
-    loanAmount: "100000",
-    transactionID: "T 2",
-    lastPaymentDate: "2022-10-10",
-  },
-  {
-    id: "L 3",
-    farmerID: "F 3",
-    farmerName: "Farmer 3",
-    farmerContact: "1234567890",
-    aadhar: "1234567890",
-    pan: "1234567890",
-    dateOfApp: "2021-10-10",
-    loanAmount: "100000",
-    transactionID: "T 3",
-    lastPaymentDate: "2022-10-10",
-  },
-  {
-    id: "L 4",
-    farmerID: "F 4",
-    farmerName: "Farmer 4",
-    farmerContact: "1234567890",
-    aadhar: "1234567890",
-    pan: "1234567890",
-    dateOfApp: "2021-10-10",
-    loanAmount: "100000",
-    transactionID: "T 4",
-    lastPaymentDate: "2022-10-10",
-  },
-];
+// const completedLoanList = [
+//   {
+//     id: "L 1",
+//     farmerID: "F 1",
+//     farmerName: "Farmer 1",
+//     farmerContact: "1234567890",
+//     aadhar: "1234567890",
+//     pan: "1234567890",
+//     dateOfApp: "2021-10-10",
+//     loanAmount: "100000",
+//     transactionID: "T 1",
+//     lastPaymentDate: "2022-10-10",
+//   },
+//   {
+//     id: "L 2",
+//     farmerID: "F 2",
+//     farmerName: "Farmer 2",
+//     farmerContact: "1234567890",
+//     aadhar: "1234567890",
+//     pan: "1234567890",
+//     dateOfApp: "2021-10-10",
+//     loanAmount: "100000",
+//     transactionID: "T 2",
+//     lastPaymentDate: "2022-10-10",
+//   },
+//   {
+//     id: "L 3",
+//     farmerID: "F 3",
+//     farmerName: "Farmer 3",
+//     farmerContact: "1234567890",
+//     aadhar: "1234567890",
+//     pan: "1234567890",
+//     dateOfApp: "2021-10-10",
+//     loanAmount: "100000",
+//     transactionID: "T 3",
+//     lastPaymentDate: "2022-10-10",
+//   },
+//   {
+//     id: "L 4",
+//     farmerID: "F 4",
+//     farmerName: "Farmer 4",
+//     farmerContact: "1234567890",
+//     aadhar: "1234567890",
+//     pan: "1234567890",
+//     dateOfApp: "2021-10-10",
+//     loanAmount: "100000",
+//     transactionID: "T 4",
+//     lastPaymentDate: "2022-10-10",
+//   },
+// ];
 
-const ongoingLoanList = [
-  {
-    id: "L 1",
-    farmerID: "F 1",
-    farmerName: "Farmer 1",
-    farmerContact: "1234567890",
-    aadhar: "1234567890",
-    pan: "1234567890",
-    dateOfApp: "2021-10-10",
-    loanAmount: "100000",
-    outstandingAmount: "90000",
-    nextPaymentAmount: "10000",
-    nextPaymentDate: "2021-10-10",
-    transactionID: "T 4",
-    tenure: "12",
-  },
-  {
-    id: "L 2",
-    farmerID: "F 2",
-    farmerName: "Farmer 2",
-    farmerContact: "1234567890",
-    aadhar: "1234567890",
-    pan: "1234567890",
-    dateOfApp: "2021-10-10",
-    loanAmount: "100000",
-    outstandingAmount: "90000",
-    nextPaymentAmount: "10000",
-    nextPaymentDate: "2021-10-10",
-    transactionID: "T 5",
-    tenure: "12",
-  },
-  {
-    id: "L 3",
-    farmerID: "F 3",
-    farmerName: "Farmer 3",
-    farmerContact: "1234567890",
-    aadhar: "1234567890",
-    pan: "1234567890",
-    dateOfApp: "2021-10-10",
-    loanAmount: "100000",
-    outstandingAmount: "90000",
-    nextPaymentAmount: "10000",
-    nextPaymentDate: "2021-10-10",
-    transactionID: "T 6",
-    tenure: "12",
-  },
-];
+// const ongoingLoanList = [
+//   {
+//     id: "L 1",
+//     farmerID: "F 1",
+//     farmerName: "Farmer 1",
+//     farmerContact: "1234567890",
+//     aadhar: "1234567890",
+//     pan: "1234567890",
+//     dateOfApp: "2021-10-10",
+//     loanAmount: "100000",
+//     outstandingAmount: "90000",
+//     nextPaymentAmount: "10000",
+//     nextPaymentDate: "2021-10-10",
+//     transactionID: "T 4",
+//     tenure: "12",
+//   },
+//   {
+//     id: "L 2",
+//     farmerID: "F 2",
+//     farmerName: "Farmer 2",
+//     farmerContact: "1234567890",
+//     aadhar: "1234567890",
+//     pan: "1234567890",
+//     dateOfApp: "2021-10-10",
+//     loanAmount: "100000",
+//     outstandingAmount: "90000",
+//     nextPaymentAmount: "10000",
+//     nextPaymentDate: "2021-10-10",
+//     transactionID: "T 5",
+//     tenure: "12",
+//   },
+//   {
+//     id: "L 3",
+//     farmerID: "F 3",
+//     farmerName: "Farmer 3",
+//     farmerContact: "1234567890",
+//     aadhar: "1234567890",
+//     pan: "1234567890",
+//     dateOfApp: "2021-10-10",
+//     loanAmount: "100000",
+//     outstandingAmount: "90000",
+//     nextPaymentAmount: "10000",
+//     nextPaymentDate: "2021-10-10",
+//     transactionID: "T 6",
+//     tenure: "12",
+//   },
+// ];
 
 const completedTransactionDetails = [
   {
@@ -229,102 +229,102 @@ const requestedTransactionDetails = [
   },
 ];
 
-const pendingLoanList = [
-  {
-    id: "L 1",
-    farmerID: "F 1",
-    farmerName: "Farmer1",
-    fpoName: "FPO 1",
-    bankName: "B 1",
-    accountNo: "1234567890",
-    ifsc: "1234567890",
-    branchName: "Br 1",
-    applicantName: "A 1",
-    requestedAmount: "100000",
-    applicantGender: "Male",
-    applicantMobile: "1234567890",
-    applicantDOB: "2021-10-10",
-    applicantAge: "20",
-    aadharNo: "1234567890",
-    panNo: "1234567890",
-    coApplicantName: "CA 1",
-    coApplicantGender: "Female",
-    coApplicantDOB: "2021-10-10",
-    coApplicantAge: "20",
-    relationWithApplicant: "RA 1",
-    applicantFatherName: "AF 1",
-    applicantMotherName: "AM 1",
-    doorNumber: "D 1",
-    streetName: "St 1",
-    village: "V 1",
-    taluk: "T 1",
-    district: "D 1",
-    state: "State 1",
-    pinCode: "123456",
-    occupation: "O 1",
-    education: "E 1",
-    nativePlace: "NP 1",
-    residence: "R 1",
-    landHolding: "LH 1",
-    typeOfLandHolding: "TLH 1",
-    caste: "C 1",
-    religion: "Rg 1",
-    monthlyHHIncome: "100000",
-    monthlyHHExpenses: "100000",
-    loanPurpose: "LP 1",
-    loanTenure: "12",
-    contact: "1234567890",
-    dateOfApp: "2021-10-10",
-    loanInterest: "12",
-  },
-  {
-    id: "L 2",
-    farmerID: "F 2",
-    farmerName: "Farmer2",
-    fpoName: "FPO 2",
-    bankName: "B 2",
-    accountNo: "1234567890",
-    ifsc: "1234567890",
-    branchName: "Br 2",
-    applicantName: "A 2",
-    requestedAmount: "100000",
-    applicantGender: "Female",
-    applicantMobile: "1234567890",
-    applicantDOB: "2021-10-10",
-    applicantAge: "20",
-    aadharNo: "1234567890",
-    panNo: "1234567890",
-    coApplicantName: "CA 2",
-    coApplicantGender: "Male",
-    coApplicantDOB: "2021-10-10",
-    coApplicantAge: "20",
-    relationWithApplicant: "RA 2",
-    applicantFatherName: "AF 2",
-    applicantMotherName: "AM 2",
-    doorNumber: "D 2",
-    streetName: "St 2",
-    village: "V 2",
-    taluk: "T 2",
-    district: "D 2",
-    state: "State 2",
-    pinCode: "123456",
-    occupation: "O 2",
-    education: "E 2",
-    nativePlace: "NP 2",
-    residence: "R 2",
-    landHolding: "LH 2",
-    typeOfLandHolding: "TLH 2",
-    caste: "C 2",
-    religion: "Rg 2",
-    monthlyHHIncome: "100000",
-    monthlyHHExpenses: "100000",
-    loanPurpose: "LP 2",
-    loanTenure: "12",
-    contact: "1234567890",
-    dateOfApp: "2021-10-10",
-    loanInterest: "12",
-  },
-];
+// const pendingLoanList = [
+//   {
+//     id: "L 1",
+//     farmerID: "F 1",
+//     farmerName: "Farmer1",
+//     fpoName: "FPO 1",
+//     bankName: "B 1",
+//     accountNo: "1234567890",
+//     ifsc: "1234567890",
+//     branchName: "Br 1",
+//     applicantName: "A 1",
+//     requestedAmount: "100000",
+//     applicantGender: "Male",
+//     applicantMobile: "1234567890",
+//     applicantDOB: "2021-10-10",
+//     applicantAge: "20",
+//     aadharNo: "1234567890",
+//     panNo: "1234567890",
+//     coApplicantName: "CA 1",
+//     coApplicantGender: "Female",
+//     coApplicantDOB: "2021-10-10",
+//     coApplicantAge: "20",
+//     relationWithApplicant: "RA 1",
+//     applicantFatherName: "AF 1",
+//     applicantMotherName: "AM 1",
+//     doorNumber: "D 1",
+//     streetName: "St 1",
+//     village: "V 1",
+//     taluk: "T 1",
+//     district: "D 1",
+//     state: "State 1",
+//     pinCode: "123456",
+//     occupation: "O 1",
+//     education: "E 1",
+//     nativePlace: "NP 1",
+//     residence: "R 1",
+//     landHolding: "LH 1",
+//     typeOfLandHolding: "TLH 1",
+//     caste: "C 1",
+//     religion: "Rg 1",
+//     monthlyHHIncome: "100000",
+//     monthlyHHExpenses: "100000",
+//     loanPurpose: "LP 1",
+//     loanTenure: "12",
+//     contact: "1234567890",
+//     dateOfApp: "2021-10-10",
+//     loanInterest: "12",
+//   },
+//   {
+//     id: "L 2",
+//     farmerID: "F 2",
+//     farmerName: "Farmer2",
+//     fpoName: "FPO 2",
+//     bankName: "B 2",
+//     accountNo: "1234567890",
+//     ifsc: "1234567890",
+//     branchName: "Br 2",
+//     applicantName: "A 2",
+//     requestedAmount: "100000",
+//     applicantGender: "Female",
+//     applicantMobile: "1234567890",
+//     applicantDOB: "2021-10-10",
+//     applicantAge: "20",
+//     aadharNo: "1234567890",
+//     panNo: "1234567890",
+//     coApplicantName: "CA 2",
+//     coApplicantGender: "Male",
+//     coApplicantDOB: "2021-10-10",
+//     coApplicantAge: "20",
+//     relationWithApplicant: "RA 2",
+//     applicantFatherName: "AF 2",
+//     applicantMotherName: "AM 2",
+//     doorNumber: "D 2",
+//     streetName: "St 2",
+//     village: "V 2",
+//     taluk: "T 2",
+//     district: "D 2",
+//     state: "State 2",
+//     pinCode: "123456",
+//     occupation: "O 2",
+//     education: "E 2",
+//     nativePlace: "NP 2",
+//     residence: "R 2",
+//     landHolding: "LH 2",
+//     typeOfLandHolding: "TLH 2",
+//     caste: "C 2",
+//     religion: "Rg 2",
+//     monthlyHHIncome: "100000",
+//     monthlyHHExpenses: "100000",
+//     loanPurpose: "LP 2",
+//     loanTenure: "12",
+//     contact: "1234567890",
+//     dateOfApp: "2021-10-10",
+//     loanInterest: "12",
+//   },
+// ];
 
 const Sammunati_Farmer_SubLoan_Page = () => {
   const [currentLoan, setCurrentLoan] = useState({});
@@ -343,10 +343,8 @@ const Sammunati_Farmer_SubLoan_Page = () => {
   const [showConfirmReject, setShowConfirmReject] = useState(false);
   const [showAadharCardImg, setShowAadharCardImg] = useState(false);
   const [showPanCardImg, setShowPanCardImg] = useState(false);
-  // const [fpoId] = useState(localStorage.getItem("fpoId"));
   const [activeTab, setActiveTab] = useState("tab1");
   const [loanWindow, setLoanWindow] = useState([]);
-  const [loanWindowId, setLoanWindowId] = useState(localStorage.getItem("loanWindowId"));
 
   const handleCloseApproveForm = () => setShowApproveForm(false);
   const handleCloseRejectForm = () => setShowRejectForm(false);
@@ -424,7 +422,7 @@ const Sammunati_Farmer_SubLoan_Page = () => {
       try {
         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
         const response = await axios.get("http://13.232.131.203:3000/api/loanwindow?windowType=farmer");
-        const loanWindow = response.data.data.filter((item) => item.id == loanWindowId)[0];
+        const loanWindow = response.data.data.filter((item) => item.id === localStorage.getItem("loanWindowId"))[0];
         setLoanWindow(loanWindow);
       } catch (error) {
         console.log(error);
@@ -620,7 +618,7 @@ const Sammunati_Farmer_SubLoan_Page = () => {
                                   }}
                                 >
                                   {
-                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.status == "completed").map((loan, i) => (
+                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.status === "completed").map((loan, i) => (
                                       <tr>
                                         <td>{loan.loanId}</td>
                                         <td>Farmer-{i}</td>
@@ -701,7 +699,7 @@ const Sammunati_Farmer_SubLoan_Page = () => {
                                   }}
                                 >
                                   {
-                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.status == "approved").map((loan, i) => {
+                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.status === "approved").map((loan, i) => {
                                       return (
                                         <tr>
                                           <td>{loan.loanId}</td>
@@ -763,7 +761,7 @@ const Sammunati_Farmer_SubLoan_Page = () => {
                                   }}
                                 >
                                   {
-                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.fpoApprovalStatus == "approved" && loan.status == "in-process").map((loan, i) => {
+                                    loanWindow.loans && loanWindow.loans.filter((loan) => loan.fpoApprovalStatus === "approved" && loan.status === "in-process").map((loan, i) => {
                                       return (
                                         <tr>
                                           <td>{loan.loanId}</td>

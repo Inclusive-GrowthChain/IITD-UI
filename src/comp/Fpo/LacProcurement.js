@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
-import AddLacProcurement from "./Modals/AddLacProcurement";
 import EditLacProcurement from "./Modals/EditLacProcurement";
+import AddLacProcurement from "./Modals/AddLacProcurement";
 import axios from "axios";
 
 const LacProcurement = () => {
