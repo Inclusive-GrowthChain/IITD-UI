@@ -15,8 +15,14 @@ const endPoints = {
   // Nisa
   nisa: {
     cropAdvisory: "/nisa/crop-advisory",
+    lactTest2: "/nisa/lactest",
     lactTest: "/nisa/lac-test",
     training: "/nisa/traning",
+  },
+
+  // Farmer
+  farmer: {
+
   },
 }
 

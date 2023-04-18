@@ -1,19 +1,20 @@
 import Modal from "react-bootstrap/Modal";
-import logo from "../../../../assets/img/logo.png";
+import logo from "../../assets/img/logo.png";
 
-function Certificate({ showCertificateImg, handleCloseCertificateImg }) {
+function DocImg({ title = "", show, handleClose }) {
   return (
     <Modal
-      show={showCertificateImg}
-      onHide={handleCloseCertificateImg}
+      show={show}
+      onHide={handleClose}
     >
       <Modal.Header closeButton>
-        Certificate Image
+        {title}
       </Modal.Header>
+
       <Modal.Body>
         <img
           src={logo}
-          alt="Certificate"
+          alt={title}
           style={{ width: "100%", height: "100%" }}
         />
       </Modal.Body>
@@ -21,4 +22,4 @@ function Certificate({ showCertificateImg, handleCloseCertificateImg }) {
   )
 }
 
-export default Certificate
+export default DocImg

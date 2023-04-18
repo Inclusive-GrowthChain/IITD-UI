@@ -4,6 +4,7 @@ import ScienceTwoToneIcon from '@mui/icons-material/ScienceTwoTone';
 import HelpTwoToneIcon from '@mui/icons-material/HelpTwoTone';
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AppWrapper from "../Template/AppWrapper";
+import "./Nisa.css";
 
 const list = [
   {

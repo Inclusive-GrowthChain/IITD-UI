@@ -11,8 +11,6 @@ import ViewCADescription from "./Modals/ViewCADescription";
 import Loader from "../Common/Loader";
 import AddCA from "./Modals/AddCA";
 
-import "./Nisa.css";
-
 const CropAdvisory = () => {
   const [modal, setModal] = useState({ state: false, data: {} })
 

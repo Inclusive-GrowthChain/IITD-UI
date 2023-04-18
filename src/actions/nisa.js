@@ -7,6 +7,20 @@ export function getLacTest() {
   })
 }
 
+export function getLacTest2() {
+  return sendApiReq({
+    url: endPoints.nisa.lactTest2,
+  })
+}
+
+export function addLacTest(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.nisa.lactTest,
+    data
+  })
+}
+
 export function getCropAdvisory() {
   return sendApiReq({
     url: endPoints.nisa.cropAdvisory,

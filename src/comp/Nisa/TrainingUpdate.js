@@ -9,8 +9,6 @@ import { getTraining } from "../../actions/nisa";
 import AddTraing from "./Modals/AddTraing";
 import Loader from "../Common/Loader";
 
-import "./Nisa.css";
-
 const TrainingUpdate = () => {
   const [modal, setModal] = useState({ state: false, data: {} })
 

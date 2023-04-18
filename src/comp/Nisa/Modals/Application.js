@@ -1,18 +1,21 @@
+import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import logo from "../../../../assets/img/logo.png";
+import logo from "../../../assets/img/logo.png";
 
-function Application({ currentApp, showApp, showFirstAppForm, setShowFirstAppForm, handleCloseApp }) {
+function Application({ show, data, handleClose }) {
+  const [showFirstAppForm, setShowFirstAppForm] = useState(true)
+
   return (
     <Modal
-      show={showApp}
-      onHide={handleCloseApp}
+      show={show}
+      onHide={handleClose}
     >
       <Modal.Header closeButton>
         Application
       </Modal.Header>
 
       <Modal.Body>
-        <div className="row ">
+        <div className="row">
           <div className="col">
             {showFirstAppForm && (
               <form>
@@ -26,7 +29,7 @@ function Application({ currentApp, showApp, showFirstAppForm, setShowFirstAppFor
                         <input
                           type="text"
                           className="form-control"
-                          value={currentApp.fpoName}
+                          value={data.fpoName}
                           disabled
                         />
                       </div>
@@ -39,7 +42,7 @@ function Application({ currentApp, showApp, showFirstAppForm, setShowFirstAppFor
                         <input
                           type="text"
                           className="form-control"
-                          value={currentApp.fpoContact}
+                          value={data.fpoContact}
                           disabled
                         />
                       </div>
@@ -52,7 +55,7 @@ function Application({ currentApp, showApp, showFirstAppForm, setShowFirstAppFor
                         <input
                           type="text"
                           className="form-control"
-                          value={currentApp.sampleId}
+                          value={data.sampleId}
                           disabled
                         />
                       </div>
@@ -67,7 +70,7 @@ function Application({ currentApp, showApp, showFirstAppForm, setShowFirstAppFor
                         <input
                           type="text"
                           className="form-control"
-                          value={currentApp.dateOfApplication}
+                          value={data.dateOfApplication}
                           disabled
                         />
                       </div>
@@ -80,7 +83,7 @@ function Application({ currentApp, showApp, showFirstAppForm, setShowFirstAppFor
                         <input
                           type="text"
                           className="form-control"
-                          value={currentApp.category}
+                          value={data.category}
                           disabled
                         />
                       </div>
@@ -93,7 +96,7 @@ function Application({ currentApp, showApp, showFirstAppForm, setShowFirstAppFor
                         <input
                           type="text"
                           className="form-control"
-                          value={currentApp.testName}
+                          value={data.testName}
                           disabled
                         />
                       </div>
@@ -106,7 +109,7 @@ function Application({ currentApp, showApp, showFirstAppForm, setShowFirstAppFor
                         <input
                           type="text"
                           className="form-control"
-                          value={currentApp.amount}
+                          value={data.amount}
                           disabled
                         />
                       </div>
@@ -119,7 +122,7 @@ function Application({ currentApp, showApp, showFirstAppForm, setShowFirstAppFor
                         <input
                           type="text"
                           className="form-control"
-                          value={currentApp.paymentRefNo}
+                          value={data.paymentRefNo}
                           disabled
                         />
                       </div>
@@ -162,7 +165,7 @@ function Application({ currentApp, showApp, showFirstAppForm, setShowFirstAppFor
                         <input
                           type="text"
                           className="form-control"
-                          value={currentApp.remarks}
+                          value={data.remarks}
                           disabled
                         />
                       </div>
@@ -185,6 +188,7 @@ function Application({ currentApp, showApp, showFirstAppForm, setShowFirstAppFor
                 </div>
               </form>
             )}
+
             {!showFirstAppForm && (
               <form>
                 <div className="form">

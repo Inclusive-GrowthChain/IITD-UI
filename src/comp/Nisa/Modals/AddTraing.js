@@ -5,7 +5,8 @@ import { Modal } from "react-bootstrap";
 import { errorNotify } from "../../../utils/toastifyHlp";
 import { addTraining, editTraining } from "../../../actions/nisa";
 
-const errStyle = { fontSize: "12px", margin: 0 }
+import Input, { errStyle } from './Input';
+
 const textAreaStyle = { resize: "none", height: "150px" }
 
 const list = [
@@ -43,36 +44,6 @@ const list = [
     type: "number",
   },
 ]
-
-function Input({
-  label = "", name = "",
-  type = "text", disabled = false,
-  register, errors,
-}) {
-  return (
-    <div className="row m-2">
-      <div className="col-lg-6">
-        <label>{label}</label>
-      </div>
-      <div className="col-lg-6">
-        <input
-          className="form-control"
-          type={type}
-          {...register(name, {
-            required: `${label} is required`
-          })}
-          disabled={disabled}
-        />
-        {
-          errors[name] &&
-          <p className="text-danger" style={errStyle}>
-            {errors[name].message}
-          </p>
-        }
-      </div>
-    </div>
-  )
-}
 
 function AddTraing({ data, show, isEdit, handleClose }) {
   const queryClient = useQueryClient()
