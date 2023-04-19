@@ -1,14 +1,7 @@
-import { useState, useEffect } from "react";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-// import EditCropAdvisory from "./Modals/CropAdvisory/EditCropAdvisory";
-// import AddCropAdvisory from "./Modals/CropAdvisory/AddCropAdvisory";
-import axios from "axios";
-
 import { useQuery } from "@tanstack/react-query";
-
 import { getCropAdvisory } from "../../actions/nisa";
 import useModal from "../../hooks/useModal";
-
 import ReadMore from "./Modals/CropAdvisory/ReadMore";
 import Loader from "../Common/Loader";
 
