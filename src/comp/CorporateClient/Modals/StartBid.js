@@ -5,7 +5,33 @@ import Modal from "react-bootstrap/Modal";
 import axios from 'axios';
 import ConfirmOrder from './ConfirmOrder';
 
-function StartBid({ showStartBid, handleCloseStartBid }) {
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { Modal } from "react-bootstrap";
+
+import { addCropAdvisory, editCropAdvisory } from '../../../actions/nisa';
+
+const errStyle = { fontSize: "12px", margin: 0 }
+const textAreaStyle = { resize: "none", height: "150px" }
+
+function StartBid({ data, show, handleClose }) {
+  const queryClient = useQueryClient()
+  const { bid, formState: { errors }, handleSubmit, reset } = useForm({
+    defaultValues: {
+      multiSelectReportName: [],
+      bidId: "B1234",
+      lacStrainType: "",
+      sourceOfTree: "",
+      origin: "",
+      seedlacContent: "",
+      freshResinContent: "",
+      quantity: 0,
+      dateOfSupply: "",
+      endDateForBidding: "",
+      remarks: "",
+    }
+  })
+
   const [multiSelectReportName, setMultiSelectReportName] = useState([])
   const [bidId, setBidId] = useState("B1234")
   const [lacStrainType, setLacStrainType] = useState("")
@@ -97,8 +123,8 @@ function StartBid({ showStartBid, handleCloseStartBid }) {
 
   return (
     <Modal
-      show={showStartBid}
-      onHide={handleCloseStartBid}
+      show={show}
+      onHide={handleClose}
     >
       <Modal.Header closeButton>Start Bid</Modal.Header>
       <Modal.Body>
