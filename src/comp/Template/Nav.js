@@ -1,17 +1,20 @@
 import { Link, useNavigate } from "react-router-dom";
-import DropdownButton from "react-bootstrap/DropdownButton";
+import { DropdownButton, Dropdown } from "react-bootstrap";
+
+import { useAuthStore } from "../../store/useAuthStore";
+
 import PersonIcon from "@mui/icons-material/Person";
-import Dropdown from "react-bootstrap/Dropdown";
 import logo from "../../assets/img/logo.png";
-import { useState } from "react";
 
 function Nav({ title, toggleSidebar }) {
   const navigate = useNavigate();
+  const logOut = useAuthStore(s => s.logOut)
 
   const logout = e => {
     e.preventDefault()
     localStorage.clear()
     sessionStorage.clear()
+    logOut()
     navigate("/")
   }
 
@@ -22,7 +25,7 @@ function Nav({ title, toggleSidebar }) {
         <div className="hamburger_menu_line"></div>
         <div className="hamburger_menu_line"></div>
       </div>
-      
+
       <div className="logo_img">
         <img src={logo} alt="logo" style={{ width: "35px", height: "35px" }} />
         <span>{title}</span>

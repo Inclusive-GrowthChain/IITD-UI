@@ -8,6 +8,7 @@ import PersonSharpIcon from "@mui/icons-material/PersonSharp";
 import LockSharpIcon from "@mui/icons-material/LockSharp";
 
 import { login, setTokenToApp } from "../../../actions/auth";
+import { useAuthStore } from "../../../store/useAuthStore";
 
 const navigationList = {
   fpo: "farmer",
@@ -46,6 +47,7 @@ function Form() {
     },
   })
 
+  const logIn = useAuthStore(s => s.logIn)
   const navigate = useNavigate()
 
   const { mutate } = useMutation({
@@ -54,8 +56,9 @@ function Form() {
       localStorage.setItem("access_token", data.token)
       localStorage.setItem("userId", data.data._id)
       setTokenToApp(data.token)
+      logIn(data.data)
       let to = navigationList[data.data.type]
-      if(data.data.type === "lendingpartner") {
+      if (data.data.type === "lendingpartner") {
         to = navigationList["samunnati"]
         navigate(`/samunnati/${to}`)
         return

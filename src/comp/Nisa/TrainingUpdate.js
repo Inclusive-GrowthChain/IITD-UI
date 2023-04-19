@@ -1,24 +1,21 @@
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Button from "react-bootstrap/Button";
 
 import EditIcon from '@mui/icons-material/Edit';
 
 import { getTraining } from "../../actions/nisa";
+import useModal from "../../hooks/useModal";
 
 import AddTraing from "./Modals/AddTraing";
 import Loader from "../Common/Loader";
 
 const TrainingUpdate = () => {
-  const [modal, setModal] = useState({ state: false, data: {} })
+  const { modal, updateModal, closeModal } = useModal()
 
   const { isLoading, data } = useQuery({
     queryKey: ["nisa/traning"],
     queryFn: getTraining
   })
-
-  const updateModal = (state, val) => setModal({ state, data: val })
-  const closeModal = () => setModal({ state: "", data: {} })
 
   if (isLoading) return <Loader wrapperCls="loader-main-right" />
 

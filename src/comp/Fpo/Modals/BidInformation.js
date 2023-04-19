@@ -1,9 +1,13 @@
 import Modal from "react-bootstrap/Modal";
 
-function BidInformation({ showStartBid, handleCloseStartBid, bid }) {
+function BidInformation({ show, handleClose, bid }) {
   return (
-    <Modal show={showStartBid} onHide={handleCloseStartBid}>
+    <Modal
+      show={show}
+      onHide={handleClose}
+    >
       <Modal.Header closeButton>Bid Information</Modal.Header>
+
       <Modal.Body>
         <div className="row">
           <div className="col">

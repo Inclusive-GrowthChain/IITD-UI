@@ -1,25 +1,36 @@
 import Modal from "react-bootstrap/Modal";
 import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
 
-function BidConfirm({ showConfirmBox, handleCloseConfirmBox, placeBid }) {
+const modalBodyStyle = {
+  position: "absolute",
+  top: "4rem",
+  left: "6rem",
+  width: "60%",
+  height: "150px",
+  timer: "1500",
+  backgroundColor: "#e9ecef",
+  color: "#000",
+  textAlign: "center",
+}
+
+const btnStyle = {
+  backgroundColor: "#064420",
+  alignItems: "center",
+  borderRadius: "5px",
+  border: "none",
+  padding: "0.25rem 1rem",
+  color: "#fff",
+}
+
+function BidConfirm({ show, handleClose }) {
   return (
     <Modal
-      show={showConfirmBox}
-      onHide={handleCloseConfirmBox}
+      show={show}
+      onHide={handleClose}
     >
       <Modal.Body
         closeButton
-        style={{
-          position: "absolute",
-          top: "4rem",
-          left: "6rem",
-          width: "60%",
-          height: "150px",
-          timer: "1500",
-          backgroundColor: "#e9ecef",
-          color: "#000",
-          textAlign: "center",
-        }}
+        style={modalBodyStyle}
       >
         <div
           style={{
@@ -28,19 +39,14 @@ function BidConfirm({ showConfirmBox, handleCloseConfirmBox, placeBid }) {
           }}
         >
           <CheckCircleTwoToneIcon />
+
           <p className="text-center">
             Are you confirm this order!
           </p>
+
           <button
-            style={{
-              backgroundColor: "#064420",
-              alignItems: "center",
-              borderRadius: "5px",
-              border: "none",
-              padding: "0.25rem 1rem",
-              color: "#fff",
-            }}
-            onClick={placeBid}
+            style={btnStyle}
+            onClick={handleClose}
           >
             Confirm
           </button>

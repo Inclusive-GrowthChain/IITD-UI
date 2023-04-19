@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQueries } from "@tanstack/react-query";
 
 import { getLacTest, getLacTest2 } from "../../../actions/nisa";
+import useModal from "../../../hooks/useModal";
 
 import { TabNavItem, TabContent } from "../../UIComp/Tabs";
 import Application from "../Modals/Application";
@@ -31,8 +32,9 @@ const h3Style = {
 }
 
 const LabTesting = () => {
-  const [modal, setModal] = useState({ state: false, data: {} })
   const [activeTab, setActiveTab] = useState("tab1")
+
+  const { modal, updateModal, closeModal } = useModal()
 
   const [
     { isLoading: isLoading1, data: testList, },
@@ -49,9 +51,6 @@ const LabTesting = () => {
       }
     ]
   })
-
-  const updateModal = (state, val = {}) => setModal({ state, data: val })
-  const closeModal = () => setModal({ state: "", data: {} })
 
   if (isLoading1 || isLoading2) return <Loader wrapperCls="loader-main-right" />
 

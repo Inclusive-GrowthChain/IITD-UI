@@ -2,7 +2,7 @@ import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import { useState } from "react";
 
-function PlaceBid({ showBid, handleCloseBid, bid }) {
+function PlaceBid({ show, handleClose, bid }) {
   const [bidAmount, setBidAmount] = useState(0);
 
   const resetInputs = () => {
@@ -32,8 +32,8 @@ function PlaceBid({ showBid, handleCloseBid, bid }) {
 
   return (
     <Modal
-      show={showBid}
-      onHide={handleCloseBid}
+      show={show}
+      onHide={handleClose}
     >
       <Modal.Header closeButton>
         Place a Bid

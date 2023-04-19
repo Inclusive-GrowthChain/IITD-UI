@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Button from "react-bootstrap/Button";
 
@@ -6,21 +5,18 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { getCropAdvisory } from "../../actions/nisa";
+import useModal from "../../hooks/useModal";
 
 import ViewCADescription from "./Modals/ViewCADescription";
 import Loader from "../Common/Loader";
 import AddCA from "./Modals/AddCA";
 
 const CropAdvisory = () => {
-  const [modal, setModal] = useState({ state: false, data: {} })
-
+  const { modal, updateModal, closeModal } = useModal()
   const { isLoading, data } = useQuery({
     queryKey: ["nisa/crop-advisory"],
     queryFn: getCropAdvisory
   })
-
-  const updateModal = (state, val) => setModal({ state, data: val })
-  const closeModal = () => setModal({ state: "", data: {} })
 
   if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
@@ -114,11 +110,14 @@ const CropAdvisory = () => {
         </div>
       </div>
 
-      <ViewCADescription
-        show={modal.state === "readMore"}
-        data={modal.data}
-        handleClose={closeModal}
-      />
+      {
+        modal.state === "readMore" &&
+        <ViewCADescription
+          show
+          data={modal.data}
+          handleClose={closeModal}
+        />
+      }
 
       {
         (modal.state === "add" || modal.state === "edit") &&

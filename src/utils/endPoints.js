@@ -11,6 +11,7 @@ const endPoints = {
   farmerSignup: "/signup/farmer",
 
   uploadImg: '/document',
+  auction: "/auction",
 
   // Nisa
   nisa: {
@@ -22,6 +23,11 @@ const endPoints = {
 
   // Farmer
   farmer: {
+
+  },
+
+  // Fpo
+  fpo: {
 
   },
 }

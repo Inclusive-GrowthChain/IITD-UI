@@ -1,17 +1,28 @@
+import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+
 import ProgressBar from "../ProgressBar/ProgressBar";
-import PageOne from "../ProgressPage/PageOne";
-import PageTwo from "../ProgressPage/PageTwo";
 import PageThree from "../ProgressPage/PageThree";
 import PageFour from "../ProgressPage/PageFour";
+import PageOne from "../ProgressPage/PageOne";
+import PageTwo from "../ProgressPage/PageTwo";
 
-function BidStatus({ showCustomer, handleCloseCustomer, page, labelArray, currentStep, updateStep, canEdit, nextPage, bid }) {
+function BidStatus({
+  show, handleClose,
+  labelArray, canEdit, bid
+}) {
+  const [currentStep, setCurrentStep] = useState(1)
+  const [page, setPage] = useState("pageone")
+
+  const updateStep = (step) => setCurrentStep(step)
+  const nextPage = (page) => setPage(page)
+
   return (
     <Modal
       className="progressModal"
       size="lg"
-      show={showCustomer}
-      onHide={handleCloseCustomer}
+      show={show}
+      onHide={handleClose}
       style={{ height: "100%" }}
     >
       <Modal.Header closeButton>
