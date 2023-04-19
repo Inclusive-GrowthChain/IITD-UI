@@ -12,6 +12,11 @@ const endPoints = {
 
   uploadImg: '/document',
 
+  // Corporate Client
+  corporateClient: {
+    lacBidding: "/auction",
+  },
+
   // Nisa
   nisa: {
     cropAdvisory: "/nisa/crop-advisory",

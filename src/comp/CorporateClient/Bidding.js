@@ -1,134 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
-import axios from "axios";
 
 import { TabNavItem, TabContent } from "../UIComp/Tabs";
-import BidStatus2 from "./Modals/BidStatus2";
 import BidStatus from "./Modals/BidStatus";
 import StartBid from "./Modals/StartBid";
 
+import { useQuery } from "@tanstack/react-query";
+import { getBidding } from "../../actions/corporateClient";
+
+import Loader from "../Common/Loader";
+
 import "./CorporateClient.css";
 
-const purchaseHistory = [
-  {
-    fpoID: "FPO123456",
-    bidID: "B111111",
-    fpoName: "FPO 1",
-    lacStrainType: "Kusmi",
-    treeSource: "Kusum",
-    origin: "Jharkhand",
-    seedlacContent: 100,
-    freshResinContent: 100,
-    quantity: 200,
-    supplyDate: "2021-10-10",
-    amount: 10000,
-  },
-  {
-    fpoID: "FPO222222",
-    bidID: "B222222",
-    fpoName: "FPO 2",
-    lacStrainType: "Rangeeni",
-    treeSource: "Kusum",
-    origin: "Chattisgarh",
-    seedlacContent: 100,
-    freshResinContent: 100,
-    quantity: 200,
-    supplyDate: "2021-10-10",
-    amount: 20000,
-  },
-  {
-    fpoID: "FPO333333",
-    bidID: "B333333",
-    fpoName: "FPO 3",
-    lacStrainType: "Kusmi",
-    treeSource: "Palash",
-    origin: "Jharkhand",
-    seedlacContent: 100,
-    freshResinContent: 100,
-    quantity: 200,
-    supplyDate: "2021-10-10",
-    amount: 10000,
-  },
-  {
-    fpoID: "FPO444444",
-    bidID: "B444444",
-    fpoName: "FPO 4",
-    lacStrainType: "Kusmi",
-    treeSource: "Ber",
-    origin: "Mednapore",
-    seedlacContent: 100,
-    freshResinContent: 100,
-    quantity: 200,
-    supplyDate: "2021-10-10",
-    amount: 15000,
-  },
-  {
-    fpoID: "FPO555555",
-    bidID: "B555555",
-    fpoName: "FPO 5",
-    lacStrainType: "Rangeeni",
-    treeSource: "Kusum",
-    origin: "MP",
-    seedlacContent: 100,
-    freshResinContent: 100,
-    quantity: 200,
-    supplyDate: "2021-10-10",
-    amount: 20000,
-  },
-  {
-    fpoID: "FPO666666",
-    bidID: "B666666",
-    fpoName: "FPO 6",
-    lacStrainType: "Kusmi",
-    treeSource: "Kusum",
-    origin: "MP",
-    seedlacContent: 100,
-    freshResinContent: 100,
-    quantity: 200,
-    supplyDate: "2021-10-10",
-    amount: 10000,
-  },
-]
-
 const Bidding = () => {
-  const [showBidStatus, setShowBidStatus] = useState(false)
-  const [showStartBid, setShowStartBid] = useState(false)
-  const [showCustomer, setShowCustomer] = useState(false)
-  const [currentBid, setCurrentBid] = useState({})
-  const [activeTab, setActiveTab] = useState("tab1")
-  const [currentStep, updateCurrentStep] = useState(1)
-  const [page2, setPage2] = useState("pageone")
-  const [page, setPage] = useState("pageone")
-  const [bidList, setBidList] = useState([]);
+  const [modal, setModal] = useState({ state: false, data: {} })
+  const [activeTab, setActiveTab] = useState("tab1");
+  const [page, setPage] = useState(1);
 
-  const handleShowStartBid = () => setShowStartBid(true)
-  const handleCloseStartBid = () => setShowStartBid(false)
-  const handleShowBidStatus = () => setShowBidStatus(true)
-  const handleCloseCustomer = () => setShowCustomer(false)
-  const nextPage = (p) => setPage(p)
-  const nextPage2 = (p) => {
-    console.log(p)
-    setPage2(p)
-  }
-  const updateStep = (step) => updateCurrentStep(step)
+  const nextPage = (p) => setPage(p);
 
-  const handleCloseBidStatus = () => {
-    setShowBidStatus(false)
-    setPage("pageone")
-  }
+  const { isLoading, data } = useQuery({
+    queryKey: ["corporateClient/lac-bidding"],
+    queryFn: getBidding
+  })
 
-  useEffect(() => {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
-    axios
-      .get("http://13.232.131.203:3000/api/auction")
-      .then((response) => {
-        console.log(response.data.data);
-        setBidList(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  const updateModal = (state, val) => setModal({ state, data: val })
+  const closeModal = () => setModal({ state: "", data: {} })
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <>
@@ -163,7 +62,7 @@ const Bidding = () => {
                   border: "none",
                   width: "fit-content",
                 }}
-                onClick={handleShowStartBid}
+                onClick={() => updateModal("startBid", {})}
               >
                 Start Bid
               </Button>
@@ -214,7 +113,7 @@ const Bidding = () => {
                                 fontWeight: "500",
                               }}
                             >
-                              {bidList.filter((bid) => bid.status == "on-going").map((bid) => (
+                              {data.data.filter((bid) => bid.status == "on-going").map((bid) => (
                                 <tr>
                                   <td>{bid.bidId}</td>
                                   <td>{bid.startDate}</td>
@@ -232,10 +131,11 @@ const Bidding = () => {
                                         fontSize: ".75rem",
                                         lineHeight: "1rem",
                                       }}
-                                      onClick={() => {
-                                        setCurrentBid(bid);
-                                        handleShowBidStatus();
-                                      }}
+                                      onClick={() => updateModal("bidStatus", bid)}
+                                      // onClick={() => {
+                                      //   setCurrentBid(bid);
+                                      //   handleShowBidStatus();
+                                      // }}
                                     >
                                       view
                                     </button>
@@ -287,7 +187,7 @@ const Bidding = () => {
                               }}
                             >
                               {
-                                bidList.map((bid) => (
+                                data.data.map((bid) => (
                                   <tr>
                                     <td>{bid.bidId}</td>
                                     <td>{bid.fpoID}</td>
@@ -301,10 +201,11 @@ const Bidding = () => {
                                     <td>{bid.bidAmount}</td>
                                     <td>
                                       <button
-                                        onClick={() => {
-                                          setCurrentBid(bid);
-                                          setShowBidStatus(true);
-                                        }}
+                                        onClick={() => updateModal("bidStatus", bid)}
+                                        // onClick={() => {
+                                        //   setCurrentBid(bid);
+                                        //   setShowBidStatus(true);
+                                        // }}
                                         style={{
                                           backgroundColor: "#064420",
                                           color: "#fff",
@@ -331,17 +232,21 @@ const Bidding = () => {
       </div>
 
       <StartBid
-        showStartBid={showStartBid}
-        handleCloseStartBid={handleCloseStartBid}
+        show={modal.state === "startBid"}
+        data={modal.data}
+        handleClose={closeModal}
       />
 
       <BidStatus
+        show={modal.state === "bidStatus"}
+        data={modal.data}
         page={page}
-        currentBid={currentBid}
-        showBidStatus={showBidStatus}
-        handleCloseBidStatus={handleCloseBidStatus}
+        // currentBid={currentBid}
+        // showBidStatus={showBidStatus}
+        // handleCloseBidStatus={handleCloseBidStatus}
         nextPage={nextPage}
-        fpoBids={currentBid.bids}
+        // fpoBids={currentBid.bids}
+        handleClose={closeModal}
       />
 
       {/* <BidStatus2
