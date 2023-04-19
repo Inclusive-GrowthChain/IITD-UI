@@ -2,33 +2,24 @@ import { useState, useEffect } from "react";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 // import EditCropAdvisory from "./Modals/CropAdvisory/EditCropAdvisory";
 // import AddCropAdvisory from "./Modals/CropAdvisory/AddCropAdvisory";
-import ReadMore from "./Modals/CropAdvisory/ReadMore";
 import axios from "axios";
 
+import { useQuery } from "@tanstack/react-query";
+
+import { getCropAdvisory } from "../../actions/nisa";
+import useModal from "../../hooks/useModal";
+
+import ReadMore from "./Modals/CropAdvisory/ReadMore";
+import Loader from "../Common/Loader";
+
 const CropAdvisory2 = () => {
-  const [showModal, setShowModal] = useState(false)
-  const [currentCA, setCurrentCA] = useState({})
-  const [caList, setCaList] = useState([])
+  const { modal, updateModal, closeModal } = useModal()
+  const { isLoading, data } = useQuery({
+    queryKey: ["nisa/crop-advisory"],
+    queryFn: getCropAdvisory
+  })
 
-  const handleClose = () => setShowModal(false)
-
-  const handleShow = (ca) => {
-    setShowModal(true)
-    setCurrentCA(ca)
-  }
-
-  useEffect(() => {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
-    axios
-      .get("http://13.232.131.203:3000/api/nisa/crop-advisory")
-      .then((response) => {
-        console.log(response.data.data);
-        setCaList(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <>
@@ -48,7 +39,7 @@ const CropAdvisory2 = () => {
               </h3>
             </div>
 
-            {caList.map((ca, ind) => (
+            {data.data.map((ca, ind) => (
               <div key={ca.id}>
                 <div className="card_wrapper">
                   <div
@@ -63,7 +54,7 @@ const CropAdvisory2 = () => {
                     </p>
                   </div>
                   <div className="card_button d-flex">
-                    <button id="btn-1" onClick={() => handleShow(ca)}>
+                    <button id="btn-1" onClick={() => updateModal("readMore", ca)}>
                       Read More
                       <ChevronRightIcon className="btn-icon" />
                     </button>
@@ -80,11 +71,14 @@ const CropAdvisory2 = () => {
         </div>
       </div>
 
-      <ReadMore
-        currentCA={currentCA}
-        showModal={showModal}
-        handleClose={handleClose}
-      />
+      {
+        modal.state &&
+        <ReadMore
+          show
+          data={modal.data}
+          handleClose={closeModal}
+        />
+      }
     </>
   )
 }

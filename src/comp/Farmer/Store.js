@@ -3,21 +3,20 @@ import axios from "axios";
 
 import Nylonbag from "../../assets/img/nylonbag.png";
 
-function Store() {
-  const [itemList, setItemList] = useState([]);
+import { useQuery } from "@tanstack/react-query";
 
-  useEffect(() => {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
-    axios
-      .get("http://13.232.131.203:3000/api/fpo/product")
-      .then((response) => {
-        console.log(response.data.data);
-        setItemList(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+import { getFpoProducts } from "../../actions/farmer";
+import useModal from "../../hooks/useModal";
+import Loader from "../Common/Loader";
+
+function Store() {
+  const { modal, updateModal, closeModal } = useModal()
+  const { isLoading, data } = useQuery({
+    queryKey: ["fpo/products"],
+    queryFn: getFpoProducts
+  })
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <div className="itemContainer">
@@ -37,7 +36,7 @@ function Store() {
           </div>
           <div className="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4">
             {
-              itemList.map((item, index) => (
+              data.data.map((item, index) => (
                 <div className="col">
                   <div className="card" style={{ marginBottom: '50px' }}>
                     <img
