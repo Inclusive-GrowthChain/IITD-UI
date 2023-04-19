@@ -1,36 +1,33 @@
 import { useState } from 'react';
-import { MenuItem } from "@mui/material";
-import Select from '@mui/material/Select';
-import Modal from "react-bootstrap/Modal";
-import axios from 'axios';
-import ConfirmOrder from './ConfirmOrder';
-
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+// import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { MenuItem, Select } from "@mui/material";
+// import { useForm } from "react-hook-form";
 import { Modal } from "react-bootstrap";
 
-import { addCropAdvisory, editCropAdvisory } from '../../../actions/nisa';
+// import axios from 'axios';
 
-const errStyle = { fontSize: "12px", margin: 0 }
-const textAreaStyle = { resize: "none", height: "150px" }
+import ConfirmOrder from './ConfirmOrder';
+
+// const errStyle = { fontSize: "12px", margin: 0 }
+// const textAreaStyle = { resize: "none", height: "150px" }
 
 function StartBid({ data, show, handleClose }) {
-  const queryClient = useQueryClient()
-  const { bid, formState: { errors }, handleSubmit, reset } = useForm({
-    defaultValues: {
-      multiSelectReportName: [],
-      bidId: "B1234",
-      lacStrainType: "",
-      sourceOfTree: "",
-      origin: "",
-      seedlacContent: "",
-      freshResinContent: "",
-      quantity: 0,
-      dateOfSupply: "",
-      endDateForBidding: "",
-      remarks: "",
-    }
-  })
+  // const queryClient = useQueryClient()
+  // const { bid, formState: { errors }, handleSubmit, reset } = useForm({
+  //   defaultValues: {
+  //     multiSelectReportName: [],
+  //     bidId: "B1234",
+  //     lacStrainType: "",
+  //     sourceOfTree: "",
+  //     origin: "",
+  //     seedlacContent: "",
+  //     freshResinContent: "",
+  //     quantity: 0,
+  //     dateOfSupply: "",
+  //     endDateForBidding: "",
+  //     remarks: "",
+  //   }
+  // })
 
   const [multiSelectReportName, setMultiSelectReportName] = useState([])
   const [bidId, setBidId] = useState("B1234")
@@ -45,9 +42,9 @@ function StartBid({ data, show, handleClose }) {
   const [remarks, setRemarks] = useState("")
   const [showConfirmBox, setShowConfirmBox] = useState(false)
 
-  const onChangeBidId = (e) => {
-    setBidId(e.target.value)
-  }
+  // const onChangeBidId = (e) => {
+  //   setBidId(e.target.value)
+  // }
 
   const onChangeLacStrainType = (e) => {
     setLacStrainType(e.target.value)
@@ -285,6 +282,7 @@ function StartBid({ data, show, handleClose }) {
             </form>
           </div>
         </div>
+
         <ConfirmOrder
           placeBid={placeBid}
           showConfirmBox={showConfirmBox}
