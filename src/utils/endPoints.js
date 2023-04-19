@@ -28,7 +28,7 @@ const endPoints = {
 
   // Fpo
   fpo: {
-
+    products: "/fpo/product",
   },
 }
 
