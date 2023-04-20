@@ -1,121 +1,116 @@
-import { useState } from 'react';
-// import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm, Controller } from "react-hook-form";
 import { MenuItem, Select } from "@mui/material";
-// import { useForm } from "react-hook-form";
 import { Modal } from "react-bootstrap";
 
-// import axios from 'axios';
+import { startAuction } from '../../../actions/auction';
+import useModal from '../../../hooks/useModal';
 
+import Input, { errStyle } from '../../Nisa/Modals/Input';
 import ConfirmOrder from './ConfirmOrder';
 
-// const errStyle = { fontSize: "12px", margin: 0 }
-// const textAreaStyle = { resize: "none", height: "150px" }
+const textAreaStyle = { resize: "none", height: "150px" }
 
-function StartBid({ data, show, handleClose }) {
-  // const queryClient = useQueryClient()
-  // const { bid, formState: { errors }, handleSubmit, reset } = useForm({
-  //   defaultValues: {
-  //     multiSelectReportName: [],
-  //     bidId: "B1234",
-  //     lacStrainType: "",
-  //     sourceOfTree: "",
-  //     origin: "",
-  //     seedlacContent: "",
-  //     freshResinContent: "",
-  //     quantity: 0,
-  //     dateOfSupply: "",
-  //     endDateForBidding: "",
-  //     remarks: "",
-  //   }
-  // })
+const list = [
+  {
+    label: "Bid ID",
+    name: "bidId",
+    disabled: true
+  },
+  {
+    label: "Lac Strain Type",
+    name: "lacStrainType",
+    isSelect: true,
+    inputWrapperCls: "col-lg-12",
+    options: [
+      "Kusmi",
+      "Rangeeni",
+    ],
+  },
+  {
+    label: "Source of Tree",
+    name: "sourceTree",
+    isSelect: true,
+    inputWrapperCls: "col-lg-12",
+    options: [
+      { label: "Kusum", val: "1" },
+      { label: "Ber", val: "2" },
+      { label: "Palash", val: "3" },
+      { label: "Other", val: "4" },
+    ],
+  },
+  {
+    label: "Origin",
+    name: "origin",
+    isSelect: true,
+    inputWrapperCls: "col-lg-12",
+    options: [
+      "Jharkhand",
+      "Chattisgarh",
+      "MP",
+      "Mednapore",
+    ],
+  },
+  {
+    label: "Seedlac Content",
+    name: "seedLacContent",
+  },
+  {
+    label: "Fresh Resin Content",
+    name: "freshResinContent",
+  },
+  {
+    label: "Quantity",
+    name: "quantity",
+    type: "number",
+  },
+  {
+    label: "Date of Supply",
+    name: "supplyDate",
+    type: "date",
+  },
+  {
+    label: "End Date for Bidding",
+    name: "bidEndDate",
+    type: "date",
+  },
+]
 
-  const [multiSelectReportName, setMultiSelectReportName] = useState([])
-  const [bidId, setBidId] = useState("B1234")
-  const [lacStrainType, setLacStrainType] = useState("")
-  const [sourceOfTree, setSourceOfTree] = useState("")
-  const [origin, setOrigin] = useState("")
-  const [seedlacContent, setSeedlacContent] = useState("")
-  const [freshResinContent, setFreshResinContent] = useState("")
-  const [quantity, setQuantity] = useState(0)
-  const [dateOfSupply, setDateOfSupply] = useState("")
-  const [endDateForBidding, setEndDateForBidding] = useState("")
-  const [remarks, setRemarks] = useState("")
-  const [showConfirmBox, setShowConfirmBox] = useState(false)
+function StartBid({ show, handleClose }) {
+  const { modal, updateModal, closeModal } = useModal()
+  const queryClient = useQueryClient()
 
-  // const onChangeBidId = (e) => {
-  //   setBidId(e.target.value)
-  // }
+  const {
+    register, control, formState: { errors },
+    handleSubmit, getValues,
+  } = useForm({
+    defaultValues: {
+      bidId: "B1234",
+      lacStrainType: "",
+      sourceTree: "",
+      origin: "",
+      seedLacContent: "",
+      freshResinContent: "",
+      quantity: "",
+      supplyDate: "",
+      bidEndDate: "",
+      reportsRequired: [],
+      remarks: "",
+    }
+  })
 
-  const onChangeLacStrainType = (e) => {
-    setLacStrainType(e.target.value)
-  }
+  const { mutate, isLoading } = useMutation({
+    mutationFn: startAuction,
+    onSuccess: () => {
+      queryClient.invalidateQueries("corporateClient/lac-bidding")
+      handleClose()
+    }
+  })
 
-  const onChangeSourceOfTree = (e) => {
-    setSourceOfTree(e.target.value)
-  }
-
-  const onChangeOrigin = (e) => {
-    setOrigin(e.target.value)
-  }
-
-  const onChangeSeedlacContent = (e) => {
-    setSeedlacContent(e.target.value)
-  }
-
-  const onChangeFreshResinContent = (e) => {
-    setFreshResinContent(e.target.value)
-  }
-
-  const onChangeQuantity = (e) => {
-    setQuantity(e.target.value)
-  }
-
-  const onChangeDateOfSupply = (e) => {
-    setDateOfSupply(e.target.value)
-  }
-
-  const onChangeEndDateForBidding = (e) => {
-    setEndDateForBidding(e.target.value)
-  }
-
-  const onChangeRemarks = (e) => {
-    setRemarks(e.target.value)
-  }
-
-  const onMultiSelectReportNameChange = (event) => {
-    const {
-      target: { value },
-    } = event
-    setMultiSelectReportName(
-      typeof value === 'string' ? value.split(',') : value,
-    )
-  }
-
-  const resetInputs = () => {
-    setBidId("")
-    setLacStrainType("")
-    setSourceOfTree("")
-    setOrigin("")
-    setSeedlacContent("")
-    setFreshResinContent("")
-    setQuantity(0)
-    setDateOfSupply("")
-    setEndDateForBidding("")
-    setRemarks("")
-    setMultiSelectReportName([])
-  }
-
-  const confirmBid = (e) => {
-    e.preventDefault()
-    setShowConfirmBox(true)
-  }
-
-  const handleCloseConfirmBox = () => {
-    setShowConfirmBox(false)
-  }
-
-  const placeBid = () => {
-    setShowConfirmBox(false)
+  const showConfirm = () => updateModal("showConfirmBox")
+  const onConfirm = () => {
+    closeModal()
+    mutate(getValues())
   }
 
   return (
@@ -127,152 +122,82 @@ function StartBid({ data, show, handleClose }) {
       <Modal.Body>
         <div className="row">
           <div className="col">
-            <form>
+            <form onSubmit={handleSubmit(showConfirm)}>
               <div className="form">
                 <div className="card p-2">
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Bid ID</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={bidId}
-                        disabled
+                  {
+                    list.map(l => (
+                      <Input
+                        key={l.name}
+                        {...l}
+                        register={register}
+                        errors={errors}
                       />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Lac Strain Type</label>
-                    </div>
-                    <div className="col-lg-12">
-                      <select
-                        className="form-control"
-                        name="category"
-                        onChange={onChangeLacStrainType}
-                      >
-                        <option value="0">Select Type</option>
-                        <option value="Kusmi">Kusmi</option>
-                        <option value="Rangeeni">Rangeeni</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Source of Tree</label>
-                    </div>
-                    <div className="col-lg-12">
-                      <select
-                        className="form-control"
-                        name="category"
-                        onChange={onChangeSourceOfTree}
-                      >
-                        <option value="0">Select Tree</option>
-                        <option value="1">Kusum</option>
-                        <option value="2">Ber</option>
-                        <option value="3">Palash</option>
-                        <option value="4">Other</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Origin</label>
-                    </div>
-                    <div className="col-lg-12">
-                      <select
-                        className="form-control"
-                        name="category"
-                        onChange={onChangeOrigin}
-                      >
-                        <option value="0">Select Origin</option>
-                        <option value="Jharkhand">Jharkhand</option>
-                        <option value="Chattisgarh">Chattisgarh</option>
-                        <option value="MP">MP</option>
-                        <option value="Mednapore">Mednapore</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Seedlac Content</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input className="form-control" type="text" onChange={onChangeSeedlacContent} />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Fresh Resin Content</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input className="form-control" type="text" onChange={onChangeFreshResinContent} />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Quantity</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input className="form-control" type="number" onChange={onChangeQuantity} />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Date of Supply</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input className="form-control" type="date" onChange={onChangeDateOfSupply} />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>End Date for Bidding</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input className="form-control" type="date" onChange={onChangeEndDateForBidding} />
-                    </div>
-                  </div>
+                    ))
+                  }
+
                   <div className="row m-2">
                     <div className="col-lg-6">
                       <label>Required Test Reports</label>
                     </div>
                     <div className="col-lg-12">
-                      <Select
-                        className="form-control"
-                        name="category"
-                        labelId="demo-multiple-name-label"
-                        id="demo-multiple-name"
-                        multiple
-                        value={multiSelectReportName}
-                        onChange={onMultiSelectReportNameChange}
-                      >
-                        <MenuItem value="Chowri">Chowri</MenuItem>
-                        <MenuItem value="Panna">Panna</MenuItem>
-                      </Select>
+                      <Controller
+                        name="reportsRequired"
+                        control={control}
+                        rules={{ required: "Test Reports is required" }}
+                        render={({ field: { value, onChange } }) => (
+                          <Select
+                            multiple
+                            id="demo-multiple-name"
+                            name="reportsRequired"
+                            labelId="demo-multiple-name-label"
+                            className="form-control"
+                            value={value}
+                            onChange={onChange}
+                          >
+                            <MenuItem value="Chowri">Chowri</MenuItem>
+                            <MenuItem value="Panna">Panna</MenuItem>
+                          </Select>
+                        )}
+                      />
+
+                      {
+                        errors.reportsRequired &&
+                        <p className="text-danger" style={errStyle}>
+                          {errors.reportsRequired.message}
+                        </p>
+                      }
                     </div>
                   </div>
+
                   <div className="row m-2">
                     <div className="col-lg-6">
                       <label>Remarks</label>
                     </div>
                     <div className="col-lg-12">
-                      <textarea className="form-control"
-                        style={{ height: "200%" }}
-                        onChange={onChangeRemarks}
+                      <textarea
+                        className="form-control"
+                        style={textAreaStyle}
+                        {...register("remarks", {
+                          required: "Remark is required"
+                        })}
                       />
+
+                      {
+                        errors.remarks &&
+                        <p className="text-danger" style={errStyle}>
+                          {errors.remarks.message}
+                        </p>
+                      }
                     </div>
                   </div>
+
                   <div className="row m-2">
                     <button
+                      type='submit'
                       className="btn btn-success"
                       style={{ marginTop: '5rem', backgroundColor: '#064420' }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        confirmBid(e);
-                      }}
+                      disabled={isLoading}
                     >
                       Submit
                     </button>
@@ -283,22 +208,14 @@ function StartBid({ data, show, handleClose }) {
           </div>
         </div>
 
-        <ConfirmOrder
-          placeBid={placeBid}
-          showConfirmBox={showConfirmBox}
-          handleCloseConfirmBox={handleCloseConfirmBox}
-          bidId={bidId}
-          lacStrainType={lacStrainType}
-          sourceOfTree={sourceOfTree}
-          origin={origin}
-          seedlacContent={seedlacContent}
-          freshResinContent={freshResinContent}
-          quantity={quantity}
-          dateOfSupply={dateOfSupply}
-          endDateForBidding={endDateForBidding}
-          multiSelectReportName={multiSelectReportName}
-          remarks={remarks}
-        />
+        {
+          modal.state === "showConfirmBox" &&
+          <ConfirmOrder
+            show
+            onConfirm={onConfirm}
+            handleClose={closeModal}
+          />
+        }
       </Modal.Body>
     </Modal>
   )

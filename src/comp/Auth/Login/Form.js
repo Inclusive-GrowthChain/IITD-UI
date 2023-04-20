@@ -9,6 +9,7 @@ import LockSharpIcon from "@mui/icons-material/LockSharp";
 
 import { login, setTokenToApp } from "../../../actions/auth";
 import { useAuthStore } from "../../../store/useAuthStore";
+import { errorNotify } from "../../../utils/toastifyHlp";
 
 const navigationList = {
   fpo: "farmer",
@@ -64,6 +65,9 @@ function Form() {
         return
       }
       if (to) navigate(`/${data.data.type}/${to}`)
+    },
+    onError: () => {
+      errorNotify()
     }
   })
 

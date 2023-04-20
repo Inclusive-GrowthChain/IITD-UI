@@ -2,6 +2,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import HelpTwoToneIcon from '@mui/icons-material/HelpTwoTone';
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
 import AppWrapper from "../Template/AppWrapper";
+import "./CorporateClient.css";
 
 const list = [
   {

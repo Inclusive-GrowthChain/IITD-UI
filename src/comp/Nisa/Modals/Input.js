@@ -1,25 +1,38 @@
+import { useId } from "react";
+
 export const errStyle = { fontSize: "12px", margin: 0 }
 
 function Input({
+  register, errors,
   label = "", name = "",
   type = "text", disabled = false,
-  register, errors, isSelect = false,
-  options = [],
+  isSelect = false, options = [],
+  wrapperCls = "row m-2",
+  lableWrapperCls = "col-lg-6",
+  inputWrapperCls = "col-lg-6",
 }) {
+  const id = useId()
+
   return (
-    <div className="row m-2">
-      <div className="col-lg-6">
-        <label>{label}</label>
+    <div className={wrapperCls}>
+      <div className={lableWrapperCls}>
+        <label
+          htmlFor={id}
+        >
+          {label}
+        </label>
       </div>
-      <div className="col-lg-6">
+
+      <div className={inputWrapperCls}>
         {
           isSelect ?
             <select
+              id={id}
+              disabled={disabled}
               className="form-select"
               {...register(name, {
                 required: `${label} is required`
               })}
-              disabled={disabled}
             >
               <option value="" disabled>Select {label}</option>
               {
@@ -35,12 +48,13 @@ function Input({
             </select>
             :
             <input
-              className="form-control"
+              id={id}
               type={type}
+              disabled={disabled}
+              className="form-control"
               {...register(name, {
                 required: `${label} is required`
               })}
-              disabled={disabled}
             />
         }
 

@@ -6,3 +6,11 @@ export function getAuction() {
     url: endPoints.auction,
   })
 }
+
+export function startAuction(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.auction,
+    data
+  })
+}
