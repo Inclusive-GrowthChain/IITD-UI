@@ -6,3 +6,9 @@ export function getFpoProducts() {
     url: endPoints.fpo.products,
   })
 }
+
+export function getFpoLacProducts() {
+  return sendApiReq({
+    url: endPoints.fpo.lac,
+  })
+}

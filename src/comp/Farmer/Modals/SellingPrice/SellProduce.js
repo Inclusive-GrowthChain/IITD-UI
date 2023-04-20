@@ -1,8 +1,8 @@
 import Modal from "react-bootstrap/Modal";
 
-function SellProduce({ showLacForm, handleCloseLacForm, date, month, year }) {
+function SellProduce({ data, show, handleClose, date, month, year }) {
   return (
-    <Modal show={showLacForm} onHide={handleCloseLacForm}>
+    <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Enter details</Modal.Header>
       <Modal.Body>
         <div className="row">
@@ -86,7 +86,6 @@ function SellProduce({ showLacForm, handleCloseLacForm, date, month, year }) {
                           className="btn btn-success"
                           onClick={(e) => {
                             e.preventDefault();
-                            handleCloseLacForm();
                           }}
                           style={{
                             marginTop: "1rem",

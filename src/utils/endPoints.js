@@ -28,12 +28,13 @@ const endPoints = {
 
   // Farmer
   farmer: {
-    
+    loans: "/loanwindow/loan?type=farmer",
   },
 
   // Fpo
   fpo: {
     products: "/fpo/product",
+    lac: "/fpo/lac",
   },
 }
 

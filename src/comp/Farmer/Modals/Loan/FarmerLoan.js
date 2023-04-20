@@ -1,7 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import { farmerDetails } from '../../dummyLoanData';
 
-function FarmerLoan({ step, setStep, showLoanApp, confirmBid, handleCloseLoanApp }) {
+function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp }) {
   return (
     <Modal
       size="lg"
@@ -778,7 +778,7 @@ function FarmerLoan({ step, setStep, showLoanApp, confirmBid, handleCloseLoanApp
                           ("Create" && step < 5)) && (
                             <button
                               className="btn btn-success"
-                              onClick={confirmBid}
+                              onClick={confirm}
                               style={{
                                 marginTop: "1rem",
                                 backgroundColor: "#064420",
