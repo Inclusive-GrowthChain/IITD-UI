@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 let tempFpoBids = [
   {
@@ -46,43 +47,43 @@ let tempFpoBids = [
   },
 ];
 
-const PageTwo = ({ onButtonClick, fpoBids }) => {
-  const [showConfirmBox, setShowConfirmBox] = useState(false);
-  const [currentFPO, setCurrentFPO] = useState({});
-  const [orderPlaced, setOrderPlaced] = useState(false);
+const PageTwo = ({ onButtonClick, fpoBids = [] }) => {
+  const [showConfirmBox, setShowConfirmBox] = useState(false)
+  const [orderPlaced, setOrderPlaced] = useState(false)
+  const [currentFPO, setCurrentFPO] = useState({})
 
   const confirmOrder = (e) => {
-    e.preventDefault();
-    setShowConfirmBox(true);
-  };
+    e.preventDefault()
+    setShowConfirmBox(true)
+  }
 
   const handleCloseConfirmBox = () => {
-    setShowConfirmBox(false);
-  };
+    setShowConfirmBox(false)
+  }
 
   const placeOrder = (e) => {
-    e.preventDefault();
-    currentFPO.orderPlaced = true;
-    setShowConfirmBox(false);
-  };
+    e.preventDefault()
+    currentFPO.orderPlaced = true
+    setShowConfirmBox(false)
+  }
 
   const checkOrderPlaced = () => {
-    let orderPlaced = false;
+    let orderPlaced = false
     tempFpoBids.forEach((fpo) => {
       if (fpo.orderPlaced) {
-        orderPlaced = true;
+        orderPlaced = true
       }
-    });
+    })
     if (currentFPO.orderPlaced) {
-      orderPlaced = true;
+      orderPlaced = true
     }
-    setOrderPlaced(orderPlaced);
-  };
+    setOrderPlaced(orderPlaced)
+  }
 
   useEffect(() => {
-    checkOrderPlaced();
+    checkOrderPlaced()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tempFpoBids, currentFPO]);
+  }, [tempFpoBids, currentFPO])
 
   return (
     <main
@@ -117,6 +118,7 @@ const PageTwo = ({ onButtonClick, fpoBids }) => {
               <ArrowBackIosIcon />
             </button>
           </div>
+
           <div style={{
             position: "relative",
             float: "right",
@@ -126,12 +128,13 @@ const PageTwo = ({ onButtonClick, fpoBids }) => {
             <button
               onClick={() => onButtonClick("pagethree")}
               style={{ backgroundColor: 'white' }}
-              // disabled={!orderPlaced}
+            // disabled={!orderPlaced}
             >
               <ArrowForwardIosIcon />
             </button>
           </div>
-          <div className=" table-responsive">
+
+          <div className="table-responsive" style={{ minHeight: "20rem" }}>
             <table className="table table-borderless">
               <thead
                 style={{
@@ -157,7 +160,7 @@ const PageTwo = ({ onButtonClick, fpoBids }) => {
                 }}
               >
                 {fpoBids.map((fpo) => (
-                  <tr>
+                  <tr key={fpo.id}>
                     <td>{fpo.fpoId}</td>
                     <td>{fpo.name}</td>
                     <td>{fpo.phoneNumber}</td>
@@ -176,8 +179,8 @@ const PageTwo = ({ onButtonClick, fpoBids }) => {
                           lineHeight: "1rem",
                         }}
                         onClick={(e) => {
-                          setCurrentFPO(fpo);
-                          confirmOrder(e);
+                          setCurrentFPO(fpo)
+                          confirmOrder(e)
                         }}
                         disabled={orderPlaced}
                         className="btn btn-success"
@@ -211,7 +214,7 @@ const PageTwo = ({ onButtonClick, fpoBids }) => {
         </div>
       </form>
     </main>
-  );
-};
+  )
+}
 
 export default PageTwo;
