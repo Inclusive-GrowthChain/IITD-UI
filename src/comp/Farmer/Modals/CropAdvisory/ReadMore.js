@@ -1,10 +1,10 @@
 import { Modal } from "react-bootstrap";
 
-function ReadMore({ currentCA, showModal, handleClose }) {
+function ReadMore({ data, show, handleClose }) {
   return (
-    <Modal show={showModal} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>{currentCA.title}</Modal.Title>
+        <Modal.Title>{data.title}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body style={{ height: "10rem" }}>
@@ -13,7 +13,7 @@ function ReadMore({ currentCA, showModal, handleClose }) {
           style={{ height: "100%" }}
           readOnly
         >
-          {currentCA.content}
+          {data.content}
         </textarea>
       </Modal.Body>
     </Modal>

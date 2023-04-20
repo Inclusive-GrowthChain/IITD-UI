@@ -6,3 +6,9 @@ export function getLacTest() {
     url: endPoints.nisa.lactTest,
   })
 }
+
+export function getFpoProducts() {
+  return sendApiReq({
+    url: endPoints.fpo.products,
+  })
+}
