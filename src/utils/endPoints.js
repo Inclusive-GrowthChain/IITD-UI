@@ -1,5 +1,6 @@
 export const root = {
   baseUrl: "http://13.232.131.203:3000/api",
+  imgUrl: "http://13.232.131.203:3000",
 }
 
 const endPoints = {
@@ -28,12 +29,13 @@ const endPoints = {
 
   // Farmer
   farmer: {
-    
+
   },
 
   // Fpo
   fpo: {
     products: "/fpo/product",
+    farmers: "/fpo/farmer",
   },
 }
 

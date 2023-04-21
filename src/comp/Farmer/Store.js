@@ -1,16 +1,11 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-
-import Nylonbag from "../../assets/img/nylonbag.png";
-
 import { useQuery } from "@tanstack/react-query";
 
 import { getFpoProducts } from "../../actions/farmer";
-import useModal from "../../hooks/useModal";
+
+import Nylonbag from "../../assets/img/nylonbag.png";
 import Loader from "../Common/Loader";
 
 function Store() {
-  const { modal, updateModal, closeModal } = useModal()
   const { isLoading, data } = useQuery({
     queryKey: ["fpo/products"],
     queryFn: getFpoProducts

@@ -6,3 +6,44 @@ export function getFpoProducts() {
     url: endPoints.fpo.products,
   })
 }
+
+export function addFpoProduct(data) {
+  const formData = new FormData()
+  formData.append("productId", data.productId)
+  formData.append("productName", data.productName)
+  formData.append("marketPrice", data.marketPrice)
+  formData.append("fpoPrice", data.fpoPrice)
+  formData.append("productImg", data.image[0])
+  formData.append("isAvailable", data.isAvailable)
+
+  return sendApiReq({
+    method: "post",
+    url: endPoints.fpo.products,
+    data: formData
+  })
+}
+
+export function editFpoProduct(data) {
+  const formData = new FormData()
+  formData.append("productId", data.productId)
+  formData.append("productName", data.productName)
+  formData.append("marketPrice", data.marketPrice)
+  formData.append("fpoPrice", data.fpoPrice)
+  formData.append("isAvailable", data.isAvailable)
+
+  if (data.image[0]) {
+    formData.append("productImg", data.image[0])
+  }
+
+  return sendApiReq({
+    method: "put",
+    url: endPoints.fpo.products + `/${data.productId}`,
+    data: formData
+  })
+}
+
+export function getFpoFarmers() {
+  return sendApiReq({
+    url: endPoints.fpo.farmers,
+  })
+}

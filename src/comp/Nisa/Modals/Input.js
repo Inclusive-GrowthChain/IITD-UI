@@ -3,7 +3,7 @@ import { useId } from "react";
 export const errStyle = { fontSize: "12px", margin: 0 }
 
 function Input({
-  register, errors,
+  register, errors, validation = {},
   label = "", name = "",
   type = "text", disabled = false,
   isSelect = false, options = [],
@@ -31,7 +31,8 @@ function Input({
               disabled={disabled}
               className="form-select"
               {...register(name, {
-                required: `${label} is required`
+                required: `${label} is required`,
+                ...validation
               })}
             >
               <option value="" disabled>Select {label}</option>
@@ -53,7 +54,8 @@ function Input({
               disabled={disabled}
               className="form-control"
               {...register(name, {
-                required: `${label} is required`
+                required: `${label} is required`,
+                ...validation
               })}
             />
         }
