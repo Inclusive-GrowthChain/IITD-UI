@@ -1,8 +1,14 @@
+import { useState } from 'react';
 import Modal from "react-bootstrap/Modal";
+import useModal from "../../../../hooks/useModal";
+import DocImg from "../../../Common/DocImg";
 
-function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step, setStep, handleShowAadharCardImg, handleShowPanCardImg, currentLoan, currentloanWindow }) {
+function LoanApplication({ show, handleClose, data, currentloanWindow }) {
+  const { modal, updateModal, closeModal } = useModal()
+  const [step, setStep] = useState(0)
+
   return (
-    <Modal show={showLoanApplication} onHide={handleCloseLoanApplication}>
+    <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Loan Application</Modal.Header>
       <Modal.Body>
         {step === 0 && (
@@ -17,7 +23,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Loan ID</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>{currentLoan.loanId}</label>
+                          <label>{data.loanId}</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -33,7 +39,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Bank Name</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>{currentLoan.bankName}</label>
+                          <label>{data.bankName}</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -41,7 +47,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Account Number</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>{currentLoan.accountNumber}</label>
+                          <label>{data.accountNumber}</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -49,7 +55,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Bank IFSC</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>{currentLoan.ifscNumber}</label>
+                          <label>{data.ifscNumber}</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -73,7 +79,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Loan Requested Amount</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>{currentLoan.requestedAmount}</label>
+                          <label>{data.requestedAmount}</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -167,9 +173,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                             fontSize: ".75rem",
                             lineHeight: "2rem",
                           }}
-                          onClick={(e) => {
-                            handleShowAadharCardImg();
-                          }}
+                          onClick={() => updateModal("Aadhar Card")}
                         >
                           view
                         </button>
@@ -200,9 +204,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                             fontSize: ".75rem",
                             lineHeight: "2rem",
                           }}
-                          onClick={(e) => {
-                            handleShowPanCardImg();
-                          }}
+                          onClick={() => updateModal("PAN Card")}
                         >
                           view
                         </button>
@@ -564,7 +566,7 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
                           <label>Loan Purpose</label>
                         </div>
                         <div className="col-lg-6">
-                          <label>{currentLoan.purpose}</label>
+                          <label>{data.purpose}</label>
                         </div>
                       </div>
                       <div className="row m-2">
@@ -604,6 +606,15 @@ function LoanApplication({ showLoanApplication, handleCloseLoanApplication, step
             </div>
           </div>
         )}
+
+        {
+          modal.state &&
+          <DocImg
+            show
+            title={modal.state}
+            handleClose={closeModal}
+          />
+        }
       </Modal.Body>
     </Modal>
   )

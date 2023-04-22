@@ -1,10 +1,10 @@
 import Modal from "react-bootstrap/Modal";
 
-function ConfirmLoanStatus({ showConfirmLoanStatus, handleCloseConfirmLoanStatus, confirmLoan }) {
+function ConfirmLoanStatus({ show, handleClose, confirmLoan }) {
   return (
     <Modal
-      show={showConfirmLoanStatus}
-      onHide={handleCloseConfirmLoanStatus}
+      show={show}
+      onHide={handleClose}
     >
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
@@ -24,9 +24,7 @@ function ConfirmLoanStatus({ showConfirmLoanStatus, handleCloseConfirmLoanStatus
               padding: "0.25rem 1rem",
               color: "#fff",
             }}
-            onClick={(e) => {
-              confirmLoan(e);
-            }}
+            onClick={confirmLoan}
           >
             Yes
           </button>
@@ -39,7 +37,7 @@ function ConfirmLoanStatus({ showConfirmLoanStatus, handleCloseConfirmLoanStatus
               padding: "0.25rem 1rem",
               color: "#fff",
             }}
-            onClick={handleCloseConfirmLoanStatus}
+            onClick={handleClose}
           >
             No
           </button>

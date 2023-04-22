@@ -1,11 +1,11 @@
 import Modal from "react-bootstrap/Modal";
 
-function RepaymentStructure({ showRepayment, handleCloseRepayment, currentLoan, currentLoanWindow }) {
+function RepaymentStructure({ show, handleClose, data, currentLoanWindow }) {
   return (
     <Modal
       size="xl"
-      show={showRepayment}
-      onHide={handleCloseRepayment}
+      show={show}
+      onHide={handleClose}
     >
       <Modal.Header closeButton>
         Repayment Structure
@@ -19,7 +19,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment, currentLoan, 
                   <strong>Loan ID : </strong>
                 </div>
                 <div className="col-6">
-                  <span>{currentLoan?.loanId}</span>
+                  <span>{data?.loanId}</span>
                 </div>
                 <div className="col-6">
                   <strong>
@@ -41,7 +41,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment, currentLoan, 
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>{currentLoan?.grantedAmount}</span>
+                  <span>{data?.grantedAmount}</span>
                 </div>
               </div>
             </div>
@@ -53,7 +53,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment, currentLoan, 
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>{currentLoan?.loanTenure}</span>
+                  <span>{data?.loanTenure}</span>
                 </div>
                 <div className="col-6">
                   <strong>
@@ -61,7 +61,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment, currentLoan, 
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>{currentLoan?.loanTenure}</span>
+                  <span>{data?.loanTenure}</span>
                 </div>
                 <div className="col-6">
                   <strong>
@@ -69,7 +69,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment, currentLoan, 
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>{currentLoan?.intrest}%</span>
+                  <span>{data?.intrest}%</span>
                 </div>
               </div>
             </div>
@@ -91,7 +91,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment, currentLoan, 
 
             <tbody>
               {
-                currentLoan?.repaymentStructure?.map((repayment) => (
+                data?.repaymentStructure?.map((repayment) => (
                   <tr>
                     <td>{repayment.id}</td>
                     <td>{repayment.repaymentDate}</td>

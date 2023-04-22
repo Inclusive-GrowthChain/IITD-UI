@@ -1,15 +1,40 @@
-import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
+import Modal from "react-bootstrap/Modal";
+import useModal from "../../../../hooks/useModal";
+import ConfirmLoanStatus from "./ConfirmLoanStatus";
 
-function RejectLoanApp({ showRejectedLoan, handleCloseRejectedLoan, handleShowConfirmLoanStatus, confirmLoanStatus, currentLoan, currentLoanWindow }) {
+function RejectLoanApp({ show, data, handleClose, currentLoanWindow }) {
+  const { modal, updateModal, closeModal } = useModal()
   const [reason, setReason] = useState("");
 
   const onChangeReason = (e) => {
     setReason(e.target.value);
   };
 
+  const rejectLoan = async (e, reason) => {
+    // const newLoan = {
+    //   "fpoApprovalStatus": "rejected",
+    //   "reason": reason
+    // };
+
+    // await axios
+    //   .put(`http://13.232.131.203:3000/api/loanwindow/${activeLoanWindow.id}/loan/${currentLoan.id}/approval`, newLoan)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    // window.location.reload();
+  }
+
+
   return (
-    <Modal show={showRejectedLoan} onHide={handleCloseRejectedLoan}>
+    <Modal
+      show={show}
+      onHide={handleClose}
+    >
       <Modal.Header closeButton>Reject Loan Application</Modal.Header>
       <Modal.Body>
         <div className="row ">
@@ -22,7 +47,7 @@ function RejectLoanApp({ showRejectedLoan, handleCloseRejectedLoan, handleShowCo
                       <label>FPO Name</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>{currentLoanWindow && currentLoanWindow.fpoName}</label>
+                      <label>{currentLoanWindow?.fpoName}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -30,7 +55,7 @@ function RejectLoanApp({ showRejectedLoan, handleCloseRejectedLoan, handleShowCo
                       <label>Contact No.</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>{currentLoanWindow && currentLoanWindow.contactNo}</label>
+                      <label>{currentLoanWindow?.contactNo}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -38,7 +63,7 @@ function RejectLoanApp({ showRejectedLoan, handleCloseRejectedLoan, handleShowCo
                       <label>Date of Application</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>{currentLoan && currentLoan.createdAt && currentLoan.createdAt.substring(0, 10)}</label>
+                      <label>{data?.createdAt.substring(0, 10)}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -46,7 +71,7 @@ function RejectLoanApp({ showRejectedLoan, handleCloseRejectedLoan, handleShowCo
                       <label>Requested Amount</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>{currentLoan && currentLoan.requestedAmount}</label>
+                      <label>{data?.requestedAmount}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -54,7 +79,7 @@ function RejectLoanApp({ showRejectedLoan, handleCloseRejectedLoan, handleShowCo
                       <label>Reason for Rejection</label>
                     </div>
                     <div className="col-lg-6">
-                      <input type="text" className="form-control" onChange={onChangeReason}/>
+                      <input type="text" className="form-control" value={reason} onChange={onChangeReason} />
                     </div>
                   </div>
                   <div className="row m-2">
@@ -66,11 +91,12 @@ function RejectLoanApp({ showRejectedLoan, handleCloseRejectedLoan, handleShowCo
                           backgroundColor: "#064420",
                           border: "none",
                         }}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleShowConfirmLoanStatus();
-                          confirmLoanStatus(e, reason);
-                        }}
+                        onClick={() => updateModal("confirm")}
+                      // onClick={(e) => {
+                      //   e.preventDefault();
+                      //   handleShowConfirmLoanStatus();
+                      //   confirmLoanStatus(e, reason);
+                      // }}
                       >
                         Reject Loan
                       </button>
@@ -81,6 +107,15 @@ function RejectLoanApp({ showRejectedLoan, handleCloseRejectedLoan, handleShowCo
             </form>
           </div>
         </div>
+
+        {
+          modal.state &&
+          <ConfirmLoanStatus
+            show
+            handleClose={closeModal}
+            confirmLoan={rejectLoan}
+          />
+        }
       </Modal.Body>
     </Modal>
   )

@@ -1,10 +1,32 @@
 import Modal from "react-bootstrap/Modal";
+import useModal from "../../../../hooks/useModal";
+import ConfirmLoanStatus from "./ConfirmLoanStatus";
 
-function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowConfirmLoanStatus, confirmLoanStatus, currentLoan, currentLoanWindow }) {
+function ApproveLoanApp({ show, data, handleClose, currentLoanWindow }) {
+  const { modal, updateModal, closeModal } = useModal()
+
+  const approveLoan = async () => {
+    // const newLoan = {
+    //   "fpoApprovalStatus": "approved"
+    // };
+
+    // await axios
+    //   .put(`http://13.232.131.203:3000/api/loanwindow/${activeLoanWindow.id}/loan/${currentLoan.id}/approval`, newLoan)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    // window.location.reload();
+  }
+
+
   return (
     <Modal
-      show={showApprovedLoan}
-      onHide={handleCloseApprovedLoan}
+      show={show}
+      onHide={handleClose}
       centered
     >
       <Modal.Header closeButton>Approve Loan Application</Modal.Header>
@@ -19,7 +41,7 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
                       <label>Loan ID</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>{currentLoan.loanId}</label>
+                      <label>{data?.loanId}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -27,7 +49,7 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
                       <label>FPO Name</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>{currentLoanWindow.fpoName}</label>
+                      <label>{currentLoanWindow?.fpoName}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -35,7 +57,7 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
                       <label>Contact No.</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>{currentLoanWindow.contactNo}</label>
+                      <label>{currentLoanWindow?.contactNo}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -43,7 +65,7 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
                       <label>Date of Application</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>{currentLoan.createdAt && currentLoan.createdAt.substring(0, 10)}</label>
+                      <label>{data?.createdAt?.substring(0, 10)}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -51,7 +73,7 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
                       <label>Loan Requested Amount</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>{currentLoan.requestedAmount}</label>
+                      <label>{data?.requestedAmount}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -59,7 +81,7 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
                       <label>Loan Tenure (months)</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>{currentLoan.loanTenure}</label>
+                      <label>{data?.loanTenure}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -67,7 +89,7 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
                       <label>Interest Rate (%)</label>
                     </div>
                     <div className="col-lg-6">
-                      <label>{currentLoan.intrest}</label>
+                      <label>{data?.intrest}</label>
                     </div>
                   </div>
                   <div className="row m-2">
@@ -79,12 +101,12 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
                           backgroundColor: "#064420",
                           border: "none",
                         }}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleShowConfirmLoanStatus();
-                          // confirmStatus();
-                          confirmLoanStatus(e);
-                        }}
+                        onClick={() => updateModal("confirm")}
+                      // onClick={(e) => {
+                      //   e.preventDefault();
+                      //   handleShowConfirmLoanStatus();
+                      //   confirmLoanStatus(e);
+                      // }}
                       >
                         Approve Loan
                       </button>
@@ -95,6 +117,15 @@ function ApproveLoanApp({ showApprovedLoan, handleCloseApprovedLoan, handleShowC
             </form>
           </div>
         </div>
+
+        {
+          modal.state &&
+          <ConfirmLoanStatus
+            show
+            handleClose={closeModal}
+            confirmLoan={approveLoan}
+          />
+        }
       </Modal.Body>
     </Modal>
   )
