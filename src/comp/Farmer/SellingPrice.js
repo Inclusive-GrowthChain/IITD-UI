@@ -1,17 +1,24 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 
 import { TabNavItem, TabContent } from "../UIComp/Tabs";
 import SellProduce from "./Modals/SellingPrice/SellProduce";
-import axios from "axios";
+
+import { useQuery } from "@tanstack/react-query";
+
+import { getFpoLac } from "../../actions/fpo";
+import useModal from "../../hooks/useModal";
+import Loader from "../Common/Loader";
 
 function SellingPrice() {
   const [activeTab, setActiveTab] = useState("tab1");
-  const [showLacForm, setShowLacForm] = useState(false);
-  const [itemList, setItemList] = useState([]);
+  const { modal, updateModal, closeModal } = useModal()
+  const { isLoading, data } = useQuery({
+    queryKey: ["fpo/lac"],
+    queryFn: getFpoLac
+  })
 
-  const handleShowLacForm = () => setShowLacForm(true);
-  const handleCloseLacForm = () => setShowLacForm(false);
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   let newDate = new Date()
   let date = newDate.getDate();
@@ -19,19 +26,6 @@ function SellingPrice() {
   let year = newDate.getFullYear();
   if (date <= 9) date = "0" + date;
   if (month <= 9) month = "0" + month;
-
-  useEffect(() => {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
-    axios
-      .get("http://13.232.131.203:3000/api/fpo/lac")
-      .then((response) => {
-        console.log(response.data.data);
-        setItemList(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
   return (
     <div className="itemContainer">
@@ -67,7 +61,7 @@ function SellingPrice() {
                     border: "none",
                     width: "130px",
                   }}
-                  onClick={handleShowLacForm}
+                  onClick={() => updateModal("SellProduce", {})}
                 >
                   Add New
                 </Button>
@@ -94,7 +88,7 @@ function SellingPrice() {
               <TabContent id="tab1" activeTab={activeTab}>
                 <div className="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4">
                   {
-                    itemList.map((item, index) => (
+                    data.data.map((item, index) => (
                       <div className="col">
                         <div className="card">
                           <img
@@ -209,13 +203,17 @@ function SellingPrice() {
                   </div>
                 </div>
                 <div>
-                  <SellProduce
-                    showLacForm={showLacForm}
-                    handleCloseLacForm={handleCloseLacForm}
-                    date={date}
-                    month={month}
-                    year={year}
-                  />
+                  {
+                    modal.state &&
+                    <SellProduce
+                      show
+                      data={modal.data}
+                      handleClose={closeModal}
+                      date={date}
+                      month={month}
+                      year={year}
+                    />
+                  }
                 </div>
               </TabContent>
             </div>

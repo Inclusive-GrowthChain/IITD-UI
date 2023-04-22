@@ -12,3 +12,9 @@ export function getFpoProducts() {
     url: endPoints.fpo.products,
   })
 }
+
+export function getLoanList() {
+  return sendApiReq({
+    url: endPoints.farmer.loans,
+  })
+}

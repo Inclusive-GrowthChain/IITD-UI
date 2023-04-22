@@ -1,8 +1,6 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 
-import { grantedLoans, rejectedLoans, inProgressLoans } from './dummyLoanData';
-
 import { TabNavItem, TabContent } from "../UIComp/Tabs";
 import SumunnatiPaymentProof from "./Modals/Loan/SumunnatiPaymentProof";
 import RepaymentStructure from "./Modals/Loan/RepaymentStructure";
@@ -12,6 +10,13 @@ import FarmerLoan from "./Modals/Loan/FarmerLoan";
 import AadharCard from "./Modals/Loan/AadharCard";
 import Submitted from "./Modals/Loan/Submitted";
 import PanCard from "./Modals/Loan/PanCard";
+
+import { useQuery } from "@tanstack/react-query";
+
+import { getLoanList } from "../../actions/farmer";
+import useModal from "../../hooks/useModal";
+
+import Loader from "../Common/Loader";
 
 const style = {
   backgroundColor: "#66FF00",
@@ -74,10 +79,18 @@ const Loan = () => {
   const handleCloseConfirmBox = () => setShowConfirmBox(false)
   const handleCloseRepaymentLoan = () => setShowRepaymentLoan(false)
 
-  const confirmBid = (e) => {
+  const confirm = (e) => {
     e.preventDefault()
     setShowConfirmBox(true)
   }
+
+  const { modal, updateModal, closeModal } = useModal()
+  const { isLoading, data } = useQuery({
+    queryKey: ["farmer/loans"],
+    queryFn: getLoanList
+  })
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <div className="itemContainer">
@@ -111,7 +124,7 @@ const Loan = () => {
                 border: "none",
                 width: "130px",
               }}
-              onClick={handleShowLoanApp}
+              onClick={() => updateModal("FarmerLoan", {})}
             >
               Apply Loan
             </Button>
@@ -175,12 +188,12 @@ const Loan = () => {
                             }}
                           >
                             {
-                              grantedLoans.map(g => (
+                              data.data.filter((g) => g.status=="approved").map(g => (
                                 <tr key={g.id}>
-                                  <td>{g.id}</td>
-                                  <td>{g.applicationDate}</td>
-                                  <td>₹ {g.amount}</td>
-                                  <td>{g.rate}%</td>
+                                  <td>{g.loanId}</td>
+                                  <td>{g.dateOfApplication}</td>
+                                  <td>₹ {g.grantedAmount}</td>
+                                  <td>{g.intrest}%</td>
                                   <td>{g.loanDate}</td>
                                   <td>₹ {g.outstandingAmount}</td>
                                   <td>₹ {g.nextPaymentAmount}</td>
@@ -188,7 +201,7 @@ const Loan = () => {
                                   <td>
                                     <button
                                       style={style}
-                                      onClick={handleShowGrantedLoanApplication}
+                                      onClick={() => updateModal("LoanApplication2", g)}
                                     >
                                       view
                                     </button>
@@ -247,11 +260,11 @@ const Loan = () => {
                             }}
                           >
                             {
-                              rejectedLoans.map(r => (
+                              data.data.filter((r) => r.status=="rejected").map(r => (
                                 <tr key={r.id}>
-                                  <td>{r.id}</td>
-                                  <td>{r.date}</td>
-                                  <td>₹ {r.amount}</td>
+                                  <td>{r.loanId}</td>
+                                  <td>{r.dateOfApplication}</td>
+                                  <td>₹ {r.requestedAmount}</td>
                                   <td>{r.reason}</td>
                                 </tr>
                               ))
@@ -291,11 +304,11 @@ const Loan = () => {
                             }}
                           >
                             {
-                              inProgressLoans.map(ip => (
+                              data.data.filter((ip) => ip.status=="pending").map(ip => (
                                 <tr key={ip.id}>
-                                  <td>{ip.id}</td>
-                                  <td>{ip.date}</td>
-                                  <td>₹ {ip.amount}</td>
+                                  <td>{ip.loanId}</td>
+                                  <td>{ip.dateOfApplication}</td>
+                                  <td>₹ {ip.requestedAmount}</td>
                                   <td>
                                     <button
                                       style={style}
@@ -319,13 +332,16 @@ const Loan = () => {
         </div>
       </div>
 
-      <FarmerLoan
-        step={step}
-        setStep={setStep}
-        showLoanApp={showLoanApp}
-        confirmBid={confirmBid}
-        handleCloseLoanApp={handleCloseLoanApp}
-      />
+      {
+        modal.state &&
+        <FarmerLoan
+          step={step}
+          setStep={setStep}
+          confirm={confirm}
+          show
+          handleClose={closeModal}
+        />
+      }
 
       <LoanApplication
         step={step}
@@ -354,8 +370,8 @@ const Loan = () => {
       <LoanApplication2
         step={step}
         setStep={setStep}
-        showGrantedLoanApplication={showGrantedLoanApplication}
-        handleCloseGrantedLoanApplication={handleCloseGrantedLoanApplication}
+        show
+        handleClose={closeModal}
         handleShowSamunnatiPaymentProof={handleShowSamunnatiPaymentProof}
         handleShowAadharCardImg={handleShowAadharCardImg}
         handleShowPanCardImg={handleShowPanCardImg}

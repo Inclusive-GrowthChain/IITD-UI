@@ -43,7 +43,7 @@ function Store() {
                     <div className="card-body">
                       <div className="row">
                         <div className="col">
-                          <h4>Nylon Bag</h4>
+                          <h4>{item.productName}</h4>
                         </div>
                       </div>
                       <div className="row mt-2">
@@ -55,7 +55,7 @@ function Store() {
                           </div>
                           <div className="row">
                             <div className="col">
-                              <div className="price_tag">520</div>
+                              <div className="price_tag">{item.marketPrice}</div>
                             </div>
                           </div>
                         </div>
@@ -67,7 +67,7 @@ function Store() {
                           </div>
                           <div className="row">
                             <div className="col">
-                              <div className="price_tag">520</div>
+                              <div className="price_tag">{item.fpoPrice}</div>
                             </div>
                           </div>
                         </div>
