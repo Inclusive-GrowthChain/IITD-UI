@@ -86,6 +86,46 @@ const pendingMembershipList = [
   },
 ]
 
+const theadStyle = {
+  color: "#064420",
+  fontSize: "17px",
+  verticalAlign: "top",
+  fontWeight: "600",
+  borderBottom: "1px solid #c7ccd1",
+}
+
+const tbodyStyle = {
+  color: "#000",
+  fontSize: "15px",
+  fontWeight: "500",
+}
+
+const btnStyle = {
+  backgroundColor: "#064420",
+  color: "#fff",
+  alignItems: "center",
+  borderRadius: "5px",
+  border: "none",
+  padding: "5px 10px",
+  width: "fit-content",
+  fontSize: ".75rem",
+  lineHeight: "1rem",
+  fontWeight: "500",
+}
+
+const btnStyle2 = {
+  backgroundColor: "#064420",
+  color: "#fff",
+  alignItems: "center",
+  borderRadius: "5px",
+  border: "none",
+  padding: "5px 10px",
+  width: "20%",
+  minWidth: "80px",
+  fontSize: ".75rem",
+  lineHeight: "1rem",
+}
+
 function Farmer() {
   const [showLoanApplicationDetails, setShowLoanApplicationDetails] = useState(false)
   const [showAadharCardImg, setShowAadharCardImg] = useState(false)
@@ -147,15 +187,7 @@ function Farmer() {
               <div className="card_table1">
                 <div className=" table-responsive">
                   <table>
-                    <thead
-                      style={{
-                        color: "#064420",
-                        fontSize: "17px",
-                        verticalAlign: "top",
-                        fontWeight: "600",
-                        borderBottom: "1px solid #c7ccd1",
-                      }}
-                    >
+                    <thead style={theadStyle}>
                       <tr>
                         <th>Id</th>
                         <th>Name</th>
@@ -165,13 +197,8 @@ function Farmer() {
                         <th>View Application</th>
                       </tr>
                     </thead>
-                    <tbody
-                      style={{
-                        color: "#000",
-                        fontSize: "15px",
-                        fontWeight: "500",
-                      }}
-                    >
+
+                    <tbody style={tbodyStyle}>
                       {approvedMembershipList.map((app, i) => (
                         <tr>
                           <td>farmer-{i}</td>
@@ -189,18 +216,7 @@ function Farmer() {
                           <td>
                             <button
                               className="py-0.5 table_btn"
-                              style={{
-                                backgroundColor: "#064420",
-                                color: "#fff",
-                                alignItems: "center",
-                                borderRadius: "5px",
-                                border: "none",
-                                padding: "5px 10px",
-                                width: "fit-content",
-                                fontSize: ".75rem",
-                                lineHeight: "1rem",
-                                fontWeight: "500",
-                              }}
+                              style={btnStyle}
                               onClick={handleShowLoanApplicationDetails}
                             >
                               View
@@ -213,19 +229,12 @@ function Farmer() {
                 </div>
               </div>
             </div>
+
             <div className={`panel ${checkActive(2, "active")}`}>
               <div className="card_table1">
                 <div className=" table-responsive">
                   <table>
-                    <thead
-                      style={{
-                        color: "#064420",
-                        fontSize: "17px",
-                        verticalAlign: "top",
-                        fontWeight: "bold",
-                        borderBottom: "1px solid #c7ccd1",
-                      }}
-                    >
+                    <thead style={theadStyle}>
                       <tr>
                         <th>Name</th>
                         <th>Village</th>
@@ -233,13 +242,7 @@ function Farmer() {
                         <th>Aadhaar Number</th>
                       </tr>
                     </thead>
-                    <tbody
-                      style={{
-                        color: "#000",
-                        fontSize: "15px",
-                        fontWeight: "500",
-                      }}
-                    >
+                    <tbody style={tbodyStyle}>
                       {rejectedMembershipList.map((app) => (
                         <tr>
                           <td>{app.farmerName}</td>
@@ -253,19 +256,12 @@ function Farmer() {
                 </div>
               </div>
             </div>
+
             <div className={`panel ${checkActive(3, "active")}`}>
               <div className="card_table1">
                 <div className=" table-responsive">
                   <table>
-                    <thead
-                      style={{
-                        color: "#064420",
-                        fontSize: "17px",
-                        verticalAlign: "top",
-                        fontWeight: "bold",
-                        borderBottom: "1px solid #c7ccd1",
-                      }}
-                    >
+                    <thead style={theadStyle}>
                       <tr>
                         <th>Name</th>
                         <th>Village</th>
@@ -275,13 +271,7 @@ function Farmer() {
                         <th>Membership Status</th>
                       </tr>
                     </thead>
-                    <tbody
-                      style={{
-                        color: "#000",
-                        fontSize: "15px",
-                        fontWeight: "500",
-                      }}
-                    >
+                    <tbody style={tbodyStyle}>
                       {pendingMembershipList.map((app) => (
                         <tr>
                           <td>{app.farmerName}</td>
@@ -291,18 +281,7 @@ function Farmer() {
                           <td>
                             <button
                               className="py-0.5"
-                              style={{
-                                backgroundColor: "#064420",
-                                color: "#fff",
-                                alignItems: "center",
-                                borderRadius: "5px",
-                                border: "none",
-                                padding: "5px 10px",
-                                width: "20%",
-                                minWidth: "80px",
-                                fontSize: ".75rem",
-                                lineHeight: "1rem",
-                              }}
+                              style={btnStyle2}
                               onClick={handleShowLoanApplicationDetails}
                             >
                               View

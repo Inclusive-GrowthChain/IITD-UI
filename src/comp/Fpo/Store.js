@@ -9,6 +9,52 @@ import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRen
 import AddFpoStore from "./Modals/AddFpoStore";
 import Loader from "../Common/Loader";
 
+function Card({ data = [], updateModal }) {
+  return (
+    <div className="store-modal">
+      <div className="container-fluid">
+        <div className="row">
+          {
+            data.map(item => (
+              <div
+                key={item._id}
+                className="col-12 col-md-6 col-xl-4"
+              >
+                <div className="store-card mt-4">
+                  <div className="card-image">
+                    <img
+                      src={`${root.imgUrl}/img/${item.imageUrl}`}
+                      alt=""
+                      height={280}
+                      className="store_img"
+                    />
+                    <DriveFileRenameOutlineOutlinedIcon
+                      className="edit_image"
+                      onClick={() => updateModal("edit", item)}
+                    />
+                  </div>
+                  <div className="store-card-text">
+                    <h5>{item.productName}</h5>
+                  </div>
+                  <div className="store-card-footer">
+                    <div className="store-card-title">
+                      <h5>Market Price</h5>
+                      <p>₹ {item.marketPrice}</p>
+                    </div>
+                    <div className="store-card-title">
+                      <h5>FPO Price</h5>
+                      <p>₹ {item.fpoPrice}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const Store = () => {
   const { modal, updateModal, closeModal } = useModal()
   const [activeIndex, setActiveIndex] = useState(1)
@@ -27,9 +73,10 @@ const Store = () => {
 
   return (
     <main id="main_container" className="main_container container-fluid itemContainer">
-      <div className="">
+      <div>
         <h3 className="mb-4">FPO Store Information</h3>
       </div>
+
       <div className="list_container">
         <div className="store_wrapper">
           <button
@@ -58,95 +105,17 @@ const Store = () => {
 
           <div className="panels">
             <div className={`panel ${checkActive(1, "active")}`}>
-              <div className="store-modal">
-                <div className="container-fluid">
-                  <div className="row">
-                    {
-                      data.data
-                        .filter(item => item.isAvailable)
-                        .map(item => (
-                          <div
-                            key={item._id}
-                            className="col-12 col-md-6 col-xl-4"
-                          >
-                            <div className="store-card mt-4">
-                              <div className="card-image">
-                                <img
-                                  src={`${root.imgUrl}/img/${item.imageUrl}`}
-                                  alt=""
-                                  height={280}
-                                  className="store_img"
-                                />
-                                <DriveFileRenameOutlineOutlinedIcon
-                                  className="edit_image"
-                                  onClick={() => updateModal("edit", item)}
-                                />
-                              </div>
-                              <div className="store-card-text">
-                                <h5>{item.productName}</h5>
-                              </div>
-                              <div className="store-card-footer">
-                                <div className="store-card-title">
-                                  <h5>Market Price</h5>
-                                  <p>₹ {item.marketPrice}</p>
-                                </div>
-                                <div className="store-card-title">
-                                  <h5>FPO Price</h5>
-                                  <p>₹ {item.fpoPrice}</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                  </div>
-                </div>
-              </div>
+              <Card
+                data={data.data.filter(item => item.isAvailable)}
+                updateModal={updateModal}
+              />
             </div>
 
             <div className={`panel ${checkActive(2, "active")}`}>
-              <div className="store-modal">
-                <div className="container-fluid">
-                  <div className="row">
-                    {
-                      data.data
-                        .filter(item => !item.isAvailable)
-                        .map(item => (
-                          <div
-                            key={item._id}
-                            className="col-12 col-md-6 col-xl-4"
-                          >
-                            <div className="store-card mt-4">
-                              <div className="card-image">
-                                <img
-                                  src={`${root.imgUrl}/img/${item.imageUrl}`}
-                                  alt=""
-                                  height={280}
-                                  className="store_img"
-                                />
-                                <DriveFileRenameOutlineOutlinedIcon
-                                  className="edit_image"
-                                  onClick={() => updateModal("edit", item)}
-                                />
-                              </div>
-                              <div className="store-card-text">
-                                <h5>{item.productName}</h5>
-                              </div>
-                              <div className="store-card-footer">
-                                <div className="store-card-title">
-                                  <h5>Market Price</h5>
-                                  <p>₹ {item.marketPrice}</p>
-                                </div>
-                                <div className="store-card-title">
-                                  <h5>FPO Price</h5>
-                                  <p>₹ {item.fpoPrice}</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                  </div>
-                </div>
-              </div>
+              <Card
+                data={data.data.filter(item => !item.isAvailable)}
+                updateModal={updateModal}
+              />
             </div>
           </div>
         </div>

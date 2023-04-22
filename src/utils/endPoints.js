@@ -11,12 +11,13 @@ const endPoints = {
   corporateClientSignup: "/signup/corporateclient",
   farmerSignup: "/signup/farmer",
 
+  loanwindow: "/loanwindow",
   uploadImg: '/document',
   auction: "/auction",
 
   // Corporate Client
   corporateClient: {
-    lacBidding: "/auction",
+
   },
 
   // Nisa
@@ -36,6 +37,7 @@ const endPoints = {
   fpo: {
     products: "/fpo/product",
     farmers: "/fpo/farmer",
+    lac: "/fpo/lac",
   },
 }
 

@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQueries } from "@tanstack/react-query";
+
+import { getLacTest, getLacTest2 } from "../../actions/nisa";
+
 import LabSampleTest from "./Modals/LabSampleTest";
-import axios from "axios";
+import Loader from "../Common/Loader";
 
 const style = {
   backgroundColor: "#064420",
@@ -15,11 +19,25 @@ const style = {
   textAlign: "center",
 }
 
+const theadStyle = {
+  color: "#064420",
+  fontSize: "17px",
+  verticalAlign: "top",
+  fontWeight: "bold",
+  borderBottom: "1px solid #c7ccd1",
+}
+
+const tbodyStyle = {
+  color: "#000",
+  fontSize: "15px",
+  fontWeight: "500",
+}
+
 const FarmerInformation = () => {
   const [activeIndex, setActiveIndex] = useState(1);
   const [show, setShow] = useState(false);
-  const [appList, setAppList] = useState([]);
-  const [testList, setTestList] = useState([]);
+  // const [appList, setAppList] = useState([]);
+  // const [testList, setTestList] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -28,37 +46,56 @@ const FarmerInformation = () => {
   const checkActive = (index, className) =>
     activeIndex === index ? className : "";
 
-  useEffect(() => {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
-    axios
-      .get("http://13.232.131.203:3000/api/nisa/lactest")
-      .then((response) => {
-        console.log(response.data.data);
-        setAppList(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  const [
+    { isLoading: isLoading1, data: testList, },
+    { isLoading: isLoading2, data: appList }
+  ] = useQueries({
+    queries: [
+      {
+        queryKey: ["nisa/lac-test"],
+        queryFn: getLacTest,
+      },
+      {
+        queryKey: ["nisa/lactest"],
+        queryFn: getLacTest2,
+      }
+    ]
+  })
 
-  useEffect(() => {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
-    axios
-      .get("http://13.232.131.203:3000/api/nisa/lac-test")
-      .then((response) => {
-        console.log(response.data.data);
-        setTestList(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+  //   axios
+  //     .get("http://13.232.131.203:3000/api/nisa/lactest")
+  //     .then((response) => {
+  //       console.log(response.data.data);
+  //       setAppList(response.data.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
+
+  // useEffect(() => {
+  //   axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
+  //   axios
+  //     .get("http://13.232.131.203:3000/api/nisa/lac-test")
+  //     .then((response) => {
+  //       console.log(response.data.data);
+  //       setTestList(response.data.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
+
+  if (isLoading1 || isLoading2) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <main id="main_container" className="main_container container-fluid itemContainer">
-      <div className="">
+      <div>
         <h3 className="mb-4">Lab Test Information</h3>
       </div>
+
       <div className="list_container">
         <div className="lab_wrapper">
           <div className="store_item mt-5">
@@ -76,6 +113,7 @@ const FarmerInformation = () => {
                 Tests Price List
               </button>
             </div>
+
             <div className="panels">
               <div className={`panel ${checkActive(1, "active")}`}>
                 <button className="lab_btn" onClick={handleShow}>
@@ -92,13 +130,7 @@ const FarmerInformation = () => {
                 <div className="card_table1">
                   <div className=" table-responsive">
                     <table>
-                      <thead
-                        style={{
-                          fontSize: "17px",
-                          verticalAlign: "top",
-                          borderBottom: "1px solid #c7ccd1",
-                        }}
-                      >
+                      <thead style={theadStyle}>
                         <tr>
                           <th>Sample Id</th>
                           <th>Reference Number</th>
@@ -112,13 +144,8 @@ const FarmerInformation = () => {
                           <th>Certificate</th>
                         </tr>
                       </thead>
-                      <tbody
-                        style={{
-                          color: "#000",
-                          fontSize: "15px",
-                          fontWeight: "500",
-                        }}
-                      >
+
+                      <tbody style={tbodyStyle}>
                         {
                           appList.map((app, index) => (
                             <tr>
@@ -161,19 +188,12 @@ const FarmerInformation = () => {
                   </div>
                 </div>
               </div>
+
               <div className={`panel ${checkActive(2, "active")}`}>
                 <div className="card_table2">
                   <div className=" table-responsive">
                     <table>
-                      <thead
-                        style={{
-                          color: "#064420",
-                          fontSize: "17px",
-                          verticalAlign: "top",
-                          fontWeight: "bold",
-                          borderBottom: "1px solid #c7ccd1",
-                        }}
-                      >
+                      <thead style={theadStyle}>
                         <tr>
                           <th>Test Category</th>
                           <th>Test</th>
@@ -182,13 +202,7 @@ const FarmerInformation = () => {
                           <th>Reporting Period(Days)</th>
                         </tr>
                       </thead>
-                      <tbody
-                        style={{
-                          color: "#000",
-                          fontSize: "15px",
-                          fontWeight: "500",
-                        }}
-                      >
+                      <tbody style={tbodyStyle}>
                         {
                           testList.map((test, index) => (
                             <tr>
@@ -204,6 +218,7 @@ const FarmerInformation = () => {
                     </table>
                   </div>
                 </div>
+
                 <div className="card-details-button" style={{ marginBottom: '40px' }}>
                   <div className="card-details-header">
                     <span>* GST 18% extra</span> <br />

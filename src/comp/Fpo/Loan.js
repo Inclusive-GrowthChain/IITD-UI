@@ -13,6 +13,32 @@ import Invoice from "./Modals/FpoLoan/Invoice";
 import Confirm from "./Modals/FpoLoan/Confirm";
 import axios from "axios";
 
+const applyBtnStyle = {
+  backgroundColor: "#064420",
+  width: "14%",
+  minWidth: "150px",
+  color: "#fff",
+  border: "none",
+  padding: "5px 5px",
+  borderRadius: "5px",
+  position: "relative",
+  float: "right",
+  top: "-25px",
+  right: "50px",
+}
+
+const btnStyle = {
+  backgroundColor: "#064420",
+  color: "#fff",
+  alignItems: "center",
+  borderRadius: "5px",
+  border: "none",
+  padding: "0.25rem 1rem",
+  width: "fit-content",
+  fontSize: ".75rem",
+  lineHeight: "1rem",
+}
+
 function LoanWindowTable({ onClick, loanWindow }) {
   return (
     <div>
@@ -25,7 +51,7 @@ function LoanWindowTable({ onClick, loanWindow }) {
       <div className="d-flex align-items-center" style={{ gap: "1rem" }}>
         <label style={{ width: "180px" }}>Loan window amount</label>
         <span>:</span>
-        <input type="text" className="px-2 py-1 border-0" value={loanWindow && (loanWindow.grantedAmount != -1 ? loanWindow.grantedAmount : loanWindow.requestedAmount)} disabled />
+        <input type="text" className="px-2 py-1 border-0" value={loanWindow && (loanWindow.grantedAmount !== -1 ? loanWindow.grantedAmount : loanWindow.requestedAmount)} disabled />
       </div>
 
       <div className="d-flex align-items-center" style={{ gap: "1rem" }}>
@@ -197,24 +223,13 @@ const Loan = ({ props }) => {
             <div>
               <button
                 className="loan-btn"
-                style={{
-                  backgroundColor: "#064420",
-                  width: "14%",
-                  minWidth: "150px",
-                  color: "#fff",
-                  border: "none",
-                  padding: "5px 5px",
-                  borderRadius: "5px",
-                  position: "relative",
-                  float: "right",
-                  top: "-25px",
-                  right: "50px",
-                }}
+                style={applyBtnStyle}
                 onClick={handleShowApplyLoan}
               >
                 Apply for Loan
               </button>
             </div>
+
             <div className={`panel ${checkActive(1, "active")}`} style={{ marginTop: '40px' }}>
               {
                 loanWindowList && loanWindowList.map((loanWindow, index) => (
@@ -277,36 +292,29 @@ const Loan = ({ props }) => {
                                 fontWeight: "500",
                               }}
                             >
-                              {loanWindow.loans && loanWindow.loans.filter((loan) => loan.status === "approved").map((loan) => (
-                                <tr>
-                                  <td>{loan.approvalAt.substring(0, 10)}</td>
-                                  <td>{loanWindow.fpoName}</td>
-                                  <td>{loanWindow.contactNo}</td>
-                                  <td>{loan.grantedAmount}</td>
-                                  <td>{loan.farmerName}</td>
-                                  <td>
-                                    <button
-                                      style={{
-                                        backgroundColor: "#064420",
-                                        color: "#fff",
-                                        alignItems: "center",
-                                        borderRadius: "5px",
-                                        border: "none",
-                                        padding: "0.25rem 1rem",
-                                        width: "fit-content",
-                                        fontSize: ".75rem",
-                                        lineHeight: "1rem",
-                                      }}
-                                      onClick={() => {
-                                        setCurrentLoan(loan)
-                                        handleShowLoanDetails()
-                                      }}
-                                    >
-                                      view
-                                    </button>
-                                  </td>
-                                </tr>
-                              ))}
+                              {
+                                loanWindow?.loans?.filter(loan => loan.status === "approved")
+                                  .map((loan) => (
+                                    <tr>
+                                      <td>{loan.approvalAt.substring(0, 10)}</td>
+                                      <td>{loanWindow.fpoName}</td>
+                                      <td>{loanWindow.contactNo}</td>
+                                      <td>{loan.grantedAmount}</td>
+                                      <td>{loan.farmerName}</td>
+                                      <td>
+                                        <button
+                                          style={btnStyle}
+                                          onClick={() => {
+                                            setCurrentLoan(loan)
+                                            handleShowLoanDetails()
+                                          }}
+                                        >
+                                          view
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))
+                              }
                             </tbody>
                           </table>
                         </div>
@@ -339,36 +347,29 @@ const Loan = ({ props }) => {
                                 textAlign: "center",
                               }}
                             >
-                              {loanWindow.loans && loanWindow.loans.filter((loan) => loan.status === "rejected").map((loan) => (
-                                <tr>
-                                  <td>{loan.createdAt.substring(0, 10)}</td>
-                                  <td>{loanWindow.fpoName}</td>
-                                  <td>{loanWindow.contactNo}</td>
-                                  <td>{loan.requestedAmount}</td>
-                                  <td>
-                                    <button
-                                      style={{
-                                        backgroundColor: "#064420",
-                                        color: "#fff",
-                                        alignItems: "center",
-                                        borderRadius: "5px",
-                                        border: "none",
-                                        padding: "0.25rem 1rem",
-                                        width: "fit-content",
-                                        fontSize: ".75rem",
-                                        lineHeight: "1rem",
-                                      }}
-                                      onClick={() => {
-                                        setCurrentLoan(loan)
-                                        handleShowRejectionLoan()
-                                      }}
-                                    >
-                                      view
-                                    </button>
-                                  </td>
-                                  <td>{loan.reason}</td>
-                                </tr>
-                              ))}
+                              {
+                                loanWindow?.loans?.filter(loan => loan.status === "rejected")
+                                  .map((loan) => (
+                                    <tr>
+                                      <td>{loan.createdAt.substring(0, 10)}</td>
+                                      <td>{loanWindow.fpoName}</td>
+                                      <td>{loanWindow.contactNo}</td>
+                                      <td>{loan.requestedAmount}</td>
+                                      <td>
+                                        <button
+                                          style={btnStyle}
+                                          onClick={() => {
+                                            setCurrentLoan(loan)
+                                            handleShowRejectionLoan()
+                                          }}
+                                        >
+                                          view
+                                        </button>
+                                      </td>
+                                      <td>{loan.reason}</td>
+                                    </tr>
+                                  ))
+                              }
                             </tbody>
                           </table>
                         </div>
@@ -400,15 +401,18 @@ const Loan = ({ props }) => {
                                 textAlign: "center",
                               }}
                             >
-                              {loanWindow.loans && loanWindow.loans.filter((loan) => loan.status === "in-process").map((loan) => (
-                                <tr>
-                                  <td>{loan.createdAt.substring(0, 10)}</td>
-                                  <td>{loanWindow.fpoName}</td>
-                                  <td>{loanWindow.contactNo}</td>
-                                  <td>{loan.requestedAmount}</td>
-                                  <td>Pending</td>
-                                </tr>
-                              ))}
+                              {
+                                loanWindow?.loans.filter(loan => loan.status === "in-process")
+                                  .map((loan) => (
+                                    <tr>
+                                      <td>{loan.createdAt.substring(0, 10)}</td>
+                                      <td>{loanWindow.fpoName}</td>
+                                      <td>{loanWindow.contactNo}</td>
+                                      <td>{loan.requestedAmount}</td>
+                                      <td>Pending</td>
+                                    </tr>
+                                  ))
+                              }
                             </tbody>
                           </table>
                         </div>

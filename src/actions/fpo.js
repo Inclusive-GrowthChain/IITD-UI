@@ -42,8 +42,59 @@ export function editFpoProduct(data) {
   })
 }
 
+
 export function getFpoFarmers() {
   return sendApiReq({
     url: endPoints.fpo.farmers,
+  })
+}
+
+
+export function getFpoLac() {
+  return sendApiReq({
+    url: endPoints.fpo.lac,
+  })
+}
+
+export function addFpoLac(data) {
+  const formData = new FormData()
+  formData.append("productId", data.productId)
+  formData.append("productName", data.productName)
+  formData.append("marketPrice", data.marketPrice)
+  formData.append("fpoPrice", data.fpoPrice)
+  formData.append("productImg", data.image[0])
+  formData.append("isProcurable", data.isProcurable)
+
+  return sendApiReq({
+    method: "post",
+    url: endPoints.fpo.lac,
+    data: formData
+  })
+}
+
+export function editFpoLac(data) {
+  const formData = new FormData()
+  formData.append("productId", data.productId)
+  formData.append("productName", data.productName)
+  formData.append("marketPrice", data.marketPrice)
+  formData.append("fpoPrice", data.fpoPrice)
+  formData.append("isProcurable", data.isProcurable)
+
+  if (data.image[0]) {
+    formData.append("productImg", data.image[0])
+  }
+
+  return sendApiReq({
+    method: "put",
+    url: endPoints.fpo.lac + `/${data.productId}`,
+    data: formData
+  })
+}
+
+
+export function getLoanwindow({ windowType = "farmer" }) {
+  return sendApiReq({
+    url: endPoints.loanwindow,
+    params: { windowType },
   })
 }

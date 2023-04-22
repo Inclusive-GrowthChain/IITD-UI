@@ -1,7 +1,8 @@
 import Modal from "react-bootstrap/Modal";
+import { root } from "../../utils/endPoints";
 import logo from "../../assets/img/logo.png";
 
-function DocImg({ title = "", show, handleClose }) {
+function DocImg({ title = "", imgUrl = "", show, handleClose }) {
   return (
     <Modal
       show={show}
@@ -13,7 +14,7 @@ function DocImg({ title = "", show, handleClose }) {
 
       <Modal.Body>
         <img
-          src={logo}
+          src={imgUrl ? `${root.imgUrl}/img/${imgUrl}` : logo}
           alt={title}
           style={{ width: "100%", height: "100%" }}
         />

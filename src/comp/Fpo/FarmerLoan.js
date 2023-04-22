@@ -1,4 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+
+import { getLoanwindow } from "../../actions/fpo";
+
 import ConfirmApproveLoanApp from "./Modals/ConfirmApproveLoanApp";
 import AggRepaymentStructure from "./Modals/AggRepaymentStructure";
 import RepaymentStructure from "./Modals/RepaymentStructure";
@@ -7,10 +11,10 @@ import LoanApplication from "./Modals/LoanApplication";
 import InterestRate from "./Modals/InterestRate";
 import AddRepayment from "./Modals/AddRepayment";
 import ConfirmBox from "./Modals/ConfirmBox";
+import Loader from '../Common/Loader';
 import Aadhar from "./Modals/Aadhar";
 import Img from "./Modals/FarmerInfo/Img";
 import Pan from "./Modals/Pan";
-import axios from "axios";
 
 const repaymentList = [
   {
@@ -45,88 +49,46 @@ const repaymentList = [
   },
 ]
 
-// const farmerList = [
-//   {
-//     id: "F 1",
-//     name: "Farmer Name",
-//     loanId: "L 1",
-//     loanAppDate: "12-08-2021",
-//     loanAmount: "10000",
-//     status: "Approval Pending",
-//     email: "Email",
-//     mobile: "1234567890",
-//     aadharNo: "1234567890",
-//     panNo: "1234567890",
-//     address: "Address",
-//     incomeType: "Income",
-//     dob: "2022-10-10",
-//     landOwned: "Land",
-//     loanReason: "Reason",
-//     interest: 12,
-//     amount: 1000000,
-//     tenure: 12,
-//   },
-//   {
-//     id: "F 2",
-//     name: "Farmer Name",
-//     loanId: "L 2",
-//     loanAppDate: "12-08-2021",
-//     loanAmount: "10000",
-//     status: "Approval Pending",
-//     email: "Email",
-//     mobile: "1234567890",
-//     aadharNo: "1234567890",
-//     panNo: "1234567890",
-//     address: "Address",
-//     incomeType: "Income",
-//     dob: "2022-10-10",
-//     landOwned: "Land",
-//     loanReason: "Reason",
-//     interest: 12,
-//     amount: 1000000,
-//     tenure: 12,
-//   },
-//   {
-//     id: "F 3",
-//     name: "Farmer Name",
-//     loanId: "L 3",
-//     loanAppDate: "12-08-2021",
-//     loanAmount: "10000",
-//     status: "Approved",
-//     email: "Email",
-//     mobile: "1234567890",
-//     aadharNo: "1234567890",
-//     panNo: "1234567890",
-//     address: "Address",
-//     incomeType: "Income",
-//     dob: "2022-10-10",
-//     landOwned: "Land",
-//     loanReason: "Reason",
-//     interest: 12,
-//     amount: 1000000,
-//     tenure: 12,
-//   },
-//   {
-//     id: "F 4",
-//     name: "Farmer Name",
-//     loanId: "L 4",
-//     loanAppDate: "12-08-2021",
-//     loanAmount: "10000",
-//     status: "Approved",
-//     email: "Email",
-//     mobile: "1234567890",
-//     aadharNo: "1234567890",
-//     panNo: "1234567890",
-//     address: "Address",
-//     incomeType: "Income",
-//     dob: "2022-10-10",
-//     landOwned: "Land",
-//     loanReason: "Reason",
-//     interest: 12,
-//     amount: 1000000,
-//     tenure: 12,
-//   },
-// ]
+const listStyle = {
+  border: "none",
+  padding: "5px 5px",
+  borderRadius: "5px",
+  position: "absolute",
+  right: "10%",
+  top: "120px",
+}
+
+const h3Style = {
+  fontSize: "15px",
+  position: "fixed",
+  right: "5.5%",
+}
+
+const theadStyle = {
+  color: "#064420",
+  fontSize: "17px",
+  verticalAlign: "top",
+  fontWeight: "bold",
+  borderBottom: "1px solid #c7ccd1",
+}
+
+const tbodyStyle = {
+  color: "#000",
+  fontSize: "15px",
+  fontWeight: "500",
+}
+
+const btnStyle = {
+  backgroundColor: "#064420",
+  color: "#fff",
+  alignItems: "center",
+  borderRadius: "5px",
+  border: "none",
+  padding: "5px 10px",
+  width: "fit-content",
+  fontSize: ".75rem",
+  lineHeight: "1rem",
+}
 
 const FarmerLoan = ({ isToggled, onToggle }) => {
   const [showLoanApplication, setShowLoanApplication] = useState(false)
@@ -143,9 +105,18 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
   const [textState, setTextState] = useState("")
   const [showImg, setShowImg] = useState(false)
   const [step, setStep] = useState(0)
-  const [loanWindowList, setLoanWindowList] = useState([])
+  // const [loanWindowList, setLoanWindowList] = useState([])
   const [currentLoan, setCurrentLoan] = useState({})
   const [currentLoanWindow, setCurrentLoanWindow] = useState({})
+
+  // const { modal, updateModal, closeModal } = useModal()
+  const { isLoading, data } = useQuery({
+    queryKey: ["loanwindow"],
+    queryFn: getLoanwindow,
+
+  })
+
+  const loanWindowList = data?.data || []
 
   const checkActive = (index, className) =>
     activeIndex === index ? className : ""
@@ -160,7 +131,6 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
   const handleCloseAggRepayment = () => setShowAggRepayment(false)
   const handleShowRepaymentForm = () => setShowRepaymentForm(true)
   const handleShowAadharCardImg = () => setShowAadharCardImg(true)
-  // const handleShowAggRepayment = () => setShowAggRepayment(true)
   const handleCloseConfirmBox = () => setShowConfirmBox(false)
   const handleClosePanCardImg = () => setShowPanCardImg(false)
   const handleShowPanCardImg = () => setShowPanCardImg(true)
@@ -197,18 +167,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
     )
   }
 
-  useEffect(() => {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
-    axios
-      .get("http://13.232.131.203:3000/api/loanwindow?windowType=farmer")
-      .then((response) => {
-        console.log(response.data.data);
-        setLoanWindowList(response.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <main id="main_container" className="main_container container-fluid itemContainer">
@@ -217,25 +176,13 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
       </div>
       <div className="list_container">
         <div
-          style={{
-            border: "none",
-            padding: "5px 5px",
-            borderRadius: "5px",
-            position: "absolute",
-            right: "10%",
-            top: "120px",
-          }}
+          style={listStyle}
           className="list_container_inner"
         >
-          <h3
-            style={{
-              fontSize: "15px",
-              position: "fixed",
-              right: "5.5%",
-            }}
-          >
+          <h3 style={h3Style}>
             {textState}
           </h3>
+
           <div>
             <label className="toggle-switch">
               <input
@@ -248,208 +195,144 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
             </label>
           </div>
         </div>
+
         <button
           className="loan_btn"
           onClick={handleShowInterest}
         >
           Set Interest Rate
         </button>
-        <>
-          <div className="tabs mt-5">
-            <button
-              className={`tab ${checkActive(1, "active")}`}
-              onClick={() => handleClick(1)}
-            >
-              Loans Approved by Samunnati
-            </button>
-            <button
-              className={`tab ${checkActive(2, "active")}`}
-              onClick={() => handleClick(2)}
-            >
-              Loan History
-            </button>
-            {/* <button
-                  style={{
-                    color: "blue",
-                    borderRadius: "5px",
-                    border: "none",
-                    padding: "0.25rem 1rem",
-                    width: "fit-content",
-                    fontSize: "1rem",
-                    lineHeight: "2rem",
-                    textDecoration: "underline",
-                    backgroundColor: "rgb(255, 255, 255, 0)",
-                    position: "relative",
-                    left: "400px",
-                  }}
-                  onClick={handleShowAggRepayment}
-                >
-                  Aggregate Repayment
-                </button> */}
-          </div>
-          <div className="panels">
-            <div className={`panel ${checkActive(1, "active")}`}>
-              <div className="card_table2">
-                <div className=" table-responsive">
-                  <table>
-                    <thead
-                      style={{
-                        color: "#064420",
-                        fontSize: "17px",
-                        verticalAlign: "top",
-                        fontWeight: "bold",
-                        borderBottom: "1px solid #c7ccd1",
-                      }}
-                    >
-                      <tr>
-                        <td>Farmer Id</td>
-                        <td>Farmer Name</td>
-                        <th>Loan Id</th>
-                        <th>Loan Application Date</th>
-                        <th>Loan Amount</th>
-                        <th>Repayment Structure</th>
-                        <th>Loan Application</th>
-                      </tr>
-                    </thead>
-                    <tbody
-                      style={{
-                        color: "#000",
-                        fontSize: "15px",
-                        fontWeight: "500",
-                      }}
-                    >
-                      {loanWindowList && loanWindowList.map((loanWindow) => (
-                        <>
-                          {
-                            loanWindow && loanWindow.loans && loanWindow.loans.filter((loan) => loan.status === "approved").map((loan) => {
-                              return (
-                                <tr>
-                                  <td>???</td>
-                                  <td>???</td>
-                                  <td>{loan.loanId}</td>
-                                  <td>{loan.createdAt && loan.createdAt.substring(0, 10)}</td>
-                                  <td>{loan.grantedAmount}</td>
-                                  <td>
-                                    <button
-                                      className="py-0.5"
-                                      style={{
-                                        backgroundColor: "#064420",
-                                        color: "#fff",
-                                        alignItems: "center",
-                                        borderRadius: "5px",
-                                        border: "none",
-                                        padding: "5px 10px",
-                                        width: "fit-content",
-                                        fontSize: ".75rem",
-                                        lineHeight: "1rem",
-                                      }}
-                                      onClick={() => {
-                                        setCurrentLoan(loan)
-                                        setCurrentLoanWindow(loanWindow)
-                                        handleShowRepaymentForm()
-                                      }}
-                                    >
-                                      View
-                                    </button>
-                                  </td>
-                                  <td>
-                                    <button
-                                      className="py-0.5"
-                                      style={{
-                                        backgroundColor: "#064420",
-                                        color: "#fff",
-                                        alignItems: "center",
-                                        borderRadius: "5px",
-                                        border: "none",
-                                        padding: "5px 10px",
-                                        width: "fit-content",
-                                        fontSize: ".75rem",
-                                        lineHeight: "1rem",
-                                      }}
-                                      onClick={() => {
-                                        setCurrentLoan(loan)
-                                        setStep(0)
-                                        handleShowLoanApplication()
-                                      }}
-                                    >
-                                      View
-                                    </button>
-                                  </td>
-                                </tr>
-                              )
-                            })
-                          }
-                        </>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
 
-            <div className={`panel ${checkActive(2, "active")}`}>
-              <div className="card_table2">
-                <div className=" table-responsive">
-                  <table>
-                    <thead
-                      style={{
-                        color: "#064420",
-                        fontSize: "17px",
-                        verticalAlign: "top",
-                        fontWeight: "bold",
-                        borderBottom: "1px solid #c7ccd1",
-                      }}
-                    >
-                      <tr>
-                        <td>Farmer Id</td>
-                        <td>Farmer Name</td>
-                        <th>Loan Id</th>
-                        <th>Loan Application Date</th>
-                        <th>Loan Amount</th>
-                        <th>Loan Date</th>
-                        <th>Outstanding Amount</th>
-                        <th>Next Payment Amount</th>
-                        <th>Next Payment Date</th>
-                      </tr>
-                    </thead>
-                    <tbody
-                      style={{
-                        color: "#000",
-                        fontSize: "15px",
-                        fontWeight: "500",
-                        // textAlign: "center",
-                      }}
-                    >
-                      <tr>
-                        <td>Farmer Id</td>
-                        <td>Farmer Name</td>
-                        <td>2022-800-07</td>
-                        <td>01-05-2022</td>
-                        <td>₹ 98765</td>
-                        <td> 13-07-2022</td>
-                        <td>₹ 3778</td>
-                        <td>₹ 761434</td>
-                        <td> 24-09-2022</td>
-                      </tr>
-                      <tr>
-                        <td>Farmer Id</td>
-                        <td>Farmer Name</td>
-                        <td>2022-800-07</td>
-                        <td>01-05-2022</td>
-                        <td>₹ 98765</td>
-                        <td> 13-07-2022</td>
-                        <td>₹ 3778</td>
-                        <td>₹ 761434</td>
-                        <td> 24-09-2022</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+        <div className="tabs mt-5">
+          <button
+            className={`tab ${checkActive(1, "active")}`}
+            onClick={() => handleClick(1)}
+          >
+            Loans Approved by Samunnati
+          </button>
+          <button
+            className={`tab ${checkActive(2, "active")}`}
+            onClick={() => handleClick(2)}
+          >
+            Loan History
+          </button>
+        </div>
+
+        <div className="panels">
+          <div className={`panel ${checkActive(1, "active")}`}>
+            <div className="card_table2">
+              <div className=" table-responsive">
+                <table>
+                  <thead style={theadStyle}>
+                    <tr>
+                      <td>Farmer Id</td>
+                      <td>Farmer Name</td>
+                      <th>Loan Id</th>
+                      <th>Loan Application Date</th>
+                      <th>Loan Amount</th>
+                      <th>Repayment Structure</th>
+                      <th>Loan Application</th>
+                    </tr>
+                  </thead>
+
+                  <tbody style={tbodyStyle}>
+                    {loanWindowList.map((loanWindow) => (
+                      <>
+                        {
+                          loanWindow?.loans?.filter(loan => loan.status === "approved")
+                            .map(loan => (
+                              <tr>
+                                <td>???</td>
+                                <td>???</td>
+                                <td>{loan.loanId}</td>
+                                <td>{loan.createdAt?.substring(0, 10)}</td>
+                                <td>{loan.grantedAmount}</td>
+                                <td>
+                                  <button
+                                    className="py-0.5"
+                                    style={btnStyle}
+                                    onClick={() => {
+                                      setCurrentLoan(loan)
+                                      setCurrentLoanWindow(loanWindow)
+                                      handleShowRepaymentForm()
+                                    }}
+                                  >
+                                    View
+                                  </button>
+                                </td>
+                                <td>
+                                  <button
+                                    className="py-0.5"
+                                    style={btnStyle}
+                                    onClick={() => {
+                                      setCurrentLoan(loan)
+                                      setStep(0)
+                                      handleShowLoanApplication()
+                                    }}
+                                  >
+                                    View
+                                  </button>
+                                </td>
+                              </tr>
+                            ))
+                        }
+                      </>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
-        </>
+
+          <div className={`panel ${checkActive(2, "active")}`}>
+            <div className="card_table2">
+              <div className=" table-responsive">
+                <table>
+                  <thead style={theadStyle}>
+                    <tr>
+                      <td>Farmer Id</td>
+                      <td>Farmer Name</td>
+                      <th>Loan Id</th>
+                      <th>Loan Application Date</th>
+                      <th>Loan Amount</th>
+                      <th>Loan Date</th>
+                      <th>Outstanding Amount</th>
+                      <th>Next Payment Amount</th>
+                      <th>Next Payment Date</th>
+                    </tr>
+                  </thead>
+
+                  <tbody style={tbodyStyle}>
+                    <tr>
+                      <td>Farmer Id</td>
+                      <td>Farmer Name</td>
+                      <td>2022-800-07</td>
+                      <td>01-05-2022</td>
+                      <td>₹ 98765</td>
+                      <td> 13-07-2022</td>
+                      <td>₹ 3778</td>
+                      <td>₹ 761434</td>
+                      <td> 24-09-2022</td>
+                    </tr>
+                    <tr>
+                      <td>Farmer Id</td>
+                      <td>Farmer Name</td>
+                      <td>2022-800-07</td>
+                      <td>01-05-2022</td>
+                      <td>₹ 98765</td>
+                      <td> 13-07-2022</td>
+                      <td>₹ 3778</td>
+                      <td>₹ 761434</td>
+                      <td> 24-09-2022</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
       <RepaymentStructure
         showRepaymentForm={showRepaymentForm}
         handleCloseRepaymentForm={handleCloseRepaymentForm}

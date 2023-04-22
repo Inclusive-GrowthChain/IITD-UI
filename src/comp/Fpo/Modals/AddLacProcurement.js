@@ -1,70 +1,59 @@
-import Modal from "react-bootstrap/Modal";
-import axios from "axios";
-import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { Modal } from "react-bootstrap";
 
-function AddLacProcurement({ show, handleClose }) {
-  const [productId, setProductId] = useState("PROD002");
-  const [name, setName] = useState("");
-  const [marketPrice, setMarketPrice] = useState(0);
-  const [fpoPrice, setFpoPrice] = useState(0);
-  const [image, setImage] = useState("");
-  const [isProcuring, setIsProcuring] = useState(true);
+import { addFpoLac, editFpoLac } from "../../../actions/fpo";
+import Input, { errStyle } from '../../Nisa/Modals/Input';
 
-  const onChangeName = (e) => {
-    setName(e.target.value);
-  };
-
-  const onChangeMarketPrice = (e) => {
-    setMarketPrice(e.target.value);
-  };
-
-  const onChangeFpoPrice = (e) => {
-    setFpoPrice(e.target.value);
-  };
-
-  const onChangeImage = (e) => {
-    setImage(e.target.files[0]);
-  };
-
-  const resetInputs = () => {
-    setName("");
-    setMarketPrice(0);
-    setFpoPrice(0);
-    setImage("");
-    setIsProcuring(true);
-  }
-
-  const addItem = async () => {
-    if (name == "" || marketPrice == 0 || fpoPrice == 0 || image == "") {
-      alert("Please fill all details and try again");
-      return;
+const list = [
+  {
+    label: "Lac name",
+    name: "productName",
+  },
+  {
+    label: "Market price",
+    name: "marketPrice",
+    type: "number",
+    validation: {
+      min: {
+        value: 0,
+        message: "Price should greater than 0"
+      }
     }
-
-    if(fpoPrice < 0) {
-      alert("FPO Price cannot be negative");
-      return;
+  },
+  {
+    label: "FPO price",
+    name: "fpoPrice",
+    type: "number",
+    validation: {
+      min: {
+        value: 0,
+        message: "Price should greater than 0"
+      }
     }
+  },
+]
 
-    const formData = new FormData();
-    formData.append("productId", productId);
-    formData.append("productName", name);
-    formData.append("marketPrice", marketPrice);
-    formData.append("fpoPrice", fpoPrice);
-    formData.append("productImg", image);
-    formData.append("isProcurable", isProcuring);
+function AddLacProcurement({ show, data, isEdit, handleClose }) {
+  const queryClient = useQueryClient()
+  const { register, formState: { errors }, handleSubmit } = useForm({
+    defaultValues: {
+      productId: isEdit ? data._id : "PROD002",
+      productName: isEdit ? data.productName : "",
+      marketPrice: isEdit ? data.marketPrice : "",
+      fpoPrice: isEdit ? data.fpoPrice : "",
+      image: "",
+      isProcurable: isEdit ? `${data.isProcurable}` : true,
+    }
+  })
 
-    await axios
-      .post("http://13.232.131.203:3000/api/fpo/lac", formData)
-      .then((response) => {
-        console.log(response.data);
-        resetInputs();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    window.location.reload();
-  }
+  const { mutate, isLoading } = useMutation({
+    mutationFn: isEdit ? editFpoLac : addFpoLac,
+    onSuccess: () => {
+      queryClient.invalidateQueries("fpo/lac")
+      handleClose()
+    }
+  })
 
   return (
     <Modal
@@ -76,88 +65,98 @@ function AddLacProcurement({ show, handleClose }) {
       <Modal.Body>
         <div className="row">
           <div className="col">
-            <form>
+            <form onSubmit={handleSubmit(mutate)}>
               <div className="p-2">
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>Lac Name</label>
+                {
+                  list.map(l => (
+                    <Input
+                      key={l.name}
+                      {...l}
+                      register={register}
+                      errors={errors}
+                    />
+                  ))
+                }
+
+                <div className="m-2">
+                  <div style={{ padding: "0 12px" }}>
+                    <label>Upload image</label>
                   </div>
-                  <div className="col-lg-6">
-                    <input className="form-control" type="text" onChange={onChangeName}/>
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>Market Price</label>
-                  </div>
-                  <div className="col-lg-6">
-                    <input className="form-control" type="text" onChange={onChangeMarketPrice}/>
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>FPO Price</label>
-                  </div>
-                  <div className="col-lg-6">
-                    <input className="form-control" type="text" onChange={onChangeFpoPrice}/>
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>Upload Image</label>
-                  </div>
-                  <div className="col-lg-6">
+                  <div style={{ padding: "0 12px" }}>
                     <input
                       type="file"
                       className="form-control"
                       required=""
                       accept="image/*"
-                      onChange={onChangeImage}
+                      {...register("image", {
+                        required: isEdit ? false : "Image is required"
+                      })}
                     />
+                    {
+                      errors.image &&
+                      <p className="text-danger" style={errStyle}>
+                        {errors.image.message}
+                      </p>
+                    }
                   </div>
                 </div>
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>List of Items</label>
+
+                <div className="m-2">
+                  <div style={{ padding: "0 12px" }}>
+                    <p style={{ marginBottom: 0 }}>List of items</p>
                   </div>
-                  <div className="col-lg-6">
+                  <div style={{ padding: "0 12px" }}>
                     <div className="row">
-                      <div className="col">
+                      <div className="col" style={{ display: "flex", alignItems: "center" }}>
                         <div className="form-check">
                           <input
                             className="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="flexCheckDefault"
-                            onChange={() => setIsProcuring(true)}
+                            type="radio"
+                            value="true"
+                            id="flexCheckDefault1"
+                            {...register("isProcurable", {
+                              required: "Item type is required"
+                            })}
                           />
                         </div>
-                        <label className="form-check-label">
-                          Procuring
+                        <label htmlFor="flexCheckDefault1" className="form-check-label">
+                          Available
                         </label>
                       </div>
-                      <div className="col">
+                      <div className="col" style={{ display: "flex", alignItems: "center" }}>
                         <div className="form-check">
                           <input
                             className="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="flexCheckDefault"
-                            onChange={() => setIsProcuring(false)}
+                            type="radio"
+                            value="false"
+                            id="flexCheckDefault2"
+                            {...register("isProcurable", {
+                              required: "Item type is required"
+                            })}
                           />
                         </div>
-                        <label className="form-check-label">
-                          Not-Procuring
+                        <label htmlFor="flexCheckDefault2" className="form-check-label">
+                          Out of stock
                         </label>
                       </div>
                     </div>
+
+                    {
+                      errors.isProcurable &&
+                      <p className="text-danger" style={errStyle}>
+                        {errors.isProcurable.message}
+                      </p>
+                    }
                   </div>
                 </div>
+
                 <div className="row m-2">
-                  <button className="btn btn-success" style={{ backgroundColor: "#064420" }} onClick={(e) => {
-                    e.preventDefault();
-                    addItem();
-                  }}>
+                  <button
+                    type="submit"
+                    style={{ backgroundColor: "#064420" }}
+                    disabled={isLoading}
+                    className="btn btn-success"
+                  >
                     Submit
                   </button>
                 </div>

@@ -9,6 +9,44 @@ import Aadhar from "./Modals/Aadhar";
 import Pan from "./Modals/Pan";
 import axios from "axios";
 
+const btnStyle = {
+  backgroundColor: "#064420",
+  color: "#fff",
+  alignItems: "center",
+  borderRadius: "5px",
+  border: "none",
+  padding: "5px 10px",
+  width: "fit-content",
+  fontSize: ".75rem",
+  lineHeight: "1rem",
+}
+
+const theadStyle = {
+  color: "#00A877",
+  fontSize: "17px",
+  verticalAlign: "top",
+  fontWeight: "bold",
+  borderBottom: "1px solid #c7ccd1",
+}
+
+const tbodyStyle = {
+  color: "#000",
+  fontSize: "15px",
+  fontWeight: "500",
+}
+
+const repaymentBtnStyle = {
+  color: "white",
+  borderRadius: "5px",
+  border: "none",
+  padding: "0.25rem 1rem",
+  width: "fit-content",
+  fontSize: "1rem",
+  lineHeight: "2rem",
+  backgroundColor: "#064420",
+  marginRight: "50px",
+}
+
 function FpoLoanTab({ Comp }) {
   const [showConfirmLoanStatus, setShowConfirmLoanStatus] = useState(false)
   const [showRepaymentAmount, setShowRepaymentAmount] = useState(false)
@@ -124,22 +162,13 @@ function FpoLoanTab({ Comp }) {
     <div className="loan_fpo">
       <div className="aggregate_repayment_container" style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}>
         <button
-          style={{
-            color: "white",
-            borderRadius: "5px",
-            border: "none",
-            padding: "0.25rem 1rem",
-            width: "fit-content",
-            fontSize: "1rem",
-            lineHeight: "2rem",
-            backgroundColor: "#064420",
-            marginRight: "50px",
-          }}
+          style={repaymentBtnStyle}
           onClick={handleShowRepaymentAmount}
         >
           Aggregate Repayment
         </button>
       </div>
+
       <div className="card_wrapper">
         {
           loanWindowList && loanWindowList.map((loanWindow, index) => (
@@ -178,14 +207,7 @@ function FpoLoanTab({ Comp }) {
               <div className="panels" style={{ overflowY: "auto" }}>
                 <div className={toggleStateList[index] === 1 ? "panel active" : "panel"}>
                   <table>
-                    <thead
-                      style={{
-                        color: "#00A877",
-                        fontSize: "17px",
-                        verticalAlign: "top",
-                        fontWeight: "bold",
-                      }}
-                    >
+                    <thead style={theadStyle}>
                       <tr>
                         <th>Date of Application</th>
                         <th>Date of Approval</th>
@@ -196,13 +218,7 @@ function FpoLoanTab({ Comp }) {
                         <th>Loan Details</th>
                       </tr>
                     </thead>
-                    <tbody
-                      style={{
-                        color: "#000",
-                        fontSize: "15px",
-                        fontWeight: "500",
-                      }}
-                    >
+                    <tbody style={tbodyStyle}>
                       {
                         loanWindow.loans && loanWindow.loans.filter((loan) => loan.status === "approved").map((loan) => (
                           <tr>
@@ -214,17 +230,7 @@ function FpoLoanTab({ Comp }) {
                             <td>
                               <button
                                 className="py-0.5"
-                                style={{
-                                  backgroundColor: "#064420",
-                                  color: "#fff",
-                                  alignItems: "center",
-                                  borderRadius: "5px",
-                                  border: "none",
-                                  padding: "5px 10px",
-                                  width: "fit-content",
-                                  fontSize: ".75rem",
-                                  lineHeight: "1rem",
-                                }}
+                                style={btnStyle}
                                 onClick={() => {
                                   setCurrentLoan(loan);
                                   setActiveLoanWindow(loanWindow);
@@ -237,17 +243,7 @@ function FpoLoanTab({ Comp }) {
                             <td>
                               <button
                                 className="py-0.5"
-                                style={{
-                                  backgroundColor: "#064420",
-                                  color: "#fff",
-                                  alignItems: "center",
-                                  borderRadius: "5px",
-                                  border: "none",
-                                  padding: "5px 10px",
-                                  width: "fit-content",
-                                  fontSize: ".75rem",
-                                  lineHeight: "1rem",
-                                }}
+                                style={btnStyle}
                                 onClick={handleShowLoanApplication}
                               >
                                 View
@@ -262,15 +258,7 @@ function FpoLoanTab({ Comp }) {
 
                 <div className={toggleStateList[index] === 2 ? "panel active" : "panel"}>
                   <table>
-                    <thead
-                      style={{
-                        color: "#00A877",
-                        fontSize: "17px",
-                        verticalAlign: "top",
-                        fontWeight: "bold",
-                        borderBottom: "1px solid #c7ccd1",
-                      }}
-                    >
+                    <thead style={theadStyle}>
                       <tr>
                         <th>Loan Id</th>
                         <th>Loan Application Date</th>
@@ -281,13 +269,7 @@ function FpoLoanTab({ Comp }) {
                         <th>Next Payment Date</th>
                       </tr>
                     </thead>
-                    <tbody
-                      style={{
-                        color: "#000",
-                        fontSize: "15px",
-                        fontWeight: "500",
-                      }}
-                    >
+                    <tbody style={tbodyStyle}>
                       {
                         loanWindow.loans && loanWindow.loans.map((loan) => (
                           <tr>
@@ -307,15 +289,7 @@ function FpoLoanTab({ Comp }) {
 
                 <div className={toggleStateList[index] === 3 ? "panel active" : "panel"}>
                   <table>
-                    <thead
-                      style={{
-                        color: "#00A877",
-                        fontSize: "17px",
-                        verticalAlign: "top",
-                        fontWeight: "bold",
-                        borderBottom: "1px solid #c7ccd1",
-                      }}
-                    >
+                    <thead style={theadStyle}>
                       <tr>
                         <th>Loan Id</th>
                         <th>Loan Application Date</th>
@@ -324,13 +298,7 @@ function FpoLoanTab({ Comp }) {
                         <th>Status</th>
                       </tr>
                     </thead>
-                    <tbody
-                      style={{
-                        color: "#000",
-                        fontSize: "15px",
-                        fontWeight: "500",
-                      }}
-                    >
+                    <tbody style={tbodyStyle}>
                       {
                         loanWindow.loans && loanWindow.loans.filter((loan) => loan.fpoApprovalStatus === "in-process").map((loan) => (
                           <tr>
@@ -340,17 +308,7 @@ function FpoLoanTab({ Comp }) {
                             <td>
                               <button
                                 className="py-0.5"
-                                style={{
-                                  backgroundColor: "#064420",
-                                  color: "#fff",
-                                  alignItems: "center",
-                                  borderRadius: "5px",
-                                  border: "none",
-                                  padding: "5px 10px",
-                                  width: "fit-content",
-                                  fontSize: ".75rem",
-                                  lineHeight: "1rem",
-                                }}
+                                style={btnStyle}
                                 onClick={() => {
                                   setCurrentLoan(loan);
                                   setActiveLoanWindow(loanWindow);
@@ -449,7 +407,6 @@ function FpoLoanTab({ Comp }) {
         currentLoan={currentLoan}
         currentLoanWindow={activeLoanWindow}
       />
-
     </div>
   )
 }
