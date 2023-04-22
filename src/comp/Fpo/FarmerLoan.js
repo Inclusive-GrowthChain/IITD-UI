@@ -111,7 +111,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
 
   // const { modal, updateModal, closeModal } = useModal()
   const { isLoading, data } = useQuery({
-    queryKey: ["loanwindow"],
+    queryKey: ["loanwindow", "farmer"],
     queryFn: getLoanwindow,
 
   })
@@ -236,7 +236,7 @@ const FarmerLoan = ({ isToggled, onToggle }) => {
                   </thead>
 
                   <tbody style={tbodyStyle}>
-                    {loanWindowList.map((loanWindow) => (
+                    {loanWindowList?.map((loanWindow) => (
                       <>
                         {
                           loanWindow?.loans?.filter(loan => loan.status === "approved")

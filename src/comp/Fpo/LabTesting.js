@@ -33,11 +33,102 @@ const tbodyStyle = {
   fontWeight: "500",
 }
 
+function Note() {
+  return (
+    <div className="card-details-button" style={{ marginBottom: '40px' }}>
+      <div className="card-details-header">
+        <span>* GST 18% extra</span> <br />
+        Payment Details: Payments for testing charges may be
+        made either through Demand Draft in favour of ICAR-UNIT
+        LING, Namkum Ranchi and payable to SBI, Namkum, Branch
+        or through Net Banking. <br />
+        The details of Netbanking are as follows :
+      </div>
+      <div className="mt-3">
+        <div className="row m-2">
+          <div className="col-lg-6">
+            <strong>State Bank of India</strong>
+          </div>
+          <div className="col-lg-6">
+            <div>Namkum (Ranchi)</div>
+          </div>
+        </div>
+        <div className="row m-2">
+          <div className="col-lg-6">
+            <strong>Dist</strong>
+          </div>
+          <div className="col-lg-6">
+            <div>Ranchi</div>
+          </div>
+        </div>
+        <div className="row m-2">
+          <div className="col-lg-6">
+            <strong>Branch Code</strong>
+          </div>
+          <div className="col-lg-6">
+            <div>9011</div>
+          </div>
+        </div>
+        <div className="row m-2">
+          <div className="col-lg-6">
+            <strong>Branch Phone</strong>
+          </div>
+          <div className="col-lg-6">
+            <div>2260209</div>
+          </div>
+        </div>
+        <div className="row m-2">
+          <div className="col-lg-6">
+            <strong>IFSC</strong>
+          </div>
+          <div className="col-lg-6">
+            <div>SBIN0009011</div>
+          </div>
+        </div>
+        <div className="row m-2">
+          <div className="col-lg-6">
+            <strong>MICR</strong>
+          </div>
+          <div className="col-lg-6">
+            <div>834002017</div>
+          </div>
+        </div>
+        <div className="row m-2">
+          <div className="col-lg-6">
+            <strong>Account No</strong>
+          </div>
+          <div className="col-lg-6">
+            <div>10379971148</div>
+          </div>
+        </div>
+        <div className="row m-2">
+          <div className="col-lg-6">
+            <strong>Product</strong>
+          </div>
+          <div className="col-lg-6">
+            <div>CA-GEN-PUBIND-NONRURAL-INR</div>
+          </div>
+        </div>
+        <div className="row m-2">
+          <div className="col-lg-6">
+            <strong>Currency</strong>
+          </div>
+          <div className="col-lg-6">
+            <div>INR</div>
+          </div>
+        </div>
+        <div className="payment-note mt-3">
+          Note: Testing charges are subjected to revision from
+          time to time without any notice
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const FarmerInformation = () => {
-  const [activeIndex, setActiveIndex] = useState(1);
-  const [show, setShow] = useState(false);
-  // const [appList, setAppList] = useState([]);
-  // const [testList, setTestList] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(1)
+  const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -61,32 +152,6 @@ const FarmerInformation = () => {
       }
     ]
   })
-
-  // useEffect(() => {
-  //   axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
-  //   axios
-  //     .get("http://13.232.131.203:3000/api/nisa/lactest")
-  //     .then((response) => {
-  //       console.log(response.data.data);
-  //       setAppList(response.data.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-
-  // useEffect(() => {
-  //   axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
-  //   axios
-  //     .get("http://13.232.131.203:3000/api/nisa/lac-test")
-  //     .then((response) => {
-  //       console.log(response.data.data);
-  //       setTestList(response.data.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
 
   if (isLoading1 || isLoading2) return <Loader wrapperCls="loader-main-right" />
 
@@ -147,8 +212,8 @@ const FarmerInformation = () => {
 
                       <tbody style={tbodyStyle}>
                         {
-                          appList.map((app, index) => (
-                            <tr>
+                          appList?.data?.map(app => (
+                            <tr key={app._id}>
                               <td>{app.sampleId}</td>
                               <td>{app.referenceNo}</td>
                               <td>{app.dateOfApplication}</td>
@@ -204,8 +269,8 @@ const FarmerInformation = () => {
                       </thead>
                       <tbody style={tbodyStyle}>
                         {
-                          testList.map((test, index) => (
-                            <tr>
+                          testList?.data?.map(test => (
+                            <tr key={test._id}>
                               <td>{test.category}</td>
                               <td>{test.testName}</td>
                               <td>{test.minRequiredQuantity}</td>
@@ -219,94 +284,7 @@ const FarmerInformation = () => {
                   </div>
                 </div>
 
-                <div className="card-details-button" style={{ marginBottom: '40px' }}>
-                  <div className="card-details-header">
-                    <span>* GST 18% extra</span> <br />
-                    Payment Details: Payments for testing charges may be
-                    made either through Demand Draft in favour of ICAR-UNIT
-                    LING, Namkum Ranchi and payable to SBI, Namkum, Branch
-                    or through Net Banking. <br />
-                    The details of Netbanking are as follows :
-                  </div>
-                  <div className="mt-3">
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <strong>State Bank of India</strong>
-                      </div>
-                      <div className="col-lg-6">
-                        <div>Namkum (Ranchi)</div>
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <strong>Dist</strong>
-                      </div>
-                      <div className="col-lg-6">
-                        <div>Ranchi</div>
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <strong>Branch Code</strong>
-                      </div>
-                      <div className="col-lg-6">
-                        <div>9011</div>
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <strong>Branch Phone</strong>
-                      </div>
-                      <div className="col-lg-6">
-                        <div>2260209</div>
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <strong>IFSC</strong>
-                      </div>
-                      <div className="col-lg-6">
-                        <div>SBIN0009011</div>
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <strong>MICR</strong>
-                      </div>
-                      <div className="col-lg-6">
-                        <div>834002017</div>
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <strong>Account No</strong>
-                      </div>
-                      <div className="col-lg-6">
-                        <div>10379971148</div>
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <strong>Product</strong>
-                      </div>
-                      <div className="col-lg-6">
-                        <div>CA-GEN-PUBIND-NONRURAL-INR</div>
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <strong>Currency</strong>
-                      </div>
-                      <div className="col-lg-6">
-                        <div>INR</div>
-                      </div>
-                    </div>
-                    <div className="payment-note mt-3">
-                      Note: Testing charges are subjected to revision from
-                      time to time without any notice
-                    </div>
-                  </div>
-                </div>
+                <Note />
               </div>
             </div>
           </div>

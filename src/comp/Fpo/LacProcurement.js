@@ -16,7 +16,7 @@ function Card({ data = [], updateModal }) {
         <div className="row">
           {
             data.map(item => (
-              <div className="col-12 col-md-6 col-xl-4">
+              <div key={item._id} className="col-12 col-md-6 col-xl-4">
                 <div className="store-card mt-4">
                   <div className="card-image">
                     <img

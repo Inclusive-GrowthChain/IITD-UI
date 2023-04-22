@@ -106,14 +106,14 @@ const Store = () => {
           <div className="panels">
             <div className={`panel ${checkActive(1, "active")}`}>
               <Card
-                data={data.data.filter(item => item.isAvailable)}
+                data={data?.data?.filter(item => item.isAvailable)}
                 updateModal={updateModal}
               />
             </div>
 
             <div className={`panel ${checkActive(2, "active")}`}>
               <Card
-                data={data.data.filter(item => !item.isAvailable)}
+                data={data?.data?.filter(item => !item.isAvailable)}
                 updateModal={updateModal}
               />
             </div>
