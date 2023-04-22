@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 
-import FPOLoanTab from "./FPOLoanTab";
+import { getLoanwindow } from "../../../actions/fpo";
+import { useAuthStore } from "../../../store/useAuthStore";
+import useModal from "../../../hooks/useModal";
 
-import RepaymentStructure from "./Modals/FpoLoan/RepaymentStructure";
-import DocumentsCollected2 from "./Modals/FpoLoan/DocumentsCollected2";
-import DocumentsCollected from "./Modals/FpoLoan/DocumentsCollected";
-import LoanApplication2 from "./Modals/FpoLoan/LoanApplication2";
-import LoanApplication from "./Modals/FpoLoan/LoanApp";
-import PaymentProof from "./Modals/FpoLoan/PaymentProof";
-import LoanDetails from "./Modals/FpoLoan/LoanDetails";
-import Invoice from "./Modals/FpoLoan/Invoice";
-import Confirm from "./Modals/FpoLoan/Confirm";
-import axios from "axios";
+import DocumentsCollected2 from "../Modals/FpoLoan/DocumentsCollected2";
+import DocumentsCollected from "../Modals/FpoLoan/DocumentsCollected";
+import LoanApplication2 from "../Modals/FpoLoan/LoanApplication2";
+import LoanApplication from "../Modals/FpoLoan/LoanApp";
+import LoanDetails from "../Modals/FpoLoan/LoanDetails";
+import FarmerLoanTab from "./FarmerLoanTab";
+import Loader from "../../Common/Loader";
 
 const applyBtnStyle = {
   backgroundColor: "#064420",
@@ -84,70 +84,24 @@ function LoanWindowTable({ onClick, loanWindow }) {
   )
 }
 
-const Loan = ({ props }) => {
-  const [showAttachPaymentImg, setShowAttachPaymentImg] = useState(false)
-  const [showAttachInvoiceImg, setShowAttachInvoiceImg] = useState(false)
-  const [showRejectionLoan, setShowRejectionLoan] = useState(false)
-  const [showLoanDetails, setShowLoanDetails] = useState(false)
-  const [showRepayment, setShowRepayment] = useState(false)
-  const [showApplyLoan, setShowApplyLoan] = useState(false)
-  const [showConfirm, setShowConfirm] = useState(false)
-  const [currentLoan, setCurrentLoan] = useState({})
-  const [activeIndex, setActiveIndex] = useState(1)
-  const [toggleStateList, setToggleStateList] = useState([])
-  const [windowId, setWindowId] = useState("")
-  const [noOfRows, setNoOfRows] = useState(1)
-  const [showApp, setShowApp] = useState(false)
-  const [showAdd, setShowAdd] = useState(false)
-  const [step, setStep] = useState(0)
-  const [activeTab, setActiveTab] = useState(1)
-  const [loanWindowList, setLoanWindowList] = useState([])
+function Loan() {
+  const { modal, updateModal, closeModal } = useModal()
+  const userId = useAuthStore(s => s.userDetails._id)
+
+  const { isLoading, data } = useQuery({
+    queryKey: ["loanwindow", "fpo"],
+    queryFn: () => getLoanwindow("fpo")
+  })
+
   const [activeLoanWindow, setActiveLoanWindow] = useState({})
+  const [toggleStateList, setToggleStateList] = useState([])
+  const [loanWindowList, setLoanWindowList] = useState([])
+  const [activeIndex, setActiveIndex] = useState(1)
+  const [windowId, setWindowId] = useState("")
 
   const checkActive = (index, className) => activeIndex === index ? className : ""
 
-  const handleCloseAttachInvoiceImg = () => setShowAttachInvoiceImg(false)
-  const handleShowAttachInvoiceImg = () => setShowAttachInvoiceImg(true)
-  const handleCloseRejectionLoan = () => setShowRejectionLoan(false)
-  const handleShowRejectionLoan = () => setShowRejectionLoan(true)
-  const handleCloseLoanDetails = () => setShowLoanDetails(false)
-  const handleClosePaymentImg = () => setShowAttachPaymentImg(false)
-  const handleShowLoanDetails = () => setShowLoanDetails(true)
-  const handleShowPaymentImg = () => setShowAttachPaymentImg(true)
-  const handleCloseApplyLoan = () => setShowApplyLoan(false)
-  const handleCloseRepayment = () => setShowRepayment(false)
-  const handleShowApplyLoan = () => setShowApplyLoan(true)
-  const handleCloseConfirm = () => setShowConfirm(false)
-  const handleShowConfirm = () => setShowConfirm(true)
-  const handleShowApp = () => setShowApp(true)
-  const handleShowAdd = () => setShowAdd(true)
-  const handleSubmit = () => alert("you are successfully submitted")
   const handleClick = (index) => setActiveIndex(index)
-
-  const handleCloseApp = () => {
-    setShowApp(false)
-    setStep(0)
-  }
-
-  const handleCloseAdd = () => {
-    setShowAdd(false)
-    setStep(0)
-  }
-
-  const handleChange = (event) => {
-    const fileUploaded = event.target.files[0]
-    props.handleFile(fileUploaded)
-  }
-
-  const confirmAttachImg = (e) => {
-    e.preventDefault()
-    setShowAttachInvoiceImg(true)
-  }
-
-  const confirmPaymentImg = (e) => {
-    e.preventDefault()
-    setShowAttachPaymentImg(true)
-  }
 
   const generateRandomWindowID = () => {
     let windowVal = 'W' + (Math.floor(100000 + Math.random() * 900000))
@@ -155,43 +109,38 @@ const Loan = ({ props }) => {
   }
 
   useEffect(() => {
-    async function fetchLoanWindow() {
-      try {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`;
-        const response = await axios.get("http://13.232.131.203:3000/api/loanwindow?windowType=fpo");
-        const loanWindow = response.data.data.filter((item) => item.fpoId === localStorage.getItem("userId"));
-        setLoanWindowList(loanWindow);
-        setToggleStateList(Array(loanWindow.length).fill(1));
-        setActiveLoanWindow(loanWindow.reduce((prev, current) => (prev.createdAt > current.createdAt) ? prev : current));
-      } catch (error) {
-        console.log(error);
-      }
+    if (data) {
+      console.log(data?.data)
+      const loanWindow = data?.data?.filter((item) => item.fpoId === userId)
+      setLoanWindowList(loanWindow)
+      // setToggleStateList(Array(loanWindow.length).fill(1))
+      // setActiveLoanWindow(loanWindow.reduce((prev, current) => (prev.createdAt > current.createdAt) ? prev : current))
     }
-    fetchLoanWindow();
-  }, []);
+  }, [data, userId])
 
   const toggleTab = (index, tabNumber) => {
-    const newToggleStateList = [...toggleStateList];
-    newToggleStateList[index] = tabNumber;
-    setToggleStateList(newToggleStateList);
-  };
+    const newToggleStateList = [...toggleStateList]
+    newToggleStateList[index] = tabNumber
+    setToggleStateList(newToggleStateList)
+  }
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <>
       <main id="main_container" className="main_container container-fluid itemContainer">
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center justify-content-between">
           <h3 className="flex-grow-1">Loan Information</h3>
-        </div>
-        <div className="d-flex loan_btn_container">
+
           <button
             className="loan_btn"
             onClick={() => {
               setWindowId(generateRandomWindowID())
-              handleShowAdd()
+              updateModal("showAdd")
             }}
           >
             {
-              activeTab === 1 ? "Apply for Working Capital Loan Window" : "Apply for Farmer Loan"
+              activeIndex === 1 ? "Apply for Working Capital Loan Window" : "Apply for Farmer Loan"
             }
           </button>
         </div>
@@ -200,20 +149,14 @@ const Loan = ({ props }) => {
           <div className="tabs mt-5">
             <button
               className={`tab ${checkActive(1, "active")}`}
-              onClick={() => {
-                handleClick(1)
-                setActiveTab(1)
-              }}
+              onClick={() => handleClick(1)}
             >
               Working Capital Loan
             </button>
 
             <button
               className={`tab ${checkActive(2, "active")}`}
-              onClick={() => {
-                handleClick(2)
-                setActiveTab(2)
-              }}
+              onClick={() => handleClick(2)}
             >
               Farmer Loan
             </button>
@@ -224,7 +167,7 @@ const Loan = ({ props }) => {
               <button
                 className="loan-btn"
                 style={applyBtnStyle}
-                onClick={handleShowApplyLoan}
+                onClick={() => updateModal("showApplyLoan")}
               >
                 Apply for Loan
               </button>
@@ -304,10 +247,7 @@ const Loan = ({ props }) => {
                                       <td>
                                         <button
                                           style={btnStyle}
-                                          onClick={() => {
-                                            setCurrentLoan(loan)
-                                            handleShowLoanDetails()
-                                          }}
+                                          onClick={() => updateModal("showLoanDetails", loan)}
                                         >
                                           view
                                         </button>
@@ -358,10 +298,7 @@ const Loan = ({ props }) => {
                                       <td>
                                         <button
                                           style={btnStyle}
-                                          onClick={() => {
-                                            setCurrentLoan(loan)
-                                            handleShowRejectionLoan()
-                                          }}
+                                          onClick={() => updateModal("showRejectionLoan", loan)}
                                         >
                                           view
                                         </button>
@@ -420,8 +357,8 @@ const Loan = ({ props }) => {
                         <div className={toggleStateList[index] === 4 ? "panel active" : "panel"}>
                           <LoanWindowTable
                             onClick={() => {
-                              handleShowApp()
                               setWindowId(generateRandomWindowID())
+                              updateModal("showApp")
                             }}
                             loanWindow={loanWindow}
                           />
@@ -434,12 +371,12 @@ const Loan = ({ props }) => {
             </div>
 
             <div className={`panel ${checkActive(2, "active")}`} style={{ marginTop: '40px' }}>
-              <FPOLoanTab
+              <FarmerLoanTab
                 Comp={
                   <LoanWindowTable
                     onClick={() => {
                       setWindowId(generateRandomWindowID())
-                      handleShowAdd()
+                      updateModal("showAdd")
                     }}
                   />
                 }
@@ -449,74 +386,50 @@ const Loan = ({ props }) => {
         </div>
       </main>
 
-      <RepaymentStructure
-        showRepayment={showRepayment}
-        handleCloseRepayment={handleCloseRepayment}
-      />
+      {
+        modal.state === "showLoanDetails" &&
+        <LoanDetails
+          show
+          data={modal.data}
+          handleClose={closeModal}
+        />
+      }
 
-      <LoanDetails
-        currentLoan={currentLoan}
-        showLoanDetails={showLoanDetails}
-        confirmAttachImg={confirmAttachImg}
-        confirmPaymentImg={confirmPaymentImg}
-        handleShowPaymentImg={handleShowPaymentImg}
-        handleCloseLoanDetails={handleCloseLoanDetails}
-        handleShowAttachInvoiceImg={handleShowAttachInvoiceImg}
-      />
+      {
+        modal.state === "showRejectionLoan" &&
+        <LoanApplication
+          show
+          data={modal.data}
+          handleClose={closeModal}
+        />
+      }
 
-      <Invoice
-        showAttachInvoiceImg={showAttachInvoiceImg}
-        handleCloseAttachInvoiceImg={handleCloseAttachInvoiceImg}
-      />
+      {
+        modal.state === "showApp" &&
+        <DocumentsCollected
+          show
+          windowId={windowId}
+          handleClose={closeModal}
+        />
+      }
 
-      <PaymentProof
-        showAttachPaymentImg={showAttachPaymentImg}
-        handleClosePaymentImg={handleClosePaymentImg}
-      />
+      {
+        modal.state === "showApplyLoan" &&
+        <LoanApplication2
+          show
+          loanWindow={activeLoanWindow}
+          handleClose={closeModal}
+        />
+      }
 
-      <LoanApplication
-        currentLoan={currentLoan}
-        showRejectionLoan={showRejectionLoan}
-        confirmPaymentImg={confirmPaymentImg}
-        handleShowPaymentImg={handleShowPaymentImg}
-        handleCloseRejectionLoan={handleCloseRejectionLoan}
-      />
-
-      <DocumentsCollected
-        showApp={showApp}
-        handleCloseApp={handleCloseApp}
-        step={step}
-        setStep={setStep}
-        handleChange={handleChange}
-        noOfRows={noOfRows}
-        setNoOfRows={setNoOfRows}
-        windowId={windowId}
-        handleSubmit={handleSubmit}
-      />
-
-      <LoanApplication2
-        showApplyLoan={showApplyLoan}
-        handleCloseApplyLoan={handleCloseApplyLoan}
-        loanWindow={activeLoanWindow}
-      />
-
-      <DocumentsCollected2
-        step={step}
-        showAdd={showAdd}
-        noOfRows={noOfRows}
-        windowId={windowId}
-        setStep={setStep}
-        setNoOfRows={setNoOfRows}
-        handleChange={handleChange}
-        handleCloseAdd={handleCloseAdd}
-        handleShowConfirm={handleShowConfirm}
-      />
-
-      <Confirm
-        showConfirm={showConfirm}
-        handleCloseAdd={handleCloseAdd}
-        handleCloseConfirm={handleCloseConfirm}
-      />
+      {
+        modal.state === "showAdd" &&
+        <DocumentsCollected2
+          show
+          windowId={windowId}
+          handleClose={closeModal}
+        />
+      }
     </>
   )
 }

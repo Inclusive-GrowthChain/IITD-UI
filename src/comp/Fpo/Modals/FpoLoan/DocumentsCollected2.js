@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 
 const style = {
@@ -14,16 +15,21 @@ const style = {
 }
 
 function DocumentsCollected2({
-  step, showAdd, setStep, noOfRows, windowId,
-  setNoOfRows, handleCloseAdd, handleChange,
-  handleShowConfirm
+  show, handleClose,
+  // step, setStep, noOfRows, setNoOfRows,
+  windowId,
+  handleChange = () => { },
+  // handleShowConfirm
 }) {
+  const [step, setStep] = useState(0)
+  const [noOfRows, setNoOfRows] = useState(1)
+
   return (
     <Modal
       size="lg"
       scrollable
-      show={showAdd}
-      onHide={handleCloseAdd}
+      show={show}
+      onHide={handleClose}
       contentClassName="modal-height"
     >
       <Modal.Header closeButton>Documents Collected</Modal.Header>
@@ -846,10 +852,7 @@ function DocumentsCollected2({
                           ("Create" && step < 5)) && (
                             <button
                               className="btn btn-success"
-                              onClick={(e) => {
-                                e.preventDefault()
-                                handleShowConfirm()
-                              }}
+                              // onClick={}
                               style={{
                                 marginTop: "1rem",
                                 backgroundColor: "#064420",

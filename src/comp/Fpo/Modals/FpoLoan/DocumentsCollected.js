@@ -1,16 +1,36 @@
+import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 
+const btnStyle = {
+  backgroundColor: "#064420",
+  color: "#fff",
+  alignItems: "center",
+  borderRadius: "5px",
+  border: "none",
+  padding: "5px 10px",
+  width: "30%",
+  fontSize: ".75rem",
+  lineHeight: "1rem",
+  textAlign: "center",
+}
+
 function DocumentsCollected({
-  showApp, handleCloseApp, step, setStep,
-  handleChange, noOfRows, setNoOfRows, windowId,
-  handleSubmit
+  show, handleClose,
+  // step, setStep,
+  handleChange = () => { },
+  // noOfRows, setNoOfRows, 
+  windowId,
+  // handleSubmit
 }) {
+  const [step, setStep] = useState(0)
+  const [noOfRows, setNoOfRows] = useState(1)
+
   return (
     <Modal
       size="lg"
-      show={showApp}
-      onHide={handleCloseApp}
-      scrollable={true}
+      show={show}
+      onHide={handleClose}
+      scrollable
     >
       <Modal.Header closeButton>Documents Collected</Modal.Header>
       <Modal.Body>
@@ -37,18 +57,7 @@ function DocumentsCollected({
                         <div className="col-lg-6 text-center">
                           <button
                             className="py-0.5"
-                            style={{
-                              backgroundColor: "#064420",
-                              color: "#fff",
-                              alignItems: "center",
-                              borderRadius: "5px",
-                              border: "none",
-                              padding: "5px 10px",
-                              width: "30%",
-                              fontSize: ".75rem",
-                              lineHeight: "1rem",
-                              textAlign: "center",
-                            }}
+                            style={btnStyle}
                           >
                             View
                           </button>
@@ -61,18 +70,7 @@ function DocumentsCollected({
                         <div className="col-lg-6 text-center">
                           <button
                             className="py-0.5"
-                            style={{
-                              backgroundColor: "#064420",
-                              color: "#fff",
-                              alignItems: "center",
-                              borderRadius: "5px",
-                              border: "none",
-                              padding: "5px 10px",
-                              width: "30%",
-                              fontSize: ".75rem",
-                              lineHeight: "1rem",
-                              textAlign: "center",
-                            }}
+                            style={btnStyle}
                           >
                             View
                           </button>
@@ -87,18 +85,7 @@ function DocumentsCollected({
                         <div className="col-lg-6 text-center">
                           <button
                             className="py-0.5"
-                            style={{
-                              backgroundColor: "#064420",
-                              color: "#fff",
-                              alignItems: "center",
-                              borderRadius: "5px",
-                              border: "none",
-                              padding: "5px 10px",
-                              width: "30%",
-                              fontSize: ".75rem",
-                              lineHeight: "1rem",
-                              textAlign: "center",
-                            }}
+                            style={btnStyle}
                           >
                             View
                           </button>
@@ -111,18 +98,7 @@ function DocumentsCollected({
                         <div className="col-lg-6 text-center">
                           <button
                             className="py-0.5"
-                            style={{
-                              backgroundColor: "#064420",
-                              color: "#fff",
-                              alignItems: "center",
-                              borderRadius: "5px",
-                              border: "none",
-                              padding: "5px 10px",
-                              width: "30%",
-                              fontSize: ".75rem",
-                              lineHeight: "1rem",
-                              textAlign: "center",
-                            }}
+                            style={btnStyle}
                           >
                             View
                           </button>
@@ -135,18 +111,7 @@ function DocumentsCollected({
                         <div className="col-lg-6 text-center">
                           <button
                             className="py-0.5"
-                            style={{
-                              backgroundColor: "#064420",
-                              color: "#fff",
-                              alignItems: "center",
-                              borderRadius: "5px",
-                              border: "none",
-                              padding: "5px 10px",
-                              width: "30%",
-                              fontSize: ".75rem",
-                              lineHeight: "1rem",
-                              textAlign: "center",
-                            }}
+                            style={btnStyle}
                           >
                             View
                           </button>
@@ -840,7 +805,7 @@ function DocumentsCollected({
                           ("Create" && step < 5)) && (
                             <button
                               className="btn btn-success"
-                              onClick={() => handleSubmit(alert)}
+                              onClick={() => { }}
                               style={{
                                 marginTop: "1rem",
                                 backgroundColor: "#064420",

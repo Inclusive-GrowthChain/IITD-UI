@@ -1,14 +1,25 @@
 import Modal from "react-bootstrap/Modal";
+import useModal from "../../../../hooks/useModal";
+import DocImg from "../../../Common/DocImg";
 
-function LoanApp({
-  currentLoan, showRejectionLoan,
-  confirmPaymentImg, handleShowPaymentImg,
-  handleCloseRejectionLoan
-}) {
+const btnStyle = {
+  backgroundColor: "#064420",
+  color: "#fff",
+  borderRadius: "5px",
+  border: "none",
+  padding: "0.25rem 1rem",
+  width: "100%",
+  fontSize: ".75rem",
+  lineHeight: "2rem",
+}
+
+function LoanApp({ data, show, handleClose }) {
+  const { modal, updateModal, closeModal } = useModal()
+
   return (
     <Modal
-      show={showRejectionLoan}
-      onHide={handleCloseRejectionLoan}
+      show={show}
+      onHide={handleClose}
     >
       <Modal.Header closeButton>
         Loan Application
@@ -27,7 +38,7 @@ function LoanApp({
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.loanId}
+                        value={data.loanId}
                         disabled
                       />
                     </div>
@@ -40,7 +51,7 @@ function LoanApp({
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.payeeName}
+                        value={data.payeeName}
                         disabled
                       />
                     </div>
@@ -53,7 +64,7 @@ function LoanApp({
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.accountNumber}
+                        value={data.accountNumber}
                         disabled
                       />
                     </div>
@@ -66,7 +77,7 @@ function LoanApp({
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.ifscNumber}
+                        value={data.ifscNumber}
                         disabled
                       />
                     </div>
@@ -79,7 +90,7 @@ function LoanApp({
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.bankName}
+                        value={data.bankName}
                         disabled
                       />
                     </div>
@@ -92,7 +103,7 @@ function LoanApp({
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.requestedAmount}
+                        value={data.requestedAmount}
                         disabled
                       />
                     </div>
@@ -105,7 +116,7 @@ function LoanApp({
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.loanTenure}
+                        value={data.loanTenure}
                         disabled
                       />
                     </div>
@@ -118,7 +129,7 @@ function LoanApp({
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.purpose}
+                        value={data.purpose}
                         disabled
                       />
                     </div>
@@ -129,22 +140,8 @@ function LoanApp({
                     </div>
                     <div className="col-lg-6">
                       <button
-                        style={{
-                          backgroundColor:
-                            "#064420",
-                          color: "#fff",
-                          borderRadius: "5px",
-                          border: "none",
-                          padding:
-                            "0.25rem 1rem",
-                          width: "100%",
-                          fontSize: ".75rem",
-                          lineHeight: "2rem",
-                        }}
-                        onClick={(e) => {
-                          handleShowPaymentImg()
-                          confirmPaymentImg(e)
-                        }}
+                        style={btnStyle}
+                        onClick={() => updateModal("Payment Proof")}
                       >
                         View
                       </button>
@@ -155,6 +152,15 @@ function LoanApp({
             </form>
           </div>
         </div>
+
+        {
+          modal.state &&
+          <DocImg
+            show
+            title={modal.state}
+            handleClose={closeModal}
+          />
+        }
       </Modal.Body>
     </Modal>
   )

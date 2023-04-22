@@ -19,7 +19,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment, currentLoan, 
                   <strong>Loan ID : </strong>
                 </div>
                 <div className="col-6">
-                  <span>{currentLoan && currentLoan.loanId}</span>
+                  <span>{currentLoan?.loanId}</span>
                 </div>
                 <div className="col-6">
                   <strong>
@@ -33,7 +33,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment, currentLoan, 
                   <strong>FPO Name : </strong>
                 </div>
                 <div className="col-6">
-                  <span>{currentLoanWindow && currentLoanWindow.fpoName}</span>
+                  <span>{currentLoanWindow?.fpoName}</span>
                 </div>
                 <div className="col-6">
                   <strong>
@@ -41,7 +41,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment, currentLoan, 
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>{currentLoan && currentLoan.grantedAmount}</span>
+                  <span>{currentLoan?.grantedAmount}</span>
                 </div>
               </div>
             </div>
@@ -53,7 +53,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment, currentLoan, 
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>{currentLoan && currentLoan.loanTenure}</span>
+                  <span>{currentLoan?.loanTenure}</span>
                 </div>
                 <div className="col-6">
                   <strong>
@@ -61,7 +61,7 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment, currentLoan, 
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>{currentLoan && currentLoan.loanTenure}</span>
+                  <span>{currentLoan?.loanTenure}</span>
                 </div>
                 <div className="col-6">
                   <strong>
@@ -69,21 +69,16 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment, currentLoan, 
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>{currentLoan && currentLoan.intrest}%</span>
+                  <span>{currentLoan?.intrest}%</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <div className="mt-5">
-          <table
-            style={{ border: "1px solid #eee" }}
-          >
-            <thead
-              style={{
-                backgroundColor: "#eee",
-              }}
-            >
+          <table style={{ border: "1px solid #eee" }}>
+            <thead style={{ backgroundColor: "#eee" }}>
               <tr>
                 <th>S.No.</th>
                 <th>Scheduled Repayment Date</th>
@@ -93,9 +88,10 @@ function RepaymentStructure({ showRepayment, handleCloseRepayment, currentLoan, 
                 <th>Balance Amount</th>
               </tr>
             </thead>
+
             <tbody>
               {
-                currentLoan && currentLoan.repaymentStructure && currentLoan.repaymentStructure.map((repayment) => (
+                currentLoan?.repaymentStructure?.map((repayment) => (
                   <tr>
                     <td>{repayment.id}</td>
                     <td>{repayment.repaymentDate}</td>

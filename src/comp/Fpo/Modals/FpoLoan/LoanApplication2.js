@@ -2,8 +2,8 @@ import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
 import axios from "axios";
 
-function LoanApplication2({ showApplyLoan, handleCloseApplyLoan, loanWindow }) {
-  const [loanId, setLoanId] = useState("LOAN0001");
+function LoanApplication2({ show, handleClose, loanWindow }) {
+  const [loanId] = useState("LOAN0001");
   const [nameOfPayee, setNameOfPayee] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
   const [ifscNumber, setIfscNumber] = useState("");
@@ -33,10 +33,6 @@ function LoanApplication2({ showApplyLoan, handleCloseApplyLoan, loanWindow }) {
     setAmount(e.target.value);
   };
 
-  const onChangeInterest = (e) => {
-    setInterest(e.target.value);
-  };
-
   const onChangeTenure = (e) => {
     setTenure(e.target.value);
   };
@@ -57,7 +53,7 @@ function LoanApplication2({ showApplyLoan, handleCloseApplyLoan, loanWindow }) {
   };
 
   const applyForLoan = async () => {
-    if (nameOfPayee == "" || accountNumber == "" || ifscNumber == "" || bankName == "" || amount == 0 || interest == 0 || tenure == 0 || purpose == "") {
+    if (nameOfPayee === "" || accountNumber === "" || ifscNumber === "" || bankName === "" || amount === 0 || interest === 0 || tenure === 0 || purpose === "") {
       alert("Please fill all details and try again");
       return;
     }
@@ -91,8 +87,8 @@ function LoanApplication2({ showApplyLoan, handleCloseApplyLoan, loanWindow }) {
 
   return (
     <Modal
-      show={showApplyLoan}
-      onHide={handleCloseApplyLoan}
+      show={show}
+      onHide={handleClose}
     >
       <Modal.Header closeButton>Loan Application</Modal.Header>
       <Modal.Body>

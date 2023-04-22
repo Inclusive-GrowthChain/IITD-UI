@@ -22,11 +22,10 @@ const FpoLacProcurement = lazy(() => import("./comp/Fpo/LacProcurement"))
 const FpoLabTesting = lazy(() => import("./comp/Fpo/LabTesting"))
 const FpoFarmerLoan = lazy(() => import("./comp/Fpo/FarmerLoan"))
 const FpoFarmerInfo = lazy(() => import("./comp/Fpo/FarmerInfo"))
-// const FpoDashboard = lazy(() => import("./comp/Fpo/Dashboard"))
 const FpoSetting = lazy(() => import("./comp/Fpo/Settings"))
 const FpoFarmer = lazy(() => import("./comp/Fpo/Farmer"))
 const FpoStore = lazy(() => import("./comp/Fpo/Store"))
-const FpoLoan = lazy(() => import("./comp/Fpo/Loan"))
+const FpoLoan = lazy(() => import("./comp/Fpo/FpoLoan"))
 const FpoWrapper = lazy(() => import("./comp/Fpo"))
 
 const AdminCorporateClient = lazy(() => import("./comp/Admin/CorporateClient"))
@@ -88,7 +87,6 @@ function App() {
           <Route path="lac-procurement" element={<FpoLacProcurement />} />
           <Route path="lab-testing" element={<FpoLabTesting />} />
           <Route path="farmerloan" element={<FpoFarmerLoan />} />
-          {/* <Route path="dashboard" element={<FpoDashboard />} /> */}
           <Route path="settings" element={<FpoSetting />} />
           <Route path="support" element={<TemplateSupport />} />
           <Route path="farmer" element={<FpoFarmer />} />
