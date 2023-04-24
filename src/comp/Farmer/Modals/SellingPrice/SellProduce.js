@@ -12,7 +12,6 @@ function SellProduce({ data, show, handleClose, date, month, year }) {
   const { register, formState: { errors }, handleSubmit, reset } = useForm({
     defaultValues: {
       farmerId: localStorage.getItem("userId"),
-      date: `${date}/${month}/${year}`,
       lacStrainType: "",
       treeSource: "",
       origin: "",
