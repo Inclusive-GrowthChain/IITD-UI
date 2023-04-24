@@ -250,7 +250,7 @@ function CapitalLoanTab() {
 
   const { isLoading, data } = useQuery({
     queryKey: ["loanwindow", "fpo"],
-    queryFn: () => getLoanwindow("fpo")
+    queryFn: () => getLoanwindow({ windowType: "fpo" })
   })
 
   useEffect(() => {

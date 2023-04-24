@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import useModal from "../../../hooks/useModal";
 
-import DocumentsCollected2 from "../Modals/FpoLoan/DocumentsCollected2";
+import CapitalWindow from "../Modals/FpoLoan/CapitalWindow";
 import CapitalLoanTab from "./CapitalLoanTab";
 import FarmerLoanTab from "./FarmerLoanTab";
 
@@ -22,7 +22,7 @@ function Loan() {
 
           <button
             className="loan_btn"
-            onClick={() => updateModal("showAdd")}
+            onClick={() => updateModal("CaptialWindow")}
           >
             {
               activeIndex === 1 ? "Apply for Working Capital Loan Window" : "Apply for Farmer Loan"
@@ -60,10 +60,9 @@ function Loan() {
       </main>
 
       {
-        modal.state === "showAdd" &&
-        <DocumentsCollected2
+        modal.state === "CaptialWindow" &&
+        <CapitalWindow
           show
-          windowId=""
           handleClose={closeModal}
         />
       }

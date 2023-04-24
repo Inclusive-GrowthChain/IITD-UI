@@ -92,7 +92,7 @@ export function editFpoLac(data) {
 }
 
 
-export function getLoanwindow(windowType = "farmer") {
+export function getLoanwindow({ windowType = "farmer" }) {
   return sendApiReq({
     url: endPoints.loanwindow,
     params: { windowType },
