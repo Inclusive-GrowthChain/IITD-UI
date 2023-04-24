@@ -4,21 +4,32 @@ import Button from "react-bootstrap/Button";
 import { TabNavItem, TabContent } from "../UIComp/Tabs";
 import SellProduce from "./Modals/SellingPrice/SellProduce";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQueries } from "@tanstack/react-query";
 
 import { getFpoLac } from "../../actions/fpo";
+import { getProduceList } from "../../actions/farmer";
 import useModal from "../../hooks/useModal";
 import Loader from "../Common/Loader";
 
 function SellingPrice() {
   const [activeTab, setActiveTab] = useState("tab1");
   const { modal, updateModal, closeModal } = useModal()
-  const { isLoading, data } = useQuery({
-    queryKey: ["fpo/lac"],
-    queryFn: getFpoLac
+  const [
+    { isLoading: isLoading1, data: sellItemList, },
+    { isLoading: isLoading2, data: produceList }
+  ] = useQueries({
+    queries: [
+      {
+        queryKey: ["fpo/lac"],
+        queryFn: getFpoLac,
+      },
+      {
+        queryKey: ["farmer/produce"],
+        queryFn: getProduceList,
+      }
+    ]
   })
-
-  if (isLoading) return <Loader wrapperCls="loader-main-right" />
+  if (isLoading1 || isLoading2) return <Loader wrapperCls="loader-main-right" />
 
   let newDate = new Date()
   let date = newDate.getDate();
@@ -88,7 +99,7 @@ function SellingPrice() {
               <TabContent id="tab1" activeTab={activeTab}>
                 <div className="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4">
                   {
-                    data.data.map((item, index) => (
+                    sellItemList && sellItemList.data.map((item, index) => (
                       <div className="col">
                         <div className="card">
                           <img
@@ -164,38 +175,20 @@ function SellingPrice() {
                               fontWeight: "500",
                             }}
                           >
-                            <tr>
-                              <td>12/12/2020</td>
-                              <td>Stick Lac</td>
-                              <td>Wild</td>
-                              <td>Assam</td>
-                              <td>100</td>
-                              <td>Good</td>
-                            </tr>
-                            <tr>
-                              <td>12/12/2020</td>
-                              <td>Stick Lac</td>
-                              <td>Wild</td>
-                              <td>Assam</td>
-                              <td>100</td>
-                              <td>Good</td>
-                            </tr>
-                            <tr>
-                              <td>12/12/2020</td>
-                              <td>Stick Lac</td>
-                              <td>Wild</td>
-                              <td>Assam</td>
-                              <td>100</td>
-                              <td>Good</td>
-                            </tr>
-                            <tr>
-                              <td>12/12/2020</td>
-                              <td>Stick Lac</td>
-                              <td>Wild</td>
-                              <td>Assam</td>
-                              <td>100</td>
-                              <td>Good</td>
-                            </tr>
+                            {
+                              produceList && produceList.data.map((item, index) => {
+                                return (
+                                  <tr>
+                                    <td>{item.date}</td>
+                                    <td>{item.lacStrainType}</td>
+                                    <td>{item.treeSource}</td>
+                                    <td>{item.origin}</td>
+                                    <td>{item.quantity}</td>
+                                    <td>{item.remarks}</td>
+                                  </tr>
+                                )
+                              })
+                            }
                           </tbody>
                         </table>
                       </div>

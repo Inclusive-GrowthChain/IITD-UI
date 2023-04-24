@@ -18,3 +18,26 @@ export function getLoanList() {
     url: endPoints.farmer.loans,
   })
 }
+
+export function getProduceList(data) {
+  return sendApiReq({
+    url: endPoints.farmer.produce + `/${data.farmerId}/produce`,
+  })
+}
+
+export function addProduce(data) {
+  const formData = new FormData()
+  formData.append("farmerId", data.farmerId)
+  formData.append("date", data.date)
+  formData.append("lacStrainType", data.lacStrainType)
+  formData.append("treeSource", data.treeSource)
+  formData.append("origin", data.origin)
+  formData.append("quantity", data.quantity)
+  formData.append("remarks", data.remarks)
+
+  return sendApiReq({
+    method: "post",
+    url: endPoints.farmer.produce,
+    data: formData
+  })
+}

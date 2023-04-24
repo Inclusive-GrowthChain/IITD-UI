@@ -148,8 +148,8 @@ const fieldSet1 = [
     isFile: true,
   },
   {
-    name: "fpoName",
-    label: "FPO Name",
+    name: "fpoId",
+    label: "FPO ID",
   }
 ];
 
@@ -191,7 +191,7 @@ function Register() {
       panCardImage: "",
       aadharCardNumber: "",
       aadharCardImage: "",
-      fpoName: "",
+      fpoId: "",
     }
   });
 
