@@ -1,13 +1,41 @@
-import Modal from "react-bootstrap/Modal";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { Modal } from "react-bootstrap";
+
+import { addProduce } from "../../../../actions/farmer";
+
+const errStyle = { fontSize: "12px", margin: 0 }
+// const textAreaStyle = { resize: "none", height: "150px" }
 
 function SellProduce({ data, show, handleClose, date, month, year }) {
+  const queryClient = useQueryClient()
+  const { register, formState: { errors }, handleSubmit, reset } = useForm({
+    defaultValues: {
+      farmerId: localStorage.getItem("userId"),
+      lacStrainType: "",
+      treeSource: "",
+      origin: "",
+      quantity: "",
+      remarks: ""
+    }
+  })
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: addProduce,
+    onSuccess: () => {
+      queryClient.invalidateQueries("farmer/produce")
+      reset()
+      handleClose()
+    }
+  })
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Enter details</Modal.Header>
       <Modal.Body>
         <div className="row">
           <div className="col">
-            <form>
+            <form onSubmit={handleSubmit(mutate)}>
               <div className="form">
                 <label className="form-label select-label">
                   <div className="">
@@ -28,7 +56,16 @@ function SellProduce({ data, show, handleClose, date, month, year }) {
                           type="text"
                           className="form-control"
                           placeholder="Lac Strain Type"
+                          {...register("lacStrainType", {
+                            required: "Lac strain type is required"
+                          })}
                         />
+                        {
+                          errors.title &&
+                          <p className="text-danger" style={errStyle}>
+                            {errors.title.message}
+                          </p>
+                        }
                       </div>
                     </div>
                     <div className="row m-2">
@@ -40,7 +77,16 @@ function SellProduce({ data, show, handleClose, date, month, year }) {
                           type="text"
                           className="form-control"
                           placeholder="Source of Tree"
+                          {...register("treeSource", {
+                            required: "Source of tree is required"
+                          })}
                         />
+                        {
+                          errors.title &&
+                          <p className="text-danger" style={errStyle}>
+                            {errors.title.message}
+                          </p>
+                        }
                       </div>
                     </div>
                     <div className="row m-2">
@@ -52,7 +98,16 @@ function SellProduce({ data, show, handleClose, date, month, year }) {
                           type="text"
                           className="form-control"
                           placeholder="Origin"
+                          {...register("origin", {
+                            required: "Origin is required"
+                          })}
                         />
+                        {
+                          errors.title &&
+                          <p className="text-danger" style={errStyle}>
+                            {errors.title.message}
+                          </p>
+                        }
                       </div>
                     </div>
                     <div className="row m-2">
@@ -64,7 +119,16 @@ function SellProduce({ data, show, handleClose, date, month, year }) {
                           type="number"
                           className="form-control"
                           placeholder="Quantity"
+                          {...register("quantity", {
+                            required: "Quantity is required"
+                          })}
                         />
+                        {
+                          errors.title &&
+                          <p className="text-danger" style={errStyle}>
+                            {errors.title.message}
+                          </p>
+                        }
                       </div>
                     </div>
                     <div className="row m-2">
@@ -77,6 +141,7 @@ function SellProduce({ data, show, handleClose, date, month, year }) {
                           className="form-control"
                           placeholder="Remarks"
                           style={{ height: "100px" }}
+                          {...register("remarks")}
                         />
                       </div>
                     </div>
@@ -84,9 +149,7 @@ function SellProduce({ data, show, handleClose, date, month, year }) {
                       <div className="col-lg-12">
                         <button
                           className="btn btn-success"
-                          onClick={(e) => {
-                            e.preventDefault();
-                          }}
+                          type="submit"
                           style={{
                             marginTop: "1rem",
                             backgroundColor: "#064420",
@@ -94,6 +157,7 @@ function SellProduce({ data, show, handleClose, date, month, year }) {
                             position: "relative",
                             float: "right",
                           }}
+                          disabled={isLoading}
                         >
                           Submit
                         </button>

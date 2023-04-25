@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { SliderData } from "./SliderData";
+// import { SliderData } from "./SliderData";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import { root } from "../../../utils/endPoints";
 
-const ImageSlider = ({ slides, itemList }) => {
+const ImageSlider = ({ slides }) => {
   const [current, setCurrent] = useState(0);
   const length = slides.length;
 
@@ -26,23 +27,28 @@ const ImageSlider = ({ slides, itemList }) => {
         className="right-arrow"
         onClick={nextSlide}
       />
-      {SliderData.map((slide, index) => (
+      {slides.map((slide, index) => (
         <div
           className={index === current ? "slide active" : "slide"}
           key={index}
         >
           {index === current && <>
-            <img src={slide.image} alt="lac" className="image" />
+            <img
+              src={`${root.imgUrl}/img/${slide.imageUrl}`}
+              alt=""
+              height={180}
+              className="image"
+            />
 
             <div className="d-flex align-items-center justify-content-center gap-4 mt-2 text-center">
               <div>
                 <p className="mb-0" style={{ color: "#777", fontSize: "14px", fontWeight: "normal" }}>Market Price</p>
-                <p className="mb-0" style={{ color: "#777", fontSize: "13px", fontWeight: "normal" }}>{(index + 1) * 500}</p>
+                <p className="mb-0" style={{ color: "#777", fontSize: "13px", fontWeight: "normal" }}>{slide.marketPrice}</p>
               </div>
 
               <div>
                 <p className="mb-0" style={{ color: "#777", fontSize: "14px", fontWeight: "normal" }}>FPO Price</p>
-                <p className="mb-0" style={{ color: "#777", fontSize: "13px", fontWeight: "normal" }}>{(index + 1) * 500 - 50}</p>
+                <p className="mb-0" style={{ color: "#777", fontSize: "13px", fontWeight: "normal" }}>{slide.fpoPrice}</p>
               </div>
             </div>
           </>}

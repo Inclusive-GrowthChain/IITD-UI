@@ -188,7 +188,7 @@ const Loan = () => {
                             }}
                           >
                             {
-                              data.data
+                              data && data.data
                                 .filter((g) => g.status === "approved")
                                 .map(g => (
                                   <tr key={g.id}>
@@ -262,7 +262,7 @@ const Loan = () => {
                             }}
                           >
                             {
-                              data.data
+                              data && data.data
                                 .filter((r) => r.status === "rejected")
                                 .map(r => (
                                   <tr key={r.id}>
@@ -308,7 +308,7 @@ const Loan = () => {
                             }}
                           >
                             {
-                              data.data
+                              data && data.data
                                 .filter((ip) => ip.status === "pending")
                                 .map(ip => (
                                   <tr key={ip.id}>

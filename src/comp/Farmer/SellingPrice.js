@@ -4,21 +4,33 @@ import Button from "react-bootstrap/Button";
 import { TabNavItem, TabContent } from "../UIComp/Tabs";
 import SellProduce from "./Modals/SellingPrice/SellProduce";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQueries } from "@tanstack/react-query";
 
 import { getFpoLac } from "../../actions/fpo";
+import { getProduceList } from "../../actions/farmer";
 import useModal from "../../hooks/useModal";
 import Loader from "../Common/Loader";
+import { root } from "../../utils/endPoints";
 
 function SellingPrice() {
   const [activeTab, setActiveTab] = useState("tab1");
   const { modal, updateModal, closeModal } = useModal()
-  const { isLoading, data } = useQuery({
-    queryKey: ["fpo/lac"],
-    queryFn: getFpoLac
+  const [
+    { isLoading: isLoading1, data: sellItemList, },
+    { isLoading: isLoading2, data: produceList }
+  ] = useQueries({
+    queries: [
+      {
+        queryKey: ["fpo/lac"],
+        queryFn: getFpoLac,
+      },
+      {
+        queryKey: ["farmer/produce"],
+        queryFn: () => getProduceList({ farmerId: localStorage.getItem("userId") }),
+      }
+    ]
   })
-
-  if (isLoading) return <Loader wrapperCls="loader-main-right" />
+  if (isLoading1 || isLoading2) return <Loader wrapperCls="loader-main-right" />
 
   let newDate = new Date()
   let date = newDate.getDate();
@@ -88,19 +100,19 @@ function SellingPrice() {
               <TabContent id="tab1" activeTab={activeTab}>
                 <div className="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4">
                   {
-                    data.data.map((item, index) => (
+                    sellItemList && sellItemList.data.map((item, index) => (
                       <div className="col">
                         <div className="card">
                           <img
-                            src="https://3.imimg.com/data3/TM/JM/ETO-196508/1-294285-full-images-stick-lac-1081592-500x500.jpg"
-                            className="card-img-top"
+                            src={`${root.imgUrl}/img/${item.imageUrl}`}
                             alt=""
-                            style={{ height: "280px", objectFit: "cover" }}
+                            height={280}
+                            className="store_img"
                           />
                           <div className="card-body">
                             <div className="row">
                               <div className="col">
-                                <h4>Stick Lac</h4>
+                                <h4>{item.name}</h4>
                               </div>
                             </div>
                             <div className="row mt-2">
@@ -112,7 +124,7 @@ function SellingPrice() {
                                 </div>
                                 <div className="row">
                                   <div className="col">
-                                    <span>500</span>
+                                    <span>{item.marketPrice}</span>
                                   </div>
                                 </div>
                               </div>
@@ -124,7 +136,7 @@ function SellingPrice() {
                                 </div>
                                 <div className="row">
                                   <div className="col">
-                                    <span>500</span>
+                                    <span>{item.fpoPrice}</span>
                                   </div>
                                 </div>
                               </div>
@@ -164,38 +176,20 @@ function SellingPrice() {
                               fontWeight: "500",
                             }}
                           >
-                            <tr>
-                              <td>12/12/2020</td>
-                              <td>Stick Lac</td>
-                              <td>Wild</td>
-                              <td>Assam</td>
-                              <td>100</td>
-                              <td>Good</td>
-                            </tr>
-                            <tr>
-                              <td>12/12/2020</td>
-                              <td>Stick Lac</td>
-                              <td>Wild</td>
-                              <td>Assam</td>
-                              <td>100</td>
-                              <td>Good</td>
-                            </tr>
-                            <tr>
-                              <td>12/12/2020</td>
-                              <td>Stick Lac</td>
-                              <td>Wild</td>
-                              <td>Assam</td>
-                              <td>100</td>
-                              <td>Good</td>
-                            </tr>
-                            <tr>
-                              <td>12/12/2020</td>
-                              <td>Stick Lac</td>
-                              <td>Wild</td>
-                              <td>Assam</td>
-                              <td>100</td>
-                              <td>Good</td>
-                            </tr>
+                            {
+                              produceList && produceList.data.map((item, index) => {
+                                return (
+                                  <tr>
+                                    <td>{item.createdAt.substring(0, 10)}</td>
+                                    <td>{item.lacStrainType}</td>
+                                    <td>{item.treeSource}</td>
+                                    <td>{item.origin}</td>
+                                    <td>{item.quantity}</td>
+                                    <td>{item.remarks}</td>
+                                  </tr>
+                                )
+                              })
+                            }
                           </tbody>
                         </table>
                       </div>
