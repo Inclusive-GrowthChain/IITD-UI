@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-const fpo = {
-  id: 1,
-  amount: 2000,
-  name: "FPO",
-  village: "Village",
-  phoneNumber: "98213XXXXX",
-  reportsReqd: [
-    {
-      reportName: "Chowri",
-      reportReqd: true,
-    },
-  ],
-};
+// const fpo = {
+//   id: 1,
+//   amount: 2000,
+//   name: "FPO",
+//   village: "Village",
+//   phoneNumber: "98213XXXXX",
+//   reportsReqd: [
+//     {
+//       reportName: "Chowri",
+//       reportReqd: true,
+//     },
+//   ],
+// };
 
 const PageTwo = ({ onButtonClick, bid }) => {
   const [selectedFile, setSelectedFile] = useState();
@@ -91,7 +91,7 @@ const PageTwo = ({ onButtonClick, bid }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={bid.bids.find((item) => item.userId == localStorage.getItem("userId")).fpoId}
+                value={bid.bids.find((item) => item.userId === localStorage.getItem("userId")).fpoId}
                 style={{ width: "105%" }}
               />
             </div>
@@ -136,7 +136,7 @@ const PageTwo = ({ onButtonClick, bid }) => {
             </div>
           </div>
           {
-            bid.status == "on-going" && (
+            bid.status === "on-going" && (
               <div className="row m-2">
                 <div className="col-lg-6">
                   <label>Required Test Reports</label>
@@ -156,7 +156,7 @@ const PageTwo = ({ onButtonClick, bid }) => {
             )
           }
           {
-            bid.status != "on-going" && (
+            bid.status !== "on-going" && (
               <div className="row m-2">
                 <div className="col-lg-6">
                   <label>Required Test Reports</label>

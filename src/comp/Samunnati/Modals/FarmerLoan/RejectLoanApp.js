@@ -14,7 +14,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
   };
 
   const rejectLoan = async () => {
-    if (reason == "") {
+    if (reason === "") {
       alert("Please fill all details and try again");
       return;
     }
@@ -119,7 +119,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
                           handleShowConfirmReject();
                         }}
                         style={{ float: "right", backgroundColor: '#064420' }}
-                        disabled={reason == ""}
+                        disabled={reason === ""}
                       >
                         Reject Loan
                       </button>

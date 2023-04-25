@@ -7,6 +7,14 @@ export function getFpoProducts() {
   })
 }
 
+export function addFpoSale(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.fpo.products,
+    data: data
+  })
+}
+
 export function addFpoProduct(data) {
   const formData = new FormData()
   formData.append("productId", data.productId)

@@ -14,7 +14,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentPendLo
   };
 
   const approveLoan = async () => {
-    if(grantedAmount==0) {
+    if(grantedAmount===0) {
       alert("Please fill all details and try again");
       return;
     }

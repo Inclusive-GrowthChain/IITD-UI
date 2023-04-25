@@ -7,6 +7,7 @@ import useModal from "../../hooks/useModal";
 
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import AddLacProcurement from "./Modals/AddLacProcurement";
+import AddLacPurchase from "./Modals/AddLacPurchase";
 import Loader from "../Common/Loader";
 
 function Card({ data = [], updateModal }) {
@@ -77,6 +78,11 @@ const LacProcurement = () => {
 
       <div className="list_container">
         <div className="store_wrapper">
+          <button className="store_btn" onClick={() => updateModal("addPurchase")}>
+            Add Purchase
+          </button>
+        </div>
+        <div className="store_wrapper" style={{ marginRight: "150px" }}>
           <button className="store_btn" onClick={() => updateModal("add")}>
             Add Item
           </button>
@@ -117,11 +123,20 @@ const LacProcurement = () => {
       </div>
 
       {
-        modal.state &&
+        modal.state === "add" &&
         <AddLacProcurement
           show
           data={modal.data}
           isEdit={modal.state === "edit"}
+          handleClose={closeModal}
+        />
+      }
+
+      {
+        modal.state === "addPurchase" &&
+        <AddLacPurchase
+          show
+          data={modal.data}
           handleClose={closeModal}
         />
       }

@@ -5,12 +5,12 @@ import Modal from "react-bootstrap/Modal";
 const PageFour = ({ onButtonClick, canEdit = true }) => {
   const [showPayment, setShowPayment] = useState(false);
 
-  const handleShowPayment = () => setShowPayment(true)
+  // const handleShowPayment = () => setShowPayment(true)
   const handleClosePayment = () => setShowPayment(false);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-  };
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+  // };
 
   return (
     <main

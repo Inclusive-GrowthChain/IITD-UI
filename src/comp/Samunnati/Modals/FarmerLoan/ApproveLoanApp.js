@@ -20,7 +20,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentPendLo
   };
 
   const approveLoan = async () => {
-    if (grantedAmount == 0 || interest == 0) {
+    if (grantedAmount === 0 || interest === 0) {
       alert("Please fill all details and try again");
       return;
     }
@@ -151,7 +151,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentPendLo
                           handleShowConfirmApprove();
                         }}
                         style={{ float: "right", backgroundColor: '#064420' }}
-                        disabled={grantedAmount == 0 || interest == ""}
+                        disabled={grantedAmount === 0 || interest === ""}
                       >
                         Approve Loan
                       </button>

@@ -7,6 +7,7 @@ import useModal from "../../hooks/useModal";
 
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import AddFpoStore from "./Modals/AddFpoStore";
+import AddFpoSale from "./Modals/AddFpoSale";
 import Loader from "../Common/Loader";
 
 function Card({ data = [], updateModal }) {
@@ -81,6 +82,14 @@ const Store = () => {
         <div className="store_wrapper">
           <button
             className="store_btn"
+            onClick={() => updateModal("addSale")}
+          >
+            Add Sale
+          </button>
+        </div>
+        <div className="store_wrapper" style={{ marginRight: "150px" }}>
+          <button
+            className="store_btn"
             onClick={() => updateModal("add")}
           >
             Add Item
@@ -122,11 +131,20 @@ const Store = () => {
       </div>
 
       {
-        modal.state &&
+        modal.state === "add" &&
         <AddFpoStore
           show
           data={modal.data}
           isEdit={modal.state === "edit"}
+          handleClose={closeModal}
+        />
+      }
+
+      {
+        modal.state === "addSale" &&
+        <AddFpoSale
+          show
+          data={modal.data}
           handleClose={closeModal}
         />
       }

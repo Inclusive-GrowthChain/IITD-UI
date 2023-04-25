@@ -73,7 +73,7 @@ const PageThree = ({ onButtonClick, bid }) => {
                 onButtonClick("pagefour")
               }}
               style={{ backgroundColor: "white" }}
-              disabled={bid.status == "on-going"}
+              disabled={bid.status === "on-going"}
             >
               <ArrowForwardIosIcon />
             </button>
@@ -146,7 +146,7 @@ const PageThree = ({ onButtonClick, bid }) => {
             </div>
           </div>
           {
-            bid.status == "on-going" && (
+            bid.status === "on-going" && (
               <div className="row m-2">
                 <div className="col-lg-6">
                   <label>Upload Invoice</label>
@@ -166,7 +166,7 @@ const PageThree = ({ onButtonClick, bid }) => {
             )
           }
           {
-            bid.status != "on-going" && (
+            bid.status !== "on-going" && (
               <div className="row m-2">
                 <div className="col-lg-6">
                   <label>Invoice</label>

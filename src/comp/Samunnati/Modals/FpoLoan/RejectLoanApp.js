@@ -14,7 +14,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
   };
 
   const rejectLoan = async () => {
-    if(reason=="") {
+    if(reason==="") {
       alert("Please fill all details and try again");
       return;
     }
