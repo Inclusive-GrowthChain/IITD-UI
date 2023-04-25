@@ -3,11 +3,11 @@ import { useQueries } from "@tanstack/react-query";
 import { getCropAdvisory, getTraining } from "../../../actions/nisa";
 import { getFpoProducts, getFpoLac } from "../../../actions/fpo";
 
-import { SliderData } from "./SliderData";
+// import { SliderData } from "./SliderData";
 import ImageSlider from "./ImageSlider";
 
-import { SliderContent } from "./SliderContent";
-import ImageSliders from "./ImageSliders";
+// import { SliderContent } from "./SliderContent";
+// import ImageSliders from "./ImageSliders";
 import Loader from "../../Common/Loader";
 
 function Dashboard() {
@@ -141,7 +141,7 @@ function Dashboard() {
               <div className="mb-2 mt-2 p-3 dash__card">
                 <p className="card_title text-center">Store</p>
                 <div>
-                  <ImageSlider slides={SliderData} itemList={storeItemList.data} />
+                  <ImageSlider slides={storeItemList.data} />
                 </div>
               </div>
             </div>
@@ -149,7 +149,7 @@ function Dashboard() {
               <div className="mb-2 mt-2 p-3 dash__card">
                 <p className="card_title text-center">Selling Price</p>
                 <div>
-                  <ImageSliders slides={SliderContent} itemList={sellItemList.data} />
+                  <ImageSlider slides={sellItemList.data} />
                 </div>
               </div>
             </div>

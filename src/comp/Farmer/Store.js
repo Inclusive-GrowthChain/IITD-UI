@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getFpoProducts } from "../../actions/farmer";
 
-import Nylonbag from "../../assets/img/nylonbag.png";
+import { root } from "../../utils/endPoints";
 import Loader from "../Common/Loader";
 
 function Store() {
@@ -35,10 +35,10 @@ function Store() {
                 <div className="col">
                   <div className="card" style={{ marginBottom: '50px' }}>
                     <img
-                      style={{ height: "280px", objectFit: "contain" }}
-                      src={Nylonbag}
-                      className="card-img-top"
-                      alt="..."
+                      src={`${root.imgUrl}/img/${item.imageUrl}`}
+                      alt=""
+                      height={280}
+                      className="store_img"
                     />
                     <div className="card-body">
                       <div className="row">

@@ -5,7 +5,7 @@ import { Modal } from "react-bootstrap";
 import { addProduce } from "../../../../actions/farmer";
 
 const errStyle = { fontSize: "12px", margin: 0 }
-const textAreaStyle = { resize: "none", height: "150px" }
+// const textAreaStyle = { resize: "none", height: "150px" }
 
 function SellProduce({ data, show, handleClose, date, month, year }) {
   const queryClient = useQueryClient()

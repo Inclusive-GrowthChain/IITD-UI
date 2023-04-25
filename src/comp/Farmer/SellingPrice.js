@@ -10,6 +10,7 @@ import { getFpoLac } from "../../actions/fpo";
 import { getProduceList } from "../../actions/farmer";
 import useModal from "../../hooks/useModal";
 import Loader from "../Common/Loader";
+import { root } from "../../utils/endPoints";
 
 function SellingPrice() {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -25,7 +26,7 @@ function SellingPrice() {
       },
       {
         queryKey: ["farmer/produce"],
-        queryFn: getProduceList,
+        queryFn: () => getProduceList({ farmerId: localStorage.getItem("userId") }),
       }
     ]
   })
@@ -103,15 +104,15 @@ function SellingPrice() {
                       <div className="col">
                         <div className="card">
                           <img
-                            src="https://3.imimg.com/data3/TM/JM/ETO-196508/1-294285-full-images-stick-lac-1081592-500x500.jpg"
-                            className="card-img-top"
+                            src={`${root.imgUrl}/img/${item.imageUrl}`}
                             alt=""
-                            style={{ height: "280px", objectFit: "cover" }}
+                            height={280}
+                            className="store_img"
                           />
                           <div className="card-body">
                             <div className="row">
                               <div className="col">
-                                <h4>Stick Lac</h4>
+                                <h4>{item.name}</h4>
                               </div>
                             </div>
                             <div className="row mt-2">
@@ -123,7 +124,7 @@ function SellingPrice() {
                                 </div>
                                 <div className="row">
                                   <div className="col">
-                                    <span>500</span>
+                                    <span>{item.marketPrice}</span>
                                   </div>
                                 </div>
                               </div>
@@ -135,7 +136,7 @@ function SellingPrice() {
                                 </div>
                                 <div className="row">
                                   <div className="col">
-                                    <span>500</span>
+                                    <span>{item.fpoPrice}</span>
                                   </div>
                                 </div>
                               </div>
@@ -179,7 +180,7 @@ function SellingPrice() {
                               produceList && produceList.data.map((item, index) => {
                                 return (
                                   <tr>
-                                    <td>{item.date}</td>
+                                    <td>{item.createdAt.substring(0, 10)}</td>
                                     <td>{item.lacStrainType}</td>
                                     <td>{item.treeSource}</td>
                                     <td>{item.origin}</td>
