@@ -1,3 +1,6 @@
+import { useFormContext } from "react-hook-form";
+import useModal from "../../../../../hooks/useModal";
+import DocImg from "../../../../Common/DocImg";
 
 const btnStyle = {
   backgroundColor: "#064420",
@@ -12,104 +15,83 @@ const btnStyle = {
   textAlign: "center",
 }
 
+const list = [
+  {
+    label: "MOA",
+    name: "moa",
+  },
+  {
+    label: "AOA",
+    name: "aoa",
+  },
+  {
+    label: "Certificate of Incorporation",
+    name: "coi",
+  },
+  {
+    label: "GST Certificate",
+    name: "gst",
+  },
+  {
+    label: "PAN Card",
+    name: "pan",
+  },
+]
+
 function Step1({ setStep, h5Style, nextBtnStyle }) {
+  const { modal, updateModal, closeModal } = useModal()
+  const { getValues } = useFormContext()
+  const docs = getValues("kycDocuments")
+
   return (
-    <div className="row">
+    <div>
       <h5 style={h5Style}>KYC Documents</h5>
 
-      <div className="col">
-        <form>
-          <div className="form">
-            <label className="form-label select-label">
-              <div className="">
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>MOA</label>
-                  </div>
-                  <div className="col-lg-6 text-center">
-                    <button
-                      className="py-0.5"
-                      style={btnStyle}
-                    >
-                      View
-                    </button>
-                  </div>
-                </div>
+      {
+        list.map(l => (
+          <div
+            key={l.name}
+            className="row m-2"
+          >
+            <div className="col-lg-6">
+              <label>{l.label}</label>
+            </div>
 
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>AOA</label>
-                  </div>
-                  <div className="col-lg-6 text-center">
-                    <button
-                      className="py-0.5"
-                      style={btnStyle}
-                    >
-                      View
-                    </button>
-                  </div>
-                </div>
-
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>
-                      Certificate of Incorporation
-                    </label>
-                  </div>
-                  <div className="col-lg-6 text-center">
-                    <button
-                      className="py-0.5"
-                      style={btnStyle}
-                    >
-                      View
-                    </button>
-                  </div>
-                </div>
-
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>GST Certificate</label>
-                  </div>
-                  <div className="col-lg-6 text-center">
-                    <button
-                      className="py-0.5"
-                      style={btnStyle}
-                    >
-                      View
-                    </button>
-                  </div>
-                </div>
-
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>PAN Card</label>
-                  </div>
-                  <div className="col-lg-6 text-center">
-                    <button
-                      className="py-0.5"
-                      style={btnStyle}
-                    >
-                      View
-                    </button>
-                  </div>
-                </div>
-
-                <div className="row m-2">
-                  <div className="col-lg-12">
-                    <button
-                      className="btn btn-success"
-                      onClick={() => setStep(1)}
-                      style={nextBtnStyle}
-                    >
-                      Next
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </label>
+            <div className="col-lg-6">
+              <button
+                className="py-0.5"
+                style={btnStyle}
+                onClick={() => updateModal(l.name, { title: l.label })}
+              >
+                View
+              </button>
+            </div>
           </div>
-        </form>
+        ))
+      }
+
+      <div className="row m-2">
+        <div className="col-lg-12">
+          <button
+            className="btn btn-success"
+            onClick={() => setStep(1)}
+            style={nextBtnStyle}
+            type="button"
+          >
+            Next
+          </button>
+        </div>
       </div>
+
+      {
+        modal.state &&
+        <DocImg
+          show
+          title={modal.data.title}
+          imgUrl={docs?.find(d => d.name === modal.state)?.doc || ""}
+          handleClose={closeModal}
+        />
+      }
     </div>
   )
 }

@@ -1,138 +1,82 @@
+import FileInput from "./FileInput";
+
+const list = [
+  {
+    label: "Product wise break up of revenues (2 fiscal)",
+    name: "productBreakRevenue",
+  },
+  {
+    label: "Latest 3 months stock statements",
+    name: "latest3MonthStock",
+  },
+  {
+    label: "Debtors ageing analysis fiscal year end",
+    name: "debtorsAgeingAnalysis",
+  },
+  {
+    label: "Top 5 suppliers/vintage (last 6 months)",
+    name: "top5Suppliers",
+  },
+  {
+    label: "Top 5 buyers/vintage (last 6 months)",
+    name: "top5Buyers",
+  },
+  {
+    label: "Sanction limit & O/s for both WC & TL",
+    name: "sanctionLimit",
+  },
+  {
+    label: "Term loan summary",
+    name: "termLoanSummary",
+  },
+  {
+    label: "Project estimate & other relavant documents",
+    name: "projectEstimate",
+  },
+]
 
 function Step5({ setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle }) {
   return (
-    <div className="row mt-3">
+    <div className="mt-3">
       <h5 style={h5Style}>Other Details</h5>
 
-      <div className="col">
-        <form>
-          <div className="form">
-            <label className="form-label select-label">
-              <div className="">
-                <div className="row m-2">
-                  <div className="col-lg-12">
-                    <label>
-                      Product wise break up of revenues (2 fiscal)
-                    </label>
-                  </div>
-                  <div className="col-lg-12">
-                    <input
-                      type="file"
-                      className="form-control"
-                    />
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-12">
-                    <label>
-                      Latest 3 months stock statements
-                    </label>
-                  </div>
-                  <div className="col-lg-12">
-                    <input
-                      type="file"
-                      className="form-control"
-                    />
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-12">
-                    <label>
-                      Debtors ageing analysis fiscal year end
-                    </label>
-                  </div>
-                  <div className="col-lg-12">
-                    <input
-                      type="file"
-                      className="form-control"
-                    />
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-12">
-                    <label>Top 5 suppliers/vintage (last 6 months)</label>
-                  </div>
-                  <div className="col-lg-12">
-                    <input
-                      type="file"
-                      className="form-control"
-                    />
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-12">
-                    <label>Top 5 buyers/vintage (last 6 months)</label>
-                  </div>
-                  <div className="col-lg-12">
-                    <input
-                      type="file"
-                      className="form-control"
-                    />
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-12">
-                    <label>
-                      Sanction limit & O/s for both WC & TL
-                    </label>
-                  </div>
-                  <div className="col-lg-12">
-                    <input
-                      type="file"
-                      className="form-control"
-                    />
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-12">
-                    <label>Term loan summary</label>
-                  </div>
-                  <div className="col-lg-12">
-                    <input
-                      type="file"
-                      className="form-control"
-                    />
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-12">
-                    <label>
-                      Project estimate & other relavant
-                      documents
-                    </label>
-                  </div>
-                  <div className="col-lg-12">
-                    <input
-                      type="file"
-                      className="form-control"
-                    />
-                  </div>
-                </div>
-
-                <div
-                  className="row m-2"
-                  style={finalWrapperStyle}
-                >
-                  <button
-                    className="btn btn-success"
-                    onClick={() => setStep(4)}
-                    style={backBtnStyle}
-                  >
-                    Back
-                  </button>
-
-                  <button
-                    className="btn btn-success"
-                    onClick={() => setStep(5)}
-                    style={nextBtnStyle}
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-            </label>
+      {
+        list.map((l, i) => (
+          <div key={l.name} className="row m-2">
+            <div className="col-lg-12">
+              <label>{l.label}</label>
+            </div>
+            <div className="col-lg-12">
+              <FileInput
+                name={`otherDetails.${i}.doc`}
+                label={l.label}
+              />
+            </div>
           </div>
-        </form>
+        ))
+      }
+
+      <div
+        className="row m-2"
+        style={finalWrapperStyle}
+      >
+        <button
+          className="btn btn-success"
+          onClick={() => setStep(3)}
+          style={backBtnStyle}
+          type="button"
+        >
+          Back
+        </button>
+
+        <button
+          className="btn btn-success"
+          onClick={() => setStep(5)}
+          style={nextBtnStyle}
+          type="button"
+        >
+          Next
+        </button>
       </div>
     </div>
   )

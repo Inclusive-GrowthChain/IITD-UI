@@ -14,7 +14,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentLoan, han
   };
 
   const rejectLoan = async () => {
-    if(reason=="") {
+    if (reason === "") {
       alert("Please fill all details and try again");
       return;
     }
@@ -23,7 +23,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentLoan, han
       "status": "rejected",
       "reason": reason
     };
-    
+
     await axios
       .put(`http://13.232.131.203:3000/api/loanwindow/${currentLoan.windowId}/loan/${currentLoan.id}/approval`, newLoan)
       .then((response) => {

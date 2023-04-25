@@ -20,7 +20,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentPendLo
   }
 
   const approveLoan = async () => {
-    if(grantedAmount==0 || interest==0) {
+    if (grantedAmount === 0 || interest === 0) {
       alert("Please fill all details and try again");
       return;
     }
@@ -30,7 +30,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentPendLo
       "grantedAmount": grantedAmount,
       "intrest": interest
     };
-    
+
     await axios
       .put(`http://13.232.131.203:3000/api/loanwindow/${currentPendLoanApp.id}/approval`, newLoan)
       .then((response) => {

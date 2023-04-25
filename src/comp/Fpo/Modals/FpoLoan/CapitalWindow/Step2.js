@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useFormContext, useFieldArray } from "react-hook-form";
+import FileInput from "./FileInput";
 
 const btnStyle = {
   background: "none",
@@ -6,120 +7,125 @@ const btnStyle = {
 }
 
 function Step2({ setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle }) {
-  const [noOfRows, setNoOfRows] = useState(1)
+  const { register, getValues, control } = useFormContext()
+  const { fields, append, remove } = useFieldArray({
+    control: control,
+    name: "kycAuthorizedSignatories",
+  })
+
+  const addDocs = () => append([
+    { name: "", doc: "" },
+    { name: "", doc: "" },
+  ])
+
+  const removeDocs = () => remove([fields.length - 2, fields.length - 1])
 
   return (
-    <div className="row mt-3">
+    <div className="mt-3">
       <h5 style={h5Style}>KYC of Authorised Signatories</h5>
 
-      <div className="col">
-        <div className="form">
-          <label className="form-label select-label">
-            <div className="">
-              <div className="row m-2">
-                <h5>List of Directors</h5>
-                <div className="col-lg-12">
-                  <input
-                    type="file"
-                    className="form-control"
-                  />
-                </div>
-              </div>
-              {[...Array(noOfRows)].map((element, index) => (
-                <>
-                  <div key={index} className="row m-2 mt-3">
-                    <div className="col-4">
-                      <label>ID Proof</label>
-                    </div>
+      <div className="m-2 px-3">
+        <h5>List of Directors</h5>
+      </div>
 
-                    <div className="col-4">
-                      <select className="form-select">
-                        <option value="select">
-                          Select
-                        </option>
-                        <option value="">PAN Card</option>
-                        <option value="">Voter ID</option>
-                      </select>
-                    </div>
-
-                    <div className="col-4">
-                      <input
-                        type="file"
-                        className="form-control"
-                        value={element || ""}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="row m-2">
-                    <div className="col-4">
-                      <label>Address Proof</label>
-                    </div>
-                    <div className="col-4">
-                      <select className="form-select">
-                        <option value="select">
-                          Select
-                        </option>
-                        <option value="">
-                          Aadhaar Card
-                        </option>
-                        <option value="">Voter ID</option>
-                        <option value="">
-                          Driving Lincese
-                        </option>
-                        <option value="">Passport</option>
-                      </select>
-                    </div>
-                    <div className="col-4">
-                      <input
-                        type="file"
-                        className="form-control"
-                      />
-                    </div>
-                  </div>
-                </>
-              ))}
-
-              <div style={{ display: "flex" }}>
-                <button
-                  className="mx-3"
-                  style={btnStyle}
-                  onClick={() => setNoOfRows(noOfRows + 1)}
-                >
-                  +
-                </button>
-                <button
-                  className="mx-3"
-                  style={btnStyle}
-                  onClick={() => setNoOfRows(noOfRows - 1)}
-                >
-                  -
-                </button>
+      {fields.map((field, i) => {
+        if (i % 2 === 0) {
+          return (
+            <div key={field.id} className="row m-2 mt-3">
+              <div className="col-4">
+                <label>ID Proof</label>
               </div>
 
-              <div
-                className="row m-2"
-                style={finalWrapperStyle}
-              >
-                <button
-                  className="btn btn-success"
-                  onClick={() => setStep(1)}
-                  style={backBtnStyle}
+              <div className="col-4">
+                <select
+                  className="form-select"
+                  {...register(`kycAuthorizedSignatories.${i}.name`)}
                 >
-                  Back
-                </button>
+                  <option value="" disabled></option>
+                  <option value="panCard">PAN Card</option>
+                  <option value="voterId">Voter ID</option>
+                </select>
+              </div>
 
-                <button
-                  className="btn btn-success"
-                  onClick={() => setStep(2)}
-                  style={nextBtnStyle}
-                >
-                  Next
-                </button>
+              <div className="col-4">
+                <FileInput
+                  name={`kycAuthorizedSignatories.${i}.doc`}
+                  label={getValues(`kycAuthorizedSignatories.${i}.name`)}
+                />
               </div>
             </div>
-          </label>
-        </div>
+          )
+        }
+
+        return (
+          <div key={field.id} className="row m-2">
+            <div className="col-4">
+              <label>Address Proof</label>
+            </div>
+            <div className="col-4">
+              <select
+                className="form-select"
+                {...register(`kycAuthorizedSignatories.${i}.name`)}
+              >
+                <option value="" disabled></option>
+                <option value="aadharCard">Aadhaar Card</option>
+                <option value="voterId">Voter ID</option>
+                <option value="drivingLicence">Driving License</option>
+                <option value="passport">Passport</option>
+              </select>
+            </div>
+            <div className="col-4">
+              <FileInput
+                name={`kycAuthorizedSignatories.${i}.doc`}
+                label={getValues(`kycAuthorizedSignatories.${i}.name`)}
+              />
+            </div>
+          </div>
+        )
+      })}
+
+
+      <div style={{ display: "flex" }}>
+        <button
+          className="mx-3"
+          style={btnStyle}
+          onClick={addDocs}
+        >
+          +
+        </button>
+        {
+          fields.length > 2 &&
+          <button
+            className="mx-3"
+            style={btnStyle}
+            onClick={removeDocs}
+          >
+            -
+          </button>
+        }
+      </div>
+
+      <div
+        className="row m-2"
+        style={finalWrapperStyle}
+      >
+        <button
+          className="btn btn-success"
+          onClick={() => setStep(0)}
+          style={backBtnStyle}
+          type="button"
+        >
+          Back
+        </button>
+
+        <button
+          className="btn btn-success"
+          onClick={() => setStep(2)}
+          style={nextBtnStyle}
+          type="button"
+        >
+          Next
+        </button>
       </div>
     </div>
   )

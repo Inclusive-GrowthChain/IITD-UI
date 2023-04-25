@@ -74,7 +74,7 @@ function LabSampleTest({ show, handleClose }) {
   };
 
   const addNewTest = async () => {
-    if(fpoName=="" || contactNo=="" || sampleId=="" || date=="" || testCategory=="" || test=="" || amount==0 || paymentRefNo=="" || paymentImage=="" || lacSampleImage=="" || remarks=="") {
+    if (fpoName === "" || contactNo === "" || sampleId === "" || date === "" || testCategory === "" || test === "" || amount === 0 || paymentRefNo === "" || paymentImage === "" || lacSampleImage === "" || remarks === "") {
       alert("Please fill all details and try again");
       return;
     }
@@ -92,7 +92,7 @@ function LabSampleTest({ show, handleClose }) {
       "lacSampleImg": lacSampleImage,
       "remarks": remarks
     }
-    
+
     await axios
       .post("http://13.232.131.203:3000/api/nisa/lactest", newTest)
       .then((response) => {
@@ -123,7 +123,7 @@ function LabSampleTest({ show, handleClose }) {
                     <label>FPO Name</label>
                   </div>
                   <div className="col-lg-6">
-                    <input className="form-control" type="text" placeholder="FPO Name" onChange={onChangeFpoName}/>
+                    <input className="form-control" type="text" placeholder="FPO Name" onChange={onChangeFpoName} />
                   </div>
                 </div>
                 <div className="row m-2">
@@ -131,7 +131,7 @@ function LabSampleTest({ show, handleClose }) {
                     <label>Contact No.</label>
                   </div>
                   <div className="col-lg-6">
-                    <input className="form-control" type="text" placeholder="98765XXXXX" onChange={onChangeContactNo}/>
+                    <input className="form-control" type="text" placeholder="98765XXXXX" onChange={onChangeContactNo} />
                   </div>
                 </div>
                 <div className="row m-2">
@@ -139,7 +139,7 @@ function LabSampleTest({ show, handleClose }) {
                     <label>Sample Id</label>
                   </div>
                   <div className="col-lg-6">
-                    <input className="form-control" type="text" placeholder="SAX34265" onChange={onChangeSampleId}/>
+                    <input className="form-control" type="text" placeholder="SAX34265" onChange={onChangeSampleId} />
                   </div>
                 </div>
                 <div className="row m-2">
@@ -147,7 +147,7 @@ function LabSampleTest({ show, handleClose }) {
                     <label>Date</label>
                   </div>
                   <div className="col-lg-6">
-                    <input className="form-control" type="date" onChange={onChangeDate}/>
+                    <input className="form-control" type="date" onChange={onChangeDate} />
                   </div>
                 </div>
                 <div className="row m-2">
@@ -233,7 +233,7 @@ function LabSampleTest({ show, handleClose }) {
                     <label>Remarks</label>
                   </div>
                   <div className="col-lg-6">
-                    <input className="form-control" type="text" onChange={onChangeRemarks}/>
+                    <input className="form-control" type="text" onChange={onChangeRemarks} />
                   </div>
                 </div>
                 <div className="row m-2">
