@@ -34,7 +34,7 @@ const list = [
   },
 ]
 
-function Step6({ setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle }) {
+function Step6({ setStep, isLoading, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle }) {
   const { register, formState: { errors } } = useFormContext()
 
   return (
@@ -85,10 +85,11 @@ function Step6({ setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle
 
         <button
           className="btn btn-success"
+          disabled={isLoading}
           style={nextBtnStyle}
           type="submit"
         >
-          Next
+          Submit
         </button>
       </div>
     </div>

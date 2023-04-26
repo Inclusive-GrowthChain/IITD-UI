@@ -106,3 +106,11 @@ export function getLoanwindow({ windowType = "farmer" }) {
     params: { windowType },
   })
 }
+
+export function createLoanwindow(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.loanwindow,
+    data,
+  })
+}

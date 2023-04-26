@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { FormProvider, useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Modal } from "react-bootstrap";
 import { nanoid } from 'nanoid';
 
+import { createLoanwindow } from "../../../../../actions/fpo";
 import { useAuthStore } from "../../../../../store/useAuthStore";
 
 import Step1 from "./Step1";
@@ -40,6 +42,8 @@ const nextBtnStyle = {
 
 function CapitalWindow({ show, handleClose }) {
   const [step, setStep] = useState(0)
+
+  const queryClient = useQueryClient()
   const user = useAuthStore(s => s.userDetails)
 
   const methods = useForm({
@@ -95,11 +99,13 @@ function CapitalWindow({ show, handleClose }) {
     }
   })
 
-  // const d = methods.watch()
-  // console.log(d)
-  const onSubmit = data => {
-    console.log(data)
-  }
+  const { mutate, isLoading } = useMutation({
+    mutationFn: createLoanwindow,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["loanwindow", "fpo"] })
+      handleClose()
+    }
+  })
 
   return (
     <Modal
@@ -112,7 +118,7 @@ function CapitalWindow({ show, handleClose }) {
 
       <Modal.Body>
         <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <form onSubmit={methods.handleSubmit(mutate)}>
             {
               step === 0 &&
               <Step1
@@ -168,6 +174,7 @@ function CapitalWindow({ show, handleClose }) {
                 finalWrapperStyle={finalWrapperStyle}
                 backBtnStyle={backBtnStyle}
                 nextBtnStyle={nextBtnStyle}
+                isLoading={isLoading}
                 setStep={setStep}
               />
             }
