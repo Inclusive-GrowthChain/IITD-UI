@@ -15,7 +15,7 @@ const labelStyle = { width: "180px" }
 
 function LoanWindowTable({ onClick, loanWindow }) {
   return (
-    <div>
+    <div style={{ paddingLeft: "24px" }}>
       <div className="d-flex align-items-center" style={{ gap: "1rem" }}>
         <label style={labelStyle}>Loan window Id</label>
         <span>:</span>
@@ -33,7 +33,7 @@ function LoanWindowTable({ onClick, loanWindow }) {
         <input
           type="text"
           className="px-2 py-1 border-0"
-          value={loanWindow?.grantedAmount !== -1 ? loanWindow?.grantedAmount : loanWindow?.requestedAmount}
+          value={loanWindow?.grantedAmount !== -1 ? loanWindow?.grantedAmount : `${loanWindow?.requestedAmount} (requested)`}
           disabled
         />
       </div>

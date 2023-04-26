@@ -28,7 +28,6 @@ const btnStyle = {
 const theadStyle = {
   color: "#00A877",
   fontSize: "17px",
-  verticalAlign: "top",
   fontWeight: "bold",
   borderBottom: "1px solid #c7ccd1",
 }
@@ -41,16 +40,11 @@ const tbodyStyle = {
 
 const applyBtnStyle = {
   backgroundColor: "#064420",
-  width: "14%",
-  minWidth: "150px",
   color: "#fff",
   border: "none",
-  padding: "5px 5px",
+  padding: "4px 16px",
   borderRadius: "5px",
-  position: "relative",
-  float: "right",
-  top: "-25px",
-  right: "50px",
+  marginLeft: "auto"
 }
 
 const tabs = [
@@ -77,13 +71,14 @@ function WindowRow({ loanWindow, updateModal }) {
 
   return (
     <div className="card_content">
-      <div style={{ display: "flex" }}>
+      <div className="d-flex align-items-center">
         {
           tabs.map(t => (
             <button
               className={`tab ${active === t.id ? "active" : ""}`}
               onClick={() => setActive(t.id)}
               style={{ padding: "8px" }}
+              key={t.id}
             >
               {t.title}
             </button>
@@ -117,7 +112,7 @@ function WindowRow({ loanWindow, updateModal }) {
               {
                 loanWindow?.loans?.filter(loan => loan.status === "approved")
                   .map(loan => (
-                    <tr>
+                    <tr key={loan.id}>
                       <td>{loan?.createdAt?.substring(0, 10)}</td>
                       <td>{loan?.fpoApprovalAt?.substring(0, 10)}</td>
                       <td>{loan.loanTenure}</td>
@@ -164,7 +159,7 @@ function WindowRow({ loanWindow, updateModal }) {
             <tbody style={tbodyStyle}>
               {
                 loanWindow?.loans?.map((loan) => (
-                  <tr>
+                  <tr key={loan.id}>
                     <td>{loan.loanId}</td>
                     <td>{loan.createdAt.substring(0, 10)}</td>
                     <td>₹ {loan.requestedAmount}</td>
@@ -194,7 +189,7 @@ function WindowRow({ loanWindow, updateModal }) {
               {
                 loanWindow?.loans?.filter((loan) => loan.fpoApprovalStatus === "in-process")
                   .map((loan) => (
-                    <tr>
+                    <tr key={loan.id}>
                       <td>{loan.loanId}</td>
                       <td>{loan.createdAt && loan.createdAt.substring(0, 10)}</td>
                       <td>₹ {loan.requestedAmount}</td>
@@ -264,17 +259,16 @@ function FarmerLoanTab() {
   if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (
-    <div className="loan_fpo">
-      <div className="card_wrapper">
-        {
-          loanWindowList.map(loanWindow => (
-            <WindowRow
-              loanWindow={loanWindow}
-              updateModal={updateModal}
-            />
-          ))
-        }
-      </div>
+    <>
+      {
+        loanWindowList.map(loanWindow => (
+          <WindowRow
+            key={loanWindow.id}
+            loanWindow={loanWindow}
+            updateModal={updateModal}
+          />
+        ))
+      }
 
       {
         modal.state === "showApprovedLoan" &&
@@ -323,7 +317,7 @@ function FarmerLoanTab() {
           handleClose={closeModal}
         />
       }
-    </div>
+    </>
   )
 }
 

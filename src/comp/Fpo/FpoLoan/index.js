@@ -24,9 +24,7 @@ function Loan() {
             className="loan_btn"
             onClick={() => updateModal("CaptialWindow")}
           >
-            {
-              activeIndex === 1 ? "Apply for Working Capital Loan Window" : "Apply for Farmer Loan"
-            }
+            Apply for {activeIndex === 1 ? "Working Capital" : "Farmer"} Loan Window
           </button>
         </div>
 
@@ -48,11 +46,11 @@ function Loan() {
           </div>
 
           <div className="panels">
-            <div className={`panel ${checkActive(1, "active")}`} style={{ marginTop: '40px' }}>
+            <div className={`panel ${checkActive(1, "active")}`} style={{ marginTop: '16px' }}>
               <CapitalLoanTab />
             </div>
 
-            <div className={`panel ${checkActive(2, "active")}`} style={{ marginTop: '40px' }}>
+            <div className={`panel ${checkActive(2, "active")}`} style={{ marginTop: '16px' }}>
               <FarmerLoanTab />
             </div>
           </div>

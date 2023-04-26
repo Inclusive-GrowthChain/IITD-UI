@@ -26,16 +26,24 @@ const btnStyle = {
 
 const applyBtnStyle = {
   backgroundColor: "#064420",
-  width: "14%",
-  minWidth: "150px",
   color: "#fff",
   border: "none",
-  padding: "5px 5px",
+  padding: "4px 16px",
   borderRadius: "5px",
-  position: "relative",
-  float: "right",
-  top: "-25px",
-  right: "50px",
+  marginLeft: "auto"
+}
+
+const theadStyle = {
+  color: "#064420",
+  fontSize: "17px",
+  verticalAlign: "top",
+  fontWeight: 600,
+}
+
+const tbodyStyle = {
+  color: "#000",
+  fontSize: "15px",
+  fontWeight: "500",
 }
 
 const tabs = [
@@ -61,181 +69,141 @@ function WindowRow({ loanWindow, updateModal }) {
   const [active, setActive] = useState(1)
 
   return (
-    <div className="card_wrapper" style={{ marginTop: "0" }}>
-      <div className="card_content">
-        <div style={{ display: "flex" }}>
-          {
-            tabs.map(t => (
-              <button
-                className={`tab ${active === t.id ? "active" : ""}`}
-                onClick={() => setActive(t.id)}
-                style={{ padding: "8px" }}
-              >
-                {t.title}
-              </button>
-            ))
-          }
+    <div className="card_content">
+      <div className="d-flex align-items-center">
+        {
+          tabs.map(t => (
+            <button
+              className={`tab ${active === t.id ? "active" : ""}`}
+              onClick={() => setActive(t.id)}
+              style={{ padding: "8px" }}
+              key={t.id}
+            >
+              {t.title}
+            </button>
+          ))
+        }
 
-          <button
-            className="loan-btn"
-            style={applyBtnStyle}
-            onClick={() => updateModal("showApplyLoan")}
-          >
-            Apply for Loan
-          </button>
+        <button
+          className="loan-btn"
+          style={applyBtnStyle}
+          onClick={() => updateModal("showApplyLoan")}
+        >
+          Apply for Loan
+        </button>
+      </div>
+
+      <div className="panels" style={{ overflowY: "auto" }}>
+        <div className={active === 1 ? "panel active" : "panel"}>
+          <table className="table-borderless">
+            <thead style={theadStyle}>
+              <tr>
+                <th>Date of Loan Approval</th>
+                <th>Name of FPO</th>
+                <th>FPO Contact</th>
+                <th>Granted Loan Amount</th>
+                <th>Farmer Name</th>
+                <th>Loan Details</th>
+              </tr>
+            </thead>
+
+            <tbody style={tbodyStyle}>
+              {
+                loanWindow?.loans?.filter(loan => loan.status === "approved")
+                  .map((loan) => (
+                    <tr key={loan.id}>
+                      <td>{loan.approvalAt.substring(0, 10)}</td>
+                      <td>{loanWindow.fpoName}</td>
+                      <td>{loanWindow.contactNo}</td>
+                      <td>{loan.grantedAmount}</td>
+                      <td>{loan.farmerName}</td>
+                      <td>
+                        <button
+                          style={btnStyle}
+                          onClick={() => updateModal("showLoanDetails", loan)}
+                        >
+                          view
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+              }
+            </tbody>
+          </table>
         </div>
 
-        <div className="panels" style={{ overflowY: "auto" }}>
-          <div className={active === 1 ? "panel active" : "panel"}>
-            <table className="table-borderless">
-              <thead
-                style={{
-                  color: "#064420",
-                  fontSize: "17px",
-                  verticalAlign: "top",
-                }}
-              >
-                <tr>
-                  <th>Date of Loan Approval</th>
-                  <th>Name of FPO</th>
-                  <th>FPO Contact</th>
-                  <th>Granted Loan Amount</th>
-                  <th>Farmer Name</th>
-                  <th>Loan Details</th>
-                </tr>
-              </thead>
-              <tbody
-                style={{
-                  color: "#000",
-                  fontSize: "15px",
-                  fontWeight: "500",
-                }}
-              >
-                {
-                  loanWindow?.loans?.filter(loan => loan.status === "approved")
-                    .map((loan) => (
-                      <tr>
-                        <td>{loan.approvalAt.substring(0, 10)}</td>
-                        <td>{loanWindow.fpoName}</td>
-                        <td>{loanWindow.contactNo}</td>
-                        <td>{loan.grantedAmount}</td>
-                        <td>{loan.farmerName}</td>
-                        <td>
-                          <button
-                            style={btnStyle}
-                            onClick={() => updateModal("showLoanDetails", loan)}
-                          >
-                            view
-                          </button>
-                        </td>
-                      </tr>
-                    ))
-                }
-              </tbody>
-            </table>
-          </div>
+        <div className={active === 2 ? "panel active" : "panel"}>
+          <table className="table table-borderless">
+            <thead style={theadStyle}>
+              <tr>
+                <td>Date of Application</td>
+                <td>Name of FPO</td>
+                <td>Contact No.</td>
+                <td>Requested Loan Amount</td>
+                <td>Loan Application</td>
+                <td>Reason for Rejection</td>
+              </tr>
+            </thead>
 
-          <div className={active === 2 ? "panel active" : "panel"}>
-            <table className="table table-borderless">
-              <thead
-                style={{
-                  color: "#064420",
-                  fontSize: "18px",
-                  verticalAlign: "top",
-                  textAlign: "center",
-                  fontWeight: 600,
-                }}
-              >
-                <tr>
-                  <td>Date of Application</td>
-                  <td>Name of FPO</td>
-                  <td>Contact No.</td>
-                  <td>Requested Loan Amount</td>
-                  <td>Loan Application</td>
-                  <td>Reason for Rejection</td>
-                </tr>
-              </thead>
-              <tbody
-                style={{
-                  color: "#000",
-                  fontSize: "16px",
-                  fontWeight: "500",
-                  textAlign: "center",
-                }}
-              >
-                {
-                  loanWindow?.loans?.filter(loan => loan.status === "rejected")
-                    .map((loan) => (
-                      <tr>
-                        <td>{loan.createdAt.substring(0, 10)}</td>
-                        <td>{loanWindow.fpoName}</td>
-                        <td>{loanWindow.contactNo}</td>
-                        <td>{loan.requestedAmount}</td>
-                        <td>
-                          <button
-                            style={btnStyle}
-                            onClick={() => updateModal("showRejectionLoan", loan)}
-                          >
-                            view
-                          </button>
-                        </td>
-                        <td>{loan.reason}</td>
-                      </tr>
-                    ))
-                }
-              </tbody>
-            </table>
-          </div>
+            <tbody style={tbodyStyle}>
+              {
+                loanWindow?.loans?.filter(loan => loan.status === "rejected")
+                  .map((loan) => (
+                    <tr key={loan.id}>
+                      <td>{loan.createdAt.substring(0, 10)}</td>
+                      <td>{loanWindow.fpoName}</td>
+                      <td>{loanWindow.contactNo}</td>
+                      <td>{loan.requestedAmount}</td>
+                      <td>
+                        <button
+                          style={btnStyle}
+                          onClick={() => updateModal("showRejectionLoan", loan)}
+                        >
+                          view
+                        </button>
+                      </td>
+                      <td>{loan.reason}</td>
+                    </tr>
+                  ))
+              }
+            </tbody>
+          </table>
+        </div>
 
-          <div className={active === 3 ? "panel active" : "panel"}>
-            <table className="table table-borderless">
-              <thead
-                style={{
-                  color: "#064420",
-                  fontSize: "17px",
-                  verticalAlign: "top",
-                  textAlign: "center",
-                  fontWeight: "600",
-                }}
-              >
-                <tr>
-                  <td>Date of Application</td>
-                  <td>Name of FPO</td>
-                  <td>Contact No.</td>
-                  <td>Requested Loan Amount</td>
-                  <td>Loan Application</td>
-                </tr>
-              </thead>
-              <tbody
-                style={{
-                  color: "#000",
-                  fontSize: "16px",
-                  fontWeight: "500",
-                  textAlign: "center",
-                }}
-              >
-                {
-                  loanWindow?.loans.filter(loan => loan.status === "in-process")
-                    .map((loan) => (
-                      <tr>
-                        <td>{loan.createdAt.substring(0, 10)}</td>
-                        <td>{loanWindow.fpoName}</td>
-                        <td>{loanWindow.contactNo}</td>
-                        <td>{loan.requestedAmount}</td>
-                        <td>Pending</td>
-                      </tr>
-                    ))
-                }
-              </tbody>
-            </table>
-          </div>
+        <div className={active === 3 ? "panel active" : "panel"}>
+          <table className="table table-borderless">
+            <thead style={theadStyle}>
+              <tr>
+                <td>Date of Application</td>
+                <td>Name of FPO</td>
+                <td>Contact No.</td>
+                <td>Requested Loan Amount</td>
+                <td>Loan Application</td>
+              </tr>
+            </thead>
 
-          <div className={active === 4 ? "panel active" : "panel"}>
-            <LoanWindowTable
-              onClick={() => updateModal("showApp")}
-              loanWindow={loanWindow}
-            />
-          </div>
+            <tbody style={tbodyStyle}>
+              {
+                loanWindow?.loans.filter(loan => loan.status === "in-process")
+                  .map((loan) => (
+                    <tr key={loan.id}>
+                      <td>{loan.createdAt.substring(0, 10)}</td>
+                      <td>{loanWindow.fpoName}</td>
+                      <td>{loanWindow.contactNo}</td>
+                      <td>{loan.requestedAmount}</td>
+                      <td>Pending</td>
+                    </tr>
+                  ))
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div className={active === 4 ? "panel active" : "panel"}>
+          <LoanWindowTable
+            onClick={() => updateModal("showApp")}
+            loanWindow={loanWindow}
+          />
         </div>
       </div>
     </div>
@@ -267,6 +235,7 @@ function CapitalLoanTab() {
       {
         loanWindowList.map(loanWindow => (
           <WindowRow
+            key={loanWindow.id}
             loanWindow={loanWindow}
             updateModal={updateModal}
           />
