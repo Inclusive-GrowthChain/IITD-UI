@@ -22,7 +22,7 @@ function Loan() {
 
           <button
             className="loan_btn"
-            onClick={() => updateModal("CaptialWindow")}
+            onClick={() => updateModal(activeIndex === 1 ? "fpo" : "farmer")}
           >
             Apply for {activeIndex === 1 ? "Working Capital" : "Farmer"} Loan Window
           </button>
@@ -58,9 +58,11 @@ function Loan() {
       </main>
 
       {
-        modal.state === "CaptialWindow" &&
+        modal.state &&
         <CapitalWindow
           show
+          canEdit
+          windowType={modal.state}
           handleClose={closeModal}
         />
       }

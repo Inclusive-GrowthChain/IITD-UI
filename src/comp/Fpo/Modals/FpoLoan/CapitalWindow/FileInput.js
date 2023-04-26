@@ -18,7 +18,7 @@ const btnStyle = {
   marginRight: "6px"
 }
 
-function FileInput({ label, name, validation = {} }) {
+function FileInput({ label, name, validation = {}, canEdit }) {
   const [show, setShow] = useState(false)
 
   const {
@@ -59,13 +59,16 @@ function FileInput({ label, name, validation = {} }) {
               View
             </button>
 
-            <button
-              type="button"
-              onClick={() => setValue(name, "")}
-              style={btnStyle}
-            >
-              Change
-            </button>
+            {
+              canEdit &&
+              <button
+                type="button"
+                onClick={() => setValue(name, "")}
+                style={btnStyle}
+              >
+                Change
+              </button>
+            }
           </>
       }
 

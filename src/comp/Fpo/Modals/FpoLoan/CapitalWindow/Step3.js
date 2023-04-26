@@ -26,7 +26,7 @@ const list2 = [
   },
 ]
 
-function Step3({ setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle }) {
+function Step3({ canEdit, setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle }) {
   return (
     <div className="mt-3">
       <h5 style={h5Style}>Brief Profile of the FPO</h5>
@@ -41,6 +41,7 @@ function Step3({ setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle
               <FileInput
                 name={`fpoProfile.${i}.doc`}
                 label={l.label}
+                canEdit={canEdit}
               />
             </div>
           </div>
@@ -59,6 +60,7 @@ function Step3({ setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle
               <FileInput
                 name={`licenses.${i}.doc`}
                 label={l.label}
+                canEdit={canEdit}
               />
             </div>
           </div>

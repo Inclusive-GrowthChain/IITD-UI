@@ -35,7 +35,7 @@ const list = [
   },
 ]
 
-function Step5({ setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle }) {
+function Step5({ canEdit, setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle }) {
   return (
     <div className="mt-3">
       <h5 style={h5Style}>Other Details</h5>
@@ -50,6 +50,7 @@ function Step5({ setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle
               <FileInput
                 name={`otherDetails.${i}.doc`}
                 label={l.label}
+                canEdit={canEdit}
               />
             </div>
           </div>

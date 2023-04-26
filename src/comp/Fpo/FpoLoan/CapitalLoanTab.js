@@ -5,7 +5,6 @@ import { getLoanwindow } from "../../../actions/fpo";
 import { useAuthStore } from "../../../store/useAuthStore";
 import useModal from "../../../hooks/useModal";
 
-import DocumentsCollected from "../Modals/FpoLoan/DocumentsCollected";
 import LoanApplication2 from "../Modals/FpoLoan/LoanApplication2";
 import LoanApplication from "../Modals/FpoLoan/LoanApp";
 import LoanDetails from "../Modals/FpoLoan/LoanDetails";
@@ -200,10 +199,7 @@ function WindowRow({ loanWindow, updateModal }) {
         </div>
 
         <div className={active === 4 ? "panel active" : "panel"}>
-          <LoanWindowTable
-            onClick={() => updateModal("showApp")}
-            loanWindow={loanWindow}
-          />
+          <LoanWindowTable loanWindow={loanWindow} />
         </div>
       </div>
     </div>
@@ -240,15 +236,6 @@ function CapitalLoanTab() {
             updateModal={updateModal}
           />
         ))
-      }
-
-      {
-        modal.state === "showApp" &&
-        <DocumentsCollected
-          show
-          windowId=""
-          handleClose={closeModal}
-        />
       }
 
       {

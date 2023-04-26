@@ -40,15 +40,15 @@ const nextBtnStyle = {
 }
 
 
-function CapitalWindow({ show, handleClose }) {
+function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = false, handleClose }) {
   const [step, setStep] = useState(0)
 
   const queryClient = useQueryClient()
   const user = useAuthStore(s => s.userDetails)
 
   const methods = useForm({
-    defaultValues: {
-      windowType: "fpo",
+    defaultValues: isEdit ? data : {
+      windowType,
       fpoId: user._id,
       fpoName: user.fpoName,
       contactNo: user.contactNumber,
@@ -102,10 +102,12 @@ function CapitalWindow({ show, handleClose }) {
   const { mutate, isLoading } = useMutation({
     mutationFn: createLoanwindow,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["loanwindow", "fpo"] })
+      queryClient.invalidateQueries({ queryKey: ["loanwindow", windowType] })
       handleClose()
     }
   })
+
+  const title = windowType === "fpo" ? "Working Captial" : "Farmer"
 
   return (
     <Modal
@@ -114,7 +116,7 @@ function CapitalWindow({ show, handleClose }) {
       onHide={handleClose}
       scrollable
     >
-      <Modal.Header closeButton>Working Captial Window</Modal.Header>
+      <Modal.Header closeButton>{title} Window</Modal.Header>
 
       <Modal.Body>
         <FormProvider {...methods}>
@@ -134,6 +136,7 @@ function CapitalWindow({ show, handleClose }) {
                 finalWrapperStyle={finalWrapperStyle}
                 backBtnStyle={backBtnStyle}
                 nextBtnStyle={nextBtnStyle}
+                canEdit={canEdit}
                 setStep={setStep}
               />
             }
@@ -144,6 +147,7 @@ function CapitalWindow({ show, handleClose }) {
                 finalWrapperStyle={finalWrapperStyle}
                 backBtnStyle={backBtnStyle}
                 nextBtnStyle={nextBtnStyle}
+                canEdit={canEdit}
                 setStep={setStep}
               />
             }
@@ -154,6 +158,7 @@ function CapitalWindow({ show, handleClose }) {
                 finalWrapperStyle={finalWrapperStyle}
                 backBtnStyle={backBtnStyle}
                 nextBtnStyle={nextBtnStyle}
+                canEdit={canEdit}
                 setStep={setStep}
               />
             }
@@ -164,6 +169,7 @@ function CapitalWindow({ show, handleClose }) {
                 finalWrapperStyle={finalWrapperStyle}
                 backBtnStyle={backBtnStyle}
                 nextBtnStyle={nextBtnStyle}
+                canEdit={canEdit}
                 setStep={setStep}
               />
             }
@@ -174,6 +180,8 @@ function CapitalWindow({ show, handleClose }) {
                 finalWrapperStyle={finalWrapperStyle}
                 backBtnStyle={backBtnStyle}
                 nextBtnStyle={nextBtnStyle}
+                title={title}
+                canEdit={canEdit}
                 isLoading={isLoading}
                 setStep={setStep}
               />

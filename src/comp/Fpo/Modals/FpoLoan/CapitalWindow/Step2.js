@@ -6,7 +6,7 @@ const btnStyle = {
   cursor: "pointer",
 }
 
-function Step2({ setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle }) {
+function Step2({ canEdit, setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle }) {
   const { register, getValues, control } = useFormContext()
   const { fields, append, remove } = useFieldArray({
     control: control,
@@ -51,6 +51,7 @@ function Step2({ setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle
                 <FileInput
                   name={`kycAuthorizedSignatories.${i}.doc`}
                   label={getValues(`kycAuthorizedSignatories.${i}.name`)}
+                  canEdit={canEdit}
                 />
               </div>
             </div>
@@ -78,6 +79,7 @@ function Step2({ setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle
               <FileInput
                 name={`kycAuthorizedSignatories.${i}.doc`}
                 label={getValues(`kycAuthorizedSignatories.${i}.name`)}
+                canEdit={canEdit}
               />
             </div>
           </div>

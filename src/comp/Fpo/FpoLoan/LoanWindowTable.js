@@ -1,3 +1,5 @@
+import useModal from "../../../hooks/useModal";
+import CapitalWindow from "../Modals/FpoLoan/CapitalWindow";
 
 const btnStyle = {
   backgroundColor: "#064420",
@@ -13,7 +15,9 @@ const btnStyle = {
 
 const labelStyle = { width: "180px" }
 
-function LoanWindowTable({ onClick, loanWindow }) {
+function LoanWindowTable({ loanWindow }) {
+  const { modal, updateModal, closeModal } = useModal()
+
   return (
     <div style={{ paddingLeft: "24px" }}>
       <div className="d-flex align-items-center" style={{ gap: "1rem" }}>
@@ -54,11 +58,21 @@ function LoanWindowTable({ onClick, loanWindow }) {
         <span>:</span>
         <button
           style={btnStyle}
-          onClick={onClick}
+          onClick={() => updateModal("show", loanWindow)}
         >
           View
         </button>
       </div>
+
+      {
+        modal.state &&
+        <CapitalWindow
+          show
+          isEdit
+          data={modal.data}
+          handleClose={closeModal}
+        />
+      }
     </div>
   )
 }

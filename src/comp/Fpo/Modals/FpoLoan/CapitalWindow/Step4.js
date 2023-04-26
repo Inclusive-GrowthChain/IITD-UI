@@ -35,7 +35,7 @@ const list = [
   },
 ]
 
-function Step4({ setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle }) {
+function Step4({ canEdit, setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle }) {
   return (
     <div className="mt-3">
       <h5 style={h5Style}>Financial Details</h5>
@@ -50,6 +50,7 @@ function Step4({ setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle
               <FileInput
                 name={`financialDetails.${i}.doc`}
                 label={l.label}
+                canEdit={canEdit}
               />
             </div>
           </div>

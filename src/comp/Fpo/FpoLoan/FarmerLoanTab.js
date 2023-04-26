@@ -5,7 +5,6 @@ import { getLoanwindow } from "../../../actions/fpo";
 import { useAuthStore } from "../../../store/useAuthStore";
 import useModal from "../../../hooks/useModal";
 
-import DocumentsCollected2 from "../Modals/FpoLoan/DocumentsCollected2";
 import RepaymentStructure from "../Modals/FpoLoan/RepaymentStructure";
 import LoanApplication from "../Modals/FpoLoan/LoanApplication";
 import ApproveLoanApp from "../Modals/FpoLoan/ApproveLoanApp";
@@ -228,10 +227,7 @@ function WindowRow({ loanWindow, updateModal }) {
         </div>
 
         <div className={active === 4 ? "panel active" : "panel"}>
-          <LoanWindowTable
-            onClick={() => updateModal("showAdd")}
-            loanWindow={loanWindow}
-          />
+          <LoanWindowTable loanWindow={loanWindow} />
         </div>
       </div>
     </div>
@@ -306,15 +302,6 @@ function FarmerLoanTab() {
           data={modal.data}
           handleClose={closeModal}
           currentLoanWindow={{}}
-        />
-      }
-
-      {
-        modal.state === "showAdd" &&
-        <DocumentsCollected2
-          show
-          windowId=""
-          handleClose={closeModal}
         />
       }
     </>

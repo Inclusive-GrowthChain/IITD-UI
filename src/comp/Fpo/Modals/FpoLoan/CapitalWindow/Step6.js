@@ -34,12 +34,12 @@ const list = [
   },
 ]
 
-function Step6({ setStep, isLoading, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle }) {
+function Step6({ setStep, title, canEdit, isLoading, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle }) {
   const { register, formState: { errors } } = useFormContext()
 
   return (
     <div className="mt-3">
-      <h5 style={h5Style}>Apply for Working Capital Loan Window</h5>
+      <h5 style={h5Style}>Apply for {title} Loan Window</h5>
 
       {
         list.map(l => (
@@ -83,14 +83,17 @@ function Step6({ setStep, isLoading, h5Style, finalWrapperStyle, backBtnStyle, n
           Back
         </button>
 
-        <button
-          className="btn btn-success"
-          disabled={isLoading}
-          style={nextBtnStyle}
-          type="submit"
-        >
-          Submit
-        </button>
+        {
+          canEdit &&
+          <button
+            className="btn btn-success"
+            disabled={isLoading}
+            style={nextBtnStyle}
+            type="submit"
+          >
+            Submit
+          </button>
+        }
       </div>
     </div>
   )
