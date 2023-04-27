@@ -2,23 +2,16 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { getLoanwindow } from "../../../actions/fpo";
-// import useModal from "../../../hooks/useModal";
+import useModal from "../../../hooks/useModal";
 
-import ConfirmApproveLoanApp from "../Modals/FarmerLoan/ConfirmApproveLoanApp";
 import AggRepaymentStructure from "../Modals/FarmerLoan/AggRepaymentStructure";
 import RepaymentStructure from "../Modals/FarmerLoan/RepaymentStructure";
-import RepaymentConfirm from "../Modals/FarmerLoan/RepaymentConfirm";
 import LoanApplication from "../Modals/FarmerLoan/LoanApplication";
 import InterestRate from "../Modals/FarmerLoan/InterestRate";
-import AddRepayment from "../Modals/FarmerLoan/AddRepayment";
-import ConfirmBox from "../Modals/FarmerLoan/ConfirmBox";
-import Loader from '../../Common/Loader';
-import Aadhar from "../Modals/Aadhar";
-import Img from "../Modals/FarmerInfo/Img";
-import Pan from "../Modals/Pan";
 
 import ApprovedLoans from "./ApprovedLoans";
 import LoanHistory from "./LoanHistory";
+import Loader from '../../Common/Loader';
 
 const listStyle = {
   border: "none",
@@ -50,72 +43,18 @@ const tbodyStyle = {
 }
 
 function FarmerLoan() {
-  const [showLoanApplication, setShowLoanApplication] = useState(false)
-  const [showApproveConfirm, setShowApproveConfirm] = useState(false)
-  const [showConfirmPayment, setShowConfirmPayment] = useState(false)
-  const [showAadharCardImg, setShowAadharCardImg] = useState(false)
-  const [showRepaymentForm, setShowRepaymentForm] = useState(false)
-  const [showAggRepayment, setShowAggRepayment] = useState(false)
-  const [showPanCardImg, setShowPanCardImg] = useState(false)
-  const [showConfirmBox, setShowConfirmBox] = useState(false)
-  const [showInterest, setShowInterest] = useState(false)
-  const [showConfirm, setShowConfirm] = useState(false)
+  const { modal, updateModal, closeModal } = useModal()
   const [activeIndex, setActiveIndex] = useState(1)
   const [textState, setTextState] = useState("")
-  const [showImg, setShowImg] = useState(false)
-  const [step, setStep] = useState(0)
-  const [currentLoan, setCurrentLoan] = useState({})
-  const [currentLoanWindow, setCurrentLoanWindow] = useState({})
 
-  // const { modal, updateModal, closeModal } = useModal()
   const { isLoading, data } = useQuery({
     queryKey: ["loanwindow", "farmer"],
     queryFn: getLoanwindow,
-
   })
 
   const loanWindowList = data?.data || []
 
-  const checkActive = (index, className) =>
-    activeIndex === index ? className : ""
-
-  const handleCloseLoanApplication = () => setShowLoanApplication(false)
-  const handleCloseApproveConfirm = () => setShowApproveConfirm(false)
-  const handleShowLoanApplication = () => setShowLoanApplication(true)
-  const handleCloseConfirmPayment = () => setShowConfirmPayment(false)
-  const handleShowConfirmPayment = () => setShowConfirmPayment(true)
-  const handleCloseRepaymentForm = () => setShowRepaymentForm(false)
-  const handleCloseAadharCardImg = () => setShowAadharCardImg(false)
-  const handleCloseAggRepayment = () => setShowAggRepayment(false)
-  const handleShowRepaymentForm = () => setShowRepaymentForm(true)
-  const handleShowAadharCardImg = () => setShowAadharCardImg(true)
-  const handleCloseConfirmBox = () => setShowConfirmBox(false)
-  const handleClosePanCardImg = () => setShowPanCardImg(false)
-  const handleShowPanCardImg = () => setShowPanCardImg(true)
-  const handleCloseInterest = () => setShowInterest(false)
-  const handleShowInterest = () => setShowInterest(true)
-  const handleCloseConfirm = () => setShowConfirm(false)
-  const handleShowConfirm = () => setShowConfirm(true)
-  const handleCloseImg = () => setShowImg(false)
-  const handleShowImg = () => setShowImg(true)
-  const handleClick = i => setActiveIndex(i)
-
-  const confirmBox = (e) => {
-    e.preventDefault()
-    setShowConfirmPayment(true)
-  }
-
-  const confirmBid = (e) => {
-    e.preventDefault()
-    setShowConfirm(false)
-    setShowInterest(false)
-  }
-
-  const cancelBid = (e) => {
-    e.preventDefault()
-    setShowConfirm(false)
-    setShowInterest(false)
-  }
+  const checkActive = (index, className) => activeIndex === index ? className : ""
 
   const toggleText = () => {
     setTextState((state) =>
@@ -145,7 +84,7 @@ function FarmerLoan() {
             <label className="toggle-switch">
               <input
                 type="checkbox"
-                checked={!!toggleText}
+                checked={!!textState}
                 onChange={toggleText}
               />
               <span className="switch" />
@@ -155,7 +94,7 @@ function FarmerLoan() {
 
         <button
           className="loan_btn"
-          onClick={handleShowInterest}
+          onClick={() => updateModal("showInterest")}
         >
           Set Interest Rate
         </button>
@@ -163,13 +102,14 @@ function FarmerLoan() {
         <div className="tabs mt-5">
           <button
             className={`tab ${checkActive(1, "active")}`}
-            onClick={() => handleClick(1)}
+            onClick={() => setActiveIndex(1)}
           >
             Loans Approved by Samunnati
           </button>
+
           <button
             className={`tab ${checkActive(2, "active")}`}
-            onClick={() => handleClick(2)}
+            onClick={() => setActiveIndex(2)}
           >
             Loan History
           </button>
@@ -193,80 +133,41 @@ function FarmerLoan() {
         </div>
       </div>
 
-      <RepaymentStructure
-        showRepaymentForm={showRepaymentForm}
-        handleCloseRepaymentForm={handleCloseRepaymentForm}
-        handleShowConfirmPayment={handleShowConfirmPayment}
-        currentLoan={currentLoan}
-        currentLoanWindow={currentLoanWindow}
-      />
+      {
+        modal.state === "showRepaymentForm" &&
+        <RepaymentStructure
+          show
+          handleClose={closeModal}
+          currentLoan={{}}
+          currentLoanWindow={{}}
+        />
+      }
 
-      <AddRepayment
-        showConfirmPayment={showConfirmPayment}
-        handleCloseConfirmPayment={handleCloseConfirmPayment}
-        confirmBid={confirmBid}
-        handleShowConfirm={handleShowConfirm}
-      />
+      {
+        modal.state === "showLoanApplication" &&
+        <LoanApplication
+          show
+          handleClose={closeModal}
+          currentLoan={{}}
+          currentLoanWindow={{}}
+        />
+      }
 
-      <RepaymentConfirm
-        showConfirm={showConfirm}
-        handleCloseConfirm={handleCloseConfirm}
-        confirmBid={confirmBid}
-        cancelBid={cancelBid}
-      />
+      {
+        modal.state === "showInterest" &&
+        <InterestRate
+          show
+          handleClose={closeModal}
+        />
+      }
 
-      <LoanApplication
-        showLoanApplication={showLoanApplication}
-        handleCloseLoanApplication={handleCloseLoanApplication}
-        step={step}
-        setStep={setStep}
-        currentLoan={currentLoan}
-        handleShowAadharCardImg={handleShowAadharCardImg}
-        handleShowPanCardImg={handleShowPanCardImg}
-        handleShowImg={handleShowImg}
-        currentLoanWindow={currentLoanWindow}
-      />
-
-      <Aadhar
-        showAadharCardImg={showAadharCardImg}
-        handleCloseAadharCardImg={handleCloseAadharCardImg}
-      />
-
-      <Pan
-        showPanCardImg={showPanCardImg}
-        handleClosePanCardImg={handleClosePanCardImg}
-      />
-
-      <ConfirmBox
-        showConfirmBox={showConfirmBox}
-        handleCloseConfirmBox={handleCloseConfirmBox}
-      />
-
-      <ConfirmApproveLoanApp
-        showApproveConfirm={showApproveConfirm}
-        handleCloseApproveConfirm={handleCloseApproveConfirm}
-      />
-
-      <Img
-        showImg={showImg}
-        handleCloseImg={handleCloseImg}
-      />
-
-      <InterestRate
-        showInterest={showInterest}
-        handleCloseInterest={handleCloseInterest}
-        handleShowConfirm={handleShowConfirm}
-        showConfirm={showConfirm}
-        handleCloseConfirm={handleCloseConfirm}
-        confirmBid={confirmBid}
-        cancelBid={cancelBid}
-        confirmBox={confirmBox}
-      />
-
-      <AggRepaymentStructure
-        showAggRepayment={showAggRepayment}
-        handleCloseAggRepayment={handleCloseAggRepayment}
-      />
+      {
+        modal.state === "showAggRepayment" &&
+        <AggRepaymentStructure
+          show
+          handleClose={closeModal}
+        />
+      }
     </main>
   )
 }

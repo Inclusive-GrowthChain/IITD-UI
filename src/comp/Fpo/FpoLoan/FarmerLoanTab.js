@@ -6,7 +6,6 @@ import { useAuthStore } from "../../../store/useAuthStore";
 import useModal from "../../../hooks/useModal";
 
 import RepaymentStructure from "../Modals/FpoLoan/RepaymentStructure";
-import LoanApplication2 from "../Modals/FpoLoan/LoanApplication2";
 import LoanApplication from "../Modals/FpoLoan/LoanApplication";
 import ApproveLoanApp from "../Modals/FpoLoan/ApproveLoanApp";
 import RejectLoanApp from "../Modals/FpoLoan/RejectLoanApp";
@@ -36,15 +35,6 @@ const tbodyStyle = {
   color: "#000",
   fontSize: "15px",
   fontWeight: "500",
-}
-
-const applyBtnStyle = {
-  backgroundColor: "#064420",
-  color: "#fff",
-  border: "none",
-  padding: "4px 16px",
-  borderRadius: "5px",
-  marginLeft: "auto"
 }
 
 const tabs = [
@@ -84,14 +74,6 @@ function WindowRow({ loanWindow, updateModal }) {
             </button>
           ))
         }
-
-        <button
-          className="loan-btn"
-          style={applyBtnStyle}
-          onClick={() => updateModal("showApplyLoan", { windowId: loanWindow.windowId, id: loanWindow.id })}
-        >
-          Apply for Loan
-        </button>
       </div>
 
       <div className="panels" style={{ overflowY: "auto" }}>
@@ -265,16 +247,6 @@ function FarmerLoanTab() {
             updateModal={updateModal}
           />
         ))
-      }
-
-      {
-        modal.state === "showApplyLoan" &&
-        <LoanApplication2
-          show
-          applyFor="farmer"
-          loanWindow={modal.data}
-          handleClose={closeModal}
-        />
       }
 
       {

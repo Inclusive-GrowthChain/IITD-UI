@@ -29,7 +29,8 @@ const applyBtnStyle = {
   border: "none",
   padding: "4px 16px",
   borderRadius: "5px",
-  marginLeft: "auto"
+  top: 0,
+  right: 0,
 }
 
 const theadStyle = {
@@ -82,14 +83,6 @@ function WindowRow({ loanWindow, updateModal }) {
             </button>
           ))
         }
-
-        <button
-          className="loan-btn"
-          style={applyBtnStyle}
-          onClick={() => updateModal("showApplyLoan", { windowId: loanWindow.windowId, id: loanWindow.id })}
-        >
-          Apply for Loan
-        </button>
       </div>
 
       <div className="panels" style={{ overflowY: "auto" }}>
@@ -228,6 +221,17 @@ function CapitalLoanTab() {
 
   return (
     <>
+      <button
+        className="loan-btn position-absolute"
+        style={applyBtnStyle}
+        onClick={() => updateModal("showApplyLoan", {
+          windowId: loanWindowList[loanWindowList.length - 1]?.windowId,
+          id: loanWindowList[loanWindowList.length - 1]?.id
+        })}
+      >
+        Apply for Loan
+      </button>
+
       {
         loanWindowList.map(loanWindow => (
           <WindowRow

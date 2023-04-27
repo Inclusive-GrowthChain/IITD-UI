@@ -45,7 +45,7 @@ function Loan() {
             </button>
           </div>
 
-          <div className="panels">
+          <div className="panels position-relative">
             <div className={`panel ${checkActive(1, "active")}`} style={{ marginTop: '16px' }}>
               <CapitalLoanTab />
             </div>

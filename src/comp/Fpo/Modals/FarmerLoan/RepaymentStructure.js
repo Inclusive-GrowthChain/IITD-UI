@@ -1,15 +1,32 @@
+import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import AddRepayment from "./AddRepayment";
 
-function RepaymentStructure({ showRepaymentForm, handleCloseRepaymentForm, handleShowConfirmPayment, currentLoan, currentLoanWindow }) {
+const btnStyle = {
+  backgroundColor: "#064420",
+  color: "#fff",
+  alignItems: "center",
+  borderRadius: "5px",
+  border: "none",
+  padding: "0.25rem 1rem",
+  width: "fit-content",
+  fontSize: ".75rem",
+  lineHeight: "1rem",
+}
+
+function RepaymentStructure({ show, handleClose, currentLoan, currentLoanWindow }) {
+  const [modal, setModal] = useState(false)
+
   return (
     <Modal
       size="xl"
-      show={showRepaymentForm}
-      onHide={handleCloseRepaymentForm}
+      show={show}
+      onHide={handleClose}
     >
       <Modal.Header closeButton>
         Repayment Structure
       </Modal.Header>
+
       <Modal.Body style={{ overflowY: 'auto' }}>
         <div className="repayment_title">
           <div className="row">
@@ -67,11 +84,7 @@ function RepaymentStructure({ showRepaymentForm, handleCloseRepaymentForm, handl
         </div>
         <div className="mt-5">
           <table style={{ border: "1px solid #eee" }}>
-            <thead
-              style={{
-                backgroundColor: "#eee",
-              }}
-            >
+            <thead style={{ backgroundColor: "#eee" }}>
               <tr>
                 <th>S.No.</th>
                 <th>Scheduled Repayment Date</th>
@@ -87,22 +100,8 @@ function RepaymentStructure({ showRepaymentForm, handleCloseRepaymentForm, handl
                   <td>{item.emi}</td>
                   <td>
                     <button
-                      style={{
-                        backgroundColor: "#064420",
-                        color: "#fff",
-                        alignItems: "center",
-                        borderRadius: "5px",
-                        border: "none",
-                        padding: "0.25rem 1rem",
-                        width: "fit-content",
-                        fontSize: ".75rem",
-                        lineHeight: "1rem",
-                      }}
-                      onClick={() => {
-                        // handleShowConfirm()
-                        // confirmBox(e)
-                        handleShowConfirmPayment()
-                      }}
+                      style={btnStyle}
+                      onClick={() => setModal(true)}
                     >
                       Add Repayment
                     </button>
@@ -112,6 +111,14 @@ function RepaymentStructure({ showRepaymentForm, handleCloseRepaymentForm, handl
             </tbody>
           </table>
         </div>
+
+        {
+          modal &&
+          <AddRepayment
+            show
+            handleClose={() => setModal(false)}
+          />
+        }
       </Modal.Body>
     </Modal>
   )

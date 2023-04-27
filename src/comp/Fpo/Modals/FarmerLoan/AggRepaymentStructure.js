@@ -1,13 +1,14 @@
 import Modal from "react-bootstrap/Modal";
 
-function AggRepaymentStructure({ showAggRepayment, handleCloseAggRepayment }) {
+function AggRepaymentStructure({ show, handleClose }) {
   return (
     <Modal
       size="xl"
-      show={showAggRepayment}
-      onHide={handleCloseAggRepayment}
+      show={show}
+      onHide={handleClose}
     >
       <Modal.Header closeButton>Repayment Structure</Modal.Header>
+
       <Modal.Body>
         <div className="repayment_title">
           <div className="row">
@@ -65,11 +66,7 @@ function AggRepaymentStructure({ showAggRepayment, handleCloseAggRepayment }) {
         </div>
         <div className="mt-5">
           <table style={{ border: "1px solid #eee" }}>
-            <thead
-              style={{
-                backgroundColor: "#eee",
-              }}
-            >
+            <thead style={{ backgroundColor: "#eee" }}>
               <tr>
                 <th>S.No.</th>
                 <th>Scheduled Repayment Date</th>
@@ -79,6 +76,7 @@ function AggRepaymentStructure({ showAggRepayment, handleCloseAggRepayment }) {
                 <th>Balance Amount</th>
               </tr>
             </thead>
+
             <tbody>
               <tr>
                 <td>1</td>

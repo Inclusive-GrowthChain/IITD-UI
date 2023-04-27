@@ -1,10 +1,22 @@
 import Modal from "react-bootstrap/Modal";
 
-function AddRepayment({ showConfirmPayment, handleCloseConfirmPayment, confirmBid, handleShowConfirm }) {
+const btnStyle = {
+  backgroundColor: "#064420",
+  color: "#fff",
+  alignItems: "center",
+  borderRadius: "5px",
+  border: "none",
+  padding: "0.25rem 1rem",
+  width: "fit-content",
+  fontSize: ".75rem",
+  lineHeight: "1rem",
+}
+
+function AddRepayment({ show, handleClose }) {
   return (
     <Modal
-      show={showConfirmPayment}
-      onHide={handleCloseConfirmPayment}
+      show={show}
+      onHide={handleClose}
     >
       <Modal.Header closeButton>Add Repayment</Modal.Header>
       <Modal.Body>
@@ -35,21 +47,7 @@ function AddRepayment({ showConfirmPayment, handleCloseConfirmPayment, confirmBi
         <div className="row">
           <div className="col-12">
             <button
-              style={{
-                backgroundColor: "#064420",
-                color: "#fff",
-                alignItems: "center",
-                borderRadius: "5px",
-                border: "none",
-                padding: "0.25rem 1rem",
-                width: "fit-content",
-                fontSize: ".75rem",
-                lineHeight: "1rem",
-              }}
-              onClick={(e) => {
-                confirmBid(e)
-                handleShowConfirm()
-              }}
+              style={btnStyle}
             >
               Submit
             </button>
