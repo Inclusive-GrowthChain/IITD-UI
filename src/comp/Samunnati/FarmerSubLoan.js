@@ -11,7 +11,7 @@ import ApproveLoanApp from "./Modals/FarmerSubLoan/ApproveLoanApp";
 import RejectLoanApp from "./Modals/FarmerSubLoan/RejectLoanApp";
 import ConfirmReject from "./Modals/FarmerSubLoan/ConfirmReject";
 import PaymentProof from "./Modals/FpoSubLoan/PaymentProof";
-import ConfirmBox from "../Fpo/Modals/ConfirmBox";
+import ConfirmBox from "../Fpo/Modals/FarmerLoan/ConfirmBox";
 import Aadhar from "../Fpo/Modals/Aadhar";
 import Pan from "../Fpo/Modals/Pan";
 import axios from "axios";
