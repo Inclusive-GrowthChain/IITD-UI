@@ -68,7 +68,7 @@ function WindowRow({ loanWindow, updateModal }) {
   const [active, setActive] = useState(1)
 
   return (
-    <div className="card_content">
+    <div className="card_content mb-5">
       <div className="d-flex align-items-center">
         {
           tabs.map(t => (
@@ -86,7 +86,7 @@ function WindowRow({ loanWindow, updateModal }) {
         <button
           className="loan-btn"
           style={applyBtnStyle}
-          onClick={() => updateModal("showApplyLoan")}
+          onClick={() => updateModal("showApplyLoan", { windowId: loanWindow.windowId, id: loanWindow.id })}
         >
           Apply for Loan
         </button>
@@ -242,7 +242,8 @@ function CapitalLoanTab() {
         modal.state === "showApplyLoan" &&
         <LoanApplication2
           show
-          loanWindow={{}} // activeLoanWindow
+          applyFor="fpo"
+          loanWindow={modal.data}
           handleClose={closeModal}
         />
       }

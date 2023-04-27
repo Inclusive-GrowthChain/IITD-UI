@@ -114,3 +114,11 @@ export function createLoanwindow(data) {
     data,
   })
 }
+
+export function createLoan(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.loanwindow + `/${data.id}/loan`,
+    data,
+  })
+}
