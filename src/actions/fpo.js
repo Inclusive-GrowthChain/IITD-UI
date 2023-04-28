@@ -122,3 +122,9 @@ export function createLoan(data) {
     data,
   })
 }
+
+export function getFarmerApplication(data) {
+  return sendApiReq({
+    url: endPoints.fpo.farmerApp + `/${data}`,
+  })
+}

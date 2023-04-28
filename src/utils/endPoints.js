@@ -39,6 +39,7 @@ const endPoints = {
     products: "/fpo/product",
     farmers: "/fpo/farmer",
     lac: "/fpo/lac",
+    farmerApp: "/user",
   },
 }
 
