@@ -1,4 +1,9 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+
+import { getFarmerApplication } from "../../../../../actions/fpo";
+
+import Loader from "../../../../Common/Loader";
 import Modal from "react-bootstrap/Modal";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
@@ -26,6 +31,13 @@ const backBtnStyle = {
 function LoanApplication({ show, handleClose, currentLoan, currentLoanWindow }) {
   const [step, setStep] = useState(1)
 
+  const { isLoading, data } = useQuery({
+    queryKey: ["loanwindow"],
+    queryFn: () => getFarmerApplication(currentLoan.userId),
+  })
+
+  const farmerDetails = data?.data?.[0]
+
   return (
     <Modal
       show={show}
@@ -37,10 +49,17 @@ function LoanApplication({ show, handleClose, currentLoan, currentLoanWindow }) 
 
       <Modal.Body>
         {
-          step === 1 &&
+          isLoading &&
+          <div style={{ height: "400px" }}><Loader wrapperCls="h-100" /></div>
+        }
+        {
+          !isLoading && step === 1 &&
           <Step1
             setStep={setStep}
             nextBtnStyle={nextBtnStyle}
+            currentLoan={currentLoan}
+            farmerDetails={farmerDetails}
+            currentLoanWindow={currentLoanWindow}
           />
         }
         {
@@ -49,6 +68,7 @@ function LoanApplication({ show, handleClose, currentLoan, currentLoanWindow }) 
             setStep={setStep}
             backBtnStyle={backBtnStyle}
             nextBtnStyle={nextBtnStyle}
+            farmerDetails={farmerDetails}
           />
         }
         {
@@ -57,6 +77,7 @@ function LoanApplication({ show, handleClose, currentLoan, currentLoanWindow }) 
             setStep={setStep}
             backBtnStyle={backBtnStyle}
             nextBtnStyle={nextBtnStyle}
+            farmerDetails={farmerDetails}
           />
         }
         {
@@ -65,6 +86,7 @@ function LoanApplication({ show, handleClose, currentLoan, currentLoanWindow }) 
             setStep={setStep}
             backBtnStyle={backBtnStyle}
             nextBtnStyle={nextBtnStyle}
+            farmerDetails={farmerDetails}
           />
         }
         {
@@ -73,6 +95,8 @@ function LoanApplication({ show, handleClose, currentLoan, currentLoanWindow }) 
             setStep={setStep}
             backBtnStyle={backBtnStyle}
             nextBtnStyle={nextBtnStyle}
+            currentLoan={currentLoan}
+            farmerDetails={farmerDetails}
           />
         }
         {
@@ -80,6 +104,7 @@ function LoanApplication({ show, handleClose, currentLoan, currentLoanWindow }) 
           <Step6
             setStep={setStep}
             backBtnStyle={backBtnStyle}
+            currentLoan={currentLoan}
           />
         }
       </Modal.Body>

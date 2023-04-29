@@ -17,15 +17,6 @@ const listStyle = {
   border: "none",
   padding: "5px 5px",
   borderRadius: "5px",
-  position: "absolute",
-  right: "10%",
-  top: "120px",
-}
-
-const h3Style = {
-  fontSize: "15px",
-  position: "fixed",
-  right: "5.5%",
 }
 
 const theadStyle = {
@@ -44,8 +35,8 @@ const tbodyStyle = {
 
 function FarmerLoan() {
   const { modal, updateModal, closeModal } = useModal()
+  const [recieveApplication, setRecieveApplication] = useState(false)
   const [activeIndex, setActiveIndex] = useState(1)
-  const [textState, setTextState] = useState("")
 
   const { isLoading, data } = useQuery({
     queryKey: ["loanwindow", "farmer"],
@@ -56,14 +47,6 @@ function FarmerLoan() {
 
   const checkActive = (index, className) => activeIndex === index ? className : ""
 
-  const toggleText = () => {
-    setTextState((state) =>
-      state === "Receive Loan Application Enabled"
-        ? "Receive Loan Application Disabled"
-        : "Receive Loan Application Enabled"
-    )
-  }
-
   if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (
@@ -72,32 +55,27 @@ function FarmerLoan() {
         <h3 className="mb-4">Farmer Loan Information</h3>
       </div>
       <div className="list_container">
-        <div
-          style={listStyle}
-          className="list_container_inner"
-        >
-          <h3 style={h3Style}>
-            {textState}
-          </h3>
+        <div className="d-flex align-items-center">
+          <button
+            className="loan_btn"
+            style={{ marginRight: "auto", marginLeft: 0 }}
+            onClick={() => updateModal("showInterest")}
+          >
+            Set Interest Rate
+          </button>
 
           <div>
-            <label className="toggle-switch">
+            Receive Loan Application
+            <label className="toggle-switch mt-0">
               <input
                 type="checkbox"
-                checked={!!textState}
-                onChange={toggleText}
+                checked={recieveApplication}
+                onChange={() => setRecieveApplication(p => !p)}
               />
               <span className="switch" />
             </label>
           </div>
         </div>
-
-        <button
-          className="loan_btn"
-          onClick={() => updateModal("showInterest")}
-        >
-          Set Interest Rate
-        </button>
 
         <div className="tabs mt-5">
           <button
@@ -121,6 +99,7 @@ function FarmerLoan() {
               loanWindowList={loanWindowList}
               theadStyle={theadStyle}
               tbodyStyle={tbodyStyle}
+              updateModal={updateModal}
             />
           </div>
 
@@ -138,8 +117,8 @@ function FarmerLoan() {
         <RepaymentStructure
           show
           handleClose={closeModal}
-          currentLoan={{}}
-          currentLoanWindow={{}}
+          currentLoan={modal.data.loan}
+          currentLoanWindow={modal.data.loanWindow}
         />
       }
 
@@ -148,8 +127,8 @@ function FarmerLoan() {
         <LoanApplication
           show
           handleClose={closeModal}
-          currentLoan={{}}
-          currentLoanWindow={{}}
+          currentLoan={modal.data.loan}
+          currentLoanWindow={modal.data.loanWindow}
         />
       }
 

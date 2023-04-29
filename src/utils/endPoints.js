@@ -14,6 +14,7 @@ const endPoints = {
   loanwindow: "/loanwindow",
   uploadImg: '/document',
   auction: "/auction",
+  user: "/user",
 
   // Corporate Client
   corporateClient: {

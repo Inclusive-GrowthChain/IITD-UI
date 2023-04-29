@@ -122,3 +122,10 @@ export function createLoan(data) {
     data,
   })
 }
+
+
+export function getFarmerApplication(userId) {
+  return sendApiReq({
+    url: endPoints.user + `/${userId}`,
+  })
+}

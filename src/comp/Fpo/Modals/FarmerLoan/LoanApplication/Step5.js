@@ -1,109 +1,97 @@
 
-function Step5({ backBtnStyle, nextBtnStyle, setStep }) {
+function Step5({ backBtnStyle, nextBtnStyle, setStep, farmerDetails, currentLoan }) {
   return (
-    <div className="row mt-3">
-      <div className="col">
-        <form>
-          <div className="form">
-            <label className="form-label select-label">
-              <div className="">
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>Land Holding</label>
-                  </div>
-                  <div className="col-lg-6">
-                    <label>Land</label>
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>
-                      Type of Land Holding
-                    </label>
-                  </div>
-                  <div className="col-lg-6">
-                    <label>XXXXXXXX</label>
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>Caste</label>
-                  </div>
-                  <div className="col-lg-6">
-                    <label>XXXXXXX</label>
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>Religion</label>
-                  </div>
-                  <div className="col-lg-6">
-                    <label>XXXXXXXX</label>
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>Monthly HH Income</label>
-                  </div>
-                  <div className="col-lg-6">
-                    <label>XXXXXXX</label>
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>Monthly HH Expenses</label>
-                  </div>
-                  <div className="col-lg-6">
-                    <label>XXXXXXX</label>
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>Loan Purpose</label>
-                  </div>
-                  <div className="col-lg-6">
-                    <label>XXXXXXX</label>
-                  </div>
-                </div>
-                <div className="row m-2">
-                  <div className="col-lg-6">
-                    <label>
-                      Loan Tenure (Months)
-                    </label>
-                  </div>
-                  <div className="col-lg-6">
-                    <label>3 months</label>
-                  </div>
-                </div>
-                <div
-                  className="row m-2"
-                  style={{
-                    justifyContent: "space-between",
-                    padding: "0 10px",
-                  }}
-                >
-                  <button
-                    className="btn btn-success"
-                    onClick={() => setStep(4)}
-                    style={backBtnStyle}
-                  >
-                    Back
-                  </button>
+    <>
+      <div className="row m-2">
+        <p className="col-lg-6">
+          Land Holding
+        </p>
+        <p className="col-lg-6">
 
-                  <button
-                    className="btn btn-success"
-                    onClick={() => setStep(6)}
-                    style={nextBtnStyle}
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
-            </label>
-          </div>
-        </form>
+        </p>
       </div>
-    </div>
+
+      <div className="row m-2">
+        <p className="col-lg-6">
+          Type of Land Holding
+        </p>
+        <p className="col-lg-6">
+
+        </p>
+      </div>
+
+      <div className="row m-2">
+        <p className="col-lg-6">
+          Caste
+        </p>
+        <p className="col-lg-6">
+          {farmerDetails.caste}
+        </p>
+      </div>
+
+      <div className="row m-2">
+        <p className="col-lg-6">
+          Religion
+        </p>
+        <p className="col-lg-6">
+          {farmerDetails.religion}
+        </p>
+      </div>
+
+      <div className="row m-2">
+        <p className="col-lg-6">
+          Monthly HH Income
+        </p>
+        <p className="col-lg-6">
+
+        </p>
+      </div>
+
+      <div className="row m-2">
+        <p className="col-lg-6">
+          Monthly HH Expenses
+        </p>
+        <p className="col-lg-6">
+
+        </p>
+      </div>
+
+      <div className="row m-2">
+        <p className="col-lg-6">
+          Loan Purpose
+        </p>
+        <p className="col-lg-6">
+          {currentLoan.loanFor}
+        </p>
+      </div>
+
+      <div className="row m-2">
+        <p className="col-lg-6">
+          Loan Tenure (Months)
+        </p>
+        <p className="col-lg-6">
+          {currentLoan.loanTenure} months
+        </p>
+      </div>
+
+      <div className="row m-2 justify-content-between px-2">
+        <button
+          className="btn btn-success"
+          onClick={() => setStep(4)}
+          style={backBtnStyle}
+        >
+          Back
+        </button>
+
+        <button
+          className="btn btn-success"
+          onClick={() => setStep(6)}
+          style={nextBtnStyle}
+        >
+          Next
+        </button>
+      </div>
+    </>
   )
 }
 
