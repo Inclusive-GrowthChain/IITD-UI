@@ -33,3 +33,11 @@ export function addProduce(data) {
     data: data
   })
 }
+
+export function applyLoan(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.farmer.applyLoan + `${data.loanwindowId}/loan`,
+    data: data
+  })
+}

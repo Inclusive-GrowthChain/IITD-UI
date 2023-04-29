@@ -54,7 +54,7 @@ const repaidButtonStyle = {
 const Loan = () => {
   // const [showGrantedLoanApplication, setShowGrantedLoanApplication] = useState(false)
   const [showSamunnatiPaymentProof, setShowSamunnatiPaymentProof] = useState(false)
-  const [showInProcessLoanApp, setShowInProcessLoanApp] = useState(false)
+  // const [showInProcessLoanApp, setShowInProcessLoanApp] = useState(false)
   const [showRepaymentLoan, setShowRepaymentLoan] = useState(false)
   const [showAadharCardImg, setShowAadharCardImg] = useState(false)
   const [showPanCardImg, setShowPanCardImg] = useState(false)
@@ -68,8 +68,8 @@ const Loan = () => {
   const handleShowRepaymentLoan = () => setShowRepaymentLoan(true)
   // const handleCloseGrantedLoanApplication = () => setShowGrantedLoanApplication(false)
   // const handleShowGrantedLoanApplication = () => setShowGrantedLoanApplication(true)
-  const handleCloseInProcessLoanApp = () => setShowInProcessLoanApp(false)
-  const handleShowInProcessLoanApp = () => setShowInProcessLoanApp(true)
+  // const handleCloseInProcessLoanApp = () => setShowInProcessLoanApp(false)
+  // const handleShowInProcessLoanApp = () => setShowInProcessLoanApp(true)
   const handleShowAadharCardImg = () => setShowAadharCardImg(true)
   const handleShowPanCardImg = () => setShowPanCardImg(true)
   const handleCloseAadharCardImg = () => setShowAadharCardImg(false)
@@ -203,7 +203,7 @@ const Loan = () => {
                                     <td>
                                       <button
                                         style={style}
-                                        onClick={() => updateModal("LoanApplication2", g)}
+                                        onClick={() => updateModal("LoanApplication", g)}
                                       >
                                         view
                                       </button>
@@ -318,7 +318,7 @@ const Loan = () => {
                                     <td>
                                       <button
                                         style={style}
-                                        onClick={handleShowInProcessLoanApp}
+                                        // onClick={handleShowInProcessLoanApp}
                                       >
                                         view
                                       </button>
@@ -349,14 +349,18 @@ const Loan = () => {
         />
       }
 
-      <LoanApplication
-        step={step}
-        setStep={setStep}
-        showInProcessLoanApp={showInProcessLoanApp}
-        handleShowPanCardImg={handleShowPanCardImg}
-        handleShowAadharCardImg={handleShowAadharCardImg}
-        handleCloseInProcessLoanApp={handleCloseInProcessLoanApp}
-      />
+      {
+        modal.state === "LoanApplication" &&
+        <LoanApplication
+          show
+          step={step}
+          data={data}
+          setStep={setStep}
+          handleShowPanCardImg={handleShowPanCardImg}
+          handleShowAadharCardImg={handleShowAadharCardImg}
+          handleClose={closeModal}
+        />
+      }
 
       <Submitted
         showConfirmBox={showConfirmBox}
