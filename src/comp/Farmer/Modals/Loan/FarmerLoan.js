@@ -1,12 +1,85 @@
 import Modal from "react-bootstrap/Modal";
-import { farmerDetails } from '../../dummyLoanData';
+// import { farmerDetails } from '../../dummyLoanData';
+import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { getFarmerApplication } from "../../../../actions/fpo";
+import { applyLoan } from "../../../../actions/farmer";
+import Loader from "../../../Common/Loader";
 
-function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp }) {
+const errStyle = { fontSize: "12px", margin: 0 }
+
+function FarmerLoan({ show, step, setStep, confirm, handleClose }) {
+  const queryClient = useQueryClient()
+  const { isLoading, data } = useQuery({
+    queryKey: ["fpo/farmerApp"],
+    queryFn: () => getFarmerApplication(localStorage.getItem("userId"))
+  })
+
+  const { register, formState: { errors }, handleSubmit, reset } = useForm({
+    defaultValues: {
+      fpoName: "",
+      bankName: "",
+      accountNumber: "",
+      ifscCode: "",
+      branchName: "",
+      name: "",
+      gender: "",
+      mobile: "",
+      dob: "",
+      age: "",
+      idProofType: "",
+      idProofNumber: "",
+      addressProofType: "",
+      addressProofNumber: "",
+      fatherName: "",
+      motherName: "",
+      doorNumber: "",
+      streetName: "",
+      village: "",
+      taluk: "",
+      district: "",
+      state: "",
+      pinCode: "",
+      occupation: "",
+      education: "",
+      natureOfPlace: "",
+      residence: "",
+      caste: "",
+      religion: "",
+      coApplicantName: "",
+      coApplicantGender: "",
+      coApplicantDob: "",
+      coApplicantGender: "",
+      relationship: "",
+      landHolding: "",
+      landHoldingType: "",
+      monthlyHHIncome: "",
+      monthlyHHExpenses: "",
+      requestedAmount: 0,
+      purpose: "",
+      tenure: 0,
+      interest: 0, 
+      loanId: ""
+    }
+  })
+
+  const { mutate } = useMutation({
+    mutationFn: applyLoan,
+    onSuccess: () => {
+      queryClient.invalidateQueries("farmer/applyLoan")
+      reset()
+      handleClose()
+    }
+  })
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />
+
   return (
     <Modal
       size="lg"
-      show={showLoanApp}
-      onHide={handleCloseLoanApp}
+      show={show}
+      onHide={handleClose}
       scrollable
     >
       <Modal.Header closeButton>Farmer Loan</Modal.Header>
@@ -26,7 +99,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.fpoName}
+                            // value={farmerDetails.fpoName}
+                            {...register("fpoName")}
                             disabled
                           />
                         </div>
@@ -39,7 +113,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.bankName}
+                            value={data.data[0].bankName}
+                            {...register("bankName")}
                             disabled
                           />
                         </div>
@@ -52,7 +127,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.accountNo}
+                            value={data.data[0].accountNumber}
+                            {...register("accountNumber")}
                             disabled
                           />
                         </div>
@@ -65,7 +141,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.ifsc}
+                            value={data.data[0].ifscCode}
+                            {...register("ifscCode")}
                             disabled
                           />
                         </div>
@@ -78,7 +155,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.branchName}
+                            value={data.data[0].branchName}
+                            {...register("branchName")}
                             disabled
                           />
                         </div>
@@ -91,7 +169,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.name}
+                            // value={farmerDetails.name}
+                            {...register("name")}
                             disabled
                           />
                         </div>
@@ -104,7 +183,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.gender}
+                            value={data.data[0].gender}
+                            {...register("gender")}
                             disabled
                           />
                         </div>
@@ -150,7 +230,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                         <input
                           type="text"
                           className="form-control"
-                          value={farmerDetails.mobile}
+                          value={data.data[0].mobile}
+                          {...register("mobile")}
                           disabled
                         />
                       </div>
@@ -163,7 +244,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                         <input
                           type="date"
                           className="form-control"
-                          value={farmerDetails.dob}
+                          value={data.data[0].dateOfBirth}
+                          {...register("dob")}
                           disabled
                         />
                       </div>
@@ -176,7 +258,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                         <input
                           type="text"
                           className="form-control"
-                          value={farmerDetails.age}
+                          value={data.data[0].age}
+                          {...register("age")}
                           disabled
                         />
                       </div>
@@ -189,7 +272,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                         <input
                           type="text"
                           className="form-control"
-                          value={farmerDetails.idProofType}
+                          // value={farmerDetails.idProofType}
+                          {...register("idProofType")}
                           disabled
                         />
                       </div>
@@ -202,7 +286,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                         <input
                           type="text"
                           className="form-control"
-                          value={farmerDetails.idProofNo}
+                          // value={farmerDetails.idProofNo}
+                          {...register("idProofNumber")}
                           disabled
                         />
                       </div>
@@ -215,7 +300,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                         <input
                           type="text"
                           className="form-control"
-                          value={farmerDetails.addressProofType}
+                          // value={farmerDetails.addressProofType}
+                          {...register("addressProofType")}
                           disabled
                         />
                       </div>
@@ -230,7 +316,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                         <input
                           type="text"
                           className="form-control"
-                          value={farmerDetails.addressProofNo}
+                          // value={farmerDetails.addressProofNo}
+                          {...register("addressProofNumber")}
                           disabled
                         />
                       </div>
@@ -293,7 +380,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.fatherName}
+                            value={data.data[0].fatherName}
+                            {...register("fatherName")}
                             disabled
                           />
                         </div>
@@ -306,7 +394,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.motherName}
+                            value={data.data[0].motherName}
+                            {...register("motherName")}
                             disabled
                           />
                         </div>
@@ -319,7 +408,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.doorNo}
+                            value={data.data[0].doorNumber}
+                            {...register("doorNumber")}
                             disabled
                           />
                         </div>
@@ -332,7 +422,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.streetName}
+                            value={data.data[0].street}
+                            {...register("street")}
                             disabled
                           />
                         </div>
@@ -345,7 +436,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.village}
+                            value={data.data[0].village}
+                            {...register("village")}
                             disabled
                           />
                         </div>
@@ -358,7 +450,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.taluk}
+                            value={data.data[0].taluk}
+                            {...register("taluk")}
                             disabled
                           />
                         </div>
@@ -371,7 +464,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.district}
+                            value={data.data[0].district}
+                            {...register("district")}
                             disabled
                           />
                         </div>
@@ -435,7 +529,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.state}
+                            value={data.data[0].state}
+                            {...register("state")}
                             disabled
                           />
                         </div>
@@ -448,7 +543,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.pincode}
+                            value={data.data[0].pinCode}
+                            {...register("pinCode")}
                             disabled
                           />
                         </div>
@@ -461,7 +557,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.occupation}
+                            value={data.data[0].occupation}
+                            {...register("occupation")}
                             disabled
                           />
                         </div>
@@ -474,7 +571,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.education}
+                            value={data.data[0].education}
+                            {...register("education")}
                             disabled
                           />
                         </div>
@@ -487,7 +585,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.natureOfPlace}
+                            value={data.data[0].natureOfPlace}
+                            {...register("natureOfPlace")}
                             disabled
                           />
                         </div>
@@ -500,7 +599,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.residence}
+                            value={data.data[0].residence}
+                            {...register("residence")}
                             disabled
                           />
                         </div>
@@ -513,7 +613,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.caste}
+                            value={data.data[0].caste}
+                            {...register("caste")}
                             disabled
                           />
                         </div>
@@ -526,7 +627,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={farmerDetails.religion}
+                            value={data.data[0].religion}
+                            {...register("religion")}
                             disabled
                           />
                         </div>
@@ -591,7 +693,16 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                             type="text"
                             className="form-control"
                             placeholder="Co-Applicant Name"
+                            {...register("coApplicantName", {
+                              required: "Co Applicant Name is required"
+                            })}
                           />
+                          {
+                            errors.title &&
+                            <p className="text-danger" style={errStyle}>
+                              {errors.title.message}
+                            </p>
+                          }
                         </div>
                       </div>
                       <div className="row m-2">
@@ -599,7 +710,7 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <label>Co-Applicant Gender</label>
                         </div>
                         <div className="col-lg-6 text-center">
-                          <select className="form-select">
+                          <select className="form-select" {...register("coApplicantGender", { required: "Co Applicant Gender is required" })}>
                             <option value="0">Select</option>
                             <option value="1">Male</option>
                             <option value="2">Female</option>
@@ -614,8 +725,16 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="date"
                             className="form-control"
-                            onChange={"12-5-12"}
+                            {...register("coApplicantDob", {
+                              required: "Co Applicant date of birth is required"
+                            })}
                           />
+                          {
+                            errors.title &&
+                            <p className="text-danger" style={errStyle}>
+                              {errors.title.message}
+                            </p>
+                          }
                         </div>
                       </div>
                       <div className="row m-2">
@@ -626,7 +745,7 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={"12-3-99"}
+                            {...register("coApplicantAge")}
                             disabled
                             placeholder="Co-Applicant Age"
                           />
@@ -641,7 +760,16 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                             type="text"
                             className="form-control"
                             placeholder="Relationship with Applicant"
+                            {...register("relationship", {
+                              required: "Co Applicant relationship with applicant is required"
+                            })}
                           />
+                          {
+                            errors.title &&
+                            <p className="text-danger" style={errStyle}>
+                              {errors.title.message}
+                            </p>
+                          }
                         </div>
                       </div>
                       <div className="row m-2">
@@ -653,7 +781,16 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                             type="text"
                             className="form-control"
                             placeholder="Land Holding"
+                            {...register("landHolding", {
+                              required: "Land holding is required"
+                            })}
                           />
+                          {
+                            errors.title &&
+                            <p className="text-danger" style={errStyle}>
+                              {errors.title.message}
+                            </p>
+                          }
                         </div>
                       </div>
                       <div className="row m-2">
@@ -665,7 +802,16 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                             type="text"
                             className="form-control"
                             placeholder="Type of Land Holding"
+                            {...register("landHoldingType", {
+                              required: "Land holding type is required"
+                            })}
                           />
+                          {
+                            errors.title &&
+                            <p className="text-danger" style={errStyle}>
+                              {errors.title.message}
+                            </p>
+                          }
                         </div>
                       </div>
                       <div className="row m-2">
@@ -677,7 +823,16 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                             type="text"
                             className="form-control"
                             placeholder="Monthly HH Income"
+                            {...register("monthlyHHIncome", {
+                              required: "Monthly HH income is required"
+                            })}
                           />
+                          {
+                            errors.title &&
+                            <p className="text-danger" style={errStyle}>
+                              {errors.title.message}
+                            </p>
+                          }
                         </div>
                       </div>
                       <div className="row m-2">
@@ -689,7 +844,16 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                             type="text"
                             className="form-control"
                             placeholder="Monthly HH Expenses"
+                            {...register("monthlyHHExpenses", {
+                              required: "Monthly HH expenses is required"
+                            })}
                           />
+                          {
+                            errors.title &&
+                            <p className="text-danger" style={errStyle}>
+                              {errors.title.message}
+                            </p>
+                          }
                         </div>
                       </div>
                       <div className="row m-2">
@@ -701,7 +865,16 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                             type="text"
                             className="form-control"
                             placeholder="Loan Requested Amount"
+                            {...register("requestedAmount", {
+                              required: "Loan requested amount is required"
+                            })}
                           />
+                          {
+                            errors.title &&
+                            <p className="text-danger" style={errStyle}>
+                              {errors.title.message}
+                            </p>
+                          }
                         </div>
                       </div>
                       <div className="row m-2">
@@ -713,7 +886,16 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                             type="text"
                             className="form-control"
                             placeholder="Loan Purpose"
+                            {...register("purpose", {
+                              required: "Loan purpose is required"
+                            })}
                           />
+                          {
+                            errors.title &&
+                            <p className="text-danger" style={errStyle}>
+                              {errors.title.message}
+                            </p>
+                          }
                         </div>
                       </div>
                       <div className="row m-2">
@@ -725,7 +907,16 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                             type="text"
                             className="form-control"
                             placeholder="Loan Tenure"
+                            {...register("tenure", {
+                              required: "Loan tenure is required"
+                            })}
                           />
+                          {
+                            errors.title &&
+                            <p className="text-danger" style={errStyle}>
+                              {errors.title.message}
+                            </p>
+                          }
                         </div>
                       </div>
                       <div className="row m-2">
@@ -736,7 +927,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={12}
+                            // value={12}
+                            {...register("interest")}
                             disabled
                           />
                         </div>
@@ -749,7 +941,8 @@ function FarmerLoan({ step, setStep, showLoanApp, confirm, handleCloseLoanApp })
                           <input
                             type="text"
                             className="form-control"
-                            value={2345678}
+                            // value={2345678}
+                            {...register("loanId")}
                             disabled
                           />
                         </div>

@@ -33,6 +33,7 @@ const endPoints = {
   farmer: {
     loans: "/loanwindow/loan?type=farmer",
     produce: "/farmer/",
+    applyLoan: "/loanwindow",
   },
 
   // Fpo
@@ -41,6 +42,7 @@ const endPoints = {
     products: "/fpo/product",
     farmers: "/fpo/farmer",
     lac: "/fpo/lac",
+    farmerApp: "/user",
   },
 }
 

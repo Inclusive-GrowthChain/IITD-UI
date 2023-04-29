@@ -54,7 +54,7 @@ const repaidButtonStyle = {
 const Loan = () => {
   // const [showGrantedLoanApplication, setShowGrantedLoanApplication] = useState(false)
   const [showSamunnatiPaymentProof, setShowSamunnatiPaymentProof] = useState(false)
-  const [showInProcessLoanApp, setShowInProcessLoanApp] = useState(false)
+  // const [showInProcessLoanApp, setShowInProcessLoanApp] = useState(false)
   const [showRepaymentLoan, setShowRepaymentLoan] = useState(false)
   const [showAadharCardImg, setShowAadharCardImg] = useState(false)
   const [showPanCardImg, setShowPanCardImg] = useState(false)
@@ -68,8 +68,8 @@ const Loan = () => {
   const handleShowRepaymentLoan = () => setShowRepaymentLoan(true)
   // const handleCloseGrantedLoanApplication = () => setShowGrantedLoanApplication(false)
   // const handleShowGrantedLoanApplication = () => setShowGrantedLoanApplication(true)
-  const handleCloseInProcessLoanApp = () => setShowInProcessLoanApp(false)
-  const handleShowInProcessLoanApp = () => setShowInProcessLoanApp(true)
+  // const handleCloseInProcessLoanApp = () => setShowInProcessLoanApp(false)
+  // const handleShowInProcessLoanApp = () => setShowInProcessLoanApp(true)
   const handleShowAadharCardImg = () => setShowAadharCardImg(true)
   const handleShowPanCardImg = () => setShowPanCardImg(true)
   const handleCloseAadharCardImg = () => setShowAadharCardImg(false)
@@ -193,7 +193,7 @@ const Loan = () => {
                                 .map(g => (
                                   <tr key={g.id}>
                                     <td>{g.loanId}</td>
-                                    <td>{g.dateOfApplication}</td>
+                                    <td>{g.createdAt.substring(0, 10)}</td>
                                     <td>₹ {g.grantedAmount}</td>
                                     <td>{g.intrest}%</td>
                                     <td>{g.loanDate}</td>
@@ -203,7 +203,7 @@ const Loan = () => {
                                     <td>
                                       <button
                                         style={style}
-                                        onClick={() => updateModal("LoanApplication2", g)}
+                                        onClick={() => updateModal("LoanApplication", g)}
                                       >
                                         view
                                       </button>
@@ -263,11 +263,11 @@ const Loan = () => {
                           >
                             {
                               data && data.data
-                                .filter((r) => r.status === "rejected")
+                                .filter((r) => r.status === "rejected" || r.fpoApprovalStatus === "rejected")
                                 .map(r => (
                                   <tr key={r.id}>
                                     <td>{r.loanId}</td>
-                                    <td>{r.dateOfApplication}</td>
+                                    <td>{r.createdAt.substring(0, 10)}</td>
                                     <td>₹ {r.requestedAmount}</td>
                                     <td>{r.reason}</td>
                                   </tr>
@@ -309,16 +309,16 @@ const Loan = () => {
                           >
                             {
                               data && data.data
-                                .filter((ip) => ip.status === "pending")
+                                .filter((ip) => ip.status === "in-process" && ip.fpoApprovalStatus !== "rejected")
                                 .map(ip => (
                                   <tr key={ip.id}>
                                     <td>{ip.loanId}</td>
-                                    <td>{ip.dateOfApplication}</td>
+                                    <td>{ip.createdAt.substring(0, 10)}</td>
                                     <td>₹ {ip.requestedAmount}</td>
                                     <td>
                                       <button
                                         style={style}
-                                        onClick={handleShowInProcessLoanApp}
+                                        // onClick={handleShowInProcessLoanApp}
                                       >
                                         view
                                       </button>
@@ -339,7 +339,7 @@ const Loan = () => {
       </div>
 
       {
-        modal.state &&
+        modal.state === "FarmerLoan" &&
         <FarmerLoan
           show
           step={step}
@@ -349,14 +349,18 @@ const Loan = () => {
         />
       }
 
-      <LoanApplication
-        step={step}
-        setStep={setStep}
-        showInProcessLoanApp={showInProcessLoanApp}
-        handleShowPanCardImg={handleShowPanCardImg}
-        handleShowAadharCardImg={handleShowAadharCardImg}
-        handleCloseInProcessLoanApp={handleCloseInProcessLoanApp}
-      />
+      {
+        modal.state === "LoanApplication" &&
+        <LoanApplication
+          show
+          step={step}
+          data={data}
+          setStep={setStep}
+          handleShowPanCardImg={handleShowPanCardImg}
+          handleShowAadharCardImg={handleShowAadharCardImg}
+          handleClose={closeModal}
+        />
+      }
 
       <Submitted
         showConfirmBox={showConfirmBox}
