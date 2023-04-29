@@ -37,6 +37,7 @@ const endPoints = {
 
   // Fpo
   fpo: {
+    interstRate: "/fpo/intrest-rate",
     products: "/fpo/product",
     farmers: "/fpo/farmer",
     lac: "/fpo/lac",

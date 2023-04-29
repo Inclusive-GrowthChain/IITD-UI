@@ -1,6 +1,8 @@
-import Modal from "react-bootstrap/Modal";
-import RepaymentConfirm from "./RepaymentConfirm";
-import useModal from "../../../../hooks/useModal";
+import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { Modal } from "react-bootstrap";
+
+import { setFarmerIntrestRate } from "../../../../actions/fpo";
 
 const btnStyle = {
   backgroundColor: "#064420",
@@ -13,8 +15,19 @@ const btnStyle = {
   lineHeight: "1rem",
 }
 
+const errStyle = { fontSize: "12px", margin: 0 }
+
 function InterestRate({ show, handleClose }) {
-  const { modal, updateModal, closeModal } = useModal()
+  const { register, formState: { errors }, handleSubmit } = useForm({
+    defaultValues: {
+      intrestRate: "",
+    }
+  })
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: setFarmerIntrestRate,
+    onSuccess: () => handleClose()
+  })
 
   return (
     <Modal
@@ -23,37 +36,42 @@ function InterestRate({ show, handleClose }) {
     >
       <Modal.Header closeButton>Interest Rate</Modal.Header>
       <Modal.Body>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Interest Rate</label>
+        <form onSubmit={handleSubmit(mutate)}>
+          <div className="row m-2">
+            <div className="col-lg-6">
+              <label>Interest Rate (%)</label>
+            </div>
+            <div className="col-lg-6">
+              <input
+                type="number"
+                className="form-control"
+                placeholder="14"
+                {...register("intrestRate", {
+                  required: "Amount is required",
+                  min: {
+                    value: 1,
+                    message: "Amount should be greater than 0"
+                  }
+                })}
+              />
+              {
+                errors.intrestRate &&
+                <p style={errStyle}>{errors.intrestRate.message}</p>
+              }
+            </div>
           </div>
-          <div className="col-lg-6">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="14%"
-            />
-          </div>
-        </div>
-        <div className="row m-2">
-          <div className="col-lg-12 text-center">
+
+          <div className="m-2 text-center">
             <button
               className="py-0.5 mt-3"
+              disabled={isLoading}
               style={btnStyle}
-              onClick={() => updateModal("confirm")}
+              type="submit"
             >
               Submit
             </button>
-
-            {
-              modal.state &&
-              <RepaymentConfirm
-                show
-                handleClose={closeModal}
-              />
-            }
           </div>
-        </div>
+        </form>
       </Modal.Body>
     </Modal>
   )

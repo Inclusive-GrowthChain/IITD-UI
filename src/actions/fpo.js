@@ -129,3 +129,12 @@ export function getFarmerApplication(userId) {
     url: endPoints.user + `/${userId}`,
   })
 }
+
+
+export function setFarmerIntrestRate(data) {
+  return sendApiReq({
+    method: "put",
+    url: endPoints.fpo.interstRate,
+    data,
+  })
+}
