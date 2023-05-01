@@ -49,7 +49,7 @@ const fieldSet1 = [
     name: "gender",
     label: "Gender",
     isSelect: true,
-    options: [{ val: "male", label: "Male" }, { val: "female", label: "Female" }]
+    options: ["Male", "Female", "Other"]
   },
   {
     name: "fatherName",
