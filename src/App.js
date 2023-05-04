@@ -34,6 +34,7 @@ const AdminSamunnati = lazy(() => import("./comp/Admin/Samunnati"))
 const AdminFarmer = lazy(() => import("./comp/Admin/Farmer"))
 const AdminNISA = lazy(() => import("./comp/Admin/NISA"))
 const AdminFPO = lazy(() => import("./comp/Admin/FPO"))
+const AdminIITDhanbad = lazy(() => import("./comp/Admin/IITDDashboard"))
 const AdminWrapper = lazy(() => import("./comp/Admin"))
 
 const NisaTrainingUpdate = lazy(() => import("./comp/Nisa/TrainingUpdate"))
@@ -55,10 +56,10 @@ const CorporateClientLacBidding = lazy(() => import("./comp/CorporateClient/Bidd
 const CorporateClientSettings = lazy(() => import("./comp/CorporateClient/Settings"))
 const CorporateClientWrapper = lazy(() => import("./comp/CorporateClient"))
 
-const IITDhanbadDashboard = lazy(() => import("./comp/IITDhanbad/Dashboard"))
-const IITDhanbadUsers = lazy(() => import("./comp/IITDhanbad/Users"))
-const IITDhanbadSettings = lazy(() => import("./comp/IITDhanbad/Settings"))
-const IITDhanbadWrapper = lazy(() => import("./comp/IITDhanbad"))
+// const IITDhanbadDashboard = lazy(() => import("./comp/IITDhanbad/Dashboard"))
+// const IITDhanbadUsers = lazy(() => import("./comp/IITDhanbad/Users"))
+// const IITDhanbadSettings = lazy(() => import("./comp/IITDhanbad/Settings"))
+// const IITDhanbadWrapper = lazy(() => import("./comp/IITDhanbad"))
 
 function App() {
   return (
@@ -102,6 +103,7 @@ function App() {
           <Route path="farmer" element={<AdminFarmer />} />
           <Route path="nisa" element={<AdminNISA />} />
           <Route path="fpo" element={<AdminFPO />} />
+          <Route path="iitd" element={<AdminIITDhanbad />} />
         </Route>
 
         {/* NISA route */}
@@ -133,12 +135,12 @@ function App() {
         </Route>
 
         {/* IIT Dhanbad route */}
-        <Route path="iit-dhanbad" element={<IITDhanbadWrapper />}>
+        {/* <Route path="iit-dhanbad" element={<IITDhanbadWrapper />}>
           <Route path="dashboard" element={<IITDhanbadDashboard />} />
           <Route path="users" element={<IITDhanbadUsers />} />
           <Route path="settings" element={<IITDhanbadSettings />} />
           <Route path="support" element={<TemplateSupport />} />
-        </Route>
+        </Route> */}
       </Routes>
     </Suspense>
   )
