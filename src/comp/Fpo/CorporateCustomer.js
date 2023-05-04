@@ -4,11 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import { getAuction } from "../../actions/auction";
 import useModal from "../../hooks/useModal";
 
-import CompletedTransactions from "./Modals/CompletedTransactions";
-import BidInformation from "./Modals/BidInformation";
-import BidConfirm from "./Modals/BidConfirm";
-import BidStatus from "./Modals/BidStatus";
-import PlaceBid from "./Modals/PlaceBid";
+import CompletedTransactions from "./Modals/CC/CompletedTransactions";
+import BidInformation from "./Modals/CC/BidInformation";
+import BidConfirm from "./Modals/CC/BidConfirm";
+import BidStatus from "./Modals/CC/BidStatus";
+import PlaceBid from "./Modals/CC/PlaceBid";
 import Loader from "../Common/Loader";
 
 const labelArray = [

@@ -44,7 +44,7 @@ const list = [
   {
     title: "Crop Advisory",
     icon: <DashboardIcon className="icon" />,
-    to: '/farmer/crop-advisory2'
+    to: '/farmer/crop-advisory'
   },
   {
     title: "Support",

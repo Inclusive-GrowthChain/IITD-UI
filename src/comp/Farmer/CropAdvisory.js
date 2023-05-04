@@ -1,11 +1,13 @@
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useQuery } from "@tanstack/react-query";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+
 import { getCropAdvisory } from "../../actions/nisa";
 import useModal from "../../hooks/useModal";
-import ReadMore from "./Modals/CropAdvisory/ReadMore";
+
+import ReadMore from "./Modals/ReadMore";
 import Loader from "../Common/Loader";
 
-const CropAdvisory2 = () => {
+function CropAdvisory() {
   const { modal, updateModal, closeModal } = useModal()
   const { isLoading, data } = useQuery({
     queryKey: ["nisa/crop-advisory"],
@@ -76,4 +78,4 @@ const CropAdvisory2 = () => {
   )
 }
 
-export default CropAdvisory2
+export default CropAdvisory

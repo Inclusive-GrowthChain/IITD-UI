@@ -9,7 +9,7 @@ const TemplateSupport = lazy(() => import("./comp/Template/Support"))
 
 const FarmerTransactionHistory = lazy(() => import("./comp/Farmer/TransactionHistory"))
 const FarmerTrainingUpdate = lazy(() => import("./comp/Farmer//TrainingUpdate"))
-const FarmerCropAdvisory2 = lazy(() => import("./comp/Farmer/CropAdvisory2"))
+const FarmerCropAdvisory = lazy(() => import("./comp/Farmer/CropAdvisory"))
 const FarmerSellingPrice = lazy(() => import("./comp/Farmer/SellingPrice"))
 const FarmerDashboard = lazy(() => import("./comp/Farmer/DashBoard"))
 const FarmerSettings = lazy(() => import("./comp/Farmer/Settings"))
@@ -70,7 +70,7 @@ function App() {
         {/* farmer route */}
         <Route path="farmer" element={<FarmerWrapper />}>
           <Route path="transaction-history" element={<FarmerTransactionHistory />} />
-          <Route path="crop-advisory2" element={<FarmerCropAdvisory2 />} />
+          <Route path="crop-advisory" element={<FarmerCropAdvisory />} />
           <Route path="selling-price" element={<FarmerSellingPrice />} />
           <Route path="training" element={<FarmerTrainingUpdate />} />
           <Route path="dashboard" element={<FarmerDashboard />} />

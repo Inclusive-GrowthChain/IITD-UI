@@ -17,9 +17,7 @@ const endPoints = {
   user: "/user",
 
   // Corporate Client
-  corporateClient: {
-
-  },
+  // corporateClient: {},
 
   // Nisa
   nisa: {
@@ -32,7 +30,7 @@ const endPoints = {
   // Farmer
   farmer: {
     loans: "/loanwindow/loan?type=farmer",
-    produce: "/farmer/",
+    produce: "/farmer",
   },
 
   // Fpo

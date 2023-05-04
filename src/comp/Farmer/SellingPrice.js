@@ -1,20 +1,20 @@
 import { useState } from "react";
+import { useQueries } from "@tanstack/react-query";
 import Button from "react-bootstrap/Button";
 
-import { TabNavItem, TabContent } from "../UIComp/Tabs";
-import SellProduce from "./Modals/SellingPrice/SellProduce";
-
-import { useQueries } from "@tanstack/react-query";
-
-import { getFpoLac } from "../../actions/fpo";
 import { getProduceList } from "../../actions/farmer";
-import useModal from "../../hooks/useModal";
-import Loader from "../Common/Loader";
+import { getFpoLac } from "../../actions/fpo";
 import { root } from "../../utils/endPoints";
+import useModal from "../../hooks/useModal";
+
+import { TabNavItem, TabContent } from "../UIComp/Tabs";
+import SellProduce from "./Modals/SellProduce";
+import Loader from "../Common/Loader";
 
 function SellingPrice() {
-  const [activeTab, setActiveTab] = useState("tab1");
+  const [activeTab, setActiveTab] = useState("tab1")
   const { modal, updateModal, closeModal } = useModal()
+
   const [
     { isLoading: isLoading1, data: sellItemList, },
     { isLoading: isLoading2, data: produceList }
@@ -30,14 +30,8 @@ function SellingPrice() {
       }
     ]
   })
-  if (isLoading1 || isLoading2) return <Loader wrapperCls="loader-main-right" />
 
-  let newDate = new Date()
-  let date = newDate.getDate();
-  let month = newDate.getMonth() + 1;
-  let year = newDate.getFullYear();
-  if (date <= 9) date = "0" + date;
-  if (month <= 9) month = "0" + month;
+  if (isLoading1 || isLoading2) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <div className="itemContainer">
@@ -73,7 +67,7 @@ function SellingPrice() {
                     border: "none",
                     width: "130px",
                   }}
-                  onClick={() => updateModal("SellProduce", {})}
+                  onClick={() => updateModal("SellProduce")}
                 >
                   Add New
                 </Button>
@@ -177,18 +171,16 @@ function SellingPrice() {
                             }}
                           >
                             {
-                              produceList && produceList.data.map((item, index) => {
-                                return (
-                                  <tr>
-                                    <td>{item.createdAt.substring(0, 10)}</td>
-                                    <td>{item.lacStrainType}</td>
-                                    <td>{item.treeSource}</td>
-                                    <td>{item.origin}</td>
-                                    <td>{item.quantity}</td>
-                                    <td>{item.remarks}</td>
-                                  </tr>
-                                )
-                              })
+                              produceList?.data?.map(item => (
+                                <tr key={item._id}>
+                                  <td>{item.createdAt.substring(0, 10)}</td>
+                                  <td>{item.lacStrainType}</td>
+                                  <td>{item.treeSource}</td>
+                                  <td>{item.origin}</td>
+                                  <td>{item.quantity}</td>
+                                  <td>{item.remarks}</td>
+                                </tr>
+                              ))
                             }
                           </tbody>
                         </table>
@@ -196,24 +188,19 @@ function SellingPrice() {
                     </div>
                   </div>
                 </div>
-                <div>
-                  {
-                    modal.state &&
-                    <SellProduce
-                      show
-                      data={modal.data}
-                      handleClose={closeModal}
-                      date={date}
-                      month={month}
-                      year={year}
-                    />
-                  }
-                </div>
               </TabContent>
             </div>
           </div>
         </div>
       </div>
+
+      {
+        modal.state &&
+        <SellProduce
+          show
+          handleClose={closeModal}
+        />
+      }
     </div>
   )
 }

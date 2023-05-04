@@ -1,11 +1,11 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 
-import ProgressBar from "../ProgressBar/ProgressBar";
-import PageThree from "../ProgressPage/PageThree";
-import PageFour from "../ProgressPage/PageFour";
-import PageOne from "../ProgressPage/PageOne";
-import PageTwo from "../ProgressPage/PageTwo";
+import ProgressBar from "../../ProgressBar/ProgressBar";
+import PageThree from "../../ProgressPage/PageThree";
+import PageFour from "../../ProgressPage/PageFour";
+import PageOne from "../../ProgressPage/PageOne";
+import PageTwo from "../../ProgressPage/PageTwo";
 
 function BidStatus({
   show, handleClose,

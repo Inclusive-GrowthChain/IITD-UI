@@ -87,6 +87,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
       tenure: !isCreate ? data.tenure : 0,
       interest: !isCreate ? data.interest : 12,
       loanId: !isCreate ? data.loanId : nanoid(10),
+      loanWindowId: "fKcP6OJFfU",
     }
   })
 

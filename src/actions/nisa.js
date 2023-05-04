@@ -21,6 +21,14 @@ export function addLacTest(data) {
   })
 }
 
+export function addLacTest2(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.nisa.lactTest2,
+    data
+  })
+}
+
 export function getCropAdvisory() {
   return sendApiReq({
     url: endPoints.nisa.cropAdvisory,

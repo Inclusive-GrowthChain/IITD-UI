@@ -22,7 +22,7 @@ export function getLoanList() {
 export function getProduceList(data) {
   console.log(data);
   return sendApiReq({
-    url: endPoints.farmer.produce + `${data.farmerId}/produce`,
+    url: endPoints.farmer.produce + `/${data.farmerId}/produce`,
   })
 }
 
@@ -37,7 +37,7 @@ export function addProduce(data) {
 export function applyLoan(data) {
   return sendApiReq({
     method: "post",
-    url: endPoints.farmer.applyLoan + `${data.loanwindowId}/loan`,
-    data: data
+    url: endPoints.loanwindow + `/${data.loanWindowId}/loan`,
+    data
   })
 }

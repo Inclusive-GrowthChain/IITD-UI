@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useQueries } from "@tanstack/react-query";
 
 import { getLacTest, getLacTest2 } from "../../actions/nisa";
+import useModal from "../../hooks/useModal";
 
 import LabSampleTest from "./Modals/LabSampleTest";
 import Loader from "../Common/Loader";
+import DocImg from "../Common/DocImg";
 
 const style = {
   backgroundColor: "#064420",
@@ -127,15 +129,11 @@ function Note() {
 }
 
 const FarmerInformation = () => {
+  const { modal, updateModal, closeModal } = useModal()
   const [activeIndex, setActiveIndex] = useState(1)
-  const [show, setShow] = useState(false)
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const handleClick = (index) => setActiveIndex(index);
   const checkActive = (index, className) =>
-    activeIndex === index ? className : "";
+    activeIndex === index ? className : ""
 
   const [
     { isLoading: isLoading1, data: testList, },
@@ -167,13 +165,13 @@ const FarmerInformation = () => {
             <div className="store_tabs">
               <button
                 className={`store-tab ${checkActive(1, "active")}`}
-                onClick={() => handleClick(1)}
+                onClick={() => setActiveIndex(1)}
               >
                 Applications
               </button>
               <button
                 className={`store-tab ${checkActive(2, "active")}`}
-                onClick={() => handleClick(2)}
+                onClick={() => setActiveIndex(2)}
               >
                 Tests Price List
               </button>
@@ -181,16 +179,9 @@ const FarmerInformation = () => {
 
             <div className="panels">
               <div className={`panel ${checkActive(1, "active")}`}>
-                <button className="lab_btn" onClick={handleShow}>
+                <button className="lab_btn" onClick={() => updateModal("addSample")}>
                   Apply for Sample Test
                 </button>
-
-                <div className="store_list">
-                  <LabSampleTest
-                    show={show}
-                    handleClose={handleClose}
-                  />
-                </div>
 
                 <div className="card_table1">
                   <div className=" table-responsive">
@@ -215,7 +206,7 @@ const FarmerInformation = () => {
                           appList?.data?.map(app => (
                             <tr key={app._id}>
                               <td>{app.sampleId}</td>
-                              <td>{app.referenceNo}</td>
+                              <td>{app.paymentRefNo}</td>
                               <td>{app.dateOfApplication}</td>
                               <td>{app.category}</td>
                               <td>{app.testName}</td>
@@ -224,6 +215,7 @@ const FarmerInformation = () => {
                                 <button
                                   className="py-0.5"
                                   style={style}
+                                  onClick={() => updateModal("Payment Image", { imgUrl: app.paymentImg })}
                                 >
                                   View
                                 </button>
@@ -232,6 +224,7 @@ const FarmerInformation = () => {
                                 <button
                                   className="py-0.5"
                                   style={style}
+                                  onClick={() => updateModal("Lac Sample Image", { imgUrl: app.lacSampleImg })}
                                 >
                                   View
                                 </button>
@@ -290,6 +283,24 @@ const FarmerInformation = () => {
           </div>
         </div>
       </div>
+
+      {
+        modal.state === "addSample" &&
+        <LabSampleTest
+          show
+          handleClose={closeModal}
+        />
+      }
+
+      {
+        modal.state && modal.state !== "addSample" &&
+        <DocImg
+          show
+          title={modal.state}
+          imgUrl={modal.data.imgUrl}
+          handleClose={closeModal}
+        />
+      }
     </main>
   )
 }

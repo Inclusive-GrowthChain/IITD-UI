@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { getFpoProducts } from "../../actions/farmer";
-
 import { root } from "../../utils/endPoints";
 import Loader from "../Common/Loader";
 

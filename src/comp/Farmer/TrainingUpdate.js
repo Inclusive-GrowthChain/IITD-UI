@@ -27,9 +27,7 @@ function TrainingUpdate() {
             </h3>
           </div>
           <div className="card shadow">
-            <div
-              className="table-responsive"
-            >
+            <div className="table-responsive">
               <table>
                 <thead
                   style={{
