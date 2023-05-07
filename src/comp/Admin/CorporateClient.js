@@ -1,11 +1,25 @@
-import { useState } from "react";
+// import { useState } from "react";
 import Button from "react-bootstrap/Button";
-import AddCorporateClient from "./Modals/AddCorporateClient";
+// import AddCorporateClient from "./Modals/AddCorporateClient";
+import CorporateClientSignup from "../Auth/Modals/CorporateClientSignup";
+import { useQuery } from "@tanstack/react-query";
+import { getCorporateClientList } from "../../actions/user";
+import Loader from "../Common/Loader";
+import useModal from "../../hooks/useModal";
 
 const CorporateClient = () => {
-  const [show, setShow] = useState(false)
+  // const [show, setShow] = useState(false)
 
-  const updateShow = () => setShow(p => !p)
+  // const updateShow = () => setShow(p => !p)
+
+  const { modal, updateModal, closeModal } = useModal()
+
+  const { isLoading, data } = useQuery({
+    queryKey: ["user/corporateClient"],
+    queryFn: getCorporateClientList
+  })
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <div className="itemContainer">
@@ -13,7 +27,7 @@ const CorporateClient = () => {
         <div className="">
           <Button
             className="loan_button mb-3"
-            onClick={updateShow}
+            onClick={() => updateModal("corporateClient")}
             style={{
               backgroundColor: "#064420",
               color: "#fff",
@@ -40,28 +54,20 @@ const CorporateClient = () => {
                     <td>Location</td>
                     <td>Mobile No</td>
                     <td>Email Id</td>
-                    <td>Status</td>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>12451</td>
-                    <td>Hitesh</td>
-                    <td>hyderabad</td>
-                    <td>98621XXXXX</td>
-                    <td>example@email.com</td>
-                    <td>--</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>12451</td>
-                    <td>Dinesh</td>
-                    <td>hyderabad</td>
-                    <td>98621XXXXX</td>
-                    <td>example@email.com</td>
-                    <td>--</td>
-                  </tr>
+                  {
+                    data.data.map(user => (
+                      <tr>
+                        <td>1</td>
+                        <td>54212</td>
+                        <td>--</td>
+                        <td>78451XXXXX</td>
+                        <td>example@email.com</td>
+                      </tr>
+                    ))
+                  }
                 </tbody>
               </table>
             </div>
@@ -69,10 +75,13 @@ const CorporateClient = () => {
         </div>
       </div>
 
-      <AddCorporateClient
-        show={show}
-        updateShow={updateShow}
-      />
+      {
+        modal.state === "corporateClient" &&
+        <CorporateClientSignup
+          show
+          close={closeModal}
+        />
+      }
     </div>
   )
 }

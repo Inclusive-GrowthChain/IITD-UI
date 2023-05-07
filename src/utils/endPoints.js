@@ -44,6 +44,13 @@ const endPoints = {
     lac: "/fpo/lac",
     farmerApp: "/user",
   },
+
+  user: {
+    corporateClient: "/user/corporateClient",
+    fpo: "/user/fpo",
+    samunnati: "/user/lendingpartner",
+    nisa: "/user/nisa",
+  }
 }
 
 export default endPoints

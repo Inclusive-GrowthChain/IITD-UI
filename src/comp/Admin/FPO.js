@@ -1,11 +1,25 @@
-import { useState } from "react";
+// import { useState } from "react";
 import Button from "react-bootstrap/Button";
-import AddFPO from "./Modals/AddFPO";
+// import AddFPO from "./Modals/AddFPO";
+import FpoSignup from "../Auth/Modals/FpoSignup";
+import { useQuery } from "@tanstack/react-query";
+import { getFpoList } from "../../actions/user";
+import Loader from "../Common/Loader";
+import useModal from "../../hooks/useModal";
 
 const FPO = () => {
-  const [show, setShow] = useState(false)
+  // const [show, setShow] = useState(false)
 
-  const updateShow = () => setShow(p => !p)
+  // const updateShow = () => setShow(p => !p)
+
+  const { modal, updateModal, closeModal } = useModal()
+
+  const { isLoading, data } = useQuery({
+    queryKey: ["user/fpo"],
+    queryFn: getFpoList
+  })
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <div className="itemContainer">
@@ -13,7 +27,7 @@ const FPO = () => {
         <div className="fpo__wrapper">
           <Button
             className="loan_button mb-3"
-            onClick={updateShow}
+            onClick={() => updateModal("fpo")}
             style={{
               backgroundColor: "#064420",
               color: "#fff",
@@ -40,28 +54,20 @@ const FPO = () => {
                     <td>Location</td>
                     <td>Mobile Number</td>
                     <td>Number of Users (Under FPO)</td>
-                    <td>Status</td>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>427135</td>
-                    <td>Hyderabad</td>
-                    <td>78451XXXXX</td>
-                    <td>14-05-2022</td>
-                    <td>2</td>
-                    <td>pending</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>427135</td>
-                    <td>Hyderabad</td>
-                    <td>78451XXXXX</td>
-                    <td>14-05-2022</td>
-                    <td>4</td>
-                    <td>view</td>
-                  </tr>
+                  {
+                    data.data.map(user => (
+                      <tr>
+                        <td>1</td>
+                        <td>54212</td>
+                        <td>--</td>
+                        <td>78451XXXXX</td>
+                        <td>example@email.com</td>
+                      </tr>
+                    ))
+                  }
                 </tbody>
               </table>
             </div>
@@ -69,10 +75,13 @@ const FPO = () => {
         </div>
       </div>
 
-      <AddFPO
-        show={show}
-        updateShow={updateShow}
-      />
+      {
+        modal.state === "fpo" &&
+        <FpoSignup
+          show
+          close={closeModal}
+        />
+      }
     </div>
   )
 }

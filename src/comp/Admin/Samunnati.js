@@ -1,11 +1,25 @@
-import { useState } from "react";
+// import { useState } from "react";
 import Button from "react-bootstrap/Button";
-import AddSumunnati from "./Modals/AddSumunnati";
+// import AddSumunnati from "./Modals/AddSumunnati";
+import SamunnatiSignup from "../Auth/Modals/SamunnatiSignup";
+import { useQuery } from "@tanstack/react-query";
+import { getSamunnatiList } from "../../actions/user";
+import Loader from "../Common/Loader";
+import useModal from "../../hooks/useModal";
 
 const Samunnati = () => {
-  const [show, setShow] = useState(false)
+  // const [show, setShow] = useState(false)
 
-  const updateShow = () => setShow(p => !p)
+  // const updateShow = () => setShow(p => !p)
+
+  const { modal, updateModal, closeModal } = useModal()
+
+  const { isLoading, data } = useQuery({
+    queryKey: ["user/lendingpartner"],
+    queryFn: getSamunnatiList
+  })
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <div className="itemContainer">
@@ -13,7 +27,7 @@ const Samunnati = () => {
         <div className="">
           <Button
             className="loan_button mb-3"
-            onClick={updateShow}
+            onClick={() => updateModal("samunnati")}
             style={{
               backgroundColor: "#064420",
               color: "#fff",
@@ -39,26 +53,20 @@ const Samunnati = () => {
                     <td>Role</td>
                     <td>Mobile No</td>
                     <td>Email Id</td>
-                    <td>Status</td>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>54212</td>
-                    <td>--</td>
-                    <td>78451XXXXX</td>
-                    <td>example@email.com</td>
-                    <td>view</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>54212</td>
-                    <td>--</td>
-                    <td>78451XXXXX</td>
-                    <td>example@email.com</td>
-                    <td>view</td>
-                  </tr>
+                  {
+                    data.data.map(user => (
+                      <tr>
+                        <td>1</td>
+                        <td>54212</td>
+                        <td>--</td>
+                        <td>78451XXXXX</td>
+                        <td>example@email.com</td>
+                      </tr>
+                    ))
+                  }
                 </tbody>
               </table>
             </div>
@@ -66,10 +74,13 @@ const Samunnati = () => {
         </div>
       </div>
 
-      <AddSumunnati
-        show={show}
-        updateShow={updateShow}
-      />
+      {
+        modal.state === "samunnati" &&
+        <SamunnatiSignup
+          show
+          close={closeModal}
+        />
+      }
     </div>
   )
 }

@@ -35,7 +35,7 @@ const list = [
   {
     title: "Corporate Client",
     icon: <HelpCenterIcon className="icon" />,
-    to: '/admin/corporate-client'
+    to: '/admin/corporateClient'
   },
 ]
 
