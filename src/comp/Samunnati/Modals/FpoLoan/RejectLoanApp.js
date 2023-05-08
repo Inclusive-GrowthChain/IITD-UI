@@ -2,19 +2,18 @@ import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
 import axios from "axios";
 
-function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanApp, handleShowConfirmReject, showConfirmReject, handleCloseConfirmReject }) {
+import useModal from "../../../../hooks/useModal";
+import Confirm from "./Confirm";
+
+function RejectLoanApp({ show, handleClose, data }) {
+  const { modal, updateModal, closeModal } = useModal()
   const [reason, setReason] = useState("");
 
-  const onChangeReason = (e) => {
-    setReason(e.target.value);
-  };
-
-  const resetInputs = () => {
-    setReason("");
-  };
+  const onChangeReason = e => setReason(e.target.value)
+  const resetInputs = () => setReason("")
 
   const rejectLoan = async () => {
-    if(reason==="") {
+    if (reason === "") {
       alert("Please fill all details and try again");
       return;
     }
@@ -23,9 +22,9 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
       "status": "rejected",
       "reason": reason
     };
-    
+
     await axios
-      .put(`http://13.232.131.203:3000/api/loanwindow/${currentPendLoanApp.id}/approval`, newLoan)
+      .put(`http://13.232.131.203:3000/api/loanwindow/${data.id}/approval`, newLoan)
       .then((response) => {
         console.log(response.data);
         resetInputs();
@@ -38,7 +37,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
   }
 
   return (
-    <Modal show={showRejectForm} onHide={handleCloseRejectForm}>
+    <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Reject Loan Application</Modal.Header>
       <Modal.Body>
         <div className="row ">
@@ -54,7 +53,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
                       <input
                         type="text"
                         className="form-control"
-                        value={currentPendLoanApp.fpoName}
+                        value={data.fpoName}
                         disabled
                       />
                     </div>
@@ -67,7 +66,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
                       <input
                         type="text"
                         className="form-control"
-                        value={currentPendLoanApp.contactNo}
+                        value={data.contactNo}
                         disabled
                       />
                     </div>
@@ -80,7 +79,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
                       <input
                         type="text"
                         className="form-control"
-                        value={currentPendLoanApp.dateOfApplication}
+                        value={data.dateOfApplication}
                         disabled
                       />
                     </div>
@@ -93,7 +92,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
                       <input
                         type="text"
                         className="form-control"
-                        value={currentPendLoanApp.requestedAmount}
+                        value={data.requestedAmount}
                         disabled
                       />
                     </div>
@@ -115,10 +114,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
                       <button
                         className="btn btn-primary"
                         style={{ float: "right", backgroundColor: '#064420' }}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleShowConfirmReject();
-                        }}
+                        onClick={() => updateModal("show")}
                       >
                         Reject Loan
                       </button>
@@ -131,51 +127,15 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
         </div>
       </Modal.Body>
 
-      <Modal show={showConfirmReject} onHide={handleCloseConfirmReject}>
-        <Modal.Header closeButton>Confirm Reject Farmer Loan Window Application</Modal.Header>
-        <Modal.Body>
-          <div className="row">
-            <div className="col-lg-12">
-              <label>Are you sure you want to reject this farmer loan window application?</label>
-            </div>
-            <div
-              className="row m-2"
-              style={{
-                justifyContent: "space-between",
-                padding: "0 10px",
-              }}
-            >
-              <button
-                className="btn btn-success"
-                onClick={handleCloseConfirmReject}
-                style={{
-                  marginTop: "1rem",
-                  backgroundColor: "#064420",
-                  width: "20%",
-                }}
-              >
-                No
-              </button>
-              <button
-                className="btn btn-success"
-                onClick={(e) => {
-                  e.preventDefault();
-                  rejectLoan();
-                }}
-                style={{
-                  marginTop: "1rem",
-                  backgroundColor: "#064420",
-                  width: "20%",
-                  position: "relative",
-                  float: "right",
-                }}
-              >
-                Yes
-              </button>
-            </div>
-          </div>
-        </Modal.Body>
-      </Modal>
+      {
+        modal.state &&
+        <Confirm
+          show
+          handleClose={closeModal}
+          title="Confirm Reject Farmer Loan Window Application"
+          confirmText="Are you sure you want to reject this farmer loan window application?"
+        />
+      }
     </Modal>
   )
 }

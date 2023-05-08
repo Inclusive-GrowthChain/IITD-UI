@@ -1,17 +1,29 @@
-import { useEffect } from "react";
-import Modal from "react-bootstrap/Modal";
+import { Modal } from "react-bootstrap";
+import useModal from "../../../../hooks/useModal";
+import Repayment from "./Repayment";
+import Confirm from "./Confirm";
 
-function RepaymentStructure({ showRepaymentStructure, handleCloseRepaymentStructure, handleShowRepaymentStatus, currentLoan }) {
+const btnStyle = {
+  color: "blue",
+  alignItems: "center",
+  borderRadius: "5px",
+  border: "none",
+  padding: "0.25rem 1rem",
+  width: "100%",
+  fontSize: "1rem",
+  lineHeight: "2rem",
+  textDecoration: "underline",
+  backgroundColor: "rgb(255, 255, 255, 0)",
+}
 
-  useEffect(() => {
-    console.log(currentLoan)
-  }, [currentLoan]);
+function RepaymentStructure({ show, handleClose, data }) {
+  const { modal, updateModal, closeModal } = useModal()
 
   return (
     <Modal
       size="xl"
-      show={showRepaymentStructure}
-      onHide={handleCloseRepaymentStructure}
+      show={show}
+      onHide={handleClose}
     >
       <Modal.Header closeButton>
         Repayment Structure
@@ -26,13 +38,13 @@ function RepaymentStructure({ showRepaymentStructure, handleCloseRepaymentStruct
                     <strong>Loan ID : </strong>
                   </div>
                   <div className="col-8">
-                    <span>{currentLoan.id}</span>
+                    <span>{data.id}</span>
                   </div>
                   <div className="col-6">
                     <strong>FPO Name : </strong>
                   </div>
                   <div className="col-6">
-                    <span>{currentLoan.fpoName}</span>
+                    <span>{data.fpoName}</span>
                   </div>
                   <div className="col-6">
                     <strong>
@@ -40,7 +52,7 @@ function RepaymentStructure({ showRepaymentStructure, handleCloseRepaymentStruct
                     </strong>
                   </div>
                   <div className="col-6">
-                    <span>{currentLoan.grantedAmount}</span>
+                    <span>{data.grantedAmount}</span>
                   </div>
                 </div>
               </div>
@@ -52,7 +64,7 @@ function RepaymentStructure({ showRepaymentStructure, handleCloseRepaymentStruct
                     </strong>
                   </div>
                   <div className="col-6">
-                    <span>{currentLoan.windowPeriod}</span>
+                    <span>{data.windowPeriod}</span>
                   </div>
                   <div className="col-6">
                     <strong>
@@ -60,7 +72,7 @@ function RepaymentStructure({ showRepaymentStructure, handleCloseRepaymentStruct
                     </strong>
                   </div>
                   <div className="col-6">
-                    <span>{currentLoan.windowPeriod}</span>
+                    <span>{data.windowPeriod}</span>
                   </div>
                   <div className="col-6">
                     <strong>
@@ -68,21 +80,15 @@ function RepaymentStructure({ showRepaymentStructure, handleCloseRepaymentStruct
                     </strong>
                   </div>
                   <div className="col-6">
-                    <span>{currentLoan.intrest}%</span>
+                    <span>{data.intrest}%</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div className="mt-5">
-            <table
-              style={{ border: "1px solid #eee" }}
-            >
-              <thead
-                style={{
-                  backgroundColor: "#eee",
-                }}
-              >
+            <table style={{ border: "1px solid #eee" }}>
+              <thead style={{ backgroundColor: "#eee" }}>
                 <tr>
                   <th>S.No.</th>
                   <th>Scheduled Repayment Date</th>
@@ -91,31 +97,18 @@ function RepaymentStructure({ showRepaymentStructure, handleCloseRepaymentStruct
                   <th>Balance</th>
                 </tr>
               </thead>
+
               <tbody>
                 {
-                  currentLoan.windowRepaymentStructure && currentLoan.windowRepaymentStructure.map((window) => (
+                  data?.windowRepaymentStructure?.map((window) => (
                     <tr>
                       <td>{window.id}</td>
                       <td>{window.repaymentDate}</td>
                       <td>{window.emi}</td>
                       <td>
                         <button
-                          style={{
-                            color: "blue",
-                            alignItems: "center",
-                            borderRadius: "5px",
-                            border: "none",
-                            padding: "0.25rem 1rem",
-                            width: "100%",
-                            fontSize: "1rem",
-                            lineHeight: "2rem",
-                            textDecoration: "underline",
-                            backgroundColor: "rgb(255, 255, 255, 0)",
-                          }}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleShowRepaymentStatus();
-                          }}
+                          style={btnStyle}
+                          onClick={() => updateModal("showRepayment", window)}
                         >
                           Repayment
                         </button>
@@ -128,6 +121,26 @@ function RepaymentStructure({ showRepaymentStructure, handleCloseRepaymentStruct
             </table>
           </div>
         </div>
+
+        {
+          modal.state === "showRepayment" &&
+          <Repayment
+            show
+            data={modal.data}
+            handleClose={closeModal}
+            showConfirm={() => updateModal("showConfirm", modal.data)}
+          />
+        }
+
+        {
+          modal.state === "showConfirm" &&
+          <Confirm
+            show
+            title="Confirm"
+            confirmText="Confirm Repayment Details?"
+            handleClose={closeModal}
+          />
+        }
       </Modal.Body>
     </Modal>
   )

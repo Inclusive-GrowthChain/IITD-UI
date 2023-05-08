@@ -12,8 +12,6 @@ function Loan() {
 
   const checkActive = (index, className) => activeIndex === index ? className : ""
 
-  const handleClick = (index) => setActiveIndex(index)
-
   return (
     <>
       <main id="main_container" className="main_container container-fluid itemContainer">
@@ -32,14 +30,14 @@ function Loan() {
           <div className="tabs mt-3">
             <button
               className={`tab ${checkActive(1, "active")}`}
-              onClick={() => handleClick(1)}
+              onClick={() => setActiveIndex(1)}
             >
               Working Capital Loan
             </button>
 
             <button
               className={`tab ${checkActive(2, "active")}`}
-              onClick={() => handleClick(2)}
+              onClick={() => setActiveIndex(2)}
             >
               Farmer Loan
             </button>

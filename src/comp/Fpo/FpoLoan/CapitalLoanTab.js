@@ -225,8 +225,8 @@ function CapitalLoanTab() {
         className="loan-btn position-absolute"
         style={applyBtnStyle}
         onClick={() => updateModal("showApplyLoan", {
-          windowId: loanWindowList[loanWindowList.length - 1]?.windowId,
-          id: loanWindowList[loanWindowList.length - 1]?.id
+          windowId: loanWindowList[0]?.windowId,
+          id: loanWindowList[0]?.id
         })}
       >
         Apply for Loan

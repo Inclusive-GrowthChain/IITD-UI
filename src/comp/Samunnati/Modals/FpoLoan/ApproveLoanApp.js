@@ -1,52 +1,57 @@
-import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
+import { Modal } from "react-bootstrap";
 import axios from "axios";
 
-function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentPendLoanApp, handleShowConfirmApprove, showConfirmApprove, handleCloseConfirmApprove }) {
-  const [grantedAmount, setGrantedAmount] = useState(0);
-  const [interest, setInterest] = useState(0);
+import useModal from "../../../../hooks/useModal";
+import Confirm from "./Confirm";
+
+function ApproveLoanApp({ show, handleClose, data }) {
+  const { modal, updateModal, closeModal } = useModal()
+  const [grantedAmount, setGrantedAmount] = useState(0)
+  const [interest, setInterest] = useState(0)
 
   const onChangeGrantedAmount = (e) => {
-    setGrantedAmount(e.target.value);
+    setGrantedAmount(e.target.value)
   }
 
   const onChangeInterest = (e) => {
-    setInterest(e.target.value);
+    setInterest(e.target.value)
   }
 
   const resetInputs = () => {
-    setGrantedAmount(0);
-    setInterest(0);
+    setGrantedAmount(0)
+    setInterest(0)
   }
 
   const approveLoan = async () => {
     if (grantedAmount === 0 || interest === 0) {
-      alert("Please fill all details and try again");
-      return;
+      alert("Please fill all details and try again")
+      return
     }
 
     const newLoan = {
       "status": "approved",
       "grantedAmount": grantedAmount,
       "intrest": interest
-    };
+    }
 
     await axios
-      .put(`http://13.232.131.203:3000/api/loanwindow/${currentPendLoanApp.id}/approval`, newLoan)
+      .put(`http://13.232.131.203:3000/api/loanwindow/${data.id}/approval`, newLoan)
       .then((response) => {
-        console.log(response.data);
-        resetInputs();
+        console.log(response.data)
+        resetInputs()
       })
       .catch((error) => {
-        console.log(error);
-      });
+        console.log(error)
+      })
 
-    window.location.reload();
+    window.location.reload()
   }
 
   return (
-    <Modal show={showApproveForm} onHide={handleCloseApproveForm}>
+    <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Approve Loan Application</Modal.Header>
+
       <Modal.Body>
         <div className="row ">
           <div className="col">
@@ -61,7 +66,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentPendLo
                       <input
                         type="text"
                         className="form-control"
-                        value={currentPendLoanApp.fpoName}
+                        value={data.fpoName}
                         disabled
                       />
                     </div>
@@ -74,7 +79,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentPendLo
                       <input
                         type="text"
                         className="form-control"
-                        value={currentPendLoanApp.contactNo}
+                        value={data.contactNo}
                         disabled
                       />
                     </div>
@@ -87,7 +92,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentPendLo
                       <input
                         type="text"
                         className="form-control"
-                        value={currentPendLoanApp.windowId}
+                        value={data.windowId}
                         disabled
                       />
                     </div>
@@ -100,7 +105,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentPendLo
                       <input
                         type="text"
                         className="form-control"
-                        value={currentPendLoanApp.dateOfApplication}
+                        value={data.dateOfApplication}
                         disabled
                       />
                     </div>
@@ -113,7 +118,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentPendLo
                       <input
                         type="text"
                         className="form-control"
-                        value={currentPendLoanApp.windowPeriod}
+                        value={data.windowPeriod}
                         disabled
                       />
                     </div>
@@ -126,7 +131,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentPendLo
                       <input
                         type="text"
                         className="form-control"
-                        value={currentPendLoanApp.requestedAmount}
+                        value={data.requestedAmount}
                         disabled
                       />
                     </div>
@@ -160,10 +165,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentPendLo
                       <button
                         className="btn btn-primary"
                         style={{ float: "right", backgroundColor: '#064420' }}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleShowConfirmApprove();
-                        }}
+                        onClick={() => updateModal("show")}
                       >
                         Approve Loan
                       </button>
@@ -176,51 +178,15 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentPendLo
         </div>
       </Modal.Body>
 
-      <Modal show={showConfirmApprove} onHide={handleCloseConfirmApprove}>
-        <Modal.Header closeButton>Confirm Approve FPO Loan Window Application</Modal.Header>
-        <Modal.Body>
-          <div className="row">
-            <div className="col-lg-12">
-              <label>Are you sure you want to approve this FPO loan window application?</label>
-            </div>
-            <div
-              className="row m-2"
-              style={{
-                justifyContent: "space-between",
-                padding: "0 10px",
-              }}
-            >
-              <button
-                className="btn btn-success"
-                onClick={handleCloseConfirmApprove}
-                style={{
-                  marginTop: "1rem",
-                  backgroundColor: "#064420",
-                  width: "20%",
-                }}
-              >
-                No
-              </button>
-              <button
-                className="btn btn-success"
-                onClick={(e) => {
-                  e.preventDefault();
-                  approveLoan();
-                }}
-                style={{
-                  marginTop: "1rem",
-                  backgroundColor: "#064420",
-                  width: "20%",
-                  position: "relative",
-                  float: "right",
-                }}
-              >
-                Yes
-              </button>
-            </div>
-          </div>
-        </Modal.Body>
-      </Modal>
+      {
+        modal.state &&
+        <Confirm
+          show
+          handleClose={closeModal}
+          title="Confirm Approve FPO Loan Window Application"
+          confirmText="Are you sure you want to approve this FPO loan window application?"
+        />
+      }
     </Modal>
   )
 }

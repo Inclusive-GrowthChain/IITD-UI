@@ -62,6 +62,7 @@ function Step1({ setStep, h5Style, nextBtnStyle }) {
                 className="py-0.5"
                 style={btnStyle}
                 onClick={() => updateModal(l.name, { title: l.label })}
+                type="button"
               >
                 View
               </button>

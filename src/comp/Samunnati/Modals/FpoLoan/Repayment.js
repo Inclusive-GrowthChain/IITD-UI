@@ -1,8 +1,8 @@
 import Modal from "react-bootstrap/Modal";
 
-function Repayment({ showRepaymentStatus, handleCloseRepaymentStatus, handleShowRepaymentConfirmation }) {
+function Repayment({ show, handleClose, showConfirm }) {
   return (
-    <Modal show={showRepaymentStatus} onHide={handleCloseRepaymentStatus}>
+    <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Repayment</Modal.Header>
       <Modal.Body>
         <div className="row">
@@ -34,7 +34,7 @@ function Repayment({ showRepaymentStatus, handleCloseRepaymentStatus, handleShow
             <button
               className="btn btn-primary"
               style={{ float: "right", backgroundColor: '#064420', marginTop: '10%', width: '100%' }}
-              onClick={() => { handleShowRepaymentConfirmation() }}
+              onClick={showConfirm}
             >
               Submit
             </button>
