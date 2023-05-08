@@ -1,17 +1,13 @@
-// import { useState } from "react";
-import Button from "react-bootstrap/Button";
-// import AddFPO from "./Modals/AddFPO";
-import FpoSignup from "../Auth/Modals/FpoSignup";
 import { useQuery } from "@tanstack/react-query";
+import Button from "react-bootstrap/Button";
+
 import { getFpoList } from "../../actions/user";
-import Loader from "../Common/Loader";
 import useModal from "../../hooks/useModal";
 
+import FpoSignup from "../Auth/Modals/FpoSignup";
+import Loader from "../Common/Loader";
+
 const FPO = () => {
-  // const [show, setShow] = useState(false)
-
-  // const updateShow = () => setShow(p => !p)
-
   const { modal, updateModal, closeModal } = useModal()
 
   const { isLoading, data } = useQuery({

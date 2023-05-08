@@ -1,17 +1,13 @@
-// import { useState } from "react";
-import Button from "react-bootstrap/Button";
-// import AddNISA from "./Modals/AddNISA";
-import NisaSignup from "../Auth/Modals/NisaSignup";
 import { useQuery } from "@tanstack/react-query";
+import Button from "react-bootstrap/Button";
+
 import { getNisaList } from "../../actions/user";
-import Loader from "../Common/Loader";
 import useModal from "../../hooks/useModal";
 
+import NisaSignup from "../Auth/Modals/NisaSignup";
+import Loader from "../Common/Loader";
+
 const IINRG = () => {
-  // const [show, setShow] = useState(false)
-
-  // const updateShow = () => setShow(p => !p)
-
   const { modal, updateModal, closeModal } = useModal()
 
   const { isLoading, data } = useQuery({

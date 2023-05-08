@@ -29,12 +29,11 @@ const FpoLoan = lazy(() => import("./comp/Fpo/FpoLoan"))
 const FpoWrapper = lazy(() => import("./comp/Fpo"))
 
 const AdminCorporateClient = lazy(() => import("./comp/Admin/CorporateClient"))
-const AdminDashboard = lazy(() => import("./comp/Admin/Dashboard"))
+const AdminIITDhanbad = lazy(() => import("./comp/Admin/IITDDashboard"))
 const AdminSamunnati = lazy(() => import("./comp/Admin/Samunnati"))
 const AdminFarmer = lazy(() => import("./comp/Admin/Farmer"))
 const AdminNISA = lazy(() => import("./comp/Admin/NISA"))
 const AdminFPO = lazy(() => import("./comp/Admin/FPO"))
-const AdminIITDhanbad = lazy(() => import("./comp/Admin/IITDDashboard"))
 const AdminWrapper = lazy(() => import("./comp/Admin"))
 
 const NisaTrainingUpdate = lazy(() => import("./comp/Nisa/TrainingUpdate"))
@@ -55,11 +54,6 @@ const SamunnatiWrapper = lazy(() => import("./comp/Samunnati"))
 const CorporateClientLacBidding = lazy(() => import("./comp/CorporateClient/Bidding"))
 const CorporateClientSettings = lazy(() => import("./comp/CorporateClient/Settings"))
 const CorporateClientWrapper = lazy(() => import("./comp/CorporateClient"))
-
-// const IITDhanbadDashboard = lazy(() => import("./comp/IITDhanbad/Dashboard"))
-// const IITDhanbadUsers = lazy(() => import("./comp/IITDhanbad/Users"))
-// const IITDhanbadSettings = lazy(() => import("./comp/IITDhanbad/Settings"))
-// const IITDhanbadWrapper = lazy(() => import("./comp/IITDhanbad"))
 
 function App() {
   return (
@@ -98,12 +92,11 @@ function App() {
         {/* Admin route */}
         <Route path="admin" element={<AdminWrapper />}>
           <Route path="corporateclient" element={<AdminCorporateClient />} />
-          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="dashboard" element={<AdminIITDhanbad />} />
           <Route path="samunnati" element={<AdminSamunnati />} />
           <Route path="farmer" element={<AdminFarmer />} />
           <Route path="nisa" element={<AdminNISA />} />
           <Route path="fpo" element={<AdminFPO />} />
-          <Route path="iitd" element={<AdminIITDhanbad />} />
         </Route>
 
         {/* NISA route */}
@@ -133,14 +126,6 @@ function App() {
           <Route path="settings" element={<CorporateClientSettings />} />
           <Route path="support" element={<TemplateSupport />} />
         </Route>
-
-        {/* IIT Dhanbad route */}
-        {/* <Route path="iit-dhanbad" element={<IITDhanbadWrapper />}>
-          <Route path="dashboard" element={<IITDhanbadDashboard />} />
-          <Route path="users" element={<IITDhanbadUsers />} />
-          <Route path="settings" element={<IITDhanbadSettings />} />
-          <Route path="support" element={<TemplateSupport />} />
-        </Route> */}
       </Routes>
     </Suspense>
   )

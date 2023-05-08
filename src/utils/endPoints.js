@@ -7,9 +7,9 @@ const endPoints = {
   login: '/login',
   fpoSignup: "/signup/fpo",
   nisaSignup: "/signup/nisa",
+  farmerSignup: "/signup/farmer",
   samunnatiSignup: "/signup/samunnati",
   corporateClientSignup: "/signup/corporateclient",
-  farmerSignup: "/signup/farmer",
 
   loanwindow: "/loanwindow",
   uploadImg: '/document',
@@ -41,11 +41,11 @@ const endPoints = {
     lac: "/fpo/lac",
   },
 
-  user: {
+  userList: {
     corporateClient: "/user/corporateClient",
-    fpo: "/user/fpo",
     samunnati: "/user/lendingpartner",
     nisa: "/user/nisa",
+    fpo: "/user/fpo",
   }
 }
 

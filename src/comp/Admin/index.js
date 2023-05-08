@@ -10,7 +10,7 @@ const list = [
   {
     title: "IIT Dhanbad",
     icon: <DashboardIcon className="icon" />,
-    to: '/admin/iitd'
+    to: '/admin/dashboard'
   },
   {
     title: "Farmer",

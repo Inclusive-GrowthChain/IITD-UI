@@ -1,26 +1,26 @@
-import sendApiReq, { cookies } from '../utils/sendApiReq';
+import sendApiReq from '../utils/sendApiReq';
 import endPoints from '../utils/endPoints';
 
 export function getNisaList() {
   return sendApiReq({
-    url: endPoints.user.nisa,
+    url: endPoints.userList.nisa,
   })
 }
 
 export function getFpoList() {
   return sendApiReq({
-    url: endPoints.user.fpo,
+    url: endPoints.userList.fpo,
   })
 }
 
 export function getSamunnatiList() {
   return sendApiReq({
-    url: endPoints.user.samunnati,
+    url: endPoints.userList.samunnati,
   })
 }
 
 export function getCorporateClientList() {
   return sendApiReq({
-    url: endPoints.user.corporateClient,
+    url: endPoints.userList.corporateClient,
   })
 }

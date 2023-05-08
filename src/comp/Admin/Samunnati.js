@@ -1,17 +1,13 @@
-// import { useState } from "react";
-import Button from "react-bootstrap/Button";
-// import AddSumunnati from "./Modals/AddSumunnati";
-import SamunnatiSignup from "../Auth/Modals/SamunnatiSignup";
 import { useQuery } from "@tanstack/react-query";
+import Button from "react-bootstrap/Button";
+
 import { getSamunnatiList } from "../../actions/user";
-import Loader from "../Common/Loader";
 import useModal from "../../hooks/useModal";
 
+import SamunnatiSignup from "../Auth/Modals/SamunnatiSignup";
+import Loader from "../Common/Loader";
+
 const Samunnati = () => {
-  // const [show, setShow] = useState(false)
-
-  // const updateShow = () => setShow(p => !p)
-
   const { modal, updateModal, closeModal } = useModal()
 
   const { isLoading, data } = useQuery({
