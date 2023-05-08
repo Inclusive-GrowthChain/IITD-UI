@@ -8,6 +8,11 @@ import "./admin.css";
 
 const list = [
   {
+    title: "IIT Dhanbad",
+    icon: <DashboardIcon className="icon" />,
+    to: '/admin/iitd'
+  },
+  {
     title: "Farmer",
     icon: <DashboardIcon className="icon" />,
     to: '/admin/farmer'
@@ -30,7 +35,7 @@ const list = [
   {
     title: "Corporate Client",
     icon: <HelpCenterIcon className="icon" />,
-    to: '/admin/corporate-client'
+    to: '/admin/corporateClient'
   },
 ]
 
