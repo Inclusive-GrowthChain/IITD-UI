@@ -29,7 +29,7 @@ const FpoLoan = lazy(() => import("./comp/Fpo/FpoLoan"))
 const FpoWrapper = lazy(() => import("./comp/Fpo"))
 
 const AdminCorporateClient = lazy(() => import("./comp/Admin/CorporateClient"))
-const AdminIITDhanbad = lazy(() => import("./comp/Admin/IITDDashboard"))
+const AdminDashboard = lazy(() => import("./comp/Admin/Dashboard"))
 const AdminSamunnati = lazy(() => import("./comp/Admin/Samunnati"))
 const AdminFarmer = lazy(() => import("./comp/Admin/Farmer"))
 const AdminNISA = lazy(() => import("./comp/Admin/NISA"))
@@ -92,7 +92,7 @@ function App() {
         {/* Admin route */}
         <Route path="admin" element={<AdminWrapper />}>
           <Route path="corporateclient" element={<AdminCorporateClient />} />
-          <Route path="dashboard" element={<AdminIITDhanbad />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="samunnati" element={<AdminSamunnati />} />
           <Route path="farmer" element={<AdminFarmer />} />
           <Route path="nisa" element={<AdminNISA />} />

@@ -9,122 +9,119 @@ import {
 
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import fpoList from './UsersList/FPOlist';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-const IITDDashboard = () => {
-  const [selectedFpo, setSelectedFpo] = useState([]);
+const sales = [
+  {
+    year: 2015,
+    amount: 3,
+  },
+  {
+    year: 2016,
+    amount: 4,
+  },
+  {
+    year: 2017,
+    amount: 3,
+  },
+  {
+    year: 2018,
+    amount: 5,
+  },
+  {
+    year: 2019,
+    amount: 6,
+  },
+  {
+    year: 2020,
+    amount: 7,
+  },
+  {
+    year: 2021,
+    amount: 8,
+  },
+  {
+    year: 2022,
+    amount: 7,
+  },
+];
 
-  const handleClearFilters = () => {
-    setSelectedFpo([]);
-  };
+const purchases = [
+  {
+    year: 2015,
+    amount: 3,
+  },
+  {
+    year: 2016,
+    amount: 4,
+  },
+  {
+    year: 2017,
+    amount: 3,
+  },
+  {
+    year: 2018,
+    amount: 5,
+  },
+  {
+    year: 2019,
+    amount: 6,
+  },
+  {
+    year: 2020,
+    amount: 7,
+  },
+  {
+    year: 2021,
+    amount: 8,
+  },
+  {
+    year: 2022,
+    amount: 7,
+  },
+];
 
-  const sales = [
-    {
-      year: 2015,
-      amount: 3,
-    },
-    {
-      year: 2016,
-      amount: 4,
-    },
-    {
-      year: 2017,
-      amount: 3,
-    },
-    {
-      year: 2018,
-      amount: 5,
-    },
-    {
-      year: 2019,
-      amount: 6,
-    },
-    {
-      year: 2020,
-      amount: 7,
-    },
-    {
-      year: 2021,
-      amount: 8,
-    },
-    {
-      year: 2022,
-      amount: 7,
-    },
-  ];
+const inventory = [
+  {
+    year: 2015,
+    amount: 3,
+  },
+  {
+    year: 2016,
+    amount: 4,
+  },
+  {
+    year: 2017,
+    amount: 3,
+  },
+  {
+    year: 2018,
+    amount: 5,
+  },
+  {
+    year: 2019,
+    amount: 6,
+  },
+  {
+    year: 2020,
+    amount: 7,
+  },
+  {
+    year: 2021,
+    amount: 8,
+  },
+  {
+    year: 2022,
+    amount: 7,
+  },
+];
 
-  const purchases = [
-    {
-      year: 2015,
-      amount: 3,
-    },
-    {
-      year: 2016,
-      amount: 4,
-    },
-    {
-      year: 2017,
-      amount: 3,
-    },
-    {
-      year: 2018,
-      amount: 5,
-    },
-    {
-      year: 2019,
-      amount: 6,
-    },
-    {
-      year: 2020,
-      amount: 7,
-    },
-    {
-      year: 2021,
-      amount: 8,
-    },
-    {
-      year: 2022,
-      amount: 7,
-    },
-  ];
+function Dashboard() {
+  const [selectedFpo, setSelectedFpo] = useState([])
 
-  const inventory = [
-    {
-      year: 2015,
-      amount: 3,
-    },
-    {
-      year: 2016,
-      amount: 4,
-    },
-    {
-      year: 2017,
-      amount: 3,
-    },
-    {
-      year: 2018,
-      amount: 5,
-    },
-    {
-      year: 2019,
-      amount: 6,
-    },
-    {
-      year: 2020,
-      amount: 7,
-    },
-    {
-      year: 2021,
-      amount: 8,
-    },
-    {
-      year: 2022,
-      amount: 7,
-    },
-  ];
+  const handleClearFilters = () => setSelectedFpo([])
 
   return (
     <div className="itemContainer">
@@ -154,7 +151,7 @@ const IITDDashboard = () => {
                       multiple
                       id="checkboxes-tags-demo"
                       className='fpoNameFilter'
-                      options={fpoList}
+                      options={[]}
                       disableCloseOnSelect
                       getOptionLabel={(option) => option.name}
                       renderOption={(props, option, { selected }) => (
@@ -291,7 +288,7 @@ const IITDDashboard = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default IITDDashboard;
+export default Dashboard
