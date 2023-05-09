@@ -1,12 +1,21 @@
 import Button from "react-bootstrap/Button";
 import AddFarmer from "./Modals/AddFarmer";
 import useModal from "../../hooks/useModal";
+import { useQuery } from "@tanstack/react-query";
+import { getFarmerList } from "../../actions/user";
 
 // import Register from "../Auth/Register";
 import Loader from "../Common/Loader";
 
 const Farmer = () => {
   const { modal, updateModal, closeModal } = useModal()
+
+  const { isLoading, data } = useQuery({
+    queryKey: ["user/farmer"],
+    queryFn: getFarmerList
+  })
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <div className="itemContainer">
@@ -42,82 +51,24 @@ const Farmer = () => {
                     <td>Date of Joining</td>
                     <td>Mobile Number</td>
                     <td>FPO Name</td>
-                    <td>Status</td>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>15478932</td>
-                    <td>Dinesh kumar</td>
-                    <td>Male</td>
-                    <td>14-05-2021</td>
-                    <td>98745XXXXX</td>
-                    <td>
-                      Churchu Nari Urja Farmer Producer Company Limited
-                    </td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>15478932</td>
-                    <td>Dinesh kumar</td>
-                    <td>Male</td>
-                    <td>14-05-2021</td>
-                    <td>98745XXXXX</td>
-                    <td>
-                      Churchu Nari Urja Farmer Producer Company Limited
-                    </td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>15478932</td>
-                    <td>Dinesh kumar</td>
-                    <td>Male</td>
-                    <td>14-05-2021</td>
-                    <td>98745XXXXX</td>
-                    <td>
-                      Churchu Nari Urja Farmer Producer Company Limited
-                    </td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>15478932</td>
-                    <td>Dinesh kumar</td>
-                    <td>Male</td>
-                    <td>14-05-2021</td>
-                    <td>98745XXXXX</td>
-                    <td>
-                      Churchu Nari Urja Farmer Producer Company Limited
-                    </td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>15478932</td>
-                    <td>Dinesh kumar</td>
-                    <td>Male</td>
-                    <td>14-05-2021</td>
-                    <td>98745XXXXX</td>
-                    <td>
-                      Churchu Nari Urja Farmer Producer Company Limited
-                    </td>
-                    <td>-</td>
-                  </tr>
-                  <tr>
-                    <td>6</td>
-                    <td>15478932</td>
-                    <td>Dinesh kumar</td>
-                    <td>Male</td>
-                    <td>14-05-2021</td>
-                    <td>98745XXXXX</td>
-                    <td>
-                      Churchu Nari Urja Farmer Producer Company Limited
-                    </td>
-                    <td>-</td>
-                  </tr>
+                  {
+                    data.data.map((user, key) => (
+                      <tr>
+                        <td>{key+1}</td>
+                        <td>{user._id}</td>
+                        <td>{user.name}</td>
+                        <td>{user.gender}</td>
+                        <td>{user.createdAt.substring(0, 10)}</td>
+                        <td>{user.mobile}</td>
+                        <td>
+                          {user.fpoName}
+                        </td>
+                      </tr>
+                    ))
+                  }
                 </tbody>
               </table>
             </div>

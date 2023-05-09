@@ -24,3 +24,9 @@ export function getCorporateClientList() {
     url: endPoints.userList.corporateClient,
   })
 }
+
+export function getFarmerList() {
+  return sendApiReq({
+    url: endPoints.userList.farmer,
+  })
+}

@@ -23,7 +23,7 @@ const list = [
     to: '/admin/fpo'
   },
   {
-    title: "IINRG",
+    title: "NISA",
     icon: <CreditScoreIcon className="icon" />,
     to: '/admin/nisa'
   },
