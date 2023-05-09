@@ -1,11 +1,12 @@
-import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import AddFarmer from "./Modals/AddFarmer";
+import useModal from "../../hooks/useModal";
+
+// import Register from "../Auth/Register";
+import Loader from "../Common/Loader";
 
 const Farmer = () => {
-  const [show, setShow] = useState(false)
-
-  const updateShow = () => setShow(p => !p)
+  const { modal, updateModal, closeModal } = useModal()
 
   return (
     <div className="itemContainer">
@@ -13,7 +14,7 @@ const Farmer = () => {
         <div className="title__wrapper">
           <Button
             className="loan_button mb-3"
-            onClick={updateShow}
+            onClick={() => updateModal("farmer")}
             style={{
               backgroundColor: "#064420",
               color: "#fff",
@@ -124,10 +125,13 @@ const Farmer = () => {
         </div>
       </div>
 
-      <AddFarmer
-        show={show}
-        updateShow={updateShow}
-      />
+      {
+        modal.state === "farmer" &&
+        <AddFarmer
+          show
+          close={closeModal}
+        />
+      }
     </div>
   )
 }

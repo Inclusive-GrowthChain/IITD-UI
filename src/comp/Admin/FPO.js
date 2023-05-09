@@ -53,8 +53,8 @@ const FPO = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    data.data.map(user => (
+                  {/* {
+                    data.data.map(user => ( */}
                       <tr>
                         <td>1</td>
                         <td>54212</td>
@@ -62,8 +62,8 @@ const FPO = () => {
                         <td>78451XXXXX</td>
                         <td>example@email.com</td>
                       </tr>
-                    ))
-                  }
+                    {/* ))
+                  } */}
                 </tbody>
               </table>
             </div>
