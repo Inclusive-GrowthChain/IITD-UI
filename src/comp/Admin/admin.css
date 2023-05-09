@@ -43,3 +43,36 @@
 	td:nth-of-type(7):before { content: "FPO Name"; }
 	td:nth-of-type(8):before { content: "Status"; }
 }
+
+@media screen and (max-width: 767px) {
+    .userTypeFilterForm {
+        width: 95% !important;
+    }
+
+    .fpoNameFilter {
+        width: 55vw;
+    }
+
+    .graphHeading {
+        font-size: 1rem !important;
+    }
+
+    .card {
+        padding-left: 0 !important;
+        padding-right: 1rem !important;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+    .userTypeFilterForm {
+        width: 75% !important;
+    }
+
+    .fpoNameFilter {
+        width: 45vw;
+    }
+
+    .graphHeading {
+        font-size: 1.2rem !important;
+    }
+}

@@ -185,6 +185,7 @@ function ApproveLoanApp({ show, handleClose, data }) {
           handleClose={closeModal}
           title="Confirm Approve FPO Loan Window Application"
           confirmText="Are you sure you want to approve this FPO loan window application?"
+          onConfirm={approveLoan}
         />
       }
     </Modal>

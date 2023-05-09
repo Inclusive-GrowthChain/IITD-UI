@@ -1,44 +1,48 @@
-import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
+import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 
-function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanApp, handleShowConfirmReject, showConfirmReject, handleCloseConfirmReject }) {
-  const [reason, setReason] = useState("");
+import useModal from "../../../../hooks/useModal";
+import Confirm from "../FpoLoan/Confirm";
+
+function RejectLoanApp({ show, handleClose, data }) {
+  const { modal, updateModal, closeModal } = useModal()
+  const [reason, setReason] = useState("")
 
   const onChangeReason = (e) => {
-    setReason(e.target.value);
-  };
+    setReason(e.target.value)
+  }
 
   const resetInputs = () => {
-    setReason("");
-  };
+    setReason("")
+  }
 
   const rejectLoan = async () => {
     if (reason === "") {
-      alert("Please fill all details and try again");
-      return;
+      alert("Please fill all details and try again")
+      return
     }
 
     const newLoan = {
       "status": "rejected",
       "reason": reason
-    };
+    }
 
     await axios
-      .put(`http://13.232.131.203:3000/api/loanwindow/${currentPendLoanApp.id}/approval`, newLoan)
+      .put(`http://13.232.131.203:3000/api/loanwindow/${data.id}/approval`, newLoan)
       .then((response) => {
-        console.log(response.data);
-        resetInputs();
+        console.log(response.data)
+        resetInputs()
       })
       .catch((error) => {
-        console.log(error);
-      });
+        console.log(error)
+      })
 
-    window.location.reload();
+    window.location.reload()
   }
 
   return (
-    <Modal show={showRejectForm} onHide={handleCloseRejectForm}>
+    <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Reject Loan Application</Modal.Header>
       <Modal.Body>
         <div className="row ">
@@ -54,7 +58,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
                       <input
                         type="text"
                         className="form-control"
-                        value={currentPendLoanApp.fpoName}
+                        value={data.fpoName}
                         disabled
                       />
                     </div>
@@ -67,7 +71,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
                       <input
                         type="text"
                         className="form-control"
-                        value={currentPendLoanApp.contactNo}
+                        value={data.contactNo}
                         disabled
                       />
                     </div>
@@ -80,7 +84,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
                       <input
                         type="text"
                         className="form-control"
-                        value={currentPendLoanApp.dateOfApplication}
+                        value={data.dateOfApplication}
                         disabled
                       />
                     </div>
@@ -93,7 +97,7 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
                       <input
                         type="text"
                         className="form-control"
-                        value={currentPendLoanApp.requestedAmount}
+                        value={data.requestedAmount}
                         disabled
                       />
                     </div>
@@ -114,12 +118,9 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
                     <div className="col-lg-12">
                       <button
                         className="btn btn-primary"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleShowConfirmReject();
-                        }}
+                        onClick={() => updateModal("show")}
                         style={{ float: "right", backgroundColor: '#064420' }}
-                        disabled={reason === ""}
+                        disabled={!reason}
                       >
                         Reject Loan
                       </button>
@@ -132,51 +133,16 @@ function RejectLoanApp({ showRejectForm, handleCloseRejectForm, currentPendLoanA
         </div>
       </Modal.Body>
 
-      <Modal show={showConfirmReject} onHide={handleCloseConfirmReject}>
-        <Modal.Header closeButton>Confirm Reject Farmer Loan Window Application</Modal.Header>
-        <Modal.Body>
-          <div className="row">
-            <div className="col-lg-12">
-              <label>Are you sure you want to reject this farmer loan window application?</label>
-            </div>
-            <div
-              className="row m-2"
-              style={{
-                justifyContent: "space-between",
-                padding: "0 10px",
-              }}
-            >
-              <button
-                className="btn btn-success"
-                onClick={handleCloseConfirmReject}
-                style={{
-                  marginTop: "1rem",
-                  backgroundColor: "#064420",
-                  width: "20%",
-                }}
-              >
-                No
-              </button>
-              <button
-                className="btn btn-success"
-                onClick={(e) => {
-                  e.preventDefault();
-                  rejectLoan();
-                }}
-                style={{
-                  marginTop: "1rem",
-                  backgroundColor: "#064420",
-                  width: "20%",
-                  position: "relative",
-                  float: "right",
-                }}
-              >
-                Yes
-              </button>
-            </div>
-          </div>
-        </Modal.Body>
-      </Modal>
+      {
+        modal.state &&
+        <Confirm
+          show
+          title="Confirm Reject Farmer Loan Window Application"
+          confirmText="Are you sure you want to reject this farmer loan window application?"
+          handleClose={closeModal}
+          onConfirm={rejectLoan}
+        />
+      }
     </Modal>
   )
 }

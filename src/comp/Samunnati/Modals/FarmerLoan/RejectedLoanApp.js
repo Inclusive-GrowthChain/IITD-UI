@@ -1,8 +1,8 @@
 import Modal from "react-bootstrap/Modal";
 
-function RejectedLoanApp({ showRejLoanApp, handleCloseRejLoanApp, currentRejLoanApp }) {
+function RejectedLoanApp({ show, handleClose, data }) {
   return (
-    <Modal show={showRejLoanApp} onHide={handleCloseRejLoanApp}>
+    <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Loan Application</Modal.Header>
       <Modal.Body>
         <div className="row ">
@@ -18,7 +18,7 @@ function RejectedLoanApp({ showRejLoanApp, handleCloseRejLoanApp, currentRejLoan
                       <input
                         type="text"
                         className="form-control"
-                        value={currentRejLoanApp.fpoName}
+                        value={data.fpoName}
                         disabled
                       />
                     </div>
@@ -31,7 +31,7 @@ function RejectedLoanApp({ showRejLoanApp, handleCloseRejLoanApp, currentRejLoan
                       <input
                         type="text"
                         className="form-control"
-                        value={currentRejLoanApp.contactNo}
+                        value={data.contactNo}
                         disabled
                       />
                     </div>
@@ -44,7 +44,7 @@ function RejectedLoanApp({ showRejLoanApp, handleCloseRejLoanApp, currentRejLoan
                       <input
                         type="text"
                         className="form-control"
-                        value={currentRejLoanApp.dateOfApplication}
+                        value={data.dateOfApplication}
                         disabled
                       />
                     </div>
@@ -57,7 +57,7 @@ function RejectedLoanApp({ showRejLoanApp, handleCloseRejLoanApp, currentRejLoan
                       <input
                         type="text"
                         className="form-control"
-                        value={currentRejLoanApp.requestedAmount}
+                        value={data.requestedAmount}
                         disabled
                       />
                     </div>
@@ -70,7 +70,7 @@ function RejectedLoanApp({ showRejLoanApp, handleCloseRejLoanApp, currentRejLoan
                       <input
                         type="text"
                         className="form-control"
-                        value={currentRejLoanApp.reason}
+                        value={data.reason}
                         disabled
                       />
                     </div>
