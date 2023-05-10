@@ -2,16 +2,11 @@ import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import { useState } from "react";
 
-function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentLoan, handleClosePendingLoanDetails }) {
+function ApproveLoanApp({ show, handleClose, data }) {
   const [grantedAmount, setGrantedAmount] = useState(0);
 
-  const onChangeGrantedAmount = (e) => {
-    setGrantedAmount(e.target.value);
-  };
-
-  const resetInputs = () => {
-    setGrantedAmount(0);
-  };
+  const onChangeGrantedAmount = (e) => setGrantedAmount(e.target.value)
+  const resetInputs = () => setGrantedAmount(0)
 
   const approveLoan = async () => {
     if (grantedAmount === 0) {
@@ -26,7 +21,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentLoan, 
     };
 
     await axios
-      .put(`http://13.232.131.203:3000/api/loanwindow/${currentLoan.windowId}/loan/${currentLoan.id}/approval`, newLoan)
+      .put(`http://13.232.131.203:3000/api/loanwindow/${data.windowId}/loan/${data.id}/approval`, newLoan)
       .then((response) => {
         console.log(response.data);
         resetInputs();
@@ -39,7 +34,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentLoan, 
   }
 
   return (
-    <Modal show={showApproveForm} onHide={handleCloseApproveForm}>
+    <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Approve Loan Application</Modal.Header>
       <Modal.Body>
         <div className="row ">
@@ -55,7 +50,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentLoan, 
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.createdAt && currentLoan.createdAt.substring(0, 10)}
+                        value={data?.createdAt.substring(0, 10)}
                         disabled
                       />
                     </div>
@@ -68,7 +63,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentLoan, 
                       <input
                         type="text"
                         className="form-control"
-                        value={currentLoan.requestedAmount}
+                        value={data.requestedAmount}
                         disabled
                       />
                     </div>
@@ -93,7 +88,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentLoan, 
                       <input
                         type="number"
                         className="form-control"
-                        value={currentLoan.loanTenure}
+                        value={data.loanTenure}
                         disabled
                       />
                     </div>
@@ -106,7 +101,7 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentLoan, 
                       <input
                         type="number"
                         className="form-control"
-                        value={currentLoan.intrest}
+                        value={data.intrest}
                         disabled
                       />
                     </div>
@@ -126,13 +121,8 @@ function ApproveLoanApp({ showApproveForm, handleCloseApproveForm, currentLoan, 
                     <div className="col-lg-12">
                       <button
                         className="btn btn-primary"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          approveLoan();
-                          // handleCloseApproveForm();
-                          // handleClosePendingLoanDetails();
-                        }}
                         style={{ float: "right", backgroundColor: '#064420' }}
+                        onClick={approveLoan}
                       >
                         Approve Loan
                       </button>

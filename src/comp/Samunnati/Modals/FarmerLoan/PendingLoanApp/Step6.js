@@ -154,7 +154,7 @@ function Step6({ data, backBtnStyle, btnStyle, h5Style, setStep }) {
       }
 
       {
-        modal.state === "Approved" &&
+        modal.state === "Rejected" &&
         <RejectLoanApp
           show
           data={data}
