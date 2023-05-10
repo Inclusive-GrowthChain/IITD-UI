@@ -53,13 +53,13 @@ const Samunnati = () => {
                 </thead>
                 <tbody>
                   {
-                    data.data.map(user => (
+                    data.data.map((user, key) => (
                       <tr>
-                        <td>1</td>
-                        <td>54212</td>
-                        <td>--</td>
-                        <td>78451XXXXX</td>
-                        <td>example@email.com</td>
+                        <td>{key+1}</td>
+                        <td>{user._id}</td>
+                        <td>{user.role}</td>
+                        <td>{user.contactNumber}</td>
+                        <td>{user.email}</td>
                       </tr>
                     ))
                   }

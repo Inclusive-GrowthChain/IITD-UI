@@ -42,10 +42,11 @@ const endPoints = {
   },
 
   userList: {
-    corporateClient: "/user/corporateClient",
-    samunnati: "/user/lendingpartner",
-    nisa: "/user/nisa",
-    fpo: "/user/fpo",
+    corporateClient: "/user/list/corporateclient",
+    samunnati: "/user/list/lendingpartner",
+    nisa: "/user/list/nisa",
+    fpo: "/user/list/fpo",
+    farmer: "/user/list/farmer"
   }
 }
 
