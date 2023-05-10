@@ -13,7 +13,7 @@ import PurchaseHistory from "../Modals/FarmerInfo/PurchaseHistory";
 import LoanApplication from "../Modals/FarmerInfo/LoanApplication";
 import SaleHistory2 from "../Modals/FarmerInfo/SaleHistory2";
 import SaleHistory from "../Modals/FarmerInfo/SaleHistory";
-import Img from "../Modals/FarmerInfo/Img";
+import DocImg from "../../Common/DocImg";
 import Panel1 from "./Panel1";
 import Panel2 from "./Panel2";
 import Panel3 from "./Panel3";
@@ -224,9 +224,10 @@ function FarmerInformation() {
         handleShowImg={handleShowImg}
       />
 
-      <Img
-        showImg={showImg}
-        handleCloseImg={handleCloseImg}
+      <DocImg
+        show={showImg}
+        title="Img"
+        handleClose={handleCloseImg}
       />
     </main>
   )

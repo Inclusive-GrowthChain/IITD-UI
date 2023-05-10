@@ -1,8 +1,7 @@
-import Modal from "react-bootstrap/Modal";
 import { useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Modal } from "react-bootstrap";
 
 import { errorNotify } from "../../../utils/toastifyHlp";
 import { farmerSignup } from "../../../actions/auth";
@@ -249,24 +248,13 @@ function AddFarmer({ show, close }) {
               </div>
 
               <div className="row mb-2">
-                <div className="col">
-                  <Link
-                    to="/"
-                    className="btn btn-block shadow"
-                    style={btnStyle}
-                  >
-                    Login
-                  </Link>
-                </div>
-                <div className="col">
-                  <button
-                    type="submit"
-                    className="btn btn-block shadow"
-                    style={btnStyle}
-                  >
-                    Sign up
-                  </button>
-                </div>
+                <button
+                  type="submit"
+                  className="btn btn-block shadow"
+                  style={btnStyle}
+                >
+                  Sign up
+                </button>
               </div>
             </form>
           </div>

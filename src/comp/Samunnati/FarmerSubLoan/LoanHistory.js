@@ -1,7 +1,7 @@
 import useModal from "../../../hooks/useModal";
-import CompletedLoanApp from "../Modals/FpoSubLoan/CompletedLoanApp";
+import CompletedLoanApp from "../Modals/FarmerSubLoan/CompletedLoanApp";
 
-const btnStyle2 = {
+const btnStyle = {
   backgroundColor: "#064420",
   color: "#fff",
   alignItems: "center",
@@ -13,7 +13,7 @@ const btnStyle2 = {
   lineHeight: "1rem",
 }
 
-function LoanHistory({ fpoId, data = [], grantedAmount, consumedWindowLoanAmount, theadStyle, tbodyStyle }) {
+function LoanHistory({ data = [], theadStyle, tbodyStyle }) {
   const { modal, updateModal, closeModal } = useModal()
 
   return (
@@ -24,21 +24,28 @@ function LoanHistory({ fpoId, data = [], grantedAmount, consumedWindowLoanAmount
             <thead style={theadStyle}>
               <tr>
                 <td>Loan ID</td>
+                <td>Farmer ID</td>
+                <td>Farmer Name</td>
+                <td>Contact</td>
                 <td>Date of Application</td>
                 <td>Loan Amount</td>
                 <td>View Transaction Details</td>
               </tr>
             </thead>
+
             <tbody style={tbodyStyle}>
               {
-                data.map((loan) => (
+                data.map((loan, i) => (
                   <tr>
                     <td>{loan.loanId}</td>
+                    <td>Farmer-{i}</td>
+                    <td>{loan.farmerName}</td>
+                    <td>{loan.farmerContact}</td>
                     <td>{loan.createdAt.substring(0, 10)}</td>
-                    <td>{loan.loanAmount}</td>
+                    <td>{loan.grantedAmount}</td>
                     <td>
                       <button
-                        style={btnStyle2}
+                        style={btnStyle}
                         onClick={() => updateModal("show", loan)}
                       >
                         view
@@ -53,14 +60,13 @@ function LoanHistory({ fpoId, data = [], grantedAmount, consumedWindowLoanAmount
       </div>
 
       <div style={{ marginTop: '2%' }}>
-        Remaining Loan Window: {grantedAmount - consumedWindowLoanAmount}
+        Remaining Loan Window: 60000
       </div>
 
       {
         modal.state &&
         <CompletedLoanApp
           show
-          fpoId={fpoId}
           currentLoan={modal.data}
           currentTransaction={{}}
           handleClose={closeModal}
