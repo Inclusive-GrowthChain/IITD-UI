@@ -61,6 +61,7 @@ function FpoLoan() {
     }
   })
 
+  console.log(data)
   if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (

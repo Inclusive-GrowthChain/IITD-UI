@@ -116,7 +116,7 @@ function App() {
           <Route path="farmer-loan" element={<SamunnatiFarmerLoan />} />
           <Route path="fpo-subloan" element={<SammunatiFPOSubLoan />} />
           <Route path="farmer-subloan" element={<SammunatiFarmerSubLoanPage />} />
-          <Route path="fpo-page" element={<SammunatiFPOPage />} />
+          <Route path="fpo-page/:id" element={<SammunatiFPOPage />} />
           <Route path="settings" element={<SammunatiSettings />} />
         </Route>
 

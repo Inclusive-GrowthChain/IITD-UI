@@ -1,5 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
 import { DropdownButton, Dropdown } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { useAuthStore } from "../../store/useAuthStore";
 
@@ -7,13 +8,15 @@ import PersonIcon from "@mui/icons-material/Person";
 import logo from "../../assets/img/logo.png";
 
 function Nav({ title, toggleSidebar }) {
-  const navigate = useNavigate();
+  const queryClient = useQueryClient()
+  const navigate = useNavigate()
   const logOut = useAuthStore(s => s.logOut)
 
   const logout = e => {
     e.preventDefault()
     localStorage.clear()
     sessionStorage.clear()
+    queryClient.clear()
     logOut()
     navigate("/")
   }

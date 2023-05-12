@@ -87,7 +87,8 @@ function Approved({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tb
                           </td>
                           <td>{app.loans.filter((loan) => loan.status === "in-process").length}</td>
                           <td>
-                            <Link to="/samunnati/fpo-subloan"
+                            <Link
+                              to="/samunnati/fpo-subloan"
                               className="data_wrapper"
                               style={linkStyle}
                               onClick={() => localStorage.setItem("loanWindowId", app.id)}

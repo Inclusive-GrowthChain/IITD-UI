@@ -1,47 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
-const fpoList = [
-  {
-    id: 1,
-    name: "FPO 1",
-    ceoName: "CEO 1",
-    phone: "1234567890",
-    email: "fpo1@gmail.com",
-    location: "Location 1",
-  },
-  {
-    id: 2,
-    name: "FPO 2",
-    ceoName: "CEO 2",
-    phone: "1234567890",
-    email: "fpo2@gmail.com",
-    location: "Location 2",
-  },
-  {
-    id: 3,
-    name: "FPO 3",
-    ceoName: "CEO 3",
-    phone: "1234567890",
-    email: "fpo3@gmail.com",
-    location: "Location 3",
-  },
-  {
-    id: 4,
-    name: "FPO 4",
-    ceoName: "CEO 4",
-    phone: "1234567890",
-    email: "fpo4@gmail.com",
-    location: "Location 4",
-  },
-  {
-    id: 5,
-    name: "FPO 5",
-    ceoName: "CEO 5",
-    phone: "1234567890",
-    email: "fpo5@gmail.com",
-    location: "Location 5",
-  },
-]
+import { getFpoList } from "../../actions/user";
+import Loader from "../Common/Loader";
 
 const h3Style = {
   fontSize: "22px",
@@ -63,6 +24,13 @@ const tbodyStyle = {
 }
 
 function FPOInfo() {
+  const { isLoading, data } = useQuery({
+    queryKey: ["user/fpo"],
+    queryFn: getFpoList
+  })
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />
+
   return (
     <div className="itemContainer">
       <div className="list_title">
@@ -89,27 +57,27 @@ function FPOInfo() {
                     <td>Location</td>
                   </tr>
                 </thead>
+
                 <tbody style={tbodyStyle}>
-                  {fpoList.map((fpo) => (
-                    <tr key={fpo.id}>
-                      <td>{fpo.id}</td>
-                      <td>
-                        <Link to="/samunnati/fpo-page"
-                          className="data_wrapper"
-                          style={{ color: "#000", textDecoration: "none" }}
-                          onClick={() => {
-                            localStorage.setItem("fpoId", fpo.id);
-                          }}
-                        >
-                          {fpo.name}
-                        </Link>
-                      </td>
-                      <td>{fpo.ceoName}</td>
-                      <td>{fpo.phone}</td>
-                      <td>{fpo.email}</td>
-                      <td>{fpo.location}</td>
-                    </tr>
-                  ))}
+                  {
+                    data?.data.map((fpo) => (
+                      <tr key={fpo._id}>
+                        <td>{fpo._id}</td>
+                        <td>
+                          <Link
+                            to={`/samunnati/fpo-page/${fpo._id}`}
+                            className="data_wrapper"
+                            style={{ color: "#000", textDecoration: "none" }}
+                          >
+                            {fpo.fpoName}
+                          </Link>
+                        </td>
+                        <td>{fpo.directorName}</td>
+                        <td>{fpo.contactNumber}</td>
+                        <td>{fpo.email}</td>
+                        <td>{fpo.address} {fpo.city} {fpo.state} {fpo.pinCode}</td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
