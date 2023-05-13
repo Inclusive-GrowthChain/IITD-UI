@@ -44,9 +44,13 @@ const endPoints = {
   userList: {
     corporateClient: "/user/list/corporateclient",
     samunnati: "/user/list/lendingpartner",
+    farmer: "/user/list/farmer",
     nisa: "/user/list/nisa",
     fpo: "/user/list/fpo",
-    farmer: "/user/list/farmer"
+  },
+
+  samunnati: {
+    loanwindow: "/loanwindow/list/samunnati?windowType=",
   }
 }
 

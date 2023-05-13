@@ -1,71 +1,45 @@
+import useModal from '../../../../../hooks/useModal';
+import DocImg from '../../../../Common/DocImg';
 
-const btnStyle2 = {
-  backgroundColor: "#064420",
-  color: "#fff",
-  alignItems: "center",
-  borderRadius: "5px",
-  border: "none",
-  padding: "5px 10px",
-  width: "30%",
-  fontSize: ".75rem",
-  lineHeight: "1rem",
-  textAlign: "center",
+let idProofs = {
+  panCard: "PAN Card",
+  voterId: "Voter ID",
+  aadharCard: "Aadhaar Card",
+  drivingLicence: "Driving License",
+  passport: "Passport",
 }
 
 function Step3({ data, backBtnStyle, nextBtnStyle, btnStyle, h5Style, setStep }) {
+  const { modal, updateModal, closeModal } = useModal()
+
   return (
     <>
       <h5 style={h5Style}>
         KYC of Authorised Signatories
       </h5>
 
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>List of Directors</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <button
-            className="py-0.5"
-            style={btnStyle}
-          >
-            View
-          </button>
-        </div>
-      </div>
+      <h5 className="row m-2 px-3">
+        List of Directors
+      </h5>
 
-      {[...Array(1)].map((element, index) => {
-        return (
-          <>
-            <div className="row m-2">
-              <div className="col-lg-6">
-                <label>ID Proof</label>
-              </div>
-              <div className="col-lg-6 text-center">
-                <button
-                  className="py-0.5"
-                  style={btnStyle2}
-                >
-                  View
-                </button>
-              </div>
+      {
+        data.kycAuthorizedSignatories.map((kyc, i) => (
+          <div className="row m-2" key={i}>
+            <div className="col-lg-6">
+              <label>{idProofs[kyc.name]}</label>
             </div>
-            <div className="row m-2">
-              <div className="col-lg-6">
-                <label>Address Proof</label>
-              </div>
-              <div className="col-lg-6 text-center">
-                <button
-                  className="py-0.5"
-                  style={btnStyle2}
-                >
-                  View
-                </button>
-              </div>
+            <div className="col-lg-6 text-center">
+              <button
+                className="py-0.5"
+                style={btnStyle}
+                onClick={() => updateModal(idProofs[kyc.name], { imgUrl: kyc.doc })}
+              >
+                View
+              </button>
             </div>
-          </>
-        );
-      })}
-
+          </div>
+        ))
+      }
 
       <div className="row m-2 justify-content-between px-2">
         <button
@@ -84,6 +58,16 @@ function Step3({ data, backBtnStyle, nextBtnStyle, btnStyle, h5Style, setStep })
           Next
         </button>
       </div>
+
+      {
+        modal.state &&
+        <DocImg
+          show
+          title={modal.state}
+          imgUrl={modal.data.imgUrl}
+          handleClose={closeModal}
+        />
+      }
     </>
   )
 }

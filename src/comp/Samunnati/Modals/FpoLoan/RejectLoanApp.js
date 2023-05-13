@@ -1,130 +1,117 @@
-import Modal from "react-bootstrap/Modal";
-import { useState } from "react";
-import axios from "axios";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { Modal } from "react-bootstrap";
 
+import { updateLoanWindowStatus } from "../../../../actions/samunnati";
 import useModal from "../../../../hooks/useModal";
+
 import Confirm from "./Confirm";
+import Input from "../../../Nisa/Modals/Input";
 
-function RejectLoanApp({ show, handleClose, data }) {
+const list = [
+  {
+    label: "FPO Name",
+    name: "fpoName",
+    disabled: true,
+  },
+  {
+    label: "Contact No.",
+    name: "contactNo",
+    disabled: true,
+  },
+  {
+    label: "Window ID",
+    name: "windowId",
+    disabled: true,
+  },
+  {
+    label: "Date of Application",
+    name: "dateOfApplication",
+    disabled: true,
+  },
+  {
+    label: "Window Tenure (months)",
+    name: "windowPeriod",
+    disabled: true,
+  },
+  {
+    label: "Requested Amount",
+    name: "requestedAmount",
+    disabled: true,
+  },
+  {
+    label: "Reason for Rejection",
+    name: "reason",
+  },
+]
+
+function RejectLoanApp({ show, handleClose, data, closeAll }) {
   const { modal, updateModal, closeModal } = useModal()
-  const [reason, setReason] = useState("");
+  const queryClient = useQueryClient()
 
-  const onChangeReason = e => setReason(e.target.value)
-  const resetInputs = () => setReason("")
-
-  const rejectLoan = async () => {
-    if (reason === "") {
-      alert("Please fill all details and try again");
-      return;
+  const { register, formState: { errors }, handleSubmit } = useForm({
+    defaultValues: {
+      fpoName: data.fpoName,
+      contactNo: data.contactNo,
+      windowId: data.windowId,
+      dateOfApplication: data.dateOfApplication,
+      windowPeriod: data.windowPeriod,
+      requestedAmount: data.requestedAmount,
+      reason: "",
     }
+  })
 
-    const newLoan = {
-      "status": "rejected",
-      "reason": reason
-    };
+  const { mutate, isLoading } = useMutation({
+    mutationFn: updateLoanWindowStatus,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["sumunnati/loanwindow", "fpo"])
+      closeAll()
+    }
+  })
 
-    await axios
-      .put(`http://13.232.131.203:3000/api/loanwindow/${data.id}/approval`, newLoan)
-      .then((response) => {
-        console.log(response.data);
-        resetInputs();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    window.location.reload();
+  const rejectLoan = () => {
+    closeModal()
+    mutate({
+      id: data.id,
+      reason: modal.data.reason,
+      status: "rejected",
+    })
   }
+
+  const onSubmit = data => updateModal("show", data)
 
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Reject Loan Application</Modal.Header>
+
       <Modal.Body>
-        <div className="row ">
-          <div className="col">
-            <form>
-              <div className="form">
-                <div className="card p-2">
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>FPO Name</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={data.fpoName}
-                        disabled
-                      />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Contact No.</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={data.contactNo}
-                        disabled
-                      />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Date of Application</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={data.dateOfApplication}
-                        disabled
-                      />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Requested Amount</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={data.requestedAmount}
-                        disabled
-                      />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Reason for Rejection</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input
-                        type="text"
-                        className="form-control"
-                        onChange={onChangeReason}
-                      />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-12">
-                      <button
-                        className="btn btn-primary"
-                        style={{ float: "right", backgroundColor: '#064420' }}
-                        onClick={() => updateModal("show")}
-                      >
-                        Reject Loan
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
+        <form
+          className="form"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          {
+            list.map(l => (
+              <Input
+                key={l.name}
+                {...l}
+                register={register}
+                errors={errors}
+              />
+            ))
+          }
+
+          <div className="row m-2">
+            <div className="col-lg-12">
+              <button
+                className="btn btn-primary"
+                style={{ float: "right", backgroundColor: '#064420' }}
+                disabled={isLoading}
+              >
+                Reject Loan
+              </button>
+            </div>
           </div>
-        </div>
+        </form>
       </Modal.Body>
 
       {
@@ -134,6 +121,7 @@ function RejectLoanApp({ show, handleClose, data }) {
           handleClose={closeModal}
           title="Confirm Reject Farmer Loan Window Application"
           confirmText="Are you sure you want to reject this farmer loan window application?"
+          onConfirm={rejectLoan}
         />
       }
     </Modal>

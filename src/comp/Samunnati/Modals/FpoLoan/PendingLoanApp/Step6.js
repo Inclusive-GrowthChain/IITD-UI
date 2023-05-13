@@ -1,15 +1,44 @@
-import useModal from "../../../../../hooks/useModal";
+import useModal from '../../../../../hooks/useModal';
 import ApproveLoanApp from "../ApproveLoanApp";
 import RejectLoanApp from "../RejectLoanApp";
+import DocImg from '../../../../Common/DocImg';
 
-const selectStyle = {
-  width: "100%",
-  position: "relative",
-  float: "right",
-  marginTop: '50px',
-}
+const list = [
+  {
+    label: "Product wise break up of revenues (2 fiscal)",
+    name: "productBreakRevenue",
+  },
+  {
+    label: "Latest 3 months stock statements",
+    name: "latest3MonthStock",
+  },
+  {
+    label: "Debtors ageing analysis fiscal year end",
+    name: "debtorsAgeingAnalysis",
+  },
+  {
+    label: "Top 5 suppliers/vintage (last 6 months)",
+    name: "top5Suppliers",
+  },
+  {
+    label: "Top 5 buyers/vintage (last 6 months)",
+    name: "top5Buyers",
+  },
+  {
+    label: "Sanction limit & O/s for both WC & TL",
+    name: "sanctionLimit",
+  },
+  {
+    label: "Term loan summary",
+    name: "termLoanSummary",
+  },
+  {
+    label: "Project estimate & other relavant documents",
+    name: "projectEstimate",
+  },
+]
 
-function Step6({ data, backBtnStyle, btnStyle, h5Style, setStep }) {
+function Step6({ data, backBtnStyle, btnStyle, h5Style, setStep, closeAll }) {
   const { modal, updateModal, closeModal } = useModal()
 
   return (
@@ -18,112 +47,28 @@ function Step6({ data, backBtnStyle, btnStyle, h5Style, setStep }) {
         Other Details
       </h5>
 
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Product wise break up of revenues (2 fiscal)</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <button
-            className="py-0.5"
-            style={btnStyle}
-          >
-            View
-          </button>
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Latest 3 Months Stocks Statements</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <button
-            className="py-0.5"
-            style={btnStyle}
-          >
-            View
-          </button>
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Debtors Ageing Analysis Fiscal Year End</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <button
-            className="py-0.5"
-            style={btnStyle}
-          >
-            View
-          </button>
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Top 5 Suppliers/Vintage (last 6 months)</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <button
-            className="py-0.5"
-            style={btnStyle}
-          >
-            View
-          </button>
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Top 5 Buyers/Vintage (last 6 months)</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <button
-            className="py-0.5"
-            style={btnStyle}
-          >
-            View
-          </button>
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Sanction Limit & O/s for both WC & TL</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <button
-            className="py-0.5"
-            style={btnStyle}
-          >
-            View
-          </button>
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Term Loan Summary</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <button
-            className="py-0.5"
-            style={btnStyle}
-          >
-            View
-          </button>
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Project Estimate & Other Relevant Documents</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <button
-            className="py-0.5"
-            style={btnStyle}
-          >
-            View
-          </button>
-        </div>
-      </div>
+      {
+        list.map(l => (
+          <div className="row m-2" key={l.name}>
+            <div className="col-lg-6">
+              <label>{l.label}</label>
+            </div>
+            <div className="col-lg-6 text-center">
+              <button
+                className="py-0.5"
+                style={btnStyle}
+                onClick={() => updateModal(l.label, {
+                  imgUrl: data?.otherDetails?.find(d => d.name === l.name)?.doc
+                })}
+              >
+                View
+              </button>
+            </div>
+          </div>
+        ))
+      }
 
-      <div className="row m-2 justify-content-between px-2">
+      <div className="d-flex align-items-center justify-content-between m-2 px-2">
         <button
           className="btn btn-success"
           onClick={() => setStep(2)}
@@ -133,10 +78,10 @@ function Step6({ data, backBtnStyle, btnStyle, h5Style, setStep }) {
         </button>
 
         <select
-          className="form-control"
-          style={selectStyle}
+          className="form-control mt-3"
           value={modal.state}
           onChange={e => updateModal(e.target.value)}
+          style={{ maxWidth: "20rem" }}
         >
           <option value="" disabled>Change Loan Window Status</option>
           <option value="Approved">Approve Loan Window</option>
@@ -145,10 +90,21 @@ function Step6({ data, backBtnStyle, btnStyle, h5Style, setStep }) {
       </div>
 
       {
+        modal.state && modal.state !== "Approved" && modal.state !== "Rejected" &&
+        <DocImg
+          show
+          title={modal.state}
+          imgUrl={modal.data.imgUrl}
+          handleClose={closeModal}
+        />
+      }
+
+      {
         modal.state === "Approved" &&
         <ApproveLoanApp
           show
           data={data}
+          closeAll={closeAll}
           handleClose={closeModal}
         />
       }
@@ -158,6 +114,7 @@ function Step6({ data, backBtnStyle, btnStyle, h5Style, setStep }) {
         <RejectLoanApp
           show
           data={data}
+          closeAll={closeAll}
           handleClose={closeModal}
         />
       }

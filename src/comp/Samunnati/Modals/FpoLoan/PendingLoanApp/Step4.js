@@ -1,92 +1,86 @@
+import useModal from '../../../../../hooks/useModal';
+import DocImg from '../../../../Common/DocImg';
 
-const btnStyle3 = {
-  backgroundColor: "#064420",
-  color: "#fff",
-  alignItems: "center",
-  borderRadius: "5px",
-  border: "none",
-  padding: "5px 10px",
-  width: "30%",
-  fontSize: ".75rem",
-  lineHeight: "1rem",
-  textAlign: "center",
-}
+const list1 = [
+  {
+    label: "Incorporation Details",
+    name: "incorp",
+  },
+  {
+    label: "Brief Profile of the promoting organization",
+    name: "promotingOrg",
+  },
+  {
+    label: "Networth statement of the promoter",
+    name: "netWorth",
+  },
+]
+
+const list2 = [
+  {
+    label: "Input Licenses",
+    name: "inputLicenses",
+  },
+  {
+    label: "Fertilizer Licenses",
+    name: "fertilizerLicenses",
+  },
+]
 
 function Step4({ data, backBtnStyle, nextBtnStyle, btnStyle, h5Style, setStep }) {
+  const { modal, updateModal, closeModal } = useModal()
+
   return (
     <>
       <h5 style={h5Style}>
         Brief Profile of the FPO
       </h5>
 
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Incorporation Details</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <button
-            className="py-0.5"
-            style={btnStyle}
-          >
-            View
-          </button>
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Brief Profile of the Promoting Organization</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <button
-            className="py-0.5"
-            style={btnStyle}
-          >
-            View
-          </button>
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Networth Statement of the Promoter</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <button
-            className="py-0.5"
-            style={btnStyle}
-          >
-            View
-          </button>
-        </div>
-      </div>
-      <div className="row m-2">
-        <h5 className="mt-3">Applicable License</h5>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Input Licences</label>
+      {
+        list1.map(l => (
+          <div className="row m-2" key={l.name}>
+            <div className="col-lg-6">
+              <label>{l.label}</label>
+            </div>
+            <div className="col-lg-6 text-center">
+              <button
+                className="py-0.5"
+                style={btnStyle}
+                onClick={() => updateModal(l.label, {
+                  imgUrl: data?.fpoProfile?.find(d => d.name === l.name)?.doc
+                })}
+              >
+                View
+              </button>
+            </div>
           </div>
-          <div className="col-lg-6 text-center">
-            <button
-              className="py-0.5"
-              style={btnStyle3}
-            >
-              View
-            </button>
+        ))
+      }
+
+      <h5 className="mt-3" style={h5Style}>
+        Applicable License
+      </h5>
+
+      {
+        list2.map(l => (
+          <div className="row m-2" key={l.name}>
+            <div className="col-lg-6">
+              <label>{l.label}</label>
+            </div>
+            <div className="col-lg-6 text-center">
+              <button
+                className="py-0.5"
+                style={btnStyle}
+                onClick={() => updateModal(l.label, {
+                  imgUrl: data?.licenses?.find(d => d.name === l.name)?.doc
+                })}
+              >
+                View
+              </button>
+            </div>
           </div>
-        </div>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Fertilizer Licences</label>
-          </div>
-          <div className="col-lg-6 text-center">
-            <button
-              className="py-0.5"
-              style={btnStyle3}
-            >
-              View
-            </button>
-          </div>
-        </div>
-      </div>
+        ))
+      }
 
       <div className="row m-2 justify-content-between px-2">
         <button
@@ -105,6 +99,16 @@ function Step4({ data, backBtnStyle, nextBtnStyle, btnStyle, h5Style, setStep })
           Next
         </button>
       </div>
+
+      {
+        modal.state &&
+        <DocImg
+          show
+          title={modal.state}
+          imgUrl={modal.data.imgUrl}
+          handleClose={closeModal}
+        />
+      }
     </>
   )
 }

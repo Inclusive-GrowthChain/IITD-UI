@@ -121,6 +121,7 @@ function PendingLoanApp({ show, handleClose, data }) {
             h5Style={h5Style}
             btnStyle={btnStyle}
             backBtnStyle={backBtnStyle}
+            closeAll={handleClose}
           />
         }
       </Modal.Body>

@@ -55,9 +55,9 @@ function Pending({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tbo
                   {
                     data
                       .filter(a => a?.fpoName.toLowerCase().includes(search.toLowerCase()) || a?.fpoId.toLowerCase().includes(search.toLowerCase()))
-                      .map((app) => (
-                        <tr>
-                          <td>{app.dateOfApplication}</td>
+                      .map(app => (
+                        <tr key={app.id}>
+                          <td>{app.dateOfApplication.substring(0, 10)}</td>
                           <td>{app.fpoId}</td>
                           <td>{app.fpoName}</td>
                           <td>{app.contactNo}</td>

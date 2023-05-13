@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { getLoanwindow } from "../../../actions/fpo";
+import { getLoanwindow } from "../../../actions/samunnati";
 
 import { TabNavItem, TabContent } from "../../UIComp/Tabs";
 import Approved from "./Approved";
@@ -46,22 +46,21 @@ function FpoLoan() {
   const [activeTab, setActiveTab] = useState("tab1")
 
   const { isLoading, data } = useQuery({
-    queryKey: ["loanwindow", "fpo"],
-    queryFn: () => getLoanwindow({ windowType: "fpo" }),
-    onSuccess(res) {
-      let numFpoPendingRequests = 0
-      res.data.forEach((loanWindow) => {
-        loanWindow.loans.forEach((loan) => {
-          if (loanWindow.status === "approved" && loan.status === "in-process") {
-            numFpoPendingRequests++
-          }
-        })
-      })
-      localStorage.setItem("FpoLoanRequests", numFpoPendingRequests)
-    }
+    queryKey: ["sumunnati/loanwindow", "fpo"],
+    queryFn: getLoanwindow,
+    // onSuccess(res) {
+    //   let numFpoPendingRequests = 0
+    //   res.data.forEach((loanWindow) => {
+    //     loanWindow.loans.forEach((loan) => {
+    //       if (loanWindow.status === "approved" && loan.status === "in-process") {
+    //         numFpoPendingRequests++
+    //       }
+    //     })
+    //   })
+    //   localStorage.setItem("FpoLoanRequests", numFpoPendingRequests)
+    // }
   })
 
-  console.log(data)
   if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (
@@ -106,7 +105,7 @@ function FpoLoan() {
                   topWrapperStyle={topWrapperStyle}
                   theadStyle={theadStyle}
                   tbodyStyle={tbodyStyle}
-                  data={data?.data?.filter(app => app.status === "approved")}
+                  data={data?.result?.fpo?.filter(app => app.status === "approved")}
                 />
               </TabContent>
 
@@ -116,7 +115,7 @@ function FpoLoan() {
                   topWrapperStyle={topWrapperStyle}
                   theadStyle={theadStyle}
                   tbodyStyle={tbodyStyle}
-                  data={data?.data?.filter(app => app.status === "rejected")}
+                  data={data?.result?.fpo?.filter(app => app.status === "rejected")}
                 />
               </TabContent>
 
@@ -126,7 +125,7 @@ function FpoLoan() {
                   topWrapperStyle={topWrapperStyle}
                   theadStyle={theadStyle}
                   tbodyStyle={tbodyStyle}
-                  data={data?.data?.filter(app => app.status === "pending")}
+                  data={data?.result?.fpo?.filter(app => app.status === "pending")}
                 />
               </TabContent>
             </div>

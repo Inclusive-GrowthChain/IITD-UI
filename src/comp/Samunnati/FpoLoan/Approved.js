@@ -70,8 +70,8 @@ function Approved({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tb
                   {
                     data
                       .filter(a => a?.fpoName.toLowerCase().includes(search.toLowerCase()) || a?.fpoId.toLowerCase().includes(search.toLowerCase()))
-                      .map((app) => (
-                        <tr>
+                      .map(app => (
+                        <tr key={app.id}>
                           <td>{app.approvalDate.substring(0, 10)}</td>
                           <td>{app.fpoId}</td>
                           <td>{app.fpoName}</td>
@@ -85,7 +85,7 @@ function Approved({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tb
                               view
                             </button>
                           </td>
-                          <td>{app.loans.filter((loan) => loan.status === "in-process").length}</td>
+                          <td>{app.loans.filter((loan) => loan.status === "in-process")?.length}</td>
                           <td>
                             <Link
                               to="/samunnati/fpo-subloan"
