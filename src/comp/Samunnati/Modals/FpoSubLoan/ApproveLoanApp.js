@@ -1,138 +1,120 @@
-import Modal from "react-bootstrap/Modal";
-import axios from "axios";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { Modal } from "react-bootstrap";
 
-function ApproveLoanApp({ show, handleClose, data }) {
-  const [grantedAmount, setGrantedAmount] = useState(0);
+import { updateLoanStatus } from "../../../../actions/samunnati";
 
-  const onChangeGrantedAmount = (e) => setGrantedAmount(e.target.value)
-  const resetInputs = () => setGrantedAmount(0)
+import Input from "../../../Nisa/Modals/Input";
+import FileInput from "../../../Common/FileInput";
 
-  const approveLoan = async () => {
-    if (grantedAmount === 0) {
-      alert("Please fill all details and try again");
-      return;
+const list = [
+  {
+    label: "Date of Application",
+    name: "createdAt",
+    disabled: true,
+  },
+  {
+    label: "Requested Amount",
+    name: "requestedAmount",
+    disabled: true,
+  },
+  {
+    label: "Tenure (in months)",
+    name: "loanTenure",
+    disabled: true,
+  },
+  {
+    label: "Interest Rate",
+    name: "intrest",
+    disabled: true,
+  },
+  {
+    label: "Granted Amount",
+    name: "grantedAmount",
+  },
+  {
+    label: "Payment Proof",
+    name: "paymentProof",
+    isFile: true,
+  },
+]
+
+function ApproveLoanApp({ show, data, handleClose, closeAll }) {
+  const { register, formState: { errors }, handleSubmit, setValue, clearErrors } = useForm({
+    defaultValues: {
+      createdAt: data?.createdAt.substring(0, 10),
+      requestedAmount: data.requestedAmount,
+      loanTenure: data.loanTenure,
+      intrest: data.intrest,
+      grantedAmount: "",
+      paymentProof: "",
     }
+  })
 
-    const newLoan = {
-      "status": "approved",
-      "grantedAmount": grantedAmount,
-      "paymentProof": "doc-1678828880007-578095983.jpg"
-    };
+  const { mutate, isLoading } = useMutation({
+    mutationFn: updateLoanStatus,
+    onSuccess: () => closeAll("approved", data.id)
+  })
 
-    await axios
-      .put(`http://13.232.131.203:3000/api/loanwindow/${data.windowId}/loan/${data.id}/approval`, newLoan)
-      .then((response) => {
-        console.log(response.data);
-        resetInputs();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    window.location.reload();
+  const approveLoan = (formData) => {
+    mutate({
+      grantedAmount: formData.grantedAmount,
+      paymentProof: formData.paymentProof,
+      windowId: data.windowId,
+      status: "approved",
+      id: data.id,
+    })
   }
 
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Approve Loan Application</Modal.Header>
       <Modal.Body>
-        <div className="row ">
-          <div className="col">
-            <form>
-              <div className="form">
-                <div className="card p-2">
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Date of Application</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={data?.createdAt.substring(0, 10)}
-                        disabled
-                      />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Requested Amount</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={data.requestedAmount}
-                        disabled
-                      />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Granted Amount</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input
-                        type="number"
-                        className="form-control"
-                        onChange={onChangeGrantedAmount}
-                      />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Tenure (in months)</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input
-                        type="number"
-                        className="form-control"
-                        value={data.loanTenure}
-                        disabled
-                      />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Interest Rate</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input
-                        type="number"
-                        className="form-control"
-                        value={data.intrest}
-                        disabled
-                      />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Payment Proof</label>
-                    </div>
-                    <div className="col-lg-6">
-                      <input
-                        type="file"
-                        className="form-control"
-                      />
-                    </div>
-                  </div>
-                  <div className="row m-2">
-                    <div className="col-lg-12">
-                      <button
-                        className="btn btn-primary"
-                        style={{ float: "right", backgroundColor: '#064420' }}
-                        onClick={approveLoan}
-                      >
-                        Approve Loan
-                      </button>
-                    </div>
-                  </div>
-                </div>
+        <form
+          className="form"
+          onSubmit={handleSubmit(approveLoan)}
+        >
+          <div className="card p-2">
+            {
+              list.map(l => {
+                if (l.isFile) {
+                  return (
+                    <FileInput
+                      {...l}
+                      key={l.name}
+                      errors={errors}
+                      register={register}
+                      setValue={setValue}
+                      clearErrors={clearErrors}
+                    />
+                  )
+                }
+
+                return (
+                  <Input
+                    {...l}
+                    key={l.name}
+                    errors={errors}
+                    register={register}
+                  />
+                )
+              })
+            }
+
+            <div className="row m-2">
+              <div className="col-lg-12">
+                <button
+                  className="btn btn-primary"
+                  style={{ float: "right", backgroundColor: '#064420' }}
+                  type="submit"
+                  disabled={isLoading}
+                >
+                  Approve Loan
+                </button>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
+        </form>
       </Modal.Body>
     </Modal>
   )

@@ -14,3 +14,19 @@ export function updateLoanWindowStatus(data) {
     data
   })
 }
+
+export function updateLoanStatus(data) {
+  return sendApiReq({
+    method: "put",
+    url: `${endPoints.loanwindow}/${data.windowId}/loan/${data.id}/approval`,
+    data
+  })
+}
+
+export function updateRepayment(data) {
+  return sendApiReq({
+    method: "put",
+    url: `${endPoints.loanwindow}/${data.lWId}/repayment/${data.id}`,
+    data
+  })
+}

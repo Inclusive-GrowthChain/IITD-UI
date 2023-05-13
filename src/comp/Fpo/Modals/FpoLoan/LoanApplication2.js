@@ -76,7 +76,7 @@ function LoanApplication2({ show, applyFor, handleClose, loanWindow }) {
       ifscNumber: "",
       bankName: "",
       requestedAmount: "",
-      intrest: "12",
+      intrest: loanWindow.intrest,
       loanTenure: "",
       invoice: "",
       purpose: "",

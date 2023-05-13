@@ -80,7 +80,7 @@ function Approved({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tb
                           <td>
                             <button
                               style={btnStyle}
-                              onClick={() => updateModal("showRepaymentStructure", data)}
+                              onClick={() => updateModal("showRepaymentStructure", app)}
                             >
                               view
                             </button>
@@ -88,10 +88,10 @@ function Approved({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tb
                           <td>{app.loans.filter((loan) => loan.status === "in-process")?.length}</td>
                           <td>
                             <Link
-                              to="/samunnati/fpo-subloan"
+                              to={`/samunnati/fpo-subloan/${app.id}`}
                               className="data_wrapper"
                               style={linkStyle}
-                              onClick={() => localStorage.setItem("loanWindowId", app.id)}
+                              state={app}
                             >
                               view
                             </Link>

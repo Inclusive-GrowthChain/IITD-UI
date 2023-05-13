@@ -20,7 +20,6 @@ export function getLoanList() {
 }
 
 export function getProduceList(data) {
-  console.log(data);
   return sendApiReq({
     url: endPoints.farmer.produce + `/${data.farmerId}/produce`,
   })

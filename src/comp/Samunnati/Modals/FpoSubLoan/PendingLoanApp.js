@@ -1,7 +1,9 @@
 import Modal from "react-bootstrap/Modal";
 import useModal from "../../../../hooks/useModal";
+
 import ApproveLoanApp from "./ApproveLoanApp";
 import RejectLoanApp from "./RejectLoanApp";
+import DocImg from '../../../Common/DocImg';
 
 const btnStyle = {
   backgroundColor: "#064420",
@@ -15,8 +17,73 @@ const btnStyle = {
   lineHeight: "1.5rem",
 }
 
-function PendingLoanApp({ show, handleClose, data }) {
+const list = [
+  {
+    label: "Loan Window ID",
+    name: "windowId",
+  },
+  {
+    label: "Loan ID",
+    name: "loanId",
+  },
+  {
+    label: "Name of Payee",
+    name: "payeeName",
+  },
+  {
+    label: "Account Number",
+    name: "accountNumber",
+  },
+  {
+    label: "IFSC Number",
+    name: "ifscNumber",
+  },
+  {
+    label: "Bank Name",
+    name: "bankName",
+  },
+  {
+    label: "Amount",
+    name: "requestedAmount",
+  },
+  {
+    label: "Interest Rate (%)",
+    name: "intrest",
+  },
+  {
+    label: "Tenure of Loan in Months",
+    name: "loanTenure",
+  },
+  {
+    label: "Invoice",
+    name: "invoice",
+    isFile: true,
+  },
+  {
+    label: "Purpose",
+    name: "purpose",
+  },
+]
+
+function PendingLoanApp({ show, handleClose, data, setLoanWindow }) {
   const { modal, updateModal, closeModal } = useModal()
+
+  const closeAll = (status, id) => {
+    setLoanWindow(pr => ({
+      ...pr,
+      loan: pr.loan.map(l => {
+        if (l.id === id) {
+          return {
+            ...l,
+            status
+          }
+        }
+
+        return l
+      })
+    }))
+    handleClose()
+  }
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -24,148 +91,34 @@ function PendingLoanApp({ show, handleClose, data }) {
       <Modal.Body>
         <div className="form">
           <div className="card p-2">
-            <div className="row m-2">
-              <div className="col-lg-6">
-                <label>Loan Window ID</label>
-              </div>
-              <div className="col-lg-6">
-                <input
-                  type="text"
-                  className="form-control"
-                  value={data.windowId}
-                  disabled
-                />
-              </div>
-            </div>
-            <div className="row m-2">
-              <div className="col-lg-6">
-                <label>Loan ID</label>
-              </div>
-              <div className="col-lg-6">
-                <input
-                  type="text"
-                  className="form-control"
-                  value={data.loanId}
-                  disabled
-                />
-              </div>
-            </div>
-            <div className="row m-2">
-              <div className="col-lg-6">
-                <label>Name of Payee</label>
-              </div>
-              <div className="col-lg-6">
-                <input
-                  type="text"
-                  className="form-control"
-                  value={data.payeeName}
-                  disabled
-                />
-              </div>
-            </div>
-            <div className="row m-2">
-              <div className="col-lg-6">
-                <label>Account Number</label>
-              </div>
-              <div className="col-lg-6">
-                <input
-                  type="text"
-                  className="form-control"
-                  value={data.accountNumber}
-                  disabled
-                />
-              </div>
-            </div>
-            <div className="row m-2">
-              <div className="col-lg-6">
-                <label>IFSC Number</label>
-              </div>
-              <div className="col-lg-6">
-                <input
-                  type="text"
-                  className="form-control"
-                  value={data.ifscNumber}
-                  disabled
-                />
-              </div>
-            </div>
-            <div className="row m-2">
-              <div className="col-lg-6">
-                <label>Bank Name</label>
-              </div>
-              <div className="col-lg-6">
-                <input
-                  type="text"
-                  className="form-control"
-                  value={data.bankName}
-                  disabled
-                />
-              </div>
-            </div>
-            <div className="row m-2">
-              <div className="col-lg-6">
-                <label>Amount</label>
-              </div>
-              <div className="col-lg-6">
-                <input
-                  type="text"
-                  className="form-control"
-                  value={data.requestedAmount}
-                  disabled
-                />
-              </div>
-            </div>
-            <div className="row m-2">
-              <div className="col-lg-6">
-                <label>Interest Rate (%)</label>
-              </div>
-              <div className="col-lg-6">
-                <input
-                  type="text"
-                  className="form-control"
-                  value={data.intrest}
-                  disabled
-                />
-              </div>
-            </div>
-            <div className="row m-2">
-              <div className="col-lg-6">
-                <label>Tenure of Loan in Months</label>
-              </div>
-              <div className="col-lg-6">
-                <input
-                  type="text"
-                  className="form-control"
-                  value={data.loanTenure}
-                  disabled
-                />
-              </div>
-            </div>
-            <div className="row m-2">
-              <div className="col-lg-6">
-                <label>Invoice</label>
-              </div>
-              <div className="col-lg-6">
-                <button
-                  style={btnStyle}
-                >
-                  View
-                </button>
-              </div>
-            </div>
-            <div className="row m-2">
-              <div className="col-lg-6">
-                <label>Purpose</label>
-              </div>
-              <div className="col-lg-6">
-                <input
-                  type="text"
-                  className="form-control"
-                  value={data.purpose}
-                  disabled
-                />
-              </div>
-            </div>
+            {
+              list.map(l => (
+                <div key={l.name} className="row m-2">
+                  <div className="col-lg-6">
+                    <label>{l.label}</label>
+                  </div>
+                  <div className="col-lg-6">
+                    {
+                      l.isFile ?
+                        <button
+                          style={btnStyle}
+                          onClick={() => updateModal("Invoice", { imgUrl: data.invoice })}
+                        >
+                          View
+                        </button>
+                        :
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={data[l.name]}
+                          disabled
+                        />
+                    }
+                  </div>
+                </div>
+              ))
+            }
+
             <div className="row m-2">
               <div className="col-lg-12">
                 <select
@@ -174,7 +127,7 @@ function PendingLoanApp({ show, handleClose, data }) {
                   value={modal.state}
                   onChange={e => updateModal(e.target.value)}
                 >
-                  <option value="">Change Loan Status</option>
+                  <option value="" disabled>Change Loan Status</option>
                   <option value="Approved">Approve</option>
                   <option value="Rejected">Reject</option>
                 </select>
@@ -184,10 +137,21 @@ function PendingLoanApp({ show, handleClose, data }) {
         </div>
 
         {
+          modal.state === "Invoice" &&
+          <DocImg
+            show
+            title="Invoice"
+            imgUrl={modal.data.imgUrl}
+            handleClose={closeModal}
+          />
+        }
+
+        {
           modal.state === "Approved" &&
           <ApproveLoanApp
             show
             data={data}
+            closeAll={closeAll}
             handleClose={closeModal}
           />
         }

@@ -1,7 +1,7 @@
 import useModal from "../../../hooks/useModal";
 import PendingLoanApp from "../Modals/FpoSubLoan/PendingLoanApp";
 
-function PendingLoans({ data = [], theadStyle, tbodyStyle, btnStyle }) {
+function PendingLoans({ data = [], theadStyle, tbodyStyle, btnStyle, setLoanWindow }) {
   const { modal, updateModal, closeModal } = useModal()
 
   return (
@@ -20,8 +20,8 @@ function PendingLoans({ data = [], theadStyle, tbodyStyle, btnStyle }) {
 
             <tbody style={tbodyStyle}>
               {
-                data.map((loan) => (
-                  <tr>
+                data.map(loan => (
+                  <tr key={loan.id}>
                     <td>{loan.loanId}</td>
                     <td>{loan.createdAt.substring(0, 10)}</td>
                     <td>{loan.requestedAmount}</td>
@@ -47,6 +47,7 @@ function PendingLoans({ data = [], theadStyle, tbodyStyle, btnStyle }) {
           show
           data={modal.data}
           handleClose={closeModal}
+          setLoanWindow={setLoanWindow}
         />
       }
     </>
