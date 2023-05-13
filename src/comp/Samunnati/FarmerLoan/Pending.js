@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useModal from "../../../hooks/useModal";
-import PendingLoanApp from "../Modals/FarmerLoan/PendingLoanApp";
+import PendingLoanApp from "../Modals/FpoLoan/PendingLoanApp";
 
 const btnStyle = {
   backgroundColor: "#064420",
@@ -50,9 +50,9 @@ function Pending({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tbo
               {
                 data
                   .filter(a => a?.fpoName.toLowerCase().includes(search.toLowerCase()) || a?.fpoId.toLowerCase().includes(search.toLowerCase()))
-                  .map((app) => (
-                    <tr>
-                      <td>{app.dateOfApplication}</td>
+                  .map(app => (
+                    <tr key={app.id}>
+                      <td>{app.dateOfApplication.substring(0, 10)}</td>
                       <td>{app.fpoId}</td>
                       <td>{app.fpoName}</td>
                       <td>{app.contactNo}</td>
@@ -78,6 +78,7 @@ function Pending({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tbo
         <PendingLoanApp
           show
           data={modal.data}
+          windowType="farmer"
           handleClose={closeModal}
         />
       }

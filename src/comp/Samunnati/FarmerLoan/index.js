@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { getLoanwindow } from "../../../actions/fpo";
+import { getLoanwindow } from "../../../actions/samunnati";
 
 import { TabNavItem, TabContent } from "../../UIComp/Tabs";
 import Approved from "./Approved";
@@ -46,19 +46,8 @@ function FarmerLoan() {
   const [activeTab, setActiveTab] = useState("tab1")
 
   const { isLoading, data } = useQuery({
-    queryKey: ["loanwindow", "fpo"],
-    queryFn: getLoanwindow,
-    onSuccess(res) {
-      let numFarmerPendingRequests = 0
-      res.data.forEach((loanWindow) => {
-        loanWindow.loans.forEach((loan) => {
-          if (loanWindow.status === "approved" && loan.status === "in-process" && loan.fpoApprovalStatus === "approved") {
-            numFarmerPendingRequests++
-          }
-        })
-      })
-      localStorage.setItem("FarmerLoanRequests", numFarmerPendingRequests)
-    }
+    queryKey: ["sumunnati/loanwindow", "farmer"],
+    queryFn: () => getLoanwindow({ windowType: "farmer" }),
   })
 
   if (isLoading) return <Loader wrapperCls="loader-main-right" />

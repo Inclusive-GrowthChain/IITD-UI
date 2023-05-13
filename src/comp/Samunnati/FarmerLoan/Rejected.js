@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useModal from "../../../hooks/useModal";
-import RejectedLoanApp from "../Modals/FarmerLoan/RejectedLoanApp";
+import RejectedLoanApp from "../Modals/FpoLoan/RejectedLoanApp";
 
 const btnStyle = {
   backgroundColor: "#064420",
@@ -52,9 +52,9 @@ function Rejected({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tb
               {
                 data
                   .filter(a => a?.fpoName.toLowerCase().includes(search.toLowerCase()) || a?.fpoId.toLowerCase().includes(search.toLowerCase()))
-                  .map((app) => (
-                    <tr>
-                      <td>{app.dateOfApplication}</td>
+                  .map(app => (
+                    <tr key={app.id}>
+                      <td>{app.dateOfApplication.substring(0, 10)}</td>
                       <td>{app.fpoId}</td>
                       <td>{app.fpoName}</td>
                       <td>{app.contactNo}</td>

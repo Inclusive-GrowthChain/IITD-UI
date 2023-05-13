@@ -45,7 +45,7 @@ const list = [
   },
 ]
 
-function RejectLoanApp({ show, handleClose, data, closeAll }) {
+function RejectLoanApp({ show, handleClose, data, windowType, closeAll }) {
   const { modal, updateModal, closeModal } = useModal()
   const queryClient = useQueryClient()
 
@@ -64,7 +64,7 @@ function RejectLoanApp({ show, handleClose, data, closeAll }) {
   const { mutate, isLoading } = useMutation({
     mutationFn: updateLoanWindowStatus,
     onSuccess: () => {
-      queryClient.invalidateQueries(["sumunnati/loanwindow", "fpo"])
+      queryClient.invalidateQueries(["sumunnati/loanwindow", windowType])
       closeAll()
     }
   })
@@ -119,8 +119,8 @@ function RejectLoanApp({ show, handleClose, data, closeAll }) {
         <Confirm
           show
           handleClose={closeModal}
-          title="Confirm Reject Farmer Loan Window Application"
-          confirmText="Are you sure you want to reject this farmer loan window application?"
+          title={`Confirm Reject ${windowType === "fpo" ? "FPO" : "Farmer"} Loan Window Application`}
+          confirmText={`Are you sure you want to reject this ${windowType === "fpo" ? "FPO" : "Farmer"} Loan Window Application?`}
           onConfirm={rejectLoan}
         />
       }

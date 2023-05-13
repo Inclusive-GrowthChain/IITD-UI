@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useModal from "../../../hooks/useModal";
-import RepaymentStructure from "../Modals/FarmerLoan/RepaymentStructure";
+import RepaymentStructure from "../Modals/FpoLoan/RepaymentStructure";
 
 const linkStyle = {
   backgroundColor: "#064420",
@@ -68,8 +68,8 @@ function Approved({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tb
               {
                 data
                   .filter(a => a?.fpoName.toLowerCase().includes(search.toLowerCase()) || a?.fpoId.toLowerCase().includes(search.toLowerCase()))
-                  .map((app) => (
-                    <tr>
+                  .map(app => (
+                    <tr key={app.id}>
                       <td>{app.approvalDate.substring(0, 10)}</td>
                       <td>{app.fpoId}</td>
                       <td>{app.fpoName}</td>
@@ -85,10 +85,11 @@ function Approved({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tb
                       </td>
                       <td>{app.loans.filter((loan) => loan.status === "pending").length}</td>
                       <td>
-                        <Link to="/samunnati/farmer-subloan"
+                        <Link
+                          to={`/samunnati/farmer-subloan/${app.id}`}
                           className="data_wrapper"
                           style={linkStyle}
-                          onClick={() => localStorage.setItem("loanWindowId", app.id)}
+                          state={app}
                         >
                           view
                         </Link>
@@ -105,6 +106,7 @@ function Approved({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tb
         <RepaymentStructure
           show
           data={modal.data}
+          windowType="farmer"
           handleClose={closeModal}
         />
       }

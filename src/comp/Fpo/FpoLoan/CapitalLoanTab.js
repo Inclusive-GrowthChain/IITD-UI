@@ -108,7 +108,7 @@ function WindowRow({ loanWindow, updateModal }) {
                       <td>{loanWindow.fpoName}</td>
                       <td>{loanWindow.contactNo}</td>
                       <td>{loan.grantedAmount}</td>
-                      <td>{loan.farmerName}</td>
+                      <td>{loan.payeeName}</td>
                       <td>
                         <button
                           style={btnStyle}

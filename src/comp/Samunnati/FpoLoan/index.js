@@ -48,17 +48,6 @@ function FpoLoan() {
   const { isLoading, data } = useQuery({
     queryKey: ["sumunnati/loanwindow", "fpo"],
     queryFn: getLoanwindow,
-    // onSuccess(res) {
-    //   let numFpoPendingRequests = 0
-    //   res.data.forEach((loanWindow) => {
-    //     loanWindow.loans.forEach((loan) => {
-    //       if (loanWindow.status === "approved" && loan.status === "in-process") {
-    //         numFpoPendingRequests++
-    //       }
-    //     })
-    //   })
-    //   localStorage.setItem("FpoLoanRequests", numFpoPendingRequests)
-    // }
   })
 
   if (isLoading) return <Loader wrapperCls="loader-main-right" />

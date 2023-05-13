@@ -43,7 +43,7 @@ const backBtnStyle = {
   backgroundColor: "#064420",
 }
 
-function PendingLoanApp({ show, handleClose, data }) {
+function PendingLoanApp({ show, handleClose, data, windowType }) {
   const [step, setStep] = useState(1)
 
   return (
@@ -121,6 +121,7 @@ function PendingLoanApp({ show, handleClose, data }) {
             h5Style={h5Style}
             btnStyle={btnStyle}
             backBtnStyle={backBtnStyle}
+            windowType={windowType}
             closeAll={handleClose}
           />
         }

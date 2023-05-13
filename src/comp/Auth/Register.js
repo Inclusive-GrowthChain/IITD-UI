@@ -1,13 +1,12 @@
 import { useEffect } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 
+import { farmerSignup, getFpoList } from "../../actions/auth";
 import { errorNotify } from "../../utils/toastifyHlp";
-import { farmerSignup } from "../../actions/auth";
 import states from '../../constants/states';
 
-import FormHelp from "./Modals/FormHelp";
+import FormHelp, { Input } from "./Modals/FormHelp";
 
 const btnStyle = {
   backgroundColor: "#064420",
@@ -147,13 +146,14 @@ const fieldSet1 = [
     label: "Upload Aadhar Card",
     isFile: true,
   },
-  {
-    name: "fpoId",
-    label: "FPO ID",
-  }
-];
+]
 
 function Register() {
+  const { isLoading, data } = useQuery({
+    queryKey: ["user/fpo/mini"],
+    queryFn: getFpoList,
+  })
+
   const {
     register, setValue,
     formState: { errors },
@@ -238,18 +238,19 @@ function Register() {
                   setValue={setValue}
                   clearErrors={clearErrors}
                 />
+
+                <Input
+                  isSelect
+                  label="FPO ID"
+                  name="fpoId"
+                  error={errors.fpoId}
+                  options={isLoading ? [] : data?.data?.map(d => ({ val: d._id, label: d.name }))}
+                  register={register}
+                  validation={{ required: "FpoId is required" }}
+                />
               </div>
 
               <div className="row mb-2">
-                <div className="col">
-                  <Link
-                    to="/"
-                    className="btn btn-block shadow"
-                    style={btnStyle}
-                  >
-                    Login
-                  </Link>
-                </div>
                 <div className="col">
                   <button
                     type="submit"

@@ -20,7 +20,7 @@ const strongStyle = {
   display: "inline-block"
 }
 
-function RepaymentStructure({ show, handleClose, data }) {
+function RepaymentStructure({ show, handleClose, data, windowType }) {
   const { modal, updateModal, closeModal } = useModal()
 
   return (
@@ -104,6 +104,7 @@ function RepaymentStructure({ show, handleClose, data }) {
           <Repayment
             show
             data={modal.data}
+            windowType={windowType}
             closeAll={handleClose}
             handleClose={closeModal}
           />

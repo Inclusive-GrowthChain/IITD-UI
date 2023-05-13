@@ -110,6 +110,7 @@ function Approved({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tb
         <RepaymentStructure
           show
           data={modal.data}
+          windowType="fpo"
           handleClose={closeModal}
         />
       }

@@ -4,7 +4,7 @@ import { uploadImg } from "../../../actions/general";
 
 const errorStyle = { fontSize: "12px", marginTop: "2px", marginBottom: 0 }
 
-function Input({
+export function Input({
   label = "", type = "text", register, name = "",
   validation = {}, error = {}, options = [],
   isSelect = false, ...rest
@@ -27,6 +27,7 @@ function Input({
           {...register(name, validation)}
           {...rest}
         >
+          <option value="" disabled></option>
           {
             options.map(op => (
               <option

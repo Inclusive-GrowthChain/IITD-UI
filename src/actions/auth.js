@@ -56,3 +56,10 @@ export function farmerSignup(data) {
     data
   })
 }
+
+export function getFpoList() {
+  return sendApiReq({
+    url: endPoints.userList.fpo + "?mini=true",
+    isAuthendicated: false,
+  })
+}

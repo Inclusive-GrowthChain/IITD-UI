@@ -38,7 +38,7 @@ const list = [
   },
 ]
 
-function Step6({ data, backBtnStyle, btnStyle, h5Style, setStep, closeAll }) {
+function Step6({ data, windowType, backBtnStyle, btnStyle, h5Style, setStep, closeAll }) {
   const { modal, updateModal, closeModal } = useModal()
 
   return (
@@ -104,6 +104,7 @@ function Step6({ data, backBtnStyle, btnStyle, h5Style, setStep, closeAll }) {
         <ApproveLoanApp
           show
           data={data}
+          windowType={windowType}
           closeAll={closeAll}
           handleClose={closeModal}
         />
@@ -114,6 +115,7 @@ function Step6({ data, backBtnStyle, btnStyle, h5Style, setStep, closeAll }) {
         <RejectLoanApp
           show
           data={data}
+          windowType={windowType}
           closeAll={closeAll}
           handleClose={closeModal}
         />

@@ -85,6 +85,7 @@ function Pending({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tbo
         <PendingLoanApp
           show
           data={modal.data}
+          windowType="fpo"
           handleClose={closeModal}
         />
       }

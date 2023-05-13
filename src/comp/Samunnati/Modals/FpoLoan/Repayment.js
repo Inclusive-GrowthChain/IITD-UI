@@ -21,7 +21,7 @@ const list = [
   },
 ]
 
-function Repayment({ show, data, handleClose, closeAll }) {
+function Repayment({ show, data, windowType, handleClose, closeAll }) {
   const { modal, updateModal, closeModal } = useModal()
   const queryClient = useQueryClient()
 
@@ -35,7 +35,7 @@ function Repayment({ show, data, handleClose, closeAll }) {
   const { mutate, isLoading } = useMutation({
     mutationFn: updateRepayment,
     onSuccess: () => {
-      queryClient.invalidateQueries(["sumunnati/loanwindow", "fpo"])
+      queryClient.invalidateQueries(["sumunnati/loanwindow", windowType])
       closeAll()
     }
   })

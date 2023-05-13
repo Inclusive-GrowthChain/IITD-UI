@@ -45,7 +45,7 @@ function Farmer() {
   const [activeIndex, setActiveIndex] = useState(1)
 
   const { isLoading, data } = useQuery({
-    queryKey: ["fpo/farmer-emberships"],
+    queryKey: ["fpo/farmer-memberships"],
     queryFn: getFpoFarmers
   })
 
