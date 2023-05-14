@@ -7,6 +7,7 @@ import { errorNotify } from "../../utils/toastifyHlp";
 import states from '../../constants/states';
 
 import FormHelp, { Input } from "./Modals/FormHelp";
+import { useNavigate } from "react-router";
 
 const btnStyle = {
   backgroundColor: "#064420",
@@ -193,8 +194,9 @@ function Register() {
       aadharCardImage: "",
       fpoId: "",
     }
-  });
+  })
 
+  const navigate = useNavigate()
   const dob = watch("dateOfBirth")
 
   useEffect(() => {
@@ -215,6 +217,7 @@ function Register() {
     mutationFn: farmerSignup,
     onSuccess: () => {
       reset()
+      navigate("/")
     }
   })
 
@@ -241,10 +244,10 @@ function Register() {
 
                 <Input
                   isSelect
-                  label="FPO ID"
+                  label="FPO"
                   name="fpoId"
                   error={errors.fpoId}
-                  options={isLoading ? [] : data?.data?.map(d => ({ val: d._id, label: d.name }))}
+                  options={isLoading ? [] : data?.data?.map(d => ({ val: d._id, label: d.name || d.fpoName }))}
                   register={register}
                   validation={{ required: "FpoId is required" }}
                 />

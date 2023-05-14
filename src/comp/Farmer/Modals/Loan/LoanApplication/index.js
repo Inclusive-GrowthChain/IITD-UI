@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { Modal } from "react-bootstrap";
 import { nanoid } from 'nanoid';
 
-import { getFarmerApplication } from "../../../../../actions/fpo";
+import { getActiveLoanwindow } from '../../../../../actions/fpo';
 import { useAuthStore } from '../../../../../store/useAuthStore';
 import { applyLoan } from "../../../../../actions/farmer";
 
@@ -85,9 +85,9 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
       requestedAmount: !isCreate ? data.requestedAmount : 0,
       purpose: !isCreate ? data.purpose : "",
       tenure: !isCreate ? data.tenure : 0,
-      interest: !isCreate ? data.interest : 12,
+      interest: !isCreate ? data.interest : "",
       loanId: !isCreate ? data.loanId : nanoid(10),
-      loanWindowId: "fKcP6OJFfU",
+      loanWindowId: !isCreate ? data.loanWindowId : "",
     }
   })
 
@@ -108,9 +108,13 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
   }, [coApplicantDob, setValue])
 
   const { isLoading } = useQuery({
-    queryKey: ["current-fpo"],
-    queryFn: () => getFarmerApplication(userDetails.fpoId),
-    onSuccess: (data) => setValue("fpoName", data.data[0].fpoName),
+    queryKey: ["active-window"],
+    queryFn: () => getActiveLoanwindow({ windowType: "farmer", fpoId: userDetails.fpoId }),
+    onSuccess: (data) => {
+      setValue("fpoName", data?.data?.[0]?.fpoName)
+      setValue("interest", data?.data?.[0]?.intrest)
+      setValue("loanWindowId", data?.data?.[0]?.windowId)
+    },
     enabled: isCreate
   })
 

@@ -72,6 +72,7 @@ function Step2({ backBtnStyle, nextBtnStyle, setStep, register, errors, getValue
                 <button
                   style={btnStyle}
                   onClick={() => updateModal(l.label, { imgUrl: getValues(l.name) })}
+                  type="button"
                 >
                   view
                 </button>
@@ -86,6 +87,7 @@ function Step2({ backBtnStyle, nextBtnStyle, setStep, register, errors, getValue
           className="btn btn-success"
           onClick={() => setStep(1)}
           style={backBtnStyle}
+          type="button"
         >
           Back
         </button>
@@ -94,6 +96,7 @@ function Step2({ backBtnStyle, nextBtnStyle, setStep, register, errors, getValue
           className="btn btn-success"
           onClick={() => setStep(3)}
           style={nextBtnStyle}
+          type="button"
         >
           Next
         </button>

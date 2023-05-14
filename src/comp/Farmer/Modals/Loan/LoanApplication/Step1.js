@@ -58,6 +58,7 @@ function Step1({ nextBtnStyle, setStep, register, errors }) {
             className="btn btn-success"
             onClick={() => setStep(2)}
             style={nextBtnStyle}
+            type="button"
           >
             Next
           </button>

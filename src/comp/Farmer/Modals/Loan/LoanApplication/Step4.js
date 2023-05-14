@@ -55,6 +55,7 @@ function Step4({ backBtnStyle, nextBtnStyle, setStep, register, errors }) {
           className="btn btn-success"
           onClick={() => setStep(3)}
           style={backBtnStyle}
+          type="button"
         >
           Back
         </button>
@@ -63,6 +64,7 @@ function Step4({ backBtnStyle, nextBtnStyle, setStep, register, errors }) {
           className="btn btn-success"
           onClick={() => setStep(5)}
           style={nextBtnStyle}
+          type="button"
         >
           Next
         </button>

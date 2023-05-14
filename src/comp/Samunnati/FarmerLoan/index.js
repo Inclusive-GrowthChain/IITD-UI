@@ -95,7 +95,7 @@ function FarmerLoan() {
                   topWrapperStyle={topWrapperStyle}
                   theadStyle={theadStyle}
                   tbodyStyle={tbodyStyle}
-                  data={data?.data?.filter(app => app.status === "approved")}
+                  data={data?.result?.farmer?.filter(app => app.status === "approved")}
                 />
               </TabContent>
 
@@ -105,7 +105,7 @@ function FarmerLoan() {
                   topWrapperStyle={topWrapperStyle}
                   theadStyle={theadStyle}
                   tbodyStyle={tbodyStyle}
-                  data={data?.data?.filter(app => app.status === "rejected")}
+                  data={data?.result?.farmer?.filter(app => app.status === "rejected")}
                 />
               </TabContent>
 
@@ -115,7 +115,7 @@ function FarmerLoan() {
                   topWrapperStyle={topWrapperStyle}
                   theadStyle={theadStyle}
                   tbodyStyle={tbodyStyle}
-                  data={data?.data?.filter(app => app.status === "pending")}
+                  data={data?.result?.farmer?.filter(app => app.status === "pending")}
                 />
               </TabContent>
             </div>

@@ -88,6 +88,7 @@ function Step5({ isCreate, backBtnStyle, nextBtnStyle, isSubmiting, setStep, reg
           className="btn btn-success"
           onClick={() => setStep(3)}
           style={backBtnStyle}
+          type="button"
         >
           Back
         </button>

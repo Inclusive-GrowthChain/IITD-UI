@@ -107,6 +107,13 @@ export function getLoanwindow({ windowType = "farmer" }) {
   })
 }
 
+export function getActiveLoanwindow({ windowType = "fpo", fpoId }) {
+  let url = `${endPoints.loanwindow}/activeLoanWindow/${windowType}`
+  if (fpoId) url = `${url}?fpoId=${fpoId}`
+
+  return sendApiReq({ url })
+}
+
 export function createLoanwindow(data) {
   return sendApiReq({
     method: "post",

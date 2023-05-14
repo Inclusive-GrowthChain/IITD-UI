@@ -64,6 +64,10 @@ const fieldSet1 = [
     label: "Date of InCorporation",
   },
   {
+    name: "registrationNumber",
+    label: "Registration Number",
+  },
+  {
     name: "panNumber",
     label: "PAN Number",
   },
@@ -71,10 +75,6 @@ const fieldSet1 = [
     name: "panImage",
     label: "PAN Card Image",
     isFile: true,
-  },
-  {
-    name: "registrationNumber",
-    label: "Registration Number",
   },
   {
     name: "shareholderNumber",
