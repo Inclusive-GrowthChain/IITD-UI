@@ -15,49 +15,45 @@ const btnStyle = {
 
 function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
   return (
-    <div className="card_table1">
-      <div className=" table-responsive">
-        <table>
-          <thead style={theadStyle}>
-            <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Village</th>
-              <th>Phone Number</th>
-              <th>Aadhaar Number</th>
-              <th>View Application</th>
-            </tr>
-          </thead>
+    <div className="table-responsive">
+      <table>
+        <thead style={theadStyle}>
+          <tr>
+            <th>Name</th>
+            <th>Village</th>
+            <th>Phone Number</th>
+            <th>Aadhaar Number</th>
+            <th>View Application</th>
+          </tr>
+        </thead>
 
-          <tbody style={tbodyStyle}>
-            {data.map((app, i) => (
-              <tr>
-                <td>farmer-{i}</td>
-                <td>
-                  <NavLink
-                    to="/fpo/farmer-information"
-                    className="info_btn"
-                  >
-                    {app?.farmerName}
-                  </NavLink>
-                </td>
-                <td>{app?.village}</td>
-                <td>{app?.contact}</td>
-                <td>{app?.aadhaar}</td>
-                <td>
-                  <button
-                    className="py-0.5 table_btn"
-                    style={btnStyle}
-                    onClick={() => updateModal("Application", app)}
-                  >
-                    View
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+        <tbody style={tbodyStyle}>
+          {data.map(app => (
+            <tr key={app._id}>
+              <td>
+                <NavLink
+                  to="/fpo/farmer-information"
+                  className="info_btn"
+                >
+                  {app.userName}
+                </NavLink>
+              </td>
+              <td>{app.village}</td>
+              <td>{app.mobile}</td>
+              <td>{app.aadharCardNumber}</td>
+              <td>
+                <button
+                  className="py-0.5 table_btn"
+                  style={btnStyle}
+                  onClick={() => updateModal("Application", app)}
+                >
+                  View
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }

@@ -1,3 +1,4 @@
+
 const list = [
   {
     label: "Taluk",
@@ -33,7 +34,7 @@ const list = [
   },
 ]
 
-function Step4({ data, setStep, backBtnStyle, nextBtnStyle }) {
+function Step4({ data, backBtnStyle, nextBtnStyle, setStep }) {
   return (
     <>
       {
@@ -54,6 +55,7 @@ function Step4({ data, setStep, backBtnStyle, nextBtnStyle }) {
           className="btn btn-success"
           onClick={() => setStep(3)}
           style={backBtnStyle}
+          type="button"
         >
           Back
         </button>
@@ -62,6 +64,7 @@ function Step4({ data, setStep, backBtnStyle, nextBtnStyle }) {
           className="btn btn-success"
           onClick={() => setStep(5)}
           style={nextBtnStyle}
+          type="button"
         >
           Next
         </button>

@@ -1,7 +1,12 @@
+
 const list = [
   {
-    label: "Farmer Name",
-    name: "userName",
+    label: "Loan Id",
+    name: "loanId",
+  },
+  {
+    label: "FPO Name",
+    name: "fpoName",
   },
   {
     label: "Bank Name",
@@ -20,16 +25,20 @@ const list = [
     name: "branchName",
   },
   {
+    label: "Applicant Name",
+    name: "name",
+  },
+  {
+    label: "Loan Requested Amount",
+    name: "requestedAmount",
+  },
+  {
     label: "Applicant Gender",
     name: "gender",
   },
-  {
-    label: "Applicant Mobile Number",
-    name: "mobile",
-  },
 ]
 
-function Step1({ data, setStep, nextBtnStyle }) {
+function Step1({ data, nextBtnStyle, setStep }) {
   return (
     <>
       {

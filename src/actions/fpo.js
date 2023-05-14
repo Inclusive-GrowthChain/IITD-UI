@@ -130,10 +130,26 @@ export function createLoan(data) {
   })
 }
 
+export function updateFarmerLoanStatus(data) {
+  return sendApiReq({
+    method: "put",
+    url: `${endPoints.loanwindow}/${data.windowId}/loan/${data.id}/approval`,
+    data
+  })
+}
+
 
 export function getFarmerApplication(userId) {
   return sendApiReq({
     url: endPoints.user + `/${userId}`,
+  })
+}
+
+export function updateFarmerApplication(data) {
+  return sendApiReq({
+    method: "put",
+    url: `${endPoints.fpo.farmers}/${data._id}`,
+    data: data
   })
 }
 

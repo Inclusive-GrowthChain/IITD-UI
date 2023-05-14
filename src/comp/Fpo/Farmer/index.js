@@ -49,8 +49,6 @@ function Farmer() {
     queryFn: getFpoFarmers
   })
 
-  console.log(data)
-
   const checkActive = (index, className) =>
     activeIndex === index ? className : ""
 
@@ -89,7 +87,7 @@ function Farmer() {
           <div className="panels">
             <div className={`panel ${checkActive(1, "active")}`}>
               <Approved
-                data={[]}
+                data={data?.data?.filter(d => d.status === "accepted")}
                 theadStyle={theadStyle}
                 tbodyStyle={tbodyStyle}
                 updateModal={updateModal}
@@ -100,13 +98,13 @@ function Farmer() {
               <Rejected
                 theadStyle={theadStyle}
                 tbodyStyle={tbodyStyle}
-                data={[]}
+                data={data?.data?.filter(d => d.status === "rejected")}
               />
             </div>
 
             <div className={`panel ${checkActive(3, "active")}`}>
               <Pending
-                data={[]}
+                data={data?.data?.filter(d => d.status === "pending")}
                 theadStyle={theadStyle}
                 tbodyStyle={tbodyStyle}
                 updateModal={updateModal}
@@ -120,6 +118,7 @@ function Farmer() {
         modal.state &&
         <FarmerMembershipApplication
           show
+          data={modal.data}
           handleClose={closeModal}
         />
       }

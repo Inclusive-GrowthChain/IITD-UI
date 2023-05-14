@@ -1,39 +1,40 @@
+
 const list = [
   {
-    label: "Taluk",
-    name: "taluk",
+    label: "Land Holding",
+    name: "landHolding",
   },
   {
-    label: "District",
-    name: "district",
+    label: "Type of Land Holding",
+    name: "landHoldingType",
   },
   {
-    label: "State",
-    name: "state",
+    label: "Caste",
+    name: "caste",
   },
   {
-    label: "Pin Code",
-    name: "pinCode",
+    label: "Religion",
+    name: "religion",
   },
   {
-    label: "Occupation",
-    name: "occupation",
+    label: "Monthly HH Income",
+    name: "monthlyHHIncome",
   },
   {
-    label: "Education",
-    name: "education",
+    label: "Monthly HH Expenses",
+    name: "monthlyHHExpenses",
   },
   {
-    label: "Nature of Place",
-    name: "natureOfPlace",
+    label: "Loan Purpose",
+    name: "purpose",
   },
   {
-    label: "Residence",
-    name: "residence",
+    label: "Loan Tenure (in months)",
+    name: "tenure",
   },
 ]
 
-function Step4({ data, setStep, backBtnStyle, nextBtnStyle }) {
+function Step5({ data, backBtnStyle, setStep }) {
   return (
     <>
       {
@@ -54,20 +55,13 @@ function Step4({ data, setStep, backBtnStyle, nextBtnStyle }) {
           className="btn btn-success"
           onClick={() => setStep(3)}
           style={backBtnStyle}
+          type="button"
         >
           Back
-        </button>
-
-        <button
-          className="btn btn-success"
-          onClick={() => setStep(5)}
-          style={nextBtnStyle}
-        >
-          Next
         </button>
       </div>
     </>
   )
 }
 
-export default Step4
+export default Step5

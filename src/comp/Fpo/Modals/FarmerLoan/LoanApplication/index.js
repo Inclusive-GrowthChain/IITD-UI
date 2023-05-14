@@ -36,7 +36,7 @@ function LoanApplication({ show, handleClose, currentLoan, currentLoanWindow }) 
     queryFn: () => getFarmerApplication(currentLoan.userId),
   })
 
-  const farmerDetails = data?.data?.[0]
+  const farmerDetails = data?.data?.[0] || {}
 
   return (
     <Modal

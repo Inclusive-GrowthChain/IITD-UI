@@ -36,7 +36,7 @@ export function addProduce(data) {
 export function applyLoan(data) {
   return sendApiReq({
     method: "post",
-    url: endPoints.loanwindow + `/${data.loanWindowId}/loan`,
+    url: endPoints.loanwindow + `/${data.id}/loan`,
     data
   })
 }

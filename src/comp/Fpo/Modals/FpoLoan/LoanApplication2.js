@@ -1,9 +1,9 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Modal } from "react-bootstrap";
 import { nanoid } from 'nanoid';
 
-import { createLoan } from "../../../../actions/fpo";
+import { createLoan, getActiveLoanwindow } from "../../../../actions/fpo";
 
 import FileInput from "../../../Common/FileInput";
 import Input from '../../../Nisa/Modals/Input';
@@ -65,23 +65,33 @@ const list = [
   },
 ]
 
-function LoanApplication2({ show, applyFor, handleClose, loanWindow }) {
+function LoanApplication2({ show, applyFor, handleClose }) {
   const queryClient = useQueryClient()
   const { register, formState: { errors }, handleSubmit, setValue, clearErrors } = useForm({
     defaultValues: {
-      loanWindowId: loanWindow.windowId,
+      loanWindowId: "",
       loanId: nanoid(10),
       payeeName: "",
       accountNumber: "",
       ifscNumber: "",
       bankName: "",
       requestedAmount: "",
-      intrest: loanWindow.intrest,
+      intrest: "",
       loanTenure: "",
       invoice: "",
       purpose: "",
-      id: loanWindow.id,
+      id: "",
     }
+  })
+
+  useQuery({
+    queryKey: ["active-window"],
+    queryFn: getActiveLoanwindow,
+    onSuccess: (data) => {
+      setValue("id", data?.data?.[0]?.id)
+      setValue("intrest", data?.data?.[0]?.intrest)
+      setValue("loanWindowId", data?.data?.[0]?.windowId)
+    },
   })
 
   const { mutate, isLoading } = useMutation({

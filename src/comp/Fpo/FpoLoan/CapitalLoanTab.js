@@ -224,11 +224,7 @@ function CapitalLoanTab() {
       <button
         className="loan-btn position-absolute"
         style={applyBtnStyle}
-        onClick={() => updateModal("showApplyLoan", {
-          windowId: loanWindowList[0]?.windowId,
-          intrest: loanWindowList[0]?.intrest,
-          id: loanWindowList[0]?.id,
-        })}
+        onClick={() => updateModal("showApplyLoan")}
       >
         Apply for Loan
       </button>
@@ -248,7 +244,6 @@ function CapitalLoanTab() {
         <LoanApplication2
           show
           applyFor="fpo"
-          loanWindow={modal.data}
           handleClose={closeModal}
         />
       }

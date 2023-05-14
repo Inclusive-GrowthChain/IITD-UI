@@ -88,6 +88,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
       interest: !isCreate ? data.interest : "",
       loanId: !isCreate ? data.loanId : nanoid(10),
       loanWindowId: !isCreate ? data.loanWindowId : "",
+      id: !isCreate ? data.id : "",
     }
   })
 
@@ -111,6 +112,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
     queryKey: ["active-window"],
     queryFn: () => getActiveLoanwindow({ windowType: "farmer", fpoId: userDetails.fpoId }),
     onSuccess: (data) => {
+      setValue("id", data?.data?.[0]?.id)
       setValue("fpoName", data?.data?.[0]?.fpoName)
       setValue("interest", data?.data?.[0]?.intrest)
       setValue("loanWindowId", data?.data?.[0]?.windowId)

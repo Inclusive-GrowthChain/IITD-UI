@@ -20,44 +20,40 @@ const tbodyStyle = {
   fontWeight: "500",
 }
 
-function InProcess({ data = [] }) {
+function InProcess({ data = [], updateModal }) {
   return (
-    <div className="row">
-      <div className="col">
-        <div className="card shadow">
-          <div className="table-responsive">
-            <table>
-              <thead style={theadStyle}>
-                <tr>
-                  <th>Loan Id</th>
-                  <th>Loan application date</th>
-                  <th>Proposed Loan amount</th>
-                  <th>Loan application</th>
-                </tr>
-              </thead>
+    <div className="card shadow">
+      <div className="table-responsive">
+        <table>
+          <thead style={theadStyle}>
+            <tr>
+              <th>Loan Id</th>
+              <th>Loan application date</th>
+              <th>Proposed Loan amount</th>
+              <th>Loan application</th>
+            </tr>
+          </thead>
 
-              <tbody style={tbodyStyle}>
-                {
-                  data.map(ip => (
-                    <tr key={ip.id}>
-                      <td>{ip.loanId}</td>
-                      <td>{ip.createdAt.substring(0, 10)}</td>
-                      <td>₹ {ip.requestedAmount}</td>
-                      <td>
-                        <button
-                          style={style}
-                        // onClick={handleShowInProcessLoanApp}
-                        >
-                          view
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                }
-              </tbody>
-            </table>
-          </div>
-        </div>
+          <tbody style={tbodyStyle}>
+            {
+              data.map(ip => (
+                <tr key={ip.id}>
+                  <td>{ip.loanId}</td>
+                  <td>{ip.createdAt.substring(0, 10)}</td>
+                  <td>₹ {ip.requestedAmount}</td>
+                  <td>
+                    <button
+                      style={style}
+                      onClick={() => updateModal("LoanApplication", ip)}
+                    >
+                      view
+                    </button>
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
       </div>
     </div>
   )

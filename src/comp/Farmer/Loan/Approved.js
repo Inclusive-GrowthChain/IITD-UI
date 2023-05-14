@@ -44,69 +44,66 @@ const style = {
 
 function Approved({ data = [], updateModal }) {
   return (
-    <div className="row">
-      <div className="col">
-        <div className="card shadow">
-          <div className="table-responsive">
-            <table>
-              <thead style={theadStyle}>
-                <tr>
-                  <th>Loan Id</th>
-                  <th>Loan application date</th>
-                  <th>Loan amount</th>
-                  <th>Interest rate</th>
-                  <th>Loan date</th>
-                  <th>Outstanding amount</th>
-                  <th>Next payment amount</th>
-                  <th>Next payment date</th>
-                  <th>Loan Application</th>
-                  <th>Repayment structure</th>
-                  <th>Status</th>
+    <div className="card shadow">
+      <div className="table-responsive">
+        <table>
+          <thead style={theadStyle}>
+            <tr>
+              <th>Loan Id</th>
+              <th>Loan application date</th>
+              <th>Loan amount</th>
+              <th>Interest rate</th>
+              <th>Loan date</th>
+              <th>Outstanding amount</th>
+              <th>Next payment amount</th>
+              <th>Next payment date</th>
+              <th>Loan Application</th>
+              <th>Repayment structure</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody style={tbodyStyle}>
+            {
+              data.map(g => (
+                <tr key={g.id}>
+                  <td>{g.loanId}</td>
+                  <td>{g.createdAt.substring(0, 10)}</td>
+                  <td>₹ {g.grantedAmount}</td>
+                  <td>{g.intrest}%</td>
+                  <td>{g.loanDate}</td>
+                  <td>₹ {g.outstandingAmount}</td>
+                  <td>₹ {g.nextPaymentAmount}</td>
+                  <td>{g.nextPaymentDate}</td>
+                  <td>
+                    <button
+                      style={style}
+                      onClick={() => updateModal("LoanApplication", g)}
+                    >
+                      view
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      style={style}
+                    // onClick={handleShowRepaymentLoan}
+                    >
+                      view
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      className="py-0.5"
+                      style={g.status === "In progress" ? inprogressButtonStyle : repaidButtonStyle}
+                    >
+                      {g.status}
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody style={tbodyStyle}>
-                {
-                  data.map(g => (
-                    <tr key={g.id}>
-                      <td>{g.loanId}</td>
-                      <td>{g.createdAt.substring(0, 10)}</td>
-                      <td>₹ {g.grantedAmount}</td>
-                      <td>{g.intrest}%</td>
-                      <td>{g.loanDate}</td>
-                      <td>₹ {g.outstandingAmount}</td>
-                      <td>₹ {g.nextPaymentAmount}</td>
-                      <td>{g.nextPaymentDate}</td>
-                      <td>
-                        <button
-                          style={style}
-                          onClick={() => updateModal("LoanApplication", g)}
-                        >
-                          view
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          style={style}
-                        // onClick={handleShowRepaymentLoan}
-                        >
-                          view
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          className="py-0.5"
-                          style={g.status === "In progress" ? inprogressButtonStyle : repaidButtonStyle}
-                        >
-                          {g.status}
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                }
-              </tbody>
-            </table>
-          </div>
-        </div>
+              ))
+            }
+          </tbody>
+        </table>
       </div>
     </div>
   )

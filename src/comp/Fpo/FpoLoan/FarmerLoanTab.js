@@ -5,8 +5,8 @@ import { getLoanwindow } from "../../../actions/fpo";
 import { useAuthStore } from "../../../store/useAuthStore";
 import useModal from "../../../hooks/useModal";
 
+import FarmerLoanApplication from "../Modals/FpoLoan/FarmerLoanApplication";
 import RepaymentStructure from "../Modals/FpoLoan/RepaymentStructure";
-import LoanApplication from "../Modals/FpoLoan/LoanApplication";
 import ApproveLoanApp from "../Modals/FpoLoan/ApproveLoanApp";
 import RejectLoanApp from "../Modals/FpoLoan/RejectLoanApp";
 import LoanWindowTable from './LoanWindowTable';
@@ -55,6 +55,25 @@ const tabs = [
     title: "Loan Window",
   },
 ]
+
+function Select({ updateModal }) {
+  const [val, setVal] = useState("")
+
+  return (
+    <select
+      className="form-control"
+      value={val}
+      onChange={e => {
+        setVal(e.target.value)
+        updateModal(e.target.value === "approve" ? "showApprovedLoan" : "showRejectedLoan")
+      }}
+    >
+      <option value="" disabled>Change Loan Status</option>
+      <option value="approve">Approve and Forward to Samunnati</option>
+      <option value="reject">Reject</option>
+    </select>
+  )
+}
 
 function WindowRow({ loanWindow, updateModal }) {
   const [active, setActive] = useState(1)
@@ -185,22 +204,7 @@ function WindowRow({ loanWindow, updateModal }) {
                         </button>
                       </td>
                       <td>
-                        <div>
-                          <select
-                            className="form-control"
-                            onChange={(e) => {
-                              if (e.target.value === "approve") {
-                                updateModal("showApprovedLoan", loan)
-                              } else if (e.target.value === "reject") {
-                                updateModal("showRejectedLoan", loan)
-                              }
-                            }}
-                          >
-                            <option value="pending">Change Loan Status</option>
-                            <option value="approve">Approve and Forward to Samunnati</option>
-                            <option value="reject">Reject</option>
-                          </select>
-                        </div>
+                        <Select updateModal={val => updateModal(val, loan)} />
                       </td>
                     </tr>
                   ))
@@ -264,17 +268,15 @@ function FarmerLoanTab() {
           show
           data={modal.data}
           handleClose={closeModal}
-          currentLoanWindow={{}}
         />
       }
 
       {
         modal.state === "showLoanApplication" &&
-        <LoanApplication
+        <FarmerLoanApplication
           show
           data={modal.data}
           handleClose={closeModal}
-          currentLoanWindow={{}}
         />
       }
 

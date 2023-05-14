@@ -1,5 +1,5 @@
-import useModal from '../../../../hooks/useModal';
-import DocImg from '../../../Common/DocImg';
+import useModal from '../../../../../hooks/useModal';
+import DocImg from '../../../../Common/DocImg';
 
 const style = {
   backgroundColor: "#064420",
@@ -15,8 +15,12 @@ const style = {
 
 const list = [
   {
+    label: "Applicant Mobile Number",
+    name: "mobile",
+  },
+  {
     label: "Applicant DOB",
-    name: "dateOfBirth",
+    name: "dob",
   },
   {
     label: "Applicant Age",
@@ -27,22 +31,22 @@ const list = [
     name: "aadharCardNumber",
   },
   {
-    label: "Aadhar Card Image",
+    label: "Aadhard Card",
     name: "aadharCardImage",
-    isFile: true,
+    isFile: true
   },
   {
-    label: "PAN Card Number",
+    label: "Pan Card Number",
     name: "panCardNumber",
   },
   {
-    label: "PAN Card Image",
+    label: "Pan Card",
     name: "panCardImage",
-    isFile: true,
+    isFile: true
   },
 ]
 
-function Step2({ data, setStep, backBtnStyle, nextBtnStyle }) {
+function Step2({ data, backBtnStyle, nextBtnStyle, setStep }) {
   const { modal, updateModal, closeModal } = useModal()
 
   return (
@@ -74,6 +78,7 @@ function Step2({ data, setStep, backBtnStyle, nextBtnStyle }) {
           className="btn btn-success"
           onClick={() => setStep(1)}
           style={backBtnStyle}
+          type="button"
         >
           Back
         </button>
@@ -82,10 +87,12 @@ function Step2({ data, setStep, backBtnStyle, nextBtnStyle }) {
           className="btn btn-success"
           onClick={() => setStep(3)}
           style={nextBtnStyle}
+          type="button"
         >
           Next
         </button>
       </div>
+
 
       {
         modal.state &&

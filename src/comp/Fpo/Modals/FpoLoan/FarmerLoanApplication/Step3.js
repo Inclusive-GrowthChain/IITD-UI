@@ -1,4 +1,27 @@
+
 const list = [
+  {
+    label: "Co-Applicant Name",
+    name: "coApplicantName",
+  },
+  {
+    label: "Co-Applicant Gender",
+    name: "coApplicantGender",
+  },
+  {
+    label: "Co-Applicant DOB",
+    name: "coApplicantDob",
+    type: "date"
+  },
+  {
+    label: "Co-Applicant Age",
+    name: "coApplicantAge",
+    disabled: true
+  },
+  {
+    label: "Relationship with Applicant",
+    name: "relationship",
+  },
   {
     label: "Applicant Father Name",
     name: "fatherName",
@@ -21,7 +44,7 @@ const list = [
   },
 ]
 
-function Step3({ data, setStep, backBtnStyle, nextBtnStyle }) {
+function Step3({ data, backBtnStyle, nextBtnStyle, setStep }) {
   return (
     <>
       {
@@ -42,6 +65,7 @@ function Step3({ data, setStep, backBtnStyle, nextBtnStyle }) {
           className="btn btn-success"
           onClick={() => setStep(2)}
           style={backBtnStyle}
+          type="button"
         >
           Back
         </button>
@@ -50,6 +74,7 @@ function Step3({ data, setStep, backBtnStyle, nextBtnStyle }) {
           className="btn btn-success"
           onClick={() => setStep(4)}
           style={nextBtnStyle}
+          type="button"
         >
           Next
         </button>

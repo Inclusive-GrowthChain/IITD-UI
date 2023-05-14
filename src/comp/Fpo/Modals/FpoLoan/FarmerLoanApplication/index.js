@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import { Modal } from "react-bootstrap";
 
 import Step1 from "./Step1";
@@ -7,21 +7,23 @@ import Step3 from "./Step3";
 import Step4 from "./Step4";
 import Step5 from "./Step5";
 
-const backBtnStyle = {
-  marginTop: "1rem",
-  backgroundColor: "#064420",
-  width: "20%",
-}
-
 const nextBtnStyle = {
-  marginTop: "1rem",
+  marginTop: "20px",
   backgroundColor: "#064420",
   width: "20%",
+  minWidth: "80px",
   position: "relative",
   float: "right",
 }
 
-function FarmerMembershipApplication({ show, data, handleClose }) {
+const backBtnStyle = {
+  marginTop: "1rem",
+  backgroundColor: "#064420",
+  width: "20%",
+  minWidth: "80px",
+}
+
+function FarmerLoanApplication({ show, data, handleClose }) {
   const [step, setStep] = useState(1)
 
   return (
@@ -29,7 +31,7 @@ function FarmerMembershipApplication({ show, data, handleClose }) {
       show={show}
       onHide={handleClose}
     >
-      <Modal.Header closeButton>Application Details</Modal.Header>
+      <Modal.Header closeButton>Loan Application</Modal.Header>
       <Modal.Body>
         {
           step === 1 &&
@@ -79,4 +81,4 @@ function FarmerMembershipApplication({ show, data, handleClose }) {
   )
 }
 
-export default FarmerMembershipApplication
+export default FarmerLoanApplication
