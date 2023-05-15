@@ -68,6 +68,7 @@ function FPOInfo() {
                             to={`/samunnati/fpo-page/${fpo._id}`}
                             className="data_wrapper"
                             style={{ color: "#000", textDecoration: "none" }}
+                            state={fpo}
                           >
                             {fpo.fpoName}
                           </Link>

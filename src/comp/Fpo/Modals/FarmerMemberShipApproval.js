@@ -19,7 +19,7 @@ function FarmerMemberShipApproval({ show, data, handleClose }) {
     <Confirm
       show={show}
       title="Famer Membership"
-      confirmText={`Are confirm farmer membership status to be ${data.status}`}
+      confirmText={`Are you confirm farmer membership status to be ${data.status}?`}
       handleClose={handleClose}
       onConfirm={onConfirm}
     />

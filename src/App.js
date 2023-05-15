@@ -45,10 +45,10 @@ const NisaWrapper = lazy(() => import("./comp/Nisa"))
 const SammunatiFarmerSubLoanPage = lazy(() => import("./comp/Samunnati/FarmerSubLoan"))
 const SammunatiFPOSubLoan = lazy(() => import("./comp/Samunnati/FpoSubLoan"))
 const SamunnatiFarmerLoan = lazy(() => import("./comp/Samunnati/FarmerLoan"))
+const SammunatiFpoDetail = lazy(() => import("./comp/Samunnati/FpoDetail"))
 const SammunatiSettings = lazy(() => import("./comp/Samunnati/Settings"))
 const SamunnatiFPOLoan = lazy(() => import("./comp/Samunnati/FpoLoan"))
 const SamunnatiFPOInfo = lazy(() => import("./comp/Samunnati/FpoInfo"))
-const SammunatiFPOPage = lazy(() => import("./comp/Samunnati/FpoPage"))
 const SamunnatiWrapper = lazy(() => import("./comp/Samunnati"))
 
 const CorporateClientLacBidding = lazy(() => import("./comp/CorporateClient/Bidding"))
@@ -114,7 +114,7 @@ function App() {
           <Route path="fpo-loan" element={<SamunnatiFPOLoan />} />
           <Route path="fpo-info" element={<SamunnatiFPOInfo />} />
           <Route path="farmer-loan" element={<SamunnatiFarmerLoan />} />
-          <Route path="fpo-page/:id" element={<SammunatiFPOPage />} />
+          <Route path="fpo-page/:id" element={<SammunatiFpoDetail />} />
           <Route path="fpo-subloan/:id" element={<SammunatiFPOSubLoan />} />
           <Route path="farmer-subloan/:id" element={<SammunatiFarmerSubLoanPage />} />
           <Route path="settings" element={<SammunatiSettings />} />
