@@ -2,115 +2,64 @@ import useModal from "../../../../../hooks/useModal";
 import ApproveLoanApp from "../ApproveLoanApp";
 import RejectLoanApp from "../RejectLoanApp";
 
-function Step5({ data, backBtnStyle, setStep }) {
+const list = [
+  {
+    label: "Land Holding",
+    name: "landHolding",
+  },
+  {
+    label: "Type of Land Holding",
+    name: "landHoldingType",
+  },
+  {
+    label: "Caste",
+    name: "caste",
+  },
+  {
+    label: "Religion",
+    name: "religion",
+  },
+  {
+    label: "Monthly HH Income",
+    name: "monthlyHHIncome",
+  },
+  {
+    label: "Monthly HH Expenses",
+    name: "monthlyHHExpenses",
+  },
+  {
+    label: "Loan Purpose",
+    name: "purpose",
+  },
+  {
+    label: "Loan Tenure (months)",
+    name: "tenure",
+  },
+]
+
+function Step5({ data, backBtnStyle, setStep, closeAll }) {
   const { modal, updateModal, closeModal } = useModal()
 
   return (
     <>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Land Holding</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="text"
-            className="form-control"
-            value={data.landHolding}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Type of Land Holding</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="text"
-            className="form-control"
-            value={data.typeOfLandHolding}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Caste</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="text"
-            className="form-control"
-            value={data.caste}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Religion</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="text"
-            className="form-control"
-            value={data.religion}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Monthly HH Income</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="text"
-            className="form-control"
-            value={data.monthlyHHIncome}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Monthly HH Expenses</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="text"
-            className="form-control"
-            value={data.monthlyHHExpenses}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Loan Purpose</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="text"
-            className="form-control"
-            value={data.loanPurpose}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Loan Tenure (months)</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="text"
-            className="form-control"
-            value={data.loanTenure}
-            disabled
-          />
-        </div>
-      </div>
+      {
+        list.map(l => (
+          <div className="row m-2" key={l.name}>
+            <div className="col-lg-6">
+              <label>{l.label}</label>
+            </div>
+            <div className="col-lg-6">
+              <input
+                type="text"
+                className="form-control"
+                value={data[l.name]}
+                disabled
+              />
+            </div>
+          </div>
+        ))
+      }
+
       <div className="row m-2">
         <div className="col-lg-12">
           <select
@@ -119,7 +68,7 @@ function Step5({ data, backBtnStyle, setStep }) {
             value={modal.state}
             onChange={e => updateModal(e.target.value)}
           >
-            <option value="">Change Loan Status</option>
+            <option value="" disabled>Change Loan Status</option>
             <option value="Approved">Approve Loan</option>
             <option value="Rejected">Reject Loan</option>
           </select>
@@ -141,6 +90,7 @@ function Step5({ data, backBtnStyle, setStep }) {
         <ApproveLoanApp
           show
           data={data}
+          closeAll={closeAll}
           handleClose={closeModal}
         />
       }
@@ -150,6 +100,7 @@ function Step5({ data, backBtnStyle, setStep }) {
         <RejectLoanApp
           show
           data={data}
+          closeAll={closeAll}
           handleClose={closeModal}
         />
       }

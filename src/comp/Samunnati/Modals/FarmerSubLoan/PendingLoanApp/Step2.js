@@ -1,3 +1,5 @@
+import useModal from "../../../../../hooks/useModal";
+import DocImg from '../../../../Common/DocImg';
 
 const btnStyle = {
   backgroundColor: "#064420",
@@ -11,111 +13,75 @@ const btnStyle = {
   lineHeight: "2rem",
 }
 
+const list = [
+  {
+    label: "Applicant DOB",
+    name: "dob",
+  },
+  {
+    label: "Applicant Age",
+    name: "age",
+  },
+  {
+    label: "Aadhar Card Number",
+    name: "aadharCardNumber",
+  },
+  {
+    label: "Aadhar Card",
+    name: "aadharCardImage",
+    isFile: true,
+  },
+  {
+    label: "PAN Card Number",
+    name: "panCardNumber",
+  },
+  {
+    label: "PAN Card",
+    name: "panCardImage",
+    isFile: true,
+  },
+  {
+    label: "Co-Applicant Name",
+    name: "coApplicantName",
+  },
+  {
+    label: "Co-Applicant Gender",
+    name: "coApplicantGender",
+  },
+]
+
 function Step2({ data, backBtnStyle, nextBtnStyle, setStep }) {
+  const { modal, updateModal, closeModal } = useModal()
+
   return (
     <>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Applicant DOB</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="date"
-            className="form-control"
-            value={data.applicantDOB}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Applicant Age</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <input
-            type="text"
-            className="form-control"
-            value={data.applicantAge}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Aadhar Card Number</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <input
-            type="text"
-            className="form-control"
-            value={data.aadharNo}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Aadhar Card</label>
-        </div>
-        <div className="col-lg-6">
-          <button
-            style={btnStyle}
-          >
-            View
-          </button>
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>PAN Card Number</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <input
-            type="text"
-            className="form-control"
-            value={data.panNo}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>PAN Card</label>
-        </div>
-        <div className="col-lg-6">
-          <button
-            style={btnStyle}
-          >
-            View
-          </button>
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Co-Applicant Name</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <input
-            type="text"
-            className="form-control"
-            value={data.coApplicantName}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Co-Applicant Gender</label>
-        </div>
-        <div className="col-lg-6 text-center">
-          <input
-            type="text"
-            className="form-control"
-            value={data.coApplicantGender}
-            disabled
-          />
-        </div>
-      </div>
+      {
+        list.map(l => (
+          <div className="row m-2" key={l.name}>
+            <div className="col-lg-6">
+              <label>{l.label}</label>
+            </div>
+            <div className="col-lg-6">
+              {
+                l.isFile ?
+                  <button
+                    style={btnStyle}
+                    onClick={() => updateModal(l.label, { imgUrl: data[l.name] })}
+                  >
+                    View
+                  </button>
+                  :
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={data[l.name]}
+                    disabled
+                  />
+              }
+            </div>
+          </div>
+        ))
+      }
 
       <div className="row m-2 justify-content-between px-2">
         <button
@@ -134,6 +100,16 @@ function Step2({ data, backBtnStyle, nextBtnStyle, setStep }) {
           Next
         </button>
       </div>
+
+      {
+        modal.state &&
+        <DocImg
+          show
+          title={modal.state}
+          imgUrl={modal.data.imgUrl}
+          handleClose={closeModal}
+        />
+      }
     </>
   )
 }

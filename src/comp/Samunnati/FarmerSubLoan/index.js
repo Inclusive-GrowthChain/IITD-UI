@@ -1,16 +1,13 @@
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import { useQuery } from "@tanstack/react-query";
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-import { getLoanwindow } from "../../../actions/fpo";
 
 import { TabNavItem, TabContent } from "../../UIComp/Tabs";
 import OngoingLoans from "./OngoingLoans";
 import PendingLoans from "./PendingLoans";
 import LoanHistory from "./LoanHistory";
 import Profile from "./Profile";
-import Loader from '../../Common/Loader';
 
 const theadStyle = {
   color: "#064420",
@@ -47,89 +44,75 @@ const tabs = [
 ]
 
 function FarmerSubLoan() {
-  const [activeTab, setActiveTab] = useState("tab1")
-  const [loanWindow, setLoanWindow] = useState({})
+  const { state } = useLocation()
   const navigate = useNavigate()
 
-  const { isLoading } = useQuery({
-    queryKey: ["loanwindow", "farmer"],
-    queryFn: getLoanwindow,
-    onSuccess(res) {
-      const loanWindowId = localStorage.getItem("loanWindowId")
-      const loanWindow = res.data.filter((item) => item.id === loanWindowId)[0]
-      setLoanWindow(loanWindow)
-    }
-  })
+  const [loanWindow, setLoanWindow] = useState(state || {})
+  const [activeTab, setActiveTab] = useState("tab1")
 
-  const handleClick = () => {
-    localStorage.removeItem("fpoId")
-    navigate('/samunnati/farmer-loan', { replace: true })
-  }
+  const handleClick = () => navigate('/samunnati/farmer-loan', { replace: true })
 
-  if (isLoading) return <Loader wrapperCls="loader-main-right" />
+  if (!loanWindow) return <Navigate to='/samunnati/fpo-loan' />
 
   return (
     <main id="main_container" className="main_container container-fluid" style={{ marginTop: "3.188rem" }}>
       <h3 className="mb-4">Farmer Loan Requests</h3>
 
-      <div className="list_container">
-        <div className="back_btn mt-3 mb-4">
-          <button onClick={handleClick}><ArrowBackIcon className="btn_icon" />Back to FPO Loan Page</button>
-        </div>
+      <div className="back_btn mt-3 mb-4">
+        <button onClick={handleClick}><ArrowBackIcon className="btn_icon" />Back to FPO Loan Page</button>
+      </div>
 
-        <div className="list_tab">
-          <div className="itemContainer">
-            <div className="list_title">
-              <div className="container-fluid">
-                <div className="tabs_wrapper">
-                  <ul className="nav-tab">
-                    {
-                      tabs.map(t => (
-                        <TabNavItem
-                          {...t}
-                          key={t.id}
-                          activeTab={activeTab}
-                          setActiveTab={setActiveTab}
-                        />
-                      ))
-                    }
-                  </ul>
+      <div className="itemContainer">
+        <div className="list_title">
+          <div className="container-fluid">
+            <div className="tabs_wrapper">
+              <ul className="nav-tab">
+                {
+                  tabs.map(t => (
+                    <TabNavItem
+                      {...t}
+                      key={t.id}
+                      activeTab={activeTab}
+                      setActiveTab={setActiveTab}
+                    />
+                  ))
+                }
+              </ul>
 
-                  <div className="outlet">
-                    <TabContent id="tab1" activeTab={activeTab}>
-                      <Profile
-                        loanWindow={loanWindow}
-                      />
-                    </TabContent>
+              <div className="outlet">
+                <TabContent id="tab1" activeTab={activeTab}>
+                  <Profile
+                    loanWindow={loanWindow}
+                  />
+                </TabContent>
 
-                    <TabContent id="tab2" activeTab={activeTab}>
-                      <LoanHistory
-                        theadStyle={theadStyle}
-                        tbodyStyle={tbodyStyle}
-                        data={loanWindow?.loans?.filter(loan => loan.status === "completed")}
-                        fpoId={loanWindow?.fpoId}
-                        grantedAmount={loanWindow?.grantedAmount}
-                        consumedWindowLoanAmount={loanWindow?.consumedWindowLoanAmount}
-                      />
-                    </TabContent>
+                <TabContent id="tab2" activeTab={activeTab}>
+                  <LoanHistory
+                    theadStyle={theadStyle}
+                    tbodyStyle={tbodyStyle}
+                    data={loanWindow?.loans?.filter(loan => loan.status === "completed")}
+                    fpoId={loanWindow?.fpoId}
+                    grantedAmount={loanWindow?.grantedAmount}
+                    consumedWindowLoanAmount={loanWindow?.consumedWindowLoanAmount}
+                  />
+                </TabContent>
 
-                    <TabContent id="tab3" activeTab={activeTab}>
-                      <OngoingLoans
-                        theadStyle={theadStyle}
-                        tbodyStyle={tbodyStyle}
-                        data={loanWindow?.loans?.filter(loan => loan.status === "approved")}
-                      />
-                    </TabContent>
+                <TabContent id="tab3" activeTab={activeTab}>
+                  <OngoingLoans
+                    theadStyle={theadStyle}
+                    tbodyStyle={tbodyStyle}
+                    data={loanWindow?.loans?.filter(loan => loan.status === "approved")}
+                  />
+                </TabContent>
 
-                    <TabContent id="tab4" activeTab={activeTab}>
-                      <PendingLoans
-                        theadStyle={theadStyle}
-                        tbodyStyle={tbodyStyle}
-                        data={loanWindow?.loans?.filter(loan => loan.status === "in-process")}
-                      />
-                    </TabContent>
-                  </div>
-                </div>
+                <TabContent id="tab4" activeTab={activeTab}>
+                  <PendingLoans
+                    setLoanWindow={setLoanWindow}
+                    theadStyle={theadStyle}
+                    tbodyStyle={tbodyStyle}
+                    data={loanWindow?.loans?.filter(loan => loan.status === "in-process")}
+                  />
+                </TabContent>
               </div>
             </div>
           </div>

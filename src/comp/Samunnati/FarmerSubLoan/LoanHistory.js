@@ -13,7 +13,7 @@ const btnStyle = {
   lineHeight: "1rem",
 }
 
-function LoanHistory({ data = [], theadStyle, tbodyStyle }) {
+function LoanHistory({ fpoId, data = [], grantedAmount, consumedWindowLoanAmount, theadStyle, tbodyStyle }) {
   const { modal, updateModal, closeModal } = useModal()
 
   return (
@@ -35,12 +35,12 @@ function LoanHistory({ data = [], theadStyle, tbodyStyle }) {
 
             <tbody style={tbodyStyle}>
               {
-                data.map((loan, i) => (
-                  <tr>
+                data.map(loan => (
+                  <tr key={loan.loanId}>
                     <td>{loan.loanId}</td>
-                    <td>Farmer-{i}</td>
-                    <td>{loan.farmerName}</td>
-                    <td>{loan.farmerContact}</td>
+                    <td>{loan.userId}</td>
+                    <td>{loan.name}</td>
+                    <td>{loan.mobile}</td>
                     <td>{loan.createdAt.substring(0, 10)}</td>
                     <td>{loan.grantedAmount}</td>
                     <td>
@@ -60,7 +60,7 @@ function LoanHistory({ data = [], theadStyle, tbodyStyle }) {
       </div>
 
       <div style={{ marginTop: '2%' }}>
-        Remaining Loan Window: 60000
+        Remaining Loan Window: {grantedAmount - consumedWindowLoanAmount}
       </div>
 
       {

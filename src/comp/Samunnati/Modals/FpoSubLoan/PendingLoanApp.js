@@ -161,6 +161,7 @@ function PendingLoanApp({ show, handleClose, data, setLoanWindow }) {
           <RejectLoanApp
             show
             data={data}
+            closeAll={closeAll}
             handleClose={closeModal}
           />
         }

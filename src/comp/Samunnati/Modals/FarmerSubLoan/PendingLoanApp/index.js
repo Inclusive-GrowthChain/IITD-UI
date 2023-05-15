@@ -23,8 +23,25 @@ const backBtnStyle = {
   backgroundColor: "#064420",
 }
 
-function PendingLoanApp({ show, handleClose, data }) {
+function PendingLoanApp({ show, data, setLoanWindow, handleClose }) {
   const [step, setStep] = useState(1)
+
+  const closeAll = (status, id) => {
+    setLoanWindow(pr => ({
+      ...pr,
+      loan: pr.loan.map(l => {
+        if (l.id === id) {
+          return {
+            ...l,
+            status
+          }
+        }
+
+        return l
+      })
+    }))
+    handleClose()
+  }
 
   return (
     <Modal
@@ -79,6 +96,7 @@ function PendingLoanApp({ show, handleClose, data }) {
             data={data}
             setStep={setStep}
             backBtnStyle={backBtnStyle}
+            closeAll={closeAll}
           />
         }
       </Modal.Body>

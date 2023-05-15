@@ -1,111 +1,59 @@
 
+const list = [
+  {
+    label: "Taluk",
+    name: "taluk",
+  },
+  {
+    label: "District",
+    name: "district",
+  },
+  {
+    label: "State",
+    name: "state",
+  },
+  {
+    label: "Pin Code",
+    name: "pinCode",
+  },
+  {
+    label: "Occupation",
+    name: "occupation",
+  },
+  {
+    label: "Education",
+    name: "education",
+  },
+  {
+    label: "Nature of Place",
+    name: "natureOfPlace",
+  },
+  {
+    label: "Residence",
+    name: "residence",
+  },
+]
+
 function Step4({ data, backBtnStyle, nextBtnStyle, setStep }) {
   return (
     <>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Taluk</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="text"
-            className="form-control"
-            value={data.taluk}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>District</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="text"
-            className="form-control"
-            value={data.district}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>State</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="text"
-            className="form-control"
-            value={data.state}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Pin Code</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="text"
-            className="form-control"
-            value={data.pinCode}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Occupation</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="text"
-            className="form-control"
-            value={data.occupation}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Education</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="text"
-            className="form-control"
-            value={data.education}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Nature of Place</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="text"
-            className="form-control"
-            value={data.nativePlace}
-            disabled
-          />
-        </div>
-      </div>
-      <div className="row m-2">
-        <div className="col-lg-6">
-          <label>Residence</label>
-        </div>
-        <div className="col-lg-6">
-          <input
-            type="text"
-            className="form-control"
-            value={data.residence}
-            disabled
-          />
-        </div>
-      </div>
+      {
+        list.map(l => (
+          <div className="row m-2" key={l.name}>
+            <div className="col-lg-6">
+              <label>{l.label}</label>
+            </div>
+            <div className="col-lg-6">
+              <input
+                type="text"
+                className="form-control"
+                value={data[l.name]}
+                disabled
+              />
+            </div>
+          </div>
+        ))
+      }
 
       <div className="row m-2 justify-content-between px-2">
         <button
