@@ -18,20 +18,24 @@ const list = [
   {
     label: "Requested Loan Amount",
     name: "requestedAmount",
+    type: "number",
     disabled: true,
   },
   {
     label: "Granted Loan Amount",
     name: "grantedAmount",
+    type: "number",
   },
   {
     label: "Tenure (in months)",
     name: "tenure",
+    type: "number",
     disabled: true,
   },
   {
     label: "Interest Rate",
-    name: "intrest",
+    name: "interest",
+    type: "number",
     disabled: true,
   },
   {
@@ -48,7 +52,7 @@ function ApproveLoanApp({ show, data, closeAll, handleClose }) {
       loanId: data?.loanId,
       requestedAmount: data.requestedAmount,
       tenure: data.tenure,
-      intrest: data.interest,
+      interest: data.interest,
       grantedAmount: "",
       paymentProof: "",
     }

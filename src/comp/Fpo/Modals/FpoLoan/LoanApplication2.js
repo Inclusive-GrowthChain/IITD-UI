@@ -47,12 +47,14 @@ const list = [
   },
   {
     label: "Interest Rate (%)",
-    name: "intrest",
+    name: "interest",
+    type: "number",
     disabled: true
   },
   {
     label: "Tenure of Loan (in Months)",
     name: "loanTenure",
+    type: "number",
   },
   {
     label: "Attach Invoice",
@@ -76,7 +78,7 @@ function LoanApplication2({ show, applyFor, handleClose }) {
       ifscNumber: "",
       bankName: "",
       requestedAmount: "",
-      intrest: "",
+      interest: "",
       loanTenure: "",
       invoice: "",
       purpose: "",
@@ -89,7 +91,7 @@ function LoanApplication2({ show, applyFor, handleClose }) {
     queryFn: getActiveLoanwindow,
     onSuccess: (data) => {
       setValue("id", data?.data?.[0]?.id)
-      setValue("intrest", data?.data?.[0]?.intrest)
+      setValue("interest", data?.data?.[0]?.interest)
       setValue("loanWindowId", data?.data?.[0]?.windowId)
     },
   })

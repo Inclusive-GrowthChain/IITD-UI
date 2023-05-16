@@ -24,6 +24,7 @@ const list = [
   {
     label: "Requested Amount",
     name: "requestedAmount",
+    type: "number",
   },
   {
     label: "Reason for Rejection",

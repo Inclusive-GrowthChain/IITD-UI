@@ -48,6 +48,7 @@ function InterestRate({ show, handleClose }) {
                 placeholder="14"
                 {...register("intrestRate", {
                   required: "Amount is required",
+                  valueAsNumber: true,
                   min: {
                     value: 1,
                     message: "Amount should be greater than 0"

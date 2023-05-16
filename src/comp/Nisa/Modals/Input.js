@@ -55,6 +55,7 @@ function Input({
               className="form-control"
               {...register(name, {
                 required: `${label} is required`,
+                valueAsNumber: type === "number",
                 ...validation
               })}
             />

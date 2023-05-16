@@ -70,7 +70,7 @@ function Approved({ data = [], updateModal }) {
                   <td>{g.loanId}</td>
                   <td>{g.createdAt.substring(0, 10)}</td>
                   <td>₹ {g.grantedAmount}</td>
-                  <td>{g.intrest}%</td>
+                  <td>{g.interest}%</td>
                   <td>{g.loanDate}</td>
                   <td>₹ {g.outstandingAmount}</td>
                   <td>₹ {g.nextPaymentAmount}</td>

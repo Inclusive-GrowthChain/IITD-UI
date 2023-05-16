@@ -30,6 +30,7 @@ const list = [
   {
     label: "Loan Requested Amount",
     name: "requestedAmount",
+    type: "number",
   },
   {
     label: "Applicant Gender",

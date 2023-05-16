@@ -48,6 +48,7 @@ const list = [
   {
     label: "Loan Requested Amount",
     name: "requestedAmount",
+    type: "number",
   },
   {
     label: "Loan Purpose",
@@ -56,6 +57,7 @@ const list = [
   {
     label: "Loan Tenure (in months)",
     name: "tenure",
+    type: "number",
   },
   {
     label: "Interest Rate",

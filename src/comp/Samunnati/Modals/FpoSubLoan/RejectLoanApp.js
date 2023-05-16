@@ -15,6 +15,7 @@ const list = [
   {
     label: "Requested Amount",
     name: "requestedAmount",
+    type: "number",
     disabled: true,
   },
   {

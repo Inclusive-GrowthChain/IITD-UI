@@ -45,14 +45,17 @@ const list = [
   {
     label: "Amount",
     name: "requestedAmount",
+    type: "number",
   },
   {
     label: "Interest Rate (%)",
-    name: "intrest",
+    name: "interest",
+    type: "number",
   },
   {
     label: "Tenure of Loan in Months",
     name: "loanTenure",
+    type: "number",
   },
   {
     label: "Invoice",

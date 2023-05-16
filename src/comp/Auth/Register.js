@@ -43,6 +43,7 @@ const fieldSet1 = [
   {
     name: "age",
     label: "Age",
+    type: "number",
     disabled: true,
   },
   {

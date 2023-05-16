@@ -114,7 +114,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
     onSuccess: (data) => {
       setValue("id", data?.data?.[0]?.id)
       setValue("fpoName", data?.data?.[0]?.fpoName)
-      setValue("interest", data?.data?.[0]?.intrest)
+      setValue("interest", data?.data?.[0]?.interest)
       setValue("loanWindowId", data?.data?.[0]?.windowId)
     },
     enabled: isCreate
