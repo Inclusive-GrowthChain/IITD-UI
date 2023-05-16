@@ -7,6 +7,16 @@ export function getLoanwindow({ windowType = "fpo" }) {
   })
 }
 
+export function getLoans({ windowType = "fpo", fpoId }) {
+  return sendApiReq({
+    url: endPoints.loanwindow,
+    params: {
+      windowType,
+      fpoId
+    }
+  })
+}
+
 export function updateLoanWindowStatus(data) {
   return sendApiReq({
     method: "put",

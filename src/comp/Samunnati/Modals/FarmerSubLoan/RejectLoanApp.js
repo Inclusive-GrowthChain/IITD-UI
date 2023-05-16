@@ -37,6 +37,7 @@ function RejectLoanApp({ show, data, handleClose, closeAll }) {
   })
 
   const rejectLoan = () => {
+    closeModal()
     mutate({
       windowId: data.windowId,
       reason: modal.data.reason,

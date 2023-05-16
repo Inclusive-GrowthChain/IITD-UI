@@ -1,6 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 
-function RepaymentStructure({ show, handleClose, data, currentLoanWindow }) {
+function RepaymentStructure({ show, handleClose, data }) {
+  console.log(data)
   return (
     <Modal
       size="xl"
@@ -23,25 +24,25 @@ function RepaymentStructure({ show, handleClose, data, currentLoanWindow }) {
                 </div>
                 <div className="col-6">
                   <strong>
-                    Farmer Name :{" "}
+                    Farmer Name :
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>???</span>
+                  <span>{data.name}</span>
                 </div>
                 <div className="col-6">
                   <strong>FPO Name : </strong>
                 </div>
                 <div className="col-6">
-                  <span>{currentLoanWindow?.fpoName}</span>
+                  <span>{data?.fpoName}</span>
                 </div>
                 <div className="col-6">
                   <strong>
-                    Loan Amount :{" "}
+                    Loan Amount :
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>{data?.grantedAmount}</span>
+                  <span>{data?.requestedAmount}</span>
                 </div>
               </div>
             </div>
@@ -49,27 +50,27 @@ function RepaymentStructure({ show, handleClose, data, currentLoanWindow }) {
               <div className="row">
                 <div className="col-6">
                   <strong>
-                    Loan Period in Months :{" "}
+                    Loan Period in Months :
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>{data?.loanTenure}</span>
+                  <span>{data?.tenure}</span>
                 </div>
                 <div className="col-6">
                   <strong>
-                    No of Repayment :{" "}
+                    No of Repayment :
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>{data?.loanTenure}</span>
+                  <span>{data?.tenure}</span>
                 </div>
                 <div className="col-6">
                   <strong>
-                    Annual Interest Rate :{" "}
+                    Annual Interest Rate :
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>{data?.intrest}%</span>
+                  <span>{data?.interest}%</span>
                 </div>
               </div>
             </div>

@@ -37,13 +37,13 @@ function OngoingLoans({ data = [], theadStyle, tbodyStyle }) {
             <tbody style={tbodyStyle}>
               {
                 data.map(loan => (
-                  <tr key={loan.loanId}>
+                  <tr key={loan.id}>
                     <td>{loan.loanId}</td>
                     <td>{loan.userId}</td>
                     <td>{loan.name}</td>
                     <td>{loan.mobile}</td>
                     <td>{loan.approvalAt?.substring(0, 10)}</td>
-                    <td>{loan.grantedAmount}</td>
+                    <td>{loan.grantedAmount || loan.requestedAmount}</td>
                     <td>{loan.tenure}</td>
                     <td>
                       <button

@@ -36,7 +36,7 @@ function PendingLoans({ data = [], theadStyle, tbodyStyle, setLoanWindow }) {
             <tbody style={tbodyStyle}>
               {
                 data.map(loan => (
-                  <tr key={loan.loanId}>
+                  <tr key={loan.id}>
                     <td>{loan.loanId}</td>
                     <td>{loan.userId}</td>
                     <td>{loan.name}</td>

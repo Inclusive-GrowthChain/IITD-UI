@@ -75,7 +75,8 @@ function PendingLoanApp({ show, handleClose, data, setLoanWindow }) {
         if (l.id === id) {
           return {
             ...l,
-            status
+            status,
+            approvalAt: new Date().toISOString(),
           }
         }
 

@@ -6,7 +6,7 @@ import { useAuthStore } from "../../../store/useAuthStore";
 import useModal from "../../../hooks/useModal";
 
 import FarmerLoanApplication from "../Modals/FpoLoan/FarmerLoanApplication";
-import RepaymentStructure from "../Modals/FpoLoan/RepaymentStructure";
+// import RepaymentStructure from "../Modals/FpoLoan/RepaymentStructure";
 import ApproveLoanApp from "../Modals/FpoLoan/ApproveLoanApp";
 import RejectLoanApp from "../Modals/FpoLoan/RejectLoanApp";
 import LoanWindowTable from './LoanWindowTable';
@@ -44,11 +44,11 @@ const tabs = [
   },
   {
     id: 2,
-    title: "Applications History",
+    title: "Rejected Applications",
   },
   {
     id: 3,
-    title: "Applications in Process",
+    title: "Pending Applications",
   },
   {
     id: 4,
@@ -105,13 +105,13 @@ function WindowRow({ loanWindow, updateModal }) {
                 <th>Subscription Tenure</th>
                 <th>Amount</th>
                 <th>Interest Rate</th>
-                <th>Repayment Structure</th>
+                {/* <th>Repayment Structure</th> */}
                 <th>Loan Details</th>
               </tr>
             </thead>
             <tbody style={tbodyStyle}>
               {
-                loanWindow?.loans?.filter(loan => loan.status === "approved")
+                loanWindow?.loans?.filter(loan => loan.fpoApprovalStatus === "approved")
                   .map(loan => (
                     <tr key={loan.id}>
                       <td>{loan?.createdAt?.substring(0, 10)}</td>
@@ -119,7 +119,7 @@ function WindowRow({ loanWindow, updateModal }) {
                       <td>{loan.tenure}</td>
                       <td>{loan.requestedAmount}</td>
                       <td>{loan.interest}%</td>
-                      <td>
+                      {/* <td>
                         <button
                           className="py-0.5"
                           style={btnStyle}
@@ -127,12 +127,12 @@ function WindowRow({ loanWindow, updateModal }) {
                         >
                           View
                         </button>
-                      </td>
+                      </td> */}
                       <td>
                         <button
                           className="py-0.5"
                           style={btnStyle}
-                          onClick={() => updateModal("showLoanApplication")}
+                          onClick={() => updateModal("showLoanApplication", loan)}
                         >
                           View
                         </button>
@@ -148,28 +148,33 @@ function WindowRow({ loanWindow, updateModal }) {
           <table>
             <thead style={theadStyle}>
               <tr>
-                <th>Loan Id</th>
-                <th>Loan Application Date</th>
+                <th>Farmer Name</th>
                 <th>Loan Amount</th>
                 <th>Loan Date</th>
-                <th>Outstanding Amount</th>
-                <th>Next Payment Amount</th>
-                <th>Next Payment Date</th>
+                <th>Reason</th>
+                <th>Loan Details</th>
               </tr>
             </thead>
             <tbody style={tbodyStyle}>
               {
-                loanWindow?.loans?.map((loan) => (
-                  <tr key={loan.id}>
-                    <td>{loan.loanId}</td>
-                    <td>{loan.createdAt.substring(0, 10)}</td>
-                    <td>₹ {loan.requestedAmount}</td>
-                    <td>???</td>
-                    <td>₹ ???</td>
-                    <td>₹ ???</td>
-                    <td>???</td>
-                  </tr>
-                ))
+                loanWindow?.loans?.filter(loan => loan.fpoApprovalStatus === "rejected")
+                  .map(loan => (
+                    <tr key={loan.id}>
+                      <td>{loan.name}</td>
+                      <td>₹ {loan.requestedAmount}</td>
+                      <td>{loan?.createdAt?.substring(0, 10)}</td>
+                      <td>{loan.reason}</td>
+                      <td>
+                        <button
+                          className="py-0.5"
+                          style={btnStyle}
+                          onClick={() => updateModal("showLoanApplication", loan)}
+                        >
+                          View
+                        </button>
+                      </td>
+                    </tr>
+                  ))
               }
             </tbody>
           </table>
@@ -280,15 +285,14 @@ function FarmerLoanTab() {
         />
       }
 
-      {
+      {/* {
         modal.state === "showRepaymentAmount" &&
         <RepaymentStructure
           show
           data={modal.data}
           handleClose={closeModal}
-          currentLoanWindow={{}}
         />
-      }
+      } */}
     </>
   )
 }

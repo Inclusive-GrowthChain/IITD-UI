@@ -110,7 +110,7 @@ function FarmerSubLoan() {
                     setLoanWindow={setLoanWindow}
                     theadStyle={theadStyle}
                     tbodyStyle={tbodyStyle}
-                    data={loanWindow?.loans?.filter(loan => loan.status === "in-process")}
+                    data={loanWindow?.loans?.filter(loan => loan.status === "in-process" && loan.fpoApprovalStatus === "approved")}
                   />
                 </TabContent>
               </div>

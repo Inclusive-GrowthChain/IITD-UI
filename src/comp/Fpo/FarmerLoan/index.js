@@ -13,12 +13,6 @@ import ApprovedLoans from "./ApprovedLoans";
 import LoanHistory from "./LoanHistory";
 import Loader from '../../Common/Loader';
 
-const listStyle = {
-  border: "none",
-  padding: "5px 5px",
-  borderRadius: "5px",
-}
-
 const theadStyle = {
   color: "#064420",
   fontSize: "17px",
@@ -35,7 +29,7 @@ const tbodyStyle = {
 
 function FarmerLoan() {
   const { modal, updateModal, closeModal } = useModal()
-  const [recieveApplication, setRecieveApplication] = useState(false)
+  // const [recieveApplication, setRecieveApplication] = useState(false)
   const [activeIndex, setActiveIndex] = useState(1)
 
   const { isLoading, data } = useQuery({
@@ -51,9 +45,8 @@ function FarmerLoan() {
 
   return (
     <main id="main_container" className="main_container container-fluid itemContainer">
-      <div className="">
-        <h3 className="mb-4">Farmer Loan Information</h3>
-      </div>
+      <h3 className="mb-4">Farmer Loan Information</h3>
+
       <div className="list_container">
         <div className="d-flex align-items-center">
           <button
@@ -64,7 +57,7 @@ function FarmerLoan() {
             Set Interest Rate
           </button>
 
-          <div>
+          {/* <div>
             Receive Loan Application
             <label className="toggle-switch mt-0">
               <input
@@ -74,7 +67,7 @@ function FarmerLoan() {
               />
               <span className="switch" />
             </label>
-          </div>
+          </div> */}
         </div>
 
         <div className="tabs mt-5">

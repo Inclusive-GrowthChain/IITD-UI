@@ -60,6 +60,7 @@ function ApproveLoanApp({ show, data, closeAll, handleClose }) {
   })
 
   const approveLoan = () => {
+    closeModal()
     mutate({
       grantedAmount: modal.data.grantedAmount,
       paymentProof: modal.data.paymentProof,
