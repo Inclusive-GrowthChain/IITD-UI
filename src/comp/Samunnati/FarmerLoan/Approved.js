@@ -83,7 +83,7 @@ function Approved({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tb
                           view
                         </button>
                       </td>
-                      <td>{app.loans.filter((loan) => loan.status === "pending").length}</td>
+                      <td>{app.loans.filter((loan) => loan.status === "in-process").length}</td>
                       <td>
                         <Link
                           to={`/samunnati/farmer-subloan/${app.id}`}

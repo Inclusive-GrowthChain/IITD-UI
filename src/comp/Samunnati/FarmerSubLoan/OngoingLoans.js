@@ -42,7 +42,7 @@ function OngoingLoans({ data = [], theadStyle, tbodyStyle }) {
                     <td>{loan.userId}</td>
                     <td>{loan.name}</td>
                     <td>{loan.mobile}</td>
-                    <td>{loan.approvalAt.substring(0, 10)}</td>
+                    <td>{loan.approvalAt?.substring(0, 10)}</td>
                     <td>{loan.grantedAmount}</td>
                     <td>{loan.tenure}</td>
                     <td>

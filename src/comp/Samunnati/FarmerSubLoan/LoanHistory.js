@@ -41,7 +41,7 @@ function LoanHistory({ fpoId, data = [], grantedAmount, consumedWindowLoanAmount
                     <td>{loan.userId}</td>
                     <td>{loan.name}</td>
                     <td>{loan.mobile}</td>
-                    <td>{loan.createdAt.substring(0, 10)}</td>
+                    <td>{loan.createdAt?.substring(0, 10)}</td>
                     <td>{loan.grantedAmount}</td>
                     <td>
                       <button

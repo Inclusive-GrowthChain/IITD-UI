@@ -48,7 +48,7 @@ function ApproveLoanApp({ show, data, closeAll, handleClose }) {
       loanId: data?.loanId,
       requestedAmount: data.requestedAmount,
       tenure: data.tenure,
-      intrest: data.intrest,
+      intrest: data.interest,
       grantedAmount: "",
       paymentProof: "",
     }

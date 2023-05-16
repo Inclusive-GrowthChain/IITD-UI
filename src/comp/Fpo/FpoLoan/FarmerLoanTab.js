@@ -116,9 +116,9 @@ function WindowRow({ loanWindow, updateModal }) {
                     <tr key={loan.id}>
                       <td>{loan?.createdAt?.substring(0, 10)}</td>
                       <td>{loan?.fpoApprovalAt?.substring(0, 10)}</td>
-                      <td>{loan.loanTenure}</td>
+                      <td>{loan.tenure}</td>
                       <td>{loan.requestedAmount}</td>
-                      <td>{loan.intrest}%</td>
+                      <td>{loan.interest}%</td>
                       <td>
                         <button
                           className="py-0.5"

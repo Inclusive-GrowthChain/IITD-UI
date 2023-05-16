@@ -26,7 +26,7 @@ function OngoingLoans({ data = [], theadStyle, tbodyStyle, btnStyle }) {
                 data.map(loan => (
                   <tr key={loan.loanId}>
                     <td>{loan.loanId}</td>
-                    <td>{loan.approvalAt.substring(0, 10)}</td>
+                    <td>{loan?.approvalAt?.substring(0, 10)}</td>
                     <td>{loan.grantedAmount}</td>
                     <td>{loan.outstandingAmount}</td>
                     <td>{loan.nextPaymentAmount}</td>

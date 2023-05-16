@@ -29,7 +29,7 @@ function PendingLoanApp({ show, data, setLoanWindow, handleClose }) {
   const closeAll = (status, id) => {
     setLoanWindow(pr => ({
       ...pr,
-      loan: pr.loan.map(l => {
+      loans: pr.loans.map(l => {
         if (l.id === id) {
           return {
             ...l,

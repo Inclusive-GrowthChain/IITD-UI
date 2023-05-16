@@ -34,49 +34,44 @@ function Pending({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tbo
         />
       </div>
 
+      <div className="card shadow">
+        <div className="table-responsive">
+          <table className="table table-borderless">
+            <thead style={theadStyle}>
+              <tr>
+                <td>Date of Application</td>
+                <td>FPO ID</td>
+                <td>Name of FPO</td>
+                <td>Contact No.</td>
+                <td>Requested Window Amount</td>
+                <td>Loan Window Application</td>
+              </tr>
+            </thead>
 
-      <div className="row">
-        <div className="col">
-          <div className="card shadow">
-            <div className="table-responsive">
-              <table className="table table-borderless">
-                <thead style={theadStyle}>
-                  <tr>
-                    <td>Date of Application</td>
-                    <td>FPO ID</td>
-                    <td>Name of FPO</td>
-                    <td>Contact No.</td>
-                    <td>Requested Window Amount</td>
-                    <td>Loan Window Application</td>
-                  </tr>
-                </thead>
-
-                <tbody style={tbodyStyle}>
-                  {
-                    data
-                      .filter(a => a?.fpoName.toLowerCase().includes(search.toLowerCase()) || a?.fpoId.toLowerCase().includes(search.toLowerCase()))
-                      .map(app => (
-                        <tr key={app.id}>
-                          <td>{app.dateOfApplication.substring(0, 10)}</td>
-                          <td>{app.fpoId}</td>
-                          <td>{app.fpoName}</td>
-                          <td>{app.contactNo}</td>
-                          <td>{app.requestedAmount}</td>
-                          <td>
-                            <button
-                              style={btnStyle}
-                              onClick={() => updateModal("loanApp", app)}
-                            >
-                              view
-                            </button>
-                          </td>
-                        </tr>
-                      ))
-                  }
-                </tbody>
-              </table>
-            </div>
-          </div>
+            <tbody style={tbodyStyle}>
+              {
+                data
+                  .filter(a => a?.fpoName.toLowerCase().includes(search.toLowerCase()) || a?.fpoId.toLowerCase().includes(search.toLowerCase()))
+                  .map(app => (
+                    <tr key={app.id}>
+                      <td>{app.dateOfApplication.substring(0, 10)}</td>
+                      <td>{app.fpoId}</td>
+                      <td>{app.fpoName}</td>
+                      <td>{app.contactNo}</td>
+                      <td>{app.requestedAmount}</td>
+                      <td>
+                        <button
+                          style={btnStyle}
+                          onClick={() => updateModal("loanApp", app)}
+                        >
+                          view
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+              }
+            </tbody>
+          </table>
         </div>
       </div>
 
