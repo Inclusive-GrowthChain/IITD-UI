@@ -57,7 +57,7 @@ function RepaymentStructure({ show, handleClose, data, windowType }) {
                   <strong style={strongStyle}>No of Repayment</strong> : &nbsp;&nbsp;&nbsp;&nbsp; {data.windowPeriod}
                 </p>
                 <p>
-                  <strong style={strongStyle}>Annual Interest Rate</strong> : &nbsp;&nbsp;&nbsp;&nbsp; {data.interest}%
+                  <strong style={strongStyle}>Annual Interest Rate</strong> : &nbsp;&nbsp;&nbsp;&nbsp; {data.intrest}%
                 </p>
               </div>
             </div>

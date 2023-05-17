@@ -85,7 +85,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
       requestedAmount: !isCreate ? data.requestedAmount : 0,
       purpose: !isCreate ? data.purpose : "",
       tenure: !isCreate ? data.tenure : 0,
-      interest: !isCreate ? data.interest : "",
+      intrest: !isCreate ? data.intrest : "",
       loanId: !isCreate ? data.loanId : nanoid(10),
       loanWindowId: !isCreate ? data.loanWindowId : "",
       id: !isCreate ? data.id : "",
@@ -114,7 +114,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
     onSuccess: (data) => {
       setValue("id", data?.data?.[0]?.id)
       setValue("fpoName", data?.data?.[0]?.fpoName)
-      setValue("interest", data?.data?.[0]?.interest)
+      setValue("intrest", data?.data?.[0]?.intrest)
       setValue("loanWindowId", data?.data?.[0]?.windowId)
     },
     enabled: isCreate

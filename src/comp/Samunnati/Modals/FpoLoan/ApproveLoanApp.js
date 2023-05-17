@@ -47,7 +47,7 @@ const list = [
   },
   {
     label: "Loan Window Interest Rate (%)",
-    name: "interest",
+    name: "intrest",
     type: "number",
   },
 ]
@@ -65,7 +65,7 @@ function ApproveLoanApp({ show, handleClose, data, windowType, closeAll }) {
       windowPeriod: data.windowPeriod,
       requestedAmount: data.requestedAmount,
       grantedAmount: "",
-      interest: "",
+      intrest: "",
     }
   })
 
@@ -82,7 +82,7 @@ function ApproveLoanApp({ show, handleClose, data, windowType, closeAll }) {
     mutate({
       id: data.id,
       grantedAmount: modal.data.grantedAmount,
-      interest: modal.data.interest,
+      intrest: modal.data.intrest,
       status: "approved",
     })
   }

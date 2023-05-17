@@ -38,7 +38,7 @@ function Step6({ backBtnStyle, setStep, currentLoan }) {
           Interest Rate (%)
         </p>
         <p className="col-md-6">
-          {currentLoan.interest}
+          {currentLoan.intrest}
         </p>
       </div>
 

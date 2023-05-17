@@ -70,7 +70,7 @@ function RepaymentStructure({ show, handleClose, data }) {
                   </strong>
                 </div>
                 <div className="col-6">
-                  <span>{data?.interest}%</span>
+                  <span>{data?.intrest}%</span>
                 </div>
               </div>
             </div>

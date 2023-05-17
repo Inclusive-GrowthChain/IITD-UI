@@ -61,7 +61,7 @@ const list = [
   },
   {
     label: "Interest Rate",
-    name: "interest",
+    name: "intrest",
     disabled: true
   },
   {

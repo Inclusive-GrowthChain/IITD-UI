@@ -76,7 +76,7 @@ function RepaymentStructure({ show, handleClose, currentLoan, currentLoanWindow 
                   <strong>Annual Interest Rate : </strong>
                 </div>
                 <div className="col-6">
-                  <span>{currentLoan.interest}%</span>
+                  <span>{currentLoan.intrest}%</span>
                 </div>
               </div>
             </div>

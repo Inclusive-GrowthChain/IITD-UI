@@ -95,7 +95,7 @@ function ApproveLoanApp({ show, data, handleClose }) {
               Interest Rate (%)
             </p>
             <p className="col-lg-6">
-              {data?.interest}
+              {data?.intrest}
             </p>
           </div>
 

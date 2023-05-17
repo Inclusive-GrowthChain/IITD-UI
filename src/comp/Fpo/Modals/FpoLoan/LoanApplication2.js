@@ -47,7 +47,7 @@ const list = [
   },
   {
     label: "Interest Rate (%)",
-    name: "interest",
+    name: "intrest",
     type: "number",
     disabled: true
   },
@@ -78,7 +78,7 @@ function LoanApplication2({ show, applyFor, handleClose }) {
       ifscNumber: "",
       bankName: "",
       requestedAmount: "",
-      interest: "",
+      intrest: "",
       loanTenure: "",
       invoice: "",
       purpose: "",
@@ -91,7 +91,7 @@ function LoanApplication2({ show, applyFor, handleClose }) {
     queryFn: getActiveLoanwindow,
     onSuccess: (data) => {
       setValue("id", data?.data?.[0]?.id)
-      setValue("interest", data?.data?.[0]?.interest)
+      setValue("intrest", data?.data?.[0]?.intrest)
       setValue("loanWindowId", data?.data?.[0]?.windowId)
     },
   })

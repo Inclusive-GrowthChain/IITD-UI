@@ -34,7 +34,7 @@ const list = [
   },
   {
     label: "Interest Rate",
-    name: "interest",
+    name: "intrest",
     type: "number",
     disabled: true,
   },
@@ -52,7 +52,7 @@ function ApproveLoanApp({ show, data, closeAll, handleClose }) {
       loanId: data?.loanId,
       requestedAmount: data.requestedAmount,
       tenure: data.tenure,
-      interest: data.interest,
+      intrest: data.intrest,
       grantedAmount: "",
       paymentProof: "",
     }
