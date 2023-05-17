@@ -120,8 +120,7 @@ function FarmerLoan() {
         <LoanApplication
           show
           handleClose={closeModal}
-          currentLoan={modal.data.loan}
-          currentLoanWindow={modal.data.loanWindow}
+          data={modal.data}
         />
       }
 

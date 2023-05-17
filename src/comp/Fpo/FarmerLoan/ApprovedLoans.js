@@ -37,7 +37,7 @@ function ApprovedLoans({ theadStyle, tbodyStyle, loanWindowList, updateModal }) 
                     .map(loan => (
                       <tr key={loan.id}>
                         <td>{loan.userId}</td>
-                        <td>{loan.payeeName}</td>
+                        <td>{loan.name}</td>
                         <td>{loan.loanId}</td>
                         <td>{loan.createdAt?.substring(0, 10)}</td>
                         <td>{loan.grantedAmount}</td>
@@ -54,7 +54,7 @@ function ApprovedLoans({ theadStyle, tbodyStyle, loanWindowList, updateModal }) 
                           <button
                             className="py-0.5"
                             style={btnStyle}
-                            onClick={() => updateModal("showLoanApplication", { loanWindow, loan })}
+                            onClick={() => updateModal("showLoanApplication", loan)}
                           >
                             View
                           </button>

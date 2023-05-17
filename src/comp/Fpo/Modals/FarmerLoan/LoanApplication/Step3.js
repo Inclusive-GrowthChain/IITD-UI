@@ -1,78 +1,64 @@
 
-function Step3({ backBtnStyle, nextBtnStyle, setStep, farmerDetails }) {
+const list = [
+  {
+    label: "Co-Applicant Name",
+    name: "coApplicantName",
+  },
+  {
+    label: "Co-Applicant Gender",
+    name: "coApplicantGender",
+  },
+  {
+    label: "Co-Applicant DOB",
+    name: "coApplicantDob",
+    type: "date"
+  },
+  {
+    label: "Co-Applicant Age",
+    name: "coApplicantAge",
+    disabled: true
+  },
+  {
+    label: "Relationship with Applicant",
+    name: "relationship",
+  },
+  {
+    label: "Applicant Father Name",
+    name: "fatherName",
+  },
+  {
+    label: "Applicant Mother Name",
+    name: "motherName",
+  },
+  {
+    label: "Door Number",
+    name: "doorNumber",
+  },
+  {
+    label: "Street Name",
+    name: "street",
+  },
+  {
+    label: "Village",
+    name: "village",
+  },
+]
+
+function Step3({ backBtnStyle, nextBtnStyle, setStep, data }) {
   return (
     <>
-      <div className="row m-2">
-        <p className="col-lg-6">
-          Co-Applicant DOB
-        </p>
-        <p className="col-lg-6">
-          02-03-2000
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-lg-6">
-          Co-Applicant Age
-        </p>
-        <p className="col-lg-6">
-          22
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-lg-6">
-          Relationship with Applicant
-        </p>
-        <p className="col-lg-6">
-          Son
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-lg-6">
-          Applicant Father Name
-        </p>
-        <p className="col-lg-6">
-          {farmerDetails.fatherName}
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-lg-6">
-          Applicant Mother Name
-        </p>
-        <p className="col-lg-6">
-          {farmerDetails.motherName}
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-lg-6">
-          Door Number
-        </p>
-        <p className="col-lg-6">
-          {farmerDetails.doorNumber}
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-lg-6">
-          Street Name
-        </p>
-        <p className="col-lg-6">
-          {farmerDetails.street}
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-lg-6">
-          Village
-        </p>
-        <p className="col-lg-6">
-          {farmerDetails.village}
-        </p>
-      </div>
+      {
+        list.map(l => (
+          <div key={l.name} className="row m-2">
+            <p className="col-lg-6">
+              {l.label}
+            </p>
+            <p className="col-lg-6">
+              {data[l.name]}
+            </p>
+          </div>
+        ))
+      }
 
       <div className="row m-2 justify-content-between px-2">
         <button

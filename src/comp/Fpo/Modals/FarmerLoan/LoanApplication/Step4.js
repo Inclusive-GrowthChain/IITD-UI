@@ -1,78 +1,54 @@
 
-function Step4({ backBtnStyle, nextBtnStyle, setStep, farmerDetails }) {
+const list = [
+  {
+    label: "Taluk",
+    name: "taluk",
+  },
+  {
+    label: "District",
+    name: "district",
+  },
+  {
+    label: "State",
+    name: "state",
+  },
+  {
+    label: "Pin Code",
+    name: "pinCode",
+  },
+  {
+    label: "Occupation",
+    name: "occupation",
+  },
+  {
+    label: "Education",
+    name: "education",
+  },
+  {
+    label: "Nature of Place",
+    name: "natureOfPlace",
+  },
+  {
+    label: "Residence",
+    name: "residence",
+  },
+]
+
+function Step4({ backBtnStyle, nextBtnStyle, setStep, data }) {
   return (
     <>
-      <div className="row m-2">
-        <p className="col-lg-6">
-          Taluk
-        </p>
-        <p className="col-lg-6">
-          {farmerDetails.taluk}
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-lg-6">
-          District
-        </p>
-        <p className="col-lg-6">
-          {farmerDetails.district}
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-lg-6">
-          State
-        </p>
-        <p className="col-lg-6">
-          {farmerDetails.state}
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-lg-6">
-          Pin Code
-        </p>
-        <p className="col-lg-6">
-          {farmerDetails.pinCode}
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-lg-6">
-          Occupation
-        </p>
-        <p className="col-lg-6">
-          {farmerDetails.occupation}
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-lg-6">
-          Education
-        </p>
-        <p className="col-lg-6">
-          {farmerDetails.education}
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-lg-6">
-          Nature of Place
-        </p>
-        <p className="col-lg-6">
-          {farmerDetails.natureOfPlace}
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-lg-6">
-          Residence
-        </p>
-        <p className="col-lg-6">
-          {farmerDetails.residence}
-        </p>
-      </div>
+      {
+        list.map(l => (
+          <div key={l.name} className="row m-2">
+            <p className="col-lg-6">
+              {l.label}
+            </p>
+            <p className="col-lg-6">
+              {data[l.name]}
+            </p>
+          </div>
+        ))
+      }
 
       <div className="row m-2 justify-content-between px-2">
         <button

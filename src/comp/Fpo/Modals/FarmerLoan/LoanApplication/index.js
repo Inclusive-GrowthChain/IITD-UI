@@ -1,10 +1,6 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { Modal } from "react-bootstrap";
 
-import { getFarmerApplication } from "../../../../../actions/fpo";
-
-import Loader from "../../../../Common/Loader";
-import Modal from "react-bootstrap/Modal";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
@@ -28,15 +24,8 @@ const backBtnStyle = {
   minWidth: "80px",
 }
 
-function LoanApplication({ show, handleClose, currentLoan, currentLoanWindow }) {
+function LoanApplication({ show, data, handleClose }) {
   const [step, setStep] = useState(1)
-
-  const { isLoading, data } = useQuery({
-    queryKey: ["loanwindow"],
-    queryFn: () => getFarmerApplication(currentLoan.userId),
-  })
-
-  const farmerDetails = data?.data?.[0] || {}
 
   return (
     <Modal
@@ -49,62 +38,55 @@ function LoanApplication({ show, handleClose, currentLoan, currentLoanWindow }) 
 
       <Modal.Body>
         {
-          isLoading &&
-          <div style={{ height: "400px" }}><Loader wrapperCls="h-100" /></div>
-        }
-        {
-          !isLoading && step === 1 &&
+          step === 1 &&
           <Step1
+            data={data}
             setStep={setStep}
             nextBtnStyle={nextBtnStyle}
-            currentLoan={currentLoan}
-            farmerDetails={farmerDetails}
-            currentLoanWindow={currentLoanWindow}
           />
         }
         {
           step === 2 &&
           <Step2
+            data={data}
             setStep={setStep}
             backBtnStyle={backBtnStyle}
             nextBtnStyle={nextBtnStyle}
-            farmerDetails={farmerDetails}
           />
         }
         {
           step === 3 &&
           <Step3
+            data={data}
             setStep={setStep}
             backBtnStyle={backBtnStyle}
             nextBtnStyle={nextBtnStyle}
-            farmerDetails={farmerDetails}
           />
         }
         {
           step === 4 &&
           <Step4
+            data={data}
             setStep={setStep}
             backBtnStyle={backBtnStyle}
             nextBtnStyle={nextBtnStyle}
-            farmerDetails={farmerDetails}
           />
         }
         {
           step === 5 &&
           <Step5
+            data={data}
             setStep={setStep}
             backBtnStyle={backBtnStyle}
             nextBtnStyle={nextBtnStyle}
-            currentLoan={currentLoan}
-            farmerDetails={farmerDetails}
           />
         }
         {
           step === 6 &&
           <Step6
+            data={data}
             setStep={setStep}
             backBtnStyle={backBtnStyle}
-            currentLoan={currentLoan}
           />
         }
       </Modal.Body>

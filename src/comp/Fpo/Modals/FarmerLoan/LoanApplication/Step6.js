@@ -13,52 +13,48 @@ const btnStyle = {
   lineHeight: "1.7rem",
 }
 
-function Step6({ backBtnStyle, setStep, currentLoan }) {
+const list = [
+  {
+    label: "Samunnati Payment Proof",
+    name: "paymentProof",
+    isFile: true,
+  },
+  {
+    label: "Interest Rate (%)",
+    name: "intrest",
+  },
+  {
+    label: "Granted Amount (in Rs.)",
+    name: "grantedAmount",
+  },
+]
+
+function Step6({ backBtnStyle, setStep, data }) {
   const { modal, updateModal, closeModal } = useModal()
 
   return (
     <>
-      <div className="row m-2">
-        <p className="col-md-6">
-          Samunnati Payment Proof
-        </p>
-        <p className="col-md-6">
-          <button
-            className="py-0.5"
-            style={btnStyle}
-            onClick={() => updateModal("Samunnati Payment Proof")}
-          >
-            View
-          </button>
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-md-6">
-          Interest Rate (%)
-        </p>
-        <p className="col-md-6">
-          {currentLoan.intrest}
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-md-6">
-          Amount (in Rs.)
-        </p>
-        <p className="col-md-6">
-          {currentLoan.requestedAmount}
-        </p>
-      </div>
-
-      <div className="row m-2">
-        <p className="col-md-6">
-          Tenure (in months)
-        </p>
-        <p className="col-md-6">
-          {currentLoan.loanTenure}
-        </p>
-      </div>
+      {
+        list.map(l => (
+          <div key={l.name} className="row m-2">
+            <p className="col-lg-6">
+              {l.label}
+            </p>
+            <p className="col-lg-6">
+              {
+                l.isFile ?
+                  <button
+                    style={btnStyle}
+                    onClick={() => updateModal(l.label)}
+                  >
+                    view
+                  </button>
+                  : data[l.name]
+              }
+            </p>
+          </div>
+        ))
+      }
 
       <div className="row m-2">
         <button
@@ -75,7 +71,7 @@ function Step6({ backBtnStyle, setStep, currentLoan }) {
         <DocImg
           show
           title={modal.state}
-          imgUrl={currentLoan.paymentProof}
+          imgUrl={data?.paymentProof}
           handleClose={closeModal}
         />
       }
