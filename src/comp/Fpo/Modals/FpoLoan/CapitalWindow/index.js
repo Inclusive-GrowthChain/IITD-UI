@@ -54,8 +54,8 @@ function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = 
       contactNo: user.contactNumber,
       dateOfApplication: new Date().toISOString(),
       windowId: nanoid(10),
-      requestedAmount: 0,
-      windowPeriod: 0,
+      requestedAmount: "",
+      windowPeriod: "",
       kycDocuments: [
         { name: "moa", doc: user.bylawsImage },
         { name: "aoa", doc: user.bylawsImage },

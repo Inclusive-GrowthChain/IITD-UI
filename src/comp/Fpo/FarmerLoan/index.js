@@ -109,9 +109,8 @@ function FarmerLoan() {
         modal.state === "showRepaymentForm" &&
         <RepaymentStructure
           show
+          data={modal.data}
           handleClose={closeModal}
-          currentLoan={modal.data.loan}
-          currentLoanWindow={modal.data.loanWindow}
         />
       }
 

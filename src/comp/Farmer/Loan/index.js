@@ -28,12 +28,9 @@ const applyBtnStyle = {
 }
 
 const Loan = () => {
-  const [showRepaymentLoan, setShowRepaymentLoan] = useState(false)
+  const { modal, updateModal, closeModal } = useModal()
   const [activeTab, setActiveTab] = useState("tab1")
 
-  const handleCloseRepaymentLoan = () => setShowRepaymentLoan(false)
-
-  const { modal, updateModal, closeModal } = useModal()
   const { isLoading, data } = useQuery({
     queryKey: ["farmer/loans"],
     queryFn: getLoanList
@@ -120,10 +117,14 @@ const Loan = () => {
         />
       }
 
-      <RepaymentStructure
-        showRepaymentLoan={showRepaymentLoan}
-        handleCloseRepaymentLoan={handleCloseRepaymentLoan}
-      />
+      {
+        modal.state === "showRepaymentLoan" &&
+        <RepaymentStructure
+          show
+          data={modal.data}
+          handleClose={closeModal}
+        />
+      }
     </div>
   )
 }

@@ -67,7 +67,7 @@ function Approved({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tb
             <tbody style={tbodyStyle}>
               {
                 data
-                  .filter(a => a?.fpoName.toLowerCase().includes(search.toLowerCase()) || a?.fpoId.toLowerCase().includes(search.toLowerCase()))
+                  .filter(a => a?.fpoName?.toLowerCase()?.includes(search.toLowerCase()) || a?.fpoId?.toLowerCase()?.includes(search.toLowerCase()))
                   .map(app => (
                     <tr key={app.id}>
                       <td>{app.approvalDate.substring(0, 10)}</td>
