@@ -1,56 +1,26 @@
 import React, { useEffect, useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Modal from "react-bootstrap/Modal";
+import { requestTestReports } from "../../../../actions/auction";
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
-let tempFpoBids = [
-  {
-    id: 1,
-    amount: 100000,
-    name: "FPO 1",
-    village: "Village 1",
-    phoneNumber: "1234567890",
-    orderPlaced: false
-  },
-  {
-    id: 2,
-    amount: 100000,
-    name: "FPO 2",
-    village: "Village 2",
-    phoneNumber: "1234567890",
-    orderPlaced: false
-  },
-  {
-    id: 3,
-    amount: 80000,
-    name: "FPO 3",
-    village: "Village 3",
-    phoneNumber: "1234567890",
-    orderPlaced: false
-  },
-  {
-    id: 4,
-    amount: 120000,
-    name: "FPO 4",
-    village: "Village 4",
-    phoneNumber: "1234567890",
-    orderPlaced: false
-  },
-  {
-    id: 5,
-    amount: 110000,
-    name: "FPO 5",
-    village: "Village 5",
-    phoneNumber: "1234567890",
-    orderPlaced: false
-  },
-];
-
-const PageTwo = ({ onButtonClick, fpoBids = [] }) => {
+const PageTwo = ({ onButtonClick, outerbid = [] }) => {
   const [showConfirmBox, setShowConfirmBox] = useState(false)
   const [orderPlaced, setOrderPlaced] = useState(false)
   const [currentFPO, setCurrentFPO] = useState({})
+  const [data, setData] = useState({})
+
+  const queryClient = useQueryClient()
+  // const { register, formState: { errors }, handleSubmit, reset } = useForm({})
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: requestTestReports,
+    onSuccess: () => {
+      queryClient.invalidateQueries("auction/")
+    }
+  })
 
   const confirmOrder = (e) => {
     e.preventDefault()
@@ -68,22 +38,17 @@ const PageTwo = ({ onButtonClick, fpoBids = [] }) => {
   }
 
   const checkOrderPlaced = () => {
-    let orderPlaced = false
-    tempFpoBids.forEach((fpo) => {
-      if (fpo.orderPlaced) {
-        orderPlaced = true
+    outerbid.bids.forEach((bid) => {
+      if (bid.status) {
+        setOrderPlaced(true)
       }
     })
-    if (currentFPO.orderPlaced) {
-      orderPlaced = true
-    }
-    setOrderPlaced(orderPlaced)
   }
 
   useEffect(() => {
     checkOrderPlaced()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tempFpoBids, currentFPO])
+  }, [outerbid])
 
   return (
     <main
@@ -128,7 +93,7 @@ const PageTwo = ({ onButtonClick, fpoBids = [] }) => {
             <button
               onClick={() => onButtonClick("pagethree")}
               style={{ backgroundColor: 'white' }}
-            // disabled={!orderPlaced}
+              disabled={!orderPlaced}
             >
               <ArrowForwardIosIcon />
             </button>
@@ -159,12 +124,12 @@ const PageTwo = ({ onButtonClick, fpoBids = [] }) => {
                   fontWeight: "500",
                 }}
               >
-                {fpoBids.map((fpo) => (
-                  <tr key={fpo.id}>
-                    <td>{fpo.fpoId}</td>
-                    <td>{fpo.name}</td>
-                    <td>{fpo.phoneNumber}</td>
-                    <td>{fpo.bidAmount}</td>
+                {outerbid.bids.map((bid) => (
+                  <tr>
+                    <td>{bid.fpoId}</td>
+                    <td>{bid.fpoName}</td>
+                    <td>{bid.fpoPhone}</td>
+                    <td>{bid.bidAmount}</td>
                     <td>
                       <button
                         style={{
@@ -179,7 +144,28 @@ const PageTwo = ({ onButtonClick, fpoBids = [] }) => {
                           lineHeight: "1rem",
                         }}
                         onClick={(e) => {
-                          setCurrentFPO(fpo)
+                          // convert new Date() to yyyy-mm-dd format
+                          let today = new Date()
+                          let dd = today.getDate()
+                          let mm = today.getMonth() + 1
+                          let yyyy = today.getFullYear()
+                          if (dd < 10) {
+                            dd = '0' + dd
+                          }
+                          if (mm < 10) {
+                            mm = '0' + mm
+                          }
+                          today = yyyy + '-' + mm + '-' + dd
+                          // if(outerbid.bidEndDate > today) {
+                          //   alert("Order cannot be placed before the end of bidding period")
+                          //   e.preventDefault();
+                          //   return
+                          // }
+                          let tempData = {}
+                          tempData.bidId = outerbid.id
+                          tempData.bidbidId = bid.id
+                          setData(tempData)
+                          setCurrentFPO(bid)
                           confirmOrder(e)
                         }}
                         disabled={orderPlaced}
@@ -198,13 +184,17 @@ const PageTwo = ({ onButtonClick, fpoBids = [] }) => {
             <Modal.Header closeButton>Confirm Order</Modal.Header>
             <Modal.Body>
               <p>
-                Are you sure you want to place order with FPO {currentFPO.id} for {currentFPO.bidAmount} rupees?
+                Are you sure you want to place order with FPO {currentFPO.fpoName} for {currentFPO.bidAmount} rupees?
               </p>
               <div className="col-lg-12" style={{ display: "flex", justifyContent: "flex-end" }}>
                 <button
                   className="btn btn-success"
                   style={{ backgroundColor: '#064420' }}
-                  onClick={(e) => placeOrder(e)}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    mutate({data})
+                    handleCloseConfirmBox()
+                  }}
                 >
                   Confirm
                 </button>
