@@ -1,23 +1,14 @@
-import { useState } from "react";
-import logo from "../../../../assets/img/logo.png";
+import { useState, useEffect } from "react";
+import { root } from "../../../../utils/endPoints";
 import Modal from "react-bootstrap/Modal";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-const fpoInvoice = {
-  id: 1,
-  name: "FPO 1",
-  village: "Village 1",
-  phoneNumber: "1234567890",
-  invoiceNo: "1234567890",
-  invoiceDate: "12/12/2021",
-  amount: "100000",
-};
-
-const PageFour = ({ onButtonClick }) => {
+const PageFour = ({ onButtonClick, outerbid }) => {
   const [showInvoice, setShowInvoice] = useState(false);
   const [showReject, setShowReject] = useState(false);
   const [showApprove, setShowApprove] = useState(false);
+  const [fpo, setFpo] = useState({});
 
   const handleShowInvoice = () => setShowInvoice(true);
   const handleCloseInvoice = () => setShowInvoice(false);
@@ -35,6 +26,22 @@ const PageFour = ({ onButtonClick }) => {
     e.preventDefault();
     setShowApprove(false);
   };
+
+  useEffect(() => {
+    console.log(outerbid);
+    outerbid.bids.forEach((bid) => {
+      if (bid.status) {
+        let tempFpo = {};
+        tempFpo.id = bid.fpoId;
+        tempFpo.fpoName = bid.fpoName;
+        tempFpo.fpoPhone = bid.fpoPhone;
+        tempFpo.bidAmount = bid.bidAmount;
+        tempFpo.invoice = bid.invoice;
+        tempFpo.invoiceDate = bid.invoiceAddedAt.substring(0, 10);
+        setFpo(tempFpo);
+      }
+    });
+  }, [outerbid])
 
   return (
     <main
@@ -76,6 +83,7 @@ const PageFour = ({ onButtonClick }) => {
             top: "7rem",
           }}>
             <button
+              disabled={!fpo.invoice}
               onClick={() => onButtonClick("pagefive")}
               style={{ backgroundColor: 'white' }}
             // disabled={!orderPlaced}
@@ -92,7 +100,7 @@ const PageFour = ({ onButtonClick }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={fpoInvoice.id}
+                value={fpo.id}
                 style={{ width: '105%' }}
               />
             </div>
@@ -106,7 +114,7 @@ const PageFour = ({ onButtonClick }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={fpoInvoice.name}
+                value={fpo.fpoName}
               />
             </div>
           </div>
@@ -119,7 +127,7 @@ const PageFour = ({ onButtonClick }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={fpoInvoice.phoneNumber}
+                value={fpo.fpoPhone}
               />
             </div>
           </div>
@@ -132,7 +140,7 @@ const PageFour = ({ onButtonClick }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={fpoInvoice.amount}
+                value={fpo.bidAmount}
               />
             </div>
           </div>
@@ -145,7 +153,7 @@ const PageFour = ({ onButtonClick }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={fpoInvoice.invoiceDate}
+                value={fpo.invoiceDate}
               />
             </div>
           </div>
@@ -176,7 +184,7 @@ const PageFour = ({ onButtonClick }) => {
             </div>
           </div>
 
-          <div className="row m-2">
+          {/* <div className="row m-2">
             <div className="col-lg-6">
               <button
                 className="btn btn-success"
@@ -201,7 +209,7 @@ const PageFour = ({ onButtonClick }) => {
                 Approve
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </form>
 
@@ -209,7 +217,7 @@ const PageFour = ({ onButtonClick }) => {
         <Modal.Header closeButton>Invoice</Modal.Header>
         <Modal.Body>
           <img
-            src={logo}
+            src={`${root.imgUrl}/img/${fpo.invoice}`}
             alt="Payment"
             style={{ width: "100%", height: "100%" }}
           />

@@ -6,7 +6,7 @@ import { TabNavItem, TabContent } from "../UIComp/Tabs";
 import BidStatus from "./Modals/BidStatus";
 import StartBid from "./Modals/StartBid";
 
-import { getBidding } from "../../actions/corporateClient";
+import { getBidding } from "../../actions/auction";
 import useModal from "../../hooks/useModal";
 
 import Loader from "../Common/Loader";
@@ -206,11 +206,7 @@ const Bidding = () => {
                                     <td>
                                       <button
                                         onClick={() => updateModal("bidStatus", bid)}
-                                        style={{
-                                          backgroundColor: "#064420",
-                                          color: "#fff",
-                                          padding: ".2rem .4rem"
-                                        }}
+                                        style={viewBtnStyle}
                                       >
                                         View
                                       </button>

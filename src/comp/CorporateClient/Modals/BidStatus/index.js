@@ -27,10 +27,10 @@ function BidStatus({ show, data, handleClose }) {
         {
           {
             pageone: <PageOne onButtonClick={nextPage} bid={data} />,
-            pagetwo: <PageTwo onButtonClick={nextPage} fpoBids={data.bids} />,
-            pagethree: <PageThree onButtonClick={nextPage} />,
-            pagefour: <PageFour onButtonClick={nextPage} />,
-            pagefive: <PageFive onButtonClick={nextPage} closeBidStatus={handleClose} />,
+            pagetwo: <PageTwo onButtonClick={nextPage} outerbid={data} />,
+            pagethree: <PageThree onButtonClick={nextPage} outerbid={data} />,
+            pagefour: <PageFour onButtonClick={nextPage} outerbid={data} />,
+            pagefive: <PageFive onButtonClick={nextPage} closeBidStatus={handleClose} outerbid={data} />,
           }[page]
         }
       </Modal.Body>

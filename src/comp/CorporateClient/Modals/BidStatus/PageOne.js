@@ -37,10 +37,10 @@ const list = [
     name: "sourceTree",
     isSelect: true,
     options: [
-      { label: "Kusum", val: "1" },
-      { label: "Ber", val: "2" },
-      { label: "Palash", val: "3" },
-      { label: "Other", val: "4" },
+      "Kusum",
+      "Ber",
+      "Palash",
+      "Other",
     ],
   },
   {
