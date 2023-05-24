@@ -1,5 +1,7 @@
 import { Modal } from "react-bootstrap";
 import useModal from "../../../../hooks/useModal";
+
+import RepaymentContentTitle from "../../../Common/RepaymentContentTitle";
 import Repayment from "./Repayment";
 
 const btnStyle = {
@@ -13,11 +15,6 @@ const btnStyle = {
   lineHeight: "2rem",
   textDecoration: "underline",
   backgroundColor: "rgb(255, 255, 255, 0)",
-}
-
-const strongStyle = {
-  width: "12rem",
-  display: "inline-block"
 }
 
 function RepaymentStructure({ show, handleClose, data, windowType }) {
@@ -37,28 +34,16 @@ function RepaymentStructure({ show, handleClose, data, windowType }) {
         <div className="repayment_title">
           <div className="row">
             <div className="col-lg-6">
-              <p>
-                <strong style={strongStyle}>Loan Window ID</strong> : &nbsp;&nbsp;&nbsp;&nbsp; {data.windowId}
-              </p>
-              <p>
-                <strong style={strongStyle}>FPO Name</strong> : &nbsp;&nbsp;&nbsp;&nbsp; {data.fpoName}
-              </p>
-              <p>
-                <strong style={strongStyle}>Loan Amount</strong> : &nbsp;&nbsp;&nbsp;&nbsp; {data.grantedAmount}
-              </p>
+              <RepaymentContentTitle title="Loan Window ID" val={data.windowId} />
+              <RepaymentContentTitle title="FPO Name" val={data.fpoName} />
+              <RepaymentContentTitle title="Loan Amount" val={data.grantedAmount} />
             </div>
 
             <div className="col-lg-6">
               <div className="row">
-                <p>
-                  <strong style={strongStyle}>Loan Period in Months</strong> : &nbsp;&nbsp;&nbsp;&nbsp; {data.windowPeriod}
-                </p>
-                <p>
-                  <strong style={strongStyle}>No of Repayment</strong> : &nbsp;&nbsp;&nbsp;&nbsp; {data.windowPeriod}
-                </p>
-                <p>
-                  <strong style={strongStyle}>Annual Interest Rate</strong> : &nbsp;&nbsp;&nbsp;&nbsp; {data.intrest}%
-                </p>
+                <RepaymentContentTitle title="Loan Period in Months" val={data.windowPeriod} />
+                <RepaymentContentTitle title="No of Repayment" val={data.windowPeriod} />
+                <RepaymentContentTitle title="Annual Interest Rate" val={`${data.intrest}%`} />
               </div>
             </div>
           </div>

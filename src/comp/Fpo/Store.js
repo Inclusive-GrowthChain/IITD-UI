@@ -131,7 +131,7 @@ const Store = () => {
       </div>
 
       {
-        modal.state === "add" &&
+        (modal.state === "add" || modal.state === "edit") &&
         <AddFpoStore
           show
           data={modal.data}

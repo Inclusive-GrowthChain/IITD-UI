@@ -21,7 +21,8 @@ export function updateLoanWindowStatus(data) {
   return sendApiReq({
     method: "put",
     url: `${endPoints.loanwindow}/${data.id}/approval`,
-    data
+    data,
+    successMsg: "Loan window status updated successfully"
   })
 }
 
@@ -29,7 +30,8 @@ export function updateLoanStatus(data) {
   return sendApiReq({
     method: "put",
     url: `${endPoints.loanwindow}/${data.windowId}/loan/${data.id}/approval`,
-    data
+    data,
+    successMsg: "Loan status updated successfully"
   })
 }
 
@@ -37,6 +39,7 @@ export function updateRepayment(data) {
   return sendApiReq({
     method: "put",
     url: `${endPoints.loanwindow}/${data.lWId}/repayment/${data.id}`,
-    data
+    data,
+    successMsg: "Loan repayment updated successfully"
   })
 }

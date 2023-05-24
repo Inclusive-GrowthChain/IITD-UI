@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Modal } from "react-bootstrap";
+import { nanoid } from "nanoid";
 
 import { addFpoProduct, editFpoProduct } from "../../../actions/fpo";
 import Input, { errStyle } from '../../Nisa/Modals/Input';
@@ -43,7 +44,7 @@ function AddFpoStore({ show, data, isEdit, handleClose }) {
   const queryClient = useQueryClient()
   const { register, formState: { errors }, handleSubmit } = useForm({
     defaultValues: {
-      productId: isEdit ? data._id : "PROD004",
+      productId: isEdit ? data._id : nanoid(10),
       productName: isEdit ? data.productName : "",
       marketPrice: isEdit ? data.marketPrice : "",
       fpoPrice: isEdit ? data.fpoPrice : "",
@@ -94,7 +95,7 @@ function AddFpoStore({ show, data, isEdit, handleClose }) {
                       required=""
                       accept="image/*"
                       {...register("image", {
-                        required: isEdit ? false : "Image is required"
+                        required: "Image is required"
                       })}
                     />
                     {

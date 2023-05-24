@@ -86,7 +86,7 @@ function Approved({ data = [], updateModal }) {
                   <td>
                     <button
                       style={style}
-                    // onClick={handleShowRepaymentLoan}
+                      onClick={() => updateModal("showRepaymentLoan", g)}
                     >
                       view
                     </button>

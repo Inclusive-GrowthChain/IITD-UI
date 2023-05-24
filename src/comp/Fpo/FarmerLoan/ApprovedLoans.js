@@ -45,7 +45,7 @@ function ApprovedLoans({ theadStyle, tbodyStyle, loanWindowList, updateModal }) 
                           <button
                             className="py-0.5"
                             style={btnStyle}
-                            onClick={() => updateModal("showRepaymentForm", { loanWindow, loan })}
+                            onClick={() => updateModal("showRepaymentForm", loan)}
                           >
                             View
                           </button>
