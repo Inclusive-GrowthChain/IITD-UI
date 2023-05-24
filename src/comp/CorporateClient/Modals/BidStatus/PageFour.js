@@ -37,7 +37,7 @@ const PageFour = ({ onButtonClick, outerbid }) => {
         tempFpo.fpoPhone = bid.fpoPhone;
         tempFpo.bidAmount = bid.bidAmount;
         tempFpo.invoice = bid.invoice;
-        tempFpo.invoiceDate = bid.invoiceAddedAt.substring(0, 10);
+        tempFpo.invoiceDate = bid.invoiceAddedAt?.substring(0, 10);
         setFpo(tempFpo);
       }
     });

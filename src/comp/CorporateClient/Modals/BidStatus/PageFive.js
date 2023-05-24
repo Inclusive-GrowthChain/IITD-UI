@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { makePaymentToFpo } from '../../../../actions/auction';
 import { root } from "../../../../utils/endPoints";
 import Modal from "react-bootstrap/Modal";
+import FileInput from "../../../Common/FileInput";
 
 const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
   const [bidComplete, setBidComplete] = useState(false)
@@ -15,14 +16,14 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
   const handleCloseInvoice = () => setShowInvoice(false);
 
   const queryClient = useQueryClient()
-  const { register, formState: { errors }, handleSubmit, reset } = useForm({
+  const { register, formState: { errors }, handleSubmit, reset, setValue, clearErrors } = useForm({
     defaultValues: {
-      invoiceNumber: "",
-      invoiceDate: "",
-      amount: 0,
-      invoice: "",
+      clientInvoiceNumber: "",
+      clientInvoiceDate: "",
+      clientAmount: 0,
+      clientInvoice: "",
+      auctionId: "",
       bidId: "",
-      bidbidId: ""
     }
   })
 
@@ -30,7 +31,7 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
     mutationFn: makePaymentToFpo,
     onSuccess: () => {
       queryClient.invalidateQueries("auction/")
-      // closeBidStatus();
+      closeBidStatus();
     }
   })
 
@@ -39,16 +40,16 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
     outerbid.bids.forEach((bid) => {
       if (bid.status) {
         reset({
-          bidId: outerbid.id,
-          bidbidId: bid.id
+          auctionId: outerbid.id,
+          bidId: bid.id
         })
         if (bid.status === "completed") {
           setBidComplete(true)
           let tempInvoiceDetails = {}
-          tempInvoiceDetails.invoiceNumber = bid.invoiceNumber
-          tempInvoiceDetails.invoiceDate = bid.invoiceDate
-          tempInvoiceDetails.amount = bid.amount
-          tempInvoiceDetails.invoice = bid.invoice
+          tempInvoiceDetails.clientInvoiceNumber = bid.clientInvoiceNumber
+          tempInvoiceDetails.clientInvoiceDate = bid.clientInvoiceDate
+          tempInvoiceDetails.clientAmount = bid.clientAmount
+          tempInvoiceDetails.clientInvoice = bid.clientInvoice
           setInvoiceDetails(tempInvoiceDetails)
         }
       }
@@ -97,8 +98,8 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
                 className="form-control"
                 type="number"
                 style={{ width: '103%' }}
-                {...register("invoiceNumber")}
-                value={invoiceDetails.invoiceNumber}
+                {...register("clientInvoiceNumber")}
+                value={invoiceDetails.clientInvoiceNumber}
                 disabled={bidComplete}
               />
             </div>
@@ -111,8 +112,8 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
               <input
                 className="form-control"
                 type="date"
-                {...register("invoiceDate")}
-                value={invoiceDetails.invoiceDate}
+                {...register("clientInvoiceDate")}
+                value={invoiceDetails.clientInvoiceDate}
                 disabled={bidComplete}
               />
             </div>
@@ -125,78 +126,76 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
               <input
                 className="form-control"
                 type="number"
-                {...register("amount")}
-                value={invoiceDetails.amount}
+                {...register("clientAmount")}
+                value={invoiceDetails.clientAmount}
                 disabled={bidComplete}
               />
             </div>
           </div>
-            <div className="row m-2">
-              <div className="col-lg-6">
-                <label>Invoice</label>
-              </div>
-              {
-                !bidComplete && (
-                  <div className="col-lg-6">
-                    <input
-                      className="form-control"
-                      type="file"
-                      {...register("invoice")}
-                    />
-                  </div>
-                )
-              }
-              {
-                bidComplete && (
-                  <div className="col-lg-6">
-                    <button
-                      style={{
-                        backgroundColor: "#064420",
-                        color: "#fff",
-                        alignItems: "center",
-                        borderRadius: "5px",
-                        border: "none",
-                        padding: "0.25rem 1rem",
-                        width: "100%",
-                        fontSize: "1rem",
-                        lineHeight: "2rem",
-                      }}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleShowInvoice();
-                      }}
-                    >
-                      view
-                    </button>
-                  </div>
-                )
-              }
+          <div className="row m-2">
+            <div className="col-lg-6">
+              <label>Invoice</label>
             </div>
             {
               !bidComplete && (
-                <div className="row m-2">
-                  <div className="col-lg-12">
-                    <button
-                      className="btn btn-success"
-                      style={{ marginTop: '1rem', backgroundColor: '#064420', width: '96%' }}
-                    // onClick={(e) => {
-                    //   e.preventDefault();
-                    //   mutate({ data })
-                    // }}
-                    >
-                      Submit
-                    </button>
-                  </div>
+                <div className="col-lg-12">
+                  <FileInput
+                    {...register("clientInvoice")}
+                    errors={errors}
+                    register={register}
+                    setValue={setValue}
+                    clearErrors={clearErrors}
+                  />
+                </div>
+              )
+            }
+            {
+              bidComplete && (
+                <div className="col-lg-6">
+                  <button
+                    style={{
+                      backgroundColor: "#064420",
+                      color: "#fff",
+                      alignItems: "center",
+                      borderRadius: "5px",
+                      border: "none",
+                      padding: "0.25rem 1rem",
+                      width: "100%",
+                      fontSize: "1rem",
+                      lineHeight: "2rem",
+                    }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleShowInvoice();
+                    }}
+                  >
+                    view
+                  </button>
                 </div>
               )
             }
           </div>
+          {
+            !bidComplete && (
+              <div className="row m-2">
+                <div className="col-lg-12">
+                  <button
+                    className="btn btn-success"
+                    style={{ marginTop: '1rem', backgroundColor: '#064420', width: '96%' }}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            )
+          }
+        </div>
 
         <Modal show={showInvoice} onHide={handleCloseInvoice}>
           <Modal.Header closeButton>Invoice</Modal.Header>
           <Modal.Body>
             <img
-              src={`${root.imgUrl}/img/${invoiceDetails.invoice}`}
+              src={`${root.imgUrl}/img/${invoiceDetails.clientInvoice}`}
               alt="Payment"
               style={{ width: "100%", height: "100%" }}
             />

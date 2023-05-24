@@ -34,7 +34,7 @@ const list = [
   },
   {
     label: "Source of Tree",
-    name: "sourceTree",
+    name: "treeSource",
     isSelect: true,
     options: [
       "Kusum",

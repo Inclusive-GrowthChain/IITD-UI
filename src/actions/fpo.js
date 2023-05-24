@@ -161,3 +161,45 @@ export function setFarmerIntrestRate(data) {
     data,
   })
 }
+
+
+// Bidding requests
+export function placeBidForAuction(data) {
+  let dataObject = {
+    bidAmount: data.data.bidAmount,
+    fpoId: data.data.fpoId,
+    fpoName: data.data.fpoName,
+    fpoPhone: data.data.fpoPhone,
+  }
+  return sendApiReq({
+    method: "post",
+    url: endPoints.auction + `/${data.data.auctionId}/bid`,
+    data: dataObject,
+  })
+}
+
+export function sendTestReports(data) {
+  // const formData = new FormData()
+  let dataObject = {
+    requiredTestReports: data.requiredTestReports,
+  }
+  return sendApiReq({
+    method: "put",
+    url: endPoints.auction + `/${data.auctionId}/bid/${data.bidId}/testreport`,
+    data: dataObject
+  })
+}
+
+export function sendInvoice(data) {
+  // const formData = new FormData()
+  // console.log(data.invoice)
+  // formData.append("invoice", data.invoice)
+  let dataObject = {
+    invoice: data.invoice,
+  }
+  return sendApiReq({
+    method: "put",
+    url: endPoints.auction + `/${data.auctionId}/bid/${data.bidId}/invoice`,
+    data: dataObject
+  })
+}

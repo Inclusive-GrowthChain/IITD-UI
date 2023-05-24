@@ -1,32 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-
-const fpoInvoice = {
-  id: 1,
-  name: "FPO",
-  village: "Village",
-  phoneNumber: "12345XXXXX",
-  invoiceNo: "12345XXXXX",
-  invoiceDate: "12/12/2021",
-  amount: "3000",
-};
+import { sendInvoice } from "../../../actions/fpo";
+import { set, useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import FileInput from "../../Common/FileInput";
+import { useAuthStore } from "../../../store/useAuthStore";
+import { root } from "../../../utils/endPoints";
+import Modal from "react-bootstrap/Modal";
 
 const PageThree = ({ onButtonClick, bid }) => {
-  const [selectedFile, setSelectedFile] = useState();
+  const [showInvoice, setShowInvoice] = useState(false);
+  const fpoId = useAuthStore(s => s.userDetails._id)
+  const [status, setStatus] = useState("")
 
-  const handleFileChange = (event) => {
-    if (event.target.files.length > 0) {
-      setSelectedFile(event.target.files[0]);
+  const handleShowInvoice = () => setShowInvoice(true);
+  const handleCloseInvoice = () => setShowInvoice(false);
+
+  const queryClient = useQueryClient()
+  const { register, formState: { errors }, handleSubmit, reset, setValue, clearErrors } = useForm({
+    defaultValues: {
+      invoice: "",
+      auctionId: "",
+      bidId: "",
     }
-  };
+  })
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: sendInvoice,
+    onSuccess: () => {
+      queryClient.invalidateQueries("auction/")
+    }
+  })
+
+  useEffect(() => {
+    console.log(bid);
+    bid.bids.map((item) => {
+      if (item.fpoId === localStorage.getItem("userId")) {
+        reset({
+          auctionId: bid.id,
+          bidId: item.id
+        })
+        setStatus(item.status)
+      }
+    });
+  }, [bid]);
 
   return (
     <main
       className="pt5 black-80 center"
       style={{ maxWidth: "100%", margin: "auto" }}
     >
-      <form className="measure">
+      <form className="measure" onSubmit={handleSubmit(mutate)}>
         <div>
           <h5
             className="mt-5"
@@ -73,7 +98,7 @@ const PageThree = ({ onButtonClick, bid }) => {
                 onButtonClick("pagefour")
               }}
               style={{ backgroundColor: "white" }}
-              disabled={bid.status === "on-going"}
+              disabled={status !== "completed"}
             >
               <ArrowForwardIosIcon />
             </button>
@@ -88,7 +113,7 @@ const PageThree = ({ onButtonClick, bid }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={bid.bids.find((item) => item.userId === localStorage.getItem("userId")).fpoId}
+                value={bid.bids.find((item) => item.fpoId === fpoId).fpoId}
                 style={{ width: "105%" }}
               />
             </div>
@@ -102,7 +127,7 @@ const PageThree = ({ onButtonClick, bid }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={bid.bids.find((item) => item.userId === localStorage.getItem("userId")).fpoName}
+                value={bid.bids.find((item) => item.fpoId === fpoId).fpoName}
               />
             </div>
           </div>
@@ -115,7 +140,7 @@ const PageThree = ({ onButtonClick, bid }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={bid.bids.find((item) => item.userId === localStorage.getItem("userId")).fpoPhone}
+                value={bid.bids.find((item) => item.fpoId === fpoId).fpoPhone}
               />
             </div>
           </div>
@@ -128,67 +153,67 @@ const PageThree = ({ onButtonClick, bid }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={bid.bids.find((item) => item.userId === localStorage.getItem("userId")).bidAmount}
-              />
-            </div>
-          </div>
-          <div className="row m-2">
-            <div className="col-lg-6">
-              <label>Date of Payment</label>
-            </div>
-            <div className="col-lg-6">
-              <input
-                className="form-control"
-                type="text"
-                disabled={true}
-                value={fpoInvoice.invoiceDate}
+                value={bid.bids.find((item) => item.fpoId === fpoId).bidAmount}
               />
             </div>
           </div>
           {
-            bid.status === "on-going" && (
+            status !== "test-report-added" && (
               <div className="row m-2">
                 <div className="col-lg-6">
-                  <label>Upload Invoice</label>
+                  <label>Date of Payment</label>
                 </div>
                 <div className="col-lg-6">
                   <input
-                    type="file"
-                    name="file"
-                    multiple={true}
-                    onClick={() => {
-                      handleFileChange();
-                      selectedFile();
-                    }}
+                    className="form-control"
+                    type="text"
+                    disabled={true}
+                    value={bid.bids.find((item) => item.fpoId === fpoId).invoiceAddedAt?.substring(0, 10)}
                   />
                 </div>
               </div>
             )
           }
           {
-            bid.status !== "on-going" && (
+            status === "test-report-added" && (
+              <div className="row m-2">
+                <div className="col-lg-12">
+                  <label>Upload Invoice</label>
+                </div>
+                <div className="col-lg-12">
+                  <FileInput
+                    {...register("invoice")}
+                    errors={errors}
+                    register={register}
+                    setValue={setValue}
+                    clearErrors={clearErrors}
+                  />
+                </div>
+              </div>
+            )
+          }
+          {
+            status !== "test-report-added" && (
               <div className="row m-2">
                 <div className="col-lg-6">
                   <label>Invoice</label>
                 </div>
                 <div className="col-lg-6">
                   <button
-                    className=""
-                    type="button"
                     style={{
-                      marginLeft: "3%",
-                      position: "relative",
-                      top: "7px",
                       backgroundColor: "#064420",
-                      textAlign: "center",
+                      color: "#fff",
+                      alignItems: "center",
                       borderRadius: "5px",
                       border: "none",
-                      padding: "5px 15px",
-                      width: "20%",
-                      minWidth: "80px",
-                      fontSize: ".85rem",
-                      lineHeight: "1rem",
-                      color: "#fff",
+                      padding: "0.25rem 1rem",
+                      width: "100%",
+                      fontSize: "1rem",
+                      lineHeight: "2rem",
+                    }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleShowInvoice();
                     }}
                   >
                     view
@@ -197,26 +222,37 @@ const PageThree = ({ onButtonClick, bid }) => {
               </div>
             )
           }
-          <div className="row m-2">
-            <div className="col-lg-12">
-              <button
-                className="btn btn-success"
-                style={{
-                  marginTop: "1rem",
-                  backgroundColor: "#064420",
-                  width: "96%",
-                }}
-                onClick={() => {
-                  // onSubmit();
-                  // handleShowPayment();
-                }}
-              >
-                Submit
-              </button>
-            </div>
-          </div>
+          {
+            status === "test-report-added" && (
+              <div className="row m-2">
+                <div className="col-lg-12">
+                  <button
+                    className="btn btn-success"
+                    style={{
+                      marginTop: "1rem",
+                      backgroundColor: "#064420",
+                      width: "96%",
+                    }}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            )
+          }
         </div>
       </form>
+
+      <Modal show={showInvoice} onHide={handleCloseInvoice}>
+        <Modal.Header closeButton>Invoice</Modal.Header>
+        <Modal.Body>
+          <img
+            src={`${root.imgUrl}/img/${bid.bids.find((item) => item.fpoId === fpoId).invoice}`}
+            alt="Invoice"
+            style={{ width: "100%", height: "100%" }}
+          />
+        </Modal.Body>
+      </Modal>
     </main>
   );
 };

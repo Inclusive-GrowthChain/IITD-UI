@@ -10,6 +10,7 @@ import BidConfirm from "./Modals/CC/BidConfirm";
 import BidStatus from "./Modals/CC/BidStatus";
 import PlaceBid from "./Modals/CC/PlaceBid";
 import Loader from "../Common/Loader";
+import { useAuthStore } from "../../store/useAuthStore";
 
 const labelArray = [
   "Bid Information",
@@ -63,10 +64,16 @@ const btnStyle2 = {
   backgroundColor: "#064420",
 }
 
+const btnStyle3 = {
+  ...btnStyle,
+  backgroundColor: "#308a56",
+}
+
 const CorporateCustomer = () => {
   const { modal, updateModal, closeModal } = useModal()
   const [activeIndex, setActiveIndex] = useState(1)
   const [canEdit, setCanEdit] = useState(false)
+  const fpoId = useAuthStore(s => s.userDetails._id)
 
   const { isLoading, data } = useQuery({
     queryKey: ["aution"],
@@ -117,7 +124,9 @@ const CorporateCustomer = () => {
 
                     <tbody style={tbodyStyle}>
                       {
-                        data.data.map(item => (
+                        data.data
+                        .filter((item) => item.bidEndDate >= new Date().toISOString().split('T')[0])
+                        .map(item => (
                           <tr key={item.id}>
                             <td>{item.bidId}</td>
                             <td>{item.quantity}</td>
@@ -133,8 +142,9 @@ const CorporateCustomer = () => {
                             </td>
                             <td>
                               <button
-                                style={btnStyle}
+                                style={item.bids.some((bid) => bid.fpoId === fpoId) ? btnStyle3 : btnStyle}
                                 onClick={() => updateModal("showBid", item)}
+                                disabled={item.bids.some((bid) => bid.fpoId === fpoId)}
                               >
                                 Place a Bid
                               </button>
@@ -166,11 +176,11 @@ const CorporateCustomer = () => {
                     <tbody style={tbodyStyle}>
                       {
                         data.data
-                          .filter((item) => item.status === "on-going" && item.bids.some((bid) => bid.userId === localStorage.getItem("userId")))
+                          .filter((item) => item.status === "on-going" && item.bids.some((bid) => bid.userId === fpoId))
                           .map(item => (
                             <tr key={item.id}>
                               <td>{item.bidId}</td>
-                              <td>{item.bids.find((bid) => bid.userId === localStorage.getItem("userId")).bidAmount}</td>
+                              <td>{item.bids.find((bid) => bid.fpoId === fpoId).bidAmount}</td>
                               <td>{item.quantity}</td>
                               <td>{item.supplyDate}</td>
                               <td>{item.bidEndDate}</td>

@@ -1,6 +1,18 @@
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useState, useEffect } from "react";
 
 const PageOne = ({ onButtonClick, bid }) => {
+  const [selected, setSelected] = useState(false);
+
+  useEffect(() => {
+    console.log(bid)
+    bid.bids.map((bid) => {
+      if (bid.status !== "pending") {
+        setSelected(true);      
+      }
+    })
+  }, []);
+
   return (
     <main
       className="pt5 black-80 center"
@@ -21,6 +33,7 @@ const PageOne = ({ onButtonClick, bid }) => {
               onButtonClick("pagetwo")
             }}
             style={{ backgroundColor: "white" }}
+            disabled={!selected}
           >
             <ArrowForwardIosIcon />
           </button>
@@ -47,8 +60,7 @@ const PageOne = ({ onButtonClick, bid }) => {
               <input
                 type="text"
                 className="form-control"
-                value=""
-                placeholder={bid.bidId}
+                value={bid.bidId}
                 disabled
               />
             </div>
@@ -61,8 +73,7 @@ const PageOne = ({ onButtonClick, bid }) => {
               <input
                 type="text"
                 className="form-control"
-                value=""
-                placeholder={bid.lacStrainType}
+                value={bid.lacStrainType}
                 disabled
               />
             </div>
@@ -75,8 +86,7 @@ const PageOne = ({ onButtonClick, bid }) => {
               <input
                 type="text"
                 className="form-control"
-                value=""
-                placeholder={bid.sourceTree}
+                value={bid.sourceTree}
                 disabled
               />
             </div>
@@ -89,8 +99,7 @@ const PageOne = ({ onButtonClick, bid }) => {
               <input
                 type="text"
                 className="form-control"
-                value=""
-                placeholder={bid.origin}
+                value={bid.origin}
                 disabled
               />
             </div>
@@ -104,8 +113,7 @@ const PageOne = ({ onButtonClick, bid }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value=""
-                placeholder={bid.seedLacContent}
+                value={bid.seedLacContent}
               />
             </div>
           </div>
@@ -118,8 +126,7 @@ const PageOne = ({ onButtonClick, bid }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value=""
-                placeholder={bid.freshResinContent}
+                value={bid.freshResinContent}
               />
             </div>
           </div>
@@ -132,8 +139,7 @@ const PageOne = ({ onButtonClick, bid }) => {
                 className="form-control"
                 type="number"
                 disabled={true}
-                value=""
-                placeholder={bid.quantity}
+                value={bid.quantity}
               />
             </div>
           </div>
@@ -146,8 +152,7 @@ const PageOne = ({ onButtonClick, bid }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value=""
-                placeholder={bid.supplyDate}
+                value={bid.supplyDate}
               />
             </div>
           </div>
@@ -160,8 +165,7 @@ const PageOne = ({ onButtonClick, bid }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value=""
-                placeholder={bid.bidEndDate}
+                value={bid.bidEndDate}
               />
             </div>
           </div>
@@ -175,9 +179,8 @@ const PageOne = ({ onButtonClick, bid }) => {
                   <input
                     type="text"
                     className="form-control"
-                    value=""
                     disabled
-                    placeholder={Array.isArray(bid.reportsRequired) ? bid.reportsRequired.join(', ') : ''}
+                    value={Array.isArray(bid.reportsRequired) ? bid.reportsRequired.join(', ') : ''}
                   />
                 </div>
               </div>
@@ -192,8 +195,7 @@ const PageOne = ({ onButtonClick, bid }) => {
                 className="form-control"
                 style={{ height: "100%" }}
                 disabled={true}
-                value=""
-                placeholder="Remarks"
+                value="Remarks"
               />
             </div>
           </div>

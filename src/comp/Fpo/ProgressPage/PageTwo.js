@@ -1,36 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-
-// const fpo = {
-//   id: 1,
-//   amount: 2000,
-//   name: "FPO",
-//   village: "Village",
-//   phoneNumber: "98213XXXXX",
-//   reportsReqd: [
-//     {
-//       reportName: "Chowri",
-//       reportReqd: true,
-//     },
-//   ],
-// };
+import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { sendTestReports } from "../../../actions/fpo";
+import FileInput from "../../Common/FileInput";
+import { useAuthStore } from "../../../store/useAuthStore";
+import { root } from "../../../utils/endPoints";
+import Modal from "react-bootstrap/Modal";
 
 const PageTwo = ({ onButtonClick, bid }) => {
-  const [selectedFile, setSelectedFile] = useState();
+  const [status, setStatus] = useState("")
+  const fpoId = useAuthStore(s => s.userDetails._id)
+  const [showInvoice, setShowInvoice] = useState(false);
 
-  const handleFileChange = (event) => {
-    if (event.target.files.length > 0) {
-      setSelectedFile(event.target.files[0]);
+  const handleShowInvoice = () => setShowInvoice(true);
+  const handleCloseInvoice = () => setShowInvoice(false);
+
+  const queryClient = useQueryClient()
+  const { register, formState: { errors }, handleSubmit, reset, setValue, clearErrors } = useForm({
+    defaultValues: {
+      requiredTestReports: "",
+      auctionId: "",
+      bidId: "",
     }
-  };
+  })
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: sendTestReports,
+    onSuccess: () => {
+      queryClient.invalidateQueries("auction/")
+    }
+  })
+
+  useEffect(() => {
+    console.log(bid);
+    bid.bids.map((item) => {
+      if (item.fpoId === localStorage.getItem("userId")) {
+        reset({
+          auctionId: bid.id,
+          bidId: item.id
+        })
+        setStatus(item.status)
+      }
+    });
+  }, [bid]);
 
   return (
     <main
       className="pt5 black-80 center"
       style={{ maxWidth: "100%", margin: "auto" }}
     >
-      <form className="measure">
+      <form className="measure" onSubmit={handleSubmit(mutate)}>
         <div>
           <h5
             className="mt-5"
@@ -76,6 +97,7 @@ const PageTwo = ({ onButtonClick, bid }) => {
                 e.preventDefault()
                 onButtonClick("pagethree")
               }}
+              disabled={!status}
               style={{ backgroundColor: "white" }}
             >
               <ArrowForwardIosIcon />
@@ -91,7 +113,7 @@ const PageTwo = ({ onButtonClick, bid }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={bid.bids.find((item) => item.userId === localStorage.getItem("userId")).fpoId}
+                value={bid.bids.find((item) => item.fpoId === fpoId).fpoId}
                 style={{ width: "105%" }}
               />
             </div>
@@ -105,7 +127,7 @@ const PageTwo = ({ onButtonClick, bid }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={bid.bids.find((item) => item.userId === localStorage.getItem("userId")).fpoName}
+                value={bid.bids.find((item) => item.fpoId === fpoId).fpoName}
               />
             </div>
           </div>
@@ -118,7 +140,7 @@ const PageTwo = ({ onButtonClick, bid }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={bid.bids.find((item) => item.userId === localStorage.getItem("userId")).fpoPhone}
+                value={bid.bids.find((item) => item.fpoId === fpoId).fpoPhone}
               />
             </div>
           </div>
@@ -131,54 +153,50 @@ const PageTwo = ({ onButtonClick, bid }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={bid.bids.find((item) => item.userId === localStorage.getItem("userId")).bidAmount}
+                value={bid.bids.find((item) => item.fpoId === fpoId).bidAmount}
               />
             </div>
           </div>
           {
-            bid.status === "on-going" && (
+            !status && (
               <div className="row m-2">
                 <div className="col-lg-6">
                   <label>Required Test Reports</label>
                 </div>
-                <div className="col-lg-6">
-                  <input
-                    type="file"
-                    name="file"
-                    multiple={true}
-                    onClick={() => {
-                      handleFileChange();
-                      selectedFile();
-                    }}
+                <div className="col-lg-12">
+                  <FileInput
+                    {...register("requiredTestReports")}
+                    errors={errors}
+                    register={register}
+                    setValue={setValue}
+                    clearErrors={clearErrors}
                   />
                 </div>
               </div>
             )
           }
           {
-            bid.status !== "on-going" && (
+            status && (
               <div className="row m-2">
                 <div className="col-lg-6">
                   <label>Required Test Reports</label>
                 </div>
                 <div className="col-lg-6">
                   <button
-                    className=""
-                    type="button"
                     style={{
-                      marginLeft: "3%",
-                      position: "relative",
-                      top: "7px",
                       backgroundColor: "#064420",
-                      textAlign: "center",
+                      color: "#fff",
+                      alignItems: "center",
                       borderRadius: "5px",
                       border: "none",
-                      padding: "5px 15px",
-                      width: "20%",
-                      minWidth: "80px",
-                      fontSize: ".85rem",
-                      lineHeight: "1rem",
-                      color: "#fff",
+                      padding: "0.25rem 1rem",
+                      width: "100%",
+                      fontSize: "1rem",
+                      lineHeight: "2rem",
+                    }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleShowInvoice();
                     }}
                   >
                     view
@@ -187,26 +205,37 @@ const PageTwo = ({ onButtonClick, bid }) => {
               </div>
             )
           }
-          <div className="row m-2">
-            <div className="col-lg-12">
-              <button
-                className="btn btn-success"
-                style={{
-                  marginTop: "1rem",
-                  backgroundColor: "#064420",
-                  width: "96%",
-                }}
-                onClick={() => {
-                  // onSubmit();
-                  // handleShowPayment();
-                }}
-              >
-                Submit
-              </button>
-            </div>
-          </div>
+          {
+            !status && (
+              <div className="row m-2">
+                <div className="col-lg-12">
+                  <button
+                    className="btn btn-success"
+                    style={{
+                      marginTop: "1rem",
+                      backgroundColor: "#064420",
+                      width: "96%",
+                    }}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            )
+          }
         </div>
       </form>
+
+      <Modal show={showInvoice} onHide={handleCloseInvoice}>
+        <Modal.Header closeButton>Invoice</Modal.Header>
+        <Modal.Body>
+          <img
+            src={`${root.imgUrl}/img/${bid.bids.find((item) => item.fpoId === fpoId).requiredTestReports}`}
+            alt="Test Reports"
+            style={{ width: "100%", height: "100%" }}
+          />
+        </Modal.Body>
+      </Modal>
     </main>
   );
 };
