@@ -17,7 +17,8 @@ export function addLacTest(data) {
   return sendApiReq({
     method: "post",
     url: endPoints.nisa.lactTest,
-    data
+    data,
+    successMsg: "Product added successfully"
   })
 }
 
@@ -25,7 +26,8 @@ export function addLacTest2(data) {
   return sendApiReq({
     method: "post",
     url: endPoints.nisa.lactTest2,
-    data
+    data,
+    successMsg: "Product added successfully"
   })
 }
 
@@ -39,7 +41,8 @@ export function addCropAdvisory(data) {
   return sendApiReq({
     method: "post",
     url: endPoints.nisa.cropAdvisory,
-    data
+    data,
+    successMsg: "Crop advisory added successfully"
   })
 }
 
@@ -47,7 +50,8 @@ export function editCropAdvisory(data) {
   return sendApiReq({
     method: "put",
     url: endPoints.nisa.cropAdvisory + `/${data.cropAdvisoryId}`,
-    data
+    data,
+    successMsg: "Crop advisory updated successfully"
   })
 }
 
@@ -61,7 +65,8 @@ export function addTraining(data) {
   return sendApiReq({
     method: "post",
     url: endPoints.nisa.training,
-    data
+    data,
+    successMsg: "New Training details added successfully"
   })
 }
 
@@ -69,6 +74,7 @@ export function editTraining(data) {
   return sendApiReq({
     method: "put",
     url: endPoints.nisa.training + `/${data.traningId}`,
-    data
+    data,
+    successMsg: "Training details updated successfully"
   })
 }

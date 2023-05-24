@@ -11,7 +11,8 @@ export function addFpoSale(data) {
   return sendApiReq({
     method: "post",
     url: endPoints.fpo.products,
-    data: data
+    data,
+    successMsg: "Product added successfully"
   })
 }
 
@@ -27,7 +28,8 @@ export function addFpoProduct(data) {
   return sendApiReq({
     method: "post",
     url: endPoints.fpo.products,
-    data: formData
+    data: formData,
+    successMsg: "Product added successfully"
   })
 }
 
@@ -38,15 +40,13 @@ export function editFpoProduct(data) {
   formData.append("marketPrice", data.marketPrice)
   formData.append("fpoPrice", data.fpoPrice)
   formData.append("isAvailable", data.isAvailable)
-
-  if (data.image[0]) {
-    formData.append("productImg", data.image[0])
-  }
+  formData.append("productImg", data.image[0])
 
   return sendApiReq({
     method: "put",
     url: endPoints.fpo.products + `/${data.productId}`,
-    data: formData
+    data: formData,
+    successMsg: "Product updated successfully"
   })
 }
 
@@ -76,7 +76,8 @@ export function addFpoLac(data) {
   return sendApiReq({
     method: "post",
     url: endPoints.fpo.lac,
-    data: formData
+    data: formData,
+    successMsg: "Product added successfully"
   })
 }
 
@@ -95,7 +96,8 @@ export function editFpoLac(data) {
   return sendApiReq({
     method: "put",
     url: endPoints.fpo.lac + `/${data.productId}`,
-    data: formData
+    data: formData,
+    successMsg: "Product updated successfully"
   })
 }
 
@@ -119,6 +121,7 @@ export function createLoanwindow(data) {
     method: "post",
     url: endPoints.loanwindow,
     data,
+    successMsg: "Loan window created successfully"
   })
 }
 
@@ -127,6 +130,7 @@ export function createLoan(data) {
     method: "post",
     url: endPoints.loanwindow + `/${data.id}/loan`,
     data,
+    successMsg: "Loan created successfully"
   })
 }
 
@@ -134,7 +138,8 @@ export function updateFarmerLoanStatus(data) {
   return sendApiReq({
     method: "put",
     url: `${endPoints.loanwindow}/${data.windowId}/loan/${data.id}/approval`,
-    data
+    data,
+    successMsg: "Status updated successfully"
   })
 }
 
@@ -149,7 +154,8 @@ export function updateFarmerApplication(data) {
   return sendApiReq({
     method: "put",
     url: `${endPoints.fpo.farmers}/${data._id}`,
-    data: data
+    data,
+    successMsg: "Farmer application status updated successfully"
   })
 }
 
@@ -159,5 +165,6 @@ export function setFarmerIntrestRate(data) {
     method: "put",
     url: endPoints.fpo.interstRate,
     data,
+    successMsg: "Interest updated successfully"
   })
 }

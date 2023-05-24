@@ -21,7 +21,8 @@ export function fpoSignup(data) {
   return sendApiReq({
     method: "post",
     url: endPoints.fpoSignup,
-    data
+    data,
+    successMsg: "FPO account created successfully"
   })
 }
 
@@ -29,7 +30,8 @@ export function nisaSignup(data) {
   return sendApiReq({
     method: "post",
     url: endPoints.nisaSignup,
-    data
+    data,
+    successMsg: "NISA account created successfully"
   })
 }
 
@@ -37,7 +39,8 @@ export function samunnatiSignup(data) {
   return sendApiReq({
     method: "post",
     url: endPoints.samunnatiSignup,
-    data
+    data,
+    successMsg: "Samunnati account created successfully"
   })
 }
 
@@ -45,7 +48,8 @@ export function corporateClientSignup(data) {
   return sendApiReq({
     method: "post",
     url: endPoints.corporateClientSignup,
-    data
+    data,
+    successMsg: "Corporate Client account created successfully"
   })
 }
 
@@ -53,7 +57,8 @@ export function farmerSignup(data) {
   return sendApiReq({
     method: "post",
     url: endPoints.farmerSignup,
-    data
+    data,
+    successMsg: "Farmer account created successfully"
   })
 }
 

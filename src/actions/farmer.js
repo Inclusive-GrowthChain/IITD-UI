@@ -29,7 +29,8 @@ export function addProduce(data) {
   return sendApiReq({
     method: "post",
     url: endPoints.farmer.produce + "/produce",
-    data: data
+    data,
+    successMsg: "Product added successfully"
   })
 }
 
@@ -37,6 +38,7 @@ export function applyLoan(data) {
   return sendApiReq({
     method: "post",
     url: endPoints.loanwindow + `/${data.id}/loan`,
-    data
+    data,
+    successMsg: "Loan applied successfully"
   })
 }

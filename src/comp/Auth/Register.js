@@ -3,7 +3,6 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 
 import { farmerSignup, getFpoList } from "../../actions/auth";
-import { errorNotify } from "../../utils/toastifyHlp";
 import states from '../../constants/states';
 
 import FormHelp, { Input } from "./Modals/FormHelp";
@@ -26,6 +25,12 @@ const fieldSet1 = [
   {
     name: "mobile",
     label: "Mobile",
+    validation: {
+      minLength: {
+        value: 10,
+        message: "Mobile number is not valid"
+      },
+    }
   },
   {
     name: "password",
@@ -45,6 +50,12 @@ const fieldSet1 = [
     label: "Age",
     type: "number",
     disabled: true,
+    validation: {
+      min: {
+        value: 18,
+        message: "Age should be atleast 18"
+      },
+    }
   },
   {
     name: "gender",
@@ -210,7 +221,7 @@ function Register() {
         temp--
       }
 
-      setValue("age", temp)
+      setValue("age", temp, { shouldValidate: true })
     }
   }, [dob, setValue])
 
@@ -222,18 +233,13 @@ function Register() {
     }
   })
 
-  const onSubmit = data => {
-    if (Number(data.age) < 1) return errorNotify("Please select valid DOB")
-    mutate(data)
-  }
-
   return (
     <div id="main-registration-container">
       <div id="register">
         <h3>Farmer Signup</h3>
         <div className="card-body">
           <div className="container">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(mutate)}>
               <div className="row mb-2">
                 <FormHelp
                   fields={fieldSet1}

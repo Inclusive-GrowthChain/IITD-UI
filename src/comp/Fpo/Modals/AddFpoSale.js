@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Modal } from "react-bootstrap";
+import { nanoid } from "nanoid";
 
 import { addFpoSale } from "../../../actions/fpo";
 import Input from '../../Nisa/Modals/Input';
@@ -50,11 +51,11 @@ const list = [
   },
 ]
 
-function AddFpoSale({ show, data, isEdit, handleClose }) {
+function AddFpoSale({ show, handleClose }) {
   const queryClient = useQueryClient()
   const { register, formState: { errors }, handleSubmit } = useForm({
     defaultValues: {
-      saleId: "SAL001",
+      saleId: nanoid(10),
       itemName: "",
       unitPrice: "",
       quantity: "",

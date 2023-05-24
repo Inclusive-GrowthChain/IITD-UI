@@ -1,5 +1,6 @@
 import axios from "axios";
 import jsCookie from "js-cookie";
+import { successNotify } from "./toastifyHlp";
 import { root } from './endPoints';
 
 export const cookies = jsCookie;
@@ -22,9 +23,12 @@ const requestIntercepter = (instance, isAuthendicated, headers) => {
   )
 }
 
-const responseIntercepter = instance => {
+const responseIntercepter = (instance, successMsg) => {
   instance.interceptors.response.use(
-    res => res.data,
+    res => {
+      if (successMsg) successNotify(successMsg)
+      return res.data
+    },
     error => {
       const err = new Error(error?.message)
       err.status = error?.response?.status
@@ -34,12 +38,12 @@ const responseIntercepter = instance => {
   )
 }
 
-const sendApiReq = ({ isAuthendicated = true, headers = {}, ...others }) => {
+const sendApiReq = ({ isAuthendicated = true, headers = {}, successMsg = "", ...others }) => {
   const instances = axios.create({
     baseURL: root.baseUrl,
   })
   requestIntercepter(instances, isAuthendicated, headers)
-  responseIntercepter(instances)
+  responseIntercepter(instances, successMsg)
   return instances({ ...others })
 }
 

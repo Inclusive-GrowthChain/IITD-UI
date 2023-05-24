@@ -3,6 +3,7 @@ import { useQueries } from "@tanstack/react-query";
 import Button from "react-bootstrap/Button";
 
 import { getProduceList } from "../../actions/farmer";
+import { useAuthStore } from "../../store/useAuthStore";
 import { getFpoLac } from "../../actions/fpo";
 import { root } from "../../utils/endPoints";
 import useModal from "../../hooks/useModal";
@@ -14,6 +15,7 @@ import Loader from "../Common/Loader";
 function SellingPrice() {
   const [activeTab, setActiveTab] = useState("tab1")
   const { modal, updateModal, closeModal } = useModal()
+  const farmerId = useAuthStore(s => s.userDetails._id)
 
   const [
     { isLoading: isLoading1, data: sellItemList, },
@@ -26,7 +28,7 @@ function SellingPrice() {
       },
       {
         queryKey: ["farmer/produce"],
-        queryFn: () => getProduceList({ farmerId: localStorage.getItem("userId") }),
+        queryFn: () => getProduceList({ farmerId }),
       }
     ]
   })
@@ -94,8 +96,8 @@ function SellingPrice() {
               <TabContent id="tab1" activeTab={activeTab}>
                 <div className="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4">
                   {
-                    sellItemList && sellItemList.data.map((item, index) => (
-                      <div className="col">
+                    sellItemList?.data.map(item => (
+                      <div className="col" key={item._id}>
                         <div className="card">
                           <img
                             src={`${root.imgUrl}/img/${item.imageUrl}`}
