@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Modal } from "react-bootstrap";
+import { nanoid } from 'nanoid';
 
 import { addCropAdvisory, editCropAdvisory } from '../../../actions/nisa';
 
@@ -9,9 +10,9 @@ const textAreaStyle = { resize: "none", height: "150px" }
 
 function AddCA({ data, show, isEdit, handleClose }) {
   const queryClient = useQueryClient()
-  const { register, formState: { errors }, handleSubmit, reset } = useForm({
+  const { register, formState: { errors }, handleSubmit } = useForm({
     defaultValues: {
-      cropAdvisoryId: isEdit ? data._id : "CA012",
+      cropAdvisoryId: isEdit ? data._id : nanoid(10),
       content: isEdit ? data.content : "",
       title: isEdit ? data.title : "",
     }
@@ -21,7 +22,6 @@ function AddCA({ data, show, isEdit, handleClose }) {
     mutationFn: isEdit ? editCropAdvisory : addCropAdvisory,
     onSuccess: () => {
       queryClient.invalidateQueries("nisa/crop-advisory")
-      reset()
       handleClose()
     }
   })

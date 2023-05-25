@@ -204,7 +204,7 @@ const FarmerInformation = () => {
                       <tbody style={tbodyStyle}>
                         {
                           appList?.data?.map(app => (
-                            <tr key={app._id}>
+                            <tr key={app.id}>
                               <td>{app.sampleId}</td>
                               <td>{app.paymentRefNo}</td>
                               <td>{app.dateOfApplication}</td>
@@ -234,8 +234,10 @@ const FarmerInformation = () => {
                                 <button
                                   className="py-0.5"
                                   style={style}
+                                  onClick={() => updateModal("Certificate", { imgUrl: app.certificate })}
+                                  disabled={!app.certificate}
                                 >
-                                  View
+                                  {app.certificate ? "View" : "Pending"}
                                 </button>
                               </td>
                             </tr>

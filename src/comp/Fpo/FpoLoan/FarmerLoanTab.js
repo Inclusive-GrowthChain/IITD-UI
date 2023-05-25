@@ -6,7 +6,6 @@ import { useAuthStore } from "../../../store/useAuthStore";
 import useModal from "../../../hooks/useModal";
 
 import FarmerLoanApplication from "../Modals/FpoLoan/FarmerLoanApplication";
-// import RepaymentStructure from "../Modals/FpoLoan/RepaymentStructure";
 import ApproveLoanApp from "../Modals/FpoLoan/ApproveLoanApp";
 import RejectLoanApp from "../Modals/FpoLoan/RejectLoanApp";
 import LoanWindowTable from './LoanWindowTable';
@@ -105,7 +104,6 @@ function WindowRow({ loanWindow, updateModal }) {
                 <th>Subscription Tenure</th>
                 <th>Amount</th>
                 <th>Interest Rate</th>
-                {/* <th>Repayment Structure</th> */}
                 <th>Loan Details</th>
               </tr>
             </thead>
@@ -119,15 +117,6 @@ function WindowRow({ loanWindow, updateModal }) {
                       <td>{loan.tenure}</td>
                       <td>{loan.requestedAmount}</td>
                       <td>{loan.intrest}%</td>
-                      {/* <td>
-                        <button
-                          className="py-0.5"
-                          style={btnStyle}
-                          onClick={() => updateModal("showRepaymentAmount", loan)}
-                        >
-                          View
-                        </button>
-                      </td> */}
                       <td>
                         <button
                           className="py-0.5"
@@ -284,15 +273,6 @@ function FarmerLoanTab() {
           handleClose={closeModal}
         />
       }
-
-      {/* {
-        modal.state === "showRepaymentAmount" &&
-        <RepaymentStructure
-          show
-          data={modal.data}
-          handleClose={closeModal}
-        />
-      } */}
     </>
   )
 }

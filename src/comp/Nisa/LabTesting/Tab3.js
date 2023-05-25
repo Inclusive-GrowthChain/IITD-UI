@@ -30,53 +30,51 @@ const tbodyStyle = {
 
 function Tab3({ data = [], updateModal }) {
   return (
-    <div className="row">
-      <div className="col">
-        <div
-          className="list__btn lt__btn"
-          style={wrapperStyle}
+    <div>
+      <div
+        className="list__btn lt__btn"
+        style={wrapperStyle}
+      >
+        <Button
+          className="new_test_button"
+          style={newTestBtnStyle}
+          onClick={() => updateModal("showNewTest")}
         >
-          <Button
-            className="new_test_button"
-            style={newTestBtnStyle}
-            onClick={() => updateModal("showNewTest")}
-          >
-            Add New Test
-          </Button>
-        </div>
+          Add New Test
+        </Button>
+      </div>
 
-        <div
-          className="lt_container card shadow"
-          style={{ marginTop: "40px" }}
-        >
-          <div className="table-responsive">
-            <table className="table table-borderless">
-              <thead style={theadStyle}>
-                <tr>
-                  <td>Test Category</td>
-                  <td>Test Name</td>
-                  <td>
-                    Min. Quantity of required sample (grams)
-                  </td>
-                  <td>Test Fee (Rs.)</td>
-                  <td>Reporting Period (days)</td>
-                </tr>
-              </thead>
-              <tbody style={tbodyStyle}>
-                {
-                  data.map(test => (
-                    <tr key={test._id}>
-                      <td>{test.category}</td>
-                      <td>{test.testName}</td>
-                      <td>{test.minRequiredQuantity}</td>
-                      <td>{test.testFee}</td>
-                      <td>{test.reportingPeriod}</td>
-                    </tr>
-                  ))
-                }
-              </tbody>
-            </table>
-          </div>
+      <div
+        className="lt_container card shadow"
+        style={{ marginTop: "40px" }}
+      >
+        <div className="table-responsive">
+          <table className="table table-borderless">
+            <thead style={theadStyle}>
+              <tr>
+                <td>Test Category</td>
+                <td>Test Name</td>
+                <td>
+                  Min. Quantity of required sample (grams)
+                </td>
+                <td>Test Fee (Rs.)</td>
+                <td>Reporting Period (days)</td>
+              </tr>
+            </thead>
+            <tbody style={tbodyStyle}>
+              {
+                data.map(test => (
+                  <tr key={test._id}>
+                    <td>{test.category}</td>
+                    <td>{test.testName}</td>
+                    <td>{test.minRequiredQuantity}</td>
+                    <td>{test.testFee}</td>
+                    <td>{test.reportingPeriod}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

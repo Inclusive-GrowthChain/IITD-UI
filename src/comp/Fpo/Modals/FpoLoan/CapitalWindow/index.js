@@ -6,6 +6,7 @@ import { nanoid } from 'nanoid';
 
 import { createLoanwindow } from "../../../../../actions/fpo";
 import { useAuthStore } from "../../../../../store/useAuthStore";
+import { errorNotify } from '../../../../../utils/toastifyHlp';
 
 import Step1 from "./Step1";
 import Step2 from "./Step2";
@@ -109,6 +110,25 @@ function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = 
 
   const title = windowType === "fpo" ? "Working Captial" : "Farmer"
 
+  const onSubmit = data => {
+    let is_kycAS_Empty = data.kycAuthorizedSignatories.some(a => !a.name || !a.doc)
+    if (is_kycAS_Empty) return errorNotify("Please fill all the fields in KYC of Authorised Signatories")
+
+    let is_fpoProfile_Empty = data.fpoProfile.some(a => !a.doc)
+    if (is_fpoProfile_Empty) return errorNotify("Please upload all the neccessary images in FPO profile")
+
+    let is_licenses_Empty = data.licenses.some(a => !a.doc)
+    if (is_licenses_Empty) return errorNotify("Please upload all the neccessary images in Lincese")
+
+    let is_fD_Empty = data.financialDetails.some(a => !a.doc)
+    if (is_fD_Empty) return errorNotify("Please upload all the neccessary images in Financial Details")
+
+    let is_oD_Empty = data.otherDetails.some(a => !a.doc)
+    if (is_oD_Empty) return errorNotify("Please upload all the neccessary images in Other Details")
+
+    mutate(data)
+  }
+
   return (
     <Modal
       size="lg"
@@ -120,7 +140,7 @@ function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = 
 
       <Modal.Body>
         <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(mutate)}>
+          <form onSubmit={methods.handleSubmit(onSubmit)}>
             {
               step === 0 &&
               <Step1

@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Modal } from "react-bootstrap";
+import { nanoid } from "nanoid";
 
 import { errorNotify } from "../../../utils/toastifyHlp";
 import { addTraining, editTraining } from "../../../actions/nisa";
@@ -47,9 +48,9 @@ const list = [
 
 function AddTraing({ data, show, isEdit, handleClose }) {
   const queryClient = useQueryClient()
-  const { register, formState: { errors }, handleSubmit, reset } = useForm({
+  const { register, formState: { errors }, handleSubmit } = useForm({
     defaultValues: {
-      traningId: isEdit ? data._id : "TRAN004",
+      traningId: isEdit ? data._id : nanoid(10),
       courseName: isEdit ? data.courseName : "",
       courseStartDate: isEdit ? data.courseStartDate : "",
       duration: isEdit ? data.duration : "",
@@ -64,14 +65,32 @@ function AddTraing({ data, show, isEdit, handleClose }) {
     mutationFn: isEdit ? editTraining : addTraining,
     onSuccess: () => {
       queryClient.invalidateQueries("nisa/traning")
-      reset()
       handleClose()
     }
   })
 
+  const getTime = date => new Date(date).getTime()
+
   const onSubmit = data => {
-    if (new Date(data.appStartDate).getTime() > new Date(data.appEndDate).getTime()) {
+    let courseSD = getTime(data.courseStartDate)
+    let startD = getTime(data.applicationStartDate)
+    let endD = getTime(data.applicationEndDate)
+    let curr = new Date().getTime()
+
+    if (courseSD < curr || startD < curr || endD < curr) {
+      return errorNotify("Past dates cannot be set")
+    }
+
+    if (startD > endD) {
       return errorNotify("Application start date cannot be greater than application end date")
+    }
+
+    if (startD === endD) {
+      return errorNotify("Application start date and end date should be different")
+    }
+
+    if (endD > courseSD) {
+      return errorNotify("Application end date cannot be greater than course start date")
     }
 
     if (Number(data.fee) < 0) {
@@ -85,58 +104,54 @@ function AddTraing({ data, show, isEdit, handleClose }) {
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>{isEdit ? "Edit" : "Add"} Training Program</Modal.Header>
       <Modal.Body>
-        <div className="row">
-          <div className="col">
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="form">
-                <div className="card p-2">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="form">
+            <div className="card p-2">
+              {
+                list.map(l => (
+                  <Input
+                    key={l.name}
+                    {...l}
+                    register={register}
+                    errors={errors}
+                  />
+                ))
+              }
+
+              <div className="row m-2">
+                <div className="col-lg-6">
+                  <label>Remarks</label>
+                </div>
+                <div className="col-lg-12">
+                  <textarea
+                    className="form-control"
+                    style={textAreaStyle}
+                    {...register("remarks", {
+                      required: "Remark is required"
+                    })}
+                  />
                   {
-                    list.map(l => (
-                      <Input
-                        key={l.name}
-                        {...l}
-                        register={register}
-                        errors={errors}
-                      />
-                    ))
+                    errors.remarks &&
+                    <p className="text-danger" style={errStyle}>
+                      {errors.remarks.message}
+                    </p>
                   }
-
-                  <div className="row m-2">
-                    <div className="col-lg-6">
-                      <label>Remarks</label>
-                    </div>
-                    <div className="col-lg-12">
-                      <textarea
-                        className="form-control"
-                        style={textAreaStyle}
-                        {...register("remarks", {
-                          required: "Remark is required"
-                        })}
-                      />
-                      {
-                        errors.remarks &&
-                        <p className="text-danger" style={errStyle}>
-                          {errors.remarks.message}
-                        </p>
-                      }
-                    </div>
-                  </div>
-
-                  <div className="row m-2">
-                    <button
-                      type="submit"
-                      style={{ marginTop: '1rem', backgroundColor: '#064420' }}
-                      disabled={isLoading}
-                      className="btn btn-success"
-                    >
-                      Submit
-                    </button>
-                  </div>
                 </div>
               </div>
-            </form>
+
+              <div className="row m-2">
+                <button
+                  type="submit"
+                  style={{ marginTop: '1rem', backgroundColor: '#064420' }}
+                  disabled={isLoading}
+                  className="btn btn-success"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
+        </form>
       </Modal.Body>
     </Modal>
   )

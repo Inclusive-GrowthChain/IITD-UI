@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Modal } from "react-bootstrap";
+import { nanoid } from "nanoid";
 
 import { addLacTest } from "../../../actions/nisa";
 
@@ -56,9 +57,9 @@ const list = [
 
 function AddNewTest({ show, handleClose }) {
   const queryClient = useQueryClient()
-  const { register, formState: { errors }, handleSubmit, reset } = useForm({
+  const { register, formState: { errors }, handleSubmit } = useForm({
     defaultValues: {
-      testId: "Test1",
+      testId: nanoid(10),
       category: "",
       testName: "",
       minQuantity: "",
@@ -71,7 +72,6 @@ function AddNewTest({ show, handleClose }) {
     mutationFn: addLacTest,
     onSuccess: () => {
       queryClient.invalidateQueries("nisa/lactest")
-      reset()
       handleClose()
     }
   })
@@ -85,37 +85,33 @@ function AddNewTest({ show, handleClose }) {
         Add New Test
       </Modal.Header>
       <Modal.Body>
-        <div className="row ">
-          <div className="col">
-            <form onSubmit={handleSubmit(mutate)}>
-              <div className="form">
-                <div className="card p-2">
-                  {
-                    list.map(l => (
-                      <Input
-                        key={l.name}
-                        {...l}
-                        register={register}
-                        errors={errors}
-                      />
-                    ))
-                  }
+        <form onSubmit={handleSubmit(mutate)}>
+          <div className="form">
+            <div className="card p-2">
+              {
+                list.map(l => (
+                  <Input
+                    key={l.name}
+                    {...l}
+                    register={register}
+                    errors={errors}
+                  />
+                ))
+              }
 
-                  <div className="row m-2">
-                    <button
-                      type="submit"
-                      style={btnStyle}
-                      disabled={isLoading}
-                      className="btn btn-success"
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </div>
+              <div className="row m-2">
+                <button
+                  type="submit"
+                  style={btnStyle}
+                  disabled={isLoading}
+                  className="btn btn-success"
+                >
+                  Submit
+                </button>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
+        </form>
       </Modal.Body>
     </Modal>
   )

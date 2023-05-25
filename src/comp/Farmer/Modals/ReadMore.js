@@ -11,10 +11,9 @@ function ReadMore({ data, show, handleClose }) {
         <textarea
           className="form-control"
           style={{ height: "100%" }}
+          defaultValue={data.content}
           readOnly
-        >
-          {data.content}
-        </textarea>
+        ></textarea>
       </Modal.Body>
     </Modal>
   )

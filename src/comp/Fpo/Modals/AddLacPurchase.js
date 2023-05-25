@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Modal } from "react-bootstrap";
+import { nanoid } from "nanoid";
 
 import { addFpoSale } from "../../../actions/fpo";
 import Input from '../../Nisa/Modals/Input';
@@ -50,11 +51,11 @@ const list = [
   },
 ]
 
-function AddLacPurchase({ show, data, isEdit, handleClose }) {
+function AddLacPurchase({ show, handleClose }) {
   const queryClient = useQueryClient()
   const { register, formState: { errors }, handleSubmit } = useForm({
     defaultValues: {
-      purchaseId: "PURCH001",
+      purchaseId: nanoid(10),
       itemName: "",
       pricePerKg: "",
       quantity: "",
@@ -78,35 +79,31 @@ function AddLacPurchase({ show, data, isEdit, handleClose }) {
     >
       <Modal.Header closeButton>FPO Store2</Modal.Header>
       <Modal.Body>
-        <div className="row">
-          <div className="col">
-            <form onSubmit={handleSubmit(mutate)}>
-              <div className="p-2">
-                {
-                  list.map(l => (
-                    <Input
-                      key={l.name}
-                      {...l}
-                      register={register}
-                      errors={errors}
-                    />
-                  ))
-                }
+        <form onSubmit={handleSubmit(mutate)}>
+          <div className="p-2">
+            {
+              list.map(l => (
+                <Input
+                  key={l.name}
+                  {...l}
+                  register={register}
+                  errors={errors}
+                />
+              ))
+            }
 
-                <div className="row m-2">
-                  <button
-                    type="submit"
-                    style={{ backgroundColor: "#064420" }}
-                    disabled={isLoading}
-                    className="btn btn-success"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </form>
+            <div className="row m-2">
+              <button
+                type="submit"
+                style={{ backgroundColor: "#064420" }}
+                disabled={isLoading}
+                className="btn btn-success"
+              >
+                Submit
+              </button>
+            </div>
           </div>
-        </div>
+        </form>
       </Modal.Body>
     </Modal>
   )

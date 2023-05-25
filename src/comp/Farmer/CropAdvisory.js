@@ -34,8 +34,8 @@ function CropAdvisory() {
               </h3>
             </div>
 
-            {data.data.map((ca, ind) => (
-              <div key={ca.id}>
+            {data?.data?.map(ca => (
+              <div key={ca._id}>
                 <div className="card_wrapper">
                   <div
                     className="card_title mb-2 text-black text-bold"
@@ -56,8 +56,8 @@ function CropAdvisory() {
                   </div>
                   <hr />
                   <div className="card__footer text-muted">
-                    <p> 2 months ago</p>
-                    <p> 19/08/2022</p>
+                    <p>Created: {ca.createdAt.substring(0, 10)}</p>
+                    <p>Last updated: {ca.updatedAt.substring(0, 10)}</p>
                   </div>
                 </div>
               </div>

@@ -1,9 +1,89 @@
 import { useState } from "react";
-import Modal from "react-bootstrap/Modal";
-import logo from "../../../assets/img/logo.png";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { Modal } from "react-bootstrap";
+
+import { approveLacTest } from "../../../actions/nisa";
+import useModal from "../../../hooks/useModal";
+
+import FileInput from "../../Common/FileInput";
+import DocImg from "../../Common/DocImg";
+import Input from './Input';
+
+const list = [
+  {
+    label: "FPO Name",
+    name: "fpoName",
+  },
+  {
+    label: "FPO Contact",
+    name: "fpoContact",
+  },
+  {
+    label: "Sample ID",
+    name: "sampleId",
+  },
+  {
+    label: "Date of Application",
+    name: "dateOfApplication",
+  },
+  {
+    label: "Category",
+    name: "category",
+  },
+  {
+    label: "Test",
+    name: "testName",
+  },
+  {
+    label: "Amount",
+    name: "amount",
+  },
+  {
+    label: "Payment Ref no.",
+    name: "paymentRefNo",
+  },
+  {
+    label: "Payment Image",
+    name: "paymentImg",
+    isFile: true,
+  },
+  {
+    label: "Lac Sample Image",
+    name: "lacSampleImg",
+    isFile: true,
+  },
+  {
+    label: "Remarks",
+    name: "remarks",
+  },
+]
+
+const btnStyle = {
+  marginTop: "1rem",
+  backgroundColor: "#064420",
+}
 
 function Application({ show, data, handleClose }) {
   const [showFirstAppForm, setShowFirstAppForm] = useState(true)
+  const { modal, updateModal, closeModal } = useModal()
+  const queryClient = useQueryClient()
+
+  const { register, formState: { errors }, setValue, clearErrors, handleSubmit } = useForm({
+    defaultValues: {
+      id: data.id,
+      referenceNo: "",
+      certificate: "",
+    }
+  })
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: approveLacTest,
+    onSuccess: () => {
+      queryClient.invalidateQueries("nisa/lactest")
+      handleClose()
+    }
+  })
 
   return (
     <Modal
@@ -15,223 +95,98 @@ function Application({ show, data, handleClose }) {
       </Modal.Header>
 
       <Modal.Body>
-        <div className="row">
-          <div className="col">
-            {showFirstAppForm && (
-              <form>
-                <div className="form">
-                  <div className="card p-2">
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <label>FPO Name</label>
-                      </div>
-                      <div className="col-lg-6">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={data.fpoName}
-                          disabled
-                        />
-                      </div>
+        <div className="form">
+          {
+            showFirstAppForm &&
+            <div className="card p-2">
+              {
+                list.map(l => (
+                  <div key={l.name} className="row m-2">
+                    <div className="col-lg-6">
+                      <label>{l.label}</label>
                     </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <label>FPO Contact</label>
-                      </div>
-                      <div className="col-lg-6">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={data.fpoContact}
-                          disabled
-                        />
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <label>Sample ID</label>
-                      </div>
-                      <div className="col-lg-6">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={data.sampleId}
-                          disabled
-                        />
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <label>
-                          Date of Application
-                        </label>
-                      </div>
-                      <div className="col-lg-6">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={data.dateOfApplication}
-                          disabled
-                        />
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <label>Category</label>
-                      </div>
-                      <div className="col-lg-6">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={data.category}
-                          disabled
-                        />
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <label>Test</label>
-                      </div>
-                      <div className="col-lg-6">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={data.testName}
-                          disabled
-                        />
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <label>Amount</label>
-                      </div>
-                      <div className="col-lg-6">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={data.amount}
-                          disabled
-                        />
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <label>Payment Ref no.</label>
-                      </div>
-                      <div className="col-lg-6">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={data.paymentRefNo}
-                          disabled
-                        />
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <label>Payment Image</label>
-                      </div>
-                      <div className="col-lg-6">
-                        <img
-                          src={logo}
-                          alt="payment"
-                          style={{
-                            height: "100px",
-                            width: "100px",
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <label>Lac Sample Image</label>
-                      </div>
-                      <div className="col-lg-6">
-                        <img
-                          src={logo}
-                          alt="Lab Sample"
-                          style={{
-                            height: "100px",
-                            width: "100px",
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <label>Remarks</label>
-                      </div>
-                      <div className="col-lg-6">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={data.remarks}
-                          disabled
-                        />
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-12">
-                        <button
-                          className="btn btn-primary"
-                          onClick={() => setShowFirstAppForm(false)}
-                          style={{
-                            float: "right",
-                            backgroundColor: "#064420",
-                          }}
-                        >
-                          Next
-                        </button>
-                      </div>
+                    <div className="col-lg-6">
+                      {
+                        l.isFile ?
+                          <button
+                            className="btn btn-success"
+                            style={{ backgroundColor: "#064420", fontSize: "14px" }}
+                            onClick={() => updateModal(l.label, { imgUrl: data[l.name] })}
+                          >
+                            View
+                          </button>
+                          :
+                          <input
+                            type="text"
+                            className="form-control"
+                            value={data[l.name]}
+                            disabled
+                          />
+                      }
                     </div>
                   </div>
-                </div>
-              </form>
-            )}
+                ))
+              }
 
-            {!showFirstAppForm && (
-              <form>
-                <div className="form">
-                  <div className="card p-2">
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <label>Ref no.</label>
-                      </div>
-                      <div className="col-lg-6">
-                        <input
-                          type="number"
-                          className="form-control"
-                        />
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <div className="col-lg-6">
-                        <label>Certificate</label>
-                      </div>
-                      <div className="col-lg-12">
-                        <input
-                          type="file"
-                          className="form-control"
-                        />
-                      </div>
-                    </div>
-                    <div className="row m-2">
-                      <button
-                        className="btn btn-success"
-                        style={{
-                          marginTop: "1rem",
-                          backgroundColor: "#064420",
-                        }}
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  </div>
+              <div className="row m-2">
+                <div className="col-lg-12">
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => setShowFirstAppForm(false)}
+                    style={btnStyle}
+                  >
+                    Next
+                  </button>
                 </div>
-              </form>
-            )}
-          </div>
+              </div>
+            </div>
+          }
+
+          {
+            !showFirstAppForm &&
+            <form
+              className="card p-2"
+              onSubmit={handleSubmit(mutate)}
+            >
+              <Input
+                name="referenceNo"
+                label="Ref no."
+                register={register}
+                errors={errors}
+              />
+
+              <FileInput
+                label="Certificate"
+                name="certificate"
+                errors={errors}
+                register={register}
+                setValue={setValue}
+                clearErrors={clearErrors}
+              />
+
+              <div className="row m-2">
+                <button
+                  className="btn btn-success"
+                  disabled={isLoading}
+                  type="submit"
+                  style={btnStyle}
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          }
         </div>
+
+        {
+          modal.state &&
+          <DocImg
+            show
+            title={modal.state}
+            imgUrl={modal.data.imgUrl}
+            handleClose={closeModal}
+          />
+        }
       </Modal.Body>
     </Modal>
   )

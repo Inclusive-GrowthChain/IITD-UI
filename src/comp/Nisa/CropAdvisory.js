@@ -11,6 +11,33 @@ import ViewCADescription from "./Modals/ViewCADescription";
 import Loader from "../Common/Loader";
 import AddCA from "./Modals/AddCA";
 
+const h3Style = {
+  fontSize: "22px",
+  fontWeight: "800",
+  color: "rgb(33, 37, 41)",
+}
+
+const btnWrapperStyle = {
+  position: "relative",
+  float: "right",
+  right: "18px",
+  top: "10px",
+}
+
+const btnStyle = {
+  backgroundColor: "#064420",
+  border: "none",
+  width: "fit-content",
+  marginTop: "50px",
+}
+
+const editIcStyle = {
+  position: "relative",
+  float: "right",
+  right: "18px",
+  top: "-3rem",
+}
+
 const CropAdvisory = () => {
   const { modal, updateModal, closeModal } = useModal()
   const { isLoading, data } = useQuery({
@@ -27,32 +54,18 @@ const CropAdvisory = () => {
           <div className="crop_container d-sm-flex justify-content-between align-items-center" style={{ marginBottom: '50px' }}>
             <h3
               className="text-dark mb-0"
-              style={{
-                fontSize: "22px",
-                fontWeight: "800",
-                color: "rgb(33, 37, 41)",
-              }}
+              style={h3Style}
             >
               Crop Advisory
             </h3>
             <div
               className="list__btn"
-              style={{
-                position: "relative",
-                float: "right",
-                right: "18px",
-                top: "10px",
-              }}
+              style={btnWrapperStyle}
             >
               <Button
                 className="crop-advisory_button"
-                style={{
-                  backgroundColor: "#064420",
-                  border: "none",
-                  width: "fit-content",
-                  marginTop: "50px",
-                }}
-                onClick={() => updateModal("add", {})}
+                style={btnStyle}
+                onClick={() => updateModal("add")}
               >
                 Add Crop Advisory
               </Button>
@@ -72,14 +85,7 @@ const CropAdvisory = () => {
                   >
                     {ca.title}
                   </div>
-                  <div
-                    style={{
-                      position: "relative",
-                      float: "right",
-                      right: "18px",
-                      top: "-3rem",
-                    }}
-                  >
+                  <div style={editIcStyle}>
                     <button
                       onClick={() => updateModal("edit", ca)}
                       className="bg-white"

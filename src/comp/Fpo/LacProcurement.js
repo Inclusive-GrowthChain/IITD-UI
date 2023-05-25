@@ -10,6 +10,17 @@ import AddLacProcurement from "./Modals/AddLacProcurement";
 import AddLacPurchase from "./Modals/AddLacPurchase";
 import Loader from "../Common/Loader";
 
+const btnStyle = {
+  backgroundColor: "#064420",
+  borderRadius: "5px",
+  border: "none",
+  padding: "0.5rem 0.75rem",
+  width: "fit-content",
+  fontSize: "14px",
+  lineHeight: "14px",
+  color: "#fff",
+}
+
 function Card({ data = [], updateModal }) {
   return (
     <div className="store-modal">
@@ -72,22 +83,19 @@ const LacProcurement = () => {
 
   return (
     <main id="main_container" className="main_container container-fluid itemContainer">
-      <div>
-        <h3 className="mb-4">Procurement Information</h3>
+      <div className="d-flex" style={{ gap: "1rem", alignItems: "center" }}>
+        <h3 style={{ marginRight: "auto" }}>Procurement Information</h3>
+
+        <button style={btnStyle} onClick={() => updateModal("add")}>
+          Add Item
+        </button>
+
+        <button style={btnStyle} onClick={() => updateModal("addPurchase")}>
+          Add Purchase
+        </button>
       </div>
 
       <div className="list_container">
-        <div className="store_wrapper">
-          <button className="store_btn" onClick={() => updateModal("addPurchase")}>
-            Add Purchase
-          </button>
-        </div>
-        <div className="store_wrapper" style={{ marginRight: "150px" }}>
-          <button className="store_btn" onClick={() => updateModal("add")}>
-            Add Item
-          </button>
-        </div>
-
         <div className="store_item mt-5">
           <div className="store_tabs">
             <button

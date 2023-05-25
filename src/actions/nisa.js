@@ -31,6 +31,15 @@ export function addLacTest2(data) {
   })
 }
 
+export function approveLacTest(data) {
+  return sendApiReq({
+    method: "put",
+    url: endPoints.nisa.lactTest2 + `/${data.id}`,
+    data,
+    successMsg: "Lac test updated successfully"
+  })
+}
+
 export function getCropAdvisory() {
   return sendApiReq({
     url: endPoints.nisa.cropAdvisory,

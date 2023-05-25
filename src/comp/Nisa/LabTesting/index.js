@@ -94,7 +94,7 @@ const LabTesting = () => {
               <div className="outlet">
                 <TabContent id="tab1" activeTab={activeTab}>
                   <Tab1
-                    data={appList.data}
+                    data={appList?.data?.filter(app => app.applicationStatus === "in-process")}
                     style={style}
                     updateModal={updateModal}
                   />
@@ -102,7 +102,7 @@ const LabTesting = () => {
 
                 <TabContent id="tab2" activeTab={activeTab}>
                   <Tab2
-                    data={appList.data}
+                    data={appList?.data?.filter(app => app.applicationStatus === "completed")}
                     style={style}
                     updateModal={updateModal}
                   />
@@ -138,28 +138,11 @@ const LabTesting = () => {
       }
 
       {
-        modal.state === "showPaymentImg" &&
+        modal.state === "showImg" &&
         <DocImg
           show
-          title="Payment Image"
-          handleClose={closeModal}
-        />
-      }
-
-      {
-        modal.state === "showCertificateImg" &&
-        <DocImg
-          show
-          title="Certificate Image"
-          handleClose={closeModal}
-        />
-      }
-
-      {
-        modal.state === "showLacSampleImg" &&
-        <DocImg
-          show
-          title="Lac Sample Image"
+          title={modal.data.title}
+          imgUrl={modal.data.imgUrl}
           handleClose={closeModal}
         />
       }
