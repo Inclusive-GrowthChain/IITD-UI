@@ -6,12 +6,13 @@ const PageOne = ({ onButtonClick, bid }) => {
 
   useEffect(() => {
     console.log(bid)
-    bid.bids.map((bid) => {
-      if (bid.status !== "pending") {
+    bid.bids.forEach((bid) => {
+      if (bid.status) {
+        // console.log("Hi")
         setSelected(true);      
       }
     })
-  }, []);
+  }, [bid]);
 
   return (
     <main

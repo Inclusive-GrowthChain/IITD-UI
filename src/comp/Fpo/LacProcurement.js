@@ -78,11 +78,6 @@ const LacProcurement = () => {
 
       <div className="list_container">
         <div className="store_wrapper">
-          <button className="store_btn" onClick={() => updateModal("addPurchase")}>
-            Add Purchase
-          </button>
-        </div>
-        <div className="store_wrapper" style={{ marginRight: "150px" }}>
           <button className="store_btn" onClick={() => updateModal("add")}>
             Add Item
           </button>

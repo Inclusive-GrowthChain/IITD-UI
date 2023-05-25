@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import logo from "../../../../assets/img/logo.png";
+// import logo from "../../../../assets/img/logo.png";
 import Modal from "react-bootstrap/Modal";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -8,14 +8,14 @@ import { root } from "../../../../utils/endPoints";
 const PageThree = ({ onButtonClick, outerbid }) => {
   const [showReport, setShowReport] = useState(false);
   const [currentReport, setCurrentReport] = useState({});
-  const [showReject, setShowReject] = useState(false);
-  const [showApprove, setShowApprove] = useState(false);
+  // const [showReject, setShowReject] = useState(false);
+  // const [showApprove, setShowApprove] = useState(false);
   const [fpo, setFpo] = useState({});
   const [status, setStatus] = useState("")
 
   const handleShowReport = () => setShowReport(true);
   const handleCloseReport = () => setShowReport(false);
-  const handleShowReject = () => setShowReject(true);
+  // const handleShowReject = () => setShowReject(true);
 
   useEffect(() => {
     console.log(outerbid);
@@ -73,7 +73,7 @@ const PageThree = ({ onButtonClick, outerbid }) => {
             top: "7rem",
           }}>
             <button
-              disabled={status === "test-report-added"}
+              disabled={status === "test-report-requested"}
               onClick={() => onButtonClick("pagefour")}
               style={{ backgroundColor: 'white' }}
             >
@@ -146,7 +146,7 @@ const PageThree = ({ onButtonClick, outerbid }) => {
             )
           }
           {
-            // fpo.testReports && fpo.testReports.map((report, index) => (
+            fpo.testReports && (
               <div className="row m-2">
                 <div className="col-lg-6">
                   <label>Report</label>
@@ -174,7 +174,7 @@ const PageThree = ({ onButtonClick, outerbid }) => {
                   </button>
                 </div>
               </div>
-            // ))
+            )
           }
           <div className="row m-2">
             <div className="col-lg-6">
@@ -184,7 +184,7 @@ const PageThree = ({ onButtonClick, outerbid }) => {
                 disabled={!fpo.testReports || status==="completed"}
                 onClick={(e) => {
                   e.preventDefault();
-                  handleShowReject()
+                  // handleShowReject()
                 }}
               >
                 Reject Test Reports

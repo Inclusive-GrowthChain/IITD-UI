@@ -54,8 +54,8 @@ function Form() {
   const { mutate } = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
-      localStorage.setItem("access_token", data.token)
-      localStorage.setItem("userId", data.data._id)
+      // localStorage.setItem("access_token", data.token)
+      // localStorage.setItem("userId", data.data._id)
       setTokenToApp(data.token)
       logIn(data.data)
       let to = navigationList[data.data.type]

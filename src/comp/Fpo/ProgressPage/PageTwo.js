@@ -9,7 +9,7 @@ import { useAuthStore } from "../../../store/useAuthStore";
 import { root } from "../../../utils/endPoints";
 import Modal from "react-bootstrap/Modal";
 
-const PageTwo = ({ onButtonClick, bid }) => {
+const PageTwo = ({ onButtonClick, bid, handleClose }) => {
   const [status, setStatus] = useState("")
   const fpoId = useAuthStore(s => s.userDetails._id)
   const [showInvoice, setShowInvoice] = useState(false);
@@ -26,17 +26,18 @@ const PageTwo = ({ onButtonClick, bid }) => {
     }
   })
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: sendTestReports,
     onSuccess: () => {
       queryClient.invalidateQueries("auction/")
+      handleClose()
     }
   })
 
   useEffect(() => {
     console.log(bid);
-    bid.bids.map((item) => {
-      if (item.fpoId === localStorage.getItem("userId")) {
+    bid.bids.forEach((item) => {
+      if (item.fpoId === fpoId) {
         reset({
           auctionId: bid.id,
           bidId: item.id
@@ -44,7 +45,7 @@ const PageTwo = ({ onButtonClick, bid }) => {
         setStatus(item.status)
       }
     });
-  }, [bid]);
+  }, [bid, fpoId, reset]);
 
   return (
     <main
@@ -97,7 +98,7 @@ const PageTwo = ({ onButtonClick, bid }) => {
                 e.preventDefault()
                 onButtonClick("pagethree")
               }}
-              disabled={!status}
+              disabled={status === "requested-test-report"}
               style={{ backgroundColor: "white" }}
             >
               <ArrowForwardIosIcon />
@@ -158,7 +159,7 @@ const PageTwo = ({ onButtonClick, bid }) => {
             </div>
           </div>
           {
-            !status && (
+            status === "requested-test-report" && (
               <div className="row m-2">
                 <div className="col-lg-6">
                   <label>Required Test Reports</label>
@@ -176,7 +177,7 @@ const PageTwo = ({ onButtonClick, bid }) => {
             )
           }
           {
-            status && (
+            status !== "requested-test-report" && (
               <div className="row m-2">
                 <div className="col-lg-6">
                   <label>Required Test Reports</label>
@@ -206,7 +207,7 @@ const PageTwo = ({ onButtonClick, bid }) => {
             )
           }
           {
-            !status && (
+            status === "requested-test-report" && (
               <div className="row m-2">
                 <div className="col-lg-12">
                   <button

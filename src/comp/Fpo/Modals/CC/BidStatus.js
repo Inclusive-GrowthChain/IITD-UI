@@ -38,16 +38,16 @@ function BidStatus({
         {
           {
             pageone: (
-              <PageOne onButtonClick={nextPage} bid={bid} />
+              <PageOne onButtonClick={nextPage} bid={bid} handleClose={handleClose} />
             ),
             pagetwo: (
-              <PageTwo onButtonClick={nextPage} bid={bid} />
+              <PageTwo onButtonClick={nextPage} bid={bid} handleClose={handleClose} />
             ),
             pagethree: (
-              <PageThree onButtonClick={nextPage} bid={bid} />
+              <PageThree onButtonClick={nextPage} bid={bid} handleClose={handleClose} />
             ),
             pagefour: (
-              <PageFour onButtonClick={nextPage} bid={bid} />
+              <PageFour onButtonClick={nextPage} bid={bid} handleClose={handleClose} />
             ),
           }[page]
         }

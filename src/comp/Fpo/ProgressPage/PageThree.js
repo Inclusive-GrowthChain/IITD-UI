@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { sendInvoice } from "../../../actions/fpo";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import FileInput from "../../Common/FileInput";
 import { useAuthStore } from "../../../store/useAuthStore";
 import { root } from "../../../utils/endPoints";
 import Modal from "react-bootstrap/Modal";
 
-const PageThree = ({ onButtonClick, bid }) => {
+const PageThree = ({ onButtonClick, bid, handleClose }) => {
   const [showInvoice, setShowInvoice] = useState(false);
   const fpoId = useAuthStore(s => s.userDetails._id)
   const [status, setStatus] = useState("")
@@ -26,17 +26,18 @@ const PageThree = ({ onButtonClick, bid }) => {
     }
   })
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: sendInvoice,
     onSuccess: () => {
       queryClient.invalidateQueries("auction/")
+      handleClose()
     }
   })
 
   useEffect(() => {
     console.log(bid);
-    bid.bids.map((item) => {
-      if (item.fpoId === localStorage.getItem("userId")) {
+    bid.bids.forEach((item) => {
+      if (item.fpoId === fpoId) {
         reset({
           auctionId: bid.id,
           bidId: item.id
@@ -44,7 +45,7 @@ const PageThree = ({ onButtonClick, bid }) => {
         setStatus(item.status)
       }
     });
-  }, [bid]);
+  }, [bid, fpoId, reset]);
 
   return (
     <main

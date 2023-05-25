@@ -79,15 +79,15 @@ const Store = () => {
       </div>
 
       <div className="list_container">
-        <div className="store_wrapper">
+        {/* <div className="store_wrapper">
           <button
             className="store_btn"
             onClick={() => updateModal("addSale")}
           >
             Add Sale
           </button>
-        </div>
-        <div className="store_wrapper" style={{ marginRight: "150px" }}>
+        </div> */}
+        <div className="store_wrapper">
           <button
             className="store_btn"
             onClick={() => updateModal("add")}
