@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Modal } from "react-bootstrap";
 
 import { addProduce } from "../../../actions/farmer";
+import { useAuthStore } from "../../../store/useAuthStore";
 
 const errStyle = { fontSize: "12px", margin: 0 }
 
@@ -10,7 +11,7 @@ function SellProduce({ show, handleClose }) {
   const queryClient = useQueryClient()
   const { register, formState: { errors }, handleSubmit, reset } = useForm({
     defaultValues: {
-      farmerId: localStorage.getItem("userId"),
+      farmerId: useAuthStore(s => s.userDetails._id),
       lacStrainType: "",
       treeSource: "",
       origin: "",

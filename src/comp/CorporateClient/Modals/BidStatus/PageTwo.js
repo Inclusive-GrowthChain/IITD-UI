@@ -162,8 +162,8 @@ const PageTwo = ({ onButtonClick, outerbid = [] }) => {
                           //   return
                           // }
                           let tempData = {}
-                          tempData.bidId = outerbid.id
-                          tempData.bidbidId = bid.id
+                          tempData.auctionId = outerbid.id
+                          tempData.bidId = bid.id
                           setData(tempData)
                           setCurrentFPO(bid)
                           confirmOrder(e)

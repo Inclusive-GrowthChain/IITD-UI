@@ -1,85 +1,88 @@
 import Modal from "react-bootstrap/Modal";
-import axios from "axios";
-import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { placeBidForAuction } from "../../../../actions/fpo";
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getFpoList } from "../../../../actions/user";
+import Loader from "../../../Common/Loader";
+import { useAuthStore } from "../../../../store/useAuthStore";
 
 function PlaceBid({ show, handleClose, bid }) {
-  const [bidAmount, setBidAmount] = useState(0);
+  const queryClient = useQueryClient()
+  const [data, setData] = useState({
+    fpoId: useAuthStore(s => s.userDetails._id),
+    fpoName: useAuthStore(s => s.userDetails.fpoName),
+    fpoPhone: useAuthStore(s => s.userDetails.contactNumber),
+    auctionId: bid.id
+  })
 
-  const resetInputs = () => {
-    setBidAmount(0);
-  };
+  // const { isLoading, data: fpoData } = useQuery({
+  //   queryKey: ["userList/fpo"],
+  //   queryFn: getFpoList,
+  // })
 
-  const confirmBid = async () => {
-    const newBid = {
-      "fpoName": bid.fpoName,
-      "fpoPhone": bid.fpoPhone,
-      "bidAmount": bidAmount,
-      "requiredTestReports": bid.requiredTestReports
-    };
+  const { mutate, isLoading } = useMutation({
+    mutationFn: placeBidForAuction,
+    onSuccess: () => {
+      queryClient.invalidateQueries("auction/")
+      handleClose()
+    }
+  })
 
-    await axios
-      .post(`http://13.232.131.203:3000/api/auction/${bid.id}/bid`, newBid)
-      .then((response) => {
-        console.log(response.data);
-        resetInputs();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const handlePlaceBid = (e) => {
+    e.preventDefault();
 
-    window.location.reload();
+    mutate({data})
+    handleClose()
   }
 
-  return (
-    <Modal
-      show={show}
-      onHide={handleClose}
-    >
-      <Modal.Header closeButton>
-        Place a Bid
-      </Modal.Header>
-      <Modal.Body>
-        <div className="bid_title">
-          <div className="row">
-            <div className="col-6">
-              <label>Enter the Price/kg</label>
-            </div>
-            <div className="col-6">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter the price"
-                onChange={(e) => {
-                  setBidAmount(e.target.value);
-                }}
-              />
-            </div>
-          </div>
-          <div>
-            <div className="row m-1">
-              <button
-                className="mt-4"
-                style={{
-                  backgroundColor: "#064420",
-                  alignItems: "center",
-                  borderRadius: "5px",
-                  border: "none",
-                  padding: "0.25rem 1rem",
-                  color: "#fff",
-                }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  confirmBid();
-                }}
-              >
-                Submit
-              </button>
-            </div>
-          </div>
-        </div>
-      </Modal.Body>
-    </Modal>
-  )
-}
+    if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
-export default PlaceBid
+    return (
+      <Modal
+        show={show}
+        onHide={handleClose}
+      >
+        <Modal.Header closeButton>
+          Place a Bid
+        </Modal.Header>
+        <Modal.Body>
+          <div className="bid_title">
+            <div className="row">
+              <div className="col-6">
+                <label>Enter the Price/kg</label>
+              </div>
+              <div className="col-6">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter the price"
+                  onChange={(e) => setData({ ...data, bidAmount: e.target.value })}
+                />
+              </div>
+            </div>
+            <div>
+              <div className="row m-1">
+                <button
+                  className="mt-4"
+                  style={{
+                    backgroundColor: "#064420",
+                    alignItems: "center",
+                    borderRadius: "5px",
+                    border: "none",
+                    padding: "0.25rem 1rem",
+                    color: "#fff",
+                  }}
+                  onClick={handlePlaceBid}
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+    )
+  }
+
+  export default PlaceBid

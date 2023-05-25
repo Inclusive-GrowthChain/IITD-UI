@@ -6,26 +6,27 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const PageFour = ({ onButtonClick, outerbid }) => {
   const [showInvoice, setShowInvoice] = useState(false);
-  const [showReject, setShowReject] = useState(false);
-  const [showApprove, setShowApprove] = useState(false);
+  // const [showReject, setShowReject] = useState(false);
+  // const [showApprove, setShowApprove] = useState(false);
   const [fpo, setFpo] = useState({});
+  const [status, setStatus] = useState("")
 
   const handleShowInvoice = () => setShowInvoice(true);
   const handleCloseInvoice = () => setShowInvoice(false);
-  const handleShowReject = () => setShowReject(true);
-  const handleCloseReject = () => setShowReject(false);
-  const handleShowApprove = () => setShowApprove(true);
-  const handleCloseApprove = () => setShowApprove(false);
+  // const handleShowReject = () => setShowReject(true);
+  // const handleCloseReject = () => setShowReject(false);
+  // const handleShowApprove = () => setShowApprove(true);
+  // const handleCloseApprove = () => setShowApprove(false);
 
-  const confirmReject = (e) => {
-    e.preventDefault();
-    setShowReject(false);
-  };
+  // const confirmReject = (e) => {
+  //   e.preventDefault();
+  //   setShowReject(false);
+  // };
 
-  const confirmApprove = (e) => {
-    e.preventDefault();
-    setShowApprove(false);
-  };
+  // const confirmApprove = (e) => {
+  //   e.preventDefault();
+  //   setShowApprove(false);
+  // };
 
   useEffect(() => {
     console.log(outerbid);
@@ -37,8 +38,9 @@ const PageFour = ({ onButtonClick, outerbid }) => {
         tempFpo.fpoPhone = bid.fpoPhone;
         tempFpo.bidAmount = bid.bidAmount;
         tempFpo.invoice = bid.invoice;
-        tempFpo.invoiceDate = bid.invoiceAddedAt.substring(0, 10);
+        tempFpo.invoiceDate = bid.invoiceAddedAt?.substring(0, 10);
         setFpo(tempFpo);
+        setStatus(bid.status)
       }
     });
   }, [outerbid])
@@ -144,45 +146,65 @@ const PageFour = ({ onButtonClick, outerbid }) => {
               />
             </div>
           </div>
-          <div className="row m-2">
-            <div className="col-lg-6">
-              <label>Date of Payment</label>
-            </div>
-            <div className="col-lg-6">
-              <input
-                className="form-control"
-                type="text"
-                disabled={true}
-                value={fpo.invoiceDate}
-              />
-            </div>
-          </div>
-          <div className="row m-2">
-            <div className="col-lg-6">
-              <label>Invoice</label>
-            </div>
-            <div className="col-lg-6">
-              <button
-                style={{
-                  backgroundColor: "#064420",
-                  color: "#fff",
-                  alignItems: "center",
-                  borderRadius: "5px",
-                  border: "none",
-                  padding: "0.25rem 1rem",
-                  width: "100%",
-                  fontSize: "1rem",
-                  lineHeight: "2rem",
-                }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleShowInvoice();
-                }}
-              >
-                view
-              </button>
-            </div>
-          </div>
+          {
+            (status === "invoice-added" || status === "completed") && (
+              <div className="row m-2">
+                <div className="col-lg-6">
+                  <label>Date of Payment</label>
+                </div>
+                <div className="col-lg-6">
+                  <input
+                    className="form-control"
+                    type="text"
+                    disabled={true}
+                    value={fpo.invoiceDate}
+                  />
+                </div>
+              </div>
+            )
+          }
+          {
+            (status === "invoice-added" || status === "completed") && (
+              <div className="row m-2">
+                <div className="col-lg-6">
+                  <label>Invoice</label>
+                </div>
+                <div className="col-lg-6">
+                  <button
+                    style={{
+                      backgroundColor: "#064420",
+                      color: "#fff",
+                      alignItems: "center",
+                      borderRadius: "5px",
+                      border: "none",
+                      padding: "0.25rem 1rem",
+                      width: "100%",
+                      fontSize: "1rem",
+                      lineHeight: "2rem",
+                    }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleShowInvoice();
+                    }}
+                  >
+                    view
+                  </button>
+                </div>
+              </div>
+            )
+          }
+          {
+            (status !== "invoice-added" && status !== "completed") && (
+              <div className="row m-2">
+                <div className="col-lg-6">
+                  <label>Invoice</label>
+                </div>
+                <div className="col-lg-6">
+                  Waiting for FPO to add invoice
+                </div>
+              </div>
+            )
+          }
 
           {/* <div className="row m-2">
             <div className="col-lg-6">
@@ -224,7 +246,7 @@ const PageFour = ({ onButtonClick, outerbid }) => {
         </Modal.Body>
       </Modal>
 
-      <Modal show={showReject} onHide={handleCloseReject}>
+      {/* <Modal show={showReject} onHide={handleCloseReject}>
         <Modal.Header closeButton>Invoice</Modal.Header>
         <Modal.Body>
           <p>
@@ -258,7 +280,7 @@ const PageFour = ({ onButtonClick, outerbid }) => {
             </button>
           </div>
         </Modal.Body>
-      </Modal>
+      </Modal> */}
     </main>
   );
 };

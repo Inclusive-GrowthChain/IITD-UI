@@ -24,21 +24,23 @@ export function getBidding() {
 export function requestTestReports(data) {
   return sendApiReq({
     method: "post",
-    url: endPoints.auction + `/${data.data.bidId}/bid/${data.data.bidbidId}/testreport`,
+    url: endPoints.auction + `/${data.data.auctionId}/bid/${data.data.bidId}/testreport`,
   })
 }
 
 export function makePaymentToFpo(data) {
-  const formData = new FormData()
-  formData.append("invoice", data.invoice)
-  formData.append("amount", data.amount)
-  formData.append("invoiceNumber", data.invoiceNumber)
-  formData.append("invoiceDate", data.invoiceDate)
-  // console.log(data)
+  let dataObject = {
+    clientInvoice: data.clientInvoice,
+    clientAmount: data.clientAmount,
+    clientInvoiceNumber: data.clientInvoiceNumber,
+    clientInvoiceDate: data.clientInvoiceDate,
+  }
+
+  console.log(dataObject)
 
   return sendApiReq({
     method: "post",
-    url: endPoints.auction + `/${data.bidId}/bid/${data.bidbidId}/payment`,
-    data: formData
+    url: endPoints.auction + `/${data.auctionId}/bid/${data.bidId}/payment`,
+    data: dataObject
   })
 }

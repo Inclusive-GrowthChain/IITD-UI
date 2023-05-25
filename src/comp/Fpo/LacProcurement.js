@@ -110,6 +110,12 @@ const LacProcurement = () => {
             >
               Not-Procuring
             </button>
+            <button
+              className={`store-tab ${checkActive(3, "active")}`}
+              onClick={() => handleClick(3)}
+            >
+              Check Farmer Produce
+            </button>
           </div>
 
           <div className="panels">
@@ -126,6 +132,13 @@ const LacProcurement = () => {
                 updateModal={updateModal}
               />
             </div>
+
+            {/* <div className={`panel ${checkActive(3, "active")}`}>
+              <Card
+                data={data.data.filter(item => !item.isProcurable)}
+                updateModal={updateModal}
+              />
+            </div> */}
           </div>
         </div>
       </div>
