@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { TabNavItem, TabContent } from "../UIComp/Tabs";
+import { useAuthStore } from "../../store/useAuthStore";
+import ImageViewer from "./Modals/ImageViewer";
+import useModal from "../../hooks/useModal";
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("tab1");
+  const fpo = useAuthStore(s => s.userDetails)
+  const { modal, updateModal, closeModal } = useModal()
 
   return (
     <main id="main_container" className="main_container container-fluid itemContainer">
@@ -52,8 +57,6 @@ const Settings = () => {
                         setActiveTab={setActiveTab}
                       />
                     </ul>
-                    {/* <div className="profile_title">
-                      </div> */}
                     <div className="outlet" style={{ marginBottom: '30px' }}>
                       <TabContent id="tab1" className="setting_content" activeTab={activeTab}>
                         <div>
@@ -71,7 +74,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        Vivek
+                                        {fpo.fpoName}
                                       </label>
                                     </div>
                                   </div>
@@ -87,23 +90,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        FPO1234e
-                                      </label>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-6">
-                                    <div className="form-group focused">
-                                      <label className="form-control-label text-black">
-                                        Password
-                                      </label>
-                                    </div>
-                                  </div>
-                                  <div className="col-lg-6">
-                                    <div className="form-group focused">
-                                      <label className="form-control-label text-black">
-                                        XXDSEF
+                                        {fpo.userName}
                                       </label>
                                     </div>
                                   </div>
@@ -119,7 +106,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        XXXXXXXX,XXX,XXX
+                                        {fpo.address}
                                       </label>
                                     </div>
                                   </div>
@@ -135,7 +122,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        Hyderabad
+                                        {fpo.city}
                                       </label>
                                     </div>
                                   </div>
@@ -151,7 +138,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        Telangana
+                                        {fpo.state}
                                       </label>
                                     </div>
                                   </div>
@@ -167,7 +154,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        500XXX
+                                        {fpo.pinCode}
                                       </label>
                                     </div>
                                   </div>
@@ -183,7 +170,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        +XX-546XXXXX
+                                        {fpo.contactNumber}
                                       </label>
                                     </div>
                                   </div>
@@ -199,7 +186,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        email@email.com
+                                        {fpo.email}
                                       </label>
                                     </div>
                                   </div>
@@ -215,7 +202,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        www.email.com
+                                        {fpo.website}
                                       </label>
                                     </div>
                                   </div>
@@ -231,7 +218,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        12-10-2021
+                                        {fpo.dateOfIncorporation}
                                       </label>
                                     </div>
                                   </div>
@@ -240,15 +227,52 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        PAN Number
+                                        PAN Card Number
                                       </label>
                                     </div>
                                   </div>
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        XXXX-XXXX-XXXX
+                                        {fpo.panNumber}
                                       </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        PAN Card Image
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <button
+                                        style={{
+                                          backgroundColor: "#064420",
+                                          color: "#fff",
+                                          alignItems: "center",
+                                          borderRadius: "5px",
+                                          border: "none",
+                                          padding: "0.25rem 1rem",
+                                          width: "10%",
+                                          minWidth: "100px",
+                                          fontSize: "1rem",
+                                          lineHeight: "2rem",
+                                        }}
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          const imageData = {
+                                            image: fpo.panImage,
+                                            title: "PAN Card Image",
+                                          }
+                                          updateModal("imageViewer", imageData)
+                                        }}
+                                      >
+                                        view
+                                      </button>
                                     </div>
                                   </div>
                                 </div>
@@ -263,7 +287,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        XXXXXXXXXX
+                                        {fpo.registrationNumber}
                                       </label>
                                     </div>
                                   </div>
@@ -279,7 +303,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        CVXXXXXXXX
+                                        {fpo.shareholderNumber}
                                       </label>
                                     </div>
                                   </div>
@@ -295,7 +319,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        XXXXXXXXXX
+                                        {fpo.bankName}
                                       </label>
                                     </div>
                                   </div>
@@ -311,7 +335,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        XXXXXXXXXX
+                                        {fpo.bankAccountNumber}
                                       </label>
                                     </div>
                                   </div>
@@ -327,23 +351,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        XXXXXXXXXX
-                                      </label>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-6">
-                                    <div className="form-group focused">
-                                      <label className="form-control-label text-black">
-                                        Upload Document
-                                      </label>
-                                    </div>
-                                  </div>
-                                  <div className="col-lg-6">
-                                    <div className="form-group focused">
-                                      <label className="form-control-label text-black">
-                                        XXXXXXXXXX
+                                        {fpo.ifscCode}
                                       </label>
                                     </div>
                                   </div>
@@ -359,7 +367,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        XXXXXXXXXX
+                                        {fpo.directorName}
                                       </label>
                                     </div>
                                   </div>
@@ -375,7 +383,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        XXXXXXXXXX
+                                        {fpo.directorContactNumber}
                                       </label>
                                     </div>
                                   </div>
@@ -391,7 +399,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        XXXXXXXXXX
+                                        {fpo.directorGender}
                                       </label>
                                     </div>
                                   </div>
@@ -406,9 +414,30 @@ const Settings = () => {
                                   </div>
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
-                                      <label className="form-control-label text-black">
-                                        XXXXXXXXXX
-                                      </label>
+                                      <button
+                                        style={{
+                                          backgroundColor: "#064420",
+                                          color: "#fff",
+                                          alignItems: "center",
+                                          borderRadius: "5px",
+                                          border: "none",
+                                          padding: "0.25rem 1rem",
+                                          width: "10%",
+                                          minWidth: "100px",
+                                          fontSize: "1rem",
+                                          lineHeight: "2rem",
+                                        }}
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          const imageData = {
+                                            image: fpo.bylawsImage,
+                                            title: "Copy of Bylaws"
+                                          }
+                                          updateModal("imageViewer", imageData)
+                                        }}
+                                      >
+                                        view
+                                      </button>
                                     </div>
                                   </div>
                                 </div>
@@ -416,15 +445,36 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        Certificate of Incorporation
+                                        Incorporation Certificate
                                       </label>
                                     </div>
                                   </div>
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
-                                      <label className="form-control-label text-black">
-                                        XXXXXXXXXX
-                                      </label>
+                                      <button
+                                        style={{
+                                          backgroundColor: "#064420",
+                                          color: "#fff",
+                                          alignItems: "center",
+                                          borderRadius: "5px",
+                                          border: "none",
+                                          padding: "0.25rem 1rem",
+                                          width: "10%",
+                                          minWidth: "100px",
+                                          fontSize: "1rem",
+                                          lineHeight: "2rem",
+                                        }}
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          const imageData = {
+                                            image: fpo.incorporationCertifcateImage,
+                                            title: "Incorporation Certificate"
+                                          }
+                                          updateModal("imageViewer", imageData)
+                                        }}
+                                      >
+                                        view
+                                      </button>
                                     </div>
                                   </div>
                                 </div>
@@ -438,9 +488,30 @@ const Settings = () => {
                                   </div>
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
-                                      <label className="form-control-label text-black">
-                                        XXXXXXXXXX
-                                      </label>
+                                      <button
+                                        style={{
+                                          backgroundColor: "#064420",
+                                          color: "#fff",
+                                          alignItems: "center",
+                                          borderRadius: "5px",
+                                          border: "none",
+                                          padding: "0.25rem 1rem",
+                                          width: "10%",
+                                          minWidth: "100px",
+                                          fontSize: "1rem",
+                                          lineHeight: "2rem",
+                                        }}
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          const imageData = {
+                                            image: fpo.gstCertificate,
+                                            title: "GST Certificate"
+                                          }
+                                          updateModal("imageViewer", imageData)
+                                        }}
+                                      >
+                                        view
+                                      </button>
                                     </div>
                                   </div>
                                 </div>
@@ -448,14 +519,14 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        Lincese Key
+                                        License Key
                                       </label>
                                     </div>
                                   </div>
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        XXXXXXXXXX
+                                        {fpo.licenseKey}
                                       </label>
                                     </div>
                                   </div>
@@ -562,6 +633,17 @@ const Settings = () => {
           </div>
         </div>
       </div>
+
+      {
+        modal.state === "imageViewer" && (
+          <ImageViewer
+            show
+            handleClose={closeModal}
+            data={modal.data}
+          />
+        )
+      }
+
     </main>
   );
 };
