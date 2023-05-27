@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { TabNavItem, TabContent } from "../UIComp/Tabs";
+import { useAuthStore } from "../../store/useAuthStore";
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("tab1");
+  const corporateClient = useAuthStore(s => s.userDetails);
 
   return (
     <main id="main_container" className="main_container container-fluid" style={{ marginTop: "3.188rem" }}>
@@ -63,14 +65,30 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        Name
+                                        Client Name
                                       </label>
                                     </div>
                                   </div>
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        Corporate Client 1
+                                        {corporateClient.clientName}
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        UserName
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {corporateClient.userName}
                                       </label>
                                     </div>
                                   </div>
@@ -86,7 +104,23 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        9XXXXXXXXX
+                                        {corporateClient.contactNumber}
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        CI Number
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {corporateClient.ciNumber}
                                       </label>
                                     </div>
                                   </div>
@@ -102,7 +136,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        9-31/3,blah,blah,blah
+                                        {corporateClient.address}
                                       </label>
                                     </div>
                                   </div>
@@ -118,7 +152,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        XXXXXXXX
+                                        {corporateClient.city}
                                       </label>
                                     </div>
                                   </div>
@@ -134,7 +168,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        Telangana
+                                        {corporateClient.state}
                                       </label>
                                     </div>
                                   </div>
@@ -150,39 +184,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        500XXX
-                                      </label>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-6">
-                                    <div className="form-group focused">
-                                      <label className="form-control-label text-black">
-                                        Telephone Number
-                                      </label>
-                                    </div>
-                                  </div>
-                                  <div className="col-lg-6">
-                                    <div className="form-group focused">
-                                      <label className="form-control-label text-black">
-                                        +XX-546XXXXX
-                                      </label>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-6">
-                                    <div className="form-group focused">
-                                      <label className="form-control-label text-black">
-                                        Fax Number
-                                      </label>
-                                    </div>
-                                  </div>
-                                  <div className="col-lg-6">
-                                    <div className="form-group focused">
-                                      <label className="form-control-label text-black">
-                                        XXXX-XXXXXXX
+                                        {corporateClient.pinCode}
                                       </label>
                                     </div>
                                   </div>
@@ -198,7 +200,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        email@email.com
+                                        {corporateClient.email}
                                       </label>
                                     </div>
                                   </div>
@@ -214,7 +216,39 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        www.email.com
+                                        {corporateClient.website}
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        GST Number
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {corporateClient.gstNumber}
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        License Key
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {corporateClient.licenseKey}
                                       </label>
                                     </div>
                                   </div>

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { TabNavItem, TabContent } from "../UIComp/Tabs";
+import { useAuthStore } from "../../store/useAuthStore";
 
 const Sammunati_Settings = () => {
   const [activeTab, setActiveTab] = useState("tab1");
+  const samunnati = useAuthStore(s => s.userDetails)
 
   return (
     <main id="main_container" className="main_container container-fluid" style={{ marginTop: "3.188rem" }}>
@@ -59,168 +61,152 @@ const Sammunati_Settings = () => {
                         <div >
                           <div className="card-body">
                             <form>
-                              {/* <div className="pl-lg-4">
-                                    <div className="row">
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            Name
-                                          </label>
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            IINRG 1
-                                          </label>
-                                        </div>
-                                      </div>
+                              <div className="pl-lg-4">
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        Name
+                                      </label>
                                     </div>
-                                    <div className="row">
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            Mobile Number
-                                          </label>
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            9XXXXXXXXX
-                                          </label>
-                                        </div>
-                                      </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {samunnati.userName}
+                                      </label>
                                     </div>
-                                    <div className="row">
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            Address
-                                          </label>
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            9-31/3,blah,blah,blah
-                                          </label>
-                                        </div>
-                                      </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        Mobile Number
+                                      </label>
                                     </div>
-                                    <div className="row">
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            City
-                                          </label>
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            XXXXXXXX
-                                          </label>
-                                        </div>
-                                      </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {samunnati.contactNumber}
+                                      </label>
                                     </div>
-                                    <div className="row">
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            State
-                                          </label>
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            Telangana
-                                          </label>
-                                        </div>
-                                      </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        Address
+                                      </label>
                                     </div>
-                                    <div className="row">
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            Pincode
-                                          </label>
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            500XXX
-                                          </label>
-                                        </div>
-                                      </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {samunnati.address}
+                                      </label>
                                     </div>
-                                    <div className="row">
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            Telephone Number
-                                          </label>
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            +XX-546XXXXX
-                                          </label>
-                                        </div>
-                                      </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        City
+                                      </label>
                                     </div>
-                                    <div className="row">
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            Fax Number
-                                          </label>
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            XXXX-XXXXXXX
-                                          </label>
-                                        </div>
-                                      </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {samunnati.city}
+                                      </label>
                                     </div>
-                                    <div className="row">
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            Email
-                                          </label>
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            email@email.com
-                                          </label>
-                                        </div>
-                                      </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        State
+                                      </label>
                                     </div>
-                                    <div className="row">
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            Website
-                                          </label>
-                                        </div>
-                                      </div>
-                                      <div className="col-lg-6">
-                                        <div className="form-group focused">
-                                          <label className="form-control-label text-black">
-                                            www.email.com
-                                          </label>
-                                        </div>
-                                      </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {samunnati.state}
+                                      </label>
                                     </div>
-                                  </div> */}
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        Pincode
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {samunnati.pinCode}
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        Email
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {samunnati.email}
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        Website
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {samunnati.website}
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        License Key
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {samunnati.licenseKey}
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </form>
                           </div>
                         </div>
