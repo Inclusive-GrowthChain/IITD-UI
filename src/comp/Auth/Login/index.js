@@ -94,25 +94,36 @@ const Login = () => {
         </p>
       </div>
 
-      <FpoSignup
-        show={modal === "Fpo"}
-        close={closeModal}
-      />
+      {
+        modal === "Fpo" &&
+        <FpoSignup
+          show
+          close={closeModal}
+        />
+      }
+      {
+        modal === "Nisa" &&
+        <NisaSignup
+          show
+          close={closeModal}
+        />
+      }
 
-      <NisaSignup
-        show={modal === "Nisa"}
-        close={closeModal}
-      />
+      {
+        modal === "Samunnati" &&
+        <SamunnatiSignup
+          show
+          close={closeModal}
+        />
+      }
 
-      <SamunnatiSignup
-        show={modal === "Samunnati"}
-        close={closeModal}
-      />
-
-      <CorporateClientSignup
-        show={modal === "CorporateClient"}
-        close={closeModal}
-      />
+      {
+        modal === "CorporateClient" &&
+        <CorporateClientSignup
+          show
+          close={closeModal}
+        />
+      }
     </div>
   )
 }

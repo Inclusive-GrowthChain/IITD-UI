@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 
@@ -54,8 +54,6 @@ function Form() {
   const { mutate } = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
-      // localStorage.setItem("access_token", data.token)
-      // localStorage.setItem("userId", data.data._id)
       setTokenToApp(data.token)
       logIn(data.data)
       let to = navigationList[data.data.type]
@@ -118,10 +116,6 @@ function Form() {
           style={visiblityIconStyle}
         />
       </div>
-
-      <Link to="/forget-password" className="pass__contant">
-        Forgot password?
-      </Link>
 
       {
         errors.password &&
