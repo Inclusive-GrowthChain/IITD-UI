@@ -15,9 +15,7 @@ const endPoints = {
   uploadImg: '/document',
   auction: "/auction",
   user: "/user",
-
-  // Corporate Client
-  // corporateClient: {},
+  getUserDetilas: "/loanWindow/userDetails",
 
   // Nisa
   nisa: {

@@ -17,6 +17,12 @@ export function login(data) {
   })
 }
 
+export function getUserDetails() {
+  return sendApiReq({
+    url: endPoints.getUserDetilas
+  })
+}
+
 export function fpoSignup(data) {
   return sendApiReq({
     method: "post",

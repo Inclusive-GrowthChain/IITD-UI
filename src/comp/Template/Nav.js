@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useAuthStore } from "../../store/useAuthStore";
+import { cookies } from "../../utils/sendApiReq";
 
 import PersonIcon from "@mui/icons-material/Person";
 import logo from "../../assets/img/logo.png";
@@ -14,9 +15,8 @@ function Nav({ title, toggleSidebar }) {
 
   const logout = e => {
     e.preventDefault()
-    localStorage.clear()
-    sessionStorage.clear()
     queryClient.clear()
+    cookies.remove("IITD")
     logOut()
     navigate("/")
   }

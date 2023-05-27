@@ -1,5 +1,11 @@
 import { lazy, Suspense } from 'react';
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { useQuery } from '@tanstack/react-query';
+
+import { getUserDetails } from './actions/auth';
+import { useAuthStore } from "./store/useAuthStore";
+import { cookies } from './utils/sendApiReq';
+
 import Loader from './comp/Common/Loader';
 
 const Register = lazy(() => import("./comp/Auth/Register"))
@@ -56,6 +62,39 @@ const CorporateClientSettings = lazy(() => import("./comp/CorporateClient/Settin
 const CorporateClientWrapper = lazy(() => import("./comp/CorporateClient"))
 
 function App() {
+  const logIn = useAuthStore(s => s.logIn)
+  const navigate = useNavigate()
+
+  const { isLoading, fetchStatus } = useQuery({
+    queryFn: getUserDetails,
+    queryKey: ["user-detail"],
+    enabled: !!cookies.get("IITD"),
+    onSuccess(data) {
+      console.log("kjhgfds")
+      logIn(data)
+      const navigationList = {
+        fpo: "farmer",
+        nisa: "crop-advisory",
+        admin: "farmer",
+        farmer: "dashboard",
+        samunnati: "fpo-loan",
+        "iit-dhanbad": "dashboard",
+        "corporateclient": "lac-bidding",
+      }
+
+      let to = navigationList[data.type]
+
+      if (data.type === "lendingpartner") {
+        to = navigationList["samunnati"]
+        navigate(`/samunnati/${to}`)
+        return
+      }
+      if (to) navigate(`/${data.type}/${to}`)
+    }
+  })
+
+  if (isLoading && fetchStatus !== "idle") return <Loader wrapperCls='h-screen' />
+
   return (
     <Suspense fallback={<Loader wrapperCls='h-screen' />}>
       <Routes>
