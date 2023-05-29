@@ -67,6 +67,7 @@ function ApproveLoanApp({ show, data, handleClose, closeAll }) {
       windowId: data.windowId,
       status: "approved",
       id: data.id,
+      isFpo: true
     })
   }
 

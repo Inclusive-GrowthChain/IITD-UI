@@ -44,6 +44,7 @@ function RejectLoanApp({ show, data, handleClose, closeAll }) {
       reason: formData.reason,
       status: "rejected",
       id: data.id,
+      isFpo: true
     })
   }
 

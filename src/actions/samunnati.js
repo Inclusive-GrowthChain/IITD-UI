@@ -27,11 +27,15 @@ export function updateLoanWindowStatus(data) {
 }
 
 export function updateLoanStatus(data) {
+  let { id, windowId, isFpo, ...rest } = data
+
+  let url = `${endPoints.loanwindow}/${windowId}/${isFpo ? "fpoloan" : "loan"}/${data.id}/approval`
+
   return sendApiReq({
+    successMsg: "Loan status updated successfully",
     method: "put",
-    url: `${endPoints.loanwindow}/${data.windowId}/fpoloan/${data.id}/approval`,
-    data,
-    successMsg: "Loan status updated successfully"
+    data: rest,
+    url,
   })
 }
 
