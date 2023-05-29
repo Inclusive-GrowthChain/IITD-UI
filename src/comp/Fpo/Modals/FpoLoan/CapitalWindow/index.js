@@ -57,6 +57,7 @@ function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = 
       windowId: nanoid(10),
       requestedAmount: "",
       windowPeriod: "",
+      maxLoanPeriod: 25,
       kycDocuments: [
         { name: "moa", doc: user.bylawsImage },
         { name: "aoa", doc: user.bylawsImage },
@@ -125,6 +126,8 @@ function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = 
 
     let is_oD_Empty = data.otherDetails.some(a => !a.doc)
     if (is_oD_Empty) return errorNotify("Please upload all the neccessary images in Other Details")
+
+    if (data.windowPeriod > 24) return errorNotify("Please selecte tenure below 25")
 
     mutate(data)
   }

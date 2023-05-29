@@ -11,11 +11,12 @@ const endPoints = {
   samunnatiSignup: "/signup/samunnati",
   corporateClientSignup: "/signup/corporateclient",
 
+  getUserDetilas: "/loanWindow/userDetails",
+  loanHistory: "/loans/history",
   loanwindow: "/loanwindow",
   uploadImg: '/document',
   auction: "/auction",
   user: "/user",
-  getUserDetilas: "/loanWindow/userDetails",
 
   // Nisa
   nisa: {

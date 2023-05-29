@@ -1,5 +1,5 @@
 
-function LoanHistory({ theadStyle, tbodyStyle }) {
+function LoanHistory({ theadStyle, tbodyStyle, data = [] }) {
   return (
     <div className="card_table2">
       <div className=" table-responsive">
@@ -16,14 +16,18 @@ function LoanHistory({ theadStyle, tbodyStyle }) {
           </thead>
 
           <tbody style={tbodyStyle}>
-            <tr>
-              <td>Farmer Id</td>
-              <td>Farmer Name</td>
-              <td>2022-800-07</td>
-              <td>01-05-2022</td>
-              <td>₹ 98765</td>
-              <td> 13-07-2022</td>
-            </tr>
+            {
+              data.map(d => (
+                <tr key={d.id}>
+                  <td>{d?.value?.loanUser}</td>
+                  <td></td>
+                  <td>{d?.value?.loanId}</td>
+                  <td>{d?.value?.loanCreatedAt?.substring(0, 10)}</td>
+                  <td>₹ {d?.value?.loanAmount}</td>
+                  <td></td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>

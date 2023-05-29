@@ -70,7 +70,6 @@ function App() {
     queryKey: ["user-detail"],
     enabled: !!cookies.get("IITD"),
     onSuccess(data) {
-      console.log("kjhgfds")
       logIn(data)
       const navigationList = {
         fpo: "farmer",

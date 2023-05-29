@@ -109,6 +109,17 @@ export function getLoanwindow({ windowType = "farmer" }) {
   })
 }
 
+export function getLoanHistory({ type = "fpo", userId }) {
+  return sendApiReq({
+    url: endPoints.loanHistory,
+    params: {
+      status: "approved",
+      userId,
+      type,
+    },
+  })
+}
+
 export function getActiveLoanwindow({ windowType = "fpo", fpoId }) {
   let url = `${endPoints.loanwindow}/activeLoanWindow/${windowType}`
   if (fpoId) url = `${url}?fpoId=${fpoId}`
@@ -186,7 +197,6 @@ export function placeBidForAuction(data) {
 }
 
 export function sendTestReports(data) {
-  // const formData = new FormData()
   let dataObject = {
     requiredTestReports: data.requiredTestReports,
   }
@@ -198,9 +208,6 @@ export function sendTestReports(data) {
 }
 
 export function sendInvoice(data) {
-  // const formData = new FormData()
-  // console.log(data.invoice)
-  // formData.append("invoice", data.invoice)
   let dataObject = {
     invoice: data.invoice,
   }

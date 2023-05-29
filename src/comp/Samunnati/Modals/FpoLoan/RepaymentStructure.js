@@ -20,6 +20,8 @@ const btnStyle = {
 function RepaymentStructure({ show, handleClose, data, windowType }) {
   const { modal, updateModal, closeModal } = useModal()
 
+  const repayments = data?.FPOrepaymentStructure || []
+
   return (
     <Modal
       size="xl"
@@ -63,22 +65,24 @@ function RepaymentStructure({ show, handleClose, data, windowType }) {
 
             <tbody>
               {
-                data?.windowRepaymentStructure?.map((window) => (
-                  <tr key={window.id}>
-                    <td>{window.id}</td>
-                    <td>{window.repaymentDate}</td>
-                    <td>{window.emi}</td>
-                    <td>
-                      <button
-                        style={btnStyle}
-                        onClick={() => updateModal("showRepayment", { ...window, lWId: data.id })}
-                      >
-                        View
-                      </button>
-                    </td>
-                    <td>{window.balance}</td>
-                  </tr>
-                ))
+                repayments
+                  ?.filter(a => a.emi)
+                  ?.map((window) => (
+                    <tr key={window.id}>
+                      <td>{window.id}</td>
+                      <td>{window.repaymentDate}</td>
+                      <td>{window.emi}</td>
+                      <td>
+                        <button
+                          style={btnStyle}
+                          onClick={() => updateModal("showRepayment", { ...window, lWId: data.id })}
+                        >
+                          View
+                        </button>
+                      </td>
+                      <td>{window.balance}</td>
+                    </tr>
+                  ))
               }
             </tbody>
           </table>

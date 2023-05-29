@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQueries } from "@tanstack/react-query";
 
-import { getLoanwindow } from "../../../actions/fpo";
+import { getLoanHistory, getLoanwindow } from "../../../actions/fpo";
 import useModal from "../../../hooks/useModal";
 
 import AggRepaymentStructure from "../Modals/FarmerLoan/AggRepaymentStructure";
@@ -12,6 +12,7 @@ import InterestRate from "../Modals/FarmerLoan/InterestRate";
 import ApprovedLoans from "./ApprovedLoans";
 import LoanHistory from "./LoanHistory";
 import Loader from '../../Common/Loader';
+import { useAuthStore } from "../../../store/useAuthStore";
 
 const theadStyle = {
   color: "#064420",
@@ -29,19 +30,30 @@ const tbodyStyle = {
 
 function FarmerLoan() {
   const { modal, updateModal, closeModal } = useModal()
-  // const [recieveApplication, setRecieveApplication] = useState(false)
   const [activeIndex, setActiveIndex] = useState(1)
+  const userId = useAuthStore(s => s.userDetails._id)
 
-  const { isLoading, data } = useQuery({
-    queryKey: ["loanwindow", "farmer"],
-    queryFn: getLoanwindow,
+  const [
+    { isLoading, data },
+    { isLoading: isLoading2, data: data2 },
+  ] = useQueries({
+    queries: [
+      {
+        queryKey: ["loanwindow", "farmer"],
+        queryFn: getLoanwindow,
+      },
+      {
+        queryKey: ["loanhistory", "fpo"],
+        queryFn: () => getLoanHistory({ userId }),
+      }
+    ]
   })
 
   const loanWindowList = data?.data || []
 
   const checkActive = (index, className) => activeIndex === index ? className : ""
 
-  if (isLoading) return <Loader wrapperCls="loader-main-right" />
+  if (isLoading || isLoading2) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <main id="main_container" className="main_container container-fluid itemContainer">
@@ -100,6 +112,7 @@ function FarmerLoan() {
             <LoanHistory
               theadStyle={theadStyle}
               tbodyStyle={tbodyStyle}
+              data={data2}
             />
           </div>
         </div>
