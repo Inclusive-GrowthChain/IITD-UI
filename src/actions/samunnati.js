@@ -29,7 +29,7 @@ export function updateLoanWindowStatus(data) {
 export function updateLoanStatus(data) {
   return sendApiReq({
     method: "put",
-    url: `${endPoints.loanwindow}/${data.windowId}/loan/${data.id}/approval`,
+    url: `${endPoints.loanwindow}/${data.windowId}/fpoloan/${data.id}/approval`,
     data,
     successMsg: "Loan status updated successfully"
   })
