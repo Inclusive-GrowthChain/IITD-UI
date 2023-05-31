@@ -1,4 +1,6 @@
+import { useQueryClient } from "@tanstack/react-query";
 import Modal from "react-bootstrap/Modal";
+
 import useModal from "../../../../hooks/useModal";
 
 import ApproveLoanApp from "./ApproveLoanApp";
@@ -70,8 +72,11 @@ const list = [
 
 function PendingLoanApp({ show, handleClose, data, setLoanWindow }) {
   const { modal, updateModal, closeModal } = useModal()
+  const queryClient = useQueryClient()
 
   const closeAll = (status, id) => {
+    queryClient.invalidateQueries(["sumunnati/loanwindow", "fpo"])
+
     setLoanWindow(pr => ({
       ...pr,
       loans: pr.loans.map(l => {

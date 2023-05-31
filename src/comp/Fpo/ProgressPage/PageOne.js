@@ -5,11 +5,9 @@ const PageOne = ({ onButtonClick, bid }) => {
   const [selected, setSelected] = useState(false);
 
   useEffect(() => {
-    console.log(bid)
     bid.bids.forEach((bid) => {
       if (bid.status) {
-        // console.log("Hi")
-        setSelected(true);      
+        setSelected(true);
       }
     })
   }, [bid]);

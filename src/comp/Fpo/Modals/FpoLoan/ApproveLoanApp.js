@@ -28,7 +28,9 @@ function ApproveLoanApp({ show, data, handleClose }) {
     closeModal()
     mutate({
       id: data.id,
+      intrest: data.intrest,
       windowId: data.windowId,
+      fpointrest: data.intrest,
       fpoApprovalStatus: "approved",
     })
   }

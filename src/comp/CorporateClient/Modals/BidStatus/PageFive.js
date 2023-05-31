@@ -36,7 +36,6 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
   })
 
   useEffect(() => {
-    console.log(outerbid);
     outerbid.bids.forEach((bid) => {
       if (bid.status) {
         reset({

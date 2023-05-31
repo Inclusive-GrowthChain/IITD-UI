@@ -29,7 +29,6 @@ const PageFour = ({ onButtonClick, outerbid }) => {
   // };
 
   useEffect(() => {
-    console.log(outerbid);
     outerbid.bids.forEach((bid) => {
       if (bid.status) {
         let tempFpo = {};

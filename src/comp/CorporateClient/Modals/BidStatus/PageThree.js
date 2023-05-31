@@ -18,7 +18,6 @@ const PageThree = ({ onButtonClick, outerbid }) => {
   // const handleShowReject = () => setShowReject(true);
 
   useEffect(() => {
-    console.log(outerbid);
     outerbid.bids.forEach((bid) => {
       if (bid.status) {
         let tempFpo = {};
@@ -181,7 +180,7 @@ const PageThree = ({ onButtonClick, outerbid }) => {
               <button
                 className="btn btn-success"
                 style={{ marginTop: '5rem', backgroundColor: '#064420' }}
-                disabled={!fpo.testReports || status==="completed"}
+                disabled={!fpo.testReports || status === "completed"}
                 onClick={(e) => {
                   e.preventDefault();
                   // handleShowReject()

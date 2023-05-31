@@ -35,7 +35,6 @@ const PageTwo = ({ onButtonClick, bid, handleClose }) => {
   })
 
   useEffect(() => {
-    console.log(bid);
     bid.bids.forEach((item) => {
       if (item.fpoId === fpoId) {
         reset({

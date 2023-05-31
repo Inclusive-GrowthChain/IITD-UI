@@ -1,7 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 
 function RepaymentStructure({ show, handleClose, data }) {
-  console.log(data)
   return (
     <Modal
       size="xl"

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { Modal } from "react-bootstrap";
 
 import Step1 from './Step1';
@@ -25,8 +26,10 @@ const backBtnStyle = {
 
 function PendingLoanApp({ show, data, setLoanWindow, handleClose }) {
   const [step, setStep] = useState(1)
+  const queryClient = useQueryClient()
 
   const closeAll = (status, id) => {
+    queryClient.invalidateQueries(["sumunnati/loanwindow", "farmer"])
     setLoanWindow(pr => ({
       ...pr,
       loans: pr.loans.map(l => {

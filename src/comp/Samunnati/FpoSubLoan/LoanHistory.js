@@ -73,8 +73,7 @@ function LoanHistory({ fpoId, grantedAmount, consumedWindowLoanAmount, theadStyl
         <CompletedLoanApp
           show
           fpoId={fpoId}
-          currentLoan={modal.data}
-          currentTransaction={{}}
+          data={modal.data}
           handleClose={closeModal}
         />
       }

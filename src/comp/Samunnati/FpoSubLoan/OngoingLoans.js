@@ -55,8 +55,7 @@ function OngoingLoans({ data = [], theadStyle, tbodyStyle, btnStyle }) {
         modal.state &&
         <OngoingLoanApp
           show
-          currentLoan={modal.data}
-          currentTransaction={{}}
+          data={modal.data}
           handleClose={closeModal}
         />
       }

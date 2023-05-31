@@ -22,6 +22,7 @@ function RepaymentStructure({ show, handleClose, data, windowType }) {
 
   const repayments = data?.FPOrepaymentStructure || []
 
+  // console.log(repayments)
   return (
     <Modal
       size="xl"

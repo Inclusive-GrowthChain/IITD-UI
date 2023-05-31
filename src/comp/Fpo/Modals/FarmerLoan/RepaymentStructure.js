@@ -19,6 +19,7 @@ const btnStyle = {
 function RepaymentStructure({ show, data, handleClose }) {
   const [modal, setModal] = useState(false)
 
+  // console.log(data)
   return (
     <Modal
       size="xl"

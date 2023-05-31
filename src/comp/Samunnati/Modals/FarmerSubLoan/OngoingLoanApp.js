@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
+import useModal from "../../../../hooks/useModal";
+import DocImg from "../../../Common/DocImg";
 
 const btnStyle = {
   backgroundColor: "#064420",
@@ -16,15 +18,19 @@ const btnStyle = {
 const firstPageData = [
   {
     title: "Farmer ID",
-    id: "farmerID",
+    id: "userId",
   },
   {
     title: "Date of Application",
-    id: "dateOfApp",
+    id: "createdAt",
   },
   {
     title: "Requested Amount",
-    id: "loanAmount",
+    id: "requestedAmount",
+  },
+  {
+    title: "Granted Amount",
+    id: "grantedAmount",
   },
 ]
 
@@ -35,23 +41,24 @@ const secondPageData = [
   },
   {
     title: "Account Number",
-    id: "accountNo",
+    id: "accountNumber",
   },
   {
     title: "IFSC Code",
-    id: "ifsc",
+    id: "ifscCode",
   },
+  // {
+  //   title: "Payment Reference Number",
+  //   id: "paymentProof",
+  // },
   {
-    title: "Payment Date",
-    id: "paymentDate",
-  },
-  {
-    title: "Payment Reference Number",
-    id: "paymentRefNo",
+    title: "Proof of Payment",
+    id: "paymentProof",
+    isFile: true,
   },
 ]
 
-function Step1({ currentLoan, setStep }) {
+function Step1({ data, setStep }) {
   return (
     <div className="form">
       <div className="card p-2">
@@ -65,7 +72,7 @@ function Step1({ currentLoan, setStep }) {
                 <input
                   type="text"
                   className="form-control"
-                  value={currentLoan[f.id]}
+                  value={data[f.id]}
                   disabled
                 />
               </div>
@@ -89,7 +96,9 @@ function Step1({ currentLoan, setStep }) {
   )
 }
 
-function Step2({ currentTransaction }) {
+function Step2({ data }) {
+  const { modal, updateModal, closeModal } = useModal()
+
   return (
     <div className="form">
       <div className="card p-2">
@@ -100,37 +109,45 @@ function Step2({ currentTransaction }) {
                 <label>{f.title}</label>
               </div>
               <div className="col-lg-6">
-                <input
-                  type="text"
-                  className="form-control"
-                  value={currentTransaction[f.id]}
-                  disabled
-                />
+                {
+                  f.isFile ?
+                    <button
+                      style={btnStyle}
+                      onClick={() => updateModal(f.title, { imgUrl: data?.[f.id] })}
+                    >
+                      view
+                    </button>
+                    :
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={data[f.id]}
+                      disabled
+                    />
+                }
               </div>
             </div>
           ))
         }
-
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Proof of Payment</label>
-          </div>
-          <div className="col-lg-6">
-            <button
-              style={btnStyle}
-            >
-              view
-            </button>
-          </div>
-        </div>
       </div>
+
+      {
+        modal.state &&
+        <DocImg
+          show
+          title={modal.state}
+          imgUrl={modal.data.imgUrl}
+          handleClose={closeModal}
+        />
+      }
     </div>
   )
 }
 
-function OngoingLoanApp({ show, handleClose, currentLoan, currentTransaction }) {
+function OngoingLoanApp({ show, handleClose, data }) {
   const [step, setStep] = useState(1)
 
+  console.log(data)
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Loan/Transaction Details</Modal.Header>
@@ -139,16 +156,14 @@ function OngoingLoanApp({ show, handleClose, currentLoan, currentTransaction }) 
         {
           step === 1 &&
           <Step1
-            currentLoan={currentLoan}
+            data={data}
             setStep={setStep}
           />
         }
 
         {
           step === 2 &&
-          <Step2
-            currentTransaction={currentTransaction}
-          />
+          <Step2 data={data} />
         }
       </Modal.Body>
     </Modal>

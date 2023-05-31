@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
+import useModal from "../../../../hooks/useModal";
+import DocImg from "../../../Common/DocImg";
 
 const btnStyle = {
   backgroundColor: "#064420",
@@ -24,18 +26,6 @@ const btnStyle2 = {
   lineHeight: "2rem",
   textDecoration: "underline",
   backgroundColor: "rgb(255, 255, 255, 0)",
-}
-
-const btnStyle4 = {
-  backgroundColor: "#064420",
-  color: "#fff",
-  alignItems: "center",
-  borderRadius: "5px",
-  border: "none",
-  padding: "0.25rem 1rem",
-  width: "100%",
-  fontSize: "1rem",
-  lineHeight: "2rem",
 }
 
 const repaymentsList = [
@@ -65,125 +55,81 @@ const repaymentsList = [
   },
 ]
 
-function Step1({ currentLoan, setStep }) {
+const step1Data = [
+  {
+    label: "Loan ID",
+    value: "loanId",
+  },
+  {
+    label: "Name of Payee",
+    value: "payeeName",
+  },
+  {
+    label: "Account Number",
+    value: "accountNumber",
+  },
+  {
+    label: "IFSC Code",
+    value: "ifscNumber",
+  },
+  {
+    label: "Granted Amount",
+    value: "grantedAmount",
+  },
+  {
+    label: "Tenure of Loan (in months)",
+    value: "loanTenure",
+  },
+  {
+    label: "Purpose",
+    value: "purpose",
+  },
+  {
+    label: "Invoice",
+    value: "invoice",
+    isFile: true,
+  },
+  {
+    label: "Payment Proof",
+    value: "paymentProof",
+    isFile: true,
+  },
+]
+
+function Step1({ data, setStep }) {
+  const { modal, updateModal, closeModal } = useModal()
+
   return (
     <div className="form">
       <div className="card p-2">
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Loan ID</label>
-          </div>
-          <div className="col-lg-6">
-            <input
-              type="text"
-              className="form-control"
-              value={currentLoan.loanId}
-              disabled
-            />
-          </div>
-        </div>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Name of Payee</label>
-          </div>
-          <div className="col-lg-6">
-            <input
-              type="text"
-              className="form-control"
-              value={currentLoan.payeeName}
-              disabled
-            />
-          </div>
-        </div>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Account Number</label>
-          </div>
-          <div className="col-lg-6">
-            <input
-              type="text"
-              className="form-control"
-              value={currentLoan.accountNumber}
-              disabled
-            />
-          </div>
-        </div>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>IFSC Code</label>
-          </div>
-          <div className="col-lg-6">
-            <input
-              type="text"
-              className="form-control"
-              value={currentLoan.ifscNumber}
-              disabled
-            />
-          </div>
-        </div>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Amount</label>
-          </div>
-          <div className="col-lg-6">
-            <input
-              type="text"
-              className="form-control"
-              value={currentLoan.grantedAmount}
-              disabled
-            />
-          </div>
-        </div>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Tenure of Loan (in months)</label>
-          </div>
-          <div className="col-lg-6">
-            <input
-              type="text"
-              className="form-control"
-              value={currentLoan.loanTenure}
-              disabled
-            />
-          </div>
-        </div>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Purpose</label>
-          </div>
-          <div className="col-lg-6">
-            <input
-              type="text"
-              className="form-control"
-              value={currentLoan.purpose}
-              disabled
-            />
-          </div>
-        </div>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Invoice</label>
-          </div>
-          <div className="col-lg-6">
-            <button
-              style={btnStyle}
-            >
-              view
-            </button>
-          </div>
-        </div>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Payment Proof</label>
-          </div>
-          <div className="col-lg-6">
-            <button
-              style={btnStyle}
-            >
-              view
-            </button>
-          </div>
-        </div>
+        {
+          step1Data.map(d => (
+            <div key={d.value} className="row m-2">
+              <div className="col-lg-6">
+                <label>{d.label}</label>
+              </div>
+              <div className="col-lg-6">
+                {
+                  d.isFile ?
+                    <button
+                      style={btnStyle}
+                      onClick={() => updateModal(d.label, { imgUrl: data?.[d.value] })}
+                    >
+                      view
+                    </button>
+                    :
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={data?.[d.value]}
+                      disabled
+                    />
+                }
+              </div>
+            </div>
+          ))
+        }
+
         <div className="row m-2">
           <div className="col-lg-12">
             <button
@@ -196,11 +142,21 @@ function Step1({ currentLoan, setStep }) {
           </div>
         </div>
       </div>
+
+      {
+        modal.state &&
+        <DocImg
+          show
+          title={modal.state}
+          imgUrl={modal.data.imgUrl}
+          handleClose={closeModal}
+        />
+      }
     </div>
   )
 }
 
-function Step2({ setStep }) {
+function Step2() {
   return (
     <>
       <div className="repayment_title">
@@ -298,107 +254,10 @@ function Step2({ setStep }) {
   )
 }
 
-function Step3({ currentTransaction }) {
-  return (
-    <div className="form">
-      <div className="card p-2">
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Receiver Name</label>
-          </div>
-          <div className="col-lg-6">
-            <input
-              type="text"
-              className="form-control"
-              value={currentTransaction.receiverName}
-              disabled
-            />
-          </div>
-        </div>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Bank Name</label>
-          </div>
-          <div className="col-lg-6">
-            <input
-              type="text"
-              className="form-control"
-              value={currentTransaction.bankName}
-              disabled
-            />
-          </div>
-        </div>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Account Number</label>
-          </div>
-          <div className="col-lg-6">
-            <input
-              type="text"
-              className="form-control"
-              value={currentTransaction.accountNo}
-              disabled
-            />
-          </div>
-        </div>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>IFSC Code</label>
-          </div>
-          <div className="col-lg-6">
-            <input
-              type="text"
-              className="form-control"
-              value={currentTransaction.ifsc}
-              disabled
-            />
-          </div>
-        </div>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Payment Date</label>
-          </div>
-          <div className="col-lg-6">
-            <input
-              type="date"
-              className="form-control"
-              value={currentTransaction.paymentDate}
-              disabled
-            />
-          </div>
-        </div>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Payment Reference Number</label>
-          </div>
-          <div className="col-lg-6">
-            <input
-              type="text"
-              className="form-control"
-              value={currentTransaction.paymentRefNo}
-              disabled
-            />
-          </div>
-        </div>
-        <div className="row m-2">
-          <div className="col-lg-6">
-            <label>Proof of Payment</label>
-          </div>
-          <div className="col-lg-6">
-            <button
-              style={btnStyle4}
-            >
-              view
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function OngoingLoanApp({ show, handleClose, currentLoan, currentTransaction }) {
+function OngoingLoanApp({ show, handleClose, data }) {
   const [step, setStep] = useState(1)
+
+  console.log(data)
 
   return (
     <Modal
@@ -412,23 +271,14 @@ function OngoingLoanApp({ show, handleClose, currentLoan, currentTransaction }) 
         {
           step === 1 &&
           <Step1
-            currentLoan={currentLoan}
+            data={data}
             setStep={setStep}
           />
         }
 
         {
           step === 2 &&
-          <Step2
-            setStep={setStep}
-          />
-        }
-
-        {
-          step === 3 &&
-          <Step3
-            currentTransaction={currentTransaction}
-          />
+          <Step2 />
         }
       </Modal.Body>
     </Modal>

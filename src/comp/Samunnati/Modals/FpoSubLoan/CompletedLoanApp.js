@@ -26,7 +26,7 @@ const firstPageData = [
   },
   {
     title: "Date of Application",
-    id: "dateOfApp",
+    id: "loanCreatedAt",
   },
   {
     title: "Requested Amount",
@@ -34,7 +34,7 @@ const firstPageData = [
   },
   {
     title: "Amount Paid",
-    id: "loanAmount",
+    id: "loaAmount",
   },
   {
     title: "Date of Last Payment",
@@ -69,7 +69,7 @@ const secondPageData = [
   },
 ]
 
-function FirstPage({ currentLoan, fpoId, setStep }) {
+function FirstPage({ data, fpoId, setStep }) {
   return (
     <div className="form">
       <div className="card p-2">
@@ -83,7 +83,7 @@ function FirstPage({ currentLoan, fpoId, setStep }) {
                 <input
                   type="text"
                   className="form-control"
-                  value={f.id === "fpoId" ? fpoId : currentLoan[f.id]}
+                  value={f.id === "fpoId" ? fpoId : data?.value?.[f.id]}
                   disabled
                 />
               </div>
@@ -107,7 +107,7 @@ function FirstPage({ currentLoan, fpoId, setStep }) {
   )
 }
 
-function SecondPage({ currentTransaction }) {
+function SecondPage({ data }) {
   return (
     <div className="form">
       <div className="card p-2">
@@ -121,7 +121,7 @@ function SecondPage({ currentTransaction }) {
                 <input
                   type="text"
                   className="form-control"
-                  value={currentTransaction[f.id]}
+                  value={data?.[f.id]}
                   disabled
                 />
               </div>
@@ -146,9 +146,10 @@ function SecondPage({ currentTransaction }) {
   )
 }
 
-function CompletedLoanApp({ show, handleClose, currentLoan, fpoId, currentTransaction }) {
+function CompletedLoanApp({ show, handleClose, data, fpoId }) {
   const [step, setStep] = useState(1)
 
+  console.log(data)
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Loan/Transaction Details</Modal.Header>
@@ -156,7 +157,7 @@ function CompletedLoanApp({ show, handleClose, currentLoan, fpoId, currentTransa
         {
           step === 1 &&
           <FirstPage
-            currentLoan={currentLoan}
+            data={data}
             fpoId={fpoId}
             setStep={setStep}
           />
@@ -165,7 +166,7 @@ function CompletedLoanApp({ show, handleClose, currentLoan, fpoId, currentTransa
         {
           step === 2 &&
           <SecondPage
-            currentTransaction={currentTransaction}
+            data={data}
           />
         }
       </Modal.Body>

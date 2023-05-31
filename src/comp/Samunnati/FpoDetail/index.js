@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 
-import { getLoans } from "../../../actions/samunnati";
+// import { getLoans } from "../../../actions/samunnati";
 
 import { TabNavItem, TabContent } from "../../UIComp/Tabs";
 import OngoingLoans from "./OngoingLoans";
 import PendingLoans from "./PendingLoans";
 import LoanHistory from "./LoanHistory";
+// import Loader from '../../Common/Loader';
 import Profile from "./Profile";
-import Loader from '../../Common/Loader';
 
 const theadStyle = {
   color: "#064420",
@@ -51,15 +51,14 @@ function FpoDetail() {
   const { state } = useLocation()
   const navigate = useNavigate()
 
-  const { isLoading, data } = useQuery({
-    queryKey: ["sumunnati/fpo-loans"],
-    queryFn: () => getLoans({ fpoId: state._id }),
-    enabled: !!state._id,
-  })
+  // const { isLoading, data } = useQuery({
+  //   queryKey: ["sumunnati/fpo-loans"],
+  //   queryFn: () => getLoans({ fpoId: state._id }),
+  //   enabled: !!state._id,
+  // })
 
   const handleClick = () => navigate('/samunnati/fpo-info', { replace: true })
 
-  console.log(data)
   // if (isLoading) return <Loader wrapperCls="loader-main-right" />
   if (!state) return <Navigate to='/samunnati/fpo-info' />
 
