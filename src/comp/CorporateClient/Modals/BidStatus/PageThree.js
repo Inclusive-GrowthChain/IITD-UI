@@ -1,21 +1,32 @@
 import React, { useEffect, useState } from "react";
-// import logo from "../../../../assets/img/logo.png";
 import Modal from "react-bootstrap/Modal";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { root } from "../../../../utils/endPoints";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { rejectTestReports } from "../../../../actions/auction";
 
-const PageThree = ({ onButtonClick, outerbid }) => {
+const PageThree = ({ onButtonClick, outerbid, handleClose }) => {
   const [showReport, setShowReport] = useState(false);
   const [currentReport, setCurrentReport] = useState({});
-  // const [showReject, setShowReject] = useState(false);
-  // const [showApprove, setShowApprove] = useState(false);
+  const [showReject, setShowReject] = useState(false);
   const [fpo, setFpo] = useState({});
   const [status, setStatus] = useState("")
+  const [data, setData] = useState({})
 
   const handleShowReport = () => setShowReport(true);
   const handleCloseReport = () => setShowReport(false);
-  // const handleShowReject = () => setShowReject(true);
+  const handleShowReject = () => setShowReject(true);
+  const handleCloseReject = () => setShowReject(false);
+
+  const queryClient = useQueryClient()
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: rejectTestReports,
+    onSuccess: () => {
+      queryClient.invalidateQueries("auction/")
+    }
+  })
 
   useEffect(() => {
     outerbid.bids.forEach((bid) => {
@@ -28,6 +39,10 @@ const PageThree = ({ onButtonClick, outerbid }) => {
         tempFpo.testReports = bid.requiredTestReports;
         setFpo(tempFpo);
         setStatus(bid.status)
+        let tempData = {}
+        tempData.auctionId = outerbid.id
+        tempData.bidId = bid.id
+        setData(tempData)
       }
     });
   }, [outerbid])
@@ -180,28 +195,15 @@ const PageThree = ({ onButtonClick, outerbid }) => {
               <button
                 className="btn btn-success"
                 style={{ marginTop: '5rem', backgroundColor: '#064420' }}
-                disabled={!fpo.testReports || status === "completed"}
+                disabled={!fpo.testReports || status === "completed" || status === "payment-done-waiting-approval"}
                 onClick={(e) => {
                   e.preventDefault();
-                  // handleShowReject()
+                  handleShowReject()
                 }}
               >
                 Reject Test Reports
               </button>
             </div>
-            {/* <div className="col-lg-6" style={{ display: "flex", justifyContent: "flex-end" }}>
-              <button
-                className="btn btn-success"
-                style={{ marginTop: '5rem', backgroundColor: '#064420' }}
-                disabled={!fpo.testReports}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleShowApprove()
-                }}
-              >
-                Approve
-              </button>
-            </div> */}
           </div>
         </div>
       </form>
@@ -214,6 +216,32 @@ const PageThree = ({ onButtonClick, outerbid }) => {
             alt="Payment"
             style={{ width: "100%", height: "100%" }}
           />
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={showReject} onHide={handleCloseReject}>
+        <Modal.Header closeButton>Reject Test Reports</Modal.Header>
+        <Modal.Body>
+          <div>
+            Are you sure you want to reject the test reports?
+          </div>
+          <div
+            className="col-lg-12"
+            style={{ display: "flex", justifyContent: "flex-end" }}
+          >
+            <button
+              className="btn btn-success"
+              style={{ backgroundColor: '#064420' }}
+              onClick={(e) => {
+                e.preventDefault()
+                mutate({data})
+                handleCloseReject()
+                handleClose()
+              }}
+            >
+              Confirm
+            </button>
+          </div>
         </Modal.Body>
       </Modal>
     </main>

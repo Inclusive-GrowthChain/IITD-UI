@@ -31,9 +31,7 @@ function PlaceBid({ show, handleClose, bid }) {
 
   const handlePlaceBid = (e) => {
     e.preventDefault();
-
     mutate({data})
-    handleClose()
   }
 
     if (isLoading) return <Loader wrapperCls="loader-main-right" />

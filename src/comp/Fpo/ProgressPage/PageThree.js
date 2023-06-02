@@ -98,7 +98,7 @@ const PageThree = ({ onButtonClick, bid, handleClose }) => {
                 onButtonClick("pagefour")
               }}
               style={{ backgroundColor: "white" }}
-              disabled={status !== "completed"}
+              disabled={status !== "completed" && status !== "payment-done-waiting-approval"}
             >
               <ArrowForwardIosIcon />
             </button>

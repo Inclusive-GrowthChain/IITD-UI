@@ -1,12 +1,15 @@
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useState, useEffect } from "react";
+import { useAuthStore } from "../../../store/useAuthStore";
 
 const PageOne = ({ onButtonClick, bid }) => {
   const [selected, setSelected] = useState(false);
+  const fpoId = useAuthStore((s) => s.userDetails._id);
 
   useEffect(() => {
+    console.log(fpoId)
     bid.bids.forEach((bid) => {
-      if (bid.status) {
+      if (bid.status && bid.status !== "test-reports-rejected" && bid.fpoId === fpoId) {
         setSelected(true);
       }
     })

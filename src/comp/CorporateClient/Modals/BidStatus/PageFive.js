@@ -42,13 +42,18 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
           auctionId: outerbid.id,
           bidId: bid.id
         })
-        if (bid.status === "completed") {
+        if (bid.status === "completed" || bid.status === "payment-done-waiting-approval") {
           setBidComplete(true)
           let tempInvoiceDetails = {}
           tempInvoiceDetails.clientInvoiceNumber = bid.clientInvoiceNumber
           tempInvoiceDetails.clientInvoiceDate = bid.clientInvoiceDate
-          tempInvoiceDetails.clientAmount = bid.clientAmount
           tempInvoiceDetails.clientInvoice = bid.clientInvoice
+          tempInvoiceDetails.clientAmount = bid.bidAmount
+          setInvoiceDetails(tempInvoiceDetails)
+        }
+        else {
+          let tempInvoiceDetails = {}
+          tempInvoiceDetails.clientAmount = bid.bidAmount
           setInvoiceDetails(tempInvoiceDetails)
         }
       }
@@ -125,9 +130,8 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
               <input
                 className="form-control"
                 type="number"
-                {...register("clientAmount")}
                 value={invoiceDetails.clientAmount}
-                disabled={bidComplete}
+                disabled
               />
             </div>
           </div>

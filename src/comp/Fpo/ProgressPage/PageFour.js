@@ -1,14 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Modal from "react-bootstrap/Modal";
 import { useAuthStore } from "../../../store/useAuthStore";
 import { root } from "../../../utils/endPoints";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { approveClientPayment } from "../../../actions/fpo";
 
-const PageFour = ({ onButtonClick, bid }) => {
+const PageFour = ({ onButtonClick, bid, canEdit }) => {
   const fpoId = useAuthStore(s => s.userDetails._id);
   const [showInvoice, setShowInvoice] = useState(false);
   const handleShowInvoice = () => setShowInvoice(true);
   const handleCloseInvoice = () => setShowInvoice(false);
+  const [data, setData] = useState({})
+  const [showApprove, setShowApprove] = useState(false)
+
+  const handleShowApprove = () => setShowApprove(true);
+  const handleCloseApprove = () => setShowApprove(false);
+
+  const queryClient = useQueryClient()
+
+  const { mutate } = useMutation({
+    mutationFn: approveClientPayment,
+    onSuccess: () => {
+      queryClient.invalidateQueries("auction/")
+    }
+  })
+
+  useEffect(() => {
+    bid.bids.forEach((item) => {
+      if (item.fpoId === fpoId) {
+        let tempData = {}
+        tempData.auctionId = bid.id
+        tempData.bidId = item.id
+        setData(tempData)
+      }
+    });
+  }, [bid, fpoId]);
 
   return (
     <main
@@ -69,7 +96,7 @@ const PageFour = ({ onButtonClick, bid }) => {
               <label>Amount</label>
             </div>
             <div className="col-lg-6">
-              <label>{bid.bids.find((item) => item.fpoId === fpoId).clientAmount}</label>
+              <label>{bid.bids.find((item) => item.fpoId === fpoId).bidAmount}</label>
             </div>
             <div className="row m-2">
               <div className="col-lg-6" style={{ marginLeft: "-2.75%" }}>
@@ -97,24 +124,28 @@ const PageFour = ({ onButtonClick, bid }) => {
                 </button>
               </div>
             </div>
-            <div className="row m-2">
-              <div className="col-lg-12">
-                <button
-                  className="btn btn-success"
-                  style={{
-                    marginTop: "1rem",
-                    backgroundColor: "#064420",
-                    width: "96%",
-                  }}
-                  onClick={() => {
-                    // onSubmit();
-                    // handleShowPayment();
-                  }}
-                >
-                  Submit
-                </button>
-              </div>
-            </div>
+            {
+              canEdit && (
+                <div className="row m-2">
+                  <div className="col-lg-12">
+                    <button
+                      className="btn btn-success"
+                      style={{
+                        marginTop: "1rem",
+                        backgroundColor: "#064420",
+                        width: "96%",
+                      }}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        handleShowApprove()
+                      }}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              )
+            }
           </div>
         </div>
       </form>
@@ -130,48 +161,31 @@ const PageFour = ({ onButtonClick, bid }) => {
         </Modal.Body>
       </Modal>
 
-      {/* <Modal
-        show={showPayment}
-        onHide={handleClosePayment}
-      >
-        <Modal.Header closeButton>Place a Bid</Modal.Header>
+      <Modal show={showApprove} onHide={handleCloseApprove}>
+        <Modal.Header closeButton>Approve Payment</Modal.Header>
         <Modal.Body>
-          <div className="bid_title">
-            <div className="row">
-              <div className="col-6">
-                <label>Enter the Price/kg</label>
-              </div>
-              <div className="col-6">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Enter thr price"
-                />
-              </div>
-            </div>
-            <div>
-              <div className="row m-1">
-                <button
-                  className="mt-4"
-                  style={{
-                    backgroundColor: "#064420",
-                    alignItems: "center",
-                    borderRadius: "5px",
-                    border: "none",
-                    padding: "0.25rem 1rem",
-                    color: "#fff",
-                  }}
-                  onClick={() => {
-                    alert.show("your amount!");
-                  }}
-                >
-                  Submit
-                </button>
-              </div>
-            </div>
+          <div>
+            Are you sure you want to approve the corporate client's payment?
+          </div>
+          <div
+            className="col-lg-12"
+            style={{ display: "flex", justifyContent: "flex-end" }}
+          >
+            <button
+              className="btn btn-success"
+              style={{ backgroundColor: '#064420' }}
+              onClick={(e) => {
+                e.preventDefault()
+                mutate({ data })
+                handleCloseApprove()
+              }}
+            >
+              Confirm
+            </button>
           </div>
         </Modal.Body>
-      </Modal> */}
+      </Modal>
+
     </main>
   );
 };

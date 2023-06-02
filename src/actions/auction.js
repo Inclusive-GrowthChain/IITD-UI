@@ -28,6 +28,13 @@ export function requestTestReports(data) {
   })
 }
 
+export function rejectTestReports(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.auction + `/${data.data.auctionId}/bid/${data.data.bidId}/testreport/reject`,
+  })
+}
+
 export function makePaymentToFpo(data) {
   let dataObject = {
     clientInvoice: data.clientInvoice,

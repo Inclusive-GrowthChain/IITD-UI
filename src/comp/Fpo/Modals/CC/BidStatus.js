@@ -47,7 +47,7 @@ function BidStatus({
               <PageThree onButtonClick={nextPage} bid={bid} handleClose={handleClose} />
             ),
             pagefour: (
-              <PageFour onButtonClick={nextPage} bid={bid} handleClose={handleClose} />
+              <PageFour onButtonClick={nextPage} bid={bid} handleClose={handleClose} canEdit={canEdit}/>
             ),
           }[page]
         }

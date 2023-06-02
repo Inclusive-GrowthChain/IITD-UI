@@ -13,9 +13,8 @@ const PageTwo = ({ onButtonClick, outerbid = [] }) => {
   const [data, setData] = useState({})
 
   const queryClient = useQueryClient()
-  // const { register, formState: { errors }, handleSubmit, reset } = useForm({})
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: requestTestReports,
     onSuccess: () => {
       queryClient.invalidateQueries("auction/")
@@ -31,15 +30,9 @@ const PageTwo = ({ onButtonClick, outerbid = [] }) => {
     setShowConfirmBox(false)
   }
 
-  const placeOrder = (e) => {
-    e.preventDefault()
-    currentFPO.orderPlaced = true
-    setShowConfirmBox(false)
-  }
-
   const checkOrderPlaced = () => {
     outerbid.bids.forEach((bid) => {
-      if (bid.status) {
+      if (bid.status === "requested-test-report" || bid.status === "test-report-added" || bid.status === "invoice-added" || bid.status === "payment-done-waiting-approval" || bid.status === "completed") {
         setOrderPlaced(true)
       }
     })
@@ -144,7 +137,6 @@ const PageTwo = ({ onButtonClick, outerbid = [] }) => {
                           lineHeight: "1rem",
                         }}
                         onClick={(e) => {
-                          // convert new Date() to yyyy-mm-dd format
                           let today = new Date()
                           let dd = today.getDate()
                           let mm = today.getMonth() + 1
@@ -156,11 +148,11 @@ const PageTwo = ({ onButtonClick, outerbid = [] }) => {
                             mm = '0' + mm
                           }
                           today = yyyy + '-' + mm + '-' + dd
-                          // if(outerbid.bidEndDate > today) {
-                          //   alert("Order cannot be placed before the end of bidding period")
-                          //   e.preventDefault();
-                          //   return
-                          // }
+                          if(outerbid.bidEndDate > today) {
+                            alert("Order cannot be placed before the end of bidding period")
+                            e.preventDefault();
+                            return
+                          }
                           let tempData = {}
                           tempData.auctionId = outerbid.id
                           tempData.bidId = bid.id
@@ -168,7 +160,7 @@ const PageTwo = ({ onButtonClick, outerbid = [] }) => {
                           setCurrentFPO(bid)
                           confirmOrder(e)
                         }}
-                        disabled={orderPlaced}
+                        disabled={orderPlaced || bid.status === "test-reports-rejected"}
                         className="btn btn-success"
                       >
                         Place Order

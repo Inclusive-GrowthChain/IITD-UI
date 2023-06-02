@@ -191,7 +191,7 @@ const Bidding = () => {
 
                             <tbody style={tbodyStyle2}>
                               {
-                                data.data.map((bid) => (
+                                data.data.filter((bid) => bid.status === "completed").map((bid) => (
                                   <tr key={bid.id}>
                                     <td>{bid.bidId}</td>
                                     {/* <td>{bid.fpoID}</td>

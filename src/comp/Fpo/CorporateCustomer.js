@@ -125,32 +125,32 @@ const CorporateCustomer = () => {
                     <tbody style={tbodyStyle}>
                       {
                         data.data
-                        .filter((item) => item.bidEndDate >= new Date().toISOString().split('T')[0])
-                        .map(item => (
-                          <tr key={item.id}>
-                            <td>{item.bidId}</td>
-                            <td>{item.quantity}</td>
-                            <td>{item.supplyDate}</td>
-                            <td>{item.bidEndDate}</td>
-                            <td>
-                              <button
-                                style={btnStyle}
-                                onClick={() => updateModal("showStartBid", item)}
-                              >
-                                View
-                              </button>
-                            </td>
-                            <td>
-                              <button
-                                style={item.bids.some((bid) => bid.fpoId === fpoId) ? btnStyle3 : btnStyle}
-                                onClick={() => updateModal("showBid", item)}
-                                disabled={item.bids.some((bid) => bid.fpoId === fpoId)}
-                              >
-                                Place a Bid
-                              </button>
-                            </td>
-                          </tr>
-                        ))
+                          .filter((item) => item.bidEndDate >= new Date().toISOString().split('T')[0])
+                          .map(item => (
+                            <tr key={item.id}>
+                              <td>{item.bidId}</td>
+                              <td>{item.quantity}</td>
+                              <td>{item.supplyDate}</td>
+                              <td>{item.bidEndDate}</td>
+                              <td>
+                                <button
+                                  style={btnStyle}
+                                  onClick={() => updateModal("showStartBid", item)}
+                                >
+                                  View
+                                </button>
+                              </td>
+                              <td>
+                                <button
+                                  style={item.bids.some((bid) => bid.fpoId === fpoId) ? btnStyle3 : btnStyle}
+                                  onClick={() => updateModal("showBid", item)}
+                                  disabled={item.bids.some((bid) => bid.fpoId === fpoId)}
+                                >
+                                  Place a Bid
+                                </button>
+                              </td>
+                            </tr>
+                          ))
                       }
                     </tbody>
                   </table>
@@ -221,26 +221,28 @@ const CorporateCustomer = () => {
                     <tbody style={tbodyStyle}>
                       {
                         data.data
-                          .filter(bid => bid.status !== "on-going")
-                          .map(bid => (
-                            <tr key={bid.id}>
-                              <td>{bid.bidId}</td>
-                              <td>02-01-2021</td>
-                              <td>12345</td>
-                              <td>200</td>
-                              <td>
-                                <button
-                                  style={btnStyle}
-                                  onClick={() => {
-                                    updateModal("showCustomer", bid)
-                                    setCanEdit(false)
-                                  }}
-                                >
-                                  view
-                                </button>
-                              </td>
-                            </tr>
-                          ))
+                          .filter(bid => bid.status === "completed")
+                          .map(bid => {
+                            return bid.bids.filter((b) => b.status === "completed" && b.fpoId === fpoId).map((b) => (
+                              <tr key={bid.id}>
+                                <td>{bid.bidId}</td>
+                                <td>{b.invoiceAddedAt.substring(0, 10)}</td>
+                                <td>{b.clientInvoiceNumber}</td>
+                                <td>{b.bidAmount}</td>
+                                <td>
+                                  <button
+                                    style={btnStyle}
+                                    onClick={() => {
+                                      updateModal("showCustomer", bid)
+                                      setCanEdit(false)
+                                    }}
+                                  >
+                                    view
+                                  </button>
+                                </td>
+                              </tr>
+                            ))
+                          })
                       }
                     </tbody>
                   </table>

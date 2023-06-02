@@ -163,7 +163,7 @@ const PageFour = ({ onButtonClick, outerbid }) => {
             )
           }
           {
-            (status === "invoice-added" || status === "completed") && (
+            (status === "invoice-added" || status === "payment-done-waiting-approval" || status === "completed") && (
               <div className="row m-2">
                 <div className="col-lg-6">
                   <label>Invoice</label>
@@ -193,7 +193,7 @@ const PageFour = ({ onButtonClick, outerbid }) => {
             )
           }
           {
-            (status !== "invoice-added" && status !== "completed") && (
+            (status !== "invoice-added" && status !== "payment-done-waiting-approval" && status !== "completed") && (
               <div className="row m-2">
                 <div className="col-lg-6">
                   <label>Invoice</label>

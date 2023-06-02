@@ -8,6 +8,7 @@ import useModal from '../../../hooks/useModal';
 
 import Input, { errStyle } from '../../Nisa/Modals/Input';
 import ConfirmOrder from './ConfirmOrder';
+import { nanoid } from "nanoid";
 
 const textAreaStyle = { resize: "none", height: "150px" }
 
@@ -85,7 +86,7 @@ function StartBid({ show, handleClose }) {
     handleSubmit, getValues,
   } = useForm({
     defaultValues: {
-      bidId: "B1234",
+      bidId: nanoid(10),
       lacStrainType: "",
       sourceTree: "",
       origin: "",

@@ -217,3 +217,10 @@ export function sendInvoice(data) {
     data: dataObject
   })
 }
+
+export function approveClientPayment(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.auction + `/${data.data.auctionId}/bid/${data.data.bidId}/payment/approve`,
+  })
+}
