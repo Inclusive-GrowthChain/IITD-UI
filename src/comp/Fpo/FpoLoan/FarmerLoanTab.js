@@ -114,7 +114,7 @@ function WindowRow({ loanWindow, updateModal }) {
                     <tr key={loan.id}>
                       <td>{loan?.createdAt?.substring(0, 10)}</td>
                       <td>{loan?.fpoApprovalAt?.substring(0, 10)}</td>
-                      <td>{loan.tenure}</td>
+                      <td>{loan.loanTenure}</td>
                       <td>{loan.requestedAmount}</td>
                       <td>{loan.intrest}%</td>
                       <td>

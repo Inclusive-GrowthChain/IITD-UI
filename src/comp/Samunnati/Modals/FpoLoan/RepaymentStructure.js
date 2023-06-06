@@ -3,6 +3,7 @@ import useModal from "../../../../hooks/useModal";
 
 import RepaymentContentTitle from "../../../Common/RepaymentContentTitle";
 import Repayment from "./Repayment";
+import { useEffect } from "react";
 
 const btnStyle = {
   color: "blue",
@@ -22,7 +23,6 @@ function RepaymentStructure({ show, handleClose, data, windowType }) {
 
   const repayments = data?.FPOrepaymentStructure || []
 
-  // console.log(repayments)
   return (
     <Modal
       size="xl"

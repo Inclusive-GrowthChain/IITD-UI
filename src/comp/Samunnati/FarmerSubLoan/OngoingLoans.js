@@ -44,7 +44,7 @@ function OngoingLoans({ data = [], theadStyle, tbodyStyle }) {
                     <td>{loan.mobile}</td>
                     <td>{loan.approvalAt?.substring(0, 10)}</td>
                     <td>{loan.grantedAmount || loan.requestedAmount}</td>
-                    <td>{loan.tenure}</td>
+                    <td>{loan.loanTenure}</td>
                     <td>
                       <button
                         style={btnStyle}

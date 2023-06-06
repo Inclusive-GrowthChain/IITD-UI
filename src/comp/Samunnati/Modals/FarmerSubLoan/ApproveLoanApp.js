@@ -28,7 +28,7 @@ const list = [
   },
   {
     label: "Tenure (in months)",
-    name: "tenure",
+    name: "loanTenure",
     type: "number",
     disabled: true,
   },
@@ -51,7 +51,7 @@ function ApproveLoanApp({ show, data, closeAll, handleClose }) {
     defaultValues: {
       loanId: data?.loanId,
       requestedAmount: data.requestedAmount,
-      tenure: data.tenure,
+      loanTenure: data.loanTenure,
       intrest: data.intrest,
       grantedAmount: "",
       paymentProof: "",

@@ -33,7 +33,7 @@ const list = [
   },
   {
     label: "Loan Tenure (months)",
-    name: "tenure",
+    name: "loanTenure",
     type: "number",
   },
 ]

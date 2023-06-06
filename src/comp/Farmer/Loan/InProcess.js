@@ -1,5 +1,5 @@
 const style = {
-  backgroundColor: "#66FF00",
+  backgroundColor: "#064420",
   alignItems: "center",
   borderRadius: "5px",
   border: "none",
@@ -7,6 +7,7 @@ const style = {
   width: "fit-content",
   fontSize: ".75rem",
   lineHeight: "1rem",
+  color: "#fff"
 }
 
 const theadStyle = {

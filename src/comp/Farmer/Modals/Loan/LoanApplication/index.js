@@ -84,7 +84,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
       monthlyHHExpenses: !isCreate ? data.monthlyHHExpenses : "",
       requestedAmount: !isCreate ? data.requestedAmount : "",
       purpose: !isCreate ? data.purpose : "",
-      tenure: !isCreate ? data.tenure : "",
+      loanTenure: !isCreate ? data.loanTenure : "",
       intrest: !isCreate ? data.intrest : "",
       loanId: !isCreate ? data.loanId : nanoid(10),
       loanWindowId: !isCreate ? data.loanWindowId : "",
