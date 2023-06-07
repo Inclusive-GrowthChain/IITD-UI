@@ -33,14 +33,14 @@ const firstPageData = [
     title: "Requested Amount",
     id: "grantedAmount",
   },
-  {
-    title: "Amount Paid",
-    id: "loaAmount",
-  },
-  {
-    title: "Date of Last Payment",
-    id: "lastPaymentDate",
-  },
+  // {
+  //   title: "Amount Paid",
+  //   id: "loaAmount",
+  // },
+  // {
+  //   title: "Date of Last Payment",
+  //   id: "lastPaymentDate",
+  // },
 ]
 
 const secondPageData = [

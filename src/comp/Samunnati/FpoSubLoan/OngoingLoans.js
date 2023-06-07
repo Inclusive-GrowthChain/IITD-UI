@@ -14,9 +14,9 @@ function OngoingLoans({ data = [], theadStyle, tbodyStyle, btnStyle }) {
                 <td>Loan ID</td>
                 <td>Date of Loan Approval</td>
                 <td>Loan Amount</td>
-                <td>Outstanding Amount</td>
+                {/* <td>Outstanding Amount</td>
                 <td>Next Payment Amount</td>
-                <td>Next Payment Date</td>
+                <td>Next Payment Date</td> */}
                 <td>View Loan Details</td>
               </tr>
             </thead>
@@ -28,9 +28,9 @@ function OngoingLoans({ data = [], theadStyle, tbodyStyle, btnStyle }) {
                     <td>{loan.loanId}</td>
                     <td>{loan?.approvalAt?.substring(0, 10)}</td>
                     <td>{loan.grantedAmount || loan.requestedAmount}</td>
-                    <td>{loan.outstandingAmount}</td>
+                    {/* <td>{loan.outstandingAmount}</td>
                     <td>{loan.nextPaymentAmount}</td>
-                    <td>{loan.nextPaymentDate}</td>
+                    <td>{loan.nextPaymentDate}</td> */}
                     <td>
                       <button
                         style={btnStyle}
