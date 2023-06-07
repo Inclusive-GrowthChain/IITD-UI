@@ -88,7 +88,7 @@ function FarmerLoan() {
               />
             </ul>
 
-            <div className="outlet">
+            <div className="outlet" style={{marginBottom: '50px'}}>
               <TabContent id="tab1" activeTab={activeTab}>
                 <Approved
                   searchInputStyle={searchInputStyle}

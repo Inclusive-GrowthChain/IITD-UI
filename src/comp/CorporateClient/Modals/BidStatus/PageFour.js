@@ -6,27 +6,11 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const PageFour = ({ onButtonClick, outerbid }) => {
   const [showInvoice, setShowInvoice] = useState(false);
-  // const [showReject, setShowReject] = useState(false);
-  // const [showApprove, setShowApprove] = useState(false);
   const [fpo, setFpo] = useState({});
   const [status, setStatus] = useState("")
 
   const handleShowInvoice = () => setShowInvoice(true);
   const handleCloseInvoice = () => setShowInvoice(false);
-  // const handleShowReject = () => setShowReject(true);
-  // const handleCloseReject = () => setShowReject(false);
-  // const handleShowApprove = () => setShowApprove(true);
-  // const handleCloseApprove = () => setShowApprove(false);
-
-  // const confirmReject = (e) => {
-  //   e.preventDefault();
-  //   setShowReject(false);
-  // };
-
-  // const confirmApprove = (e) => {
-  //   e.preventDefault();
-  //   setShowApprove(false);
-  // };
 
   useEffect(() => {
     outerbid.bids.forEach((bid) => {
@@ -204,33 +188,6 @@ const PageFour = ({ onButtonClick, outerbid }) => {
               </div>
             )
           }
-
-          {/* <div className="row m-2">
-            <div className="col-lg-6">
-              <button
-                className="btn btn-success"
-                style={{ marginTop: '5rem', backgroundColor: '#064420' }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleShowReject()
-                }}
-              >
-                Reject
-              </button>
-            </div>
-            <div className="col-lg-6" style={{ display: "flex", justifyContent: "flex-end" }}>
-              <button
-                className="btn btn-success"
-                style={{ marginTop: '5rem', backgroundColor: '#064420' }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleShowApprove()
-                }}
-              >
-                Approve
-              </button>
-            </div>
-          </div> */}
         </div>
       </form>
 
@@ -245,41 +202,6 @@ const PageFour = ({ onButtonClick, outerbid }) => {
         </Modal.Body>
       </Modal>
 
-      {/* <Modal show={showReject} onHide={handleCloseReject}>
-        <Modal.Header closeButton>Invoice</Modal.Header>
-        <Modal.Body>
-          <p>
-            Are you sure you want to reject the invoice?
-          </p>
-          <div className="col-lg-12" style={{ display: "flex", justifyContent: "flex-end" }}>
-            <button
-              className="btn btn-success"
-              style={{ backgroundColor: '#064420' }}
-              onClick={(e) => confirmReject(e)}
-            >
-              Reject
-            </button>
-          </div>
-        </Modal.Body>
-      </Modal>
-
-      <Modal show={showApprove} onHide={handleCloseApprove}>
-        <Modal.Header closeButton>Invoice</Modal.Header>
-        <Modal.Body>
-          <p>
-            Are you sure you want to approve the invoice?
-          </p>
-          <div className="col-lg-12" style={{ display: "flex", justifyContent: "flex-end" }}>
-            <button
-              className="btn btn-success"
-              style={{ backgroundColor: '#064420' }}
-              onClick={(e) => confirmApprove(e)}
-            >
-              Approve
-            </button>
-          </div>
-        </Modal.Body>
-      </Modal> */}
     </main>
   );
 };

@@ -139,12 +139,12 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
       <Modal.Body>
         <form onSubmit={handleSubmit(mutate)}>
 
-          {
+          {/* {
             isLoading &&
             <div style={{ height: "400px" }}><Loader wrapperCls="h-100" /></div>
-          }
+          } */}
           {
-            !isLoading && step === 1 &&
+            step === 1 &&
             <Step1
               errors={errors}
               setStep={setStep}

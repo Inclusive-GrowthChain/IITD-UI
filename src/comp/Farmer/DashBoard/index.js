@@ -1,7 +1,8 @@
 import { useQueries } from "@tanstack/react-query";
 
 import { getCropAdvisory, getTraining } from "../../../actions/nisa";
-import { getFpoProducts, getFpoLac } from "../../../actions/fpo";
+import { getFpoProducts, getFpoLac, getLoanHistory } from "../../../actions/fpo";
+import { useAuthStore } from "../../../store/useAuthStore";
 
 // import { SliderData } from "./SliderData";
 import ImageSlider from "./ImageSlider";
@@ -16,6 +17,7 @@ function Dashboard() {
     { isLoading: isLoading2, data: tpList },
     { isLoading: isLoading3, data: storeItemList },
     { isLoading: isLoading4, data: sellItemList },
+    { isLoading: isLoading5, data: loanList }
   ] = useQueries({
     queries: [
       {
@@ -34,10 +36,16 @@ function Dashboard() {
         queryKey: ["fpo/lac"],
         queryFn: getFpoLac,
       },
+      {
+        queryKey: ["/loans/history"],
+        queryFn: () => getLoanHistory({type: "farmer"}),
+      }
     ]
   })
 
-  if (isLoading1 || isLoading2 || isLoading3 || isLoading4) return <Loader wrapperCls="loader-main-right" />
+  const farmerId = useAuthStore((s) => s.userDetails._id);
+
+  if (isLoading1 || isLoading2 || isLoading3 || isLoading4 || isLoading5) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <div className="itemContainer">
@@ -166,26 +174,15 @@ function Dashboard() {
                       </tr>
                     </thead>
                     <tbody className="fw-light fs-10">
-                      <tr>
-                        <td>334521</td>
-                        <td>₹ 372</td>
-                        <td>pending</td>
-                      </tr>
-                      <tr>
-                        <td>334521</td>
-                        <td>₹ 372</td>
-                        <td>pending</td>
-                      </tr>
-                      <tr>
-                        <td>334521</td>
-                        <td>₹ 372</td>
-                        <td>pending</td>
-                      </tr>
-                      <tr>
-                        <td>334521</td>
-                        <td>₹ 372</td>
-                        <td>pending</td>
-                      </tr>
+                      {
+                        loanList.filter((loan) => loan.value.userId === farmerId).map((loan) => (
+                          <tr key={loan.id}>
+                            <td>{loan.value.loanId}</td>
+                            <td>{loan.value.grantedAmount}</td>
+                            <td>{loan.value.status}</td>
+                          </tr>
+                        ))
+                      }
                     </tbody>
                   </table>
                 </div>

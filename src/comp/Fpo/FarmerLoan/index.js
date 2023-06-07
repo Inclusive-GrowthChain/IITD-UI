@@ -43,8 +43,8 @@ function FarmerLoan() {
         queryFn: getLoanwindow,
       },
       {
-        queryKey: ["loanhistory", "fpo"],
-        queryFn: () => getLoanHistory({ userId }),
+        queryKey: ["loanhistory", "farmer"],
+        queryFn: () => getLoanHistory({ type: "farmer" }),
       }
     ]
   })

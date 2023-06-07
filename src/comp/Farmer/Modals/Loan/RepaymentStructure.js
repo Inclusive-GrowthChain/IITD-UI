@@ -1,7 +1,12 @@
 import Modal from "react-bootstrap/Modal";
 import RepaymentContentTitle from "../../../Common/RepaymentContentTitle";
+import { useEffect } from "react";
 
 function RepaymentStructure({ show, data, handleClose }) {
+  useEffect(() => {
+    console.log(data)
+  }, [data])
+
   return (
     <Modal
       size="xl"
@@ -22,7 +27,7 @@ function RepaymentStructure({ show, data, handleClose }) {
             </div>
 
             <div className="col-lg-6">
-              <RepaymentContentTitle title="Loan Period in Months" val={data.tenure} />
+              <RepaymentContentTitle title="Loan Period in Months" val={data.loanTenure} />
               <RepaymentContentTitle title="No of Repayment" val={1} />
               <RepaymentContentTitle title="Annual Interest Rate" val={`${data.intrest}%`} />
             </div>
@@ -44,14 +49,14 @@ function RepaymentStructure({ show, data, handleClose }) {
 
             <tbody>
               {
-                data?.repaymentStructure.map(r => (
+                data?.farmerWindowRepaymentStructure.map((r, key) => (
                   <tr>
-                    <td>1</td>
-                    <td>12-10-2021</td>
-                    <td>100000</td>
-                    <td>21-10-2021</td>
-                    <td>4000000</td>
-                    <td>3000000</td>
+                    <td>{key+1}</td>
+                    <td>{r.repaymentDate}</td>
+                    <td>{r.emi}</td>
+                    <td>{r.paymentDate ? r.paymentDate : "Pending"}</td>
+                    <td>{r.paidAmount !== 0 ? r.paidAmount : "Pending"}</td>
+                    <td>{r.balance}</td>
                   </tr>
                 ))
               }

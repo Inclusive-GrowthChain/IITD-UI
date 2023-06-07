@@ -46,8 +46,8 @@ function LoanHistory({ fpoId, grantedAmount, consumedWindowLoanAmount, theadStyl
                 data?.map(loan => (
                   <tr key={loan?.value?.loanId}>
                     <td>{loan?.value?.loanId}</td>
-                    <td>{loan?.value?.loanCreatedAt?.substring(0, 10)}</td>
-                    <td>{loan?.value?.loanAmount}</td>
+                    <td>{loan?.value?.createdAt?.substring(0, 10)}</td>
+                    <td>{loan?.value?.grantedAmount}</td>
                     <td>
                       <button
                         style={btnStyle2}

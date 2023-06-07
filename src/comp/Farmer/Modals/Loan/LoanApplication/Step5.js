@@ -81,6 +81,7 @@ function Step5({ isCreate, backBtnStyle, nextBtnStyle, isSubmiting, setStep, reg
             key={l.name}
             errors={errors}
             register={register}
+            disabled={!isCreate || l.disabled}
           />
         ))
       }

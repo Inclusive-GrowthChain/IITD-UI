@@ -102,7 +102,7 @@ function FpoSubLoan() {
                     data={loanWindow?.loans?.filter(loan => loan.status === "completed")}
                     fpoId={loanWindow?.fpoId}
                     grantedAmount={loanWindow?.grantedAmount}
-                    consumedWindowLoanAmount={loanWindow?.consumedWindowLoanAmount}
+                    consumedWindowLoanAmount={loanWindow?.grantedAmountUtilized}
                   />
                 </TabContent>
 

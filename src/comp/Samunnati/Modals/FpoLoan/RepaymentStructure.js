@@ -60,7 +60,7 @@ function RepaymentStructure({ show, handleClose, data, windowType }) {
                 <th>Scheduled Repayment Date</th>
                 <th>Scheduled EMI Amount</th>
                 <th>Repayment</th>
-                <th>Balance</th>
+                <th>Status</th>
               </tr>
             </thead>
 
@@ -77,11 +77,12 @@ function RepaymentStructure({ show, handleClose, data, windowType }) {
                         <button
                           style={btnStyle}
                           onClick={() => updateModal("showRepayment", { ...window, lWId: data.id })}
+                          disabled={window.completed}
                         >
-                          View
+                          Add
                         </button>
                       </td>
-                      <td>{window.balance}</td>
+                      <td>{window.completed? "Paid" : "Pending"}</td>
                     </tr>
                   ))
               }

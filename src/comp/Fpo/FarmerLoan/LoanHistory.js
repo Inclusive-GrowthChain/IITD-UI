@@ -1,5 +1,10 @@
+import { useEffect } from "react"
 
 function LoanHistory({ theadStyle, tbodyStyle, data = [] }) {
+  useEffect(() => {
+    console.log(data)
+  }, [data])
+
   return (
     <div className="card_table2">
       <div className=" table-responsive">
@@ -19,11 +24,11 @@ function LoanHistory({ theadStyle, tbodyStyle, data = [] }) {
             {
               data.map(d => (
                 <tr key={d.id}>
-                  <td>{d?.value?.loanUser}</td>
-                  <td></td>
+                  <td>{d?.value?.userId}</td>
+                  <td>{d?.value?.name}</td>
                   <td>{d?.value?.loanId}</td>
                   <td>{d?.value?.loanCreatedAt?.substring(0, 10)}</td>
-                  <td>₹ {d?.value?.loanAmount}</td>
+                  <td>₹ {d?.value?.grantedAmount}</td>
                   <td></td>
                 </tr>
               ))

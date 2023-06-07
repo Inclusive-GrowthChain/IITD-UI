@@ -72,9 +72,21 @@ function Approved({ data = [], updateModal }) {
                   <td>₹ {g.grantedAmount}</td>
                   <td>{g.intrest}%</td>
                   <td>{g.loanDate}</td>
-                  <td>₹ {g.outstandingAmount}</td>
-                  <td>₹ {g.nextPaymentAmount}</td>
-                  <td>{g.nextPaymentDate}</td>
+                  {
+                    g.farmerWindowRepaymentStructure.find((f) => f.completed === false) && (
+                      <td>₹ {g.farmerWindowRepaymentStructure.find((f) => f.completed === false).balance}</td>
+                    )
+                  }
+                  {
+                    g.farmerWindowRepaymentStructure.find((f) => f.completed === false) && (
+                      <td>₹ {g.farmerWindowRepaymentStructure.find((f) => f.completed === false).emi}</td>
+                    )
+                  }
+                  {
+                    g.farmerWindowRepaymentStructure.find((f) => f.completed === false) && (
+                      <td>{g.farmerWindowRepaymentStructure.find((f) => f.completed === false).repaymentDate}</td>
+                    )
+                  }
                   <td>
                     <button
                       style={style}
