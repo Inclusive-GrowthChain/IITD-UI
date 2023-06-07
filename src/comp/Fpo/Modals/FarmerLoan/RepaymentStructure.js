@@ -1,4 +1,4 @@
-import { useState } from "react";
+import useModal from "../../../../hooks/useModal";
 import { Modal } from "react-bootstrap";
 
 import RepaymentContentTitle from "../../../Common/RepaymentContentTitle";
@@ -17,7 +17,7 @@ const btnStyle = {
 }
 
 function RepaymentStructure({ show, data, handleClose }) {
-  const [modal, setModal] = useState(false)
+  const { modal, updateModal, closeModal } = useModal()
 
   // console.log(data)
   return (
@@ -41,7 +41,7 @@ function RepaymentStructure({ show, data, handleClose }) {
             </div>
 
             <div className="col-lg-6">
-              <RepaymentContentTitle title="Loan Period in Months" val={data.tenure} />
+              <RepaymentContentTitle title="Loan Period in Months" val={data.loanTenure} />
               <RepaymentContentTitle title="No of Repayment" val={1} />
               <RepaymentContentTitle title="Annual Interest Rate" val={`${data.intrest}%`} />
             </div>
@@ -59,19 +59,30 @@ function RepaymentStructure({ show, data, handleClose }) {
               </tr>
             </thead>
             <tbody>
-              {data?.repaymentStructure?.map((item) => (
+              {data?.farmerWindowRepaymentStructure?.map((item) => (
                 <tr>
                   <td>{item.id}</td>
                   <td>{item.repaymentDate}</td>
                   <td>{item.emi}</td>
-                  <td>
-                    <button
-                      style={btnStyle}
-                      onClick={() => setModal(true)}
-                    >
-                      Add Repayment
-                    </button>
-                  </td>
+                  {
+                    !item.completed && (
+                      <td>
+                        <button
+                          style={btnStyle}
+                          onClick={() => updateModal("addRepayment", { repaymentItem: item })}
+                        >
+                          Add Repayment
+                        </button>
+                      </td>
+                    )
+                  }
+                  {
+                    item.completed && (
+                      <td>
+                        <span style={{ color: "green" }}>Paid</span>
+                      </td>
+                    )
+                  }
                 </tr>
               ))}
             </tbody>
@@ -79,10 +90,12 @@ function RepaymentStructure({ show, data, handleClose }) {
         </div>
 
         {
-          modal &&
+          modal.state === "addRepayment" &&
           <AddRepayment
             show
-            handleClose={() => setModal(false)}
+            handleClose={() => closeModal("addRepayment")}
+            data={data}
+            repaymentItem={modal.data.repaymentItem}
           />
         }
       </Modal.Body>

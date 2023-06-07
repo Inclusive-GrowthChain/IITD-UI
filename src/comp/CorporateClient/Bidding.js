@@ -84,7 +84,7 @@ const Bidding = () => {
   return (
     <>
       <div className="itemContainer">
-        <div className="list_title">
+        <div className="list_title" style={{marginBottom: "100px"}}>
           <div className="container-fluid">
             <div className="d-sm-flex justify-content-between align-items-center mb-4">
               <h3
@@ -175,16 +175,13 @@ const Bidding = () => {
                           <table className="table table-borderless">
                             <thead style={theadStyle2}>
                               <tr>
-                                <td>Bid ID</td>
-                                {/* <td>FPO ID</td>
-                                <td>FPO Name</td> */}
+                                <td>Bid ID</td>                                
                                 <td>Lac Strain Type</td>
                                 <td>Source of Tree</td>
                                 <td>Origin</td>
                                 <td>Seedlac Content</td>
                                 <td>Fresh Resin Content</td>
                                 <td>Quantity</td>
-                                {/* <td>Amount</td> */}
                                 <td>Status</td>
                               </tr>
                             </thead>
@@ -194,15 +191,12 @@ const Bidding = () => {
                                 data.data.filter((bid) => bid.status === "completed").map((bid) => (
                                   <tr key={bid.id}>
                                     <td>{bid.bidId}</td>
-                                    {/* <td>{bid.fpoID}</td>
-                                    <td>{bid.fpoName}</td> */}
                                     <td>{bid.lacStrainType}</td>
                                     <td>{bid.sourceTree}</td>
                                     <td>{bid.origin}</td>
                                     <td>{bid.seedLacContent}</td>
                                     <td>{bid.freshResinContent}</td>
                                     <td>{bid.quantity}</td>
-                                    {/* <td>{bid.bidAmount}</td> */}
                                     <td>
                                       <button
                                         onClick={() => updateModal("bidStatus", bid)}

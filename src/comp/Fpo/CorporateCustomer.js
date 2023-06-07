@@ -180,7 +180,7 @@ const CorporateCustomer = () => {
                           .map(item => (
                             <tr key={item.id}>
                               <td>{item.bidId}</td>
-                              <td>{item.bids.find((bid) => bid.fpoId === fpoId).bidAmount}</td>
+                              <td>{item.bids.find((bid) => bid.userId === fpoId).bidAmount}</td>
                               <td>{item.quantity}</td>
                               <td>{item.supplyDate}</td>
                               <td>{item.bidEndDate}</td>

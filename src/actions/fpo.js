@@ -145,6 +145,20 @@ export function createLoan(data) {
   })
 }
 
+export function updateFarmerLoanRepayment(rData) {
+  let data = {
+    paymentDate: rData.paymentDate,
+    paidAmount: rData.paidAmount,
+  }
+
+  return sendApiReq({
+    method: "put",
+    url: endPoints.loanwindow + `/${rData.windowId}/loan/${rData.loanId}/repayment/${rData.repaymentId}`,
+    data,
+    successMsg: "Repayment updated successfully"
+  })
+}
+
 export function updateFarmerLoanStatus(data) {
   return sendApiReq({
     method: "put",
