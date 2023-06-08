@@ -39,6 +39,9 @@ function Dashboard() {
       {
         queryKey: ["/loans/history"],
         queryFn: () => getLoanHistory({type: "farmer"}),
+        onSuccess: (data) => {
+          console.log(data)
+        }
       }
     ]
   })

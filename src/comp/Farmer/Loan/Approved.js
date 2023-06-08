@@ -71,7 +71,7 @@ function Approved({ data = [], updateModal }) {
                   <td>{g.createdAt.substring(0, 10)}</td>
                   <td>₹ {g.grantedAmount}</td>
                   <td>{g.intrest}%</td>
-                  <td>{g.loanDate}</td>
+                  <td>{g.approvalAt.substring(0, 10)}</td>
                   {
                     g.farmerWindowRepaymentStructure.find((f) => f.completed === false) && (
                       <td>₹ {g.farmerWindowRepaymentStructure.find((f) => f.completed === false).balance}</td>
