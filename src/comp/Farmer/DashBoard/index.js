@@ -175,7 +175,7 @@ function Dashboard() {
                     </thead>
                     <tbody className="fw-light fs-10">
                       {
-                        loanList.filter((loan) => loan.value.userId === farmerId).map((loan) => (
+                        loanList?.filter((loan) => loan.value.userId === farmerId)?.map((loan) => (
                           <tr key={loan.id}>
                             <td>{loan.value.loanId}</td>
                             <td>{loan.value.grantedAmount}</td>

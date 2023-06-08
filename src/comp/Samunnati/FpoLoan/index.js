@@ -55,7 +55,7 @@ function FpoLoan() {
   return (
     <div className="itemContainer">
       <div className="list_title">
-        <div className="container-fluid">
+        <div className="container-fluid" style={{marginBottom: "50px"}}>
           <div className="d-sm-flex justify-content-between align-items-center mb-4">
             <h3
               className="text-dark mb-0"

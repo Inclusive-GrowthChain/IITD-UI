@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { useQueries } from "@tanstack/react-query";
 
 import { getFpoLac } from "../../actions/fpo";
 import { root } from "../../utils/endPoints";
@@ -9,6 +9,7 @@ import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRen
 import AddLacProcurement from "./Modals/AddLacProcurement";
 import AddLacPurchase from "./Modals/AddLacPurchase";
 import Loader from "../Common/Loader";
+import { getProduceList } from "../../actions/farmer";
 
 const btnStyle = {
   backgroundColor: "#064420",
@@ -69,17 +70,37 @@ const LacProcurement = () => {
   const { modal, updateModal, closeModal } = useModal()
   const [activeIndex, setActiveIndex] = useState(1)
 
-  const { isLoading, data } = useQuery({
-    queryKey: ["fpo/lac"],
-    queryFn: getFpoLac
+  // const { isLoading, data } = useQuery({
+  //   queryKey: ["fpo/lac"],
+  //   queryFn: getFpoLac
+  // })
+
+  const [
+    { isLoading: isLoading1, data: lacList, },
+    { isLoading: isLoading2, data: produceList }
+  ] = useQueries({
+    queries: [
+      {
+        queryKey: ["fpo/lac"],
+        queryFn: getFpoLac,
+      },
+      {
+        queryKey: ["farmer/"],
+        queryFn: getProduceList,
+      }
+    ]
   })
+
+  useEffect(() => {
+    console.log("produceList", produceList)
+  }, [produceList])
 
   const handleClick = (index) => setActiveIndex(index)
 
   const checkActive = (index, className) =>
     activeIndex === index ? className : "";
 
-  if (isLoading) return <Loader wrapperCls="loader-main-right" />
+  if (isLoading1 || isLoading2) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <main id="main_container" className="main_container container-fluid itemContainer">
@@ -89,10 +110,10 @@ const LacProcurement = () => {
         <button style={btnStyle} onClick={() => updateModal("add")}>
           Add Item
         </button>
-
+{/* 
         <button style={btnStyle} onClick={() => updateModal("addPurchase")}>
           Add Purchase
-        </button>
+        </button> */}
       </div>
 
       <div className="list_container">
@@ -121,14 +142,14 @@ const LacProcurement = () => {
           <div className="panels">
             <div className={`panel ${checkActive(1, "active")}`}>
               <Card
-                data={data.data.filter(item => item.isProcurable)}
+                data={lacList.data.filter(item => item.isProcurable)}
                 updateModal={updateModal}
               />
             </div>
 
             <div className={`panel ${checkActive(2, "active")}`}>
               <Card
-                data={data.data.filter(item => !item.isProcurable)}
+                data={lacList.data.filter(item => !item.isProcurable)}
                 updateModal={updateModal}
               />
             </div>
