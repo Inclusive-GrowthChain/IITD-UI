@@ -7,6 +7,7 @@ import { createLoan, getActiveLoanwindow } from "../../../../actions/fpo";
 
 import FileInput from "../../../Common/FileInput";
 import Input from '../../../Nisa/Modals/Input';
+import { useAuthStore } from "../../../../store/useAuthStore";
 
 const submitBtnStyle = {
   backgroundColor: "#064420",
@@ -68,6 +69,7 @@ const list = [
 ]
 
 function LoanApplication2({ show, applyFor, handleClose }) {
+  const fpoId = useAuthStore((s) => s.userDetails._id)
   const queryClient = useQueryClient()
   const { register, formState: { errors }, handleSubmit, setValue, clearErrors } = useForm({
     defaultValues: {
@@ -88,7 +90,7 @@ function LoanApplication2({ show, applyFor, handleClose }) {
 
   useQuery({
     queryKey: ["active-window"],
-    queryFn: getActiveLoanwindow,
+    queryFn: () => getActiveLoanwindow({fpoId: fpoId}),
     onSuccess: (data) => {
       setValue("id", data?.data?.[0]?.id)
       setValue("intrest", data?.data?.[0]?.intrest)
