@@ -25,11 +25,27 @@ export function getProduceList(data) {
   })
 }
 
+export function getAllProduceList(data) {
+  return sendApiReq({
+    url: endPoints.farmer.produce + `/produce`,
+  })
+}
+
 export function addProduce(data) {
+  console.log(data)
+  const formData = new FormData()
+  formData.append("farmerId", data.farmerId)
+  formData.append("lacStrainType", data.lacStrainType)
+  formData.append("treeSource", data.treeSource)
+  formData.append("origin", data.origin)
+  formData.append("quantity", data.quantity)
+  formData.append("image", data.image[0])
+  formData.append("remarks", data.remarks)
+
   return sendApiReq({
     method: "post",
     url: endPoints.farmer.produce + "/produce",
-    data,
+    data: formData,
     successMsg: "Product added successfully"
   })
 }

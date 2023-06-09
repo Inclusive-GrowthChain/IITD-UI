@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQueries } from "@tanstack/react-query";
 
 import { getFpoLac } from "../../actions/fpo";
@@ -9,7 +9,7 @@ import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRen
 import AddLacProcurement from "./Modals/AddLacProcurement";
 import AddLacPurchase from "./Modals/AddLacPurchase";
 import Loader from "../Common/Loader";
-import { getProduceList } from "../../actions/farmer";
+import { getAllProduceList } from "../../actions/farmer";
 
 const btnStyle = {
   backgroundColor: "#064420",
@@ -66,6 +66,67 @@ function Card({ data = [], updateModal }) {
   )
 }
 
+function ProduceCard({ data = [], updateModal }) {
+  return (
+    <div className="store-modal">
+      <div className="container-fluid">
+        <div className="row">
+          {
+            data.map(item => (
+              <div key={item._id} className="col-12 col-md-6 col-xl-4">
+                <div className="store-card mt-4">
+                  <div className="card-image">
+                    <img
+                      src={`${root.imgUrl}/img/${item.imageUrl}`}
+                      alt=""
+                      height={280}
+                      className="store_img"
+                    />
+                  </div>
+                  <div style={{padding: 10}}>
+                    <div className="row">
+                      <div className="col-lg-12">
+                        <h5>Farmer ID</h5>
+                        <p>{item.farmerId}</p>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-lg-6">
+                        <h5>Lac Strain Type</h5>
+                        <p>{item.lacStrainType}</p>
+                      </div>
+                      <div className="col-lg-6">
+                        <h5>Origin</h5>
+                        <p>{item.origin}</p>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-lg-6">
+                        <h5>Source of Tree</h5>
+                        <p>{item.treeSource}</p>
+                      </div>
+                      <div className="col-lg-6">
+                        <h5>Quantity</h5>
+                        <p>{item.quantity}</p>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-lg-12">
+                        <h5>Remarks</h5>
+                        <p>{item.remarks}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const LacProcurement = () => {
   const { modal, updateModal, closeModal } = useModal()
   const [activeIndex, setActiveIndex] = useState(1)
@@ -86,14 +147,10 @@ const LacProcurement = () => {
       },
       {
         queryKey: ["farmer/"],
-        queryFn: getProduceList,
+        queryFn: getAllProduceList,
       }
     ]
   })
-
-  useEffect(() => {
-    console.log("produceList", produceList)
-  }, [produceList])
 
   const handleClick = (index) => setActiveIndex(index)
 
@@ -110,7 +167,7 @@ const LacProcurement = () => {
         <button style={btnStyle} onClick={() => updateModal("add")}>
           Add Item
         </button>
-{/* 
+        {/* 
         <button style={btnStyle} onClick={() => updateModal("addPurchase")}>
           Add Purchase
         </button> */}
@@ -154,12 +211,12 @@ const LacProcurement = () => {
               />
             </div>
 
-            {/* <div className={`panel ${checkActive(3, "active")}`}>
-              <Card
-                data={data.data.filter(item => !item.isProcurable)}
+            <div className={`panel ${checkActive(3, "active")}`} style={{ marginBottom: "50px" }}>
+              <ProduceCard
+                data={produceList.data}
                 updateModal={updateModal}
               />
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

@@ -16,6 +16,7 @@ function SellProduce({ show, handleClose }) {
       treeSource: "",
       origin: "",
       quantity: "",
+      image: "",
       remarks: ""
     }
   })
@@ -128,6 +129,29 @@ function SellProduce({ show, handleClose }) {
                 errors.title &&
                 <p className="text-danger" style={errStyle}>
                   {errors.title.message}
+                </p>
+              }
+            </div>
+          </div>
+
+          <div className="row m-2">
+            <div className="col-lg-6">
+              <label>Upload image</label>
+            </div>
+            <div className="col-lg-6">
+              <input
+                type="file"
+                className="form-control"
+                required=""
+                accept="image/*"
+                {...register("image", {
+                  required: "Image is required"
+                })}
+              />
+              {
+                errors.image &&
+                <p className="text-danger" style={errStyle}>
+                  {errors.image.message}
                 </p>
               }
             </div>

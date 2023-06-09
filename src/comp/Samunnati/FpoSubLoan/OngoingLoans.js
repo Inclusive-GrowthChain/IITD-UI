@@ -47,9 +47,9 @@ function OngoingLoans({ data = [], theadStyle, tbodyStyle, btnStyle }) {
         </div>
       </div>
 
-      <div style={{ marginTop: '2%' }}>
+      {/* <div style={{ marginTop: '2%' }}>
         Total amount to be paid in next installment: ???
-      </div>
+      </div> */}
 
       {
         modal.state &&
