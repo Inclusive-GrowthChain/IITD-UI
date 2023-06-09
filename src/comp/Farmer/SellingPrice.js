@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQueries } from "@tanstack/react-query";
 import Button from "react-bootstrap/Button";
 
-import { getProduceList } from "../../actions/farmer";
+import { getAllProduceList } from "../../actions/farmer";
 import { useAuthStore } from "../../store/useAuthStore";
 import { getFpoLac } from "../../actions/fpo";
 import { root } from "../../utils/endPoints";
@@ -28,7 +28,7 @@ function SellingPrice() {
       },
       {
         queryKey: ["farmer/produce"],
-        queryFn: () => getProduceList({ farmerId }),
+        queryFn: getAllProduceList,
       }
     ]
   })
@@ -145,7 +145,7 @@ function SellingPrice() {
                 </div>
               </TabContent>
               <TabContent id="tab2" activeTab={activeTab}>
-                <div className="row row-cols-1">
+                {/* <div className="row row-cols-1">
                   <div className="col">
                     <div className="card shadow">
                       <div className="table-responsive">
@@ -189,6 +189,50 @@ function SellingPrice() {
                       </div>
                     </div>
                   </div>
+                </div> */}
+                <div className="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4" style={{marginBottom: "50px"}}>
+                  {
+                    produceList?.data.filter((item) => item.farmerId === farmerId).map(item => (
+                      <div className="col" key={item._id}>
+                        <div className="card">
+                          <img
+                            src={`${root.imgUrl}/img/${item.imageUrl}`}
+                            alt=""
+                            height={280}
+                            className="store_img"
+                          />
+                          <div className="card-body">
+                            <div className="row">
+                              <div className="col-lg-6">
+                                <h5>Lac Strain Type</h5>
+                                <p>{item.lacStrainType}</p>
+                              </div>
+                              <div className="col-lg-6">
+                                <h5>Origin</h5>
+                                <p>{item.origin}</p>
+                              </div>
+                            </div>
+                            <div className="row">
+                              <div className="col-lg-6">
+                                <h5>Source of Tree</h5>
+                                <p>{item.treeSource}</p>
+                              </div>
+                              <div className="col-lg-6">
+                                <h5>Quantity</h5>
+                                <p>{item.quantity}</p>
+                              </div>
+                            </div>
+                            <div className="row">
+                              <div className="col-lg-12">
+                                <h5>Remarks</h5>
+                                <p>{item.remarks}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  }
                 </div>
               </TabContent>
             </div>
