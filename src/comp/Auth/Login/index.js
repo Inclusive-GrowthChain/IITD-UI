@@ -24,7 +24,7 @@ const wrapperStyle = {
 }
 
 const farmerLinkStyle = { textDecoration: 'none', color: '#fff' }
-const igcSpanStyle = { color: "#064420", fontSize: "21px", fontWeight: "bold" }
+const igcSpanStyle = { color: "#0089f0", fontSize: "21px", fontWeight: "bold" }
 
 const Login = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState(false)
@@ -87,7 +87,7 @@ const Login = () => {
 
       <div className="footer">
         <p style={{ color: "#000" }}>
-          Designed and Developed by
+          Powered by
           <span style={igcSpanStyle}>
             IGC
           </span>
