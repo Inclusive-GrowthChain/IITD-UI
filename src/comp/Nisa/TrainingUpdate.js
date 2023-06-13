@@ -56,7 +56,7 @@ const TrainingUpdate = () => {
               </Button>
             </div>
           </div>
-          <div className="tp_container card shadow">
+          <div className="tp_container card shadow" style={{marginBottom: "50px"}}>
             <div
               className="table-responsive"
               style={{ padding: "1rem 1rem" }}
@@ -96,7 +96,7 @@ const TrainingUpdate = () => {
                         <td>{tp.applicationStartDate}</td>
                         <td>{tp.applicationEndDate}</td>
                         <td>{tp.fee}</td>
-                        <td>{tp.remarks}</td>
+                        <td style={{textAlign: "left", whiteSpace: "normal"}}>{tp.remarks}</td>
                         <td>
                           <button
                             onClick={() => updateModal("edit", tp)}

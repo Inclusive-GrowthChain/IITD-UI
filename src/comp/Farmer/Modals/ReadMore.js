@@ -2,12 +2,12 @@ import { Modal } from "react-bootstrap";
 
 function ReadMore({ data, show, handleClose }) {
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={handleClose} size="lg">
       <Modal.Header closeButton>
         <Modal.Title>{data.title}</Modal.Title>
       </Modal.Header>
 
-      <Modal.Body style={{ height: "10rem" }}>
+      <Modal.Body style={{ height: "40rem" }}>
         <textarea
           className="form-control"
           style={{ height: "100%" }}

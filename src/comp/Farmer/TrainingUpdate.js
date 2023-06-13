@@ -63,7 +63,7 @@ function TrainingUpdate() {
                         <td>{tp.applicationStartDate}</td>
                         <td>{tp.applicationEndDate}</td>
                         <td>{tp.fee}</td>
-                        <td>{tp.remarks}</td>
+                        <td style={{textAlign: "left", whiteSpace: "normal"}}>{tp.remarks}</td>
                       </tr>
                     ))
                   }

@@ -38,7 +38,7 @@ function Dashboard() {
       },
       {
         queryKey: ["/loans/history"],
-        queryFn: () => getLoanHistory({type: "farmer"}),
+        queryFn: () => getLoanHistory({ type: "farmer" }),
         onSuccess: (data) => {
           console.log(data)
         }
@@ -140,7 +140,9 @@ function Dashboard() {
                         caList.data.slice(0, 4).map(ca => (
                           <tr key={ca._id}>
                             <td>{ca.createdAt.substring(0, 10)}</td>
-                            <td>{ca.title}</td>
+                            <td>{
+                              ca.title.length > 40 ? ca.title.substring(0, 40) + "..." : ca.title
+                            }</td>
                           </tr>
                         ))}
                     </tbody>

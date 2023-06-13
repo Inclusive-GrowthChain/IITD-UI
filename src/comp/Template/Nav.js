@@ -31,7 +31,7 @@ function Nav({ title, toggleSidebar }) {
 
       <div className="logo_img">
         <img src={logo} alt="logo" style={{ width: "35px", height: "35px" }} />
-        <span>{title}</span>
+        <span style={{fontSize: "1.3rem"}}>{title}</span>
       </div>
 
       <div className="nav_items">

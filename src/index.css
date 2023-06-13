@@ -6,6 +6,10 @@
   font-family: 'Poppins', sans-serif !important;
 }
 
+button:disabled {
+  background-color: grey !important;
+}
+
 body::-webkit-scrollbar {
   width: 10px;
 }
