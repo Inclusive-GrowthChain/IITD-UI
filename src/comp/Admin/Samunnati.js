@@ -46,7 +46,6 @@ const Samunnati = () => {
                   <tr>
                     <td>S.No.</td>
                     <td>Id</td>
-                    <td>Role</td>
                     <td>Mobile No</td>
                     <td>Email Id</td>
                   </tr>
@@ -57,7 +56,6 @@ const Samunnati = () => {
                       <tr>
                         <td>{key+1}</td>
                         <td>{user._id}</td>
-                        <td>{user.role}</td>
                         <td>{user.contactNumber}</td>
                         <td>{user.email}</td>
                       </tr>

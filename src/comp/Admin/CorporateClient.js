@@ -58,7 +58,7 @@ const CorporateClient = () => {
                       <tr>
                         <td>{key+1}</td>
                         <td>{user._id}</td>
-                        <td>{user.name}</td>
+                        <td>{user.userName}</td>
                         <td>{user.city}, {user.state}</td>
                         <td>{user.contactNumber}</td>
                         <td>{user.email}</td>

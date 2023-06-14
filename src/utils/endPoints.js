@@ -5,6 +5,7 @@ export const root = {
 
 const endPoints = {
   login: '/login',
+  userDetails: '/userDetails',
   fpoSignup: "/signup/fpo",
   nisaSignup: "/signup/nisa",
   farmerSignup: "/signup/farmer",

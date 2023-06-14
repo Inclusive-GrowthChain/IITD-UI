@@ -30,3 +30,9 @@ export function getFarmerList() {
     url: endPoints.userList.farmer,
   })
 }
+
+export function getUserDetails(data) {
+  return sendApiReq({
+    url: endPoints.userDetails + "/" + data,
+  })
+}

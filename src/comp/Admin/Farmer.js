@@ -1,21 +1,41 @@
 import Button from "react-bootstrap/Button";
 import AddFarmer from "./Modals/AddFarmer";
 import useModal from "../../hooks/useModal";
-import { useQuery } from "@tanstack/react-query";
+import { useQueries } from "@tanstack/react-query";
 import { getFarmerList } from "../../actions/user";
-
-// import Register from "../Auth/Register";
 import Loader from "../Common/Loader";
+import { getUserDetails } from "../../actions/user";
+import { useMemo } from "react";
 
 const Farmer = () => {
-  const { modal, updateModal, closeModal } = useModal()
+  const { modal, updateModal, closeModal } = useModal();
 
-  const { isLoading, data } = useQuery({
-    queryKey: ["user/farmer"],
-    queryFn: getFarmerList
-  })
+  const [{ isLoading: isLoading1, data: farmerData }] = useQueries({
+    queries: [
+      {
+        queryKey: ["user/farmer"],
+        queryFn: getFarmerList,
+      },
+    ],
+  });
 
-  if (isLoading) return <Loader wrapperCls="loader-main-right" />
+  const queries = useMemo(() => {
+    if (!farmerData) return [];
+
+    return farmerData.data.map((farmer) => ({
+      queryKey: ["userDetails/", farmer.fpoId],
+      queryFn: () => getUserDetails(farmer.fpoId),
+      enabled: true,
+    }));
+  }, [farmerData]);
+
+  const results = useQueries({ queries });
+
+  const isLoading2 = results?.some((result) => result.isLoading);
+  const fpoData = results?.map((result) => result.data);
+
+  if (isLoading1 || isLoading2 || !farmerData)
+    return <Loader wrapperCls="loader-main-right" />;
 
   return (
     <div className="itemContainer">
@@ -54,21 +74,19 @@ const Farmer = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    data.data.map((user, key) => (
-                      <tr>
-                        <td>{key+1}</td>
-                        <td>{user._id}</td>
-                        <td>{user.name}</td>
-                        <td>{user.gender}</td>
-                        <td>{user.createdAt.substring(0, 10)}</td>
-                        <td>{user.mobile}</td>
-                        <td>
-                          {user.fpoName}
-                        </td>
-                      </tr>
-                    ))
-                  }
+                  {farmerData.data.map((user, key) => (
+                    <tr>
+                      <td>{key + 1}</td>
+                      <td>{user._id}</td>
+                      <td>{user.userName}</td>
+                      <td>{user.gender}</td>
+                      <td>{user.createdAt.substring(0, 10)}</td>
+                      <td>{user.mobile}</td>
+                      <td>
+                        {fpoData.find((fpo) => fpo._id === user.fpoId)?.fpoName}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -76,15 +94,9 @@ const Farmer = () => {
         </div>
       </div>
 
-      {
-        modal.state === "farmer" &&
-        <AddFarmer
-          show
-          close={closeModal}
-        />
-      }
+      {modal.state === "farmer" && <AddFarmer show close={closeModal} />}
     </div>
-  )
-}
+  );
+};
 
-export default Farmer
+export default Farmer;
