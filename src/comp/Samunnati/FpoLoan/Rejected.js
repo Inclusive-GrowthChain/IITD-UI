@@ -13,32 +13,35 @@ const btnStyle = {
   width: "fit-content",
   fontSize: ".75rem",
   lineHeight: "1rem",
-}
+};
 
-function Rejected({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tbodyStyle }) {
-  const { modal, updateModal, closeModal } = useModal()
-  const [search, setSearch] = useState("")
+function Rejected({
+  data = [],
+  searchInputStyle,
+  topWrapperStyle,
+  theadStyle,
+  tbodyStyle,
+}) {
+  const { modal, updateModal, closeModal } = useModal();
+  const [search, setSearch] = useState("");
 
   return (
     <>
-      <div
-        className="form-group"
-        style={topWrapperStyle}
-      >
+      <div className="form-group" style={topWrapperStyle}>
         <input
           type="text"
           className="form-control"
           placeholder="Search by FPO Name or FPO ID"
           style={searchInputStyle}
-          onChange={e => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
       <div className="row">
         <div className="col">
           <div className="card shadow">
-            <div className="table-responsive">
-              <table className="table table-borderless">
+            <div className=" table-responsive p-3">
+              <table className="table table-striped">
                 <thead style={theadStyle}>
                   <tr>
                     <td>Date of Application</td>
@@ -52,28 +55,32 @@ function Rejected({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tb
                 </thead>
 
                 <tbody style={tbodyStyle}>
-                  {
-                    data
-                      .filter(a => a?.fpoName?.toLowerCase()?.includes(search.toLowerCase()) || a?.fpoId?.toLowerCase()?.includes(search.toLowerCase()))
-                      .map(app => (
-                        <tr key={app.id}>
-                          <td>{app.dateOfApplication.substring(0, 10)}</td>
-                          <td>{app.fpoId}</td>
-                          <td>{app.fpoName}</td>
-                          <td>{app.contactNo}</td>
-                          <td>{app.requestedAmount}</td>
-                          <td>
-                            <button
-                              style={btnStyle}
-                              onClick={() => updateModal("show", app)}
-                            >
-                              view
-                            </button>
-                          </td>
-                          <td>{app.reason}</td>
-                        </tr>
-                      ))
-                  }
+                  {data
+                    .filter(
+                      (a) =>
+                        a?.fpoName
+                          ?.toLowerCase()
+                          ?.includes(search.toLowerCase()) ||
+                        a?.fpoId?.toLowerCase()?.includes(search.toLowerCase())
+                    )
+                    .map((app) => (
+                      <tr key={app.id}>
+                        <td>{app.dateOfApplication.substring(0, 10)}</td>
+                        <td>{app.fpoId}</td>
+                        <td>{app.fpoName}</td>
+                        <td>{app.contactNo}</td>
+                        <td>{app.requestedAmount}</td>
+                        <td>
+                          <button
+                            style={btnStyle}
+                            onClick={() => updateModal("show", app)}
+                          >
+                            view
+                          </button>
+                        </td>
+                        <td>{app.reason}</td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
@@ -81,16 +88,11 @@ function Rejected({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tb
         </div>
       </div>
 
-      {
-        modal.state &&
-        <RejectedLoanApp
-          show
-          data={modal.data}
-          handleClose={closeModal}
-        />
-      }
+      {modal.state && (
+        <RejectedLoanApp show data={modal.data} handleClose={closeModal} />
+      )}
     </>
-  )
+  );
 }
 
-export default Rejected
+export default Rejected;

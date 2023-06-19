@@ -1,9 +1,18 @@
 import { useState } from "react";
 import HighlightOffTwoToneIcon from "@mui/icons-material/HighlightOffTwoTone";
 import Modal from "react-bootstrap/Modal";
+import { useQuery } from "@tanstack/react-query";
+import { getLacTypes } from "../../../../actions/fpo";
+import Loader from "../../../Common/Loader";
 
 function SaleHistory({ showAddSale, handleCloseAddSale, handleShowAddSale, handleShowConfirmSale }) {
   const [noOfSaleRows, setNoOfSaleRows] = useState(1)
+  const {isLoading, data} = useQuery({
+    queryKey:["Lac_Type"],
+    queryFn: getLacTypes
+  })
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (
     <Modal
@@ -25,7 +34,6 @@ function SaleHistory({ showAddSale, handleCloseAddSale, handleShowAddSale, handl
               }}
             >
               <tr>
-                <th>Sale Id</th>
                 <th>Date of Sale</th>
                 <th>Type of Lac</th>
                 <th>Quantity</th>
@@ -48,13 +56,6 @@ function SaleHistory({ showAddSale, handleCloseAddSale, handleShowAddSale, handl
                       <td>
                         <input
                           type="text"
-                          placeholder="SAM107254367"
-                          style={{ width: "130px" }}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
                           placeholder="17-02-22"
                           style={{ width: "130px" }}
                         />
@@ -73,8 +74,11 @@ function SaleHistory({ showAddSale, handleCloseAddSale, handleShowAddSale, handl
                           data-mdb-option-height="50"
                         >
                           <option value="select">Select</option>
-                          <option value="">Stick Lac</option>
-                          <option value="">Shellac Lac</option>
+                        {
+                          data?.productNames?.map((lac,ind) =>{
+                            return <option className="text-capitalize" key={ind} value={lac}>{lac}</option>
+                          })
+                        }
                         </select>
                       </td>
                       <td>

@@ -15,33 +15,33 @@ const h3Style = {
   fontSize: "22px",
   fontWeight: "800",
   color: "rgb(33, 37, 41)",
-}
+};
 
 const listStyle = {
   position: "relative",
   float: "right",
   right: "18px",
   top: "10px",
-}
+};
 
 const startBidStyle = {
   backgroundColor: "#064420",
   border: "none",
   width: "fit-content",
-}
+};
 
 const theadStyle = {
   color: "#064420",
-  fontSize: "18px",
+  fontSize: "15px",
   verticalAlign: "top",
-  fontWeight: 600
-}
+  fontWeight: 600,
+};
 
 const tbodyStyle = {
   color: "#000",
-  fontSize: "16px",
+  fontSize: "15px",
   fontWeight: "500",
-}
+};
 
 const viewBtnStyle = {
   backgroundColor: "#064420",
@@ -53,51 +53,31 @@ const viewBtnStyle = {
   width: "fit-content",
   fontSize: ".75rem",
   lineHeight: "1rem",
-}
+};
 
-const theadStyle2 = {
-  color: "#064420",
-  fontSize: "18px",
-  verticalAlign: "top",
-  textAlign: "center",
-  fontWeight: 600
-}
-
-const tbodyStyle2 = {
-  color: "#000",
-  fontSize: "16px",
-  fontWeight: "500",
-  textAlign: "center",
-}
 
 const Bidding = () => {
-  const { modal, updateModal, closeModal } = useModal()
-  const [activeTab, setActiveTab] = useState("tab1")
+  const { modal, updateModal, closeModal } = useModal();
+  const [activeTab, setActiveTab] = useState("tab1");
 
   const { isLoading, data } = useQuery({
     queryKey: ["corporateClient/lac-bidding"],
-    queryFn: getBidding
-  })
+    queryFn: getBidding,
+  });
 
-  if (isLoading) return <Loader wrapperCls="loader-main-right" />
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />;
 
   return (
     <>
       <div className="itemContainer">
-        <div className="list_title" style={{marginBottom: "100px"}}>
+        <div className="list_title" style={{ marginBottom: "100px" }}>
           <div className="container-fluid">
             <div className="d-sm-flex justify-content-between align-items-center mb-4">
-              <h3
-                className="text-dark mb-0"
-                style={h3Style}
-              >
+              <h3 className="text-dark mb-0" style={h3Style}>
                 Corporate Client
               </h3>
             </div>
-            <div
-              className="list__btn"
-              style={listStyle}
-            >
+            <div className="list__btn" style={listStyle}>
               <Button
                 className="crop-advisory_button"
                 style={startBidStyle}
@@ -129,8 +109,8 @@ const Bidding = () => {
                   <div className="row">
                     <div className="col">
                       <div className="card shadow">
-                        <div className=" table-responsive">
-                          <table className="table table-borderless">
+                        <div className=" table-responsive p-3">
+                          <table className="table table-striped">
                             <thead style={theadStyle}>
                               <tr>
                                 <td>Bid ID</td>
@@ -141,24 +121,25 @@ const Bidding = () => {
                             </thead>
 
                             <tbody style={tbodyStyle}>
-                              {
-                                data.data
-                                  .filter(bid => bid.status === "on-going")
-                                  .map(bid => (
-                                    <tr key={bid.id}>
-                                      <td>{bid.bidId}</td>
-                                      <td>{bid.supplyDate}</td>
-                                      <td>{bid.bidEndDate}</td>
-                                      <td>
-                                        <button
-                                          style={viewBtnStyle}
-                                          onClick={() => updateModal("bidStatus", bid)}
-                                        >
-                                          view
-                                        </button>
-                                      </td>
-                                    </tr>
-                                  ))}
+                              {data.data
+                                .filter((bid) => bid.status === "on-going")
+                                .map((bid) => (
+                                  <tr key={bid.id}>
+                                    <td>{bid.bidId}</td>
+                                    <td>{bid.supplyDate}</td>
+                                    <td>{bid.bidEndDate}</td>
+                                    <td>
+                                      <button
+                                        style={viewBtnStyle}
+                                        onClick={() =>
+                                          updateModal("bidStatus", bid)
+                                        }
+                                      >
+                                        view
+                                      </button>
+                                    </td>
+                                  </tr>
+                                ))}
                             </tbody>
                           </table>
                         </div>
@@ -171,11 +152,11 @@ const Bidding = () => {
                   <div className="row">
                     <div className="col">
                       <div className="card shadow">
-                        <div className="table-responsive">
-                          <table className="table table-borderless">
-                            <thead style={theadStyle2}>
+                        <div className=" table-responsive p-3">
+                          <table className="table table-striped">
+                            <thead style={theadStyle}>
                               <tr>
-                                <td>Bid ID</td>                                
+                                <td>Bid ID</td>
                                 <td>Lac Strain Type</td>
                                 <td>Source of Tree</td>
                                 <td>Origin</td>
@@ -186,9 +167,10 @@ const Bidding = () => {
                               </tr>
                             </thead>
 
-                            <tbody style={tbodyStyle2}>
-                              {
-                                data.data.filter((bid) => bid.status === "completed").map((bid) => (
+                            <tbody style={tbodyStyle}>
+                              {data.data
+                                .filter((bid) => bid.status === "completed")
+                                .map((bid) => (
                                   <tr key={bid.id}>
                                     <td>{bid.bidId}</td>
                                     <td>{bid.lacStrainType}</td>
@@ -199,15 +181,16 @@ const Bidding = () => {
                                     <td>{bid.quantity}</td>
                                     <td>
                                       <button
-                                        onClick={() => updateModal("bidStatus", bid)}
+                                        onClick={() =>
+                                          updateModal("bidStatus", bid)
+                                        }
                                         style={viewBtnStyle}
                                       >
                                         View
                                       </button>
                                     </td>
                                   </tr>
-                                ))
-                              }
+                                ))}
                             </tbody>
                           </table>
                         </div>
@@ -221,25 +204,15 @@ const Bidding = () => {
         </div>
       </div>
 
-      {
-        modal.state === "startBid" &&
-        <StartBid
-          show
-          data={modal.data}
-          handleClose={closeModal}
-        />
-      }
+      {modal.state === "startBid" && (
+        <StartBid show data={modal.data} handleClose={closeModal} />
+      )}
 
-      {
-        modal.state === "bidStatus" &&
-        <BidStatus
-          show
-          data={modal.data}
-          handleClose={closeModal}
-        />
-      }
+      {modal.state === "bidStatus" && (
+        <BidStatus show data={modal.data} handleClose={closeModal} />
+      )}
     </>
-  )
-}
+  );
+};
 
-export default Bidding
+export default Bidding;

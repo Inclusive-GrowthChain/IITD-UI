@@ -1,16 +1,27 @@
 import { useState } from "react";
 import HighlightOffTwoToneIcon from "@mui/icons-material/HighlightOffTwoTone";
 import Modal from "react-bootstrap/Modal";
+import { useQuery } from "@tanstack/react-query";
+import { getItemNames } from "../../../../actions/fpo";
+import Loader from "../../../Common/Loader";
 
-function PurchaseHistory2({ showAddPurchase, handleShowAddPurchase, handleCloseAddPurchase, handleShowConfirmPurchase }) {
-  const [noOfPurchaseRows, setNoOfPurchaseRows] = useState(1)
+function PurchaseHistory2({
+  showAddPurchase,
+  handleShowAddPurchase,
+  handleCloseAddPurchase,
+  handleShowConfirmPurchase,
+}) {
+  const [noOfPurchaseRows, setNoOfPurchaseRows] = useState(1);
+
+  const { isLoading, data } = useQuery({
+    queryKey: ["Item_Names"],
+    queryFn: getItemNames,
+  });
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />;
 
   return (
-    <Modal
-      size="xl"
-      show={showAddPurchase}
-      onHide={handleCloseAddPurchase}
-    >
+    <Modal size="xl" show={showAddPurchase} onHide={handleCloseAddPurchase}>
       <Modal.Header closeButton>Purchase History</Modal.Header>
       <Modal.Body>
         <div className="card_table1 table-responsive">
@@ -25,7 +36,6 @@ function PurchaseHistory2({ showAddPurchase, handleShowAddPurchase, handleCloseA
               }}
             >
               <tr>
-                <th>Purchase Id</th>
                 <th>Date of Purchase</th>
                 <th>Item Name</th>
                 <th>Quantity</th>
@@ -42,92 +52,88 @@ function PurchaseHistory2({ showAddPurchase, handleShowAddPurchase, handleCloseA
                 // textAlign: "center",
               }}
             >
-              {[...Array(noOfPurchaseRows)].map(
-                (elementInArray, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>
-                        <input
-                          type="text"
-                          placeholder="SAM107254367"
-                          style={{ width: "130px" }}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          placeholder="17-02-22"
-                          style={{ width: "130px" }}
-                        />
-                      </td>
-                      <td>
-                        <select
-                          style={{ width: "70%" }}
-                          className="select form-control-sm"
-                          required
-                          name="Less than 25 lakhs"
-                          data-mdb-filter="true"
-                          data-mdb-validation="true"
-                          data-mdb-valid-feedback=" "
-                          data-mdb-container=".modal"
-                          data-mdb-invalid-feedback=" "
-                          data-mdb-option-height="50"
-                        >
-                          <option value="select">Select</option>
-                          <option value="">Nylon Bag</option>
-                          <option value="">--</option>
-                        </select>
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          placeholder="2 kg"
-                          style={{ width: "130px" }}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          placeholder="3"
-                          style={{ width: "130px" }}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          placeholder="520"
-                          style={{ width: "130px" }}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          placeholder="Remarks"
-                          style={{ width: "130px" }}
-                        />
-                      </td>
-                      <td>
-                        <HighlightOffTwoToneIcon
-                          onClick={() =>
-                            setNoOfPurchaseRows(noOfPurchaseRows - 1)
-                          }
-                          style={{
-                            cursor: "pointer",
-                          }}
-                        />
-                      </td>
-                    </tr>
-                  )
-                }
-              )}
+              {[...Array(noOfPurchaseRows)].map((elementInArray, index) => {
+                return (
+                  <tr key={index}>
+                    <td>
+                      <input
+                        type="text"
+                        placeholder="17-02-22"
+                        style={{ width: "130px" }}
+                      />
+                    </td>
+                    <td>
+                      <select
+                        style={{ width: "70%" }}
+                        className="select form-control-sm"
+                        required
+                        name="Less than 25 lakhs"
+                        data-mdb-filter="true"
+                        data-mdb-validation="true"
+                        data-mdb-valid-feedback=" "
+                        data-mdb-container=".modal"
+                        data-mdb-invalid-feedback=" "
+                        data-mdb-option-height="50"
+                      >
+                        <option value="select">Select</option>
+                        {data?.productNames?.map((item, ind) => {
+                          return (
+                            <option className="text-capitalize" value={item} key={ind}>
+                              {item}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        placeholder="2 kg"
+                        style={{ width: "130px" }}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        placeholder="3"
+                        style={{ width: "130px" }}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        placeholder="520"
+                        style={{ width: "130px" }}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        placeholder="Remarks"
+                        style={{ width: "130px" }}
+                      />
+                    </td>
+                    <td>
+                      <HighlightOffTwoToneIcon
+                        onClick={() =>
+                          setNoOfPurchaseRows(noOfPurchaseRows - 1)
+                        }
+                        style={{
+                          cursor: "pointer",
+                        }}
+                      />
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
         <div className="purchase-add-button mt-4">
           <button
             onClick={() => {
-              handleShowAddPurchase()
-              setNoOfPurchaseRows(noOfPurchaseRows + 1)
+              handleShowAddPurchase();
+              setNoOfPurchaseRows(noOfPurchaseRows + 1);
             }}
             style={{
               backgroundColor: "#064420",
@@ -185,7 +191,7 @@ function PurchaseHistory2({ showAddPurchase, handleShowAddPurchase, handleCloseA
         </div>
       </Modal.Body>
     </Modal>
-  )
+  );
 }
 
-export default PurchaseHistory2
+export default PurchaseHistory2;

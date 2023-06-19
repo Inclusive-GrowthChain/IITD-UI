@@ -19,7 +19,7 @@ function LoanWindowTable({ loanWindow }) {
   const { modal, updateModal, closeModal } = useModal()
 
   return (
-    <div style={{ paddingLeft: "24px" }}>
+    <div className="shadow m-2 p-3" style={{ paddingLeft: "24px" }}>
       <div className="d-flex align-items-center" style={{ gap: "1rem" }}>
         <label style={labelStyle}>Loan window Id</label>
         <span>:</span>

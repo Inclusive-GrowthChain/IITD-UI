@@ -42,13 +42,13 @@ const ImageSlider = ({ slides }) => {
 
             <div className="d-flex align-items-center justify-content-center gap-4 mt-2 text-center">
               <div>
-                <p className="mb-0" style={{ color: "#777", fontSize: "14px", fontWeight: "normal" }}>Market Price</p>
-                <p className="mb-0" style={{ color: "#777", fontSize: "13px", fontWeight: "normal" }}>{slide.marketPrice}</p>
+                <p className="mb-0" style={{ color: "black", fontSize: "14px", fontWeight: "bold" }}>Market Price</p>
+                <p className="mb-0" style={{ color: "black", fontSize: "13px", fontWeight: "bold" }}>₹ {slide.marketPrice}</p>
               </div>
 
               <div>
-                <p className="mb-0" style={{ color: "#777", fontSize: "14px", fontWeight: "normal" }}>FPO Price</p>
-                <p className="mb-0" style={{ color: "#777", fontSize: "13px", fontWeight: "normal" }}>{slide.fpoPrice}</p>
+                <p className="mb-0" style={{ color: "black", fontSize: "14px", fontWeight: "bold" }}>FPO Price</p>
+                <p className="mb-0" style={{ color: "black", fontSize: "13px", fontWeight: "bold" }}>₹ {slide.fpoPrice}</p>
               </div>
             </div>
           </>}

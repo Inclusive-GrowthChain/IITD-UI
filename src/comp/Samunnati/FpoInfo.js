@@ -8,45 +8,42 @@ const h3Style = {
   fontSize: "22px",
   fontWeight: "800",
   color: "rgb(33, 37, 41)",
-}
+};
 
 const theadStyle = {
   color: "#064420",
-  fontSize: "18px",
+  fontSize: "15px",
   verticalAlign: "top",
-  fontWeight: 600
-}
+  fontWeight: 600,
+};
 
 const tbodyStyle = {
   color: "#000",
-  fontSize: "16px",
+  fontSize: "15px",
   fontWeight: "500",
-}
+};
 
 function FPOInfo() {
   const { isLoading, data } = useQuery({
     queryKey: ["user/fpo"],
-    queryFn: getFpoList
-  })
+    queryFn: getFpoList,
+  });
 
-  if (isLoading) return <Loader wrapperCls="loader-main-right" />
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />;
 
   return (
     <div className="itemContainer">
       <div className="list_title">
         <div className="container-fluid">
           <div className="d-sm-flex justify-content-between align-items-center mb-4">
-            <h3
-              className="text-dark mb-0"
-              style={h3Style}
-            >
+            <h3 className="text-dark mb-0" style={h3Style}>
               FPO Information
             </h3>
           </div>
 
           <div className="card shadow">
-            <div className=" table-responsive">
-              <table className="table table-borderless">
+            <div className=" table-responsive p-3">
+              <table className="table table-striped">
                 <thead style={theadStyle}>
                   <tr>
                     <td>FPO ID</td>
@@ -59,26 +56,27 @@ function FPOInfo() {
                 </thead>
 
                 <tbody style={tbodyStyle}>
-                  {
-                    data?.data.map((fpo) => (
-                      <tr key={fpo._id}>
-                        <td>{fpo._id}</td>
-                        <td>
-                          <Link
-                            to={`/samunnati/fpo-page/${fpo._id}`}
-                            className="data_wrapper"
-                            style={{ color: "#000", textDecoration: "none" }}
-                            state={fpo}
-                          >
-                            {fpo.fpoName}
-                          </Link>
-                        </td>
-                        <td>{fpo.directorName}</td>
-                        <td>{fpo.contactNumber}</td>
-                        <td>{fpo.email}</td>
-                        <td>{fpo.address} {fpo.city} {fpo.state} {fpo.pinCode}</td>
-                      </tr>
-                    ))}
+                  {data?.data.map((fpo) => (
+                    <tr key={fpo._id}>
+                      <td>{fpo._id}</td>
+                      <td>
+                        <Link
+                          to={`/samunnati/fpo-page/${fpo._id}`}
+                          className="data_wrapper"
+                          style={{ color: "#000", textDecoration: "none" }}
+                          state={fpo}
+                        >
+                          {fpo.fpoName}
+                        </Link>
+                      </td>
+                      <td>{fpo.directorName}</td>
+                      <td>{fpo.contactNumber}</td>
+                      <td>{fpo.email}</td>
+                      <td>
+                        {fpo.address} {fpo.city} {fpo.state} {fpo.pinCode}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -86,7 +84,7 @@ function FPOInfo() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default FPOInfo
+export default FPOInfo;

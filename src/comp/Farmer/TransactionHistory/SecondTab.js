@@ -31,7 +31,7 @@ const data = [
     quantity: "6",
     totalAmount: "300",
   },
-]
+];
 
 const SecondTab = () => {
   return (
@@ -39,12 +39,12 @@ const SecondTab = () => {
       <div className="row">
         <div className="col">
           <div className="card shadow">
-            <div className="table-responsive">
-              <table>
+            <div className=" table-responsive p-3">
+              <table className="table table-striped">
                 <thead
                   style={{
                     // color: "green",
-                    fontSize: "17px",
+                    fontSize: "15px",
                     verticalAlign: "top",
                   }}
                 >
@@ -64,18 +64,16 @@ const SecondTab = () => {
                     fontWeight: "500",
                   }}
                 >
-                  {
-                    data.map(d => (
-                      <tr key={d.id}>
-                        <td>{d.id}</td>
-                        <td>{d.date}</td>
-                        <td>{d.name}</td>
-                        <td>{d.pricePerKg}</td>
-                        <td>{d.quantity}</td>
-                        <td>{d.totalAmount}</td>
-                      </tr>
-                    ))
-                  }
+                  {data.map((d) => (
+                    <tr key={d.id}>
+                      <td>{d.id}</td>
+                      <td>{d.date}</td>
+                      <td>{d.name}</td>
+                      <td>{d.pricePerKg}</td>
+                      <td>{d.quantity}</td>
+                      <td>{d.totalAmount}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

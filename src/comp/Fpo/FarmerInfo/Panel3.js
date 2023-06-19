@@ -7,16 +7,19 @@ const addPurchaseBtnStyle = {
   textTransform: "uppercase",
   fontSize: "12px",
   marginBottom: "15px",
-}
+};
 
-function Panel3({ theadStyle2, tbodyStyle, style3, handleShowAddPurchase, handleShowPurchaseDetails }) {
+function Panel3({
+  theadStyle2,
+  tbodyStyle,
+  style3,
+  handleShowAddPurchase,
+  handleShowPurchaseDetails,
+}) {
   return (
     <>
       <div>
-        <button
-          onClick={handleShowAddPurchase}
-          style={addPurchaseBtnStyle}
-        >
+        <button onClick={handleShowAddPurchase} style={addPurchaseBtnStyle}>
           Add Purchase
         </button>
       </div>
@@ -38,10 +41,7 @@ function Panel3({ theadStyle2, tbodyStyle, style3, handleShowAddPurchase, handle
                 <td>17-02-22</td>
                 <td>520</td>
                 <td>
-                  <button
-                    style={style3}
-                    onClick={handleShowPurchaseDetails}
-                  >
+                  <button style={style3} onClick={handleShowPurchaseDetails}>
                     View
                   </button>
                 </td>
@@ -51,10 +51,7 @@ function Panel3({ theadStyle2, tbodyStyle, style3, handleShowAddPurchase, handle
                 <td>17-02-22</td>
                 <td>520</td>
                 <td>
-                  <button
-                    style={style3}
-                    onClick={handleShowPurchaseDetails}
-                  >
+                  <button style={style3} onClick={handleShowPurchaseDetails}>
                     View
                   </button>
                 </td>
@@ -64,7 +61,7 @@ function Panel3({ theadStyle2, tbodyStyle, style3, handleShowAddPurchase, handle
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default Panel3
+export default Panel3;

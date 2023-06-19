@@ -7,7 +7,7 @@ const inprogressButtonStyle = {
   width: "fit-content",
   fontSize: ".75rem",
   lineHeight: "1rem",
-}
+};
 
 const repaidButtonStyle = {
   backgroundColor: "#1ad77f",
@@ -18,18 +18,18 @@ const repaidButtonStyle = {
   width: "fit-content",
   fontSize: ".75rem",
   lineHeight: "1rem",
-}
+};
 
 const theadStyle = {
-  fontSize: "17px",
+  fontSize: "15px",
   verticalAlign: "top",
-}
+};
 
 const tbodyStyle = {
   color: "#000",
   fontSize: "15px",
   fontWeight: "500",
-}
+};
 
 const style = {
   backgroundColor: "#66FF00",
@@ -40,13 +40,13 @@ const style = {
   width: "fit-content",
   fontSize: ".75rem",
   lineHeight: "1rem",
-}
+};
 
 function Approved({ data = [], updateModal }) {
   return (
     <div className="card shadow">
-      <div className="table-responsive">
-        <table>
+      <div className=" table-responsive p-3">
+        <table className="table table-striped">
           <thead style={theadStyle}>
             <tr>
               <th>Loan Id</th>
@@ -64,61 +64,83 @@ function Approved({ data = [], updateModal }) {
           </thead>
 
           <tbody style={tbodyStyle}>
-            {
-              data.map(g => (
-                <tr key={g.id}>
-                  <td>{g.loanId}</td>
-                  <td>{g.createdAt.substring(0, 10)}</td>
-                  <td>₹ {g.grantedAmount}</td>
-                  <td>{g.intrest}%</td>
-                  <td>{g.approvalAt.substring(0, 10)}</td>
-                  {
-                    g.farmerWindowRepaymentStructure.find((f) => f.completed === false) && (
-                      <td>₹ {g.farmerWindowRepaymentStructure.find((f) => f.completed === false).balance}</td>
-                    )
-                  }
-                  {
-                    g.farmerWindowRepaymentStructure.find((f) => f.completed === false) && (
-                      <td>₹ {g.farmerWindowRepaymentStructure.find((f) => f.completed === false).emi}</td>
-                    )
-                  }
-                  {
-                    g.farmerWindowRepaymentStructure.find((f) => f.completed === false) && (
-                      <td>{g.farmerWindowRepaymentStructure.find((f) => f.completed === false).repaymentDate}</td>
-                    )
-                  }
+            {data.map((g) => (
+              <tr key={g.id}>
+                <td>{g.loanId}</td>
+                <td>{g.createdAt.substring(0, 10)}</td>
+                <td>₹ {g.grantedAmount}</td>
+                <td>{g.intrest}%</td>
+                <td>{g.approvalAt.substring(0, 10)}</td>
+                {g.farmerWindowRepaymentStructure.find(
+                  (f) => f.completed === false
+                ) && (
                   <td>
-                    <button
-                      style={style}
-                      onClick={() => updateModal("LoanApplication", g)}
-                    >
-                      view
-                    </button>
+                    ₹{" "}
+                    {
+                      g.farmerWindowRepaymentStructure.find(
+                        (f) => f.completed === false
+                      ).balance
+                    }
                   </td>
+                )}
+                {g.farmerWindowRepaymentStructure.find(
+                  (f) => f.completed === false
+                ) && (
                   <td>
-                    <button
-                      style={style}
-                      onClick={() => updateModal("showRepaymentLoan", g)}
-                    >
-                      view
-                    </button>
+                    ₹{" "}
+                    {
+                      g.farmerWindowRepaymentStructure.find(
+                        (f) => f.completed === false
+                      ).emi
+                    }
                   </td>
+                )}
+                {g.farmerWindowRepaymentStructure.find(
+                  (f) => f.completed === false
+                ) && (
                   <td>
-                    <button
-                      className="py-0.5"
-                      style={g.status === "In progress" ? inprogressButtonStyle : repaidButtonStyle}
-                    >
-                      {g.status}
-                    </button>
+                    {
+                      g.farmerWindowRepaymentStructure.find(
+                        (f) => f.completed === false
+                      ).repaymentDate
+                    }
                   </td>
-                </tr>
-              ))
-            }
+                )}
+                <td>
+                  <button
+                    style={style}
+                    onClick={() => updateModal("LoanApplication", g)}
+                  >
+                    view
+                  </button>
+                </td>
+                <td>
+                  <button
+                    style={style}
+                    onClick={() => updateModal("showRepaymentLoan", g)}
+                  >
+                    view
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="py-0.5"
+                    style={
+                      g.status === "In progress"
+                        ? inprogressButtonStyle
+                        : repaidButtonStyle
+                    }
+                  >
+                    {g.status}
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
     </div>
-  )
+  );
 }
 
-export default Approved
+export default Approved;

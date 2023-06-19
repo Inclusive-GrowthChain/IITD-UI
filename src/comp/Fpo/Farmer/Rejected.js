@@ -1,8 +1,7 @@
-
 function Rejected({ theadStyle, tbodyStyle, data = [] }) {
   return (
-    <div className="table-responsive">
-      <table>
+    <div className="table-responsive shadow p-3">
+      <table className="table table-striped">
         <thead style={theadStyle}>
           <tr>
             <th>Name</th>
@@ -13,7 +12,7 @@ function Rejected({ theadStyle, tbodyStyle, data = [] }) {
         </thead>
 
         <tbody style={tbodyStyle}>
-          {data.map(app => (
+          {data.map((app) => (
             <tr key={app._id}>
               <td>{app.userName}</td>
               <td>{app.village}</td>
@@ -24,7 +23,7 @@ function Rejected({ theadStyle, tbodyStyle, data = [] }) {
         </tbody>
       </table>
     </div>
-  )
+  );
 }
 
-export default Rejected
+export default Rejected;

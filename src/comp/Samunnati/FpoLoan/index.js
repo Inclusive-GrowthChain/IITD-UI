@@ -7,60 +7,58 @@ import { TabNavItem, TabContent } from "../../UIComp/Tabs";
 import Approved from "./Approved";
 import Rejected from "./Rejected";
 import Pending from "./Pending";
-import Loader from '../../Common/Loader';
+import Loader from "../../Common/Loader";
 
 const h3Style = {
   fontSize: "22px",
   fontWeight: "800",
   color: "rgb(33, 37, 41)",
-}
+};
 
 const searchInputStyle = {
   color: "#000",
   fontSize: "16px",
   fontWeight: "500",
-  width: "100%"
-}
+  width: "100%",
+};
 
 const topWrapperStyle = {
-  width: '100%',
-  maxWidth: '300px',
-  marginBottom: '20px',
-  borderRadius: '5px',
-}
+  width: "100%",
+  maxWidth: "300px",
+  marginBottom: "20px",
+  borderRadius: "5px",
+};
 
 const theadStyle = {
   color: "#064420",
-  fontSize: "18px",
+  fontSize: "15px",
   verticalAlign: "top",
-  fontWeight: 600
-}
+  fontWeight: "600",
+  borderBottom: "1px solid #c7ccd1",
+};
 
 const tbodyStyle = {
   color: "#000",
-  fontSize: "16px",
+  fontSize: "14px",
   fontWeight: "500",
-}
+};
 
 function FpoLoan() {
-  const [activeTab, setActiveTab] = useState("tab1")
+  const [activeTab, setActiveTab] = useState("tab1");
 
   const { isLoading, data } = useQuery({
     queryKey: ["sumunnati/loanwindow", "fpo"],
     queryFn: getLoanwindow,
-  })
+  });
 
-  if (isLoading) return <Loader wrapperCls="loader-main-right" />
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />;
 
   return (
     <div className="itemContainer">
       <div className="list_title">
-        <div className="container-fluid" style={{marginBottom: "50px"}}>
+        <div className="container-fluid" style={{ marginBottom: "50px" }}>
           <div className="d-sm-flex justify-content-between align-items-center mb-4">
-            <h3
-              className="text-dark mb-0"
-              style={h3Style}
-            >
+            <h3 className="text-dark mb-0" style={h3Style}>
               FPO Loan Window
             </h3>
           </div>
@@ -94,7 +92,9 @@ function FpoLoan() {
                   topWrapperStyle={topWrapperStyle}
                   theadStyle={theadStyle}
                   tbodyStyle={tbodyStyle}
-                  data={data?.result?.fpo?.filter(app => app.status === "approved")}
+                  data={data?.result?.fpo?.filter(
+                    (app) => app.status === "approved"
+                  )}
                 />
               </TabContent>
 
@@ -104,7 +104,9 @@ function FpoLoan() {
                   topWrapperStyle={topWrapperStyle}
                   theadStyle={theadStyle}
                   tbodyStyle={tbodyStyle}
-                  data={data?.result?.fpo?.filter(app => app.status === "rejected")}
+                  data={data?.result?.fpo?.filter(
+                    (app) => app.status === "rejected"
+                  )}
                 />
               </TabContent>
 
@@ -114,7 +116,9 @@ function FpoLoan() {
                   topWrapperStyle={topWrapperStyle}
                   theadStyle={theadStyle}
                   tbodyStyle={tbodyStyle}
-                  data={data?.result?.fpo?.filter(app => app.status === "pending")}
+                  data={data?.result?.fpo?.filter(
+                    (app) => app.status === "pending"
+                  )}
                 />
               </TabContent>
             </div>
@@ -122,7 +126,7 @@ function FpoLoan() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default FpoLoan
+export default FpoLoan;

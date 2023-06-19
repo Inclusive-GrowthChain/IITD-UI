@@ -1,14 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { getTraining } from "../../actions/nisa";
 import Loader from "../Common/Loader";
+import { useState } from "react";
 
 function TrainingUpdate() {
+  const [readMore, setReadMore] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const { isLoading, data } = useQuery({
     queryKey: ["nisa/training"],
-    queryFn: getTraining
-  })
+    queryFn: getTraining,
+  });
 
-  if (isLoading) return <Loader wrapperCls="loader-main-right" />
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />;
 
   return (
     <div className="itemContainer">
@@ -16,7 +19,7 @@ function TrainingUpdate() {
         <div className="sale__title container-fluid">
           <div className="d-sm-flex justify-content-between align-items-center mb-4">
             <h3
-              className="text-dark mb-0"
+              className="success"
               style={{
                 fontSize: "22px",
                 fontWeight: "800",
@@ -27,11 +30,11 @@ function TrainingUpdate() {
             </h3>
           </div>
           <div className="card shadow">
-            <div className="table-responsive">
-              <table>
+            <div className=" table-responsive p-3">
+              <table className="table table-striped">
                 <thead
                   style={{
-                    fontSize: "17px",
+                    fontSize: "15px",
                     verticalAlign: "top",
                   }}
                 >
@@ -53,20 +56,32 @@ function TrainingUpdate() {
                     fontWeight: "500",
                   }}
                 >
-                  {
-                    data.data.map(tp => (
-                      <tr key={tp.id}>
-                        <td>{tp.traningId}</td>
-                        <td>{tp.courseName}</td>
-                        <td>{tp.courseStartDate}</td>
-                        <td>{tp.duration}</td>
-                        <td>{tp.applicationStartDate}</td>
-                        <td>{tp.applicationEndDate}</td>
-                        <td>{tp.fee}</td>
-                        <td style={{textAlign: "left", whiteSpace: "normal"}}>{tp.remarks}</td>
-                      </tr>
-                    ))
-                  }
+                  {data.data.map((tp, ind) => (
+                    <tr key={tp.id}>
+                      <td>{tp.traningId}</td>
+                      <td>{tp.courseName}</td>
+                      <td>{tp.courseStartDate}</td>
+                      <td>{tp.duration}</td>
+                      <td>{tp.applicationStartDate}</td>
+                      <td>{tp.applicationEndDate}</td>
+                      <td>{tp.fee}</td>
+                      <td style={{ textAlign: "left", whiteSpace: "normal" }}>
+                        {currentIndex === ind + 1 && readMore ? (
+                          tp.remarks
+                        ) : (
+                          <small
+                            onClick={() => {
+                              setReadMore(!readMore);
+                              setCurrentIndex(ind + 1);
+                            }}
+                          >
+                            {tp.remarks.slice(0, 20)}
+                            <span className="text-success">...Read More</span>
+                          </small>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -74,7 +89,7 @@ function TrainingUpdate() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default TrainingUpdate
+export default TrainingUpdate;

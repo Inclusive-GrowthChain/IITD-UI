@@ -57,6 +57,17 @@ export function getFpoFarmers() {
   })
 }
 
+export function getItemNames(){
+  return sendApiReq({
+    url:endPoints.fpo.itemsName
+  })
+}
+
+export function getLacTypes(){
+  return sendApiReq({
+    url: endPoints.fpo.lacType
+  })
+}
 
 export function getFpoLac() {
   return sendApiReq({

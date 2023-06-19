@@ -1,19 +1,19 @@
 const theadStyle = {
-  fontSize: "17px",
+  fontSize: "15px",
   verticalAlign: "top",
-}
+};
 
 const tbodyStyle = {
   color: "#000",
   fontSize: "15px",
   fontWeight: "500",
-}
+};
 
 function Rejected({ data = [] }) {
   return (
     <div className="card shadow">
-      <div className="table-responsive">
-        <table>
+      <div className=" table-responsive p-3">
+        <table className="table table-striped">
           <thead style={theadStyle}>
             <tr>
               <th>Loan Id</th>
@@ -24,21 +24,19 @@ function Rejected({ data = [] }) {
           </thead>
 
           <tbody style={tbodyStyle}>
-            {
-              data.map(r => (
-                <tr key={r.id}>
-                  <td>{r.loanId}</td>
-                  <td>{r.createdAt.substring(0, 10)}</td>
-                  <td>₹ {r.requestedAmount}</td>
-                  <td>{r.reason}</td>
-                </tr>
-              ))
-            }
+            {data.map((r) => (
+              <tr key={r.id}>
+                <td>{r.loanId}</td>
+                <td>{r.createdAt.substring(0, 10)}</td>
+                <td>₹ {r.requestedAmount}</td>
+                <td>{r.reason}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
     </div>
-  )
+  );
 }
 
-export default Rejected
+export default Rejected;

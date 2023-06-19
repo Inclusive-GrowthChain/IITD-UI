@@ -80,8 +80,7 @@ const CropAdvisory = () => {
               >
                 <div className="card_wrapper">
                   <div
-                    className="card_title mb-2 text-black text-bold"
-                    style={{ fontSize: "30px" }}
+                    className="mb-2 text-black text-bold h4"
                   >
                     {ca.title}
                   </div>

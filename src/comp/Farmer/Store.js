@@ -7,10 +7,10 @@ import Loader from "../Common/Loader";
 function Store() {
   const { isLoading, data } = useQuery({
     queryKey: ["fpo/products"],
-    queryFn: getFpoProducts
-  })
+    queryFn: getFpoProducts,
+  });
 
-  if (isLoading) return <Loader wrapperCls="loader-main-right" />
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />;
 
   return (
     <div className="itemContainer">
@@ -29,59 +29,64 @@ function Store() {
             </h3>
           </div>
           <div className="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4">
-            {
-              data?.data?.filter(a => a.isAvailable)
-                .map(item => (
-                  <div className="col" key={item._id}>
-                    <div className="card" style={{ marginBottom: '50px' }}>
-                      <img
-                        src={`${root.imgUrl}/img/${item.imageUrl}`}
-                        alt=""
-                        height={280}
-                        className="store_img"
-                      />
-                      <div className="card-body">
-                        <div className="row">
-                          <div className="col">
-                            <h4>{item.productName}</h4>
+            {data?.data
+              ?.filter((a) => a.isAvailable)
+              .map((item) => (
+                <div className="col" key={item._id}>
+                  <div className="card" style={{ marginBottom: "50px" }}>
+                    <img
+                      src={`${root.imgUrl}/img/${item.imageUrl}`}
+                      alt=""
+                      height={280}
+                      className="store_img"
+                    />
+                    <div className="card-body">
+                      <div className="row">
+                        <div className="col">
+                          <h5 className="fw-bold text-capitalize">
+                            {item.productName}
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-7">
+                          <div className="row">
+                            <div className="col">
+                              <strong className="h6 fw-bold">
+                                Market Price
+                              </strong>
+                            </div>
+                          </div>
+                          <div className="row">
+                            <div className="col">
+                              <p className="pt-2 fw-bold">
+                                ₹ {item.marketPrice}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                        <div className="row mt-2">
-                          <div className="col-7">
-                            <div className="row">
-                              <div className="col">
-                                <strong>Market Price</strong>
-                              </div>
-                            </div>
-                            <div className="row">
-                              <div className="col">
-                                <div className="price_tag">{item.marketPrice}</div>
-                              </div>
+                        <div className="col-5">
+                          <div className="row">
+                            <div className="col">
+                              <strong className="h6 fw-bold">FPO Price</strong>
                             </div>
                           </div>
-                          <div className="col-5">
-                            <div className="row">
-                              <div className="col">
-                                <strong>FPO Price</strong>
-                              </div>
-                            </div>
-                            <div className="row">
-                              <div className="col">
-                                <div className="price_tag">{item.fpoPrice}</div>
-                              </div>
+                          <div className="row">
+                            <div className="col">
+                              <p className="pt-2 fw-bold">₹ {item.fpoPrice}</p>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                ))
-            }
+                </div>
+              ))}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Store
+export default Store;

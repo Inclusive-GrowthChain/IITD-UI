@@ -11,12 +11,12 @@ const btnStyle = {
   fontSize: ".75rem",
   lineHeight: "1rem",
   fontWeight: "500",
-}
+};
 
 function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
   return (
-    <div className="table-responsive">
-      <table>
+    <div className="table-responsive shadow p-3">
+      <table className="table table-striped">
         <thead style={theadStyle}>
           <tr>
             <th>Name</th>
@@ -28,13 +28,10 @@ function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
         </thead>
 
         <tbody style={tbodyStyle}>
-          {data.map(app => (
+          {data.map((app) => (
             <tr key={app._id}>
               <td>
-                <NavLink
-                  to="/fpo/farmer-information"
-                  className="info_btn"
-                >
+                <NavLink to="/fpo/farmer-information" className="info_btn">
                   {app.userName}
                 </NavLink>
               </td>
@@ -55,7 +52,7 @@ function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
         </tbody>
       </table>
     </div>
-  )
+  );
 }
 
-export default Approved
+export default Approved;

@@ -1,21 +1,21 @@
 const theadStyle = {
   color: "#064420",
-  fontSize: "18px",
+  fontSize: "15px",
   verticalAlign: "top",
   fontWeight: 600,
-}
+};
 
 const tbodyStyle = {
   color: "#000",
-  fontSize: "16px",
+  fontSize: "15px",
   fontWeight: "500",
-}
+};
 
 function Tab1({ data = [], style, updateModal }) {
   return (
     <div className="card shadow">
-      <div className=" table-responsive">
-        <table className="table table-borderless">
+      <div className=" table-responsive p-3">
+        <table className="table table-striped">
           <thead style={theadStyle}>
             <tr>
               <td>Sample ID</td>
@@ -31,46 +31,55 @@ function Tab1({ data = [], style, updateModal }) {
           </thead>
 
           <tbody style={tbodyStyle}>
-            {
-              data.map(app => (
-                <tr key={app.id}>
-                  <td>{app.sampleId}</td>
-                  <td>{app.dateOfApplication}</td>
-                  <td>{app.category}</td>
-                  <td>{app.testName}</td>
-                  <td>{app.amount}</td>
-                  <td>
-                    <button
-                      style={style}
-                      onClick={() => updateModal("showImg", { imgUrl: app.paymentImg, title: "Payment Image" })}
-                    >
-                      view
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      style={style}
-                      onClick={() => updateModal("showImg", { imgUrl: app.lacSampleImg, title: "Lac Sample Image" })}
-                    >
-                      view
-                    </button>
-                  </td>
-                  <td>{app.remarks}</td>
-                  <td>
-                    <button
-                      style={style}
-                      onClick={() => updateModal("showApp", app)}
-                    >
-                      view
-                    </button>
-                  </td>
-                </tr>
-              ))}
+            {data.map((app) => (
+              <tr key={app.id}>
+                <td>{app.sampleId}</td>
+                <td>{app.dateOfApplication}</td>
+                <td>{app.category}</td>
+                <td>{app.testName}</td>
+                <td>{app.amount}</td>
+                <td>
+                  <button
+                    style={style}
+                    onClick={() =>
+                      updateModal("showImg", {
+                        imgUrl: app.paymentImg,
+                        title: "Payment Image",
+                      })
+                    }
+                  >
+                    view
+                  </button>
+                </td>
+                <td>
+                  <button
+                    style={style}
+                    onClick={() =>
+                      updateModal("showImg", {
+                        imgUrl: app.lacSampleImg,
+                        title: "Lac Sample Image",
+                      })
+                    }
+                  >
+                    view
+                  </button>
+                </td>
+                <td>{app.remarks}</td>
+                <td>
+                  <button
+                    style={style}
+                    onClick={() => updateModal("showApp", app)}
+                  >
+                    view
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
     </div>
-  )
+  );
 }
 
-export default Tab1
+export default Tab1;

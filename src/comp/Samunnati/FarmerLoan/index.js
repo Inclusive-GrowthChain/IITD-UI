@@ -31,14 +31,14 @@ const topWrapperStyle = {
 
 const theadStyle = {
   color: "#064420",
-  fontSize: "18px",
+  fontSize: "16px",
   verticalAlign: "top",
   fontWeight: 600
 }
 
 const tbodyStyle = {
   color: "#000",
-  fontSize: "16px",
+  fontSize: "15px",
   fontWeight: "500",
 }
 

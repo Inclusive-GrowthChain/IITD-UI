@@ -51,8 +51,8 @@ function Approved({ data = [], searchInputStyle, topWrapperStyle, theadStyle, tb
       <div className="row">
         <div className="col">
           <div className="card shadow">
-            <div className=" table-responsive">
-              <table className="table table-borderless">
+            <div className=" table-responsive p-3">
+              <table className="table table-striped">
                 <thead style={theadStyle}>
                   <tr>
                     <td>Date of Loan Window Approval</td>

@@ -12,39 +12,40 @@ const btnStyle2 = {
   minWidth: "80px",
   fontSize: ".75rem",
   lineHeight: "1rem",
-}
+};
 
 function Select({ _id }) {
-  const { modal, updateModal, closeModal } = useModal()
+  const { modal, updateModal, closeModal } = useModal();
 
   return (
     <>
       <select
         className="form-select"
         value={modal.state}
-        onChange={e => updateModal(e.target.value)}
+        onChange={(e) => updateModal(e.target.value)}
       >
-        <option value="" disabled>Select</option>
+        <option value="" disabled>
+          Select
+        </option>
         <option value="accepted">Approve</option>
         <option value="rejected">Reject</option>
       </select>
 
-      {
-        modal.state &&
+      {modal.state && (
         <FarmerMemberShipApproval
           show
           data={{ status: modal.state, _id }}
           handleClose={closeModal}
         />
-      }
+      )}
     </>
-  )
+  );
 }
 
 function Pending({ theadStyle, tbodyStyle, data = [], updateModal }) {
   return (
-    <div className="table-responsive">
-      <table>
+    <div className="table-responsive shadow p-3">
+      <table className="table table-striped">
         <thead style={theadStyle}>
           <tr>
             <th>Name</th>
@@ -57,7 +58,7 @@ function Pending({ theadStyle, tbodyStyle, data = [], updateModal }) {
         </thead>
 
         <tbody style={tbodyStyle}>
-          {data.map(app => (
+          {data.map((app) => (
             <tr key={app._id}>
               <td>{app.userName}</td>
               <td>{app.village}</td>
@@ -80,7 +81,7 @@ function Pending({ theadStyle, tbodyStyle, data = [], updateModal }) {
         </tbody>
       </table>
     </div>
-  )
+  );
 }
 
-export default Pending
+export default Pending;

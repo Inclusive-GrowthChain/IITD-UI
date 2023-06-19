@@ -37,14 +37,13 @@ function CropAdvisory() {
             {data?.data?.map(ca => (
               <div key={ca._id}>
                 <div className="card_wrapper">
-                  <div
-                    className="card_title mb-2 text-black text-bold"
-                    style={{ fontSize: "30px" }}
+                  <p
+                    className="h4 mb-2 text-black text-bold"
                   >
                     {ca.title}
-                  </div>
+                  </p>
                   <div className="card_content">
-                    <p style={{ fontSize: "20px" }}>
+                    <p style={{ fontSize: "17px" }}>
                       {ca.content.substring(0, 100)}
                     </p>
                   </div>
