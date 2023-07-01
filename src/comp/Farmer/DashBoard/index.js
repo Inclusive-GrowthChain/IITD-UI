@@ -14,6 +14,7 @@ import { WeekDays, months } from "../../../constants/Date";
 
 function Dashboard() {
   const [weatherData, setWeatherData] = useState([]);
+
   const [currentWeather, setCurrentWeather] = useState({
     coord: {
       lon: 73.9306,
@@ -60,7 +61,11 @@ function Dashboard() {
     name: "Mundhva",
     cod: 200,
   });
-  const { pinCode: pincode, _id: farmerId } = useAuthStore((s) => s.userDetails);
+
+  const { pinCode: pincode, _id: farmerId } = useAuthStore(
+    (s) => s.userDetails
+  );
+  
   const currentDate = new Date();
   const weekDayIndex = dayjs.unix(currentWeather?.dt).day();
 
@@ -145,13 +150,12 @@ function Dashboard() {
       {
         queryKey: ["/loans/history"],
         queryFn: () => getLoanHistory({ type: "farmer" }),
-        onSuccess: (data) => {
-          console.log(data);
+        onSuccess: () => {
+          return
         },
       },
     ],
   });
-
 
   if (isLoading1 || isLoading2 || isLoading3 || isLoading4 || isLoading5)
     return <Loader wrapperCls="loader-main-right" />;
@@ -176,8 +180,8 @@ function Dashboard() {
                       </tr>
                     </thead>
                     <tbody className="fw-light fs-10">
-                      {tpList.data.slice(0, 4).map((tp) => (
-                        <tr className="fw-bold text-capitalize" key={tp._id}>
+                      {tpList?.data?.slice(0, 4).map((tp, ind) => (
+                        <tr className="fw-bold text-capitalize" key={ind}>
                           <td>{tp.createdAt.substring(0, 10)}</td>
                           <td>{tp.courseName}</td>
                         </tr>
@@ -246,7 +250,10 @@ function Dashboard() {
                       if (nextInterval) {
                         currentDate.setDate(currentDate.getDate() + 1);
                         return (
-                          <div className="d-flex align-items-center flex-column">
+                          <div
+                            key={index}
+                            className="d-flex align-items-center flex-column"
+                          >
                             <img
                               className="weatherIcon"
                               alt="myit"
@@ -288,8 +295,8 @@ function Dashboard() {
                         </tr>
                       </thead>
                       <tbody className="fw-light fs-10">
-                        {caList.data.slice(0, 4).map((ca) => (
-                          <tr className="fw-bold text-capitalize" key={ca._id}>
+                        {caList.data.slice(0, 4).map((ca, ind) => (
+                          <tr className="fw-bold text-capitalize" key={ind}>
                             <td>{ca.createdAt.substring(0, 10)}</td>
                             <td>
                               {ca.title.length > 40
@@ -335,8 +342,8 @@ function Dashboard() {
                     <tbody className="fw-light fs-10">
                       {loanList
                         ?.filter((loan) => loan.value.userId === farmerId)
-                        ?.map((loan) => (
-                          <tr className="fw-bold text-capitalize" key={loan.id}>
+                        ?.map((loan, ind) => (
+                          <tr className="fw-bold text-capitalize" key={ind}>
                             <td>{loan.value.loanId}</td>
                             <td>{loan.value.grantedAmount}</td>
                             <td>{loan.value.status}</td>

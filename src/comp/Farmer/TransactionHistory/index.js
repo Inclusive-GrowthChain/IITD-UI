@@ -24,23 +24,21 @@ const TransactionHistory = () => {
               Transaction History
             </h3>
           </div>
-
           <div className="tabs_wrapper">
             <ul className="nav-tab">
               <li
-                className={activeTab === "tab1" ? "active" : ""}
+                className={activeTab === "tab1" ? "active" : null}
                 onClick={handleTab1}
               >
                 Purchase History
               </li>
               <li
-                className={activeTab === "tab2" ? "active" : ""}
+                className={activeTab === "tab2" ? "active" : null}
                 onClick={handleTab2}
               >
                 Sale History
               </li>
             </ul>
-
             <div className="outlet">
               {activeTab === "tab1" ? <FirstTab /> : <SecondTab />}
             </div>

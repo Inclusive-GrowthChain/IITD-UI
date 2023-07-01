@@ -55,8 +55,9 @@ function AddRepayment({ show, handleClose, data, repaymentItem }) {
                       <input
                         type="date"
                         className="form-control"
+                        required
                         placeholder="Enter the repayment date"
-                        {...register("paymentDate")}
+                        {...register("paymentDate",{required:true})}
                       />
                     </div>
                   </div>
@@ -67,9 +68,10 @@ function AddRepayment({ show, handleClose, data, repaymentItem }) {
                     <div className="col-6">
                       <input
                         type="text"
+                        required
                         className="form-control"
                         placeholder="Repayment amount"
-                        {...register("paidAmount")}
+                        {...register("paidAmount",{required:true})}
                       />
                     </div>
                   </div>

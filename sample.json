@@ -1,0 +1,15 @@
+{
+    "transactions": [
+        {
+            "dateOfPurchase": "2023-06-23",
+            "itemName": "rice",
+            "quantity": "10",
+            "ratePerUnit": "50",
+            "amount": "420",
+            "remarks": "Charan",
+            "total": "99999"
+        }
+    ],
+    "type": "purchase",
+    "farmerId": "6490029892c97411634f3354"
+}

@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getLoanList } from "../../../actions/farmer";
+import Loader from "../../Common/Loader";
+import useModal from "../../../hooks/useModal";
 
-const style1 = {
-  backgroundColor: "#064420",
-  color: "#fff",
+const inprogressButtonStyle = {
+  backgroundColor: "yellow",
   alignItems: "center",
   borderRadius: "5px",
   border: "none",
@@ -10,280 +12,150 @@ const style1 = {
   width: "fit-content",
   fontSize: ".75rem",
   lineHeight: "1rem",
-}
+};
 
-const style2 = {
-  backgroundColor: "#FFD700",
+const repaidButtonStyle = {
+  backgroundColor: "#1ad77f",
   alignItems: "center",
   borderRadius: "5px",
   border: "none",
-  padding: "5px 10px",
+  padding: "0.25rem 1.4rem",
   width: "fit-content",
   fontSize: ".75rem",
   lineHeight: "1rem",
-}
+};
 
-const tabs = [
-  {
-    id: 1,
-    title: "Active Loans",
-  },
-  {
-    id: 2,
-    title: "Loan History",
-  },
-  {
-    id: 3,
-    title: "Loan in Process",
-  },
-]
+const theadStyle = {
+  fontSize: "15px",
+  verticalAlign: "top",
+};
 
-function Panel2({ theadStyle, tbodyStyle, handleShow, handleShowRepayment }) {
-  const [toggleState, setToggleState] = useState(1)
+const tbodyStyle = {
+  color: "#000",
+  fontSize: "15px",
+  fontWeight: "500",
+};
 
-  const toggleTab = i => setToggleState(i)
+const style = {
+  backgroundColor: "#66FF00",
+  alignItems: "center",
+  borderRadius: "5px",
+  border: "none",
+  padding: "0.25rem 1rem",
+  width: "fit-content",
+  fontSize: ".75rem",
+  lineHeight: "1rem",
+};
+
+function Panel2() {
+  const { modal, updateModal, closeModal } = useModal();
+  const { isLoading, data } = useQuery({
+    queryKey: ["farmer/loans"],
+    queryFn: getLoanList,
+  });
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />;
 
   return (
-    <div className="loan_container">
-      <div className="bloc-tabs">
-        {
-          tabs.map(t => (
-            <button
-              key={t.id}
-              style={{ marginRight: "10px" }}
-              className={`tabs-1 ${toggleState === t.id ? "active-tabs" : ""}`}
-              onClick={() => toggleTab(t.id)}
-            >
-              {t.title}
-            </button>
-          ))
-        }
-      </div>
+    <div className="card shadow">
+      <div className=" table-responsive p-3">
+        <table className="table table-striped">
+          <thead style={theadStyle}>
+            <tr>
+              <th>Loan Id</th>
+              <th>Loan application date</th>
+              <th>Loan amount</th>
+              <th>Interest rate</th>
+              <th>Loan date</th>
+              <th>Outstanding amount</th>
+              <th>Next payment amount</th>
+              <th>Next payment date</th>
+              <th>Loan Application</th>
+              <th>Repayment structure</th>
+              <th>Status</th>
+            </tr>
+          </thead>
 
-      <div className="content-tabs">
-        <div className={toggleState === 1 ? "content active-content" : "content"}>
-          <div className="card_table1 text-center">
-            <div className="table-responsive">
-              <table>
-                <thead style={theadStyle}>
-                  <tr>
-                    <th>Loan Id</th>
-                    <th>Loan Application Date</th>
-                    <th>Loan Amount</th>
-                    <th>Loan Date</th>
-                    <th>Outstanding Amount</th>
-                    <th>Next Payment Amount</th>
-                    <th>Next Payment Date</th>
-                    <th>Repayment Structure</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody style={tbodyStyle}>
-                  <tr>
-                    <td>2022-800-07</td>
-                    <td>01-05-2022</td>
-                    <td>₹ 98765</td>
-                    <td> 13-07-2022</td>
-                    <td>₹ 3778</td>
-                    <td>₹ 761434</td>
-                    <td> 24-09-2022</td>
+          <tbody style={tbodyStyle}>
+            {data?.data
+              .filter((g) => g.status === "approved")
+              .map((g) => (
+                <tr key={g.id}>
+                  <td>{g.loanId}</td>
+                  <td>{g.createdAt.substring(0, 10)}</td>
+                  <td>₹ {g.grantedAmount}</td>
+                  <td>{g.intrest}%</td>
+                  <td>{g.approvalAt.substring(0, 10)}</td>
+                  {g.farmerWindowRepaymentStructure.find(
+                    (f) => f.completed === false
+                  ) && (
                     <td>
-                      <button
-                        className="py-0.5"
-                        style={style1}
-                        onClick={handleShowRepayment}
-                      >
-                        View
-                      </button>
+                      ₹{" "}
+                      {
+                        g.farmerWindowRepaymentStructure.find(
+                          (f) => f.completed === false
+                        ).balance
+                      }
                     </td>
+                  )}
+                  {g.farmerWindowRepaymentStructure.find(
+                    (f) => f.completed === false
+                  ) && (
                     <td>
-                      <button
-                        className="py-0.5"
-                        style={style2}
-                      >
-                        Pending
-                      </button>
+                      ₹{" "}
+                      {
+                        g.farmerWindowRepaymentStructure.find(
+                          (f) => f.completed === false
+                        ).emi
+                      }
                     </td>
-                  </tr>
-                  <tr>
-                    <td>2022-800-07</td>
-                    <td>01-05-2022</td>
-                    <td>₹ 98765</td>
-                    <td> 13-07-2022</td>
-                    <td>₹ 3778</td>
-                    <td>₹ 761434</td>
-                    <td> 24-09-2022</td>
+                  )}
+                  {g.farmerWindowRepaymentStructure.find(
+                    (f) => f.completed === false
+                  ) && (
                     <td>
-                      <button
-                        className="py-0.5"
-                        style={style1}
-                        onClick={handleShowRepayment}
-                      >
-                        View
-                      </button>
+                      {
+                        g.farmerWindowRepaymentStructure.find(
+                          (f) => f.completed === false
+                        ).repaymentDate
+                      }
                     </td>
-                    <td>
-                      <button
-                        className="py-0.5"
-                        style={style2}
-                      >
-                        Pending
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <div className={toggleState === 2 ? "content active-content" : "content"}>
-          <div className="card_table1 text-center">
-            <div className="table-responsive">
-              <table>
-                <thead style={theadStyle}>
-                  <tr>
-                    <th>Loan Id</th>
-                    <th>Loan Application Date</th>
-                    <th>Loan Amount</th>
-                    <th>Loan Date</th>
-                    <th>Outstanding Amount</th>
-                    <th>Next Payment Amount</th>
-                    <th>Next Payment Date</th>
-                  </tr>
-                </thead>
-                <tbody style={tbodyStyle}>
-                  <tr>
-                    <td>2022-800-07</td>
-                    <td>01-05-2022</td>
-                    <td>₹ 98765</td>
-                    <td> 13-07-2022</td>
-                    <td>₹ 3778</td>
-                    <td>₹ 761434</td>
-                    <td> 24-09-2022</td>
-                  </tr>
-                  <tr>
-                    <td>2022-800-07</td>
-                    <td>01-05-2022</td>
-                    <td>₹ 98765</td>
-                    <td> 13-07-2022</td>
-                    <td>₹ 3778</td>
-                    <td>₹ 761434</td>
-                    <td> 24-09-2022</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <div className={toggleState === 3 ? "content active-content" : "content"}>
-          <div className="card_table1 text-center">
-            <div className="table-responsive">
-              <table>
-                <thead style={theadStyle}>
-                  <tr>
-                    <th>Loan Id</th>
-                    <th>Loan Application Date</th>
-                    <th>Loan Amount</th>
-                    <th>Loan Application</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody style={tbodyStyle}>
-                  <tr>
-                    <td>2022-64-07</td>
-                    <td>02-05-2022</td>
-                    <td>₹ 7345</td>
-                    <td>
-                      <button
-                        className="py-0.5"
-                        style={style1}
-                        onClick={handleShow}
-                      >
-                        View
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        className="py-0.5"
-                        style={style2}
-                      >
-                        Pending
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2022-64-07</td>
-                    <td>02-05-2022</td>
-                    <td>₹ 7345</td>
-                    <td>
-                      <button
-                        className="py-0.5"
-                        style={style1}
-                      >
-                        View
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        className="py-0.5"
-                        style={style2}
-                      >
-                        Pending
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2022-64-07</td>
-                    <td>02-05-2022</td>
-                    <td>₹ 7345</td>
-                    <td>
-                      <button
-                        className="py-0.5"
-                        style={style1}
-                      >
-                        View
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        className="py-0.5"
-                        style={style2}
-                      >
-                        Pending with samunnati
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>2022-64-07</td>
-                    <td>02-05-2022</td>
-                    <td>₹ 7345</td>
-                    <td>
-                      <button
-                        className="py-0.5"
-                        style={style1}
-                      >
-                        View
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        className="py-0.5"
-                        style={style2}
-                      >
-                        Pending with samunnati
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+                  )}
+                  <td>
+                    <button
+                      style={style}
+                      onClick={() => updateModal("LoanApplication", g)}
+                    >
+                      view
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      style={style}
+                      onClick={() => updateModal("showRepaymentLoan", g)}
+                    >
+                      view
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      className="py-0.5"
+                      style={
+                        g.status === "In progress"
+                          ? inprogressButtonStyle
+                          : repaidButtonStyle
+                      }
+                    >
+                      {g.status}
+                    </button>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </div>
     </div>
-  )
+  );
 }
 
-export default Panel2
+export default Panel2;

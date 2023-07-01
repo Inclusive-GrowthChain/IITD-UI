@@ -31,11 +31,13 @@ function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
           {data.map((app) => (
             <tr key={app._id}>
               <td>
-                <NavLink to="/fpo/farmer-information" className="info_btn">
+                <NavLink to={`/fpo/farmer-information/${app._id}`} className="info_btn">
                   {app.userName}
                 </NavLink>
               </td>
-              <td>{app.village}</td>
+              <td>
+                {app.village}
+              </td>
               <td>{app.mobile}</td>
               <td>{app.aadharCardNumber}</td>
               <td>

@@ -13,27 +13,28 @@ const btnStyle = {
   width: "30%",
   fontSize: "17px",
   lineHeight: "1rem",
-}
+};
 
-const errStyle = { fontSize: "12px", margin: 0 }
+const errStyle = { fontSize: "12px", margin: 0, color: "red" };
 
 function InterestRate({ show, handleClose }) {
-  const { register, formState: { errors }, handleSubmit } = useForm({
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
     defaultValues: {
       intrestRate: "",
-    }
-  })
+    },
+  });
 
   const { mutate, isLoading } = useMutation({
     mutationFn: setFarmerIntrestRate,
-    onSuccess: () => handleClose()
-  })
+    onSuccess: () => handleClose(),
+  });
 
   return (
-    <Modal
-      show={show}
-      onHide={handleClose}
-    >
+    <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Interest Rate</Modal.Header>
       <Modal.Body>
         <form onSubmit={handleSubmit(mutate)}>
@@ -47,18 +48,17 @@ function InterestRate({ show, handleClose }) {
                 className="form-control"
                 placeholder="14"
                 {...register("intrestRate", {
-                  required: "Amount is required",
+                  required: "Interest Rate is required",
                   valueAsNumber: true,
                   min: {
                     value: 1,
-                    message: "Amount should be greater than 0"
-                  }
+                    message: "Interest Rate should be greater than 0",
+                  },
                 })}
               />
-              {
-                errors.intrestRate &&
+              {errors.intrestRate && (
                 <p style={errStyle}>{errors.intrestRate.message}</p>
-              }
+              )}
             </div>
           </div>
 
@@ -75,7 +75,7 @@ function InterestRate({ show, handleClose }) {
         </form>
       </Modal.Body>
     </Modal>
-  )
+  );
 }
 
-export default InterestRate
+export default InterestRate;

@@ -1,11 +1,11 @@
 export const root = {
   baseUrl: "http://13.232.131.203:3000/api",
   imgUrl: "http://13.232.131.203:3000",
-}
+};
 
 const endPoints = {
-  login: '/login',
-  userDetails: '/userDetails',
+  login: "/login",
+  userDetails: "/userDetails",
   fpoSignup: "/signup/fpo",
   nisaSignup: "/signup/nisa",
   farmerSignup: "/signup/farmer",
@@ -15,9 +15,13 @@ const endPoints = {
   getUserDetilas: "/loanWindow/userDetails",
   loanHistory: "/loans/history",
   loanwindow: "/loanwindow",
-  uploadImg: '/document',
+  uploadImg: "/document",
   auction: "/auction",
   user: "/user",
+
+  admin: {
+    getLicenses: "/licenses"
+  },
 
   // Nisa
   nisa: {
@@ -31,6 +35,7 @@ const endPoints = {
   farmer: {
     loans: "/loanwindow/loan?type=farmer",
     produce: "/farmer",
+    purchaseTransaction : "/fpo/transaction/api/transactions"
   },
 
   // Fpo
@@ -40,7 +45,11 @@ const endPoints = {
     farmers: "/fpo/farmer",
     lac: "/fpo/lac",
     itemsName: "/items/store",
-    lacType: "/items/lac"
+    lacType: "/items/lac",
+    purchase: "/fpo/transaction/api/transaction",
+    sale: "/fpo/transaction/api/transaction",
+    userDetails: "/userDetails",
+    loanData: "/loans/history?type=farmer&userId="
   },
 
   userList: {
@@ -53,7 +62,7 @@ const endPoints = {
 
   samunnati: {
     loanwindow: "/loanwindow/list/samunnati?windowType=",
-  }
-}
+  },
+};
 
-export default endPoints
+export default endPoints;

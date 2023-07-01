@@ -57,7 +57,7 @@ function TrainingUpdate() {
                   }}
                 >
                   {data.data.map((tp, ind) => (
-                    <tr key={tp.id}>
+                    <tr key={ind}>
                       <td>{tp.traningId}</td>
                       <td>{tp.courseName}</td>
                       <td>{tp.courseStartDate}</td>

@@ -17,77 +17,75 @@ const theadStyle = {
   verticalAlign: "top",
   fontWeight: "600",
   borderBottom: "1px solid #c7ccd1",
-}
+};
 
 const tbodyStyle = {
   color: "#000",
   fontSize: "15px",
   fontWeight: "500",
-}
+};
 
 const tabs = [
   {
     id: 1,
-    title: "Accepted Memberships"
+    title: "Accepted Memberships",
   },
   {
     id: 2,
-    title: "Rejected Memberships"
+    title: "Rejected Memberships",
   },
   {
     id: 3,
-    title: "Pending Applications"
+    title: "Pending Applications",
   },
-]
+];
 
 function Farmer() {
-  const { modal, updateModal, closeModal } = useModal()
-  const [activeIndex, setActiveIndex] = useState(1)
+  const { modal, updateModal, closeModal } = useModal();
+  const [activeIndex, setActiveIndex] = useState(1);
 
   const { isLoading, data } = useQuery({
     queryKey: ["fpo/farmer-memberships"],
-    queryFn: getFpoFarmers
-  })
+    queryFn: getFpoFarmers,
+  });
 
   const checkActive = (index, className) =>
-    activeIndex === index ? className : ""
+    activeIndex === index ? className : "";
 
-  if (isLoading) return <Loader wrapperCls="loader-main-right" />
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />;
 
   return (
-    <main id="main_container" className="main_container container-fluid itemContainer">
+    <main
+      id="main_container"
+      className="main_container container-fluid itemContainer"
+    >
       <div>
         <h3>Farmer Information</h3>
       </div>
 
       <div className="list_container">
         <div className="search">
-          <input
-            className="search_input active"
-            placeholder="Search here..."
-          />
+          <input className="search_input active" placeholder="Search here..." />
           <SearchTwoToneIcon className="search_icon" />
         </div>
 
         <div className="list_tab">
           <div className="tabs">
-            {
-              tabs.map(t => (
-                <button
-                  key={t.id}
-                  className={`tab ${checkActive(t.id, "active")}`}
-                  onClick={() => setActiveIndex(t.id)}
-                >
-                  {t.title}
-                </button>
-              ))
-            }
+            {tabs.map((t) => (
+              <button
+                key={t.id}
+                className={`tab ${checkActive(t.id, "active")}`}
+                onClick={() => setActiveIndex(t.id)}
+              >
+                {t.title}
+              </button>
+            ))}
           </div>
 
           <div className="panels">
             <div className={`panel ${checkActive(1, "active")}`}>
               <Approved
-                data={data?.data?.filter(d => d.status === "accepted")}
+                data={data?.data?.filter((d) => d.status === "accepted")}
                 theadStyle={theadStyle}
                 tbodyStyle={tbodyStyle}
                 updateModal={updateModal}
@@ -98,13 +96,13 @@ function Farmer() {
               <Rejected
                 theadStyle={theadStyle}
                 tbodyStyle={tbodyStyle}
-                data={data?.data?.filter(d => d.status === "rejected")}
+                data={data?.data?.filter((d) => d.status === "rejected")}
               />
             </div>
 
             <div className={`panel ${checkActive(3, "active")}`}>
               <Pending
-                data={data?.data?.filter(d => d.status === "pending")}
+                data={data?.data?.filter((d) => d.status === "pending")}
                 theadStyle={theadStyle}
                 tbodyStyle={tbodyStyle}
                 updateModal={updateModal}
@@ -114,16 +112,15 @@ function Farmer() {
         </div>
       </div>
 
-      {
-        modal.state &&
+      {modal.state && (
         <FarmerMembershipApplication
           show
           data={modal.data}
           handleClose={closeModal}
         />
-      }
+      )}
     </main>
-  )
+  );
 }
 
-export default Farmer
+export default Farmer;

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-// import useModal from "../../../hooks/useModal";
+import useModal from "../../../hooks/useModal";
 
 import ConfirmPurchaseHistory from "../Modals/FarmerInfo/ConfirmPurchaseHistory";
 import RepaymentStructure2 from "../Modals/FarmerInfo/RepaymentStructure2";
@@ -29,7 +29,7 @@ const style3 = {
   fontSize: ".75rem",
   lineHeight: "1rem",
   color: "#fff",
-}
+};
 
 const theadStyle = {
   color: "#00A877",
@@ -37,16 +37,16 @@ const theadStyle = {
   verticalAlign: "top",
   fontWeight: "bold",
   borderBottom: "1px solid #c7ccd1",
-}
+};
 
 const tbodyStyle = {
   color: "#000",
   fontSize: "15px",
   fontWeight: "500",
-}
+};
 
-const theadStyle2 = { ...theadStyle, color: "green" }
-const theadStyle3 = { ...theadStyle, color: "#064420" }
+const theadStyle2 = { ...theadStyle, color: "green" };
+const theadStyle3 = { ...theadStyle, color: "#064420" };
 
 const tabs = [
   {
@@ -65,50 +65,51 @@ const tabs = [
     id: 4,
     title: "Sale History",
   },
-]
+];
 
 function FarmerInformation() {
-  // const { modal, updateModal, closeModal } = useModal()
-  const [showConfirmPurchase, setShowConfirmPurchase] = useState(false)
-  const [showPurchaseDetails, setShowPurchaseDetails] = useState(false)
-  const [showAddPurchase, setShowAddPurchase] = useState(false)
-  const [showSaleDetails, setShowSaleDetails] = useState(false)
-  const [showConfirmSale, setShowConfirmSale] = useState(false)
-  const [showRepayment, setShowRepayment] = useState(false)
-  const [showAddSale, setShowAddSale] = useState(false)
-  const [activeIndex, setActiveIndex] = useState(1)
-  const [showImg, setShowImg] = useState(false)
-  const [show, setShow] = useState(false)
-  const navigate = useNavigate()
+  const { modal, updateModal} = useModal()
+  const [showConfirmPurchase, setShowConfirmPurchase] = useState(false);
+  const [showPurchaseDetails, setShowPurchaseDetails] = useState(false);
+  const [showAddPurchase, setShowAddPurchase] = useState(false);
+  const [showSaleDetails, setShowSaleDetails] = useState(false);
+  const [showConfirmSale, setShowConfirmSale] = useState(false);
+  const [showRepayment, setShowRepayment] = useState(false);
+  const [showAddSale, setShowAddSale] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(1);
+  const [showImg, setShowImg] = useState(false);
+  const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   const checkActive = (index, className) =>
-    activeIndex === index ? className : ""
+    activeIndex === index ? className : "";
 
-  const handleCloseConfirmPurchase = () => setShowConfirmPurchase(false)
-  const handleClosePurchaseDetails = () => setShowPurchaseDetails(false)
-  const handleShowConfirmPurchase = () => setShowConfirmPurchase(true)
-  const handleShowPurchaseDetails = () => setShowPurchaseDetails(true)
-  const handleCloseConfirmSale = () => setShowConfirmSale(false)
-  const handleCloseAddPurchase = () => setShowAddPurchase(false)
-  const handleCloseSaleDetails = () => setShowSaleDetails(false)
-  const handleShowAddPurchase = () => setShowAddPurchase(true)
-  const handleShowSaleDetails = () => setShowSaleDetails(true)
-  const handleShowConfirmSale = () => setShowConfirmSale(true)
-  const handleCloseAddSale = () => setShowAddSale(false)
-  const handleShowAddSale = () => setShowAddSale(true)
-  const handleClick = i => setActiveIndex(i)
+  const handleCloseConfirmPurchase = () => setShowConfirmPurchase(false);
+  const handleClosePurchaseDetails = () => setShowPurchaseDetails(false);
+  const handleShowConfirmPurchase = () => setShowConfirmPurchase(true);
+  const handleShowPurchaseDetails = () => setShowPurchaseDetails(true);
+  const handleCloseConfirmSale = () => setShowConfirmSale(false);
+  const handleCloseAddPurchase = () => setShowAddPurchase(false);
+  const handleCloseSaleDetails = () => setShowSaleDetails(false);
+  const handleShowAddPurchase = () => setShowAddPurchase(true);
+  const handleShowSaleDetails = () => setShowSaleDetails(true);
+  const handleShowConfirmSale = () => setShowConfirmSale(true);
+  const handleCloseAddSale = () => setShowAddSale(false);
+  const handleShowAddSale = () => setShowAddSale(true);
+  const handleClick = (i) => setActiveIndex(i);
 
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-  const handleShowRepayment = () => setShowRepayment(true)
-  const handleCloseRepayment = () => setShowRepayment(false)
+  const handleShowRepayment = () => setShowRepayment(true);
+  const handleCloseRepayment = () => setShowRepayment(false);
 
-  const handleShowImg = () => setShowImg(true)
-  const handleCloseImg = () => setShowImg(false)
+  const handleShowImg = () => setShowImg(true);
+  const handleCloseImg = () => setShowImg(false);
 
-  const handleClick2 = () => navigate('/fpo/farmer', { replace: true })
+  const handleClick2 = () => navigate("/fpo/farmer", { replace: true });
 
+  
   return (
     <main id="main_container" className="main_container container-fluid">
       <div className="">
@@ -124,17 +125,15 @@ function FarmerInformation() {
 
         <div className="list_tab">
           <div className="tabs">
-            {
-              tabs.map(t => (
-                <button
-                  key={t.id}
-                  className={`tab ${checkActive(t.id, "active")}`}
-                  onClick={() => handleClick(t.id)}
-                >
-                  {t.title}
-                </button>
-              ))
-            }
+            {tabs.map((t) => (
+              <button
+                key={t.id}
+                className={`tab ${checkActive(t.id, "active")}`}
+                onClick={() => handleClick(t.id)}
+              >
+                {t.title}
+              </button>
+            ))}
           </div>
 
           <div className="panels">
@@ -147,6 +146,7 @@ function FarmerInformation() {
                 theadStyle={theadStyle}
                 tbodyStyle={tbodyStyle}
                 handleShow={handleShow}
+                updateModal={updateModal}
                 handleShowRepayment={handleShowRepayment}
               />
             </div>
@@ -215,22 +215,20 @@ function FarmerInformation() {
 
       <RepaymentStructure2
         showRepayment={showRepayment}
+        modal={modal}
         handleCloseRepayment={handleCloseRepayment}
       />
 
       <LoanApplication
         show={show}
+        modal={modal}
         handleClose={handleClose}
         handleShowImg={handleShowImg}
       />
 
-      <DocImg
-        show={showImg}
-        title="Img"
-        handleClose={handleCloseImg}
-      />
+      <DocImg show={showImg} title="Img" handleClose={handleCloseImg} />
     </main>
-  )
+  );
 }
 
-export default FarmerInformation
+export default FarmerInformation;

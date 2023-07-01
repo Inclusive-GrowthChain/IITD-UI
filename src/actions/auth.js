@@ -19,7 +19,7 @@ export function login(data) {
 
 export function getUserDetails() {
   return sendApiReq({
-    url: endPoints.getUserDetilas
+    url: endPoints.userDetails
   })
 }
 

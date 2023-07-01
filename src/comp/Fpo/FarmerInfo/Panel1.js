@@ -1,5 +1,19 @@
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router";
+import { getUserDetails } from "../../../actions/fpo";
+import Loader from "../../Common/Loader";
 
 function Panel1() {
+  const { farmerId } = useParams();
+
+  const { isLoading, data } = useQuery({
+    queryKey: ["get_users_details"],
+    queryFn: () => getUserDetails(farmerId),
+  });
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />;
+
+
   return (
     <div className="card_table">
       <h6 className="heading-small text-muted text-bold text-uppercase mb-4">
@@ -9,16 +23,12 @@ function Panel1() {
         <div className="row">
           <div className="col-lg-6">
             <div className="form-group focused">
-              <label className="form-control-label text-black">
-                Name
-              </label>
+              <label className="form-control-label text-black">Name</label>
             </div>
           </div>
           <div className="col-lg-6">
             <div className="form-group focused">
-              <label className="form-control-label text-black">
-                Vivek
-              </label>
+              <label className="form-control-label text-black">{data.userName}</label>
             </div>
           </div>
         </div>
@@ -33,7 +43,7 @@ function Panel1() {
           <div className="col-lg-6">
             <div className="form-group focused">
               <label className="form-control-label text-black">
-                9XXXXXXXXX
+                {data.mobile}
               </label>
             </div>
           </div>
@@ -49,7 +59,7 @@ function Panel1() {
           <div className="col-lg-6">
             <div className="form-group focused">
               <label className="form-control-label text-black">
-                18-06-1994
+              {data.dateOfBirth}
               </label>
             </div>
           </div>
@@ -57,31 +67,25 @@ function Panel1() {
         <div className="row">
           <div className="col-lg-6">
             <div className="form-group focused">
-              <label className="form-control-label text-black">
-                Gender
-              </label>
+              <label className="form-control-label text-black">Gender</label>
             </div>
           </div>
           <div className="col-lg-6">
             <div className="form-group focused">
-              <label className="form-control-label text-black">
-                Male
-              </label>
+              <label className="form-control-label text-black">{data.gender}</label>
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col-lg-6">
             <div className="form-group focused">
-              <label className="form-control-label text-black">
-                Address
-              </label>
+              <label className="form-control-label text-black">Address</label>
             </div>
           </div>
           <div className="col-lg-6">
             <div className="form-group focused">
               <label className="form-control-label text-black">
-                9-31/3,blah,blah,blah
+                {data.doorNumber} {data.street} {data.village} {data.taluk} {data.district} {data.state} {data.pinCode}
               </label>
             </div>
           </div>
@@ -97,7 +101,7 @@ function Panel1() {
           <div className="col-lg-6">
             <div className="form-group focused">
               <label className="form-control-label text-black">
-                XXXX-XXXX-XXXX
+                {data.aadharCardNumber}
               </label>
             </div>
           </div>
@@ -113,7 +117,7 @@ function Panel1() {
           <div className="col-lg-6">
             <div className="form-group focused">
               <label className="form-control-label text-black">
-                XXXXXXXXXX
+                {data.panCardNumber}
               </label>
             </div>
           </div>
@@ -121,14 +125,12 @@ function Panel1() {
         <div className="row">
           <div className="col-lg-6">
             <div className="form-group focused">
-              <label className="form-control-label text-black">
-                Bank Name
-              </label>
+              <label className="form-control-label text-black">Bank Name</label>
             </div>
           </div>
           <div className="col-lg-6">
             <div className="form-group focused">
-              <label className="form-control-label text-black">SBI</label>
+              <label className="form-control-label text-black">{data.bankName}</label>
             </div>
           </div>
         </div>
@@ -143,7 +145,7 @@ function Panel1() {
           <div className="col-lg-6">
             <div className="form-group focused">
               <label className="form-control-label text-black">
-                XXXXXXXXXX
+                {data.accountNumber}
               </label>
             </div>
           </div>
@@ -151,22 +153,20 @@ function Panel1() {
         <div className="row">
           <div className="col-lg-6">
             <div className="form-group focused">
-              <label className="form-control-label text-black">
-                IFSC Code
-              </label>
+              <label className="form-control-label text-black">IFSC Code</label>
             </div>
           </div>
           <div className="col-lg-6">
             <div className="form-group focused">
               <label className="form-control-label text-black">
-                XXXXXXXXXX
+                {data.ifscCode}
               </label>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Panel1
+export default Panel1;

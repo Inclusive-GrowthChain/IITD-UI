@@ -1,39 +1,30 @@
-const data = [
-  {
-    id: "SAM107254367",
-    date: "17-02-22",
-    name: "Stick Lac",
-    pricePerKg: "100",
-    quantity: "2",
-    totalAmount: "200",
-  },
-  {
-    id: "SAM107254368",
-    date: "17-02-22",
-    name: "Seed Lac",
-    pricePerKg: "300",
-    quantity: "2",
-    totalAmount: "600",
-  },
-  {
-    id: "SAM107254369",
-    date: "17-02-22",
-    name: "Shellac Lac",
-    pricePerKg: "150",
-    quantity: "6",
-    totalAmount: "900",
-  },
-  {
-    id: "SAM107254370",
-    date: "19-02-22",
-    name: "Stick Lac",
-    pricePerKg: "50",
-    quantity: "6",
-    totalAmount: "300",
-  },
-];
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useAuthStore } from "../../../store/useAuthStore";
+import { getSaleTransactions } from "../../../actions/farmer";
+import useModal from "../../../hooks/useModal";
+import { TranscationDetailsSale } from "../Modals/TranscationDetailsSale";
+import Loader from "../../Common/Loader";
 
 const SecondTab = () => {
+  const { modal, updateModal, closeModal } = useModal();
+  const { _id } = useAuthStore((s) => s.userDetails);
+  const { isLoading, data } = useQuery({
+    queryKey: ["Sale_Transactions"],
+    queryFn: () => getSaleTransactions(_id),
+  });
+
+  const applyBtnStyle = {
+    backgroundColor: "#064420",
+    border: "none",
+    borderRadius: "5px",
+    width: "130px",
+    color: "#fff",
+    padding: "5px 8px",
+  };
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />;
+
   return (
     <div className="secondtab">
       <div className="row">
@@ -51,10 +42,8 @@ const SecondTab = () => {
                   <tr>
                     <th>Sale Id</th>
                     <th>Date of Sale</th>
-                    <th>Item</th>
-                    <th>Quantity</th>
-                    <th>Price Per KG</th>
                     <th>Total Amount</th>
+                    <th>Item Details</th>
                   </tr>
                 </thead>
                 <tbody
@@ -64,14 +53,28 @@ const SecondTab = () => {
                     fontWeight: "500",
                   }}
                 >
-                  {data.map((d) => (
-                    <tr key={d.id}>
-                      <td>{d.id}</td>
-                      <td>{d.date}</td>
-                      <td>{d.name}</td>
-                      <td>{d.pricePerKg}</td>
-                      <td>{d.quantity}</td>
-                      <td>{d.totalAmount}</td>
+                  {data?.map((d, ind) => (
+                    <tr key={ind}>
+                      <td>{d.uniqueId}</td>
+                      {d.transactions?.map((date,ind) => {
+                        return (
+                          <React.Fragment key={ind}>
+                            <td>{date.dateOfSale}</td> 
+                            <td>{date.total}</td>
+                          </React.Fragment>
+                        );
+                      })}
+                      <td>
+                        <button
+                          className="loan_button"
+                          style={applyBtnStyle}
+                          onClick={() =>
+                            updateModal("View Details", { data: d })
+                          }
+                        >
+                          View
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -80,6 +83,13 @@ const SecondTab = () => {
           </div>
         </div>
       </div>
+      {modal.state === "View Details" && (
+        <TranscationDetailsSale
+          show
+          data={modal.data}
+          handleClose={closeModal}
+        />
+      )}
     </div>
   );
 };

@@ -1,61 +1,48 @@
-const data = [
-  {
-    id: "SAM107254367",
-    date: "17-02-22",
-    name: "Nylon Bag",
-    unitPrice: "10",
-    quantity: "2",
-    totalAmount: "20",
-  },
-  {
-    id: "SAM107254368",
-    date: "17-02-22",
-    name: "Nylon Bag 2",
-    unitPrice: "30",
-    quantity: "2",
-    totalAmount: "60",
-  },
-  {
-    id: "SAM107254369",
-    date: "17-02-22",
-    name: "Nylon Bag 3",
-    unitPrice: "10",
-    quantity: "2",
-    totalAmount: "20",
-  },
-  {
-    id: "SAM107254370",
-    date: "19-02-22",
-    name: "Nylon Bag 4",
-    unitPrice: "10",
-    quantity: "6",
-    totalAmount: "60",
-  },
-];
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useAuthStore } from "../../../store/useAuthStore";
+import { getPurchaseTransactions } from "../../../actions/farmer";
+import useModal from "../../../hooks/useModal";
+import { TranscationDetailsPurchase } from "../Modals/TransacationDetailsPurchase";
+import Loader from "../../Common/Loader";
 
 const FirstTab = () => {
+  const { modal, updateModal, closeModal } = useModal();
+  const { _id } = useAuthStore((s) => s.userDetails);
+  const { isLoading, data } = useQuery({
+    queryKey: ["Purchase_Transactions"],
+    queryFn: () => getPurchaseTransactions(_id),
+  });
+
+  const applyBtnStyle = {
+    backgroundColor: "#064420",
+    border: "none",
+    borderRadius: "5px",
+    width: "130px",
+    color: "#fff",
+    padding: "5px 8px",
+  };
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />;
   return (
     <div className="firsttab">
       <div className="row">
         <div className="col">
           <div className="card shadow">
-            <div className=" table-responsive p-3">
+            <div className="table-responsive p-3">
               <table className="table table-striped">
                 <thead
                   style={{
                     color: "green",
                     fontSize: "15px",
                     verticalAlign: "top",
-                    // textAlign: "center",
                   }}
                 >
                   <tr>
                     <th>Purchase Id</th>
                     <th>Date of purchase</th>
-                    <th>Item Name</th>
-                    <th>Unit Price</th>
-                    <th>Quantity</th>
                     <th>Total Amount</th>
+                    <th>Item Details</th>
                   </tr>
                 </thead>
                 <tbody
@@ -63,17 +50,28 @@ const FirstTab = () => {
                     color: "#000",
                     fontSize: "15px",
                     fontWeight: "500",
-                    // textAlign: "center",
                   }}
                 >
-                  {data.map((d) => (
-                    <tr key={d.id}>
-                      <td>{d.id}</td>
-                      <td>{d.date}</td>
-                      <td>{d.name}</td>
-                      <td>{d.unitPrice}</td>
-                      <td>{d.quantity}</td>
-                      <td>{d.totalAmount}</td>
+                  {data?.map((d, ind) => (
+                    <tr key={ind}>
+                      <td>{d.uniqueId}</td>
+                      {d.transactions?.map((date, ind) => (
+                        <React.Fragment key={ind}>
+                          <td>{date.dateOfPurchase}</td>
+                          <td>{date.total}</td>
+                        </React.Fragment>
+                      ))}
+                      <td>
+                        <button
+                          className="loan_button"
+                          style={applyBtnStyle}
+                          onClick={() =>
+                            updateModal("View Details", { data: d })
+                          }
+                        >
+                          View
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -82,6 +80,13 @@ const FirstTab = () => {
           </div>
         </div>
       </div>
+      {modal.state === "View Details" && (
+        <TranscationDetailsPurchase
+          show
+          data={modal.data}
+          handleClose={closeModal}
+        />
+      )}
     </div>
   );
 };

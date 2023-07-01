@@ -1,6 +1,6 @@
 import axios from "axios";
 import jsCookie from "js-cookie";
-import { successNotify } from "./toastifyHlp";
+import {successNotify } from "./toastifyHlp";
 import { root } from './endPoints';
 
 export const cookies = jsCookie;
@@ -10,7 +10,7 @@ const requestIntercepter = (instance, isAuthendicated, headers) => {
     function (config) {
       if (isAuthendicated) {
         config.headers = {
-          Authorization: cookies.get("IITD"),
+          Authorization: `Bearer ${cookies.get("IITD")}`,
           ...headers
         }
       }

@@ -7,7 +7,6 @@ const PageOne = ({ onButtonClick, bid }) => {
   const fpoId = useAuthStore((s) => s.userDetails._id);
 
   useEffect(() => {
-    console.log(fpoId)
     bid.bids.forEach((bid) => {
       if (bid.status && bid.status !== "test-reports-rejected" && bid.fpoId === fpoId) {
         setSelected(true);

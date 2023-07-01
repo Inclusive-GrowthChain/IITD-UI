@@ -5,30 +5,35 @@ import { Modal } from "react-bootstrap";
 import { addProduce } from "../../../actions/farmer";
 import { useAuthStore } from "../../../store/useAuthStore";
 
-const errStyle = { fontSize: "12px", margin: 0 }
+const errStyle = { fontSize: "12px", margin: 0, textAlign: "left" };
 
 function SellProduce({ show, handleClose }) {
-  const queryClient = useQueryClient()
-  const { register, formState: { errors }, handleSubmit, reset } = useForm({
+  const queryClient = useQueryClient();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm({
     defaultValues: {
-      farmerId: useAuthStore(s => s.userDetails._id),
+      farmerId: useAuthStore((s) => s.userDetails._id),
       lacStrainType: "",
       treeSource: "",
       origin: "",
       quantity: "",
       image: "",
-      remarks: ""
-    }
-  })
+      remarks: "",
+    },
+  });
 
   const { mutate, isLoading } = useMutation({
     mutationFn: addProduce,
     onSuccess: () => {
-      queryClient.invalidateQueries("farmer/produce")
-      reset()
-      handleClose()
-    }
-  })
+      queryClient.invalidateQueries("farmer/produce");
+      reset();
+      handleClose();
+    },
+  });
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -36,7 +41,6 @@ function SellProduce({ show, handleClose }) {
 
       <Modal.Body>
         <form onSubmit={handleSubmit(mutate)}>
-
           <div className="row m-2">
             <div className="col-lg-6">
               <label>Date</label>
@@ -56,15 +60,14 @@ function SellProduce({ show, handleClose }) {
                 className="form-control"
                 placeholder="Lac Strain Type"
                 {...register("lacStrainType", {
-                  required: "Lac strain type is required"
+                  required: "Lac strain type is required",
                 })}
               />
-              {
-                errors.title &&
+              {errors.lacStrainType && (
                 <p className="text-danger" style={errStyle}>
-                  {errors.title.message}
+                  {errors.lacStrainType.message}
                 </p>
-              }
+              )}
             </div>
           </div>
 
@@ -78,15 +81,14 @@ function SellProduce({ show, handleClose }) {
                 className="form-control"
                 placeholder="Source of Tree"
                 {...register("treeSource", {
-                  required: "Source of tree is required"
+                  required: "Source of tree is required",
                 })}
               />
-              {
-                errors.title &&
+              {errors.treeSource && (
                 <p className="text-danger" style={errStyle}>
-                  {errors.title.message}
+                  {errors.treeSource.message}
                 </p>
-              }
+              )}
             </div>
           </div>
 
@@ -100,15 +102,14 @@ function SellProduce({ show, handleClose }) {
                 className="form-control"
                 placeholder="Origin"
                 {...register("origin", {
-                  required: "Origin is required"
+                  required: "Origin is required",
                 })}
               />
-              {
-                errors.title &&
+              {errors.origin && (
                 <p className="text-danger" style={errStyle}>
-                  {errors.title.message}
+                  {errors.origin.message}
                 </p>
-              }
+              )}
             </div>
           </div>
 
@@ -122,15 +123,14 @@ function SellProduce({ show, handleClose }) {
                 className="form-control"
                 placeholder="Quantity"
                 {...register("quantity", {
-                  required: "Quantity is required"
+                  required: "Quantity is required",
                 })}
               />
-              {
-                errors.title &&
+              {errors.quantity && (
                 <p className="text-danger" style={errStyle}>
-                  {errors.title.message}
+                  {errors.quantity.message}
                 </p>
-              }
+              )}
             </div>
           </div>
 
@@ -145,15 +145,14 @@ function SellProduce({ show, handleClose }) {
                 required=""
                 accept="image/*"
                 {...register("image", {
-                  required: "Image is required"
+                  required: "Image is required",
                 })}
               />
-              {
-                errors.image &&
+              {errors.image && (
                 <p className="text-danger" style={errStyle}>
                   {errors.image.message}
                 </p>
-              }
+              )}
             </div>
           </div>
 
@@ -193,7 +192,7 @@ function SellProduce({ show, handleClose }) {
         </form>
       </Modal.Body>
     </Modal>
-  )
+  );
 }
 
-export default SellProduce
+export default SellProduce;

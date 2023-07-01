@@ -1,83 +1,122 @@
-const addSaleBtnStyle = {
-  backgroundColor: "#064420",
-  border: "none",
-  borderRadius: "10px",
-  padding: "10px 15px",
-  color: "#fff",
-  textTransform: "uppercase",
-  fontSize: "12px",
-  marginBottom: "15px",
-}
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import useModal from "../../../hooks/useModal";
+import { TranscationDetailsSale } from "../../Farmer/Modals/TranscationDetailsSale";
+import Loader from "../../Common/Loader";
+import { getSaleTransactions } from "../../../actions/farmer";
+import React from "react";
 
-function Panel4({ theadStyle3, tbodyStyle, style3, handleShowAddSale, handleShowSaleDetails }) {
+function Panel4({
+  theadStyle3,
+  tbodyStyle,
+  style3,
+  handleShowAddSale,
+  handleShowSaleDetails,
+}) {
+  const { modal, updateModal, closeModal } = useModal();
+  const { farmerId } = useParams();
+  const { isLoading, data } = useQuery({
+    queryKey: ["Sale_Transactions"],
+    queryFn: () => getSaleTransactions(farmerId),
+  });
+
+  const applyBtnStyle = {
+    backgroundColor: "#064420",
+    border: "none",
+    borderRadius: "5px",
+    width: "130px",
+    color: "#fff",
+    padding: "5px 8px",
+  };
+
+  const addSaleBtnStyle = {
+    backgroundColor: "#064420",
+    border: "none",
+    borderRadius: "10px",
+    padding: "10px 15px",
+    color: "#fff",
+    textTransform: "uppercase",
+    fontSize: "12px",
+    marginBottom: "15px",
+  };
+
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />;
+
   return (
     <>
       <div>
-        <button
-          onClick={handleShowAddSale}
-          style={addSaleBtnStyle}
-        >
+        <button onClick={handleShowAddSale} style={addSaleBtnStyle}>
           Add Sale
         </button>
       </div>
 
-      <div className="card_table1">
-        <div className=" table-responsive">
-          <table>
-            <thead style={theadStyle3}>
-              <tr>
-                <th>Sale Id</th>
-                <th>Date of Sale</th>
-                <th>Total Amount</th>
-                <th>Sale Details</th>
-              </tr>
-            </thead>
-            <tbody style={tbodyStyle}>
-              <tr>
-                <td>SAM10742671</td>
-                <td>12-02-22</td>
-                <td>₹ 520</td>
-                <td>
-                  <button
-                    style={style3}
-                    onClick={handleShowSaleDetails}
+      <div className="secondtab">
+        <div className="row">
+          <div className="col">
+            <div className="card shadow">
+              <div className=" table-responsive p-3">
+                <table className="table table-striped">
+                  <thead
+                    style={{
+                      // color: "green",
+                      fontSize: "15px",
+                      verticalAlign: "top",
+                    }}
                   >
-                    View
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>SAM10742671</td>
-                <td>12-02-22</td>
-                <td>₹ 520</td>
-                <td>
-                  <button
-                    style={style3}
-                    onClick={handleShowSaleDetails}
+                    <tr>
+                      <th>Sale Id</th>
+                      <th>Date of Sale</th>
+                      <th>Total Amount</th>
+                      <th>Item Details</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    style={{
+                      color: "#000",
+                      fontSize: "15px",
+                      fontWeight: "500",
+                    }}
                   >
-                    View
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>SAM10742671</td>
-                <td>12-02-22</td>
-                <td>₹ 520</td>
-                <td>
-                  <button
-                    style={style3}
-                    onClick={handleShowSaleDetails}
-                  >
-                    View
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                    {data?.map((d) => (
+                      <tr key={d.uniqueId}>
+                        <td>{d.uniqueId}</td>
+                        {d.transactions?.map((date, ind) => {
+                          return (
+                            <React.Fragment key={ind}>
+                              <td>{date.dateOfSale}</td>
+                              <td>{date.total}</td>
+                            </React.Fragment>
+                          );
+                        })}
+                        <td>
+                          <button
+                            className="loan_button"
+                            style={applyBtnStyle}
+                            onClick={() =>
+                              updateModal("View Details", { data: d })
+                            }
+                          >
+                            View
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
+        {modal.state === "View Details" && (
+          <TranscationDetailsSale
+            show
+            data={modal.data}
+            handleClose={closeModal}
+          />
+        )}
       </div>
     </>
-  )
+  );
 }
 
-export default Panel4
+export default Panel4;

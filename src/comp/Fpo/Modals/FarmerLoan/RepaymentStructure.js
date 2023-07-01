@@ -60,7 +60,7 @@ function RepaymentStructure({ show, data, handleClose }) {
             </thead>
             <tbody>
               {data?.farmerWindowRepaymentStructure?.map((item) => (
-                <tr>
+                <tr key={item.id}>
                   <td>{item.id}</td>
                   <td>{item.repaymentDate}</td>
                   <td>{item.emi}</td>

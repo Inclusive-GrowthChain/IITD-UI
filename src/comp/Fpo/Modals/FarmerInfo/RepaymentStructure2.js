@@ -1,15 +1,9 @@
 import Modal from "react-bootstrap/Modal";
 
-function RepaymentStructure2({ showRepayment, handleCloseRepayment }) {
+function RepaymentStructure2({ showRepayment, handleCloseRepayment, modal }) {
   return (
-    <Modal
-      size="xl"
-      show={showRepayment}
-      onHide={handleCloseRepayment}
-    >
-      <Modal.Header closeButton>
-        Repayment Structure
-      </Modal.Header>
+    <Modal size="xl" show={showRepayment} onHide={handleCloseRepayment}>
+      <Modal.Header closeButton>Repayment Structure</Modal.Header>
       <Modal.Body>
         <div className="repayment_title">
           <div className="row">
@@ -19,41 +13,43 @@ function RepaymentStructure2({ showRepayment, handleCloseRepayment }) {
                   <strong>Loan ID : </strong>
                 </div>
                 <div className="col-6">
-                  <span>12345</span>
+                  <span>{modal?.data?.value?.loanId}</span>
                 </div>
                 <div className="col-6">
                   <strong>FPO Name : </strong>
                 </div>
                 <div className="col-6">
-                  <span>abcd</span>
+                  <span>{modal?.data?.value?.fpoName}</span>
                 </div>
                 <div className="col-6">
                   <strong>Loan Amount : </strong>
                 </div>
                 <div className="col-6">
-                  <span>400</span>
+                  <span>{modal?.data?.value?.grantedAmount}</span>
                 </div>
               </div>
             </div>
             <div className="col-lg-6">
               <div className="row">
                 <div className="col-6">
-                  <strong>Loan Period in Years : </strong>
+                  <strong>Loan Period in Months : </strong>
                 </div>
                 <div className="col-6">
-                  <span>1</span>
+                  <span>{modal?.data?.value?.loanTenure}</span>
                 </div>
                 <div className="col-6">
-                  <strong>No of Payment Per Year : </strong>
+                  <strong>No of Payment Installments : </strong>
                 </div>
                 <div className="col-6">
-                  <span>1</span>
+                  <span>
+                    {modal?.data?.value?.farmerWindowRepaymentStructure?.length}
+                  </span>
                 </div>
                 <div className="col-6">
                   <strong>Annual Interest Rate : </strong>
                 </div>
                 <div className="col-6">
-                  <span>14%</span>
+                  <span>{modal?.data?.value?.fpointrest}%</span>
                 </div>
               </div>
             </div>
@@ -63,55 +59,33 @@ function RepaymentStructure2({ showRepayment, handleCloseRepayment }) {
           <table style={{ border: "1px solid #eee" }}>
             <thead style={{ backgroundColor: "#eee" }}>
               <tr>
-                <th>Payment Number</th>
-                <th>Payment Date</th>
-                <th>Principle Amount</th>
-                <th>Interest Amount</th>
-                <th>Status</th>
+                <th>S.No</th>
+                <th>Scheduled Repayment Date</th>
+                <th>Scheduled EMI Amount</th>
+                <th>Actual Repayment Date</th>
+                <th>Actual Repayment Amount</th>
+                <th>Balance Amount</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>123456</td>
-                <td>12-09-2021</td>
-                <td>400</td>
-                <td>14%</td>
-                <td>status</td>
-              </tr>
-              <tr>
-                <td>123456</td>
-                <td>12-09-2021</td>
-                <td>400</td>
-                <td>14%</td>
-                <td>status</td>
-              </tr>
-              <tr>
-                <td>123456</td>
-                <td>12-09-2021</td>
-                <td>400</td>
-                <td>14%</td>
-                <td>status</td>
-              </tr>
-              <tr>
-                <td>123456</td>
-                <td>12-09-2021</td>
-                <td>400</td>
-                <td>14%</td>
-                <td>status</td>
-              </tr>
-              <tr>
-                <td>123456</td>
-                <td>12-09-2021</td>
-                <td>400</td>
-                <td>14%</td>
-                <td>status</td>
-              </tr>
+              {modal?.data?.value?.farmerWindowRepaymentStructure?.map((d,ind) => {
+                return (
+                  <tr key={ind}>
+                    <td>{d.id}</td>
+                    <td>{d.repaymentDate}</td>
+                    <td>{d.emi}</td>
+                    <td>{d.paymentDate ? d.paymentDate : "Pending"}</td>
+                    <td>{d.paidAmount !== 0 ? d.paidAmount : "Pending"}</td>
+                    <td>{d.balance}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
       </Modal.Body>
     </Modal>
-  )
+  );
 }
 
-export default RepaymentStructure2
+export default RepaymentStructure2;

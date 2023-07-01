@@ -13,6 +13,18 @@ export function getFpoProducts() {
   })
 }
 
+export function getPurchaseTransactions(_id) {
+  return sendApiReq({
+    url: endPoints.farmer.purchaseTransaction + `/${_id}/purchase`
+  })
+}
+
+export function getSaleTransactions(_id) {
+  return sendApiReq({
+    url: endPoints.farmer.purchaseTransaction + `/${_id}/sale`
+  })
+}
+
 export function getLoanList() {
   return sendApiReq({
     url: endPoints.farmer.loans,
