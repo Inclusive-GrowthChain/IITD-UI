@@ -3,11 +3,29 @@ import { TabNavItem, TabContent } from "../UIComp/Tabs";
 import { useAuthStore } from "../../store/useAuthStore";
 import ImageViewer from "./Modals/ImageViewer";
 import useModal from "../../hooks/useModal";
+import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateProfile } from "../../actions/farmer";
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("tab1");
   const fpo = useAuthStore(s => s.userDetails)
   const { modal, updateModal, closeModal } = useModal()
+
+  const { register, handleSubmit, formState: { errors }, reset } = useForm()
+
+  const userType = fpo.type
+  const userId = fpo._id
+
+  const queryClient = useQueryClient()
+
+  const { mutate } = useMutation({
+    mutationFn: (data) => updateProfile(data, userType, userId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user-detail"] });
+      reset()
+    }
+  })
 
   return (
     <main id="main_container" className="main_container container-fluid itemContainer">
@@ -360,7 +378,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        Director Name
+                                        CEO Name
                                       </label>
                                     </div>
                                   </div>
@@ -376,7 +394,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        Director Mobile Number
+                                        CEO Mobile Number
                                       </label>
                                     </div>
                                   </div>
@@ -392,7 +410,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        Director Gender
+                                        CEO Gender
                                       </label>
                                     </div>
                                   </div>
@@ -542,73 +560,168 @@ const Settings = () => {
                             Update information
                           </h6>
                           <div className="pl-lg-4">
-                            <div className="row">
-                              <div className="col-lg-6">
-                                <div className="form-group focused">
-                                  <label className="form-control-label text-black">
-                                    Email Id
-                                  </label>
-                                  <input
-                                    type="text"
-                                    className="form-control form-control-alternative"
-                                    placeholder=""
-                                  />
+                            <form onSubmit={handleSubmit(mutate)}>
+                              <div className="row">
+                                <div className="col-lg-6">
+                                  <div className="form-group focused">
+                                    <label className="form-control-label text-black">
+                                      City
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control form-control-alternative"
+                                      placeholder=""
+                                      {...register("city")}
+                                    />
+                                    <p role="alert">{errors.city?.message}</p>
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="col-lg-6">
-                                <div className="form-group focused">
-                                  <label className="form-control-label text-black">
-                                    Mobile Number
-                                  </label>
-                                  <input
-                                    type="text"
-                                    className="form-control form-control-alternative"
-                                    placeholder=""
-                                  />
+                                <div className="col-lg-6">
+                                  <div className="form-group focused">
+                                    <label className="form-control-label text-black">
+                                      State
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control form-control-alternative"
+                                      placeholder=""
+                                      {...register("state")}
+                                    />
+                                    <p role="alert">{errors.state?.message}</p>
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="col-lg-6">
-                                <div className="form-group focused">
-                                  <label className="form-control-label text-black">
-                                    Old Password
-                                  </label>
-                                  <input
-                                    type="text"
-                                    className="form-control form-control-alternative"
-                                    placeholder=""
-                                  />
+                                <div className="col-lg-6">
+                                  <div className="form-group focused">
+                                    <label className="form-control-label text-black">
+                                      Mobile Number
+                                    </label>
+                                    <input
+                                      type="Number"
+                                      className="form-control form-control-alternative"
+                                      placeholder=""
+                                      {...register("contactNumber", { maxLength: 10})}
+                                    />
+                                    <p role="alert">{errors.contactNumber?.message}</p>
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="col-lg-6">
-                                <div className="form-group focused">
-                                  <label className="form-control-label text-black">
-                                    New Password
-                                  </label>
-                                  <input
-                                    type="text"
-                                    className="form-control form-control-alternative"
-                                    placeholder=""
-                                  />
+                                <div className="col-lg-6">
+                                  <div className="form-group focused">
+                                    <label className="form-control-label text-black">
+                                      Pincode
+                                    </label>
+                                    <input
+                                      type="number"
+                                      className="form-control form-control-alternative"
+                                      placeholder=""
+                                      {...register("pinCode", { maxLength: 6 })}
+                                    />
+                                    <p role="alert">{errors.pinCode?.message}</p>
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="col-lg-6">
-                                <div className="form-group focused">
-                                  <label className="form-control-label text-black">
-                                    Confirm Password
-                                  </label>
-                                  <input
-                                    type="text"
-                                    className="form-control form-control-alternative"
-                                    placeholder=""
-                                  />
+                                <div className="col-lg-6">
+                                  <div className="form-group focused">
+                                    <label className="form-control-label text-black">
+                                      Shareholder Number
+                                    </label>
+                                    <input
+                                      type="number"
+                                      className="form-control form-control-alternative"
+                                      placeholder=""
+                                      {...register("shareholderNumber")}
+                                    />
+                                    <p role="alert">{errors.shareholderNumber?.message}</p>
+                                  </div>
+                                </div>
+                                <div className="col-lg-6">
+                                  <div className="form-group focused">
+                                    <label className="form-control-label text-black">
+                                      Email
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control form-control-alternative"
+                                      placeholder=""
+                                      {...register("email")}
+                                    />
+                                    <p role="alert">{errors.email?.message}</p>
+                                  </div>
+                                </div>
+                                <div className="col-lg-6">
+                                  <div className="form-group focused">
+                                    <label className="form-control-label text-black">
+                                      CEO Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control form-control-alternative"
+                                      placeholder=""
+                                      {...register("directorName")}
+                                    />
+                                    <p role="alert">{errors.role?.message}</p>
+                                  </div>
+                                </div>
+                                <div className="col-lg-6">
+                                  <div className="form-group focused">
+                                    <label className="form-control-label text-black">
+                                      CEO Gender
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control form-control-alternative"
+                                      placeholder=""
+                                      {...register("directorGender")}
+                                    />
+                                    <p role="alert">{errors.directorGender?.message}</p>
+                                  </div>
+                                </div>
+
+
+                                <div className="col-lg-6">
+                                  <div className="form-group focused">
+                                    <label className="form-control-label text-black">
+                                      Bank Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control form-control-alternative"
+                                      placeholder=""
+                                      {...register("bankName")}
+                                    />
+                                    <p role="alert">{errors.bankName?.message}</p>
+                                  </div>
+                                </div>
+                                <div className="col-lg-6">
+                                  <div className="form-group focused">
+                                    <label className="form-control-label text-black">
+                                      Account Number
+                                    </label>
+                                    <input
+                                      type="number"
+                                      className="form-control form-control-alternative"
+                                      placeholder=""
+                                      {...register("bankAccountNumber")}
+                                    />
+                                    <p role="alert">{errors.bankAccountNumber?.message}</p>
+                                  </div>
+                                </div>
+                                <div className="col-lg-6">
+                                  <div className="form-group focused">
+                                    <label className="form-control-label text-black">
+                                      IFSC Code
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control form-control-alternative"
+                                      placeholder=""
+                                      {...register("ifscCode")}
+                                    />
+                                    <p role="alert">{errors.ifscCode?.message}</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
                                 className=""
-                                style={{
-                                  display: "flex",
-                                  justifyContent: "center",
-                                }}
+                                style={{ display: "flex", justifyContent: "center" }}
                               >
                                 <button
                                   className="btn btn-info mt-4"
@@ -617,11 +730,12 @@ const Settings = () => {
                                     border: "none",
                                     color: "#fff",
                                   }}
+                                  type="submit"
                                 >
                                   Update Profile
                                 </button>
                               </div>
-                            </div>
+                            </form>
                           </div>
                         </div>
                       </TabContent>

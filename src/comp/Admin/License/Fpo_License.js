@@ -6,6 +6,7 @@ import {
   getLicenses,
 } from "../../../actions/admin";
 import Loader from "../../Common/Loader";
+import { errorNotify } from "../../../utils/toastifyHlp";
 
 const applyBtnStyle = {
   backgroundColor: "#064420",
@@ -36,12 +37,17 @@ const Fpo_License = () => {
   });
 
   const onSubmit = (data) => {
+    const restructuredData = {
+      ...data,
+      role: "fpo"
+    };
+
     if (data) {
-      mutate(data);
+      mutate(restructuredData);
     }
   };
 
- //Delete License 
+  //Delete License 
   const deleteMutation = useMutation({
     mutationFn: (id) => deleteLicense(id),
     onSuccess: () => {
@@ -50,7 +56,11 @@ const Fpo_License = () => {
   });
 
   //Loading
-  if(isLoading) return <Loader wrapperCls="loader-main-right"/>
+  if (isLoading) return <Loader wrapperCls="loader-main-right" />
+
+  if (deleteMutation.error) {
+    return errorNotify()
+  }
 
   return (
     <div>
@@ -62,7 +72,7 @@ const Fpo_License = () => {
           >
             <div class="input-group mb-3">
               <input
-                {...register("Name", {
+                {...register("name", {
                   required: true,
                 })}
                 type="text"
@@ -117,7 +127,7 @@ const Fpo_License = () => {
                 return (
                   <tr key={license._id}>
                     <td>{ind + 1}</td>
-                    <td>{license.role}</td>
+                    <td>{license.name}</td>
                     <td>{license.licenseId}</td>
                     <td>{license.status}</td>
                     <td>{createdDate.toLocaleString("en-IN")}</td>

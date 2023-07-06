@@ -40,7 +40,7 @@ const PageTwo = ({ onButtonClick, outerbid = [] }) => {
 
   useEffect(() => {
     checkOrderPlaced()
-    console.log(outerbid)
+    // console.log(outerbid)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [outerbid])
 

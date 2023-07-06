@@ -121,7 +121,7 @@ const Bidding = () => {
                             </thead>
 
                             <tbody style={tbodyStyle}>
-                              {data.data
+                              {data?.data
                                 .filter((bid) => bid.status === "on-going")
                                 .map((bid) => (
                                   <tr key={bid.id}>
@@ -168,7 +168,7 @@ const Bidding = () => {
                             </thead>
 
                             <tbody style={tbodyStyle}>
-                              {data.data
+                              {data?.data
                                 .filter((bid) => bid.status === "completed")
                                 .map((bid) => (
                                   <tr key={bid.id}>

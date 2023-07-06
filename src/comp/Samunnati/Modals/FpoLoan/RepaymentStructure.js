@@ -21,6 +21,7 @@ const btnStyle = {
 function RepaymentStructure({ show, handleClose, data, windowType }) {
   const { modal, updateModal, closeModal } = useModal()
 
+  console.log(data);
   const repayments = data?.FPOrepaymentStructure || []
 
   return (

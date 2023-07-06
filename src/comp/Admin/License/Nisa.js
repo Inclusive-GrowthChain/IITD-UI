@@ -36,8 +36,12 @@ const Nisa = () => {
   });
 
   const onSubmit = (data) => {
+    const restructuredData = {
+      ...data,
+      role: "nisa"
+    };
     if (data) {
-      mutate(data);
+      mutate(restructuredData);
     }
   };
 
@@ -63,7 +67,7 @@ const Nisa = () => {
           >
             <div class="input-group mb-3">
               <input
-                {...register("Name", {
+                {...register("name", {
                   required: "Please enter your first name.",
                   maxLength: 20,
                 })}
@@ -135,7 +139,7 @@ const Nisa = () => {
                 return (
                   <tr key={license._id}>
                     <td>{ind + 1}</td>
-                    <td>{license.role}</td>
+                    <td>{license.name}</td>
                     <td>{license.licenseId}</td>
                     <td>{license.status}</td>
                     <td>{createdDate.toLocaleString("en-IN")}</td>

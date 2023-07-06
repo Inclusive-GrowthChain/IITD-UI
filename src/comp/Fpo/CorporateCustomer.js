@@ -124,7 +124,7 @@ const CorporateCustomer = () => {
 
                     <tbody style={tbodyStyle}>
                       {
-                        data.data
+                        data?.data
                           .filter((item) => item.bidEndDate >= new Date().toISOString().split('T')[0])
                           .map(item => (
                             <tr key={item.id}>
@@ -175,7 +175,7 @@ const CorporateCustomer = () => {
 
                     <tbody style={tbodyStyle}>
                       {
-                        data.data
+                        data?.data
                           .filter((item) => item.status === "on-going" && item.bids.some((bid) => bid.userId === fpoId))
                           .map(item => (
                             <tr key={item.id}>
@@ -220,7 +220,7 @@ const CorporateCustomer = () => {
 
                     <tbody style={tbodyStyle}>
                       {
-                        data.data
+                        data?.data
                           .filter(bid => bid.status === "completed")
                           .map(bid => {
                             return bid.bids.filter((b) => b.status === "completed" && b.fpoId === fpoId).map((b) => (

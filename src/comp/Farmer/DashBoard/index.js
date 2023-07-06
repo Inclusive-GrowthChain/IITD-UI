@@ -149,13 +149,14 @@ function Dashboard() {
       },
       {
         queryKey: ["/loans/history"],
-        queryFn: () => getLoanHistory({ type: "farmer" }),
+        queryFn: () => getLoanHistory({userId:farmerId}),
         onSuccess: () => {
           return
         },
       },
     ],
   });
+
 
   if (isLoading1 || isLoading2 || isLoading3 || isLoading4 || isLoading5)
     return <Loader wrapperCls="loader-main-right" />;
@@ -203,9 +204,8 @@ function Dashboard() {
                         alt="weatherIcon"
                         height={100}
                         width={100}
-                        src={`http://openweathermap.org/img/wn/${
-                          currentWeather.weather[0].icon.slice(0, -1) + "d"
-                        }@2x.png`}
+                        src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon.slice(0, -1) + "d"
+                          }@2x.png`}
                       />
                     </div>
                     <div className="px-2">
@@ -259,9 +259,8 @@ function Dashboard() {
                               alt="myit"
                               height={50}
                               width={50}
-                              src={`http://openweathermap.org/img/wn/${
-                                nextInterval.icon.slice(0, -1) + "d"
-                              }@2x.png`}
+                              src={`http://openweathermap.org/img/wn/${nextInterval.icon.slice(0, -1) + "d"
+                                }@2x.png`}
                             />
                             <p className="text-base font-medium">
                               {Math.ceil(nextInterval.temperature)}° C
@@ -286,7 +285,7 @@ function Dashboard() {
               <div className="mb-2 p-3 dash__card">
                 <p className="card_title text-center">Crop Advisory</p>
                 <div className="card-text">
-                  <div class="table-responsive">
+                  <div className="table-responsive">
                     <table className="table table-striped">
                       <thead className="h6 px-2">
                         <tr>
@@ -340,8 +339,7 @@ function Dashboard() {
                       </tr>
                     </thead>
                     <tbody className="fw-light fs-10">
-                      {loanList
-                        ?.filter((loan) => loan.value.userId === farmerId)
+                      {loanList?.data?.filter((loan) => loan.value.userId === farmerId)
                         ?.map((loan, ind) => (
                           <tr className="fw-bold text-capitalize" key={ind}>
                             <td>{loan.value.loanId}</td>

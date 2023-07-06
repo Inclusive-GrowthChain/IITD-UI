@@ -161,15 +161,17 @@ export function getLoanwindow({ windowType = "farmer" }) {
   });
 }
 
-export function getLoanHistory({ type = "fpo", userId }) {
+export function getLoanHistory({ type = "farmer", userId }) {
   return sendApiReq({
-    url: endPoints.loanHistory,
-    params: {
-      status: "approved",
-      userId,
-      type,
-    },
+    url: endPoints.loanHistory + `?userId=${userId}&type=${type}&status=approved`
+    
   });
+}
+
+export function getApprovedLoanList(farmerId) {
+  return sendApiReq({
+    url: endPoints.loanHistory + `?userId=${farmerId}&type=farmer&status=approved`
+  })
 }
 
 export function getActiveLoanwindow({ windowType = "fpo", fpoId }) {

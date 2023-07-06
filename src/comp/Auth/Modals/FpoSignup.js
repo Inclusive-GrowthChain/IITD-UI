@@ -19,22 +19,27 @@ const fieldSet1 = [
   {
     name: "fpoName",
     label: "Name of FPO",
+    type: "text"
   },
   {
     name: "userName",
     label: "Username",
+    type: "text"
   },
   {
     name: "password",
     label: "Password",
+    type: "text"
   },
   {
     name: "address",
     label: "Address",
+    type: "text"
   },
   {
     name: "city",
     label: "City",
+    type: "text"
   },
   {
     name: "state",
@@ -45,18 +50,34 @@ const fieldSet1 = [
   {
     name: "pinCode",
     label: "Pin Code",
+    type: "number",
+    validation: {
+      minLength: {
+        value: 6,
+        message: "Pincode number is not valid"
+      },
+    }
   },
   {
     name: "contactNumber",
     label: "Contact Number",
+    type: "number",
+    validation: {
+      minLength: {
+        value: 10,
+        message: "Mobile number is not valid"
+      },
+    }
   },
   {
     name: "email",
     label: "Email",
+    type: "email"
   },
   {
     name: "website",
     label: "Website",
+    type: "text"
   },
   {
     type: "date",
@@ -66,10 +87,18 @@ const fieldSet1 = [
   {
     name: "registrationNumber",
     label: "Registration Number",
+    type: "number"
   },
   {
     name: "panNumber",
     label: "PAN Number",
+    type: "text",
+    validation: {
+      minLength: {
+        value: 6,
+        message: "Pancard number is not valid"
+      },
+    }
   },
   {
     name: "panImage",
@@ -79,6 +108,7 @@ const fieldSet1 = [
   {
     name: "shareholderNumber",
     label: "No of ShareHolders",
+    type: "number"
   },
 ]
 
@@ -86,14 +116,17 @@ const fieldSet2 = [
   {
     name: "bankName",
     label: "Bank Name",
+    type: "text"
   },
   {
     name: "bankAccountNumber",
     label: "Account Number",
+    type: "number"
   },
   {
     name: "ifscCode",
     label: "IFSC Number",
+    type: "text"
   },
   {
     name: "passbookImage",
@@ -106,10 +139,12 @@ const fieldSet3 = [
   {
     name: "directorName",
     label: "Name",
+    type: "text"
   },
   {
     name: "directorContactNumber",
     label: "Mobile Number",
+    type: "number"
   },
   {
     name: "directorGender",
@@ -135,6 +170,7 @@ const fieldSet3 = [
   {
     name: "licenseKey",
     label: "License Key",
+    type: "text"
   },
 ]
 

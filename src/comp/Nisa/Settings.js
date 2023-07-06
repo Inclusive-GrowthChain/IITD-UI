@@ -1,10 +1,28 @@
 import { useState } from "react";
 import { TabNavItem, TabContent } from "../UIComp/Tabs";
 import { useAuthStore } from "../../store/useAuthStore";
+import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateProfile } from "../../actions/farmer";
 
 const IINRG_Settings = () => {
   const [activeTab, setActiveTab] = useState("tab1");
   const nisa = useAuthStore(s => s.userDetails)
+
+  const userType = nisa.type
+  const userId = nisa._id
+
+  const queryClient = useQueryClient()
+
+  const { register, reset, handleSubmit } = useForm()
+
+  const { mutate } = useMutation({
+    mutationFn: (data) => updateProfile(data, userType, userId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user-detail"] });
+      reset()
+    }
+  })
 
   return (
     <main id="main_container" className="main_container container-fluid" style={{ marginTop: "3.188rem" }}>
@@ -215,88 +233,83 @@ const IINRG_Settings = () => {
                           <h6 className="heading-small text-muted text-bold text-uppercase mb-4">
                             Update information
                           </h6>
-                          <div className="pl-lg-4">
-                            <div className="row">
-                              <div className="col-lg-6">
-                                <div className="form-group focused">
-                                  <label className="form-control-label text-black">
-                                    Email Id
-                                  </label>
-                                  <input
-                                    type="text"
-                                    className="form-control form-control-alternative"
-                                    placeholder=""
-                                  />
+                          <form onSubmit={handleSubmit(mutate)}>
+                            <div className="pl-lg-4">
+                              <div className="row">
+                                <div className="col-lg-6">
+                                  <div className="form-group focused">
+                                    <label className="form-control-label text-black">
+                                      Address
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control form-control-alternative"
+                                      placeholder=""
+                                      {...register("address")}
+                                    />
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="col-lg-6">
-                                <div className="form-group focused">
-                                  <label className="form-control-label text-black">
-                                    Mobile Number
-                                  </label>
-                                  <input
-                                    type="text"
-                                    className="form-control form-control-alternative"
-                                    placeholder=""
-                                  />
+                                <div className="col-lg-6">
+                                  <div className="form-group focused">
+                                    <label className="form-control-label text-black">
+                                      City
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control form-control-alternative"
+                                      placeholder=""
+                                      {...register("city")}
+                                    />
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="col-lg-6">
-                                <div className="form-group focused">
-                                  <label className="form-control-label text-black">
-                                    Old Password
-                                  </label>
-                                  <input
-                                    type="text"
-                                    className="form-control form-control-alternative"
-                                    placeholder=""
-                                  />
+                                <div className="col-lg-6">
+                                  <div className="form-group focused">
+                                    <label className="form-control-label text-black">
+                                      State
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="form-control form-control-alternative"
+                                      placeholder=""
+                                      {...register("state")}
+                                    />
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="col-lg-6">
-                                <div className="form-group focused">
-                                  <label className="form-control-label text-black">
-                                    New Password
-                                  </label>
-                                  <input
-                                    type="text"
-                                    className="form-control form-control-alternative"
-                                    placeholder=""
-                                  />
+                                <div className="col-lg-6">
+                                  <div className="form-group focused">
+                                    <label className="form-control-label text-black">
+                                      Pincode
+                                    </label>
+                                    <input
+                                      type="number"
+                                      className="form-control form-control-alternative"
+                                      placeholder=""
+                                      {...register("pinCode",{maxLength:6})}
+                                    />
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="col-lg-6">
-                                <div className="form-group focused">
-                                  <label className="form-control-label text-black">
-                                    Confirm Password
-                                  </label>
-                                  <input
-                                    type="text"
-                                    className="form-control form-control-alternative"
-                                    placeholder=""
-                                  />
-                                </div>
-                              </div>
-                              <div
-                                className=""
-                                style={{
-                                  display: "flex",
-                                  justifyContent: "center",
-                                }}
-                              >
-                                <button
-                                  className="btn btn-info mt-4"
+                                <div
+                                  className=""
                                   style={{
-                                    backgroundColor: "#064420",
-                                    border: "none",
-                                    color: "#fff",
+                                    display: "flex",
+                                    justifyContent: "center",
                                   }}
                                 >
-                                  Update Profile
-                                </button>
+                                  <button
+                                    className="btn btn-info mt-4"
+                                    style={{
+                                      backgroundColor: "#064420",
+                                      border: "none",
+                                      color: "#fff",
+                                    }}
+                                    type="submit"
+                                  >
+                                    Update Profile
+                                  </button>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          </form>
                         </div>
                       </TabContent>
                     </div>

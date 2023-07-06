@@ -25,8 +25,8 @@ const backBtnStyle = {
 }
 
 function LoanApplication({ show, data, handleClose }) {
+  
   const [step, setStep] = useState(1)
-
   return (
     <Modal
       show={show}

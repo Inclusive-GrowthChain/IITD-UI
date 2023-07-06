@@ -5,7 +5,7 @@ import { uploadImg } from "../../../actions/general";
 const errorStyle = { fontSize: "12px", marginTop: "2px", marginBottom: 0 }
 
 export function Input({
-  label = "", type = "text", register, name = "",
+  label = "", type, register, name = "",
   validation = {}, error = {}, options = [],
   isSelect = false, ...rest
 }) {
@@ -129,6 +129,7 @@ function FormHelp({ fields = [], register, errors, setValue, clearErrors }) {
 
           return <Input
             {...f}
+            type={f.type}
             key={f.name}
             error={errors[f.name]}
             register={register}

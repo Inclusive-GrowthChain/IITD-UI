@@ -38,8 +38,12 @@ const CorporateClient = () => {
   });
 
   const onSubmit = (data) => {
+    const restructuredData = {
+      ...data,
+      role: "corporate-client"
+    };
     if (data) {
-      mutate(data);
+      mutate(restructuredData);
     }
   };
 
@@ -65,7 +69,7 @@ const CorporateClient = () => {
           >
             <div class="input-group mb-3">
               <input
-                {...register("Name", { required: "Name is required" })}
+                {...register("name", { required: "Name is required" })}
                 required
                 type="text"
                 autoComplete="Name"
@@ -119,7 +123,7 @@ const CorporateClient = () => {
                 return (
                   <tr key={license._id}>
                     <td>{ind + 1}</td>
-                    <td>{license.role}</td>
+                    <td>{license.name}</td>
                     <td>{license.licenseId}</td>
                     <td>{license.status}</td>
                     <td>{createdDate.toLocaleString("en-IN")}</td>

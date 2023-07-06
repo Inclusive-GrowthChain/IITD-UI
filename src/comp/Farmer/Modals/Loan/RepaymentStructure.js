@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 function RepaymentStructure({ show, data, handleClose }) {
   useEffect(() => {
-    console.log(data)
+    // console.log(data)
   }, [data])
 
   return (
@@ -50,7 +50,7 @@ function RepaymentStructure({ show, data, handleClose }) {
             <tbody>
               {
                 data?.farmerWindowRepaymentStructure.map((r, key) => (
-                  <tr>
+                  <tr key={key}>
                     <td>{key+1}</td>
                     <td>{r.repaymentDate}</td>
                     <td>{r.emi}</td>

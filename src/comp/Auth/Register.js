@@ -21,10 +21,12 @@ const fieldSet1 = [
   {
     name: "userName",
     label: "Username",
+    type: "text"
   },
   {
     name: "mobile",
     label: "Mobile",
+    type: "number",
     validation: {
       minLength: {
         value: 10,
@@ -35,10 +37,12 @@ const fieldSet1 = [
   {
     name: "password",
     label: "Password",
+    type: "text"
   },
   {
     name: "confirmPassword",
     label: "Confirm Password",
+    type: "text"
   },
   {
     type: "date",
@@ -66,30 +70,37 @@ const fieldSet1 = [
   {
     name: "fatherName",
     label: "Father's Name",
+    type: 'text'
   },
   {
     name: "motherName",
     label: "Mother's Name",
+    type: "text"
   },
   {
     name: "doorNumber",
     label: "Door Number",
+    type: "text"
   },
   {
     name: "street",
     label: "Street Name",
+    type: "text"
   },
   {
     name: "village",
     label: "Village",
+    type: "text"
   },
   {
     name: "taluk",
     label: "Taluk",
+    type: "text"
   },
   {
     name: "district",
     label: "District",
+    type: "text"
   },
   {
     name: "state",
@@ -100,50 +111,74 @@ const fieldSet1 = [
   {
     name: "pinCode",
     label: "Pin Code",
+    type: "number",
+    validation: {
+      minLength: {
+        value: 6,
+        message: "Mobile number is not valid"
+      },
+    }
   },
   {
     name: "occupation",
     label: "Occupation",
+    type:"text"
   },
   {
     name: "education",
     label: "Education",
+    type: "text"
   },
   {
     name: "natureOfPlace",
     label: "Nature of Place",
+    type: "text"
   },
   {
     name: "residence",
     label: "Residence",
+    type: "text"
   },
   {
     name: "caste",
     label: "Caste",
+    type: "text"
   },
   {
     name: "religion",
     label: "Religion",
+    type: "text"
   },
   {
     name: "bankName",
     label: "Bank Name",
+    type: "text"
   },
   {
     name: "accountNumber",
     label: "Account Number",
+    type: "number"
   },
   {
     name: "ifscCode",
     label: "IFSC Code",
+    type: "text"
   },
   {
     name: "branchName",
     label: "Branch Name",
+    type: "text"
   },
   {
     name: "panCardNumber",
     label: "PAN Card Number",
+    type: 'text',
+    validation: {
+      minLength: {
+        value: 10,
+        message: "Mobile number is not valid"
+      },
+    }
   },
   {
     name: "panCardImage",
@@ -153,6 +188,7 @@ const fieldSet1 = [
   {
     name: "aadharCardNumber",
     label: "Aadhar Card Number",
+    type: "number"
   },
   {
     name: "aadharCardImage",

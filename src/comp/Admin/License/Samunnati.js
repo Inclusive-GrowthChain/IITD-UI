@@ -37,8 +37,13 @@ const Samunnati = () => {
   });
 
   const onSubmit = (data) => {
+    const restructuredData = {
+      ...data,
+      role: "bank"
+    };
+
     if (data) {
-      mutate(data);
+      mutate(restructuredData);
     }
   };
 
@@ -64,7 +69,7 @@ const Samunnati = () => {
           >
             <div class="input-group mb-3">
               <input
-                {...register("Name", { required: true })}
+                {...register("name", { required: true })}
                 type="text"
                 className="form-control"
                 placeholder="Enter user Name"
@@ -133,7 +138,7 @@ const Samunnati = () => {
                 return (
                   <tr key={license._id}>
                     <td>{ind + 1}</td>
-                    <td>{license.role}</td>
+                    <td>{license.name}</td>
                     <td>{license.licenseId}</td>
                     <td>{license.status}</td>
                     <td>{createdDate.toLocaleString("en-IN")}</td>

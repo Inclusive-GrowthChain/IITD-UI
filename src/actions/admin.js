@@ -18,9 +18,10 @@ export function deleteLicense(id) {
   });
 }
 
-export function createLicense(name) {
+export function createLicense(licenseData) {
   const restructuredData = {
-    role: name.Name,
+    name: licenseData.name,
+    role: licenseData.role
   };
   return sendApiReq({
     method: "post",

@@ -85,7 +85,7 @@ function AddLacProcurement({ show, data, isEdit, handleClose }) {
                 <input
                   type="file"
                   className="form-control"
-                  required=""
+                  required
                   accept="image/*"
                   {...register("image", {
                     required: isEdit ? false : "Image is required"

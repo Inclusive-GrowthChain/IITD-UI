@@ -1,5 +1,6 @@
 export const root = {
-  baseUrl: "http://13.232.131.203:3000/api",
+  // baseUrl: "http://172.18.13.104:3000/api/", //Local URL
+  baseUrl: "http://13.232.131.203:3000/api", //Production URL 
   imgUrl: "http://13.232.131.203:3000",
 };
 
@@ -35,7 +36,8 @@ const endPoints = {
   farmer: {
     loans: "/loanwindow/loan?type=farmer",
     produce: "/farmer",
-    purchaseTransaction : "/fpo/transaction/api/transactions"
+    purchaseTransaction : "/fpo/transaction/api/transactions",
+    updateProfile: "/profile"
   },
 
   // Fpo

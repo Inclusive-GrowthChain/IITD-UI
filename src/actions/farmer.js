@@ -44,7 +44,6 @@ export function getAllProduceList() {
 }
 
 export function addProduce(data) {
-  console.log(data)
   const formData = new FormData()
   formData.append("farmerId", data.farmerId)
   formData.append("lacStrainType", data.lacStrainType)
@@ -68,5 +67,14 @@ export function applyLoan(data) {
     url: endPoints.loanwindow + `/${data.id}/loan`,
     data,
     successMsg: "Loan applied successfully"
+  })
+}
+
+export function updateProfile(data,userType,userId) {
+  return sendApiReq({
+    method: "patch",
+    url: endPoints.farmer.updateProfile + `/${userType}/${userId}`,
+    data,
+    successMsg: "Profile has been updated."
   })
 }

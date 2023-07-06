@@ -19,18 +19,22 @@ const fieldSet1 = [
   {
     name: "userName",
     label: "Username",
+    type: "text"
   },
   {
     name: "password",
     label: "Password",
+    type: "text"
   },
   {
     name: "address",
     label: "Address",
+    type: "text"
   },
   {
     name: "city",
     label: "City",
+    type: "text"
   },
   {
     name: "state",
@@ -41,22 +45,39 @@ const fieldSet1 = [
   {
     name: "pinCode",
     label: "Pin Code",
+    type: "number",
+    validation: {
+      minLength: {
+        value: 6,
+        message: "Pincode number is not valid"
+      },
+    }
   },
   {
     name: "contactNumber",
     label: "Contact Number",
+    type: "number",
+    validation: {
+      minLength: {
+        value: 10,
+        message: "Mobile number is not valid"
+      },
+    }
   },
   {
     name: "email",
     label: "Email",
+    type: "email"
   },
   {
     name: "website",
     label: "Website",
+    type: "text"
   },
   {
     name: "licenseKey",
     label: "License Key",
+    type: "text"
   },
 ];
 

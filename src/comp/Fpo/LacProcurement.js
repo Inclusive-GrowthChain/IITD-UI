@@ -276,7 +276,7 @@ const LacProcurement = () => {
         </div>
       </div>
 
-      {modal.state === "add" && (
+      {(modal.state === "add" || modal.state === "edit") && (
         <AddLacProcurement
           show
           data={modal.data}

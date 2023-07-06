@@ -18,8 +18,6 @@ const btnStyle = {
 
 function RepaymentStructure({ show, data, handleClose }) {
   const { modal, updateModal, closeModal } = useModal()
-
-  // console.log(data)
   return (
     <Modal
       size="xl"
@@ -34,16 +32,16 @@ function RepaymentStructure({ show, data, handleClose }) {
         <div className="repayment_title">
           <div className="row">
             <div className="col-lg-6">
-              <RepaymentContentTitle title="Loan ID" val={data.loanId} />
-              <RepaymentContentTitle title="Farmer Name" val={data.name} />
-              <RepaymentContentTitle title="FPO Name" val={data.fpoName} />
-              <RepaymentContentTitle title="Loan Amount" val={data.grantedAmount} />
+              <RepaymentContentTitle title="Loan ID" val={data?.value?.loanId || data?.loanId} />
+              <RepaymentContentTitle title="Farmer Name" val={data?.value?.name || data?.name} />
+              <RepaymentContentTitle title="FPO Name" val={data?.value?.fpoName || data?.fpoName} />
+              <RepaymentContentTitle title="Loan Amount" val={data?.value?.grantedAmount || data?.grantedAmount} />
             </div>
 
             <div className="col-lg-6">
-              <RepaymentContentTitle title="Loan Period in Months" val={data.loanTenure} />
-              <RepaymentContentTitle title="No of Repayment" val={1} />
-              <RepaymentContentTitle title="Annual Interest Rate" val={`${data.intrest}%`} />
+              <RepaymentContentTitle title="Loan Period in Months" val={data?.value?.loanTenure || data?.loanTenure} />
+              <RepaymentContentTitle title="No of Repayment" val={data?.value?.farmerWindowRepaymentStructure?.length || data?.farmerWindowRepaymentStructure.length} />
+              <RepaymentContentTitle title="Annual Interest Rate" val={`${data?.value?.intrest || data?.intrest}%`} />
             </div>
           </div>
         </div>
@@ -55,36 +53,33 @@ function RepaymentStructure({ show, data, handleClose }) {
                 <th>S.No.</th>
                 <th>Scheduled Repayment Date</th>
                 <th>Scheduled EMI Amount</th>
-                <th>Repayment Status</th>
+                <th>Actual Repayment Date</th>
+                <th>Actual Repayment Amount</th>
+                <th>Balance Amount</th>
               </tr>
             </thead>
             <tbody>
-              {data?.farmerWindowRepaymentStructure?.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.repaymentDate}</td>
-                  <td>{item.emi}</td>
-                  {
-                    !item.completed && (
-                      <td>
-                        <button
-                          style={btnStyle}
-                          onClick={() => updateModal("addRepayment", { repaymentItem: item })}
-                        >
-                          Add Repayment
-                        </button>
-                      </td>
-                    )
-                  }
-                  {
-                    item.completed && (
-                      <td>
-                        <span style={{ color: "green" }}>Paid</span>
-                      </td>
-                    )
-                  }
-                </tr>
-              ))}
+              {
+                data?.value?.farmerWindowRepaymentStructure.map((r, key) => (
+                  <tr key={key}>
+                    <td>{key + 1}</td>
+                    <td>{r.repaymentDate}</td>
+                    <td>{r.emi}</td>
+                    <td>{r.paymentDate ? r.paymentDate : "Pending"}</td>
+                    <td>{r.paidAmount !== 0 ? r.paidAmount : "Pending"}</td>
+                    <td>{r.balance}</td>
+                  </tr>
+                )) || data.farmerWindowRepaymentStructure.map((r, key) => (
+                  <tr key={key}>
+                    <td>{key + 1}</td>
+                    <td>{r.repaymentDate}</td>
+                    <td>{r.emi}</td>
+                    <td>{r.paymentDate ? r.paymentDate : "Pending"}</td>
+                    <td>{r.paidAmount !== 0 ? r.paidAmount : "Pending"}</td>
+                    <td>{r.balance}</td>
+                  </tr>
+                ))
+              }
             </tbody>
           </table>
         </div>

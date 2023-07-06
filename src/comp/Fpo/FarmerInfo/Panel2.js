@@ -1,7 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { getLoanList } from "../../../actions/farmer";
+
 import Loader from "../../Common/Loader";
 import useModal from "../../../hooks/useModal";
+import { useParams } from "react-router";
+import { getApprovedLoanList } from "../../../actions/fpo";
+import RepaymentStructure from "../Modals/FarmerLoan/RepaymentStructure";
+import LoanApplication from "../../Farmer/Modals/Loan/LoanApplication/index"
 
 const inprogressButtonStyle = {
   backgroundColor: "yellow",
@@ -49,9 +53,12 @@ const style = {
 
 function Panel2() {
   const { modal, updateModal, closeModal } = useModal();
+
+  const { farmerId } = useParams()
+
   const { isLoading, data } = useQuery({
     queryKey: ["farmer/loans"],
-    queryFn: getLoanList,
+    queryFn: () => getApprovedLoanList(farmerId),
   });
 
   if (isLoading) return <Loader wrapperCls="loader-main-right" />;
@@ -77,83 +84,100 @@ function Panel2() {
           </thead>
 
           <tbody style={tbodyStyle}>
-            {data?.data
-              .filter((g) => g.status === "approved")
-              .map((g) => (
-                <tr key={g.id}>
-                  <td>{g.loanId}</td>
-                  <td>{g.createdAt.substring(0, 10)}</td>
-                  <td>₹ {g.grantedAmount}</td>
-                  <td>{g.intrest}%</td>
-                  <td>{g.approvalAt.substring(0, 10)}</td>
-                  {g.farmerWindowRepaymentStructure.find(
+            {data?.data?.map((g, ind) => (
+              <tr key={ind}>
+                <td>{g.value.loanId}</td>
+                <td>{g.value.createdAt.substring(0, 10)}</td>
+                <td>₹ {g.value.grantedAmount}</td>
+                <td>{g.value.intrest}%</td>
+                <td>{g.value.approvalAt.substring(0, 10)}</td>
+                {
+                  g.value.farmerWindowRepaymentStructure.find(
                     (f) => f.completed === false
                   ) && (
                     <td>
                       ₹{" "}
                       {
-                        g.farmerWindowRepaymentStructure.find(
+                        g.value.farmerWindowRepaymentStructure.find(
                           (f) => f.completed === false
                         ).balance
                       }
                     </td>
-                  )}
-                  {g.farmerWindowRepaymentStructure.find(
-                    (f) => f.completed === false
-                  ) && (
+                  )
+                }
+                {g.value.farmerWindowRepaymentStructure.find(
+                  (f) => f.completed === false
+                ) && (
                     <td>
                       ₹{" "}
                       {
-                        g.farmerWindowRepaymentStructure.find(
+                        g.value.farmerWindowRepaymentStructure.find(
                           (f) => f.completed === false
                         ).emi
                       }
                     </td>
                   )}
-                  {g.farmerWindowRepaymentStructure.find(
-                    (f) => f.completed === false
-                  ) && (
+                {g.value.farmerWindowRepaymentStructure.find(
+                  (f) => f.completed === false
+                ) && (
                     <td>
                       {
-                        g.farmerWindowRepaymentStructure.find(
+                        g.value.farmerWindowRepaymentStructure.find(
                           (f) => f.completed === false
                         ).repaymentDate
                       }
                     </td>
                   )}
-                  <td>
-                    <button
-                      style={style}
-                      onClick={() => updateModal("LoanApplication", g)}
-                    >
-                      view
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      style={style}
-                      onClick={() => updateModal("showRepaymentLoan", g)}
-                    >
-                      view
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      className="py-0.5"
-                      style={
-                        g.status === "In progress"
-                          ? inprogressButtonStyle
-                          : repaidButtonStyle
-                      }
-                    >
-                      {g.status}
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                <td>
+                  <button
+                    style={style}
+                    onClick={() => {
+                      console.log("Button is clicked from loan application.");
+                      updateModal("LoanApplication", g) 
+                    }}
+                  >
+                    view
+                  </button>
+                </td>
+                <td>
+                  <button
+                    style={style}
+                    onClick={() => {
+                      updateModal("showRepaymentLoan", g)
+                    }}
+                  >
+                    view
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="py-0.5"
+                    style={
+                      g.value.status === "In progress"
+                        ? inprogressButtonStyle
+                        : repaidButtonStyle
+                    }
+                  >
+                    {g.value.status}
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
+      {
+        modal.state === "showRepaymentLoan" &&
+        <RepaymentStructure
+          show
+          data={modal.data}
+          handleClose={closeModal}
+        />
+      }
+
+      {
+        modal.state === "LoanApplication" && <LoanApplication show data={modal.data} handleClose={closeModal} />
+      }
     </div>
   );
 }
