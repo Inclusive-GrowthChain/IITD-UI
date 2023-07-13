@@ -1,5 +1,5 @@
 import { DropdownButton, Dropdown } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useAuthStore } from "../../store/useAuthStore";
@@ -9,9 +9,12 @@ import PersonIcon from "@mui/icons-material/Person";
 import logo from "../../assets/img/logo.png";
 
 function Nav({ title, toggleSidebar }) {
+  const { pathname } = useLocation()
   const queryClient = useQueryClient()
   const navigate = useNavigate()
   const logOut = useAuthStore(s => s.logOut)
+
+  console.log(pathname.split("/")[1]);
 
   const logout = e => {
     e.preventDefault()
@@ -31,14 +34,16 @@ function Nav({ title, toggleSidebar }) {
 
       <div className="logo_img">
         <img src={logo} alt="logo" style={{ width: "35px", height: "35px" }} />
-        <span style={{fontSize: "1.3rem"}}>{title}</span>
+        <span style={{ fontSize: "1.3rem" }}>{title}</span>
       </div>
 
       <div className="nav_items">
         <PersonIcon className="nav_icons" />
 
+        {/* to="/fpo/settings" */}
+
         <DropdownButton id="dropdown-item-button" title="">
-          <Link to="/fpo/settings" style={{ textDecoration: "none" }}>
+          <Link to={`/${pathname.split("/")[1]}/settings`}  style={{ textDecoration: "none" }}>
             <Dropdown.Item as="button">Profile</Dropdown.Item>
           </Link>
 

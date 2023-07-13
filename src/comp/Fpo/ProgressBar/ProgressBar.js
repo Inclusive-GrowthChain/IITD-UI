@@ -22,7 +22,6 @@ const StepProgressBar = ({ page, onPageNumberClick }) => {
         {({ accomplished, index }) => (
           <div
             className={`indexedStep ${accomplished ? "accomplished" : null}`}
-          // onClick={() => onPageNumberClick("1")}
           >
             {index + 1}
           </div>
