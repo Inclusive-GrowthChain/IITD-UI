@@ -24,6 +24,7 @@ function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
             <th>Phone Number</th>
             <th>Aadhaar Number</th>
             <th>View Application</th>
+            <th>Reset Password</th>
           </tr>
         </thead>
 
@@ -47,6 +48,22 @@ function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
                   onClick={() => updateModal("Application", app)}
                 >
                   View
+                </button>
+              </td>
+              <td>
+                {/* {
+                  app && <button
+                    className="py-0.5 table_btn"
+                    style={btnStyle}
+                  >
+                    Reset
+                  </button>
+                } */}
+                <button
+                  className="py-0.5 table_btn"
+                  style={btnStyle}
+                >
+                  Reset
                 </button>
               </td>
             </tr>

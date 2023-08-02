@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 
@@ -10,6 +10,9 @@ import LockSharpIcon from "@mui/icons-material/LockSharp";
 import { login, setTokenToApp } from "../../../actions/auth";
 import { useAuthStore } from "../../../store/useAuthStore";
 import { errorNotify } from "../../../utils/toastifyHlp";
+
+import useModal from "../../../hooks/useModal"
+import Reset_Password from "../Modals/Reset_Password";
 
 const navigationList = {
   fpo: "farmer",
@@ -41,6 +44,7 @@ const errStyle = { marginTop: "-1rem", fontSize: "12px" }
 
 function Form() {
   const [passwordShown, setPasswordShown] = useState(false)
+  const {modal,closeModal,updateModal} = useModal()
   const { register, formState: { errors }, handleSubmit } = useForm({
     defaultValues: {
       userName: "",
@@ -124,11 +128,21 @@ function Form() {
         </p>
       }
 
+      <div className="d-flex justify-content-end" onClick={() => updateModal("ShowSelectRole")}>
+        <Link>
+          Forgot Your Password?
+        </Link>
+      </div>
+
       <div className="submit_btn">
         <button type="submit">
           Log in
         </button>
       </div>
+
+      {
+        modal.state === "ShowSelectRole" && <Reset_Password show closeModal={closeModal} />
+      }
     </form>
   )
 }
