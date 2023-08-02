@@ -31,7 +31,7 @@ function Profile({ loanWindow }) {
 
         <div className="pl-lg-4">
           {
-            list.map(l => (
+            list?.map(l => (
               <div key={l.name} className="row">
                 <div className="col-lg-6">
                   <div className="form-group focused">

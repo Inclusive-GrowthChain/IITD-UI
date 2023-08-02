@@ -35,14 +35,14 @@ function PendingLoans({ data = [], theadStyle, tbodyStyle, setLoanWindow }) {
 
             <tbody style={tbodyStyle}>
               {
-                data.map(loan => (
+                data?.map((loan) => (
                   <tr key={loan.id}>
-                    <td>{loan.loanId}</td>
-                    <td>{loan.userId}</td>
-                    <td>{loan.name}</td>
-                    <td>{loan.mobile}</td>
-                    <td>{loan.createdAt?.substring(0, 10)}</td>
-                    <td>{loan.requestedAmount}</td>
+                    <td>{loan?.loanId}</td>
+                    <td>{loan?.userId}</td>
+                    <td>{loan?.name}</td>
+                    <td>{loan?.mobile}</td>
+                    <td>{loan?.createdAt?.substring(0, 10)}</td>
+                    <td>{loan?.requestedAmount}</td>
                     <td>
                       <button
                         style={btnStyle}
@@ -54,6 +54,7 @@ function PendingLoans({ data = [], theadStyle, tbodyStyle, setLoanWindow }) {
                   </tr>
                 ))
               }
+
             </tbody>
           </table>
         </div>

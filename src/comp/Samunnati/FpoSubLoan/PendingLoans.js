@@ -20,11 +20,11 @@ function PendingLoans({ data = [], theadStyle, tbodyStyle, btnStyle, setLoanWind
 
             <tbody style={tbodyStyle}>
               {
-                data.map(loan => (
-                  <tr key={loan.id}>
-                    <td>{loan.loanId}</td>
-                    <td>{loan.createdAt.substring(0, 10)}</td>
-                    <td>{loan.requestedAmount}</td>
+                data?.map(loan => (
+                  <tr key={loan?.id}>
+                    <td>{loan?.loanId}</td>
+                    <td>{loan?.createdAt.substring(0, 10)}</td>
+                    <td>{loan?.requestedAmount}</td>
                     <td>
                       <button
                         style={btnStyle}

@@ -43,7 +43,7 @@ function LoanHistory({ fpoId, grantedAmount, consumedWindowLoanAmount, theadStyl
             </thead>
             <tbody style={tbodyStyle}>
               {
-                data?.map(loan => (
+                data?.data?.map(loan => (
                   <tr key={loan?.value?.loanId}>
                     <td>{loan?.value?.loanId}</td>
                     <td>{loan?.value?.createdAt?.substring(0, 10)}</td>

@@ -68,7 +68,7 @@ function FarmerSubLoan() {
             <div className="tabs_wrapper">
               <ul className="nav-tab">
                 {
-                  tabs.map(t => (
+                  tabs?.map(t => (
                     <TabNavItem
                       {...t}
                       key={t.id}

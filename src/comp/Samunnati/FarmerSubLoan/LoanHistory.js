@@ -26,7 +26,7 @@ function LoanHistory({ fpoId, grantedAmount, consumedWindowLoanAmount, theadStyl
     queryKey: ["loanhistory", "farmer"],
     queryFn: () => getLoanHistory({ userId: fpoId, type: "farmer" }),
   })
-
+  
   if (isLoading) return <Loader className="h-100" />
 
   return (
@@ -48,12 +48,12 @@ function LoanHistory({ fpoId, grantedAmount, consumedWindowLoanAmount, theadStyl
 
             <tbody style={tbodyStyle}>
               {
-                data?.map(loan => (
+               data?.data?.map(loan => (
                   <tr key={loan?.value?.loanId}>
                     <td>{loan?.value?.loanId}</td>
-                    <td>{loan.userId}</td>
-                    <td>{loan.name}</td>
-                    <td>{loan.mobile}</td>
+                    <td>{loan?.userId}</td>
+                    <td>{loan?.name}</td>
+                    <td>{loan?.mobile}</td>
                     <td>{loan?.value?.loanCreatedAt?.substring(0, 10)}</td>
                     <td>{loan?.value?.loanAmount}</td>
                     <td>
