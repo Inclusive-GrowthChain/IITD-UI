@@ -12,7 +12,7 @@ import { useAuthStore } from "../../../store/useAuthStore";
 import { errorNotify } from "../../../utils/toastifyHlp";
 
 import useModal from "../../../hooks/useModal"
-import Reset_Password from "../Modals/Reset_Password";
+import ResetPassword from "../Modals/ResetPassword";
 
 const navigationList = {
   fpo: "farmer",
@@ -141,7 +141,7 @@ function Form() {
       </div>
 
       {
-        modal.state === "ShowSelectRole" && <Reset_Password show closeModal={closeModal} />
+        modal.state === "ShowSelectRole" && <ResetPassword show closeModal={closeModal} />
       }
     </form>
   )

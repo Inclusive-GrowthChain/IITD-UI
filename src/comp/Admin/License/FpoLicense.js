@@ -17,7 +17,7 @@ const applyBtnStyle = {
   padding: "3px 4px",
 };
 
-const Fpo_License = () => {
+const FpoLicense = () => {
   const { register, handleSubmit, reset } = useForm();
   const queryClient = useQueryClient();
 
@@ -152,4 +152,4 @@ const Fpo_License = () => {
   );
 };
 
-export default Fpo_License;
+export default FpoLicense;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TabNavItem } from "../UIComp/Tabs";
-import Fpo_License from "./License/Fpo_License";
+import FpoLicense from "./License/FpoLicense";
 import Nisa from "../Admin/License/Nisa";
 import Samunnati from "../Admin/License/Samunnati";
 import CorporateClient from "../Admin/License/CorporateClient";
@@ -10,7 +10,7 @@ const LicenseKey = () => {
 
   const uiComponent = () => {
     if (activeTab === "tab1") {
-      return <Fpo_License />;
+      return <FpoLicense />;
     } else if (activeTab === "tab2") {
       return <Nisa />;
     } else if (activeTab === "tab3") {

@@ -27,14 +27,14 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
     }
   })
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: makePaymentToFpo,
     onSuccess: () => {
       queryClient.invalidateQueries("auction/")
       closeBidStatus();
     }
   })
-
+  // eslint-disable-next-line
   useEffect(() => {
     outerbid.bids.forEach((bid) => {
       if (bid.status) {

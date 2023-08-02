@@ -1,9 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { placeBidForAuction } from "../../../../actions/fpo";
-import { useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getFpoList } from "../../../../actions/user";
+import { useState} from "react";
 import Loader from "../../../Common/Loader";
 import { useAuthStore } from "../../../../store/useAuthStore";
 

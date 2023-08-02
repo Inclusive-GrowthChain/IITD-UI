@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal"
 
-const Reset_Password = ({ show, closeModal }) => {
+const ResetPassword = ({ show, closeModal }) => {
     return (
         <Modal size="lg" show={show} onHide={closeModal} centered>
             <Modal.Header closeButton>Reset Password</Modal.Header>
@@ -28,4 +28,4 @@ const Reset_Password = ({ show, closeModal }) => {
     )
 }
 
-export default Reset_Password
+export default ResetPassword

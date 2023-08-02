@@ -21,7 +21,7 @@ const PageThree = ({ onButtonClick, outerbid, handleClose }) => {
 
   const queryClient = useQueryClient()
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate} = useMutation({
     mutationFn: rejectTestReports,
     onSuccess: () => {
       queryClient.invalidateQueries("auction/")
