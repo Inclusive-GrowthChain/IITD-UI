@@ -4,6 +4,7 @@ import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTo
 import CreditScoreTwoToneIcon from '@mui/icons-material/CreditScoreTwoTone';
 import PaymentsTwoToneIcon from '@mui/icons-material/PaymentsTwoTone';
 import FileCopyTwoToneIcon from '@mui/icons-material/FileCopyTwoTone';
+import SpaIcon from "@mui/icons-material/Spa";
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
 import HelpTwoToneIcon from '@mui/icons-material/HelpTwoTone';
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -30,6 +31,11 @@ const list = [
     title: "Loan",
     icon: <PaymentsTwoToneIcon className="icon" />,
     to: '/farmer/loan'
+  },
+  {
+    title: "Place a Requirement",
+    icon: <SpaIcon className='icon'/>,
+    to: "/farmer/requirement"
   },
   {
     title: "Transaction History",

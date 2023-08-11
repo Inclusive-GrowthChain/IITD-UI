@@ -32,6 +32,24 @@ export function fpoSignup(data) {
   })
 }
 
+export function forgotPassword(data) {
+
+  return sendApiReq({
+    method: "post",
+    url: endPoints.forgotPassword,
+    data
+  })
+}
+
+export function updatePassword(data,id) {
+  console.log(data,id)
+  return sendApiReq({
+    method: "patch",
+    url: endPoints.updatePassword + `/${id}`,
+    data
+  })
+}
+
 export function nisaSignup(data) {
   return sendApiReq({
     method: "post",

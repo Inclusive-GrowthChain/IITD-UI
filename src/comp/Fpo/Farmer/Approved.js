@@ -25,6 +25,7 @@ function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
             <th>Aadhaar Number</th>
             <th>View Application</th>
             <th>Reset Password</th>
+            <th>Farmer Password</th>
           </tr>
         </thead>
 
@@ -65,6 +66,9 @@ function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
                 >
                   Reset
                 </button>
+              </td>
+              <td>
+                pahdioudf4454
               </td>
             </tr>
           ))}

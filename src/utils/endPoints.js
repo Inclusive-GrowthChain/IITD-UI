@@ -2,6 +2,8 @@ export const root = {
   // baseUrl: "http://172.18.13.104:3000/api/", //Local URL
   baseUrl: "http://3.7.253.48:3000/api", //Production URL
   imgUrl: "http://3.7.253.48:3000",
+  // baseUrl: "http://172.18.8.65:3000/api",
+  // imgUrl: "http://172.18.8.65:3000/"
 };
 
 const endPoints = {
@@ -19,6 +21,8 @@ const endPoints = {
   uploadImg: "/document",
   auction: "/auction",
   user: "/user",
+  forgotPassword: "/forgotpassword",
+  updatePassword: "/user/updatepassword",
 
   admin: {
     getLicenses: "/licenses"

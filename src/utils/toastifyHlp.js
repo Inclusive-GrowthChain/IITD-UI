@@ -8,7 +8,8 @@ export const successNotify = (msg, position = "") => {
   });
 };
 
-export const errorNotify = (msg = "Something went wrong, try again later", position = "") => {
+export const errorNotify = (msg, position = "") => {
+  msg = msg || "Something went wrong, try again later"
   toast.error(msg, {
     position: position || toast.POSITION.TOP_CENTER,
     autoClose: 2000,

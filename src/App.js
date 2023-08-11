@@ -9,6 +9,7 @@ import { cookies } from "./utils/sendApiReq";
 import Loader from "./comp/Common/Loader";
 
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
+import RequirementGathering from "./comp/Fpo/RequirementGathering";
 
 const Register = lazy(() => import("./comp/Auth/Register"));
 const Login = lazy(() => import("./comp/Auth/Login"));
@@ -28,6 +29,7 @@ const FarmerSettings = lazy(() => import("./comp/Farmer/Settings"));
 const FarmerStore = lazy(() => import("./comp/Farmer/Store"));
 const FarmerLoan = lazy(() => import("./comp/Farmer/Loan"));
 const FarmerWrapper = lazy(() => import("./comp/Farmer"));
+const FarmerInputRequirement = lazy(() => import("./comp/Farmer/InputRequirement"))
 
 const FpoCorporateCustomer = lazy(() => import("./comp/Fpo/CorporateCustomer"));
 const FpoLacProcurement = lazy(() => import("./comp/Fpo/LacProcurement"));
@@ -73,7 +75,7 @@ function App() {
   const logIn = useAuthStore((s) => s.logIn);
   const navigate = useNavigate();
 
-  
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -138,6 +140,7 @@ function App() {
             <Route path="support" element={<TemplateSupport />} />
             <Route path="store" element={<FarmerStore />} />
             <Route path="loan" element={<FarmerLoan />} />
+            <Route path="requirement" element={<FarmerInputRequirement />} />
           </Route>
         </Route>
 
@@ -160,6 +163,7 @@ function App() {
             <Route path="farmer" element={<FpoFarmer />} />
             <Route path="fpoloan" element={<FpoLoan />} />
             <Route path="store" element={<FpoStore />} />
+            <Route path="requirement-gathering" element={<RequirementGathering />} />
           </Route>
         </Route>
 

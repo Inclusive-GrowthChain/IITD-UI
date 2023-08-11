@@ -371,53 +371,7 @@ const Settings = () => {
                         </div>
                       </TabContent>
                       <TabContent id="tab3" activeTab={activeTab}>
-                        <div className="profile_1 mt-4">
-                          <div className="pl-lg-4">
-                            <form>
-                              <div className="col">
-                                <div className="col-lg-6">
-                                  <div className="form-group focused">
-                                    <label className="form-control-label text-black">
-                                      Enter the Old Password
-                                    </label>
-                                    <input
-                                      type="text"
-                                      className="form-control form-control-alternative"
-                                      required
-                                    />
-                                  </div>
-                                </div>
-                                <div className="col-lg-6">
-                                  <div className="form-group focused">
-                                    <label className="form-control-label text-black">
-                                      Enter the new Password
-                                    </label>
-                                    <input
-                                      type="text"
-                                      className="form-control form-control-alternative"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                              <div
-                                className=""
-                                style={{ display: "flex", justifyContent: "start" }}
-                              >
-                                <button
-                                  className="btn btn-info mt-4"
-                                  style={{
-                                    backgroundColor: "#064420",
-                                    border: "none",
-                                    color: "#fff",
-                                  }}
-                                  type="submit"
-                                >
-                                  Update Password
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
+                        <updateProfile userId={userId} />
                       </TabContent>
                     </div>
                   </div>
