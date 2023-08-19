@@ -34,8 +34,8 @@ function RepaymentStructure({ show, data, handleClose }) {
           </div>
         </div>
 
-        <div className="mt-5">
-          <table style={{ border: "1px solid #eee" }}>
+        <div className="mt-5 table-responsive">
+          <table className="table" style={{ border: "1px solid #eee" }}>
             <thead style={{ backgroundColor: "#eee" }}>
               <tr>
                 <th>S.No.</th>
@@ -51,7 +51,7 @@ function RepaymentStructure({ show, data, handleClose }) {
               {
                 data?.farmerWindowRepaymentStructure.map((r, key) => (
                   <tr key={key}>
-                    <td>{key+1}</td>
+                    <td>{key + 1}</td>
                     <td>{r.repaymentDate}</td>
                     <td>{r.emi}</td>
                     <td>{r.paymentDate ? r.paymentDate : "Pending"}</td>
