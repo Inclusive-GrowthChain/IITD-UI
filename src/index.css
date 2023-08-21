@@ -1,0 +1,645 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif !important;
+}
+
+button:disabled {
+  background-color: grey !important;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+body::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+body::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.auth-bg {
+  background-image: url(./assets/img/bg-img.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 625px;
+}
+
+.header {
+  box-sizing: border-box;
+  flex-direction: row;
+  flex-basis: 100%;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  max-width: 100%;
+  background-color: #064420;
+  height: 80px;
+}
+
+.header_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 5px;
+}
+
+.header_wrapper_2 {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: right;
+  top: -65px;
+  height: 80px;
+  z-index: 98;
+}
+
+.header>.header_wrapper>.logo_container {
+  position: relative;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.375rem;
+  font-weight: bold;
+}
+
+.header>.header_wrapper>.logo_container>.logo {
+  width: 65px;
+  height: 65px;
+  position: relative;
+  left: -10px;
+}
+
+.header>.header_wrapper_2>.account_wrapper, .header>.header_wrapper_3>.hamburger_container>.hamburger_menu_wrapper_item>.account_wrapper {
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  background-color: #25864d;
+  padding: 7px 10px;
+  border-radius: 8px;
+  width: 150px;
+  height: 38px;
+  text-align: center;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+  margin-right: 20px;
+  top: -20px;
+}
+
+.header>.header_wrapper_3>.hamburger_container>.hamburger_menu_wrapper_item>.account_wrapper {
+  top: 0;
+}
+
+.header>.header_wrapper_2>.account_wrapper>.account_wrapper_link, .header>.header_wrapper_3>.hamburger_container>.hamburger_menu_wrapper_item>.account_wrapper>.account_wrapper_link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.header>.header_wrapper_2>.account_wrapper:hover {
+  background-color: #117039;
+  transition: all 0.3s ease-in;
+}
+
+.header_wrapper_3 {
+  display: flex;
+  align-items: left;
+  justify-content: flex-start;
+  position: relative;
+  top: -145px;
+  height: 150px;
+}
+
+.header_wrapper_3>.hamburger_menu {
+  position: relative;
+  top: 25px;
+  left: 20px;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.hamburger_container {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #064420;
+  z-index: 99;
+  padding: 0 20px;
+}
+
+.hamburger_menu_wrapper_item {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.left-side {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  margin: 0px;
+  flex-basis: 100%;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  position: relative;
+  top: 10px;
+}
+
+.widget_auth {
+  position: relative;
+  display: block;
+  background-color: #fff;
+  height: 100%;
+  width: 25%;
+  padding: 0 70px;
+  overflow: hidden;
+  border: none rgb(230, 235, 241);
+  border-radius: 8px;
+  box-shadow: rgb(0 0 0 / 15%) 0px 2px 8px;
+}
+
+.hello {
+  margin-top: 40px;
+  color: #2a2739;
+}
+
+.hello>h3 {
+  position: relative;
+  right: 6px;
+  padding: 5px;
+  font-weight: bolder;
+  font-size: 2rem;
+  line-height: 1.33;
+  margin-bottom: 22px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.hello>p {
+  position: relative;
+  bottom: 4.7rem;
+  left: 17rem;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.input_text {
+  position: relative;
+  /* margin-top: 20px; */
+}
+
+.input_text>label {
+  color: rgb(89, 89, 89);
+  font-size: 18px;
+  line-height: 1.4375em;
+  font-weight: 400;
+}
+
+.input_text>input {
+  height: 45px;
+  width: 100%;
+  border: none;
+  outline: 0;
+  padding: 0 35px;
+  font-size: 14px;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+}
+
+.input_text>input:hover {
+  border-color: #333;
+}
+
+.input_text>input {
+  height: 45px;
+  width: 100%;
+  border: none;
+  outline: 0;
+  padding: 0 35px;
+  font-size: 14px;
+  padding-right: 33px;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+}
+
+.pass__contant {
+  display: flex;
+  float: right;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.submit_btn {
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.submit_btn>button {
+  height: 40px;
+  width: 35%;
+  text-align: center;
+  border: none;
+  outline: 0;
+  background-color: #064420;
+  border-radius: 5px;
+  transition: all 0.5s;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.left-side>.right-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.right-side {
+  height: 100vh;
+}
+
+.main {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.register>.account_wrapper {
+  text-decoration: none;
+  color: #333;
+}
+
+.register .acct-create {
+  text-decoration: none;
+  color: #2a2739;
+  font-size: 14px;
+}
+
+.register .acct-create:hover {
+  color: #50c878;
+}
+
+.register .forget-pass {
+  text-decoration: none;
+  color: #2a2739;
+  font-size: 14px;
+}
+
+.register .forget-pass:hover {
+  color: #50c878;
+}
+
+.footer {
+  display: block;
+  position: relative;
+  top: 80px;
+}
+
+.footer>p {
+  text-align: center;
+  color: #2a2739;
+}
+
+/*---- register ----*/
+#main-registration-container {
+  background-image: url(./assets/img/bg-img.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: fit-content !important;
+  display: flex;
+  justify-content: center;
+}
+
+#register {
+  width: 40%;
+  border: 1px solid #d6d7da;
+  padding: 20px 1rem;
+  line-height: 16px;
+  color: #333333;
+  font-size: 14px;
+  background-color: rgba(255, 255, 255, 0.6);
+  position: relative;
+  top: 40px;
+  height: fit-content;
+  box-shadow: 0 0 9px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+}
+
+#register>label>input {
+  display: block;
+  margin-bottom: 10px;
+  width: 90%;
+}
+
+#register>h3 {
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
+div>label {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0px;
+}
+
+#register>form {
+  margin-top: 40px;
+  position: relative;
+}
+
+#register>form>input {
+  padding: 10px;
+  border: 1px solid #bdc7d8;
+  border-radius: 5px;
+  /* margin-top: 10px; */
+  margin: 10px 0px;
+}
+
+#register>form>.button {
+  width: 50%;
+  text-align: center;
+  border: none;
+  outline: 0;
+  background-color: #e8e8e8;
+  border-radius: 30px;
+  transition: all 0.5s;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  position: relative;
+  left: 55px;
+}
+
+#register>form>.bank-details {
+  margin-top: 30px;
+  background-color: #eee;
+  padding: 15px 5px;
+}
+
+.upload-btn {
+  position: relative;
+  left: 195px;
+}
+
+#register>form>.fpo_name {
+  margin-top: 30px;
+  background-color: #eee;
+  padding: 15px 5px;
+}
+
+#register>form>label>select {
+  width: 100%;
+  height: 40px;
+  margin-top: 10px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+}
+
+.btn-submit {
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn-submit>button {
+  height: 40px;
+  width: 100%;
+  text-align: center;
+  border: none;
+  outline: 0;
+  background-color: #064420;
+  border-radius: 10px;
+  transition: all 0.5s;
+  cursor: pointer;
+  font-size: 14px;
+  color: #fff;
+}
+
+.input_text>input {
+  margin-top: 10px;
+}
+
+/*---- register end ----*/
+@media screen and (max-width: 1980px) {
+
+  /* .auth-bg {
+    height: auto;
+    min-height: 929px;
+  } */
+  #main-registration-container {
+    height: 1400px;
+  }
+
+  #register {
+    position: relative;
+    width: 50%;
+  }
+
+  .left-side {
+    position: relative;
+    top: 100px;
+  }
+
+  .footer {
+    position: relative;
+    top: 10rem;
+  }
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+  .auth-bg {
+    height: 670px;
+  }
+
+  .header {
+    height: 70px;
+  }
+
+  .header_wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 15px;
+  }
+
+  .header_wrapper_3 {
+    top: -45px;
+  }
+
+  .header_wrapper_3>.hamburger_menu {
+    top: 45px;
+  }
+
+  .header h2 {
+    font-size: 11px;
+    position: relative;
+    left: -3rem;
+  }
+
+  .header>.header_wrapper>.logo_container>.logo {
+    width: 35px;
+    height: 35px;
+    position: relative;
+    left: -0.5rem;
+  }
+
+  .header>.header_wrapper_2>.account_wrapper {
+    position: relative;
+    left: 3.5rem;
+    top: 2px;
+    width: 30%;
+    font-size: 11px;
+    padding: 6px 0px;
+    height: 30px;
+  }
+
+  .left-side {
+    position: relative;
+    top: 90px;
+    padding: 0 10px;
+  }
+
+  .widget_auth {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .footer {
+    position: relative;
+    top: 10rem;
+  }
+
+  #main-registration-container {
+    height: fit-content;
+    padding: 0 15px;
+  }
+
+  #register {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .widget_auth {
+    width: 80%;
+    padding: 0 10px;
+  }
+
+  .hamburger_container {
+    top: 80px;
+  }
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hamburger_container {
+    top: 80px;
+  }
+
+  .widget_auth {
+    width: 70%;
+    padding: 0 40px;
+  }
+}
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+@media (min-width: 1025px) and (max-width: 1920px) {
+  .auth-bg {
+    height: auto;
+    min-height: 929px;
+  }
+
+  .hamburger_container {
+    top: 80px;
+  }
+
+  .left-side {
+    position: relative;
+    top: 100px;
+  }
+
+  .footer {
+    position: relative;
+    top: 10rem;
+  }
+}
+
+/* 
+  ##Device = Laptops, Desktops
+  ##LargeScreen 4K = B/w 1930px to 2048px
+*/
+@media (min-width: 1930px) and (max-width: 2048px) {
+  .auth-bg {
+    height: auto;
+    min-height: 1035px;
+  }
+
+  .left-side {
+    position: relative;
+    top: 100px;
+  }
+
+  .footer {
+    position: relative;
+    top: 10rem;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1520px) {
+  .widget_auth {
+    width: 50%;
+    height: 530px;
+  }
+}
+
+@media (min-width: 1521px) and (max-width: 1920px) {
+  .widget_auth {
+    width: 27%;
+    height: 530px;
+  }
+}

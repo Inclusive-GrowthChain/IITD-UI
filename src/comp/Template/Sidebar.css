@@ -1,0 +1,18 @@
+/* Responsiveness */
+
+@media screen and (max-width: 768px) {
+    .hamburger_menu {
+        display: block;
+        cursor: pointer;
+    }
+
+    .app-wrapper {
+        grid-template-columns: 0px 1fr;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .sidebar_wrapper {
+        display: block !important;
+    }
+}
