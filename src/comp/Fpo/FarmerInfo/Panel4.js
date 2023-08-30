@@ -20,6 +20,8 @@ function Panel4({
     queryFn: () => getSaleTransactions(farmerId),
   });
 
+  console.log(data)
+
   const applyBtnStyle = {
     backgroundColor: "#064420",
     border: "none",
@@ -79,15 +81,9 @@ function Panel4({
                   >
                     {data?.map((d) => (
                       <tr key={d.uniqueId}>
-                        <td>{d.uniqueId}</td>
-                        {d.transactions?.map((date, ind) => {
-                          return (
-                            <React.Fragment key={ind}>
-                              <td>{date.dateOfSale}</td>
-                              <td>{date.total}</td>
-                            </React.Fragment>
-                          );
-                        })}
+                        <td>{d?.uniqueId}</td>
+                        <td>{d?.dateOfSale}</td>
+                        <td>{d?.totalAmount}</td>
                         <td>
                           <button
                             className="loan_button"

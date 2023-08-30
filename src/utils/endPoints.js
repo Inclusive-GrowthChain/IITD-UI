@@ -41,7 +41,8 @@ const endPoints = {
     loans: "/loanwindow/loan?type=farmer",
     produce: "/farmer",
     purchaseTransaction : "/fpo/transaction/api/transactions",
-    updateProfile: "/profile"
+    updateProfile: "/profile",
+    placeRequirements: "/farmer/requirements"
   },
 
   // Fpo

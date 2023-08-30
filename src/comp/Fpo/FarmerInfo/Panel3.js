@@ -76,14 +76,8 @@ function Panel3({ handleShowAddPurchase }) {
                     {data?.map((d, ind) => (
                       <tr key={ind}>
                         <td>{d.uniqueId}</td>
-                        {d.transactions?.map((date, ind) => {
-                          return (
-                            <React.Fragment key={ind}>
-                              <td key={ind}>{date.dateOfPurchase}</td>
-                              <td>{date.total}</td>
-                            </React.Fragment>
-                          );
-                        })}
+                        <td>{d?.dateOfPurchase}</td>
+                        <td>{d?.totalAmount}</td>
                         <td>
                           <button
                             className="loan_button"

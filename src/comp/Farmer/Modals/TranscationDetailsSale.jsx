@@ -22,12 +22,10 @@ export const TranscationDetailsSale = ({ show, data, handleClose }) => {
                       }}
                     >
                       <tr>
-                        <th>Date of Sale</th>
                         <th>Item Name</th>
                         <th>Quantity</th>
                         <th>Rate/Unit</th>
                         <th>Amount</th>
-                        <th>Total Amount</th>
                         <th>Remarks</th>
                       </tr>
                     </thead>
@@ -42,12 +40,10 @@ export const TranscationDetailsSale = ({ show, data, handleClose }) => {
                       {data.data.transactions?.map((date, ind) => {
                         return (
                           <tr key={ind}>
-                            <td>{date.dateOfSale}</td>
                             <td>{date.itemName}</td>
                             <td>{date.quantity}</td>
                             <td>{date.ratePerUnit}</td>
                             <td>{date.amount}</td>
-                            <td>{date.total}</td>
                             <td>{date.remarks}</td>
                           </tr>
                         );

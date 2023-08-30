@@ -14,7 +14,7 @@ function Nav({ title, toggleSidebar }) {
   const navigate = useNavigate()
   const logOut = useAuthStore(s => s.logOut)
 
-  console.log(pathname.split("/")[1]);
+  // console.log(pathname.split("/")[1]);
 
   const logout = e => {
     e.preventDefault()

@@ -1,6 +1,8 @@
-import React from 'react'
+import { useQuery } from '@tanstack/react-query'
 import useModal from '../../hooks/useModal'
 import PlaceRequirement from './Modals/PlaceRequirement'
+import { getPlacedRequirements } from '../../actions/farmer'
+import Loader from '../Common/Loader'
 
 const InputRequirement = () => {
     const { modal, closeModal, updateModal } = useModal()
@@ -14,6 +16,14 @@ const InputRequirement = () => {
         padding: "5px 8px"
     }
 
+    const { isLoading, data } = useQuery({
+        queryFn: getPlacedRequirements,
+        queryKey: ["getPlacedRequirements"]
+    })
+
+    if (isLoading) return <Loader wrapperCls="loader-main-right" />
+
+    console.log(data)
     return (
         <>
             <div className="itemContainer">
@@ -57,11 +67,23 @@ const InputRequirement = () => {
                                             <th>Input Type</th>
                                             <th>Brand</th>
                                             <th>Quantity</th>
-                                            <th>Month</th>
+                                            <th>Months</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        {
+                                            data?.length > 0 && data?.map((item) => {
+                                                return (
+                                                    <tr key={item?._id}>
+                                                        <td>{item?.updatedAt}</td>
+                                                        <td>{item?.inputType}</td>
+                                                        <td>{item?.brand}</td>
+                                                        <td>{item?.quantity}</td>
+                                                        <td>{item?.month}</td>
+                                                    </tr>
+                                                )
+                                            })
+                                        }
                                     </tbody>
                                 </table>
                             </div>

@@ -2,6 +2,8 @@ import React from 'react'
 import { Modal } from 'react-bootstrap'
 import { months } from '../../../constants/Date'
 import { useForm } from 'react-hook-form'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { placeRequirement } from '../../../actions/farmer'
 
 const PlaceRequirement = ({ show, closeModal }) => {
     const { register, reset, handleSubmit } = useForm({
@@ -9,11 +11,20 @@ const PlaceRequirement = ({ show, closeModal }) => {
             inputType: "",
             brand: "",
             quantity: "",
-            unit: "",
             month: ""
         }
     })
 
+    const queryClient = useQueryClient()
+
+    const {mutate} = useMutation({
+        mutationFn: placeRequirement,
+        onSuccess : () => {
+            queryClient.invalidateQueries("getPlacedRequirements")
+            reset()
+            closeModal()
+        } 
+    })
 
     const applyBtnStyle = {
         backgroundColor: "#064420",
@@ -28,7 +39,7 @@ const PlaceRequirement = ({ show, closeModal }) => {
         <Modal show={show} onHide={closeModal}>
             <Modal.Header closeButton>Enter details</Modal.Header>
             <Modal.Body>
-                <form onSubmit={handleSubmit(console.log)}>
+                <form onSubmit={handleSubmit(mutate)}>
                     <div className="row m-2">
                         <div className="col-lg-6">
                             <label>Input Type</label>
@@ -37,7 +48,7 @@ const PlaceRequirement = ({ show, closeModal }) => {
                             <select {...register("inputType")} className='form-control' required>
                                 <option value="">Select</option>
                                 <option value="Brood Lac">Brood Lac</option>
-                                <option value="Pesticide">Pesticide</option>
+                                <option value="Pesticide">Nylon Bag</option>
                                 <option value="Insecticide">Insecticide</option>
                             </select>
                         </div>
@@ -69,11 +80,6 @@ const PlaceRequirement = ({ show, closeModal }) => {
                                     className="form-control"
                                     placeholder="Enter the Quantity"
                                 />
-                                <select {...register('unit')} className='form-control' required>
-                                    <option value="">Select in Kg/L</option>
-                                    <option value="Kg">Kg</option>
-                                    <option value="L">L</option>
-                                </select>
                             </div>
                         </div>
                     </div>
@@ -93,7 +99,7 @@ const PlaceRequirement = ({ show, closeModal }) => {
                         </div>
                     </div>
                     <button
-                        className="loan_button"
+                        className="loan_button my-2"
                         style={applyBtnStyle}
                     >
                         Submit

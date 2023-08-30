@@ -70,7 +70,23 @@ export function applyLoan(data) {
   })
 }
 
-export function updateProfile(data,userType,userId) {
+
+export function placeRequirement(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.farmer.placeRequirements,
+    data,
+    successMsg: "Requirement placed successfully!"
+  })
+}
+
+export function getPlacedRequirements() {
+  return sendApiReq({
+    url: endPoints.farmer.placeRequirements,
+  })
+}
+
+export function updateProfile(data, userType, userId) {
   return sendApiReq({
     method: "patch",
     url: endPoints.farmer.updateProfile + `/${userType}/${userId}`,

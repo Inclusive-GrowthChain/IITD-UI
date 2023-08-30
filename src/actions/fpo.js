@@ -28,10 +28,12 @@ export function addFpoSale(data) {
   });
 }
 
-export function addPurchase(data_passed, farmerId) {
+export function addPurchase(data_passed, farmerId, totalAmount) {
   const restructuredData = {
-    transactions: [data_passed],
+    transactions: data_passed,
+    totalAmount,
     type: "purchase",
+    dateOfPurchase: new Date().toLocaleString(),
     farmerId: farmerId,
   };
 
@@ -43,12 +45,15 @@ export function addPurchase(data_passed, farmerId) {
   });
 }
 
-export function addSale(data_passed, farmerId) {
+export function addSale(data_passed, farmerId, totalAmount) {
   const restructuredData = {
-    transactions: [data_passed],
+    transactions: data_passed,
+    totalAmount,
     type: "sale",
+    dateOfSale: new Date().toLocaleString(),
     farmerId: farmerId,
   };
+  // console.log(restructuredData)
 
   return sendApiReq({
     method: "post",
@@ -164,7 +169,7 @@ export function getLoanwindow({ windowType = "farmer" }) {
 export function getLoanHistory({ type = "farmer", userId }) {
   return sendApiReq({
     url: endPoints.loanHistory + `?userId=${userId}&type=${type}&status=approved`
-    
+
   });
 }
 

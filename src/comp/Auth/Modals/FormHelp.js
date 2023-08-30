@@ -93,6 +93,7 @@ function File({
         className="form-control"
         accept="image/*"
         onChange={onChange}
+        multiple="multiple"
       />
 
       <input
@@ -127,14 +128,22 @@ function FormHelp({ fields = [], register, errors, setValue, clearErrors }) {
             />
           }
 
-          return <Input
+          return f.name === 'website' || f.name === "panCardNumber"  ? <Input
             {...f}
             type={f.type}
             key={f.name}
             error={errors[f.name]}
             register={register}
-            validation={{ required: `${f.label} is required`, ...f.validation }}
-          />
+          /> :
+            <Input
+              {...f}
+              type={f.type}
+              key={f.name}
+              error={errors[f.name]}
+              register={register}
+              validation={{ required: `${f.label} is required`, ...f.validation }}
+            />
+
         })
       }
     </>
