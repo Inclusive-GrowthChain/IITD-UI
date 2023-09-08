@@ -137,7 +137,7 @@ function FormHelp({ fields = [], register, errors, setValue, clearErrors }) {
             />
           }
 
-          return f.name === 'website' || f.name === "panCardNumber"  ? <Input
+          return f.name === 'website' ||  f.name === "panCardNumber"  ? <Input
             {...f}
             type={f.type}
             key={f.name}

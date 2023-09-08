@@ -12,6 +12,7 @@ const Settings = () => {
   const [activeTab, setActiveTab] = useState("tab1");
   const fpo = useAuthStore(s => s.userDetails)
   const { modal, updateModal, closeModal } = useModal()
+  console.log(fpo)
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
 
@@ -292,7 +293,7 @@ const Settings = () => {
                                         onClick={(e) => {
                                           e.preventDefault();
                                           const imageData = {
-                                            image: fpo.panImage,
+                                            image: fpo.panCardImage,
                                             title: "PAN Card Image",
                                           }
                                           updateModal("imageViewer", imageData)
@@ -457,7 +458,7 @@ const Settings = () => {
                                         onClick={(e) => {
                                           e.preventDefault();
                                           const imageData = {
-                                            image: fpo.bylawsImage,
+                                            image: fpo.copyOfByLawsImage,
                                             title: "Copy of Bylaws"
                                           }
                                           updateModal("imageViewer", imageData)
@@ -494,7 +495,7 @@ const Settings = () => {
                                         onClick={(e) => {
                                           e.preventDefault();
                                           const imageData = {
-                                            image: fpo.incorporationCertifcateImage,
+                                            image: fpo.certificateOfIncorporationImage,
                                             title: "Incorporation Certificate"
                                           }
                                           updateModal("imageViewer", imageData)
@@ -531,7 +532,7 @@ const Settings = () => {
                                         onClick={(e) => {
                                           e.preventDefault();
                                           const imageData = {
-                                            image: fpo.gstCertificate,
+                                            image: fpo.gstCertificateImage,
                                             title: "GST Certificate"
                                           }
                                           updateModal("imageViewer", imageData)

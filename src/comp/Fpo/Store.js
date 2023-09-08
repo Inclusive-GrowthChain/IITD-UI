@@ -11,6 +11,7 @@ import AddFpoSale from "./Modals/AddFpoSale";
 import Loader from "../Common/Loader";
 
 function Card({ data = [], updateModal }) {
+  console.log(data)
   return (
     <div className="store-modal">
       <div className="container-fluid pb-5">
@@ -20,7 +21,8 @@ function Card({ data = [], updateModal }) {
               <div className="store-card mt-4">
                 <div className="card-image">
                   <img
-                    src={`${root.imgUrl}/img/${item.imageUrl}`}
+                    // src={`${root.imgUrl}/img/${item.imageUrl}`}
+                    src={item?.imageUrl}
                     alt=""
                     height={280}
                     className="store_img"
