@@ -1,6 +1,13 @@
+import { useQuery } from '@tanstack/react-query'
 import React from 'react'
+import { getRequirements } from '../../actions/fpo'
 
 const RequirementGathering = () => {
+    const { data } = useQuery({
+        queryKey: ["/farmer/requiremens/gathering"],
+        queryFn: getRequirements
+    })
+
     return (
         <>
             <div className="itemContainer">
@@ -33,8 +40,8 @@ const RequirementGathering = () => {
                                         }}
                                     >
                                         <tr>
-                                            <th>Application Date</th>
                                             <th>Farmer Name</th>
+                                            <th>Application Date</th>
                                             <th>Input Type</th>
                                             <th>Brand</th>
                                             <th>Quantity</th>
@@ -42,7 +49,20 @@ const RequirementGathering = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        {data?.map((tp, ind) => {
+                                            const famerName = tp.farmerName
+                                            
+                                            return tp.requirements?.map((requirement, requirementIndex) => (
+                                                <tr className="fw-bold text-capitalize" key={requirementIndex}>
+                                                    <td>{famerName}</td>
+                                                    <td>{requirement.updatedAt || 'N/A'}</td>
+                                                    <td>{requirement.inputType || 'N/A'}</td>
+                                                    <td>{requirement.brand || 'N/A'}</td>
+                                                    <td>{requirement.quantity || 'N/A'}</td>
+                                                    <td>{requirement.month || 'N/A'}</td>
+                                                </tr>
+                                            ))
+                                        })}
                                     </tbody>
                                 </table>
                             </div>

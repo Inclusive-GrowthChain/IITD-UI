@@ -24,7 +24,7 @@ function InterestRate({ show, handleClose }) {
     handleSubmit,
   } = useForm({
     defaultValues: {
-      intrestRate: "",
+      interestRate: "",
     },
   });
 
@@ -47,7 +47,7 @@ function InterestRate({ show, handleClose }) {
                 type="number"
                 className="form-control"
                 placeholder="14"
-                {...register("intrestRate", {
+                {...register("interestRate", {
                   required: "Interest Rate is required",
                   valueAsNumber: true,
                   min: {
@@ -56,8 +56,8 @@ function InterestRate({ show, handleClose }) {
                   },
                 })}
               />
-              {errors.intrestRate && (
-                <p style={errStyle}>{errors.intrestRate.message}</p>
+              {errors.interestRate && (
+                <p style={errStyle}>{errors.interestRate.message}</p>
               )}
             </div>
           </div>

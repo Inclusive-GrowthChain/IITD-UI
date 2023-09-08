@@ -25,7 +25,7 @@ const list = [
   },
   {
     label: "Nature of Place",
-    name: "natureOfPlace",
+    name: "natureOfplace",
   },
   {
     label: "Residence",

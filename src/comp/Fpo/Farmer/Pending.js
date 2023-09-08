@@ -62,7 +62,7 @@ function Pending({ theadStyle, tbodyStyle, data = [], updateModal }) {
             <tr key={app._id}>
               <td>{app.userName}</td>
               <td>{app.village}</td>
-              <td>{app.mobile}</td>
+              <td>{app.contactNumber}</td>
               <td>{app.aadharCardNumber}</td>
               <td>
                 <button

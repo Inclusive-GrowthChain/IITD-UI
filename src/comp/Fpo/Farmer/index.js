@@ -85,7 +85,7 @@ function Farmer() {
           <div className="panels">
             <div className={`panel ${checkActive(1, "active")}`}>
               <Approved
-                data={data?.data?.filter((d) => d.status === "accepted")}
+                data={data?.data?.filter((d) => d.membershipStatus === "accepted")}
                 theadStyle={theadStyle}
                 tbodyStyle={tbodyStyle}
                 updateModal={updateModal}
@@ -96,13 +96,13 @@ function Farmer() {
               <Rejected
                 theadStyle={theadStyle}
                 tbodyStyle={tbodyStyle}
-                data={data?.data?.filter((d) => d.status === "rejected")}
+                data={data?.data?.filter((d) => d.membershipStatus === "rejected")}
               />
             </div>
 
             <div className={`panel ${checkActive(3, "active")}`}>
               <Pending
-                data={data?.data?.filter((d) => d.status === "pending")}
+                data={data?.data?.filter((d) => d.membershipStatus === "pending")}
                 theadStyle={theadStyle}
                 tbodyStyle={tbodyStyle}
                 updateModal={updateModal}

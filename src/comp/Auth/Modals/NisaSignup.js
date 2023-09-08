@@ -37,6 +37,10 @@ const fieldSet1 = [
     type: "text"
   },
   {
+    name: "district",
+    label: "District"
+  },
+  {
     name: "state",
     label: "State",
     options: states,

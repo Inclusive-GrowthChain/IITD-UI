@@ -4,12 +4,13 @@ import { useAuthStore } from "../../store/useAuthStore";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProfile } from "../../actions/farmer";
+import UpdatePassword from "../Fpo/UpdatePassword";
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("tab1");
   const corporateClient = useAuthStore(s => s.userDetails);
 
-  const userType = corporateClient.type
+  const userType = corporateClient.userType
   const userId = corporateClient._id
 
   const queryClient = useQueryClient()
@@ -19,7 +20,7 @@ const Settings = () => {
   const { mutate } = useMutation({
     mutationFn: (data) => {
       if (data) {
-        updateProfile(data, userType, userId)
+        updateProfile(data, userType)
       }
     },
     onSuccess: () => {
@@ -371,7 +372,7 @@ const Settings = () => {
                         </div>
                       </TabContent>
                       <TabContent id="tab3" activeTab={activeTab}>
-                        <updateProfile userId={userId} />
+                        <UpdatePassword />
                       </TabContent>
                     </div>
                   </div>

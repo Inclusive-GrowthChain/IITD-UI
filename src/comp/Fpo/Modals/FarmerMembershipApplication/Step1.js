@@ -25,7 +25,7 @@ const list = [
   },
   {
     label: "Applicant Mobile Number",
-    name: "mobile",
+    name: "contactNumber",
   },
 ]
 

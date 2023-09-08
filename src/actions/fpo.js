@@ -72,7 +72,6 @@ export function addFpoProduct(data) {
   formData.append("productImg", data.image[0]);
   formData.append("isAvailable", data.isAvailable);
 
-  console.log(formData);
   return sendApiReq({
     method: "post",
     url: endPoints.fpo.products,
@@ -205,6 +204,7 @@ export function createLoan(data) {
 }
 
 export function updateFarmerLoanRepayment(rData) {
+  console.log(rData)
   let data = {
     paymentDate: rData.paymentDate,
     paidAmount: rData.paidAmount,
@@ -233,6 +233,12 @@ export function getFarmerApplication(userId) {
   return sendApiReq({
     url: endPoints.user + `/${userId}`,
   });
+}
+
+export function getRequirements(){
+  return sendApiReq({
+    url: endPoints.fpo.requirements
+  })
 }
 
 export function updateFarmerApplication(data) {
@@ -297,4 +303,17 @@ export function approveClientPayment(data) {
       endPoints.auction +
       `/${data.data.auctionId}/bid/${data.data.bidId}/payment/approve`,
   });
+}
+
+export function resetFarmerPassword(id) {
+  return sendApiReq({
+    method: "patch",
+    url: endPoints.fpo.resetPasswordFarmer + `/${id}`
+  })
+}
+
+export function getProcurementList(){
+  return sendApiReq({
+    url: endPoints.fpo.procurements
+  })
 }

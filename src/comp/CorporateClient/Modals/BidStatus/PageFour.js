@@ -17,7 +17,7 @@ const PageFour = ({ onButtonClick, outerbid }) => {
       if (bid.status) {
         let tempFpo = {};
         tempFpo.id = bid.fpoId;
-        tempFpo.fpoName = bid.fpoName;
+        tempFpo.name = bid.name;
         tempFpo.fpoPhone = bid.fpoPhone;
         tempFpo.bidAmount = bid.bidAmount;
         tempFpo.invoice = bid.invoice;
@@ -99,7 +99,7 @@ const PageFour = ({ onButtonClick, outerbid }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={fpo.fpoName}
+                value={fpo.name}
               />
             </div>
           </div>

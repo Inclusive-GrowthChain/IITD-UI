@@ -61,6 +61,7 @@ function Panel2() {
     queryFn: () => getApprovedLoanList(farmerId),
   });
 
+  console.log(data)
   if (isLoading) return <Loader wrapperCls="loader-main-right" />;
 
   return (

@@ -60,13 +60,13 @@ function Form() {
     onSuccess: (data) => {
       setTokenToApp(data.token)
       logIn(data.data)
-      let to = navigationList[data.data.type]
-      if (data.data.type === "lendingpartner") {
+      let to = navigationList[data.data.userType]
+      if (data.data.userType === "lendingpartner") {
         to = navigationList["samunnati"]
         navigate(`/samunnati/${to}`)
         return
       }
-      if (to) navigate(`/${data.data.type}/${to}`)
+      if (to) navigate(`/${data.data.userType}/${to}`)
     },
     onError: () => {
       errorNotify()

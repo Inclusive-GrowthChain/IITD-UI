@@ -18,6 +18,7 @@ const btnStyle = {
 
 function RepaymentStructure({ show, data, handleClose }) {
   const { modal, updateModal, closeModal } = useModal()
+  console.log(data)
   return (
     <Modal
       size="xl"
@@ -28,7 +29,7 @@ function RepaymentStructure({ show, data, handleClose }) {
         Repayment Structure
       </Modal.Header>
 
-      <Modal.Body style={{ overflowY: 'auto' }}>
+      <Modal.Body className="mx-2">
         <div className="repayment_title">
           <div className="row">
             <div className="col-lg-6">
@@ -46,37 +47,46 @@ function RepaymentStructure({ show, data, handleClose }) {
           </div>
         </div>
 
-        <div className="mt-5">
-          <table style={{ border: "1px solid #eee" }}>
+        <div className="my-5" style={{ overflowY: 'auto' }}>
+          <table className="table" style={{ border: "1px solid #eee" }}>
             <thead style={{ backgroundColor: "#eee" }}>
               <tr>
                 <th>S.No.</th>
                 <th>Scheduled Repayment Date</th>
                 <th>Scheduled EMI Amount</th>
-                <th>Actual Repayment Date</th>
-                <th>Actual Repayment Amount</th>
                 <th>Balance Amount</th>
+                <th>Repayment Status</th>
               </tr>
             </thead>
             <tbody>
               {
-                data?.value?.farmerWindowRepaymentStructure.map((r, key) => (
+                data?.farmerWindowRepaymentStructure?.map((r, key) => (
                   <tr key={key}>
                     <td>{key + 1}</td>
                     <td>{r.repaymentDate}</td>
                     <td>{r.emi}</td>
-                    <td>{r.paymentDate ? r.paymentDate : "Pending"}</td>
-                    <td>{r.paidAmount !== 0 ? r.paidAmount : "Pending"}</td>
                     <td>{r.balance}</td>
+                    <td><button disabled={r.completed}
+                      className="py-0.5"
+                      style={btnStyle}
+                      onClick={() => updateModal("addRepayment", r.id)}
+                    >
+                      Add Repayment
+                    </button></td>
                   </tr>
-                )) || data.farmerWindowRepaymentStructure.map((r, key) => (
+                )) || data?.value?.farmerWindowRepaymentStructure?.map((r, key) => (
                   <tr key={key}>
                     <td>{key + 1}</td>
                     <td>{r.repaymentDate}</td>
                     <td>{r.emi}</td>
-                    <td>{r.paymentDate ? r.paymentDate : "Pending"}</td>
-                    <td>{r.paidAmount !== 0 ? r.paidAmount : "Pending"}</td>
                     <td>{r.balance}</td>
+                    <td><button disabled={r.completed}
+                      className="py-0.5"
+                      style={btnStyle}
+                      onClick={() => updateModal("addRepayment", r.id)}
+                    >
+                      Add Repayment
+                    </button></td>
                   </tr>
                 ))
               }
@@ -90,7 +100,7 @@ function RepaymentStructure({ show, data, handleClose }) {
             show
             handleClose={() => closeModal("addRepayment")}
             data={data}
-            repaymentItem={modal.data.repaymentItem}
+            repaymentItem={modal?.data}
           />
         }
       </Modal.Body>

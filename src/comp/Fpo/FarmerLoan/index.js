@@ -69,17 +69,15 @@ function FarmerLoan() {
             Set Interest Rate
           </button>
 
-          {/* <div>
+          <div>
             Receive Loan Application
             <label className="toggle-switch mt-0">
               <input
                 type="checkbox"
-                checked={recieveApplication}
-                onChange={() => setRecieveApplication(p => !p)}
               />
               <span className="switch" />
             </label>
-          </div> */}
+          </div>
         </div>
 
         <div className="tabs mt-5">
@@ -124,6 +122,8 @@ function FarmerLoan() {
           show
           data={modal.data}
           handleClose={closeModal}
+          updateModal={updateModal}
+          modal={modal}
         />
       }
 

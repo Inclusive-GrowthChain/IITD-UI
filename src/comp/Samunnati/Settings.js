@@ -10,7 +10,7 @@ const Sammunati_Settings = () => {
   const [activeTab, setActiveTab] = useState("tab1");
   const samunnati = useAuthStore(s => s.userDetails);
 
-  const userType = samunnati.type
+  const userType = samunnati.userType
   const userId = samunnati._id
 
   const queryClient = useQueryClient()
@@ -18,7 +18,7 @@ const Sammunati_Settings = () => {
   const { reset, register, handleSubmit } = useForm()
 
   const { mutate } = useMutation({
-    mutationFn: (data) => updateProfile(data, userType, userId),
+    mutationFn: (data) => updateProfile(data, userType),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user-detail"] });
       reset()

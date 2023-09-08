@@ -13,6 +13,13 @@ export function getFpoList() {
   })
 }
 
+
+export function getListOfFPO() {
+  return sendApiReq({
+    url: endPoints.userList.fpolist
+  })
+}
+
 export function getSamunnatiList() {
   return sendApiReq({
     url: endPoints.userList.samunnati,

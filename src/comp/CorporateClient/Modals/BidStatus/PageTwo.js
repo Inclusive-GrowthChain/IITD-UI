@@ -118,10 +118,11 @@ const PageTwo = ({ onButtonClick, outerbid = [] }) => {
                   fontWeight: "500",
                 }}
               >
-                {outerbid.bids.map((bid) => (
-                  <tr>
+                {outerbid.bids.map((bid) => {
+                  console.log(bid)
+                  return <tr>
                     <td>{bid.fpoId}</td>
-                    <td>{bid.fpoName}</td>
+                    <td>{bid.name}</td>
                     <td>{bid.fpoPhone}</td>
                     <td>{bid.bidAmount}</td>
                     <td>
@@ -149,7 +150,7 @@ const PageTwo = ({ onButtonClick, outerbid = [] }) => {
                             mm = '0' + mm
                           }
                           today = yyyy + '-' + mm + '-' + dd
-                          if(outerbid.bidEndDate > today) {
+                          if (outerbid.bidEndDate > today) {
                             alert("Order cannot be placed before the end of bidding period")
                             e.preventDefault();
                             return
@@ -168,7 +169,7 @@ const PageTwo = ({ onButtonClick, outerbid = [] }) => {
                       </button>
                     </td>
                   </tr>
-                ))}
+                })}
               </tbody>
             </table>
           </div>
@@ -177,7 +178,7 @@ const PageTwo = ({ onButtonClick, outerbid = [] }) => {
             <Modal.Header closeButton>Confirm Order</Modal.Header>
             <Modal.Body>
               <p>
-                Are you sure you want to place order with FPO {currentFPO.fpoName} for {currentFPO.bidAmount} rupees?
+                Are you sure you want to place order with FPO {currentFPO.name} for {currentFPO.bidAmount} rupees?
               </p>
               <div className="col-lg-12" style={{ display: "flex", justifyContent: "flex-end" }}>
                 <button
@@ -185,7 +186,7 @@ const PageTwo = ({ onButtonClick, outerbid = [] }) => {
                   style={{ backgroundColor: '#064420' }}
                   onClick={(e) => {
                     e.preventDefault()
-                    mutate({data})
+                    mutate({ data })
                     handleCloseConfirmBox()
                   }}
                 >

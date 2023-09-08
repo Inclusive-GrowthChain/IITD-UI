@@ -55,12 +55,8 @@ const FirstTab = () => {
                   {data?.map((d, ind) => (
                     <tr key={ind}>
                       <td>{d.uniqueId}</td>
-                      {d.transactions?.map((date, ind) => (
-                        <React.Fragment key={ind}>
-                          <td>{date.dateOfPurchase}</td>
-                          <td>{date.total}</td>
-                        </React.Fragment>
-                      ))}
+                      <td>{d.dateOfPurchase}</td>
+                      <td>{d.totalAmount}</td>
                       <td>
                         <button
                           className="loan_button"

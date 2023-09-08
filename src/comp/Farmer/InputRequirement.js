@@ -23,7 +23,6 @@ const InputRequirement = () => {
 
     if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
-    console.log(data)
     return (
         <>
             <div className="itemContainer">

@@ -9,7 +9,13 @@ export function getLacTest() {
 
 export function getFpoProducts() {
   return sendApiReq({
-    url: endPoints.fpo.products,
+    url: endPoints.farmer.products,
+  })
+}
+
+export function getFpoLac(){
+  return sendApiReq({
+    url: endPoints.farmer.lacProducts
   })
 }
 
@@ -86,10 +92,10 @@ export function getPlacedRequirements() {
   })
 }
 
-export function updateProfile(data, userType, userId) {
+export function updateProfile(data, userType) {
   return sendApiReq({
     method: "patch",
-    url: endPoints.farmer.updateProfile + `/${userType}/${userId}`,
+    url: endPoints.farmer.updateProfile + `/${userType}`,
     data,
     successMsg: "Profile has been updated."
   })

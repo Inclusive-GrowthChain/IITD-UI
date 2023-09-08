@@ -30,14 +30,24 @@ function LoanWindowTable({ loanWindow }) {
           disabled
         />
       </div>
-
       <div className="d-flex align-items-center" style={{ gap: "1rem" }}>
-        <label style={labelStyle}>Loan window amount</label>
+        <label style={labelStyle}>Loan window Requested Amount</label>
         <span>:</span>
         <input
           type="text"
           className="px-2 py-1 border-0"
-          value={loanWindow?.grantedAmount !== -1 ? loanWindow?.grantedAmount : `${loanWindow?.requestedAmount} (requested)`}
+          value={loanWindow.requestedAmount}
+          disabled
+        />
+      </div>
+
+      <div className="d-flex align-items-center" style={{ gap: "1rem" }}>
+        <label style={labelStyle}>Loan window Granted Amount</label>
+        <span>:</span>
+        <input
+          type="text"
+          className="px-2 py-1 border-0"
+          value={loanWindow?.grantedAmount !== -1 ? loanWindow?.grantedAmount : `Waiting for window approval`}
           disabled
         />
       </div>
@@ -54,7 +64,7 @@ function LoanWindowTable({ loanWindow }) {
       </div>
 
       <div className="d-flex align-items-center" style={{ gap: "1rem" }}>
-        <label style={labelStyle}>Status</label>
+        <label style={labelStyle}>View Loan Window Application</label>
         <span>:</span>
         <button
           style={btnStyle}
@@ -62,6 +72,27 @@ function LoanWindowTable({ loanWindow }) {
         >
           View
         </button>
+      </div>
+
+      <div className="d-flex align-items-center" style={{ gap: "1rem" }}>
+        <label style={labelStyle}>Status</label>
+        <span>:</span>
+        <input
+          type="text"
+          className="px-2 py-1 border-0"
+          value={loanWindow?.status}
+          disabled
+        />
+      </div>
+      <div className="d-flex align-items-center" style={{ gap: "1rem" }}>
+        <label style={labelStyle}>Date of Application</label>
+        <span>:</span>
+        <input
+          type="text"
+          className="px-2 py-1 border-0"
+          value={new Date(loanWindow?.AppliedDate).toDateString()}
+          disabled
+        />
       </div>
 
       {

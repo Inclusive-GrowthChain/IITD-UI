@@ -41,11 +41,11 @@ export function forgotPassword(data) {
   })
 }
 
-export function updatePassword(data,id) {
-  console.log(data,id)
+export function updatePassword(data) {
+
   return sendApiReq({
     method: "patch",
-    url: endPoints.updatePassword + `/${id}`,
+    url: endPoints.updatePassword,
     data
   })
 }
@@ -88,7 +88,7 @@ export function farmerSignup(data) {
 
 export function getFpoList() {
   return sendApiReq({
-    url: endPoints.userList.fpo + "?mini=true",
+    url: endPoints.userList.fpo,
     isAuthendicated: false,
   })
 }

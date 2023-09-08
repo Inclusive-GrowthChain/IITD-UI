@@ -32,6 +32,11 @@ const fieldSet1 = [
     type: 'text'
   },
   {
+    name: "district",
+    label: "District",
+    type: "text"
+  },
+  {
     name: "city",
     label: "City",
     type: "text"

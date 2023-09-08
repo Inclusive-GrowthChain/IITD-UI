@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQueries } from "@tanstack/react-query";
 
-import { getFpoLac } from "../../actions/fpo";
+import { getFpoLac, getProcurementList } from "../../actions/fpo";
 import { root } from "../../utils/endPoints";
 import useModal from "../../hooks/useModal";
 
@@ -81,6 +81,7 @@ function Card({ data = [], updateModal }) {
 }
 
 function ProduceCard({ data = [], updateModal }) {
+  console.log(data)
   return (
     <>
       <div className="table-responsive shadow p-3">
@@ -99,28 +100,32 @@ function ProduceCard({ data = [], updateModal }) {
           </thead>
 
           <tbody style={tbodyStyle}>
-            {data.map((item) => (
-              <tr key={item._id}>
-                <td>{item.farmerId}</td>
-                <td>{item.farmerName}</td>
-                <td>{item.lacStrainType}</td>
-                <td>{item.origin}</td>
-                <td>{item.treeSource}</td>
-                <td>{item.quantity}</td>
-                <td>
-                  <button
-                    className="py-0.5 table_btn"
-                    onClick={() => {
-                      updateModal("View Image", { imgUrl: item.imageUrl });
-                    }}
-                    style={btnStyle}
-                  >
-                    View
-                  </button>
-                </td>
-                <td>{item.remarks}</td>
-              </tr>
-            ))}
+            {data.map((item) => {
+              const farmerName = item.farmerName
+              const farmerId = item.farmerId
+              return item?.products?.map((item) => (
+                <tr key={item._id}>
+                  <td>{farmerId}</td>
+                  <td>{farmerName}</td>
+                  <td>{item.lacStrainType}</td>
+                  <td>{item.origin}</td>
+                  <td>{item.treeSource}</td>
+                  <td>{item.quantity}</td>
+                  <td>
+                    <button
+                      className="py-0.5 table_btn"
+                      onClick={() => {
+                        updateModal("View Image", { imgUrl: item.imageUrl });
+                      }}
+                      style={btnStyle}
+                    >
+                      View
+                    </button>
+                  </td>
+                  <td>{item.remarks}</td>
+                </tr>
+              ))
+            })}
           </tbody>
         </table>
       </div>
@@ -198,7 +203,7 @@ const LacProcurement = () => {
       },
       {
         queryKey: ["farmer/"],
-        queryFn: getAllProduceList,
+        queryFn: getProcurementList,
       },
     ],
   });
@@ -270,7 +275,7 @@ const LacProcurement = () => {
               className={`panel ${checkActive(3, "active")}`}
               style={{ marginBottom: "50px" }}
             >
-              <ProduceCard data={produceList.data} updateModal={updateModal} />
+              <ProduceCard data={produceList} updateModal={updateModal} />
             </div>
           </div>
         </div>

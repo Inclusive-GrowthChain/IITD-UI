@@ -15,15 +15,15 @@ const btnStyle = {
   lineHeight: "1rem",
 }
 
-function AddRepayment({ show, handleClose, data, repaymentItem }) {
+function AddRepayment({ show, handleClose, data,repaymentItem}) {
   const queryClient = useQueryClient()
   const { register, handleSubmit } = useForm({
     defaultValues: {
       "paymentDate": "",
       "paidAmount": 0,
-      "loanId": data.id,
-      "windowId": data.windowId,
-      "repaymentId": repaymentItem.id,
+      "loanId": data?.id,
+      "windowId": data?.windowId,
+      "repaymentId": repaymentItem,
     }
   })
 

@@ -117,7 +117,16 @@ function FormHelp({ fields = [], register, errors, setValue, clearErrors }) {
       {
         fields.map(f => {
           if (f.isFile) {
-            return <File
+            return f.name === "panCardImage" ? <File
+              {...f}
+              key={f.name}
+              error={errors[f.name]}
+              register={register}
+              setValue={setValue}
+              clearErrors={clearErrors}
+            />
+            : 
+            <File
               {...f}
               key={f.name}
               error={errors[f.name]}

@@ -24,7 +24,7 @@ const Samunnati = () => {
   //Get License Data
   const { isLoading, data } = useQuery({
     queryKey: ["Licenses"],
-    queryFn: () => getLicenses("bank"),
+    queryFn: () => getLicenses("lendingpartner"),
   });
 
   //Create License
@@ -39,7 +39,7 @@ const Samunnati = () => {
   const onSubmit = (data) => {
     const restructuredData = {
       ...data,
-      role: "bank"
+      role: "lendingpartner"
     };
 
     if (data) {

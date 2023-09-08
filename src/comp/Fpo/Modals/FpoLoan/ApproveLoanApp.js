@@ -89,7 +89,7 @@ function ApproveLoanApp({ show, data, handleClose }) {
               Loan Tenure (months)
             </p>
             <p className="col-lg-6">
-              {data?.tenure}
+              {data?.loanTenure}
             </p>
           </div>
           <div className="row m-2">

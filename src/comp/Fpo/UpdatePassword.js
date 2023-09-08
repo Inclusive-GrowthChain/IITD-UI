@@ -5,17 +5,15 @@ import { updatePassword } from '../../actions/auth'
 import { errorNotify } from '../../utils/toastifyHlp'
 import { successNotify } from '../../utils/toastifyHlp'
 
-const UpdatePassword = ({ userId }) => {
+const UpdatePassword = () => {
     const { register, reset, handleSubmit } = useForm()
     const { mutate} = useMutation({
-        mutationFn: (data) => updatePassword(data, userId),
+        mutationFn: (data) => updatePassword(data),
         onSuccess: (e) => {
-            console.log(e)
-            successNotify(e.message)
+            successNotify(e)
             reset()
         },
         onError: (e) => {
-            console.log(e)
             errorNotify(e.message)
         }
     })

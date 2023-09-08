@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
-import { getFpoList } from "../../actions/user";
+import { getListOfFPO } from "../../actions/user";
 import Loader from "../Common/Loader";
 
 const h3Style = {
@@ -26,7 +26,7 @@ const tbodyStyle = {
 function FPOInfo() {
   const { isLoading, data } = useQuery({
     queryKey: ["user/fpo"],
-    queryFn: getFpoList,
+    queryFn: getListOfFPO,
   });
 
   if (isLoading) return <Loader wrapperCls="loader-main-right" />;
@@ -66,7 +66,7 @@ function FPOInfo() {
                           style={{ color: "#000", textDecoration: "none" }}
                           state={fpo}
                         >
-                          {fpo.fpoName}
+                          {fpo.userName}
                         </Link>
                       </td>
                       <td>{fpo.directorName}</td>

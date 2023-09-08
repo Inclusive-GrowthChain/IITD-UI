@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 
 import { getAllProduceList } from "../../actions/farmer";
 import { useAuthStore } from "../../store/useAuthStore";
-import { getFpoLac } from "../../actions/fpo";
+import { getFpoLac } from "../../actions/farmer";
 import { root } from "../../utils/endPoints";
 import useModal from "../../hooks/useModal";
 
@@ -106,7 +106,7 @@ function SellingPrice() {
                         <div className="card-body">
                           <div className="row">
                             <div className="col">
-                              <p className="h6 fw-bold">{item.name}</p>
+                              <p className="h5 fw-bold text-capitalize ">{item.productName}</p>
                             </div>
                           </div>
                           <div className="row">

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import Modal from "react-bootstrap/Modal";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { addPurchase, getItemNames } from "../../../../actions/fpo";
+import { addPurchase, getLacTypes } from "../../../../actions/fpo";
 import Loader from "../../../Common/Loader";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router";
@@ -40,13 +40,14 @@ function PurchaseHistory2({ showAddPurchase, handleShowAddPurchase, handleCloseA
     },
     onSuccess: () => {
       queryClient.invalidateQueries("/fpo/transaction/api/transaction");
-      setSubmitting(false);
+      setSubmitting(true);
+      handleCloseAddPurchase()
     },
   });
 
   const { isLoading, data } = useQuery({
     queryKey: ["Item_Names"],
-    queryFn: getItemNames,
+    queryFn: getLacTypes,
   });
 
 

@@ -13,7 +13,6 @@ function Panel1() {
 
   if (isLoading) return <Loader wrapperCls="loader-main-right" />;
 
-
   return (
     <div className="card_table">
       <h6 className="heading-small text-muted text-bold text-uppercase mb-4">
@@ -28,7 +27,7 @@ function Panel1() {
           </div>
           <div className="col-lg-6">
             <div className="form-group focused">
-              <label className="form-control-label text-black">{data.userName}</label>
+              <label className="form-control-label text-black">{data?.data?.userName}</label>
             </div>
           </div>
         </div>
@@ -43,7 +42,7 @@ function Panel1() {
           <div className="col-lg-6">
             <div className="form-group focused">
               <label className="form-control-label text-black">
-                {data.mobile}
+                {data?.data?.contactNumber}
               </label>
             </div>
           </div>
@@ -59,7 +58,7 @@ function Panel1() {
           <div className="col-lg-6">
             <div className="form-group focused">
               <label className="form-control-label text-black">
-              {data.dateOfBirth}
+                {data?.data?.DOB}
               </label>
             </div>
           </div>
@@ -72,7 +71,7 @@ function Panel1() {
           </div>
           <div className="col-lg-6">
             <div className="form-group focused">
-              <label className="form-control-label text-black">{data.gender}</label>
+              <label className="form-control-label text-black">{data?.data?.gender}</label>
             </div>
           </div>
         </div>
@@ -85,7 +84,7 @@ function Panel1() {
           <div className="col-lg-6">
             <div className="form-group focused">
               <label className="form-control-label text-black">
-                {data.doorNumber} {data.street} {data.village} {data.taluk} {data.district} {data.state} {data.pinCode}
+                {data?.data?.doorNumber} {data?.data?.streetName} {data?.data?.village} {data?.data?.taluk} {data?.data?.district} {data?.data?.state} {data?.data?.pinCode}
               </label>
             </div>
           </div>
@@ -101,27 +100,31 @@ function Panel1() {
           <div className="col-lg-6">
             <div className="form-group focused">
               <label className="form-control-label text-black">
-                {data.aadharCardNumber}
+                {data?.data?.aadharCardNumber}
               </label>
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-lg-6">
-            <div className="form-group focused">
-              <label className="form-control-label text-black">
-                PAN Number
-              </label>
+        {
+          data?.data?.panCardNumber && <>
+            <div className="row">
+              <div className="col-lg-6">
+                <div className="form-group focused">
+                  <label className="form-control-label text-black">
+                    PAN Number
+                  </label>
+                </div>
+              </div>
+              <div className="col-lg-6">
+                <div className="form-group focused">
+                  <label className="form-control-label text-black">
+                    {data?.data?.panCardNumber}
+                  </label>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="col-lg-6">
-            <div className="form-group focused">
-              <label className="form-control-label text-black">
-                {data.panCardNumber}
-              </label>
-            </div>
-          </div>
-        </div>
+          </>
+        }
         <div className="row">
           <div className="col-lg-6">
             <div className="form-group focused">
@@ -130,7 +133,7 @@ function Panel1() {
           </div>
           <div className="col-lg-6">
             <div className="form-group focused">
-              <label className="form-control-label text-black">{data.bankName}</label>
+              <label className="form-control-label text-black">{data?.data?.bankName}</label>
             </div>
           </div>
         </div>
@@ -145,7 +148,7 @@ function Panel1() {
           <div className="col-lg-6">
             <div className="form-group focused">
               <label className="form-control-label text-black">
-                {data.accountNumber}
+                {data?.data?.accountNumber}
               </label>
             </div>
           </div>
@@ -159,7 +162,7 @@ function Panel1() {
           <div className="col-lg-6">
             <div className="form-group focused">
               <label className="form-control-label text-black">
-                {data.ifscCode}
+                {data?.data?.ifscCode}
               </label>
             </div>
           </div>

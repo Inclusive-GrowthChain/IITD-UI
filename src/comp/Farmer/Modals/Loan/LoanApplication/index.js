@@ -36,6 +36,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
   const [step, setStep] = useState(1)
   const userDetails = useAuthStore(s => s.userDetails)
   const queryClient = useQueryClient()
+  console.log(data)
 
   const {
     register, formState: { errors }, handleSubmit,
@@ -50,17 +51,17 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
       branchName: userDetails.branchName || data.value.branchName,
       name: userDetails.userName,
       gender: userDetails.gender,
-      mobile: userDetails.mobile || data.value.mobile,
-      dob: userDetails.dateOfBirth || data.value.dob,
+      mobile: userDetails.contactNumber || data.value.contactNumber,
+      dob: userDetails.DOB || data.value.DOB,
       age: userDetails.age || data.value.age,
       aadharCardNumber: userDetails.aadharCardNumber || data.value.aadharCardNumber,
       aadharCardImage: userDetails.aadharCardImage || data.value.aadharCardImage,
-      panCardNumber: userDetails.panCardNumber || data.value.panCardNumber,
-      panCardImage: userDetails.panCardImage || data.value.panCardImage,
-      fatherName: userDetails.fatherName || data.value.fatherName,
-      motherName: userDetails.motherName || data.value.motherName,
+      panCardNumber: userDetails?.panCardNumber || data?.value?.panCardNumber,
+      panCardImage: userDetails?.panCardImage || data?.value?.panCardImage,
+      fatherName: userDetails.fathersName || data.value.fatherName,
+      motherName: userDetails.mothersName || data.value.motherName,
       doorNumber: userDetails.doorNumber || data.value.doorNumber,
-      street: userDetails.street || data.value.street,
+      street: userDetails.streetName || data.value.street,
       village: userDetails.village || data.value.village,
       taluk: userDetails.taluk || data.value.taluk,
       district: userDetails.district || data.value.district,
@@ -68,7 +69,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
       pinCode: userDetails.pinCode || data.value.pinCode,
       occupation: userDetails.occupation || data.value.occupation,
       education: userDetails.education || data.value.education,
-      natureOfPlace: userDetails.natureOfPlace || data.value.natureOfPlace,
+      natureOfPlace: userDetails.natureOfplace || data.value.natureOfplace,
       residence: userDetails.residence || data.value.residence,
       caste: userDetails.caste || data.value.caste,
       religion: userDetails.religion || data.value.religion,

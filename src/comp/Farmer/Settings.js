@@ -6,20 +6,21 @@ import useModal from "../../hooks/useModal";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProfile } from "../../actions/farmer";
+import UpdatePassword from "../Fpo/UpdatePassword";
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("tab1")
   const farmer = useAuthStore(s => s.userDetails)
   const { modal, updateModal, closeModal } = useModal()
 
-  const { register, handleSubmit, formState: { errors },reset } = useForm()
+  const { register, handleSubmit, formState: { errors }, reset } = useForm()
   const queryClient = useQueryClient()
 
-  const userType = farmer.type
+  const userType = farmer.userType
   const userId = farmer._id
 
-  const {mutate} = useMutation({
-    mutationFn: (data) => updateProfile(data,userType,userId),
+  const { mutate } = useMutation({
+    mutationFn: (data) => updateProfile(data, userType),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user-detail"] });
       reset()
@@ -71,6 +72,12 @@ const Settings = () => {
                         activeTab={activeTab}
                         setActiveTab={setActiveTab}
                       />
+                      <TabNavItem
+                        title="Update Password"
+                        id="tab3"
+                        activeTab={activeTab}
+                        setActiveTab={setActiveTab}
+                      />
                     </ul>
 
                     <div className="outlet">
@@ -106,7 +113,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        {farmer.mobile}
+                                        {farmer.contactNumber}
                                       </label>
                                     </div>
                                   </div>
@@ -122,7 +129,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        {farmer.dateOfBirth}
+                                        {farmer.DOB}
                                       </label>
                                     </div>
                                   </div>
@@ -154,7 +161,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        {farmer.fatherName}
+                                        {farmer.fathersName}
                                       </label>
                                     </div>
                                   </div>
@@ -170,7 +177,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        {farmer.motherName}
+                                        {farmer.mothersName}
                                       </label>
                                     </div>
                                   </div>
@@ -234,7 +241,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        {farmer.natureOfPlace}
+                                        {farmer.natureOfplace}
                                       </label>
                                     </div>
                                   </div>
@@ -404,59 +411,63 @@ const Settings = () => {
                                     </div>
                                   </div>
                                 </div>
-                                <div className="row">
-                                  <div className="col-lg-6">
-                                    <div className="form-group focused">
-                                      <label className="form-control-label text-black">
-                                        PAN Card Number
-                                      </label>
+                                {
+                                  farmer.panCardNumber && <>
+                                    <div className="row">
+                                      <div className="col-lg-6">
+                                        <div className="form-group focused">
+                                          <label className="form-control-label text-black">
+                                            PAN Card Number
+                                          </label>
+                                        </div>
+                                      </div>
+                                      <div className="col-lg-6">
+                                        <div className="form-group focused">
+                                          <label className="form-control-label text-black">
+                                            {farmer.panCardNumber}
+                                          </label>
+                                        </div>
+                                      </div>
                                     </div>
-                                  </div>
-                                  <div className="col-lg-6">
-                                    <div className="form-group focused">
-                                      <label className="form-control-label text-black">
-                                        {farmer.panCardNumber}
-                                      </label>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="row">
-                                  <div className="col-lg-6">
-                                    <div className="form-group focused">
-                                      <label className="form-control-label text-black">
-                                        PAN Card Image
-                                      </label>
-                                    </div>
-                                  </div>
-                                  <div className="col-lg-6">
-                                    <div className="form-group focused">
-                                      <button
-                                        style={{
-                                          backgroundColor: "#064420",
-                                          color: "#fff",
-                                          alignItems: "center",
-                                          borderRadius: "5px",
-                                          border: "none",
-                                          padding: "0.25rem 1rem",
-                                          width: "10%",
-                                          minWidth: "100px",
-                                          fontSize: "1rem",
-                                          lineHeight: "2rem",
-                                        }}
-                                        onClick={(e) => {
-                                          e.preventDefault();
-                                          const imageData = {
-                                            image: farmer.panCardImage,
-                                            title: "PAN Card Image",
-                                          }
-                                          updateModal("imageViewer", imageData)
-                                        }}
-                                      >
-                                        view
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
+                                    <div className="row">
+                                      <div className="col-lg-6">
+                                        <div className="form-group focused">
+                                          <label className="form-control-label text-black">
+                                            PAN Card Image
+                                          </label>
+                                        </div>
+                                      </div>
+                                      <div className="col-lg-6">
+                                        <div className="form-group focused">
+                                          <button
+                                            style={{
+                                              backgroundColor: "#064420",
+                                              color: "#fff",
+                                              alignItems: "center",
+                                              borderRadius: "5px",
+                                              border: "none",
+                                              padding: "0.25rem 1rem",
+                                              width: "10%",
+                                              minWidth: "100px",
+                                              fontSize: "1rem",
+                                              lineHeight: "2rem",
+                                            }}
+                                            onClick={(e) => {
+                                              e.preventDefault();
+                                              const imageData = {
+                                                image: farmer.panCardImage,
+                                                title: "PAN Card Image",
+                                              }
+                                              updateModal("imageViewer", imageData)
+                                            }}
+                                          >
+                                            view
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div></>
+                                }
+
                               </div>
                             </form>
                           </div>
@@ -479,9 +490,9 @@ const Settings = () => {
                                       type="Number"
                                       className="form-control form-control-alternative"
                                       placeholder=""
-                                      {...register("mobile", { maxLength: 10,  })}
+                                      {...register("contactNumber", { maxLength: 10, })}
                                     />
-                                    <p role="alert">{errors.mobile?.message}</p>
+                                    <p role="alert">{errors.contactNumber?.message}</p>
                                   </div>
                                 </div>
                                 <div className="col-lg-6">
@@ -495,7 +506,7 @@ const Settings = () => {
                                       placeholder=""
                                       {...register("doorNumber")}
                                     />
-                                      <p role="alert">{errors.doorNumber?.message}</p>
+                                    <p role="alert">{errors.doorNumber?.message}</p>
                                   </div>
                                 </div>
                                 <div className="col-lg-6">
@@ -507,9 +518,9 @@ const Settings = () => {
                                       type="text"
                                       className="form-control form-control-alternative"
                                       placeholder=""
-                                      {...register("street")}
+                                      {...register("streetName")}
                                     />
-                                    <p role="alert">{errors.street?.message}</p>
+                                    <p role="alert">{errors.streetName?.message}</p>
                                   </div>
                                 </div>
                                 <div className="col-lg-6">
@@ -577,7 +588,7 @@ const Settings = () => {
                                       type="number"
                                       className="form-control form-control-alternative"
                                       placeholder=""
-                                      {...register("pinCode", {maxLength: 6 })}
+                                      {...register("pinCode", { maxLength: 6 })}
                                     />
                                     <p role="alert">{errors.pinCode?.message}</p>
                                   </div>
@@ -672,6 +683,9 @@ const Settings = () => {
                             </form>
                           </div>
                         </div>
+                      </TabContent>
+                      <TabContent id="tab3" activeTab={activeTab}>
+                        <UpdatePassword />
                       </TabContent>
                     </div>
                   </div>

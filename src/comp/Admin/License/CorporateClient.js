@@ -25,7 +25,7 @@ const CorporateClient = () => {
   //Get License Data
   const { isLoading, data } = useQuery({
     queryKey: ["Licenses"],
-    queryFn: () => getLicenses("corporate-client"),
+    queryFn: () => getLicenses("corporateclient"),
   });
 
   //Create License 
@@ -40,7 +40,7 @@ const CorporateClient = () => {
   const onSubmit = (data) => {
     const restructuredData = {
       ...data,
-      role: "corporate-client"
+      role: "corporateclient"
     };
     if (data) {
       mutate(restructuredData);

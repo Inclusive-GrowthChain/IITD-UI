@@ -6,16 +6,15 @@ import Repayment from "./Repayment";
 import { useEffect } from "react";
 
 const btnStyle = {
-  color: "blue",
+  backgroundColor: "#064420",
+  color: "#fff",
   alignItems: "center",
   borderRadius: "5px",
   border: "none",
   padding: "0.25rem 1rem",
-  width: "100%",
-  fontSize: "1rem",
-  lineHeight: "2rem",
-  textDecoration: "underline",
-  backgroundColor: "rgb(255, 255, 255, 0)",
+  width: "fit-content",
+  fontSize: ".75rem",
+  lineHeight: "1rem",
 }
 
 function RepaymentStructure({ show, handleClose, data, windowType }) {
@@ -83,7 +82,7 @@ function RepaymentStructure({ show, handleClose, data, windowType }) {
                           Add
                         </button>
                       </td>
-                      <td>{window.completed? "Paid" : "Pending"}</td>
+                      <td>{window.completed ? "Paid" : "Pending"}</td>
                     </tr>
                   ))
               }

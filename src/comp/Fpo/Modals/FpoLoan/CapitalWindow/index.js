@@ -6,7 +6,6 @@ import { nanoid } from 'nanoid';
 
 import { createLoanwindow } from "../../../../../actions/fpo";
 import { useAuthStore } from "../../../../../store/useAuthStore";
-import { errorNotify } from '../../../../../utils/toastifyHlp';
 
 import Step1 from "./Step1";
 import Step2 from "./Step2";
@@ -14,6 +13,7 @@ import Step3 from "./Step3";
 import Step4 from "./Step4";
 import Step5 from "./Step5";
 import Step6 from "./Step6";
+import { errorNotify } from "../../../../../utils/toastifyHlp";
 
 const h5Style = {
   padding: "10px 25px",
@@ -106,9 +106,13 @@ function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["loanwindow", windowType] })
       handleClose()
+    },
+    onError: (e) => {
+      const msg = e.stack.split(":")[1]
+      errorNotify(msg)
     }
   })
-
+ 
   const title = windowType === "fpo" ? "Working Captial" : "Farmer"
 
   const onSubmit = data => {

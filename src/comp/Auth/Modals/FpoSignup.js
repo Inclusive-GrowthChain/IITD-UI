@@ -17,7 +17,7 @@ const btnStyle = {
 
 const fieldSet1 = [
   {
-    name: "fpoName",
+    name: "name",
     label: "Name of FPO",
     type: "text"
   },
@@ -39,6 +39,11 @@ const fieldSet1 = [
   {
     name: "city",
     label: "City",
+    type: "text"
+  },
+  {
+    name: "district",
+    label: "District",
     type: "text"
   },
   {
@@ -90,7 +95,7 @@ const fieldSet1 = [
     type: "number"
   },
   {
-    name: "panNumber",
+    name: "panCardNumber",
     label: "PAN Number",
     type: "text",
     validation: {
@@ -101,12 +106,12 @@ const fieldSet1 = [
     }
   },
   {
-    name: "panImage",
+    name: "panCardImage",
     label: "PAN Card Image",
     isFile: true,
   },
   {
-    name: "shareholderNumber",
+    name: "noOfShareHolders",
     label: "No of ShareHolders",
     type: "number"
   },
@@ -129,7 +134,7 @@ const fieldSet2 = [
     type: "text"
   },
   {
-    name: "passbookImage",
+    name: "bankPassBookImage",
     label: "Upload Bank Passbook Image",
     isFile: true,
   },
@@ -142,7 +147,7 @@ const fieldSet3 = [
     type: "text"
   },
   {
-    name: "directorContactNumber",
+    name: "directorMobileNumber",
     label: "Mobile Number",
     type: "number"
   },
@@ -153,17 +158,17 @@ const fieldSet3 = [
     options: ["Male", "Female", "Other"]
   },
   {
-    name: "bylawsImage",
+    name: "copyOfByLawsImage",
     label: "Copy of Bylaws (MOA & AOA)",
     isFile: true,
   },
   {
-    name: "incorporationCertifcateImage",
+    name: "certificateOfIncorporationImage",
     label: "Certificate of Incorporation",
     isFile: true,
   },
   {
-    name: "gstCertificate",
+    name: "gstCertificateImage",
     label: "GST Certificate",
     isFile: true,
   },
@@ -182,7 +187,7 @@ function FpoSignup({ show, close }) {
     clearErrors
   } = useForm({
     defaultValues: {
-      fpoName: "",
+      name: "",
       userName: "",
       password: "",
       address: "",
@@ -193,20 +198,20 @@ function FpoSignup({ show, close }) {
       email: "",
       website: "",
       dateOfIncorporation: "",
-      panNumber: "",
-      panImage: "",
+      panCardNumber: "",
+      panCardImage: "",
       registrationNumber: "",
-      shareholderNumber: "",
+      noOfShareHolders: "",
       bankName: "",
       bankAccountNumber: "",
       ifscCode: "",
-      passbookImage: "",
+      bankPassBookImage: "",
       directorName: "",
-      directorContactNumber: "",
+      directorMobileNumber: "",
       directorGender: "",
-      bylawsImage: "",
+      copyOfByLawsImage: "",
       incorporationCertifcateImage: "",
-      gstCertificate: "",
+      gstCertificateImage: "",
       licenseKey: "",
     },
   })

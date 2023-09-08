@@ -16,7 +16,7 @@ function Rejected({ theadStyle, tbodyStyle, data = [] }) {
             <tr key={app._id}>
               <td>{app.userName}</td>
               <td>{app.village}</td>
-              <td>{app.mobile}</td>
+              <td>{app.contactNumber}</td>
               <td>{app.aadharCardNumber}</td>
             </tr>
           ))}

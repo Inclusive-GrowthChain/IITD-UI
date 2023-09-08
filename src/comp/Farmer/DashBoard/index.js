@@ -1,16 +1,16 @@
 import { useQueries } from "@tanstack/react-query";
 import { getCropAdvisory, getTraining } from "../../../actions/nisa";
 import {
-  getFpoProducts,
-  getFpoLac,
   getLoanHistory,
 } from "../../../actions/fpo";
+import { getFpoLac } from "../../../actions/farmer";
 import { useAuthStore } from "../../../store/useAuthStore";
 import ImageSlider from "./ImageSlider";
 import Loader from "../../Common/Loader";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import { WeekDays, months } from "../../../constants/Date";
+import { getFpoProducts } from "../../../actions/farmer";
 
 function Dashboard() {
   const [weatherData, setWeatherData] = useState([]);
@@ -77,7 +77,7 @@ function Dashboard() {
         );
         if (!response.ok) throw new Error("Failed to retrieve weather data");
         const { list } = await response.json();
-        if (!list || list.length === 0)
+        if (!list || list?.length === 0)
           throw new Error("Failed to retrieve weather data");
         const groupedForecast = list.reduce((acc, item) => {
           const date = new Date(item.dt_txt).toDateString();
@@ -181,10 +181,10 @@ function Dashboard() {
                       </tr>
                     </thead>
                     <tbody className="fw-light fs-10">
-                      {tpList?.data?.slice(0, 4).map((tp, ind) => (
+                      {tpList?.data?.slice(0, 4)?.map((tp, ind) => (
                         <tr className="fw-bold text-capitalize" key={ind}>
-                          <td>{tp.createdAt.substring(0, 10)}</td>
-                          <td>{tp.courseName}</td>
+                          <td>{tp?.createdAt?.substring(0, 10)}</td>
+                          <td>{tp?.courseName}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -212,17 +212,17 @@ function Dashboard() {
                       <div className="d-flex justify-content-center">
                         <p className="">{WeekDays[weekDayIndex]}</p>
                         <p className="px-2 font-medium">
-                          | {currentDate.getDate()}{" "}
-                          {months[currentDate.getMonth()]}{" "}
-                          {currentDate.getFullYear()}
+                          | {currentDate?.getDate()}{" "}
+                          {months[currentDate?.getMonth()]}{" "}
+                          {currentDate?.getFullYear()}
                         </p>
                       </div>
                       <div className=" d-flex">
                         <p className="text-base font-medium">
-                          {Math.ceil(currentWeather?.main.temp)} ° C
+                          {Math.ceil(currentWeather?.main?.temp)} ° C
                         </p>
                         <p className="px-2 text-capitalize">
-                          {currentWeather?.weather[0].description}
+                          {currentWeather?.weather[0]?.description}
                         </p>
                       </div>
                     </div>
@@ -233,10 +233,10 @@ function Dashboard() {
                       </div>
                       <div className="d-flex gap-2 justify-space-between align-content-start">
                         <p className="text-base font-medium">
-                          {Math.ceil(currentWeather?.main.humidity)} %
+                          {Math.ceil(currentWeather?.main?.humidity)} %
                         </p>
                         <p className="px-2 text-capitalize">
-                          {Math.ceil(currentWeather?.wind.speed)} Km/h
+                          {Math.ceil(currentWeather?.wind?.speed)} Km/h
                         </p>
                       </div>
                     </div>
@@ -244,7 +244,7 @@ function Dashboard() {
                   <p className="font-medium h6 py-1">Next 5 Days Weather</p>
                   <div className="d-flex gap-2 flex-wrap justify-content-between">
                     {weatherData.map((day, index) => {
-                      const nextInterval = day.fields.find(
+                      const nextInterval = day?.fields?.find(
                         ({ date }) => new Date(date) > currentDate
                       );
                       if (nextInterval) {
@@ -294,13 +294,13 @@ function Dashboard() {
                         </tr>
                       </thead>
                       <tbody className="fw-light fs-10">
-                        {caList.data.slice(0, 4).map((ca, ind) => (
+                        {caList?.data?.slice(0, 4)?.map((ca, ind) => (
                           <tr className="fw-bold text-capitalize" key={ind}>
-                            <td>{ca.createdAt.substring(0, 10)}</td>
+                            <td>{ca?.createdAt?.substring(0, 10)}</td>
                             <td>
-                              {ca.title.length > 40
-                                ? ca.title.substring(0, 40) + "..."
-                                : ca.title}
+                              {ca?.title?.length > 40
+                                ? ca?.title.substring(0, 40) + "..."
+                                : ca?.title}
                             </td>
                           </tr>
                         ))}
@@ -314,7 +314,7 @@ function Dashboard() {
               <div className="mb-2 mt-2 p-3 dash__card">
                 <p className="card_title text-center">Store</p>
                 <div>
-                  <ImageSlider slides={storeItemList.data} />
+                  <ImageSlider slides={storeItemList?.data} />
                 </div>
               </div>
             </div>
@@ -322,7 +322,7 @@ function Dashboard() {
               <div className="mb-2 mt-2 p-3 dash__card">
                 <p className="card_title text-center">Selling Price</p>
                 <div>
-                  <ImageSlider slides={sellItemList.data} />
+                  <ImageSlider slides={sellItemList?.data} />
                 </div>
               </div>
             </div>
@@ -342,9 +342,9 @@ function Dashboard() {
                       {loanList?.data?.filter((loan) => loan.value.userId === farmerId)
                         ?.map((loan, ind) => (
                           <tr className="fw-bold text-capitalize" key={ind}>
-                            <td>{loan.value.loanId}</td>
-                            <td>{loan.value.grantedAmount}</td>
-                            <td>{loan.value.status}</td>
+                            <td>{loan?.value.loanId}</td>
+                            <td>{loan?.value.grantedAmount}</td>
+                            <td>{loan?.value.status}</td>
                           </tr>
                         ))}
                     </tbody>

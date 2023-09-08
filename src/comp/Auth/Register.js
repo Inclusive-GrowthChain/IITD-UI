@@ -24,7 +24,7 @@ const fieldSet1 = [
     type: "text"
   },
   {
-    name: "mobile",
+    name: "contactNumber",
     label: "Mobile",
     type: "number",
     validation: {
@@ -46,7 +46,7 @@ const fieldSet1 = [
   },
   {
     type: "date",
-    name: "dateOfBirth",
+    name: "DOB",
     label: "Date of Birth",
   },
   {
@@ -68,12 +68,12 @@ const fieldSet1 = [
     options: ["Male", "Female", "Other"]
   },
   {
-    name: "fatherName",
+    name: "fathersName",
     label: "Father's Name",
     type: 'text'
   },
   {
-    name: "motherName",
+    name: "mothersName",
     label: "Mother's Name",
     type: "text"
   },
@@ -83,7 +83,7 @@ const fieldSet1 = [
     type: "text"
   },
   {
-    name: "street",
+    name: "streetName",
     label: "Street Name",
     type: "text"
   },
@@ -122,7 +122,7 @@ const fieldSet1 = [
   {
     name: "occupation",
     label: "Occupation",
-    type:"text"
+    type: "text"
   },
   {
     name: "education",
@@ -130,7 +130,7 @@ const fieldSet1 = [
     type: "text"
   },
   {
-    name: "natureOfPlace",
+    name: "natureOfplace",
     label: "Nature of Place",
     type: "text"
   },
@@ -211,16 +211,16 @@ function Register() {
   } = useForm({
     defaultValues: {
       userName: "",
-      mobile: "",
+      contactNumber: "",
       password: "",
       confirmPassword: "",
-      dateOfBirth: "",
+      DOB: "",
       age: "",
       gender: "",
-      fatherName: "",
-      motherName: "",
+      fathersName: "",
+      mothersName: "",
       doorNumber: "",
-      street: "",
+      streetName: "",
       village: "",
       taluk: "",
       district: "",
@@ -228,7 +228,7 @@ function Register() {
       pinCode: "",
       occupation: "",
       education: "",
-      natureOfPlace: "",
+      natureOfplace: "",
       residence: "",
       caste: "",
       religion: "",
@@ -245,7 +245,7 @@ function Register() {
   })
 
   const navigate = useNavigate()
-  const dob = watch("dateOfBirth")
+  const dob = watch("DOB")
 
   useEffect(() => {
     if (dob) {

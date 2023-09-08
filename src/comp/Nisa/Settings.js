@@ -10,7 +10,7 @@ const IINRG_Settings = () => {
   const [activeTab, setActiveTab] = useState("tab1");
   const nisa = useAuthStore(s => s.userDetails)
 
-  const userType = nisa.type
+  const userType = nisa.userType
   const userId = nisa._id
 
   const queryClient = useQueryClient()
@@ -18,7 +18,7 @@ const IINRG_Settings = () => {
   const { register, reset, handleSubmit } = useForm()
 
   const { mutate } = useMutation({
-    mutationFn: (data) => updateProfile(data, userType, userId),
+    mutationFn: (data) => updateProfile(data, userType),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user-detail"] });
       reset()

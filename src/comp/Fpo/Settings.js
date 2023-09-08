@@ -15,19 +15,20 @@ const Settings = () => {
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
 
-  const userType = fpo.type
+  const userType = fpo.userType
   const userId = fpo._id
 
   const queryClient = useQueryClient()
 
   const { mutate } = useMutation({
-    mutationFn: (data) => updateProfile(data, userType, userId),
+    mutationFn: (data) => updateProfile(data, userType),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user-detail"] });
       reset()
     }
   })
 
+  console.log(new Date(fpo.dateOfIncorporation).toDateString())
 
   return (
     <main id="main_container" className="main_container container-fluid itemContainer">
@@ -100,7 +101,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        {fpo.fpoName}
+                                        {fpo.userName}
                                       </label>
                                     </div>
                                   </div>
@@ -329,7 +330,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        {fpo.shareholderNumber}
+                                        {fpo.noOfShareHolders}
                                       </label>
                                     </div>
                                   </div>
@@ -345,7 +346,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        {fpo.bankName}
+                                        {fpo.bank}
                                       </label>
                                     </div>
                                   </div>
@@ -361,7 +362,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        {fpo.bankAccountNumber}
+                                        {fpo.accountNumber}
                                       </label>
                                     </div>
                                   </div>
@@ -635,9 +636,9 @@ const Settings = () => {
                                       type="number"
                                       className="form-control form-control-alternative"
                                       placeholder=""
-                                      {...register("shareholderNumber")}
+                                      {...register("noOfShareHolders")}
                                     />
-                                    <p role="alert">{errors.shareholderNumber?.message}</p>
+                                    <p role="alert">{errors.noOfShareHolders?.message}</p>
                                   </div>
                                 </div>
                                 <div className="col-lg-6">

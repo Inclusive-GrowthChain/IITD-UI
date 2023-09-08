@@ -127,7 +127,7 @@ const PageThree = ({ onButtonClick, bid, handleClose }) => {
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={bid.bids.find((item) => item.fpoId === fpoId).fpoName}
+                value={bid.bids.find((item) => item.fpoId === fpoId).name}
               />
             </div>
           </div>

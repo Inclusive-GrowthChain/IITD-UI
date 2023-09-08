@@ -16,7 +16,7 @@ const style = {
 const list = [
   {
     label: "Applicant DOB",
-    name: "dateOfBirth",
+    name: "DOB",
   },
   {
     label: "Applicant Age",

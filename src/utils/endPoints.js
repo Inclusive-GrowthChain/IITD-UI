@@ -1,14 +1,14 @@
 export const root = {
   // baseUrl: "http://172.18.13.104:3000/api/", //Local URL
-  baseUrl: "http://3.7.253.48:3000/api", //Production URL
-  imgUrl: "http://3.7.253.48:3000",
-  // baseUrl: "http://172.18.8.65:3000/api",
-  // imgUrl: "http://172.18.8.65:3000/"
+  // baseUrl: "http://3.7.253.48:3000/api", //Production URL
+  // imgUrl: "http://3.7.253.48:3000",
+  baseUrl: "http://172.18.8.65:3000/api",
+  imgUrl: "http://172.18.8.65:3000/"
 };
 
 const endPoints = {
   login: "/login",
-  userDetails: "/userDetails",
+  userDetails: "/profile",
   fpoSignup: "/signup/fpo",
   nisaSignup: "/signup/nisa",
   farmerSignup: "/signup/farmer",
@@ -22,7 +22,7 @@ const endPoints = {
   auction: "/auction",
   user: "/user",
   forgotPassword: "/forgotpassword",
-  updatePassword: "/user/updatepassword",
+  updatePassword: "/updatepassword",
 
   admin: {
     getLicenses: "/licenses"
@@ -38,10 +38,12 @@ const endPoints = {
 
   // Farmer
   farmer: {
+    products: "/farmer/fpo/products",
     loans: "/loanwindow/loan?type=farmer",
     produce: "/farmer",
     purchaseTransaction : "/fpo/transaction/api/transactions",
     updateProfile: "/profile",
+    lacProducts: "/farmer/fpo/lacproducts",
     placeRequirements: "/farmer/requirements"
   },
 
@@ -51,12 +53,15 @@ const endPoints = {
     products: "/fpo/product",
     farmers: "/fpo/farmer",
     lac: "/fpo/lac",
-    itemsName: "/items/store",
-    lacType: "/items/lac",
+    itemsName: "/fpo/items/store",
+    lacType: "/fpo/items/lac",
     purchase: "/fpo/transaction/api/transaction",
     sale: "/fpo/transaction/api/transaction",
-    userDetails: "/userDetails",
-    loanData: "/loans/history?type=farmer&userId="
+    userDetails: "/fpo/farmer/details",
+    loanData: "/loans/history?type=farmer&userId=",
+    requirements: "/fpo/requirements",
+    procurements: "/fpo/farmerproduce",
+    resetPasswordFarmer: "/fpo/farmer/forgotpassword"
   },
 
   userList: {
@@ -64,7 +69,8 @@ const endPoints = {
     samunnati: "/user/list/lendingpartner",
     farmer: "/user/list/farmer",
     nisa: "/user/list/nisa",
-    fpo: "/user/list/fpo",
+    fpo: "/list/fpo",
+    fpolist: "/user/list/fpo"
   },
 
   samunnati: {

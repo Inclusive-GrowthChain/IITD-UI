@@ -1,4 +1,9 @@
+import { useQuery } from "@tanstack/react-query";
 import { NavLink } from "react-router-dom";
+import { resetFarmerPassword } from "../../../actions/fpo";
+import useModal from "../../../hooks/useModal";
+import { useState } from "react";
+import ResetPassword from "../Modals/CC/ResetPassword";
 
 const btnStyle = {
   backgroundColor: "#064420",
@@ -14,6 +19,19 @@ const btnStyle = {
 };
 
 function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
+
+  const [farmerPassword, setFarmerPassword] = useState("")
+  const [showPassword, setClosePassword] = useState(false)
+
+  const resetPasswordOnClick = async () => {
+    try {
+      const response = await resetFarmerPassword(data?.[0]?._id);
+      setFarmerPassword(response.newPassword)
+    } catch (error) {
+      console.error("API error:", error);
+    }
+  };
+
   return (
     <div className="table-responsive shadow p-3">
       <table className="table table-striped">
@@ -25,7 +43,6 @@ function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
             <th>Aadhaar Number</th>
             <th>View Application</th>
             <th>Reset Password</th>
-            <th>Farmer Password</th>
           </tr>
         </thead>
 
@@ -40,7 +57,7 @@ function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
               <td>
                 {app.village}
               </td>
-              <td>{app.mobile}</td>
+              <td>{app.contactNumber}</td>
               <td>{app.aadharCardNumber}</td>
               <td>
                 <button
@@ -61,19 +78,23 @@ function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
                   </button>
                 } */}
                 <button
+                  onClick={() => {
+                    resetPasswordOnClick()
+                    setClosePassword(true)
+                  }}
                   className="py-0.5 table_btn"
                   style={btnStyle}
                 >
                   Reset
                 </button>
               </td>
-              <td>
-                pahdioudf4454
-              </td>
             </tr>
           ))}
         </tbody>
       </table>
+      {
+        showPassword && <ResetPassword show newPassword={farmerPassword} handleClose={setClosePassword} />
+      }
     </div>
   );
 }
