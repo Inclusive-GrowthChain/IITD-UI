@@ -34,7 +34,7 @@ const ImageSlider = ({ slides }) => {
         >
           {index === current && <>
             <img
-              src={`${root.imgUrl}/img/${slide.imageUrl}`}
+              src={slide.imageUrl}
               alt=""
               height={180}
               className="image"

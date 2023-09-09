@@ -21,7 +21,7 @@ const PageThree = ({ onButtonClick, outerbid, handleClose }) => {
 
   const queryClient = useQueryClient()
 
-  const { mutate} = useMutation({
+  const { mutate } = useMutation({
     mutationFn: rejectTestReports,
     onSuccess: () => {
       queryClient.invalidateQueries("auction/")
@@ -212,7 +212,7 @@ const PageThree = ({ onButtonClick, outerbid, handleClose }) => {
         <Modal.Header closeButton>Report</Modal.Header>
         <Modal.Body>
           <img
-            src={`${root.imgUrl}/img/${currentReport}`}
+            src={root.imgUrl}
             alt="Payment"
             style={{ width: "100%", height: "100%" }}
           />
@@ -234,7 +234,7 @@ const PageThree = ({ onButtonClick, outerbid, handleClose }) => {
               style={{ backgroundColor: '#064420' }}
               onClick={(e) => {
                 e.preventDefault()
-                mutate({data})
+                mutate({ data })
                 handleCloseReject()
                 handleClose()
               }}

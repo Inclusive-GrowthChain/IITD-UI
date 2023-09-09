@@ -98,7 +98,7 @@ function SellingPrice() {
                     <div className="col" key={item._id}>
                       <div className="card">
                         <img
-                          src={`${root.imgUrl}/img/${item.imageUrl}`}
+                          src={item.imageUrl}
                           alt=""
                           height={280}
                           className="store_img"
@@ -204,7 +204,7 @@ function SellingPrice() {
                           style={{ width: "20rem" }}
                         >
                           <img
-                            src={`${root.imgUrl}/img/${item.imageUrl}`}
+                            src={item.imageUrl}
                             alt=""
                             height={280}
                             className="store_img"

@@ -89,6 +89,7 @@ function App() {
     fetchData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+
   const { isLoading, fetchStatus } = useQuery({
     queryFn: getUserDetails,
     queryKey: ["user-detail"],

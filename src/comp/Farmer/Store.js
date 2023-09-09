@@ -35,7 +35,7 @@ function Store() {
                 <div className="col" key={item._id}>
                   <div className="card" style={{ marginBottom: "50px" }}>
                     <img
-                      src={`${root.imgUrl}/img/${item.imageUrl}`}
+                      src={item.imageUrl}
                       alt=""
                       height={280}
                       className="store_img"

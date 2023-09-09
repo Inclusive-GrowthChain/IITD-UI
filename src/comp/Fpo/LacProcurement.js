@@ -46,7 +46,8 @@ function Card({ data = [], updateModal }) {
               <div className="store-card mt-4">
                 <div className="card-image">
                   <img
-                    src={`${root.imgUrl}/img/${item.imageUrl}`}
+                    // src={`${root.imgUrl}/img/${item.imageUrl}`}
+                    src={item.imageUrl}
                     alt=""
                     height={280}
                     className="store_img"
@@ -81,7 +82,6 @@ function Card({ data = [], updateModal }) {
 }
 
 function ProduceCard({ data = [], updateModal }) {
-  console.log(data)
   return (
     <>
       <div className="table-responsive shadow p-3">

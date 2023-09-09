@@ -198,7 +198,7 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
           <Modal.Header closeButton>Invoice</Modal.Header>
           <Modal.Body>
             <img
-              src={`${root.imgUrl}/img/${invoiceDetails.clientInvoice}`}
+              src={root.imgUrl}
               alt="Payment"
               style={{ width: "100%", height: "100%" }}
             />

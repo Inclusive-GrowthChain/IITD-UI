@@ -68,8 +68,8 @@ function Form() {
       }
       if (to) navigate(`/${data.data.userType}/${to}`)
     },
-    onError: () => {
-      errorNotify()
+    onError: (e) => {
+      errorNotify(e)
     }
   })
 

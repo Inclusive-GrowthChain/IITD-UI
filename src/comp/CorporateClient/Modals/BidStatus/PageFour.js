@@ -195,7 +195,7 @@ const PageFour = ({ onButtonClick, outerbid }) => {
         <Modal.Header closeButton>Invoice</Modal.Header>
         <Modal.Body>
           <img
-            src={`${root.imgUrl}/img/${fpo.invoice}`}
+            src={root.imgUrl}
             alt="Payment"
             style={{ width: "100%", height: "100%" }}
           />
