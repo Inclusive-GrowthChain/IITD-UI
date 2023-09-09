@@ -8,7 +8,7 @@ import { rejectTestReports } from "../../../../actions/auction";
 
 const PageThree = ({ onButtonClick, outerbid, handleClose }) => {
   const [showReport, setShowReport] = useState(false);
-  const [currentReport, setCurrentReport] = useState({});
+  const [currentReport, setCurrentReport] = useState([]);
   const [showReject, setShowReject] = useState(false);
   const [fpo, setFpo] = useState({});
   const [status, setStatus] = useState("")
@@ -30,7 +30,7 @@ const PageThree = ({ onButtonClick, outerbid, handleClose }) => {
 
   useEffect(() => {
     outerbid.bids.forEach((bid) => {
-      if (bid.status) {
+      if (bid.status === "test-report-added" || bid?.status === "payment-done-waiting-approval" || bid?.status === "completed"  || bid.status === "invoice-added") {
         let tempFpo = {};
         tempFpo.id = bid.fpoId;
         tempFpo.name = bid.name;
@@ -181,7 +181,7 @@ const PageThree = ({ onButtonClick, outerbid, handleClose }) => {
                     onClick={(e) => {
                       e.preventDefault();
                       handleShowReport();
-                      setCurrentReport(fpo.testReports);
+                      setCurrentReport(outerbid?.bids);
                     }}
                   >
                     view
@@ -208,14 +208,41 @@ const PageThree = ({ onButtonClick, outerbid, handleClose }) => {
         </div>
       </form>
 
+      {/* <Modal show={showReport} onHide={handleCloseReport}>
+        <Modal.Header closeButton>Report</Modal.Header>
+        <Modal.Body>
+          {
+            currentReport?.map((report) => {
+              if (report?.status === "" && report?.requiredTestReports) {
+                <img
+                  src={report.requiredTestReports}
+                  alt="Payment"
+                  style={{ width: "100%", height: "100%" }}
+                />
+              }
+            })
+          }
+        </Modal.Body>
+      </Modal> */}
+
       <Modal show={showReport} onHide={handleCloseReport}>
         <Modal.Header closeButton>Report</Modal.Header>
         <Modal.Body>
-          <img
-            src={root.imgUrl}
-            alt="Payment"
-            style={{ width: "100%", height: "100%" }}
-          />
+          {
+            currentReport?.length > 0 && currentReport?.map((report, index) => {
+              if ((report?.status === "test-report-added" || report?.status === "completed" || report?.status === "payment-done-waiting-approval" || report?.status === "invoice-added") && report?.requiredTestReports) {
+                return (
+                  <img
+                    key={index} 
+                    src={report.requiredTestReports}
+                    alt="Payment"
+                    style={{ width: "100%", height: "100%" }}
+                  />
+                );
+              }
+              return null; 
+            })
+          }
         </Modal.Body>
       </Modal>
 

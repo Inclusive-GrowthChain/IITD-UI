@@ -3,7 +3,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { makePaymentToFpo } from '../../../../actions/auction';
-import { root } from "../../../../utils/endPoints";
 import Modal from "react-bootstrap/Modal";
 import FileInput from "../../../Common/FileInput";
 
@@ -11,7 +10,7 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
   const [bidComplete, setBidComplete] = useState(false)
   const [invoiceDetails, setInvoiceDetails] = useState({})
   const [showInvoice, setShowInvoice] = useState(false);
-
+  const [currentReport, setCurrentReport] = useState([]);
   const handleShowInvoice = () => setShowInvoice(true);
   const handleCloseInvoice = () => setShowInvoice(false);
 
@@ -37,7 +36,7 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
   // eslint-disable-next-line
   useEffect(() => {
     outerbid.bids.forEach((bid) => {
-      if (bid.status) {
+      if (bid.status !== "test-reports-rejected") {
         reset({
           auctionId: outerbid.id,
           bidId: bid.id
@@ -170,6 +169,7 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
                     onClick={(e) => {
                       e.preventDefault();
                       handleShowInvoice();
+                      setCurrentReport(outerbid?.bids);
                     }}
                   >
                     view
@@ -197,11 +197,21 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
         <Modal show={showInvoice} onHide={handleCloseInvoice}>
           <Modal.Header closeButton>Invoice</Modal.Header>
           <Modal.Body>
-            <img
-              src={root.imgUrl}
-              alt="Payment"
-              style={{ width: "100%", height: "100%" }}
-            />
+            {
+              currentReport?.length > 0 && currentReport?.map((report, index) => {
+                if ((report?.status === "test-report-added" || report?.status === "completed" || report?.status === "payment-done-waiting-approval" || report?.status === "invoice-added") && report?.requiredTestReports) {
+                  return (
+                    <img
+                      key={index}
+                      src={report.requiredTestReports}
+                      alt="Payment"
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  );
+                }
+                return null;
+              })
+            }
           </Modal.Body>
         </Modal>
 

@@ -8,13 +8,14 @@ const PageFour = ({ onButtonClick, outerbid }) => {
   const [showInvoice, setShowInvoice] = useState(false);
   const [fpo, setFpo] = useState({});
   const [status, setStatus] = useState("")
+  const [currentReport, setCurrentReport] = useState([]);
 
   const handleShowInvoice = () => setShowInvoice(true);
   const handleCloseInvoice = () => setShowInvoice(false);
 
   useEffect(() => {
     outerbid.bids.forEach((bid) => {
-      if (bid.status) {
+      if (bid.status === "invoice-added" || bid.status === "payment-done-waiting-approval" || bid?.status === "completed") {
         let tempFpo = {};
         tempFpo.id = bid.fpoId;
         tempFpo.name = bid.name;
@@ -168,6 +169,7 @@ const PageFour = ({ onButtonClick, outerbid }) => {
                     onClick={(e) => {
                       e.preventDefault();
                       handleShowInvoice();
+                      setCurrentReport(outerbid?.bids);
                     }}
                   >
                     view
@@ -194,11 +196,21 @@ const PageFour = ({ onButtonClick, outerbid }) => {
       <Modal show={showInvoice} onHide={handleCloseInvoice}>
         <Modal.Header closeButton>Invoice</Modal.Header>
         <Modal.Body>
-          <img
-            src={root.imgUrl}
-            alt="Payment"
-            style={{ width: "100%", height: "100%" }}
-          />
+          {
+            currentReport?.length > 0 && currentReport?.map((report, index) => {
+              if ((report?.status === "test-report-added" || report?.status === "completed" || report?.status === "payment-done-waiting-approval" || report?.status === "invoice-added") && report?.requiredTestReports) {
+                return (
+                  <img
+                    key={index}
+                    src={report.requiredTestReports}
+                    alt="Payment"
+                    style={{ width: "100%", height: "100%" }}
+                  />
+                );
+              }
+              return null;
+            })                                                                                                                                                           
+          }
         </Modal.Body>
       </Modal>
 
