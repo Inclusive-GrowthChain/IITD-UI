@@ -1,6 +1,6 @@
 import axios from "axios";
 import jsCookie from "js-cookie";
-import {successNotify } from "./toastifyHlp";
+import { errorNotify, successNotify } from "./toastifyHlp";
 import { root } from './endPoints';
 
 export const cookies = jsCookie;
@@ -30,10 +30,9 @@ const responseIntercepter = (instance, successMsg) => {
       return res.data
     },
     error => {
-      const err = new Error(error?.message)
-      err.status = error?.response?.status
-      err.message = error?.response?.data?.message
-      throw err
+      // const err = new Error(error.response.data.error || error?.message || error?.response?.data?.message)
+      // err.status = error?.response?.status
+      throw error.response.data.error || error?.message || error?.response?.data?.message
     }
   )
 }

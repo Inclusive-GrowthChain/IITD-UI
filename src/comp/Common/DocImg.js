@@ -14,7 +14,7 @@ function DocImg({ title = "", imgUrl = "", show, handleClose }) {
 
       <Modal.Body>
         <img
-          src={imgUrl ? root.imgUrl : logo}
+          src={imgUrl ? imgUrl : logo}
           alt={title}
           style={{ width: "100%", height: "100%" }}
         />

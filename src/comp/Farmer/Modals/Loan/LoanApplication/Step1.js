@@ -28,12 +28,12 @@ const list = [
   {
     label: "Applicant Gender",
     name: "gender",
-    isSelect: true,
-    options: [
-      "Male",
-      "Female",
-      "Other"
-    ]
+    // isSelect: true,
+    // options: [
+    //   "Male",
+    //   "Female",
+    //   "Other"
+    // ]
   },
 ]
 

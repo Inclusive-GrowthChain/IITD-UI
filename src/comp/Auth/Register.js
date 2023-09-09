@@ -7,6 +7,7 @@ import states from '../../constants/states';
 
 import FormHelp, { Input } from "./Modals/FormHelp";
 import { useNavigate } from "react-router";
+import { errorNotify } from "../../utils/toastifyHlp";
 
 const btnStyle = {
   backgroundColor: "#064420",
@@ -266,6 +267,9 @@ function Register() {
     onSuccess: () => {
       reset()
       navigate("/")
+    },
+    onError: (e) => {
+      errorNotify(e)
     }
   })
 

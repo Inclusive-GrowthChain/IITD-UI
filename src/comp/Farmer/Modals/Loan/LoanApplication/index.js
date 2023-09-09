@@ -36,7 +36,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
   const [step, setStep] = useState(1)
   const userDetails = useAuthStore(s => s.userDetails)
   const queryClient = useQueryClient()
-  console.log(data)
+  console.log(userDetails)
 
   const {
     register, formState: { errors }, handleSubmit,
@@ -165,6 +165,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
               getValues={getValues}
               backBtnStyle={backBtnStyle}
               nextBtnStyle={nextBtnStyle}
+              // userDetails={userDetails}
             />
           }
           {

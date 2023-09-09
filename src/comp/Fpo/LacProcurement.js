@@ -2,14 +2,12 @@ import { useState } from "react";
 import { useQueries } from "@tanstack/react-query";
 
 import { getFpoLac, getProcurementList } from "../../actions/fpo";
-import { root } from "../../utils/endPoints";
 import useModal from "../../hooks/useModal";
 
 import DriveFileRenameOutlineOutlinedIcon from "@mui/icons-material/DriveFileRenameOutlineOutlined";
 import AddLacProcurement from "./Modals/AddLacProcurement";
 import AddLacPurchase from "./Modals/AddLacPurchase";
 import Loader from "../Common/Loader";
-import { getAllProduceList } from "../../actions/farmer";
 import DocImg from "../Common/DocImg";
 
 const btnStyle = {
@@ -294,6 +292,9 @@ const LacProcurement = () => {
         <AddLacPurchase show data={modal.data} handleClose={closeModal} />
       )}
 
+      {
+        console.log(modal)
+      }
       {modal.state && modal.state === "View Image" && (
         <DocImg
           show

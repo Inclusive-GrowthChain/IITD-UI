@@ -11,6 +11,7 @@ import Loader from "../../Common/Loader";
 import InProcess from "./InProcess";
 import Approved from "./Approved";
 import Rejected from "./Rejected";
+import { getActiveLoanwindow } from "../../../actions/fpo";
 
 const h3Style = {
   fontSize: "22px",
@@ -36,6 +37,12 @@ const Loan = () => {
     queryFn: getLoanList
   })
 
+  const { data: data1 } = useQuery({
+    queryKey: ["active-window"],
+    queryFn: () => getActiveLoanwindow({ windowType: "farmer" })
+  })
+  console.log(data1, "data1")
+
   if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
   return (
@@ -50,13 +57,29 @@ const Loan = () => {
               Apply for loan
             </h3>
 
-            <button
-              className="loan_button"
-              style={applyBtnStyle}
-              onClick={() => updateModal("applyLoan")}
-            >
-              Apply Loan
-            </button>
+            {
+              // Check if data1 and data1.data exist and data1.data has a length greater than 1
+              data1?.data?.length > 0 ? (
+                // Render a disabled button if the condition is true
+                <button
+                  className="loan_button"
+                  style={applyBtnStyle}
+                  onClick={() => updateModal("applyLoan")}
+                >
+                  Apply Loan
+                </button>
+              ) : (
+                // Render a regular button if the condition is false
+                <button
+                  className="loan_button"
+                  disabled={true}
+                  style={applyBtnStyle}
+                  onClick={() => updateModal("applyLoan")}
+                >
+                  Apply Loan
+                </button>
+              )
+            }
           </div>
 
           <div className="tabs_wrapper">

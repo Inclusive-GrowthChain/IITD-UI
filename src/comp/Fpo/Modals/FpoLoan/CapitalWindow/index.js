@@ -108,6 +108,7 @@ function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = 
       handleClose()
     },
     onError: (e) => {
+      console.log(e)
       const msg = e.stack.split(":")[1]
       errorNotify(msg)
     }
