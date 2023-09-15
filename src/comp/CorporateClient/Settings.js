@@ -11,7 +11,6 @@ const Settings = () => {
   const corporateClient = useAuthStore(s => s.userDetails);
 
   const userType = corporateClient.userType
-  const userId = corporateClient._id
 
   const queryClient = useQueryClient()
 

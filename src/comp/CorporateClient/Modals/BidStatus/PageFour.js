@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { root } from "../../../../utils/endPoints";
 import Modal from "react-bootstrap/Modal";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';

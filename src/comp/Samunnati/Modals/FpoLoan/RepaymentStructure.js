@@ -3,7 +3,6 @@ import useModal from "../../../../hooks/useModal";
 
 import RepaymentContentTitle from "../../../Common/RepaymentContentTitle";
 import Repayment from "./Repayment";
-import { useEffect } from "react";
 
 const btnStyle = {
   backgroundColor: "#064420",

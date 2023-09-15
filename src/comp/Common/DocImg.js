@@ -1,5 +1,4 @@
 import Modal from "react-bootstrap/Modal";
-import { root } from "../../utils/endPoints";
 import logo from "../../assets/img/logo.png";
 
 function DocImg({ title = "", imgUrl = "", show, handleClose }) {

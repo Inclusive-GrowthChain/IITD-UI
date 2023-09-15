@@ -33,7 +33,7 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
       closeBidStatus();
     }
   })
-  // eslint-disable-next-line
+
   useEffect(() => {
     outerbid.bids.forEach((bid) => {
       if (bid.status !== "test-reports-rejected") {
@@ -57,7 +57,7 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
         }
       }
     });
-  }, [outerbid])
+  }, [outerbid]) // eslint-disable-next-line
 
   return (
     <main

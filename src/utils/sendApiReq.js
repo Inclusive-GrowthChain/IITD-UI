@@ -32,7 +32,9 @@ const responseIntercepter = (instance, successMsg) => {
     error => {
       // const err = new Error(error.response.data.error || error?.message || error?.response?.data?.message)
       // err.status = error?.response?.status
-      throw error.response.data.error || error?.message || error?.response?.data?.message
+      const msg = error.response.data.error || error?.message || error?.response?.data?.message
+      errorNotify(msg)
+      throw msg
     }
   )
 }

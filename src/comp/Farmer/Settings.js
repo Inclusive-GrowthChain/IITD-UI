@@ -17,7 +17,6 @@ const Settings = () => {
   const queryClient = useQueryClient()
 
   const userType = farmer.userType
-  const userId = farmer._id
 
   const { mutate } = useMutation({
     mutationFn: (data) => updateProfile(data, userType),

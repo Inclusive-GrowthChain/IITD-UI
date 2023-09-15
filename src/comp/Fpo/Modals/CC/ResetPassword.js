@@ -13,14 +13,14 @@ const modalBodyStyle = {
   textAlign: "center",
 }
 
-const btnStyle = {
-  backgroundColor: "#064420",
-  alignItems: "center",
-  borderRadius: "5px",
-  border: "none",
-  padding: "0.25rem 1rem",
-  color: "#fff",
-}
+// const btnStyle = {
+//   backgroundColor: "#064420",
+//   alignItems: "center",
+//   borderRadius: "5px",
+//   border: "none",
+//   padding: "0.25rem 1rem",
+//   color: "#fff",
+// }
 
 function ResetPassword({ show, handleClose, newPassword }) {
   return (

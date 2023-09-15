@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 import { getAllProduceList } from "../../actions/farmer";
 import { useAuthStore } from "../../store/useAuthStore";
 import { getFpoLac } from "../../actions/farmer";
-import { root } from "../../utils/endPoints";
 import useModal from "../../hooks/useModal";
 
 import { TabNavItem, TabContent } from "../UIComp/Tabs";

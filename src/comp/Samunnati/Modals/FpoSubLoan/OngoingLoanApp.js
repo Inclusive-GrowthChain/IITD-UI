@@ -15,45 +15,45 @@ const btnStyle = {
   lineHeight: "2rem",
 }
 
-const btnStyle2 = {
-  color: "blue",
-  alignItems: "center",
-  borderRadius: "5px",
-  border: "none",
-  padding: "0.25rem 1rem",
-  width: "100%",
-  fontSize: "1rem",
-  lineHeight: "2rem",
-  textDecoration: "underline",
-  backgroundColor: "rgb(255, 255, 255, 0)",
-}
+// const btnStyle2 = {
+//   color: "blue",
+//   alignItems: "center",
+//   borderRadius: "5px",
+//   border: "none",
+//   padding: "0.25rem 1rem",
+//   width: "100%",
+//   fontSize: "1rem",
+//   lineHeight: "2rem",
+//   textDecoration: "underline",
+//   backgroundColor: "rgb(255, 255, 255, 0)",
+// }
 
-const repaymentsList = [
-  {
-    id: 1,
-    date: "12-10-2021",
-    amt: "100000",
-    amt2: "90000"
-  },
-  {
-    id: 2,
-    date: "12-10-2021",
-    amt: "100000",
-    amt2: "90000"
-  },
-  {
-    id: 3,
-    date: "12-10-2021",
-    amt: "100000",
-    amt2: "90000"
-  },
-  {
-    id: 4,
-    date: "12-10-2021",
-    amt: "100000",
-    amt2: "90000"
-  },
-]
+// const repaymentsList = [
+//   {
+//     id: 1,
+//     date: "12-10-2021",
+//     amt: "100000",
+//     amt2: "90000"
+//   },
+//   {
+//     id: 2,
+//     date: "12-10-2021",
+//     amt: "100000",
+//     amt2: "90000"
+//   },
+//   {
+//     id: 3,
+//     date: "12-10-2021",
+//     amt: "100000",
+//     amt2: "90000"
+//   },
+//   {
+//     id: 4,
+//     date: "12-10-2021",
+//     amt: "100000",
+//     amt2: "90000"
+//   },
+// ]
 
 const step1Data = [
   {

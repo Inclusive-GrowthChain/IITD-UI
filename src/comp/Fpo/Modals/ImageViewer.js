@@ -1,4 +1,3 @@
-import { root } from "../../../utils/endPoints";
 import Modal from "react-bootstrap/Modal";
 
 function ImageViewer({ show, handleClose, data }) {

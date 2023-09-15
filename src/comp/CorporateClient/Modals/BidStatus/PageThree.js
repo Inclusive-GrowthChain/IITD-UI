@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { root } from "../../../../utils/endPoints";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { rejectTestReports } from "../../../../actions/auction";
 

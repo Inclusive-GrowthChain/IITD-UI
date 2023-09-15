@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { getFpoProducts } from "../../actions/fpo";
-import { root } from "../../utils/endPoints";
 import useModal from "../../hooks/useModal";
 
 import DriveFileRenameOutlineOutlinedIcon from "@mui/icons-material/DriveFileRenameOutlineOutlined";

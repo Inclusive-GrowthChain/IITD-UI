@@ -1,7 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
 import { NavLink } from "react-router-dom";
 import { resetFarmerPassword } from "../../../actions/fpo";
-import useModal from "../../../hooks/useModal";
 import { useState } from "react";
 import ResetPassword from "../Modals/CC/ResetPassword";
 
