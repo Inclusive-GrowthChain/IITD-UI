@@ -67,7 +67,7 @@ const Samunnati = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="d-flex align-items-center justify-content-center"
           >
-            <div class="input-group mb-3">
+            <div className="input-group mb-3">
               <input
                 {...register("name", { required: true })}
                 type="text"

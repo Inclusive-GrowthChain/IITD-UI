@@ -204,7 +204,7 @@ export function createLoan(data) {
 }
 
 export function updateFarmerLoanRepayment(rData) {
-  console.log(rData)
+  console.log(rData,"Loan window id and id")
   let data = {
     paymentDate: rData.paymentDate,
     paidAmount: rData.paidAmount,

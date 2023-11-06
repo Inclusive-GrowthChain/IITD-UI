@@ -17,14 +17,18 @@ const btnStyle = {
 
 function AddRepayment({ show, handleClose, data,repaymentItem}) {
   console.log("------------------------")
-  console.log("Add Repayment...........",data.value.id)
+  // console.log("Add Repayment...........",data.value.id)
+  // console.log(repaymentItem)
+  // console.log(data.windowId)
+  // console.log(data.id)
   const queryClient = useQueryClient()
+  
   const { register, handleSubmit } = useForm({
     defaultValues: {
       "paymentDate": "",
       "paidAmount": 0,
-      "loanId": data?.value?.id,
-      "windowId": data?.value?.windowId,
+      "loanId": data?.value?.id || data?.id,
+      "windowId": data?.value?.windowId || data?.windowId,
       "repaymentId": repaymentItem,
     }
   })

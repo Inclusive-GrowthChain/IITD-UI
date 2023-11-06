@@ -20,6 +20,16 @@ const btnStyle = {
 
 const fieldSet1 = [
   {
+    name: "firstName",
+    label: "First Name",
+    type: "text"
+  },
+  {
+    name: "lastName",
+    label: "Last Name",
+    type: "text"
+  },
+  {
     name: "userName",
     label: "Username",
     type: "text"
@@ -211,6 +221,8 @@ function Register() {
     clearErrors
   } = useForm({
     defaultValues: {
+      firstName:"",
+      lastName: "",
       userName: "",
       contactNumber: "",
       password: "",

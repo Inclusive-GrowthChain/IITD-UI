@@ -38,7 +38,7 @@ function SaleHistory({ showAddSale, handleCloseAddSale, handleShowAddSale, handl
     },
     onSuccess: () => {
       queryClient.invalidateQueries("/fpo/transaction/api/transaction");
-      setSubmitting(true);
+      setSubmitting(false);
       handleCloseAddSale()
     },
   });
