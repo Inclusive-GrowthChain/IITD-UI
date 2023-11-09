@@ -19,30 +19,38 @@ const list = [
   {
     label: "MOA",
     name: "moa",
+    urlTitle: "certificateOfIncorporationImage"
   },
   {
     label: "AOA",
     name: "aoa",
+    urlTitle: "copyOfByLawsImage"
   },
   {
     label: "Certificate of Incorporation",
     name: "coi",
+    urlTitle: "certificateOfIncorporationImage"
   },
   {
     label: "GST Certificate",
     name: "gst",
+    urlTitle: "gstCertificateImage"
   },
   {
     label: "PAN Card",
     name: "pan",
+    urlTitle: "panCardImage"
   },
 ]
 
-function Step1({ setStep, h5Style, nextBtnStyle }) {
+function Step1({ setStep, h5Style, nextBtnStyle,user }) {
   const { modal, updateModal, closeModal } = useModal()
   const { getValues } = useFormContext()
   const docs = getValues("kycDocuments")
-
+  console.log(docs)
+  console.log(user)
+  console.log(user.certificateOfIncorporationImage)
+  console.log()
   return (
     <div>
       <h5 style={h5Style}>KYC Documents</h5>
@@ -61,7 +69,7 @@ function Step1({ setStep, h5Style, nextBtnStyle }) {
               <button
                 className="py-0.5"
                 style={btnStyle}
-                onClick={() => updateModal(l.name, { title: l.label })}
+                onClick={() => updateModal(l.name, { title: l.label, urlTitle:l.urlTitle })}
                 type="button"
               >
                 View
@@ -89,7 +97,7 @@ function Step1({ setStep, h5Style, nextBtnStyle }) {
         <DocImg
           show
           title={modal.data.title}
-          imgUrl={docs?.find(d => d.name === modal.state)?.doc || ""}
+          imgUrl={docs?.find(d => d.name === modal.state)?.doc || user[modal.data.urlTitle] || ""}
           handleClose={closeModal}
         />
       }

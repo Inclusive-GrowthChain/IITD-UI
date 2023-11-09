@@ -61,7 +61,6 @@ function Panel2() {
     queryFn: () => getApprovedLoanList(farmerId),
   });
 
-  console.log(data)
   if (isLoading) return <Loader wrapperCls="loader-main-right" />;
 
   return (
@@ -133,7 +132,6 @@ function Panel2() {
                   <button
                     style={style}
                     onClick={() => {
-                      console.log("Button is clicked from loan application.");
                       updateModal("LoanApplication", g) 
                     }}
                   >

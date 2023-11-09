@@ -12,13 +12,14 @@ const Settings = () => {
   const [activeTab, setActiveTab] = useState("tab1");
   const fpo = useAuthStore(s => s.userDetails)
   const { modal, updateModal, closeModal } = useModal()
-  console.log(fpo)
+
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
 
   const userType = fpo.userType
   const userId = fpo._id
 
+  console.log(fpo)
   const queryClient = useQueryClient()
 
   const { mutate } = useMutation({
@@ -29,7 +30,6 @@ const Settings = () => {
     }
   })
 
-  console.log(new Date(fpo.dateOfIncorporation).toDateString())
 
   return (
     <main id="main_container" className="main_container container-fluid itemContainer">
@@ -262,7 +262,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        {fpo.panNumber}
+                                        {fpo.panCardNumber}
                                       </label>
                                     </div>
                                   </div>
@@ -347,7 +347,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        {fpo.bank}
+                                        {fpo.bankName}
                                       </label>
                                     </div>
                                   </div>
@@ -363,7 +363,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        {fpo.accountNumber}
+                                        {fpo.bankAccountNumber}
                                       </label>
                                     </div>
                                   </div>
@@ -411,7 +411,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        {fpo.directorContactNumber}
+                                        {fpo.directorMobileNumber}
                                       </label>
                                     </div>
                                   </div>

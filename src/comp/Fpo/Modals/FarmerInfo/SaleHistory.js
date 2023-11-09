@@ -12,8 +12,6 @@ function SaleHistory({ showAddSale, handleCloseAddSale, handleShowAddSale, handl
   const { farmerId } = useParams();
   const { register, watch, reset, handleSubmit } = useForm()
   const [totalItems, setTotalItems] = useState([])
-  const [submitting, setSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const amount = watch("ratePerUnit") * watch("quantity") || 0
 
@@ -27,18 +25,14 @@ function SaleHistory({ showAddSale, handleCloseAddSale, handleShowAddSale, handl
   const { mutate } = useMutation({
     mutationFn: async (data) => {
       if (data.length > 0) {
-        setSubmitting(true); 
         await addSale(data, farmerId, totalAmount);
-        setSubmitSuccess(true); 
       } else {
         errorNotify("Please fill the required Data.");
-        setSubmitting(false)
         throw new Error("Required data not filled");
       }
     },
     onSuccess: () => {
       queryClient.invalidateQueries("/fpo/transaction/api/transaction");
-      setSubmitting(false);
       handleCloseAddSale()
     },
   });
@@ -182,12 +176,10 @@ function SaleHistory({ showAddSale, handleCloseAddSale, handleShowAddSale, handl
             <div>
               <button
                 onClick={async () => {
-                  if (!submitting) {
-                    setSubmitting(true);
-                    await mutate(totalItems);
-                  }
+                  await mutate(totalItems);
+                  setTotalItems([])
+                  handleCloseAddSale()
                 }}
-                disabled={submitting || submitSuccess} 
                 style={{
                   backgroundColor: "#064420",
                   border: "none",
@@ -198,7 +190,7 @@ function SaleHistory({ showAddSale, handleCloseAddSale, handleShowAddSale, handl
                 }}
                 type="button"
               >
-                {submitting ? "Submitting..." : submitSuccess ? "Submitted" : "Submit"}
+                Submit
               </button>
             </div>
           </div>

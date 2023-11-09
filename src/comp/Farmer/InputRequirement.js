@@ -74,9 +74,9 @@ const InputRequirement = () => {
                                             data?.length > 0 && data?.map((item) => {
                                                 return (
                                                     <tr key={item?._id}>
-                                                        <td>{item?.updatedAt}</td>
-                                                        <td>{item?.inputType}</td>
-                                                        <td>{item?.brand}</td>
+                                                        <td>{new Date(item?.updatedAt).toISOString().slice(0,10)}</td>
+                                                        <td>{item?.inputType || item?.type}</td>
+                                                        <td>{item?.brand || item.Brand}</td>
                                                         <td>{item?.quantity}</td>
                                                         <td>{item?.month}</td>
                                                     </tr>

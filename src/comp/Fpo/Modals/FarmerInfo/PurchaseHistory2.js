@@ -14,8 +14,6 @@ function PurchaseHistory2({ showAddPurchase, handleShowAddPurchase, handleCloseA
   const { farmerId } = useParams();
   const { register, watch, reset, handleSubmit } = useForm()
   const [totalItems, setTotalItems] = useState([])
-  const [submitting, setSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const amount = watch("ratePerUnit") * watch("quantity") || 0
 
@@ -29,18 +27,14 @@ function PurchaseHistory2({ showAddPurchase, handleShowAddPurchase, handleCloseA
   const { mutate } = useMutation({
     mutationFn: async (data) => {
       if (data.length > 0) {
-        setSubmitting(true);
         await addPurchase(data, farmerId, totalAmount);
-        setSubmitSuccess(true);
       } else {
         errorNotify("Please fill the required Data.");
-        setSubmitting(false)
         throw new Error("Required data not filled");
       }
     },
     onSuccess: () => {
       queryClient.invalidateQueries("/fpo/transaction/api/transaction");
-      setSubmitting(true);
       handleCloseAddPurchase()
     },
   });
@@ -187,12 +181,10 @@ function PurchaseHistory2({ showAddPurchase, handleShowAddPurchase, handleCloseA
             <div>
               <button
                 onClick={async () => {
-                  if (!submitting) {
-                    setSubmitting(true);
-                    await mutate(totalItems);
-                  }
+                  await mutate(totalItems);
+                  setTotalItems([])
+                  handleCloseAddPurchase()
                 }}
-                disabled={submitting || submitSuccess}
                 style={{
                   backgroundColor: "#064420",
                   border: "none",
@@ -203,7 +195,7 @@ function PurchaseHistory2({ showAddPurchase, handleShowAddPurchase, handleCloseA
                 }}
                 type="button"
               >
-                {submitting ? "Submitting..." : submitSuccess ? "Submitted" : "Submit"}
+                Submit
               </button>
             </div>
           </div>

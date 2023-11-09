@@ -5,7 +5,7 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 
 const ImageSlider = ({ slides }) => {
   const [current, setCurrent] = useState(0);
-  const length = slides.length;
+  const length = slides?.length;
 
   const nextSlide = () => {
     setCurrent(current === length - 1 ? 0 : current + 1);

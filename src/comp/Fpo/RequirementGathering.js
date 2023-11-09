@@ -51,17 +51,17 @@ const RequirementGathering = () => {
                                     <tbody>
                                         {data?.map((tp, ind) => {
                                             const famerName = tp.farmerName
-                                            
-                                            return tp.requirements?.map((requirement, requirementIndex) => (
-                                                <tr className="fw-bold text-capitalize" key={requirementIndex}>
+
+                                            return tp.requirements?.map((requirement, requirementIndex) => {
+                                                return <tr className="fw-bold text-capitalize" key={requirementIndex}>
                                                     <td>{famerName}</td>
-                                                    <td>{requirement.updatedAt || 'N/A'}</td>
-                                                    <td>{requirement.inputType || 'N/A'}</td>
-                                                    <td>{requirement.brand || 'N/A'}</td>
+                                                    <td>{ new Date(requirement.updatedAt).toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }) || 'N/A'}</td>
+                                                    <td>{requirement.type || requirement.inputType || 'N/A'}</td>
+                                                    <td>{requirement.Brand || requirement.brand || 'N/A'}</td>
                                                     <td>{requirement.quantity || 'N/A'}</td>
                                                     <td>{requirement.month || 'N/A'}</td>
                                                 </tr>
-                                            ))
+                                            })
                                         })}
                                     </tbody>
                                 </table>

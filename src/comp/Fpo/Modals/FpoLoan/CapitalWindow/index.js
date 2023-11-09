@@ -155,6 +155,7 @@ function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = 
                 h5Style={h5Style}
                 nextBtnStyle={nextBtnStyle}
                 setStep={setStep}
+                user={user}
               />
             }
             {

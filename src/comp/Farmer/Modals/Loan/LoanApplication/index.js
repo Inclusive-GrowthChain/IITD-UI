@@ -36,8 +36,9 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
   const [step, setStep] = useState(1)
   const userDetails = useAuthStore(s => s.userDetails)
   const queryClient = useQueryClient()
-  console.log(userDetails)
-
+  // console.log(data, "data")
+  // console.log(data.value.dob)
+  // console.log(userDetails, "userdetails")
   const {
     register, formState: { errors }, handleSubmit,
     setValue, getValues, watch
@@ -47,12 +48,12 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
       fpoName: !isCreate ? data.fpoName || data.value.fpoName : "",
       bankName: userDetails.bankName || data.value.bankName,
       accountNumber: userDetails.accountNumber || data.value.accountNumber,
-      ifscCode: userDetails.ifscCode,
+      ifscCode: userDetails.ifscCode || data.value.ifscCode,
       branchName: userDetails.branchName || data.value.branchName,
-      name: userDetails.userName,
-      gender: userDetails.gender,
+      name: userDetails.userName || data.value.userName,
+      gender: userDetails.gender || data.value.gender,
       mobile: userDetails.contactNumber || data.value.contactNumber,
-      dob: userDetails.DOB || data.value.DOB,
+      dob: new Date(userDetails.DOB).toISOString().slice(0,10) || new Date(data.value.DOB).toISOString().slice(0, 10),
       age: userDetails.age || data.value.age,
       aadharCardNumber: userDetails.aadharCardNumber || data.value.aadharCardNumber,
       aadharCardImage: userDetails.aadharCardImage || data.value.aadharCardImage,
@@ -69,25 +70,25 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
       pinCode: userDetails.pinCode || data.value.pinCode,
       occupation: userDetails.occupation || data.value.occupation,
       education: userDetails.education || data.value.education,
-      natureOfPlace: userDetails.natureOfplace || data.value.natureOfplace,
+      natureOfPlace: userDetails.natureOfplace || data.value.natureOfPlace,
       residence: userDetails.residence || data.value.residence,
       caste: userDetails.caste || data.value.caste,
       religion: userDetails.religion || data.value.religion,
       coApplicantName: !isCreate ? data.coApplicantName || data.value.coApplicantName : "",
-      coApplicantGender: !isCreate ? data.coApplicantGender || data.value.coApplicantGender : "" ,
-      coApplicantDob: !isCreate ? data.coApplicantDob || data.value.coApplicantDob : "" ,
-      coApplicantAge: !isCreate ? data.coApplicantAge || data.value.coApplicantAge : "" ,
-      relationship: !isCreate ? data.relationship || data.value.relationship : "" ,
-      landHolding: !isCreate ? data.landHolding || data.value.landHolding : "" ,
-      landHoldingType: !isCreate ? data.landHoldingType || data.value.landHoldingType : "" ,
+      coApplicantGender: !isCreate ? data.coApplicantGender || data.value.coApplicantGender : "",
+      coApplicantDob: !isCreate ? data.coApplicantDob || data.value.coApplicantDob : "",
+      coApplicantAge: !isCreate ? data.coApplicantAge || data.value.coApplicantAge : "",
+      relationship: !isCreate ? data.relationship || data.value.relationship : "",
+      landHolding: !isCreate ? data.landHolding || data.value.landHolding : "",
+      landHoldingType: !isCreate ? data.landHoldingType || data.value.landHoldingType : "",
       monthlyHHIncome: !isCreate ? data.monthlyHHIncome || data.value.monthlyHHIncome : "",
-      monthlyHHExpenses: !isCreate ? data.monthlyHHExpenses || data.value.monthlyHHExpenses : "" ,
-      requestedAmount: !isCreate ? data.requestedAmount || data.value.requestedAmount : "" ,
-      purpose: !isCreate ? data.purpose || data.value.purpose : "" ,
-      loanTenure: !isCreate ? data.loanTenure || data.value.loanTenure : "" ,
+      monthlyHHExpenses: !isCreate ? data.monthlyHHExpenses || data.value.monthlyHHExpenses : "",
+      requestedAmount: !isCreate ? data.requestedAmount || data.value.requestedAmount : "",
+      purpose: !isCreate ? data.purpose || data.value.purpose : "",
+      loanTenure: !isCreate ? data.loanTenure || data.value.loanTenure : "",
       intrest: !isCreate ? data.intrest || data.value.intrest : "",
       loanId: !isCreate ? data.loanId || data.value.loanId : nanoid(10),
-      loanWindowId: !isCreate ? data.loanWindowId || data.value.loanWindowId : "" ,
+      loanWindowId: !isCreate ? data.loanWindowId || data.value.loanWindowId : "",
       id: !isCreate ? data.id || data.value.id : "",
     }
   })
@@ -108,7 +109,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
     }
   }, [coApplicantDob, setValue])
 
-  const {isLoading} = useQuery({
+  const { isLoading } = useQuery({
     queryKey: ["active-window"],
     queryFn: () => getActiveLoanwindow({ windowType: "farmer", fpoId: userDetails.fpoId || data.value.fpoId }),
     onSuccess: (data) => {
@@ -127,9 +128,9 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
       handleClose()
     }
   })
-  
+
   {
-    isLoading && <Loader/>
+    isLoading && <Loader />
   }
 
   return (
@@ -165,7 +166,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
               getValues={getValues}
               backBtnStyle={backBtnStyle}
               nextBtnStyle={nextBtnStyle}
-              // userDetails={userDetails}
+            // userDetails={userDetails}
             />
           }
           {

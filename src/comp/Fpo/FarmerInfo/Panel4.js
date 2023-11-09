@@ -20,8 +20,6 @@ function Panel4({
     queryFn: () => getSaleTransactions(farmerId),
   });
 
-  console.log(data)
-
   const applyBtnStyle = {
     backgroundColor: "#064420",
     border: "none",

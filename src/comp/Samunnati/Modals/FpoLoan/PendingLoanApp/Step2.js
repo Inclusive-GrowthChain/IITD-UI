@@ -6,11 +6,12 @@ const list = [
   { lable: "AOA", name: "aoa" },
   { lable: "Certificate of Incorporation", name: "coi" },
   { lable: "GST Certificate", name: "gst" },
-  { lable: "PAN Card", name: "pan" },
+  { lable: "PAN Card", name: "panCard" },
 ]
 
 function Step2({ data, backBtnStyle, nextBtnStyle, btnStyle, h5Style, setStep }) {
   const { modal, updateModal, closeModal } = useModal()
+  console.log(data)
 
   return (
     <>
@@ -29,7 +30,7 @@ function Step2({ data, backBtnStyle, nextBtnStyle, btnStyle, h5Style, setStep })
                 className="py-0.5"
                 style={btnStyle}
                 onClick={() => updateModal(l.lable, {
-                  imgUrl: data?.kycDocuments?.find(d => d.name === l.name)?.doc
+                  imgUrl: data?.kycAuthorizedSignatories?.find(d => d.name === l.name)?.doc
                 })}
               >
                 View
