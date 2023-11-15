@@ -52,8 +52,8 @@ function LoanHistory({ fpoId, grantedAmount, consumedWindowLoanAmount, theadStyl
                   <tr key={loan?.value?.loanId}>
                     <td>{loan?.value?.loanId}</td>
                     <td>{loan?.userId}</td>
-                    <td>{loan?.name}</td>
-                    <td>{loan?.mobile}</td>
+                    <td>{loan?.userName}</td>
+                    <td>{loan?.contactNumber}</td>
                     <td>{loan?.value?.loanCreatedAt?.substring(0, 10)}</td>
                     <td>{loan?.value?.loanAmount}</td>
                     <td>

@@ -16,11 +16,11 @@ const style = {
 const list = [
   {
     label: "Applicant Mobile Number",
-    name: "mobile",
+    name: "contactNumber",
   },
   {
     label: "Applicant DOB",
-    name: "dob",
+    name: "DOB",
   },
   {
     label: "Applicant Age",
@@ -48,7 +48,7 @@ const list = [
 
 function Step2({ data, backBtnStyle, nextBtnStyle, setStep }) {
   const { modal, updateModal, closeModal } = useModal()
-
+console.log(data)
   return (
     <>
       {

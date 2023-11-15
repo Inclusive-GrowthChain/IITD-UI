@@ -24,11 +24,11 @@ const list = [
   },
   {
     label: "Applicant Father Name",
-    name: "fatherName",
+    name: "fathersName",
   },
   {
     label: "Applicant Mother Name",
-    name: "motherName",
+    name: "mothersName",
   },
   {
     label: "Door Number",
@@ -36,7 +36,7 @@ const list = [
   },
   {
     label: "Street Name",
-    name: "street",
+    name: "streetName",
   },
   {
     label: "Village",
@@ -45,6 +45,7 @@ const list = [
 ]
 
 function Step3({ backBtnStyle, nextBtnStyle, setStep, data }) {
+  console.log(data)
   return (
     <>
       {

@@ -26,7 +26,7 @@ const list = [
   },
   {
     label: "Applicant Name",
-    name: "name",
+    name: "userName",
   },
   {
     label: "Loan Requested Amount",

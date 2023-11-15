@@ -25,6 +25,7 @@ export function getPurchaseTransactions(_id) {
   })
 }
 
+
 export function getSaleTransactions(_id) {
   return sendApiReq({
     url: endPoints.farmer.purchaseTransaction + `/${_id}/sale`

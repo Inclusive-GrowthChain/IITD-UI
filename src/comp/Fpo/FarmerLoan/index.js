@@ -49,6 +49,7 @@ function FarmerLoan() {
     ]
   })
 
+  console.log(data2,"data2")
   const loanWindowList = data?.data || []
 
   const checkActive = (index, className) => activeIndex === index ? className : ""
@@ -133,6 +134,7 @@ function FarmerLoan() {
           show
           handleClose={closeModal}
           data={modal.data}
+          loanWindowList={loanWindowList}
         />
       }
 

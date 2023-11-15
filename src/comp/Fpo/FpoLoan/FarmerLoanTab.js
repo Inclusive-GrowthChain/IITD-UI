@@ -155,7 +155,7 @@ function WindowRow({ loanWindow, updateModal }) {
                   ?.filter((loan) => loan.fpoApprovalStatus === "rejected")
                   .map((loan) => (
                     <tr key={loan.id}>
-                      <td>{loan.name}</td>
+                      <td>{loan?.name} {loan?.userName}</td>
                       <td>₹ {loan.requestedAmount}</td>
                       <td>{loan?.createdAt?.substring(0, 10)}</td>
                       <td>{loan.reason}</td>

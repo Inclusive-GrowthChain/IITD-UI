@@ -66,6 +66,7 @@ function ApproveLoanApp({ show, data, handleClose }) {
             </p>
             <p className="col-lg-6">
               {data?.mobile}
+              {data?.contactNumber}
             </p>
           </div>
           <div className="row m-2">

@@ -10,9 +10,15 @@ const btnStyle = {
   width: "fit-content",
   fontSize: ".75rem",
   lineHeight: "1rem",
-}
+};
 
-function ApprovedLoans({ theadStyle, tbodyStyle, loanWindowList, updateModal }) {
+function ApprovedLoans({
+  theadStyle,
+  tbodyStyle,
+  loanWindowList,
+  updateModal,
+}) {
+  console.log(loanWindowList);
   return (
     <div className="card_table2">
       <div className="table-responsive">
@@ -32,12 +38,14 @@ function ApprovedLoans({ theadStyle, tbodyStyle, loanWindowList, updateModal }) 
           <tbody style={tbodyStyle}>
             {loanWindowList?.map((loanWindow) => (
               <Fragment key={loanWindow.id}>
-                {
-                  loanWindow?.loans?.filter(loan => loan.status === "approved")
-                    .map(loan => (
+                {loanWindow?.loans
+                  ?.filter((loan) => loan.status === "approved")
+                  .map((loan) => {
+                    console.log(loan,"Loan application");
+                    return (
                       <tr key={loan.id}>
                         <td>{loan.userId}</td>
-                        <td>{loan.name}</td>
+                        <td>{loan.userName}</td>
                         <td>{loan.loanId}</td>
                         <td>{loan.createdAt?.substring(0, 10)}</td>
                         <td>{loan.grantedAmount}</td>
@@ -45,7 +53,9 @@ function ApprovedLoans({ theadStyle, tbodyStyle, loanWindowList, updateModal }) 
                           <button
                             className="py-0.5"
                             style={btnStyle}
-                            onClick={() => updateModal("showRepaymentForm", loan)}
+                            onClick={() =>
+                              updateModal("showRepaymentForm", loan)
+                            }
                           >
                             View
                           </button>
@@ -54,21 +64,23 @@ function ApprovedLoans({ theadStyle, tbodyStyle, loanWindowList, updateModal }) 
                           <button
                             className="py-0.5"
                             style={btnStyle}
-                            onClick={() => updateModal("showLoanApplication", loan)}
+                            onClick={() =>
+                              updateModal("showLoanApplication", loan)
+                            }
                           >
                             View
                           </button>
                         </td>
                       </tr>
-                    ))
-                }
+                    );
+                  })}
               </Fragment>
             ))}
           </tbody>
         </table>
       </div>
     </div>
-  )
+  );
 }
 
-export default ApprovedLoans
+export default ApprovedLoans;

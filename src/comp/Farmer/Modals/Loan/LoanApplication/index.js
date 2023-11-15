@@ -50,19 +50,19 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
       accountNumber: userDetails.accountNumber || data.value.accountNumber,
       ifscCode: userDetails.ifscCode || data.value.ifscCode,
       branchName: userDetails.branchName || data.value.branchName,
-      name: userDetails.userName || data.value.userName,
+      userName: userDetails.userName || data.value.userName,
       gender: userDetails.gender || data.value.gender,
-      mobile: userDetails.contactNumber || data.value.contactNumber,
-      dob: new Date(userDetails.DOB).toISOString().slice(0,10) || new Date(data.value.DOB).toISOString().slice(0, 10),
+      contactNumber: userDetails.contactNumber || data.value.contactNumber,
+      DOB: new Date(userDetails.DOB).toISOString().slice(0,10) || new Date(data.value.DOB).toISOString().slice(0, 10),
       age: userDetails.age || data.value.age,
       aadharCardNumber: userDetails.aadharCardNumber || data.value.aadharCardNumber,
       aadharCardImage: userDetails.aadharCardImage || data.value.aadharCardImage,
       panCardNumber: userDetails?.panCardNumber || data?.value?.panCardNumber,
       panCardImage: userDetails?.panCardImage || data?.value?.panCardImage,
-      fatherName: userDetails.fathersName || data.value.fatherName,
-      motherName: userDetails.mothersName || data.value.motherName,
+      fathersName: userDetails.fathersName || data.value.fatherName,
+      mothersName: userDetails.mothersName || data.value.motherName,
       doorNumber: userDetails.doorNumber || data.value.doorNumber,
-      street: userDetails.streetName || data.value.street,
+      streetName: userDetails.streetName || data.value.street,
       village: userDetails.village || data.value.village,
       taluk: userDetails.taluk || data.value.taluk,
       district: userDetails.district || data.value.district,
@@ -70,12 +70,12 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
       pinCode: userDetails.pinCode || data.value.pinCode,
       occupation: userDetails.occupation || data.value.occupation,
       education: userDetails.education || data.value.education,
-      natureOfPlace: userDetails.natureOfplace || data.value.natureOfPlace,
+      natureOfplace: userDetails.natureOfplace || data.value.natureOfPlace,
       residence: userDetails.residence || data.value.residence,
       caste: userDetails.caste || data.value.caste,
       religion: userDetails.religion || data.value.religion,
       coApplicantName: !isCreate ? data.coApplicantName || data.value.coApplicantName : "",
-      coApplicantGender: !isCreate ? data.coApplicantGender || data.value.coApplicantGender : "",
+      coApplicantGender: !isCreate ? data?.coApplicantGender || data?.value?.coApplicantGender : "",
       coApplicantDob: !isCreate ? data.coApplicantDob || data.value.coApplicantDob : "",
       coApplicantAge: !isCreate ? data.coApplicantAge || data.value.coApplicantAge : "",
       relationship: !isCreate ? data.relationship || data.value.relationship : "",
@@ -133,6 +133,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
     isLoading && <Loader />
   }
 
+  console.log(data)
   return (
     <Modal
       size="lg"

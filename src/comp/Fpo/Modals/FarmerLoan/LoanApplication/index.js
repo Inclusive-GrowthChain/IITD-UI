@@ -24,7 +24,8 @@ const backBtnStyle = {
   minWidth: "80px",
 }
 
-function LoanApplication({ show, data, handleClose }) {
+function LoanApplication({ show, data, handleClose,loanWindowList }) {
+  console.log(loanWindowList,"Gender")
   
   const [step, setStep] = useState(1)
   return (

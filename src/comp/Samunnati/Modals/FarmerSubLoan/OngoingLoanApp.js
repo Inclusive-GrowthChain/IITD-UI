@@ -59,6 +59,7 @@ const secondPageData = [
 ]
 
 function Step1({ data, setStep }) {
+  console.log(data)
   return (
     <div className="form">
       <div className="card p-2">

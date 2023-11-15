@@ -1,4 +1,3 @@
-
 const list = [
   {
     label: "Loan Id",
@@ -26,7 +25,7 @@ const list = [
   },
   {
     label: "Applicant Name",
-    name: "name",
+    name: "userName",
   },
   {
     label: "Loan Requested Amount",
@@ -37,23 +36,17 @@ const list = [
     label: "Applicant Gender",
     name: "gender",
   },
-]
+];
 
 function Step1({ data, nextBtnStyle, setStep }) {
   return (
     <>
-      {
-        list.map(l => (
-          <div key={l.name} className="row m-2">
-            <p className="col-lg-6">
-              {l.label}
-            </p>
-            <p className="col-lg-6">
-              {data[l.name]}
-            </p>
-          </div>
-        ))
-      }
+      {list.map((l) => (
+        <div key={l.name} className="row m-2">
+          <p className="col-lg-6">{l.label}</p>
+          <p className="col-lg-6">{data[l.name]}</p>
+        </div>
+      ))}
 
       <div className="row m-2">
         <div className="col-lg-12">
@@ -68,7 +61,7 @@ function Step1({ data, nextBtnStyle, setStep }) {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default Step1
+export default Step1;

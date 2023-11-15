@@ -17,6 +17,8 @@ const btnStyle = {
 function LoanDetails({ show, data, handleClose }) {
   const { modal, updateModal, closeModal } = useModal()
 
+  console.log(data,"loan details")
+
   return (
     <Modal
       size="ml"
@@ -152,7 +154,7 @@ function LoanDetails({ show, data, handleClose }) {
                 <div className="col-lg-6">
                   <button
                     style={btnStyle}
-                    onClick={() => updateModal("Invoice")}
+                    onClick={() => updateModal("Invoice",{imgUrl: data?.invoice})}
                   >
                     view
                   </button>
@@ -167,7 +169,7 @@ function LoanDetails({ show, data, handleClose }) {
                 <div className="col-lg-6">
                   <button
                     style={btnStyle}
-                    onClick={() => updateModal("Payment Proof")}
+                    onClick={() => updateModal("Payment Proof",{imgUrl: data?.paymentProof})}
                   >
                     view
                   </button>
@@ -182,6 +184,7 @@ function LoanDetails({ show, data, handleClose }) {
           <DocImg
             show
             title={modal.state}
+            imgUrl={modal.data.imgUrl}
             handleClose={closeModal}
           />
         }

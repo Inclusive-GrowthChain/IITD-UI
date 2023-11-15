@@ -14,11 +14,11 @@ const btnStyle = {
 const list = [
   {
     label: "Applicant Mobile Number",
-    name: "mobile",
+    name: "contactNumber",
   },
   {
     label: "Applicant DOB",
-    name: "dob",
+    name: "DOB",
   },
   {
     label: "Applicant Age",

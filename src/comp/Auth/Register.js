@@ -126,7 +126,7 @@ const fieldSet1 = [
     validation: {
       minLength: {
         value: 6,
-        message: "Mobile number is not valid"
+        message: "Pin code number is not valid"
       },
     }
   },

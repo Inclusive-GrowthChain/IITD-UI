@@ -16,7 +16,7 @@ const btnStyle = {
 const list = [
   {
     label: "Applicant DOB",
-    name: "dob",
+    name: "DOB",
   },
   {
     label: "Applicant Age",
@@ -46,12 +46,13 @@ const list = [
   },
   {
     label: "Co-Applicant Gender",
-    name: "coApplicantGender",
+    name: "gender",
   },
 ]
 
 function Step2({ data, backBtnStyle, nextBtnStyle, setStep }) {
   const { modal, updateModal, closeModal } = useModal()
+  console.log(data)
 
   return (
     <>

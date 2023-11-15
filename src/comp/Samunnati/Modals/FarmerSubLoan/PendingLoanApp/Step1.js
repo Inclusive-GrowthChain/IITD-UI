@@ -25,7 +25,7 @@ const list = [
   },
   {
     label: "Applicant Name",
-    name: "name",
+    name: "userName",
   },
   {
     label: "Loan Requested Amount",
@@ -38,7 +38,7 @@ const list = [
   },
   {
     label: "Applicant Mobile Number",
-    name: "mobile",
+    name: "contactNumber",
   },
 ]
 

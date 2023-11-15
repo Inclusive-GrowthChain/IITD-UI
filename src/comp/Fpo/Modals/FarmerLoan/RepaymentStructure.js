@@ -34,7 +34,7 @@ function RepaymentStructure({ show, data, handleClose }) {
           <div className="row">
             <div className="col-lg-6">
               <RepaymentContentTitle title="Loan ID" val={data?.value?.loanId || data?.loanId} />
-              <RepaymentContentTitle title="Farmer Name" val={data?.value?.name || data?.name} />
+              <RepaymentContentTitle title="Farmer Name" val={data?.value?.name || data?.userName} />
               <RepaymentContentTitle title="FPO Name" val={data?.value?.fpoName || data?.fpoName} />
               <RepaymentContentTitle title="Loan Amount" val={data?.value?.grantedAmount || data?.grantedAmount} />
             </div>

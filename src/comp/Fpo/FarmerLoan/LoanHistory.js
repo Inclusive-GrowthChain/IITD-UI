@@ -1,6 +1,7 @@
 import { useAuthStore } from "../../../store/useAuthStore"
 
 function LoanHistory({ theadStyle, tbodyStyle, data = [] }) {
+  console.log(data,"log data")
  
   const fpoId = useAuthStore((s) => s.userDetails._id);
 
