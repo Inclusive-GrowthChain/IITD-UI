@@ -22,6 +22,8 @@ function Tab2({ data = [], style, updateModal }) {
             <tr>
               <td>Sample ID</td>
               <td>Ref no</td>
+              <td>FPO ID</td>
+              <td>FPO Name</td>
               <td>Date of Application</td>
               <td>Test Category</td>
               <td>Test</td>
@@ -38,6 +40,8 @@ function Tab2({ data = [], style, updateModal }) {
               <tr key={item.id}>
                 <td>{item.sampleId}</td>
                 <td>{item.referenceNo}</td>
+                <td>{item.fpoId}</td>
+                <td>{item.fpoName}</td>
                 <td>{item.dateOfApplication}</td>
                 <td>{item.category}</td>
                 <td>{item.testName}</td>

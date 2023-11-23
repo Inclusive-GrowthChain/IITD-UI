@@ -46,7 +46,6 @@ function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = 
 
   const queryClient = useQueryClient()
   const user = useAuthStore(s => s.userDetails)
-
   const methods = useForm({
     defaultValues: isEdit ? data : {
       windowType,
@@ -60,10 +59,10 @@ function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = 
       maxLoanPeriod: 25,
       kycDocuments: [
         { name: "moa", doc: user.bylawsImage },
-        { name: "aoa", doc: user.bylawsImage },
-        { name: "coi", doc: user.incorporationCertifcateImage },
-        { name: "gst", doc: user.gstCertificate },
-        { name: "pan", doc: user.panImage },
+        { name: "aoa", doc: user.copyOfByLawsImage},
+        { name: "coi", doc: user.certificateOfIncorporationImage},
+        { name: "gst", doc: user.gstCertificateImage},
+        { name: "pan", doc: user.panCardImage},
       ],
       kycAuthorizedSignatories: [
         { name: "", doc: "" },
@@ -108,7 +107,6 @@ function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = 
       handleClose()
     },
     onError: (e) => {
-      console.log(e)
       const msg = e.stack.split(":")[1]
       errorNotify(msg)
     }

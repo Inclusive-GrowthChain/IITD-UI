@@ -43,8 +43,6 @@ export function makePaymentToFpo(data) {
     clientInvoiceDate: data.clientInvoiceDate,
   }
 
-  console.log(dataObject)
-
   return sendApiReq({
     method: "post",
     url: endPoints.auction + `/${data.auctionId}/bid/${data.bidId}/payment`,

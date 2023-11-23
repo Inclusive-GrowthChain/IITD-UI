@@ -72,22 +72,32 @@ const CorporateClientSettings = lazy(() =>
 const CorporateClientWrapper = lazy(() => import("./comp/CorporateClient"));
 
 function App() {
-  const logIn = useAuthStore((s) => s.logIn);
+  const { loggedIn, logIn } = useAuthStore()
+
+  // console.log(userStore,"userStore")
+  // const logIn = useAuthStore((s) => {
+  //   console.log(s)
+  //   return  s.logIn
+  // });
+  
   const navigate = useNavigate();
 
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const userDetails = await getUserDetails();
-        logIn(userDetails);
-      } catch (error) {
-        console.error("Failed to fetch user details:", error);
+    if (loggedIn) {
+      async function fetchData() {
+        try {
+          const userDetails = await getUserDetails();
+          logIn(userDetails);
+        } catch (error) {
+          console.error("Failed to fetch user details:", error);
+        }
       }
-    }
 
-    fetchData();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+      fetchData();
+    }
+  }, [loggedIn]); // eslint-disable-line react-hooks/exhaustive-deps
+
 
 
   const { isLoading, fetchStatus } = useQuery({

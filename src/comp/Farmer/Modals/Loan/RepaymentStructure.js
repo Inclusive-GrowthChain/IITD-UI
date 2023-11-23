@@ -4,7 +4,6 @@ import { useEffect } from "react";
 
 function RepaymentStructure({ show, data, handleClose }) {
   useEffect(() => {
-    // console.log(data)
   }, [data])
 
   return (
@@ -21,14 +20,15 @@ function RepaymentStructure({ show, data, handleClose }) {
           <div className="row">
             <div className="col-lg-6">
               <RepaymentContentTitle title="Loan ID" val={data.loanId} />
-              <RepaymentContentTitle title="Farmer Name" val={data.name} />
+              <RepaymentContentTitle title="Farmer Name" val={data.userName || data.name} />
               <RepaymentContentTitle title="FPO Name" val={data.fpoName} />
-              <RepaymentContentTitle title="Loan Amount" val={data.grantedAmount} />
+              <RepaymentContentTitle title="Requested Amount" val={data.requestedAmount} />
+              <RepaymentContentTitle title="Loan Granted Amount" val={data.grantedAmount} />
             </div>
 
             <div className="col-lg-6">
-              <RepaymentContentTitle title="Loan Period in Months" val={data.loanTenure} />
-              <RepaymentContentTitle title="No of Repayment" val={1} />
+              <RepaymentContentTitle title="Loan Window Period in Months" val={data.loanTenure} />
+              <RepaymentContentTitle title="No of Repayment" val={data?.farmerWindowRepaymentStructure.length} />
               <RepaymentContentTitle title="Annual Interest Rate" val={`${data.intrest}%`} />
             </div>
           </div>

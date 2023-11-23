@@ -133,7 +133,6 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
     isLoading && <Loader />
   }
 
-  console.log(data)
   return (
     <Modal
       size="lg"

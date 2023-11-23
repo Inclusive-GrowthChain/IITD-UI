@@ -43,6 +43,7 @@ const style = {
 };
 
 function Approved({ data = [], updateModal }) {
+
   return (
     <div className="card shadow">
       <div className=" table-responsive p-3">
@@ -71,41 +72,49 @@ function Approved({ data = [], updateModal }) {
                 <td>₹ {g.grantedAmount}</td>
                 <td>{g.intrest}%</td>
                 <td>{g.approvalAt.substring(0, 10)}</td>
-                {g.farmerWindowRepaymentStructure.find(
-                  (f) => f.completed === false
-                ) && (
-                  <td>
-                    ₹{" "}
-                    {
-                      g.farmerWindowRepaymentStructure.find(
-                        (f) => f.completed === false
-                      ).balance
-                    }
-                  </td>
-                )}
-                {g.farmerWindowRepaymentStructure.find(
-                  (f) => f.completed === false
-                ) && (
-                  <td>
-                    ₹{" "}
-                    {
-                      g.farmerWindowRepaymentStructure.find(
-                        (f) => f.completed === false
-                      ).emi
-                    }
-                  </td>
-                )}
-                {g.farmerWindowRepaymentStructure.find(
-                  (f) => f.completed === false
-                ) && (
-                  <td>
-                    {
-                      g.farmerWindowRepaymentStructure.find(
-                        (f) => f.completed === false
-                      ).repaymentDate
-                    }
-                  </td>
-                )}
+                {
+                  g.status === "Completed" ? <td>Paid</td> :
+                    g.farmerWindowRepaymentStructure.find(
+                      (f) => f.completed === false
+                    ) && (
+                      <td>
+                        ₹{" "}
+                        {
+                          g.farmerWindowRepaymentStructure.find(
+                            (f) => f.completed === false
+                          ).balance
+                        }
+                      </td>
+                    )
+                }
+                {
+                  g.status === "Completed" ? <td>Paid</td> :
+                    g.farmerWindowRepaymentStructure.find(
+                      (f) => f.completed === false
+                    ) && (
+                      <td>
+                        ₹{" "}
+                        {
+                          g.farmerWindowRepaymentStructure.find(
+                            (f) => f.completed === false
+                          ).emi
+                        }
+                      </td>
+                    )
+                }
+                {
+                  g.status === "Completed" ? <td>Paid</td> : g.farmerWindowRepaymentStructure.find(
+                    (f) => f.completed === false
+                  ) && (
+                      <td>
+                        {
+                          g.farmerWindowRepaymentStructure.find(
+                            (f) => f.completed === false
+                          ).repaymentDate
+                        }
+                      </td>
+                    )
+                }
                 <td>
                   <button
                     style={style}

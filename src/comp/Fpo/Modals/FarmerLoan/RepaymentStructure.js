@@ -17,8 +17,7 @@ const btnStyle = {
 }
 
 function RepaymentStructure({ show, data, handleClose }) {
-  const { modal, updateModal, closeModal } = useModal()
-  console.log(data)
+  const { modal, updateModal } = useModal()
   return (
     <Modal
       size="xl"
@@ -34,13 +33,13 @@ function RepaymentStructure({ show, data, handleClose }) {
           <div className="row">
             <div className="col-lg-6">
               <RepaymentContentTitle title="Loan ID" val={data?.value?.loanId || data?.loanId} />
-              <RepaymentContentTitle title="Farmer Name" val={data?.value?.name || data?.userName} />
+              <RepaymentContentTitle title="Farmer Name" val={data?.value?.name || data?.userName || data?.name} />
               <RepaymentContentTitle title="FPO Name" val={data?.value?.fpoName || data?.fpoName} />
               <RepaymentContentTitle title="Loan Amount" val={data?.value?.grantedAmount || data?.grantedAmount} />
             </div>
 
             <div className="col-lg-6">
-              <RepaymentContentTitle title="Loan Period in Months" val={data?.value?.loanTenure || data?.loanTenure} />
+              <RepaymentContentTitle title="Loan Window Period in Months" val={data?.value?.loanTenure || data?.loanTenure} />
               <RepaymentContentTitle title="No of Repayment" val={data?.value?.farmerWindowRepaymentStructure?.length || data?.farmerWindowRepaymentStructure.length} />
               <RepaymentContentTitle title="Annual Interest Rate" val={`${data?.value?.intrest || data?.intrest}%`} />
             </div>
@@ -98,7 +97,7 @@ function RepaymentStructure({ show, data, handleClose }) {
           modal.state === "addRepayment" &&
           <AddRepayment
             show
-            handleClose={() => closeModal("addRepayment")}
+            handleClose={handleClose}
             data={data}
             repaymentItem={modal?.data}
           />

@@ -20,6 +20,7 @@ function Tab1({ data = [], style, updateModal }) {
             <tr>
               <td>Sample ID</td>
               <td>Date of Application</td>
+              <td>FPO Name</td>
               <td>Test Category</td>
               <td>Test</td>
               <td>Amount</td>
@@ -35,6 +36,7 @@ function Tab1({ data = [], style, updateModal }) {
               <tr key={app.id}>
                 <td>{app.sampleId}</td>
                 <td>{app.dateOfApplication}</td>
+                <td>{app.fpoName}</td>
                 <td>{app.category}</td>
                 <td>{app.testName}</td>
                 <td>{app.amount}</td>

@@ -18,7 +18,7 @@ function ApprovedLoans({
   loanWindowList,
   updateModal,
 }) {
-  console.log(loanWindowList);
+
   return (
     <div className="card_table2">
       <div className="table-responsive">
@@ -41,11 +41,10 @@ function ApprovedLoans({
                 {loanWindow?.loans
                   ?.filter((loan) => loan.status === "approved")
                   .map((loan) => {
-                    console.log(loan,"Loan application");
                     return (
                       <tr key={loan.id}>
                         <td>{loan.userId}</td>
-                        <td>{loan.userName}</td>
+                        <td>{loan.userName || loan?.name}</td>
                         <td>{loan.loanId}</td>
                         <td>{loan.createdAt?.substring(0, 10)}</td>
                         <td>{loan.grantedAmount}</td>

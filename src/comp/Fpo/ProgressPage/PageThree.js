@@ -6,13 +6,14 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import FileInput from "../../Common/FileInput";
 import { useAuthStore } from "../../../store/useAuthStore";
-import { root } from "../../../utils/endPoints";
 import Modal from "react-bootstrap/Modal";
+import useModal from "../../../hooks/useModal";
 
 const PageThree = ({ onButtonClick, bid, handleClose }) => {
   const [showInvoice, setShowInvoice] = useState(false);
   const fpoId = useAuthStore(s => s.userDetails._id)
   const [status, setStatus] = useState("")
+  const {updateModal,modal} = useModal()
 
   const handleShowInvoice = () => setShowInvoice(true);
   const handleCloseInvoice = () => setShowInvoice(false);
@@ -214,6 +215,7 @@ const PageThree = ({ onButtonClick, bid, handleClose }) => {
                     onClick={(e) => {
                       e.preventDefault();
                       handleShowInvoice();
+                      updateModal("showRequestedReport", { imgUrl: bid.bids.find((item) => item.fpoId === fpoId).invoice })
                     }}
                   >
                     view
@@ -244,11 +246,11 @@ const PageThree = ({ onButtonClick, bid, handleClose }) => {
       </form>
 
       <Modal show={showInvoice} onHide={handleCloseInvoice}>
-        <Modal.Header closeButton>Invoice</Modal.Header>
+        <Modal.Header closeButton>Requested Report</Modal.Header>
         <Modal.Body>
           <img
-            src={`${root.imgUrl}/img/${bid.bids.find((item) => item.fpoId === fpoId).invoice}`}
-            alt="Invoice"
+            src={modal.data.imgUrl}
+            alt="Test Reports"
             style={{ width: "100%", height: "100%" }}
           />
         </Modal.Body>

@@ -226,7 +226,7 @@ const CorporateCustomer = () => {
                             return bid.bids.filter((b) => b.status === "completed" && b.fpoId === fpoId).map((b) => (
                               <tr key={bid.id}>
                                 <td>{bid.bidId}</td>
-                                <td>{b.invoiceAddedAt.substring(0, 10)}</td>
+                                <td>{b.clientInvoiceDate?.substring(0, 10)}</td>
                                 <td>{b.clientInvoiceNumber}</td>
                                 <td>{b.bidAmount}</td>
                                 <td>

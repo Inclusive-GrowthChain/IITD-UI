@@ -14,8 +14,6 @@ function Nav({ title, toggleSidebar }) {
   const navigate = useNavigate()
   const logOut = useAuthStore(s => s.logOut)
 
-  // console.log(pathname.split("/")[1]);
-
   const logout = e => {
     e.preventDefault()
     queryClient.clear()
@@ -39,9 +37,6 @@ function Nav({ title, toggleSidebar }) {
 
       <div className="nav_items">
         <PersonIcon className="nav_icons" />
-
-        {/* to="/fpo/settings" */}
-
         <DropdownButton id="dropdown-item-button" title="">
           <Link to={`/${pathname.split("/")[1]}/settings`}  style={{ textDecoration: "none" }}>
             <Dropdown.Item as="button">Profile</Dropdown.Item>

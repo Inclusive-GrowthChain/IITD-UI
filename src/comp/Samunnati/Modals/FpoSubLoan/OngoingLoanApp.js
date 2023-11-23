@@ -257,8 +257,6 @@ function Step1({ data, setStep }) {
 function OngoingLoanApp({ show, handleClose, data }) {
   const [step, setStep] = useState(1)
 
-  console.log(data)
-
   return (
     <Modal
       show={show}

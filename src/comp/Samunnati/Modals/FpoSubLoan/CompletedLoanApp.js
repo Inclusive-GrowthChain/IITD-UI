@@ -182,8 +182,6 @@ function SecondPage({ data, fpoId }) {
 
 function CompletedLoanApp({ show, handleClose, data, fpoId }) {
   const [step, setStep] = useState(1)
-
-  console.log(data)
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Loan/Transaction Details</Modal.Header>

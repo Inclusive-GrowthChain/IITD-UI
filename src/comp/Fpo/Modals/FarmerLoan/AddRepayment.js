@@ -16,11 +16,6 @@ const btnStyle = {
 }
 
 function AddRepayment({ show, handleClose, data,repaymentItem}) {
-  console.log("------------------------")
-  // console.log("Add Repayment...........",data.value.id)
-  // console.log(repaymentItem)
-  // console.log(data.windowId)
-  // console.log(data.id)
   const queryClient = useQueryClient()
   
   const { register, handleSubmit } = useForm({

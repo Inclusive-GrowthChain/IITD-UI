@@ -201,7 +201,7 @@ const PageFour = ({ onButtonClick, outerbid }) => {
                 return (
                   <img
                     key={index}
-                    src={report.requiredTestReports}
+                    src={report.invoice}
                     alt="Payment"
                     style={{ width: "100%", height: "100%" }}
                   />

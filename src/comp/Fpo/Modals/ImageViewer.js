@@ -1,7 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 
 function ImageViewer({ show, handleClose, data }) {
-  console.log(data)
   return (
     <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>{data.title}</Modal.Header>

@@ -6,7 +6,7 @@ import { requestTestReports } from "../../../../actions/auction";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
-const PageTwo = ({ onButtonClick, outerbid = [] }) => {
+const PageTwo = ({ onButtonClick,handleClose,outerbid = [] }) => {
   const [showConfirmBox, setShowConfirmBox] = useState(false)
   const [orderPlaced, setOrderPlaced] = useState(false)
   const [currentFPO, setCurrentFPO] = useState({})
@@ -27,6 +27,7 @@ const PageTwo = ({ onButtonClick, outerbid = [] }) => {
   }
 
   const handleCloseConfirmBox = () => {
+    handleClose()
     setShowConfirmBox(false)
   }
 
@@ -40,7 +41,6 @@ const PageTwo = ({ onButtonClick, outerbid = [] }) => {
 
   useEffect(() => {
     checkOrderPlaced()
-    // console.log(outerbid)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [outerbid])
 
@@ -119,7 +119,6 @@ const PageTwo = ({ onButtonClick, outerbid = [] }) => {
                 }}
               >
                 {outerbid.bids.map((bid) => {
-                  console.log(bid)
                   return <tr>
                     <td>{bid.fpoId}</td>
                     <td>{bid.name}</td>

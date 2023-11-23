@@ -53,7 +53,7 @@ export function addSale(data_passed, farmerId, totalAmount) {
     dateOfSale: new Date().toLocaleString(),
     farmerId: farmerId,
   };
-  // console.log(restructuredData)
+
 
   return sendApiReq({
     method: "post",
@@ -204,7 +204,6 @@ export function createLoan(data) {
 }
 
 export function updateFarmerLoanRepayment(rData) {
-  console.log(rData,"Loan window id and id")
   let data = {
     paymentDate: rData.paymentDate,
     paidAmount: rData.paidAmount,

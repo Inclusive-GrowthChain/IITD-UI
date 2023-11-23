@@ -45,7 +45,6 @@ const list = [
 ]
 
 function Step3({ backBtnStyle, nextBtnStyle, setStep, data }) {
-  console.log(data)
   return (
     <>
       {

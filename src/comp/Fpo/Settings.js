@@ -19,7 +19,6 @@ const Settings = () => {
   const userType = fpo.userType
   const userId = fpo._id
 
-  console.log(fpo)
   const queryClient = useQueryClient()
 
   const { mutate } = useMutation({

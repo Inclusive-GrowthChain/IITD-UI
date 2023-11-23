@@ -26,7 +26,6 @@ const Settings = () => {
     }
   })
 
-  // const onSubmit = (data) => console.log(data);
 
   return (
     <div className="itemContainer">

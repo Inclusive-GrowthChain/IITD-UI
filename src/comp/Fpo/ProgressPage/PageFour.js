@@ -2,17 +2,18 @@ import React, { useState, useEffect } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Modal from "react-bootstrap/Modal";
 import { useAuthStore } from "../../../store/useAuthStore";
-import { root } from "../../../utils/endPoints";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { approveClientPayment } from "../../../actions/fpo";
+import useModal from "../../../hooks/useModal";
 
-const PageFour = ({ onButtonClick, bid, canEdit }) => {
+const PageFour = ({ onButtonClick, bid, canEdit,handleClose }) => {
   const fpoId = useAuthStore(s => s.userDetails._id);
   const [showInvoice, setShowInvoice] = useState(false);
   const handleShowInvoice = () => setShowInvoice(true);
   const handleCloseInvoice = () => setShowInvoice(false);
   const [data, setData] = useState({})
   const [showApprove, setShowApprove] = useState(false)
+  const { updateModal, modal } = useModal()
 
   const handleShowApprove = () => setShowApprove(true);
   const handleCloseApprove = () => setShowApprove(false);
@@ -118,6 +119,7 @@ const PageFour = ({ onButtonClick, bid, canEdit }) => {
                   onClick={(e) => {
                     e.preventDefault();
                     handleShowInvoice();
+                    updateModal("", { imgUrl: bid.bids.find((item) => item.fpoId === fpoId).clientInvoice })
                   }}
                 >
                   view
@@ -138,6 +140,7 @@ const PageFour = ({ onButtonClick, bid, canEdit }) => {
                       onClick={(e) => {
                         e.preventDefault()
                         handleShowApprove()
+                        handleClose()
                       }}
                     >
                       Submit
@@ -151,11 +154,11 @@ const PageFour = ({ onButtonClick, bid, canEdit }) => {
       </form>
 
       <Modal show={showInvoice} onHide={handleCloseInvoice}>
-        <Modal.Header closeButton>Invoice</Modal.Header>
+        <Modal.Header closeButton>Payment Invoice</Modal.Header>
         <Modal.Body>
           <img
-            src={`${root.imgUrl}/img/${bid.bids.find((item) => item.fpoId === fpoId).clientInvoice}`}
-            alt="Invoice"
+            src={modal.data.imgUrl}
+            alt="Test Reports"
             style={{ width: "100%", height: "100%" }}
           />
         </Modal.Body>

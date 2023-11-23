@@ -11,8 +11,6 @@ const list = [
 
 function Step2({ data, backBtnStyle, nextBtnStyle, btnStyle, h5Style, setStep }) {
   const { modal, updateModal, closeModal } = useModal()
-  console.log(data)
-
   return (
     <>
       <h5 style={h5Style}>

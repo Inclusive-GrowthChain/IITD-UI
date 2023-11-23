@@ -48,7 +48,6 @@ const list = [
 
 function Step2({ data, backBtnStyle, nextBtnStyle, setStep }) {
   const { modal, updateModal, closeModal } = useModal()
-console.log(data)
   return (
     <>
       {

@@ -29,7 +29,7 @@ const PageThree = ({ onButtonClick, outerbid, handleClose }) => {
 
   useEffect(() => {
     outerbid.bids.forEach((bid) => {
-      if (bid.status === "test-report-added" || bid?.status === "payment-done-waiting-approval" || bid?.status === "completed"  || bid.status === "invoice-added") {
+      if (bid?.status === "test-report-added" || bid?.status === "payment-done-waiting-approval" || bid?.status === "completed"  || bid?.status === "invoice-added") {
         let tempFpo = {};
         tempFpo.id = bid.fpoId;
         tempFpo.name = bid.name;

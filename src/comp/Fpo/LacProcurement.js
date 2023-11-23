@@ -39,7 +39,7 @@ function Card({ data = [], updateModal }) {
     <div className="store-modal">
       <div className="container-fluid pb-5">
         <div className="row">
-          {data.map((item) => (
+          {data && data.map((item) => (
             <div key={item._id} className="col-12 col-md-6 col-xl-4">
               <div className="store-card mt-4">
                 <div className="card-image">
@@ -292,9 +292,6 @@ const LacProcurement = () => {
         <AddLacPurchase show data={modal.data} handleClose={closeModal} />
       )}
 
-      {
-        console.log(modal)
-      }
       {modal.state && modal.state === "View Image" && (
         <DocImg
           show

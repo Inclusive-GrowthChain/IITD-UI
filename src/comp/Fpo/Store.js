@@ -10,7 +10,6 @@ import AddFpoSale from "./Modals/AddFpoSale";
 import Loader from "../Common/Loader";
 
 function Card({ data = [], updateModal }) {
-  console.log(data)
   return (
     <div className="store-modal">
       <div className="container-fluid pb-5">

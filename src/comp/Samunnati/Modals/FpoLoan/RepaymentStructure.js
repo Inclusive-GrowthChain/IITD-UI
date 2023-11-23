@@ -18,8 +18,6 @@ const btnStyle = {
 
 function RepaymentStructure({ show, handleClose, data, windowType }) {
   const { modal, updateModal, closeModal } = useModal()
-
-  console.log(data);
   const repayments = data?.FPOrepaymentStructure || []
 
   return (
@@ -38,13 +36,13 @@ function RepaymentStructure({ show, handleClose, data, windowType }) {
             <div className="col-lg-6">
               <RepaymentContentTitle title="Loan Window ID" val={data.windowId} />
               <RepaymentContentTitle title="FPO Name" val={data.fpoName} />
-              <RepaymentContentTitle title="Loan Amount" val={data.grantedAmount} />
+              <RepaymentContentTitle title="Loan Window Amount" val={data.grantedAmount} />
             </div>
 
             <div className="col-lg-6">
               <div className="row">
-                <RepaymentContentTitle title="Loan Period in Months" val={data.windowPeriod} />
-                <RepaymentContentTitle title="No of Repayment" val={data.windowPeriod} />
+                <RepaymentContentTitle title="Loan Window Period in Months" val={data.windowPeriod} />
+                <RepaymentContentTitle title="No of Repayment" val={data.FPOrepaymentStructure.filter((repayment) => repayment.balance === null).length} />
                 <RepaymentContentTitle title="Annual Interest Rate" val={`${data.intrest}%`} />
               </div>
             </div>

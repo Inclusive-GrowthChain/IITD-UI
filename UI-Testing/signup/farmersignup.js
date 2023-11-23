@@ -12,7 +12,6 @@ const rl = readline.createInterface({
       rl.close(); // Close the readline interface after taking input
 
       if (!url) {
-        console.log('URL is required.');
         return;
       }
 

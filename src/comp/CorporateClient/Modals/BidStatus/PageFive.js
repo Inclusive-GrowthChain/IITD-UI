@@ -56,9 +56,32 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
           setInvoiceDetails(tempInvoiceDetails)
         }
       }
+      // const filteredBids = outerbid.bids.filter(bid => bid.status !== "test-reports-rejected");
+
+      // if (filteredBids.length > 0) {
+      //   const completedBids = filteredBids.filter(bid => bid.status === "completed" || bid.status === "payment-done-waiting-approval");
+
+      //   if (completedBids.length > 0) {
+      //     const invoiceDetails = completedBids.map(bid => ({
+      //       clientInvoiceNumber: bid.clientInvoiceNumber,
+      //       clientInvoiceDate: bid.clientInvoiceDate,
+      //       clientAmount: bid.bidAmount,
+      //       clientInvoice: bid.clientInvoice 
+      //     }));
+
+      //     setInvoiceDetails(invoiceDetails[0]); 
+      //     setBidComplete(true);
+      //   } else {
+      //     const tempInvoiceDetails = {
+      //       clientAmount: filteredBids[0].bidAmount 
+      //     };
+      //     setInvoiceDetails(tempInvoiceDetails);
+      //   }
+      // }
+
     });
   }, [outerbid]) // eslint-disable-next-line
-
+ 
   return (
     <main
       className="pt5 black-80 center"
@@ -203,7 +226,7 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
                   return (
                     <img
                       key={index}
-                      src={report.requiredTestReports}
+                      src={report.clientInvoice}
                       alt="Payment"
                       style={{ width: "100%", height: "100%" }}
                     />

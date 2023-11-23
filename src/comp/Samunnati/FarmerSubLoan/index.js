@@ -90,7 +90,7 @@ function FarmerSubLoan() {
                   <LoanHistory
                     theadStyle={theadStyle}
                     tbodyStyle={tbodyStyle}
-                    data={loanWindow?.loans?.filter(loan => loan.status === "completed")}
+                    data={loanWindow?.loans?.filter((loan) => loan.status === "Completed")}
                     fpoId={loanWindow?.fpoId}
                     grantedAmount={loanWindow?.grantedAmount}
                     consumedWindowLoanAmount={loanWindow?.grantedAmountUtilized}

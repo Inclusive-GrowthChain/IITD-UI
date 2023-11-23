@@ -41,7 +41,6 @@ const Loan = () => {
     queryKey: ["active-window"],
     queryFn: () => getActiveLoanwindow({ windowType: "farmer" })
   })
-  console.log(data1, "data1")
 
   if (isLoading) return <Loader wrapperCls="loader-main-right" />
 
@@ -108,7 +107,7 @@ const Loan = () => {
             <div className="outlet">
               <TabContent id="tab1" activeTab={activeTab}>
                 <Approved
-                  data={data?.data.filter(g => g.status === "approved")}
+                  data={data?.data.filter(g => g.status === "approved" || g.status === "Completed")}
                   updateModal={updateModal}
                 />
               </TabContent>

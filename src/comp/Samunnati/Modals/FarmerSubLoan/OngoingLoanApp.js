@@ -59,7 +59,6 @@ const secondPageData = [
 ]
 
 function Step1({ data, setStep }) {
-  console.log(data)
   return (
     <div className="form">
       <div className="card p-2">
@@ -148,7 +147,6 @@ function Step2({ data }) {
 function OngoingLoanApp({ show, handleClose, data }) {
   const [step, setStep] = useState(1)
 
-  console.log(data)
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Loan/Transaction Details</Modal.Header>

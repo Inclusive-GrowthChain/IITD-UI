@@ -17,8 +17,6 @@ const btnStyle = {
 function LoanDetails({ show, data, handleClose }) {
   const { modal, updateModal, closeModal } = useModal()
 
-  console.log(data,"loan details")
-
   return (
     <Modal
       size="ml"
