@@ -17,14 +17,14 @@ const btnStyle = {
 
 const list = [
   {
-    label: "MOA",
-    name: "moa",
-    urlTitle: "copyOfByLawsImageMOA"
-  },
-  {
     label: "AOA",
     name: "aoa",
     urlTitle: "copyOfByLawsImageAOA"
+  },
+  {
+    label: "MOA",
+    name: "moa",
+    urlTitle: "copyOfByLawsImageMOA"
   },
   {
     label: "Certificate of Incorporation",
@@ -45,8 +45,7 @@ const list = [
 
 function Step1({ setStep, h5Style, nextBtnStyle,user }) {
   const { modal, updateModal, closeModal } = useModal()
-  const { getValues } = useFormContext()
-  const docs = getValues("kycDocuments")
+
   return (
     <div>
       <h5 style={h5Style}>KYC Documents</h5>
@@ -87,13 +86,12 @@ function Step1({ setStep, h5Style, nextBtnStyle,user }) {
           </button>
         </div>
       </div>
-
       {
         modal.state &&
         <DocImg
           show
           title={modal.data.title}
-          imgUrl={docs?.find(d => d.name === modal.state)?.doc || user[modal.data.urlTitle] || ""}
+          imgUrl={user[modal.data.urlTitle] || ""}
           handleClose={closeModal}
         />
       }

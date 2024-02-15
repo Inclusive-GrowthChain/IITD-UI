@@ -59,10 +59,10 @@ function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = 
       maxLoanPeriod: 25,
       kycDocuments: [
         { name: "moa", doc: user.copyOfByLawsImageMOA },
-        { name: "aoa", doc: user.copyOfByLawsImageAOA},
-        { name: "coi", doc: user.certificateOfIncorporationImage},
-        { name: "gst", doc: user.gstCertificateImage},
-        { name: "pan", doc: user.panCardImage},
+        { name: "aoa", doc: user.copyOfByLawsImageAOA },
+        { name: "coi", doc: user.certificateOfIncorporationImage },
+        { name: "gst", doc: user.gstCertificateImage },
+        { name: "pan", doc: user.panCardImage },
       ],
       kycAuthorizedSignatories: [
         { name: "", doc: "" },
@@ -111,7 +111,7 @@ function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = 
       errorNotify(msg)
     }
   })
- 
+
   const title = windowType === "fpo" ? "Working Captial" : "Farmer"
 
   const onSubmit = data => {
@@ -164,6 +164,7 @@ function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = 
                 backBtnStyle={backBtnStyle}
                 nextBtnStyle={nextBtnStyle}
                 canEdit={canEdit}
+                user={user}
                 setStep={setStep}
               />
             }

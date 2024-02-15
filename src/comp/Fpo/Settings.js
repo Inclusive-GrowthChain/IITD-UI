@@ -435,7 +435,7 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        Copy of Bylaws
+                                        Copy Of By Laws Image MOA
                                       </label>
                                     </div>
                                   </div>
@@ -457,7 +457,44 @@ const Settings = () => {
                                         onClick={(e) => {
                                           e.preventDefault();
                                           const imageData = {
-                                            image: fpo.copyOfByLawsImage,
+                                            image: fpo.copyOfByLawsImageMOA,
+                                            title: "Copy of Bylaws"
+                                          }
+                                          updateModal("imageViewer", imageData)
+                                        }}
+                                      >
+                                        view
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        Copy Of By Laws Image AOA
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <button
+                                        style={{
+                                          backgroundColor: "#064420",
+                                          color: "#fff",
+                                          alignItems: "center",
+                                          borderRadius: "5px",
+                                          border: "none",
+                                          padding: "0.25rem 1rem",
+                                          width: "10%",
+                                          minWidth: "100px",
+                                          fontSize: "1rem",
+                                          lineHeight: "2rem",
+                                        }}
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          const imageData = {
+                                            image: fpo.copyOfByLawsImageAOA,
                                             title: "Copy of Bylaws"
                                           }
                                           updateModal("imageViewer", imageData)

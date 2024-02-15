@@ -6,13 +6,14 @@ const btnStyle = {
   cursor: "pointer",
 }
 
-function Step2({ canEdit, setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle }) {
+function Step2({ canEdit, setStep, h5Style, finalWrapperStyle, backBtnStyle, nextBtnStyle,user }) {
   const { register, getValues, control } = useFormContext()
   const { fields, append, remove } = useFieldArray({
     control: control,
     name: "kycAuthorizedSignatories",
   })
 
+  console.log(user)
   const addDocs = () => append([
     { name: "", doc: "" },
     { name: "", doc: "" },
