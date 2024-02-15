@@ -73,13 +73,12 @@ const CorporateClientWrapper = lazy(() => import("./comp/CorporateClient"));
 
 function App() {
   const { loggedIn, logIn } = useAuthStore()
-
   // console.log(userStore,"userStore")
   // const logIn = useAuthStore((s) => {
   //   console.log(s)
   //   return  s.logIn
   // });
-  
+
   const navigate = useNavigate();
 
 

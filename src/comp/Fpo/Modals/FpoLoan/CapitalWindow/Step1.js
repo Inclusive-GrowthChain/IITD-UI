@@ -19,12 +19,12 @@ const list = [
   {
     label: "MOA",
     name: "moa",
-    urlTitle: "certificateOfIncorporationImage"
+    urlTitle: "copyOfByLawsImageMOA"
   },
   {
     label: "AOA",
     name: "aoa",
-    urlTitle: "copyOfByLawsImage"
+    urlTitle: "copyOfByLawsImageAOA"
   },
   {
     label: "Certificate of Incorporation",

@@ -158,8 +158,13 @@ const fieldSet3 = [
     options: ["Male", "Female", "Other"]
   },
   {
-    name: "copyOfByLawsImage",
-    label: "Copy of Bylaws (MOA & AOA)",
+    name: "copyOfByLawsImageMOA",
+    label: "Copy of Bylaws (MOA)",
+    isFile: true,
+  },
+  {
+    name: "copyOfByLawsImageAOA",
+    label: "Copy of Bylaws (AOA)",
     isFile: true,
   },
   {
@@ -209,7 +214,8 @@ function FpoSignup({ show, close }) {
       directorName: "",
       directorMobileNumber: "",
       directorGender: "",
-      copyOfByLawsImage: "",
+      copyOfByLawsImageMOA: "",
+      copyOfByLawsImageAOA: "",
       incorporationCertifcateImage: "",
       gstCertificateImage: "",
       licenseKey: "",

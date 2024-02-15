@@ -16,7 +16,7 @@ export function getLacTest2() {
 export function addLacTest(data) {
   return sendApiReq({
     method: "post",
-    url: endPoints.nisa.lactTest,
+    url: endPoints.nisa.lactTest3,
     data,
     successMsg: "Product added successfully"
   })

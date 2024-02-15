@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Modal } from "react-bootstrap";
 
-import { addLacTest2 } from "../../../actions/nisa";
+import { addLacTest} from "../../../actions/nisa";
 
 import FileInput from "../../Common/FileInput";
 import Input from '../../Nisa/Modals/Input';
@@ -90,7 +90,7 @@ function LabSampleTest({ show, handleClose }) {
   })
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: addLacTest2,
+    mutationFn: addLacTest,
     onSuccess: () => {
       queryClient.invalidateQueries("nisa/lactest")
       handleClose()

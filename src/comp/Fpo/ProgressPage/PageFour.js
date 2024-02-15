@@ -140,7 +140,6 @@ const PageFour = ({ onButtonClick, bid, canEdit,handleClose }) => {
                       onClick={(e) => {
                         e.preventDefault()
                         handleShowApprove()
-                        handleClose()
                       }}
                     >
                       Submit

@@ -141,7 +141,7 @@ const FarmerInformation = () => {
   ] = useQueries({
     queries: [
       {
-        queryKey: ["nisa/lac-test"],
+        queryKey: ["/lactest"],
         queryFn: getLacTest,
       },
       {
@@ -150,6 +150,7 @@ const FarmerInformation = () => {
       }
     ]
   })
+
 
   if (isLoading1 || isLoading2) return <Loader wrapperCls="loader-main-right" />
 
@@ -203,7 +204,7 @@ const FarmerInformation = () => {
 
                       <tbody style={tbodyStyle}>
                         {
-                          appList?.data?.map(app => (
+                          testList?.data?.map(app => (
                             <tr key={app.id}>
                               <td>{app.sampleId}</td>
                               <td>{app.paymentRefNo}</td>
@@ -264,7 +265,7 @@ const FarmerInformation = () => {
                       </thead>
                       <tbody style={tbodyStyle}>
                         {
-                          testList?.data?.map(test => (
+                          appList?.data?.map(test => (
                             <tr key={test._id}>
                               <td>{test.category}</td>
                               <td>{test.testName}</td>

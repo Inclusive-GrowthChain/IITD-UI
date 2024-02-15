@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TabNavItem, TabContent } from "../UIComp/Tabs";
 import { useAuthStore } from "../../store/useAuthStore";
-import ImageViewer from "./Modals/ImageViewer";
+import DocImg from "../Common/DocImg";
 import useModal from "../../hooks/useModal";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -11,7 +11,11 @@ import UpdatePassword from "../Fpo/UpdatePassword";
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("tab1")
   const farmer = useAuthStore(s => s.userDetails)
+  console.log(farmer)
+  console.log(farmer.panCardImage)
   const { modal, updateModal, closeModal } = useModal()
+
+  console.log(modal)
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
   const queryClient = useQueryClient()
@@ -693,12 +697,14 @@ const Settings = () => {
           </div>
         </div>
       </div>
+
       {
         modal.state === "imageViewer" && (
-          <ImageViewer
+          <DocImg
             show
             handleClose={closeModal}
-            data={modal.data}
+            imgUrl={modal?.data?.image}
+            title={modal?.data?.title}
           />
         )
       }

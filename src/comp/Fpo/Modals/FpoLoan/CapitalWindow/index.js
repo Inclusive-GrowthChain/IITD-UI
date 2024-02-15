@@ -58,8 +58,8 @@ function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = 
       windowPeriod: "",
       maxLoanPeriod: 25,
       kycDocuments: [
-        { name: "moa", doc: user.bylawsImage },
-        { name: "aoa", doc: user.copyOfByLawsImage},
+        { name: "moa", doc: user.copyOfByLawsImageMOA },
+        { name: "aoa", doc: user.copyOfByLawsImageAOA},
         { name: "coi", doc: user.certificateOfIncorporationImage},
         { name: "gst", doc: user.gstCertificateImage},
         { name: "pan", doc: user.panCardImage},
