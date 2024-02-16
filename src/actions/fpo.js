@@ -7,6 +7,28 @@ export function getFpoProducts() {
   });
 }
 
+export function getLacTest2() {
+  return sendApiReq({
+    url: endPoints.fpo.getSampleTest,
+  })
+}
+
+export function getLacTest() {
+  return sendApiReq({
+    url: endPoints.fpo.lactestList
+  })
+}
+
+
+export function addLacTest(data) {
+  return sendApiReq({
+    method: "post",
+    url: endPoints.fpo.addLacTest,
+    data,
+    successMsg: "Product added successfully"
+  })
+}
+
 export function getLoansData(farmerId) {
   return sendApiReq({
     url: endPoints.fpo.loanData + `${farmerId}`,
@@ -234,7 +256,7 @@ export function getFarmerApplication(userId) {
   });
 }
 
-export function getRequirements(){
+export function getRequirements() {
   return sendApiReq({
     url: endPoints.fpo.requirements
   })
@@ -311,7 +333,7 @@ export function resetFarmerPassword(id) {
   })
 }
 
-export function getProcurementList(){
+export function getProcurementList() {
   return sendApiReq({
     url: endPoints.fpo.procurements
   })

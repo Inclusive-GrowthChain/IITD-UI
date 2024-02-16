@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useQueries } from "@tanstack/react-query";
 
-import { getLacTest, getLacTest2 } from "../../actions/nisa";
+import { getLacTest2 } from "../../actions/fpo";
+import { getLacTest } from "../../actions/fpo";
 import useModal from "../../hooks/useModal";
 
 import LabSampleTest from "./Modals/LabSampleTest";
@@ -136,12 +137,12 @@ const FarmerInformation = () => {
     activeIndex === index ? className : ""
 
   const [
-    { isLoading: isLoading1, data: testList, },
-    { isLoading: isLoading2, data: appList }
+    { isLoading: isLoading1, data: appList },
+    { isLoading: isLoading2, data: testList }
   ] = useQueries({
     queries: [
       {
-        queryKey: ["/lactest"],
+        queryKey: ["fpo/lactest"],
         queryFn: getLacTest,
       },
       {

@@ -93,7 +93,7 @@ function SellingPrice() {
             <div className="outlet">
               <TabContent id="tab1" activeTab={activeTab}>
                 <div className="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4">
-                  {sellItemList?.data.map((item) => (
+                  {sellItemList?.data?.filter((a) => a.isProcurable)?.map((item) => (
                     <div className="col" key={item._id}>
                       <div className="card">
                         <img

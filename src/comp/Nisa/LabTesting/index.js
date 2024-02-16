@@ -36,10 +36,7 @@ const LabTesting = () => {
 
   const { modal, updateModal, closeModal } = useModal()
 
-  const [
-    { isLoading: isLoading1, data: testList, },
-    { isLoading: isLoading2, data: appList }
-  ] = useQueries({
+  const [ { isLoading: isLoading1, data: testList, }, { isLoading: isLoading2, data: appList } ] = useQueries({
     queries: [
       {
         queryKey: ["nisa/lac-test"],
@@ -52,8 +49,10 @@ const LabTesting = () => {
     ]
   })
 
+
   if (isLoading1 || isLoading2) return <Loader wrapperCls="loader-main-right" />
 
+  console.log(appList,testList)
   return (
     <>
       <div className="item_Container">
@@ -110,7 +109,7 @@ const LabTesting = () => {
 
                 <TabContent id="tab3" activeTab={activeTab}>
                   <Tab3
-                    data={testList.data}
+                    data={testList?.data}
                     updateModal={updateModal}
                   />
                 </TabContent>
@@ -124,7 +123,7 @@ const LabTesting = () => {
         modal.state === "showApp" &&
         <Application
           show
-          data={modal.data}
+          data={modal?.data}
           handleClose={closeModal}
         />
       }
@@ -141,8 +140,8 @@ const LabTesting = () => {
         modal.state === "showImg" &&
         <DocImg
           show
-          title={modal.data.title}
-          imgUrl={modal.data.imgUrl}
+          title={modal?.data?.title}
+          imgUrl={modal?.data?.imgUrl}
           handleClose={closeModal}
         />
       }

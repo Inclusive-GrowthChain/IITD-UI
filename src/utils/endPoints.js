@@ -32,9 +32,9 @@ const endPoints = {
   // Nisa
   nisa: {
     cropAdvisory: "/nisa/crop-advisory",
-    lactTest2: "/nisa/lac-test",
-    lactTest: "/fpo/lactest",
-    lactTest3: "/nisa/lactest",
+    lactTest2: "/nisa/lactest",
+    lactTest: "/nisa/lac-test",
+    lactTest3: "/nisa/lac-test",
     training: "/nisa/traning",
   },
 
@@ -43,7 +43,7 @@ const endPoints = {
     products: "/farmer/fpo/products",
     loans: "/loanwindow/loan?type=farmer",
     produce: "/farmer",
-    purchaseTransaction : "/fpo/transaction/api/transactions",
+    purchaseTransaction: "/fpo/transaction/api/transactions",
     updateProfile: "/profile",
     lacProducts: "/farmer/fpo/lacproducts",
     placeRequirements: "/farmer/requirements"
@@ -55,6 +55,9 @@ const endPoints = {
     products: "/fpo/product",
     farmers: "/fpo/farmer",
     lac: "/fpo/lac",
+    getSampleTest: "/fpo/lactest",
+    addLacTest: "/nisa/lactest",
+    lactestList: "/nisa/lac-test",
     itemsName: "/fpo/items/store",
     lacType: "/fpo/items/lac",
     purchase: "/fpo/transaction/api/transaction",
