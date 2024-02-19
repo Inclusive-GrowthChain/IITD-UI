@@ -12,6 +12,7 @@ const PageOne = ({ onButtonClick, bid }) => {
         setSelected(true);
       }
     })
+    // eslint-disable-next-line
   }, [bid]);
 
   return (
