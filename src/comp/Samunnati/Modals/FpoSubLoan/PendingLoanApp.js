@@ -70,7 +70,7 @@ const list = [
   },
 ]
 
-function PendingLoanApp({ show, handleClose, data, setLoanWindow }) {
+function PendingLoanApp({ show, handleClose, data, setLoanWindow,loanWindow }) {
   const { modal, updateModal, closeModal } = useModal()
   const queryClient = useQueryClient()
 
@@ -161,6 +161,7 @@ function PendingLoanApp({ show, handleClose, data, setLoanWindow }) {
             show
             data={data}
             closeAll={closeAll}
+            loanWindow={loanWindow}
             handleClose={closeModal}
           />
         }

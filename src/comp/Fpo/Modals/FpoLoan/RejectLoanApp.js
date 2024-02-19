@@ -14,6 +14,7 @@ const btnStyle = {
 }
 
 function RejectLoanApp({ show, data, handleClose }) {
+  console.log(data)
   const { modal, updateModal, closeModal } = useModal()
   const [reason, setReason] = useState("")
   const queryClient = useQueryClient()
@@ -58,7 +59,7 @@ function RejectLoanApp({ show, data, handleClose }) {
               Contact No.
             </p>
             <p className="col-lg-6">
-              {data?.mobile}
+              {data?.contactNumber}
             </p>
           </div>
 

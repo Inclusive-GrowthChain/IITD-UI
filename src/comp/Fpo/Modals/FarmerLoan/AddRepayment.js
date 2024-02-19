@@ -28,7 +28,7 @@ function AddRepayment({ show, handleClose, data,repaymentItem}) {
     }
   })
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: updateFarmerLoanRepayment,
     onSuccess: () => {
       queryClient.invalidateQueries("loanwindow/")

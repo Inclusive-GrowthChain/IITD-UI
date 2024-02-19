@@ -13,7 +13,7 @@ const btnStyle = {
   lineHeight: "1rem",
 }
 
-function PendingLoans({ data = [], theadStyle, tbodyStyle, setLoanWindow }) {
+function PendingLoans({ data = [], theadStyle, tbodyStyle, setLoanWindow}) {
   const { modal, updateModal, closeModal } = useModal()
 
   return (

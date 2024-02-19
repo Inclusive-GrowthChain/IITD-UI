@@ -34,7 +34,7 @@ function FarmerLoan() {
   const userId = useAuthStore(s => s.userDetails._id)
 
   const [
-    { isLoading, data },
+    { isLoading, data },// eslint-disable-next-line
     { isLoading: isLoading2, data: data2 },
   ] = useQueries({
     queries: [
@@ -44,7 +44,7 @@ function FarmerLoan() {
       },
       {
         queryKey: ["loanhistory", "farmer"],
-        queryFn: () => getLoanHistory({ type: "farmer",userId }),
+        queryFn: () => getLoanHistory({ type: "farmer", userId }),
       }
     ]
   })
@@ -68,16 +68,6 @@ function FarmerLoan() {
           >
             Set Interest Rate
           </button>
-
-          <div>
-            Receive Loan Application
-            <label className="toggle-switch mt-0">
-              <input
-                type="checkbox"
-              />
-              <span className="switch" />
-            </label>
-          </div>
         </div>
 
         <div className="tabs mt-5">

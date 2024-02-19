@@ -121,6 +121,7 @@ function FpoSubLoan() {
                     theadStyle={theadStyle}
                     tbodyStyle={tbodyStyle}
                     btnStyle={btnStyle}
+                    loanWindow={loanWindow}
                     data={loanWindow?.loans?.filter(loan => loan.status === "in-process")}
                   />
                 </TabContent>

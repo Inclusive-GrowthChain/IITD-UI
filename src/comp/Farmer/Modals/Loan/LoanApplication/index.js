@@ -36,9 +36,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
   const [step, setStep] = useState(1)
   const userDetails = useAuthStore(s => s.userDetails)
   const queryClient = useQueryClient()
-  // console.log(data, "data")
-  // console.log(data.value.dob)
-  // console.log(userDetails, "userdetails")
+
   const {
     register, formState: { errors }, handleSubmit,
     setValue, getValues, watch
@@ -129,6 +127,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
     }
   })
 
+  // eslint-disable-next-line
   {
     isLoading && <Loader />
   }

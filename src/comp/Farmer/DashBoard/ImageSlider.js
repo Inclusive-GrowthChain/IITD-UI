@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import { SliderData } from "./SliderData";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 

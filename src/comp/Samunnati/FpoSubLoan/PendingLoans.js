@@ -1,7 +1,7 @@
 import useModal from "../../../hooks/useModal";
 import PendingLoanApp from "../Modals/FpoSubLoan/PendingLoanApp";
 
-function PendingLoans({ data = [], theadStyle, tbodyStyle, btnStyle, setLoanWindow }) {
+function PendingLoans({ data = [], theadStyle, tbodyStyle, btnStyle, setLoanWindow, loanWindow }) {
   const { modal, updateModal, closeModal } = useModal()
 
   return (
@@ -48,6 +48,7 @@ function PendingLoans({ data = [], theadStyle, tbodyStyle, btnStyle, setLoanWind
           data={modal.data}
           handleClose={closeModal}
           setLoanWindow={setLoanWindow}
+          loanWindow={loanWindow}
         />
       }
     </>

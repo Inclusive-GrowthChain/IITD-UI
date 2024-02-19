@@ -6,6 +6,7 @@ import { updateLoanStatus } from "../../../../actions/samunnati";
 
 import Input from "../../../Nisa/Modals/Input";
 import FileInput from "../../../Common/FileInput";
+import { errorNotify } from "../../../../utils/toastifyHlp";
 
 const list = [
   {
@@ -43,7 +44,8 @@ const list = [
   },
 ]
 
-function ApproveLoanApp({ show, data, handleClose, closeAll }) {
+function ApproveLoanApp({ show, data, handleClose, closeAll, loanWindow }) {
+  console.log("Approve LoanWindow", loanWindow)
   const { register, formState: { errors }, handleSubmit, setValue, clearErrors } = useForm({
     defaultValues: {
       createdAt: data?.createdAt.substring(0, 10),
@@ -61,14 +63,18 @@ function ApproveLoanApp({ show, data, handleClose, closeAll }) {
   })
 
   const approveLoan = (formData) => {
-    mutate({
-      grantedAmount: formData.grantedAmount,
-      paymentProof: formData.paymentProof,
-      windowId: data.windowId,
-      status: "approved",
-      id: data.id,
-      isFpo: true
-    })
+    if (formData.grantedAmount <= (loanWindow?.grantedAmount - loanWindow?.grantedAmountUtilized)) {
+      mutate({
+        grantedAmount: formData.grantedAmount,
+        paymentProof: formData.paymentProof,
+        windowId: data.windowId,
+        status: "approved",
+        id: data.id,
+        isFpo: true
+      })
+    } else {
+      errorNotify("Loan Amount is exceeding from the loan Window!")
+    }
   }
 
   return (

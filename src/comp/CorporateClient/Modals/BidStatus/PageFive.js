@@ -79,9 +79,9 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
       //   }
       // }
 
-    });
-  }, [outerbid]) // eslint-disable-next-line
- 
+    });// eslint-disable-next-line
+  }, [outerbid])
+
   return (
     <main
       className="pt5 black-80 center"
