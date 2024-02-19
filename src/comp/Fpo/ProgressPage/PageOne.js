@@ -11,9 +11,10 @@ const PageOne = ({ onButtonClick, bid }) => {
       if (bid.status && bid.status !== "test-reports-rejected" && bid.fpoId === fpoId) {
         setSelected(true);
       }
-    })
-    // eslint-disable-next-line
-  }, [bid]);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bid, fpoId]);
+
 
   return (
     <main

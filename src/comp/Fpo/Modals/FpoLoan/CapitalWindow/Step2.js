@@ -13,7 +13,6 @@ function Step2({ canEdit, setStep, h5Style, finalWrapperStyle, backBtnStyle, nex
     name: "kycAuthorizedSignatories",
   })
 
-  console.log(user)
   const addDocs = () => append([
     { name: "", doc: "" },
     { name: "", doc: "" },

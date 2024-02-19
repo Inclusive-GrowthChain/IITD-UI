@@ -52,7 +52,6 @@ const LabTesting = () => {
 
   if (isLoading1 || isLoading2) return <Loader wrapperCls="loader-main-right" />
 
-  console.log(appList,testList)
   return (
     <>
       <div className="item_Container">

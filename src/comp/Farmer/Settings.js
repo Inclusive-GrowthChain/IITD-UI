@@ -11,11 +11,8 @@ import UpdatePassword from "../Fpo/UpdatePassword";
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("tab1")
   const farmer = useAuthStore(s => s.userDetails)
-  console.log(farmer)
-  console.log(farmer.panCardImage)
-  const { modal, updateModal, closeModal } = useModal()
 
-  console.log(modal)
+  const { modal, updateModal, closeModal } = useModal()
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
   const queryClient = useQueryClient()

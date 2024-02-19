@@ -14,7 +14,6 @@ const btnStyle = {
 }
 
 function RejectLoanApp({ show, data, handleClose }) {
-  console.log(data)
   const { modal, updateModal, closeModal } = useModal()
   const [reason, setReason] = useState("")
   const queryClient = useQueryClient()
