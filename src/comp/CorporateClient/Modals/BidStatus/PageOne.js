@@ -1,5 +1,4 @@
-import { useForm, Controller } from "react-hook-form";
-import { MenuItem, Select } from "@mui/material";
+import { useForm } from "react-hook-form";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Input from '../../../Nisa/Modals/Input';
 
@@ -120,30 +119,15 @@ const PageOne = ({ onButtonClick, bid }) => {
               />
             ))
           }
-
           <div className="row m-2">
             <div className="col-lg-6">
               <label>Required Test Reports</label>
             </div>
             <div className="col-lg-12">
-              <Controller
-                name="reportsRequired"
-                control={control}
-                render={({ field: { value, onChange } }) => (
-                  <Select
-                    multiple
-                    id="demo-multiple-name"
-                    name="reportsRequired"
-                    labelId="demo-multiple-name-label"
-                    className="form-control"
-                    value={value}
-                    onChange={onChange}
-                    disabled
-                  >
-                    <MenuItem value="Chowri">Chowri</MenuItem>
-                    <MenuItem value="Panna">Panna</MenuItem>
-                  </Select>
-                )}
+              <input
+                className="form-control text-capitalize"
+                {...register("reportsRequired")}
+                disabled
               />
             </div>
           </div>

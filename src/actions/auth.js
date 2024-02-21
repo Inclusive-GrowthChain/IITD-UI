@@ -46,7 +46,8 @@ export function updatePassword(data) {
   return sendApiReq({
     method: "patch",
     url: endPoints.updatePassword,
-    data
+    data,
+    successMsg: "Password has been updated successfully"
   })
 }
 

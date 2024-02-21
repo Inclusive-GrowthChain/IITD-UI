@@ -30,8 +30,8 @@ const tbodyStyle = {
 
 function Tab3({ data = [], updateModal }) {
   return (
-    <div>
-      <div className="list__btn lt__btn my-3" style={wrapperStyle}>
+    <>
+      <div className="d-flex item-center justify-content-end">
         <Button
           className="new_test_button"
           style={newTestBtnStyle}
@@ -41,33 +41,34 @@ function Tab3({ data = [], updateModal }) {
         </Button>
       </div>
 
-      <div className="container card shadow ">
-        <div className="table-responsive p-2">
-          <table className="table table-striped">
-            <thead style={theadStyle}>
-              <tr>
-                <td>Test Category</td>
-                <td>Test Name</td>
-                <td>Min. Quantity of required sample (grams)</td>
-                <td>Test Fee (Rs.)</td>
-                <td>Reporting Period (days)</td>
-              </tr>
-            </thead>
-            <tbody style={tbodyStyle}>
-              {data.map((test) => (
-                <tr key={test._id}>
-                  <td>{test.category}</td>
-                  <td>{test.testName}</td>
-                  <td>{test.minRequiredQuantity}</td>
-                  <td>{test.testFee}</td>
-                  <td>{test.reportingPeriod}</td>
+      <div>
+        <div className="card shadow my-4">
+          <div className="table-responsive p-2">
+            <table className="table table-striped">
+              <thead style={theadStyle}>
+                <tr>
+                  <td>Test Category</td>
+                  <td>Test Name</td>
+                  <td>Min. Quantity of required sample (grams)</td>
+                  <td>Test Fee (Rs.)</td>
+                  <td>Reporting Period (days)</td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody style={tbodyStyle}>
+                {data.map((test) => (
+                  <tr key={test._id}>
+                    <td>{test.category}</td>
+                    <td>{test.testName}</td>
+                    <td>{test.minRequiredQuantity}</td>
+                    <td>{test.testFee}</td>
+                    <td>{test.reportingPeriod}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-    </div>
+      </div></>
   );
 }
 

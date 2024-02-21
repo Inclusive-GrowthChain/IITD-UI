@@ -32,11 +32,11 @@ function Store() {
               ?.filter((a) => a.isAvailable)
               .map((item) => (
                 <div className="col" key={item._id}>
-                  <div className="card" style={{ marginBottom: "50px" }}>
+                  <div className="card shadow-sm p-2 mb-5 bg-white rounded" style={{ marginBottom: "50px" }}>
                     <img
                       src={item.imageUrl}
                       alt=""
-                      height={280}
+                      height={220}
                       className="store_img"
                     />
                     <div className="card-body">

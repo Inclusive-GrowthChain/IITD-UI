@@ -132,7 +132,7 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
           </div>
           <div className="row m-2">
             <div className="col-lg-6">
-              <label>Invoice Date</label>
+              <label>Payment Date</label>
             </div>
             <div className="col-lg-6">
               <input
@@ -159,7 +159,7 @@ const PageFive = ({ onButtonClick, closeBidStatus, outerbid }) => {
           </div>
           <div className="row m-2">
             <div className="col-lg-6">
-              <label>Invoice</label>
+              <label>Payment Proof</label>
             </div>
             {
               !bidComplete && (

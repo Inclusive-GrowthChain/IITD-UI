@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueries, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm, Controller } from "react-hook-form";
 import { MenuItem, Select } from "@mui/material";
 import { Modal } from "react-bootstrap";
@@ -9,6 +9,7 @@ import useModal from '../../../hooks/useModal';
 import Input, { errStyle } from '../../Nisa/Modals/Input';
 import ConfirmOrder from './ConfirmOrder';
 import { nanoid } from "nanoid";
+import { getLacTest } from "../../../actions/nisa";
 
 const textAreaStyle = { resize: "none", height: "150px" }
 
@@ -81,6 +82,14 @@ function StartBid({ show, handleClose }) {
   const { modal, updateModal, closeModal } = useModal()
   const queryClient = useQueryClient()
 
+  const { data } = useQuery({
+    queryKey: ['nisa/lactest'],
+    queryFn: getLacTest
+  })
+
+
+
+  console.log(data)
   const {
     register, control, formState: { errors },
     handleSubmit, getValues,
@@ -156,6 +165,12 @@ function StartBid({ show, handleClose }) {
                             value={value}
                             onChange={onChange}
                           >
+                            {
+                              data && data?.data?.map((test, ind) => {
+                                return <MenuItem key={ind} value={test?.testName}>{test?.testName
+                                }</MenuItem>
+                              })
+                            }
                             <MenuItem value="Chowri">Chowri</MenuItem>
                             <MenuItem value="Panna">Panna</MenuItem>
                           </Select>

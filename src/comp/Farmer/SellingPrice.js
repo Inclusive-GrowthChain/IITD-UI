@@ -95,29 +95,33 @@ function SellingPrice() {
                 <div className="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4">
                   {sellItemList?.data?.filter((a) => a.isProcurable)?.map((item) => (
                     <div className="col" key={item._id}>
-                      <div className="card">
+                      <div className="card shadow-sm p-2 mb-5 bg-white rounded" style={{ marginBottom: "50px" }}>
                         <img
                           src={item.imageUrl}
                           alt=""
-                          height={280}
+                          height={220}
                           className="store_img"
                         />
                         <div className="card-body">
                           <div className="row">
                             <div className="col">
-                              <p className="h5 fw-bold text-capitalize ">{item.productName}</p>
+                              <h5 className="fw-bold text-capitalize">
+                                {item.productName}
+                              </h5>
                             </div>
                           </div>
                           <div className="row">
                             <div className="col-7">
                               <div className="row">
                                 <div className="col">
-                                  <strong className="fw-bold">Market Price</strong>
+                                  <strong className="h6 fw-bold">
+                                    Market Price
+                                  </strong>
                                 </div>
                               </div>
                               <div className="row">
                                 <div className="col">
-                                  <span className="pt-2 h6">
+                                  <span className="pt-2">
                                     ₹ {item.marketPrice}
                                   </span>
                                 </div>
@@ -126,14 +130,12 @@ function SellingPrice() {
                             <div className="col-5">
                               <div className="row">
                                 <div className="col">
-                                  <strong className="fw-bold">FPO Price</strong>
+                                  <strong className="h6 fw-bold">FPO Price</strong>
                                 </div>
                               </div>
                               <div className="row">
                                 <div className="col">
-                                  <span className="pt-2 h6">
-                                    ₹ {item.fpoPrice}
-                                  </span>
+                                  <span className="pt-2">₹ {item.fpoPrice}</span>
                                 </div>
                               </div>
                             </div>
@@ -199,55 +201,54 @@ function SellingPrice() {
                     .map((item) => (
                       <div className="col" key={item._id}>
                         <div
-                          className="width-1/3 border shadow-sm bg-body rounded"
-                          style={{ width: "20rem" }}
+                          className="card shadow-sm p-2 bg-white rounded"
                         >
                           <img
                             src={item.imageUrl}
                             alt=""
-                            height={280}
+                            height={220}
                             className="store_img"
                           />
-                          <div className="mx-auto px-4">
-                            <div className="d-flex gap-2 justify-content-between py-2">
+                          <div className="px-1">
+                            <div className="d-flex justify-content-between py-1">
                               <div className="d-flex flex-column text-start text-capitalize">
-                                <strong className="text-black">
+                                <h6 className="text-black fw-semibold">
                                   Lac Strain Type
-                                </strong>
+                                </h6  >
                                 <small>
                                   {item.lacStrainType}
                                 </small>
                               </div>
                               <div className="d-flex flex-column text-start text-capitalize">
-                                <strong className="text-black fw-bold">
+                                <h6 className="text-black fw-semibold">
                                   Origin
-                                </strong>
+                                </h6  >
                                 <small>{item.origin}</small>
                               </div>
                             </div>
-                            <div className="d-flex gap-2 justify-content-between py-2">
+                            <div className="d-flex gap-2 justify-content-between py-1">
                               <div className="d-flex flex-column text-start text-capitalize">
-                                <strong className="text-black fw-bold">
+                                <h6 className="text-black fw-semibold">
                                   Source of Tree
-                                </strong>
+                                </h6>
                                 <small>
                                   {item.treeSource}
                                 </small>
                               </div>
                               <div className="d-flex flex-column text-start text-capitalize">
-                                <strong className="text-black fw-bold">
+                                <h6 className="text-black fw-semibold">
                                   Quantity
-                                </strong>
+                                </h6>
                                 <small>
                                   {item.quantity}
                                 </small>
                               </div>
                             </div>
-                            <div className="d-flex gap-2 justify-content-between py-2">
+                            <div className="d-flex gap-2 justify-content-between py-1">
                               <div className="d-flex flex-column text-start text-capitalize">
-                                <strong className="text-black fw-bold">
+                                <h6 className="text-black fw-semibold">
                                   Remarks
-                                </strong>
+                                </h6>
                                 <small>
                                   {item.remarks}
                                 </small>

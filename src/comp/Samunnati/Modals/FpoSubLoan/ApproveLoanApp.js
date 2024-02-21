@@ -45,7 +45,6 @@ const list = [
 ]
 
 function ApproveLoanApp({ show, data, handleClose, closeAll, loanWindow }) {
-  console.log("Approve LoanWindow", loanWindow)
   const { register, formState: { errors }, handleSubmit, setValue, clearErrors } = useForm({
     defaultValues: {
       createdAt: data?.createdAt.substring(0, 10),

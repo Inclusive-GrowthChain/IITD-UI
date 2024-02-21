@@ -6,15 +6,18 @@ import { addLacTest } from "../../../actions/fpo";
 
 import FileInput from "../../Common/FileInput";
 import Input from '../../Nisa/Modals/Input';
+import { useAuthStore } from "../../../store/useAuthStore";
 
 const list = [
   {
     label: "FPO Name",
     name: "fpoName",
+    disabled: true
   },
   {
     label: "Contact No.",
     name: "fpoContact",
+    disabled: true
   },
   {
     label: "Sample Id",
@@ -72,11 +75,13 @@ const list = [
 ]
 
 function LabSampleTest({ show, handleClose }) {
-  const queryClient = useQueryClient()
+  const fpo = useAuthStore(s => s.userDetails);
+
+  const queryClient = useQueryClient();
   const { register, formState: { errors }, handleSubmit, setValue, clearErrors } = useForm({
     defaultValues: {
-      fpoName: "",
-      fpoContact: "",
+      fpoName: fpo?.name || "",
+      fpoContact: fpo?.contactNumber || "",
       sampleId: "",
       dateOfApplication: "",
       category: "",
@@ -87,15 +92,15 @@ function LabSampleTest({ show, handleClose }) {
       lacSampleImg: "",
       remarks: "",
     }
-  })
+  });
 
   const { mutate, isLoading } = useMutation({
     mutationFn: addLacTest,
     onSuccess: () => {
-      queryClient.invalidateQueries("fpo/lactest")
-      handleClose()
+      queryClient.invalidateQueries("fpo/lactest");
+      handleClose();
     }
-  })
+  });
 
   return (
     <Modal
@@ -109,31 +114,29 @@ function LabSampleTest({ show, handleClose }) {
           className="p-2"
           onSubmit={handleSubmit(mutate)}
         >
-          {
-            list.map(l => {
-              if (!l.isFile) {
-                return (
-                  <Input
-                    {...l}
-                    key={l.name}
-                    register={register}
-                    errors={errors}
-                  />
-                )
-              }
-
+          {list.map(l => {
+            if (!l.isFile) {
               return (
-                <FileInput
+                <Input
                   {...l}
                   key={l.name}
-                  errors={errors}
                   register={register}
-                  setValue={setValue}
-                  clearErrors={clearErrors}
+                  errors={errors}
                 />
-              )
-            })
-          }
+              );
+            }
+
+            return (
+              <FileInput
+                {...l}
+                key={l.name}
+                errors={errors}
+                register={register}
+                setValue={setValue}
+                clearErrors={clearErrors}
+              />
+            );
+          })}
 
           <div className="row m-2">
             <button
@@ -148,7 +151,7 @@ function LabSampleTest({ show, handleClose }) {
         </form>
       </Modal.Body>
     </Modal>
-  )
+  );
 }
 
-export default LabSampleTest
+export default LabSampleTest;

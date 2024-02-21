@@ -28,6 +28,7 @@ const list = [
   {
     label: "Name of Payee",
     name: "payeeName",
+    disabled: true
   },
   {
     label: "Account Number",
@@ -69,14 +70,14 @@ const list = [
 ]
 
 function LoanApplication2({ show, applyFor, handleClose }) {
-  const fpoId = useAuthStore((s) => s.userDetails._id)
+  const fpo = useAuthStore(s => s.userDetails);
   const queryClient = useQueryClient()
   const { register, formState: { errors }, handleSubmit, setValue, clearErrors } = useForm({
     defaultValues: {
       loanWindowId: "",
       loanId: nanoid(10),
-      payeeName: "",
-      accountNumber: "",
+      payeeName: fpo?.name || "",
+      accountNumber:"",
       ifscNumber: "",
       bankName: "",
       requestedAmount: "",
@@ -90,7 +91,7 @@ function LoanApplication2({ show, applyFor, handleClose }) {
 
   useQuery({
     queryKey: ["active-window"],
-    queryFn: () => getActiveLoanwindow({fpoId: fpoId}),
+    queryFn: () => getActiveLoanwindow({ fpoId: fpo?._id }),
     onSuccess: (data) => {
       setValue("id", data?.data?.[0]?.id)
       setValue("intrest", data?.data?.[0]?.intrest)
