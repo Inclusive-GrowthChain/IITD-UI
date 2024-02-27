@@ -1,5 +1,5 @@
 import Input from "../../../../Nisa/Modals/Input";
-
+ 
 const list = [
   {
     label: "Co-Applicant Name",
@@ -61,7 +61,7 @@ const list = [
   },
   {
     label: "Interest Rate",
-    name: "intrest",
+    name: "fpointrest",
     disabled: true
   },
   {
@@ -70,7 +70,7 @@ const list = [
     disabled: true
   },
 ]
-
+ 
 function Step5({ isCreate, backBtnStyle, nextBtnStyle, isSubmiting, setStep, register, errors }) {
   return (
     <>
@@ -85,7 +85,7 @@ function Step5({ isCreate, backBtnStyle, nextBtnStyle, isSubmiting, setStep, reg
           />
         ))
       }
-
+ 
       <div className="row m-2 justify-content-between px-2">
         <button
           className="btn btn-success"
@@ -95,7 +95,7 @@ function Step5({ isCreate, backBtnStyle, nextBtnStyle, isSubmiting, setStep, reg
         >
           Back
         </button>
-
+ 
         {
           isCreate &&
           <button
@@ -111,5 +111,5 @@ function Step5({ isCreate, backBtnStyle, nextBtnStyle, isSubmiting, setStep, reg
     </>
   )
 }
-
+ 
 export default Step5

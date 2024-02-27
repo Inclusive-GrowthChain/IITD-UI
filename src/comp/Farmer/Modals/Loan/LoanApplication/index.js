@@ -51,7 +51,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
       userName: userDetails.userName || data.value.userName,
       gender: userDetails.gender || data.value.gender,
       contactNumber: userDetails.contactNumber || data.value.contactNumber,
-      DOB: new Date(userDetails.DOB).toISOString().slice(0,10) || new Date(data.value.DOB).toISOString().slice(0, 10),
+      DOB: new Date(userDetails.DOB).toISOString().slice(0, 10) || new Date(data.value.DOB).toISOString().slice(0, 10),
       age: userDetails.age || data.value.age,
       aadharCardNumber: userDetails.aadharCardNumber || data.value.aadharCardNumber,
       aadharCardImage: userDetails.aadharCardImage || data.value.aadharCardImage,
@@ -84,6 +84,7 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
       requestedAmount: !isCreate ? data.requestedAmount || data.value.requestedAmount : "",
       purpose: !isCreate ? data.purpose || data.value.purpose : "",
       loanTenure: !isCreate ? data.loanTenure || data.value.loanTenure : "",
+      fpointrest: !isCreate ? data.fpointrest || data.value.fpointrest : "",
       intrest: !isCreate ? data.intrest || data.value.intrest : "",
       loanId: !isCreate ? data.loanId || data.value.loanId : nanoid(10),
       loanWindowId: !isCreate ? data.loanWindowId || data.value.loanWindowId : "",
@@ -113,8 +114,10 @@ function LoanApplication({ show, data, isCreate, handleClose }) {
     onSuccess: (data) => {
       setValue("id", data?.data?.[0]?.id)
       setValue("fpoName", data?.data?.[0]?.fpoName)
-      setValue("intrest", data?.fpoInterestRate)
+      setValue("fpointrest", data?.fpoInterestRate)
+      setValue("intrest", data?.data?.[0]?.intrest)
       setValue("loanWindowId", data?.data?.[0]?.windowId)
+      console.log(data, "testing", data?.fpoInterestRate, data?.data?.[0]?.intrest)
     },
     enabled: isCreate
   })

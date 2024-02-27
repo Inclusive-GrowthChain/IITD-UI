@@ -1,4 +1,4 @@
-import { useMutation, useQueries, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm, Controller } from "react-hook-form";
 import { MenuItem, Select } from "@mui/material";
 import { Modal } from "react-bootstrap";
@@ -89,7 +89,7 @@ function StartBid({ show, handleClose }) {
 
 
 
-  console.log(data)
+  // console.log(data)
   const {
     register, control, formState: { errors },
     handleSubmit, getValues,

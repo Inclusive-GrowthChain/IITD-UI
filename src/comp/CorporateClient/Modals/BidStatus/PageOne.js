@@ -79,7 +79,7 @@ const list = [
 ]
 
 const PageOne = ({ onButtonClick, bid }) => {
-  const { register, control } = useForm({
+  const { register } = useForm({
     defaultValues: bid
   })
 

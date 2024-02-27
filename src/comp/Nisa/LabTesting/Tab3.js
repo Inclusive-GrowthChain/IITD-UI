@@ -1,12 +1,5 @@
 import Button from "react-bootstrap/Button";
 
-const wrapperStyle = {
-  position: "relative",
-  float: "right",
-  right: "18px",
-  top: "-2rem",
-};
-
 const newTestBtnStyle = {
   backgroundColor: "#064420",
   border: "none",
