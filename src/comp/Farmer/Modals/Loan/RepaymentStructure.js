@@ -30,7 +30,7 @@ function RepaymentStructure({ show, data, handleClose }) {
               <div className="col-lg-6">
                 <RepaymentContentTitle title="Loan Window Period in Months" val={data.loanTenure} />
                 <RepaymentContentTitle title="No of Repayment" val={data?.farmerWindowRepaymentStructure.length} />
-                <RepaymentContentTitle title="Annual Interest Rate" val={`${data.intrest}%`} />
+                <RepaymentContentTitle title="Annual Interest Rate" val={`${data.fpointrest}%`} />
               </div>
             </div> : <div className="row">
               <div className="col-lg-6">
