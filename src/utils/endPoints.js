@@ -3,7 +3,9 @@ export const root = {
   // baseUrl: "http://3.7.253.48:3000/api", //Production URL
   // imgUrl: "http://3.7.253.48:3000",
   //  baseUrl: "http://52.66.41.156:3000/api",
-  baseUrl: "http://13.127.42.253:4000/api"
+  baseUrl: "http://13.234.217.143:4000/api"
+
+  // baseUrl : "http://localhost:4000/api"
   // imgUrl: "http://52.66.41.156:3000/"
 };
 
@@ -21,6 +23,7 @@ const endPoints = {
   loanwindow: "/loanwindow",
   uploadImg: "/document",
   auction: "/auction",
+  fetchAuctionById: "/auction/getByUserId",
   user: "/user",
   forgotPassword: "/forgotpassword",
   updatePassword: "/updatepassword",

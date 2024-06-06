@@ -250,7 +250,7 @@ function FarmerLoanTab() {
 
   return (
     <>
-      {loanWindowList.map((loanWindow) => (
+      {loanWindowList?.map((loanWindow) => (
         <WindowRow
           key={loanWindow.id}
           loanWindow={loanWindow}

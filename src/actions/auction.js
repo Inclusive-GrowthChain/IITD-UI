@@ -3,7 +3,7 @@ import endPoints from '../utils/endPoints';
 
 export function getAuction() {
   return sendApiReq({
-    url: endPoints.auction,
+    url: endPoints.auction
   })
 }
 
@@ -17,7 +17,7 @@ export function startAuction(data) {
 
 export function getBidding() {
   return sendApiReq({
-    url: endPoints.auction,
+    url: endPoints.fetchAuctionById,
   })
 }
 

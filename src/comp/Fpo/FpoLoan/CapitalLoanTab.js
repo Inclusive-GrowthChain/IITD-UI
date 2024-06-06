@@ -230,7 +230,7 @@ function CapitalLoanTab() {
         Apply for Loan
       </button>
 
-      {loanWindowList.map((loanWindow) => (
+      {loanWindowList?.map((loanWindow) => (
         <WindowRow
           key={loanWindow.id}
           loanWindow={loanWindow}

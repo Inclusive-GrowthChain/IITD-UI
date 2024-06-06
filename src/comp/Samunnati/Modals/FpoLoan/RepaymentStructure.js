@@ -56,6 +56,7 @@ function RepaymentStructure({ show, handleClose, data, windowType }) {
                 <th>S.No.</th>
                 <th>Scheduled Repayment Date</th>
                 <th>Scheduled EMI Amount</th>
+                <th>Remaining EMI Amount</th>
                 <th>Repayment</th>
                 <th>Status</th>
               </tr>
@@ -70,6 +71,7 @@ function RepaymentStructure({ show, handleClose, data, windowType }) {
                       <td>{window.id}</td>
                       <td>{window.repaymentDate}</td>
                       <td>{window.emi}</td>
+                      <td>{window?.emi - window?.paidAmount}</td>
                       <td>
                         <button
                           style={btnStyle}

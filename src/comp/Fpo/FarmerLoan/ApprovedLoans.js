@@ -40,7 +40,7 @@ function ApprovedLoans({
               <Fragment key={loanWindow.id}>
                 {loanWindow?.loans
                   ?.filter((loan) => loan.status === "approved")
-                  .map((loan) => {
+                  ?.map((loan) => {
                     return (
                       <tr key={loan.id}>
                         <td>{loan.userId}</td>
