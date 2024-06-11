@@ -112,7 +112,7 @@ function CapitalWindow({ show, isEdit = false, data = {}, windowType, canEdit = 
     }
   })
 
-  const title = windowType === "fpo" ? "Working Captial" : "Farmer"
+  const title = windowType === "fpo" ? "Working Capital" : "Farmer"
 
   const onSubmit = data => {
     let is_kycAS_Empty = data.kycAuthorizedSignatories.some(a => !a.name || !a.doc)

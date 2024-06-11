@@ -14,7 +14,7 @@ const btnStyle = {
 
 const list = [
   {
-    label: "Test",
+    label: "Test ID",
     name: "testId",
     disabled: true
   },

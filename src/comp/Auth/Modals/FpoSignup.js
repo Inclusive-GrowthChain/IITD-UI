@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import Modal from "react-bootstrap/Modal";
 
 import { fpoSignup } from "../../../actions/auth";
-import states from '../../../constants/states';
+import states from "../../../constants/states";
 import FormHelp from "./FormHelp";
 
 const btnStyle = {
@@ -13,38 +13,38 @@ const btnStyle = {
   alignItems: "center",
   width: "20%",
   fontSize: "15px",
-}
+};
 
 const fieldSet1 = [
   {
     name: "name",
     label: "Name of FPO",
-    type: "text"
+    type: "text",
   },
   {
     name: "userName",
     label: "Username",
-    type: "text"
+    type: "text",
   },
   {
     name: "password",
     label: "Password",
-    type: "text"
+    type: "text",
   },
   {
     name: "address",
     label: "Address",
-    type: "text"
+    type: "text",
   },
   {
     name: "city",
     label: "City",
-    type: "text"
+    type: "text",
   },
   {
     name: "district",
     label: "District",
-    type: "text"
+    type: "text",
   },
   {
     name: "state",
@@ -59,9 +59,9 @@ const fieldSet1 = [
     validation: {
       minLength: {
         value: 6,
-        message: "Pincode number is not valid"
+        message: "Pincode number is not valid",
       },
-    }
+    },
   },
   {
     name: "contactNumber",
@@ -70,19 +70,19 @@ const fieldSet1 = [
     validation: {
       minLength: {
         value: 10,
-        message: "Mobile number is not valid"
+        message: "Mobile number is not valid",
       },
-    }
+    },
   },
   {
     name: "email",
     label: "Email",
-    type: "email"
+    type: "email",
   },
   {
     name: "website",
     label: "Website",
-    type: "text"
+    type: "text",
   },
   {
     type: "date",
@@ -92,7 +92,7 @@ const fieldSet1 = [
   {
     name: "registrationNumber",
     label: "Registration Number",
-    type: "number"
+    type: "text",
   },
   {
     name: "panCardNumber",
@@ -101,9 +101,9 @@ const fieldSet1 = [
     validation: {
       minLength: {
         value: 6,
-        message: "Pancard number is not valid"
+        message: "Pancard number is not valid",
       },
-    }
+    },
   },
   {
     name: "panCardImage",
@@ -113,49 +113,49 @@ const fieldSet1 = [
   {
     name: "noOfShareHolders",
     label: "No of ShareHolders",
-    type: "number"
+    type: "number",
   },
-]
+];
 
 const fieldSet2 = [
   {
     name: "bankName",
     label: "Bank Name",
-    type: "text"
+    type: "text",
   },
   {
     name: "bankAccountNumber",
     label: "Account Number",
-    type: "number"
+    type: "number",
   },
   {
     name: "ifscCode",
     label: "IFSC Number",
-    type: "text"
+    type: "text",
   },
   {
     name: "bankPassBookImage",
     label: "Upload Bank Passbook Image",
     isFile: true,
   },
-]
+];
 
 const fieldSet3 = [
   {
     name: "directorName",
     label: "Name",
-    type: "text"
+    type: "text",
   },
   {
     name: "directorMobileNumber",
     label: "Mobile Number",
-    type: "number"
+    type: "number",
   },
   {
     name: "directorGender",
     label: "Gender",
     isSelect: true,
-    options: ["Male", "Female", "Other"]
+    options: ["Male", "Female", "Other"],
   },
   {
     name: "copyOfByLawsImageMOA",
@@ -180,16 +180,18 @@ const fieldSet3 = [
   {
     name: "licenseKey",
     label: "License Key",
-    type: "text"
+    type: "text",
   },
-]
+];
 
 function FpoSignup({ show, close }) {
   const {
-    register, setValue,
+    register,
+    setValue,
     formState: { errors },
-    handleSubmit, reset,
-    clearErrors
+    handleSubmit,
+    reset,
+    clearErrors,
   } = useForm({
     defaultValues: {
       name: "",
@@ -220,15 +222,15 @@ function FpoSignup({ show, close }) {
       gstCertificateImage: "",
       licenseKey: "",
     },
-  })
+  });
 
   const { mutate } = useMutation({
     mutationFn: fpoSignup,
     onSuccess: () => {
-      reset()
-      close()
-    }
-  })
+      reset();
+      close();
+    },
+  });
 
   return (
     <Modal size="lg" show={show} onHide={close} centered>
@@ -238,6 +240,7 @@ function FpoSignup({ show, close }) {
           <form onSubmit={handleSubmit(mutate)}>
             <div className="row mb-2">
               <FormHelp
+                role={"fpo"}
                 fields={fieldSet1}
                 errors={errors}
                 register={register}
@@ -249,6 +252,7 @@ function FpoSignup({ show, close }) {
             <div className="row mb-2">
               <h5 className="mt-3">Bank Details</h5>
               <FormHelp
+                role={"fpo"}
                 fields={fieldSet2}
                 errors={errors}
                 register={register}
@@ -258,8 +262,9 @@ function FpoSignup({ show, close }) {
             </div>
 
             <div className="row mb-2">
-              <h5 className="mt-3">Director Details</h5>
+              <h5 className="mt-3">CEO Details</h5>
               <FormHelp
+                role={"fpo"}
                 fields={fieldSet3}
                 errors={errors}
                 register={register}
@@ -283,7 +288,7 @@ function FpoSignup({ show, close }) {
         </div>
       </Modal.Body>
     </Modal>
-  )
+  );
 }
 
-export default FpoSignup
+export default FpoSignup;

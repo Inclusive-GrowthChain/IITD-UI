@@ -26,7 +26,7 @@ const list = [
     type: "date",
   },
   {
-    label: "Duration",
+    label: "Duration (Days)",
     name: "duration",
   },
   {

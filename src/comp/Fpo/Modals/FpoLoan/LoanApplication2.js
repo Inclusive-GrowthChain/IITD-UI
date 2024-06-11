@@ -28,7 +28,6 @@ const list = [
   {
     label: "Name of Payee",
     name: "payeeName",
-    disabled: true
   },
   {
     label: "Account Number",
@@ -76,7 +75,7 @@ function LoanApplication2({ show, applyFor, handleClose }) {
     defaultValues: {
       loanWindowId: "",
       loanId: nanoid(10),
-      payeeName: fpo?.name || "",
+      payeeName: "",
       accountNumber:"",
       ifscNumber: "",
       bankName: "",

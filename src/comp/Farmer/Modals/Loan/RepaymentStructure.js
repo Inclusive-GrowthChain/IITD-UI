@@ -92,13 +92,12 @@ function RepaymentStructure({ show, data, handleClose }) {
                 <th>Scheduled Repayment Date</th>
                 <th>Scheduled EMI Amount</th>
                 <th>Actual Repayment Date</th>
-                <th>Actual Repayment Amount</th>
-                <th>Remaining Repayment Amount</th>
-                <th>
-                  {data?.farmerWindowRepaymentStructure
-                    ? "Balance Amount"
-                    : "Status"}
-                </th>
+
+                {data?.farmerWindowRepaymentStructure && (
+                  <th> Actual Repayment Amount </th>
+                )}
+
+                {data?.FPOrepaymentStructure && <th>Status</th>}
               </tr>
             </thead>
 
@@ -109,7 +108,6 @@ function RepaymentStructure({ show, data, handleClose }) {
                   <td>{r.repaymentDate}</td>
                   <td>{r.emi}</td>
                   <td>{r.paymentDate ? r.paymentDate : "Pending"}</td>
-                  <td>{r.paidAmount !== 0 ? r.paidAmount : "Pending"}</td>
                   <td>{r.balance}</td>
                 </tr>
               )) ||
@@ -121,8 +119,7 @@ function RepaymentStructure({ show, data, handleClose }) {
                     <td>{r.repaymentDate}</td>
                     <td>{r.emi}</td>
                     <td>{r.paymentDate ? r.paymentDate : "Pending"}</td>
-                    <td>{r.paidAmount !== 0 ? r.paidAmount : "Pending"}</td>
-                    <td>{r.emi - r.paidAmount}</td>
+
                     <td>{r.completed ? "Paid" : "Not Paid"}</td>
                   </tr>
                 ))}

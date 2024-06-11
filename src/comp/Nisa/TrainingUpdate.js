@@ -82,7 +82,7 @@ const TrainingUpdate = () => {
                   <tr>
                     <td>Training Course</td>
                     <td>Course Start Date</td>
-                    <td>Duration</td>
+                    <td>Duration (Days)</td>
                     <td>Application Start Date</td>
                     <td>Application End Date</td>
                     <td>Fee (Rs)</td>

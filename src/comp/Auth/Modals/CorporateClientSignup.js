@@ -77,7 +77,7 @@ const fieldSet1 = [
   {
     name: "ciNumber",
     label: "CI Number",
-    type: "number"
+    type: "text"
   },
   {
     name: "email",

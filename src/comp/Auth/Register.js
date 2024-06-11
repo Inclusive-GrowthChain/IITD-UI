@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 
 import { farmerSignup, getFpoList } from "../../actions/auth";
-import states from '../../constants/states';
+import states from "../../constants/states";
 
 import FormHelp, { Input } from "./Modals/FormHelp";
 import { useNavigate } from "react-router";
@@ -16,23 +16,23 @@ const btnStyle = {
   alignItems: "center",
   width: "100%",
   fontSize: "15px",
-}
+};
 
 const fieldSet1 = [
   {
     name: "firstName",
     label: "First Name",
-    type: "text"
+    type: "text",
   },
   {
     name: "lastName",
     label: "Last Name",
-    type: "text"
+    type: "text",
   },
   {
     name: "userName",
     label: "Username",
-    type: "text"
+    type: "text",
   },
   {
     name: "contactNumber",
@@ -41,19 +41,19 @@ const fieldSet1 = [
     validation: {
       minLength: {
         value: 10,
-        message: "Mobile number is not valid"
+        message: "Mobile number is not valid",
       },
-    }
+    },
   },
   {
     name: "password",
     label: "Password",
-    type: "text"
+    type: "text",
   },
   {
     name: "confirmPassword",
     label: "Confirm Password",
-    type: "text"
+    type: "text",
   },
   {
     type: "date",
@@ -68,50 +68,66 @@ const fieldSet1 = [
     validation: {
       min: {
         value: 18,
-        message: "Age should be atleast 18"
+        message: "Age should be atleast 18",
       },
-    }
+    },
   },
   {
     name: "gender",
     label: "Gender",
     isSelect: true,
-    options: ["Male", "Female", "Other"]
+    options: ["Male", "Female", "Other"],
   },
   {
     name: "fathersName",
     label: "Father's Name",
-    type: 'text'
+    type: "text",
   },
   {
     name: "mothersName",
     label: "Mother's Name",
-    type: "text"
+    type: "text",
   },
   {
     name: "doorNumber",
     label: "Door Number",
-    type: "text"
+    type: "text",
   },
   {
     name: "streetName",
     label: "Street Name",
-    type: "text"
+    type: "text",
   },
   {
     name: "village",
     label: "Village",
-    type: "text"
+    type: "text",
   },
   {
     name: "taluk",
     label: "Taluk",
-    type: "text"
+    type: "text",
   },
   {
     name: "district",
     label: "District",
-    type: "text"
+    isSelect: true,
+    options: [
+      "Dumka",
+      "Godda",
+      "Gumla",
+      "Hazaribagh",
+      "Jamtara",
+      "Khunti",
+      "Koderma",
+      "Lohardaga",
+      "Pakur",
+      "Palamu",
+      "Ranchi",
+      "Sahebganj",
+      "Simdega",
+      "West Singhbhum",
+    ],
   },
   {
     name: "state",
@@ -126,70 +142,70 @@ const fieldSet1 = [
     validation: {
       minLength: {
         value: 6,
-        message: "Pin code number is not valid"
+        message: "Pin code number is not valid",
       },
-    }
+    },
   },
   {
     name: "occupation",
     label: "Occupation",
-    type: "text"
+    type: "text",
   },
   {
     name: "education",
     label: "Education",
-    type: "text"
+    type: "text",
   },
   {
     name: "natureOfplace",
     label: "Nature of Place",
-    type: "text"
+    type: "text",
   },
   {
     name: "residence",
     label: "Residence",
-    type: "text"
+    type: "text",
   },
   {
     name: "caste",
     label: "Caste",
-    type: "text"
+    type: "text",
   },
   {
     name: "religion",
     label: "Religion",
-    type: "text"
+    type: "text",
   },
   {
     name: "bankName",
     label: "Bank Name",
-    type: "text"
+    type: "text",
   },
   {
     name: "accountNumber",
     label: "Account Number",
-    type: "number"
+    type: "number",
   },
   {
     name: "ifscCode",
     label: "IFSC Code",
-    type: "text"
+    type: "text",
   },
   {
     name: "branchName",
     label: "Branch Name",
-    type: "text"
+    type: "text",
   },
   {
     name: "panCardNumber",
     label: "PAN Card Number",
-    type: 'text',
+    type: "text",
     validation: {
       minLength: {
         value: 10,
-        message: "Mobile number is not valid"
+        message: "Mobile number is not valid",
       },
-    }
+    },
   },
   {
     name: "panCardImage",
@@ -199,29 +215,32 @@ const fieldSet1 = [
   {
     name: "aadharCardNumber",
     label: "Aadhar Card Number",
-    type: "number"
+    type: "number",
   },
   {
     name: "aadharCardImage",
     label: "Upload Aadhar Card",
     isFile: true,
   },
-]
+];
 
 function Register() {
   const { isLoading, data } = useQuery({
     queryKey: ["user/fpo/mini"],
     queryFn: getFpoList,
-  })
+  });
 
   const {
-    register, setValue,
+    register,
+    setValue,
     formState: { errors },
-    handleSubmit, reset, watch,
-    clearErrors
+    handleSubmit,
+    reset,
+    watch,
+    clearErrors,
   } = useForm({
     defaultValues: {
-      firstName:"",
+      firstName: "",
       lastName: "",
       userName: "",
       contactNumber: "",
@@ -254,36 +273,36 @@ function Register() {
       aadharCardNumber: "",
       aadharCardImage: "",
       fpoId: "",
-    }
-  })
+    },
+  });
 
-  const navigate = useNavigate()
-  const dob = watch("DOB")
+  const navigate = useNavigate();
+  const dob = watch("DOB");
 
   useEffect(() => {
     if (dob) {
-      const dobVal = new Date(dob)
-      const today = new Date()
-      let temp = today.getFullYear() - dobVal.getFullYear()
-      const m = today.getMonth() - dobVal.getMonth()
+      const dobVal = new Date(dob);
+      const today = new Date();
+      let temp = today.getFullYear() - dobVal.getFullYear();
+      const m = today.getMonth() - dobVal.getMonth();
       if (m < 0 || (m === 0 && today.getDate() < dobVal.getDate())) {
-        temp--
+        temp--;
       }
 
-      setValue("age", temp, { shouldValidate: true })
+      setValue("age", temp, { shouldValidate: true });
     }
-  }, [dob, setValue])
+  }, [dob, setValue]);
 
   const { mutate } = useMutation({
     mutationFn: farmerSignup,
     onSuccess: () => {
-      reset()
-      navigate("/")
+      reset();
+      navigate("/");
     },
     onError: (e) => {
-      errorNotify(e)
-    }
-  })
+      errorNotify(e);
+    },
+  });
 
   return (
     <div id="main-registration-container">
@@ -294,6 +313,7 @@ function Register() {
             <form onSubmit={handleSubmit(mutate)}>
               <div className="row mb-2">
                 <FormHelp
+                  role={"farmer"}
                   fields={fieldSet1}
                   errors={errors}
                   register={register}
@@ -306,7 +326,14 @@ function Register() {
                   label="FPO"
                   name="fpoId"
                   error={errors.fpoId}
-                  options={isLoading ? [] : data?.data?.map(d => ({ val: d._id, label: d.name || d.fpoName }))}
+                  options={
+                    isLoading
+                      ? []
+                      : data?.data?.map((d) => ({
+                          val: d._id,
+                          label: d.name || d.fpoName,
+                        }))
+                  }
                   register={register}
                   validation={{ required: "FpoId is required" }}
                 />
@@ -328,7 +355,7 @@ function Register() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Register
+export default Register;

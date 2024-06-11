@@ -47,10 +47,7 @@ const list = [
     isSelect: true,
     inputWrapperCls: "col-lg-12",
     options: [
-      "Jharkhand",
-      "Chattisgarh",
-      "MP",
-      "Mednapore",
+      "Jharkhand"
     ],
   },
   {
@@ -171,8 +168,6 @@ function StartBid({ show, handleClose }) {
                                 }</MenuItem>
                               })
                             }
-                            <MenuItem value="Chowri">Chowri</MenuItem>
-                            <MenuItem value="Panna">Panna</MenuItem>
                           </Select>
                         )}
                       />

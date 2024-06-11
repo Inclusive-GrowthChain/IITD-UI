@@ -5,80 +5,76 @@ import { Modal } from "react-bootstrap";
 import { addLacTest } from "../../../actions/fpo";
 
 import FileInput from "../../Common/FileInput";
-import Input from '../../Nisa/Modals/Input';
+import Input from "../../Nisa/Modals/Input";
 import { useAuthStore } from "../../../store/useAuthStore";
 
-const list = [
-  {
-    label: "FPO Name",
-    name: "fpoName",
-    disabled: true
-  },
-  {
-    label: "Contact No.",
-    name: "fpoContact",
-    disabled: true
-  },
-  {
-    label: "Sample Id",
-    name: "sampleId",
-  },
-  {
-    label: "Date",
-    name: "dateOfApplication",
-    type: "date"
-  },
-  {
-    label: "Test Category",
-    name: "category",
-    isSelect: true,
-    options: [
-      "Shellac / Seedlac / By-product of Lac",
-      "Bleached Lac",
-      "Lac Dye",
-      "Shellac Wax",
-      "Aleuritic Acid",
-      "Hydrolysed Lac",
-      "Sealing Wax",
-      "Gasket Shellac Compound",
-      "Organic Substance",
-    ],
-  },
-  {
-    label: "Test Name",
-    name: "testName",
-  },
-  {
-    label: "Amount",
-    name: "amount",
-    type: "number",
-  },
-  {
-    label: "Payment Reference No.",
-    name: "paymentRefNo",
-    type: "number",
-  },
-  {
-    label: "Payment Image",
-    name: "paymentImg",
-    isFile: true
-  },
-  {
-    label: "Lac Sample Image",
-    name: "lacSampleImg",
-    isFile: true
-  },
-  {
-    label: "Remarks",
-    name: "remarks",
-  },
-]
 
-function LabSampleTest({ show, handleClose }) {
-  const fpo = useAuthStore(s => s.userDetails);
-
+function LabSampleTest({ show, handleClose, outputArr }) {
+  const fpo = useAuthStore((s) => s.userDetails);
+  const list = [
+    {
+      label: "FPO Name",
+      name: "fpoName",
+      disabled: true,
+    },
+    {
+      label: "Contact No.",
+      name: "fpoContact",
+      disabled: true,
+    },
+    {
+      label: "Sample Id",
+      name: "sampleId",
+    },
+    {
+      label: "Date",
+      name: "dateOfApplication",
+      type: "date",
+    },
+    {
+      label: "Test Category",
+      name: "category",
+      isSelect: true,
+      options: outputArr,
+    },
+    {
+      label: "Test Name",
+      name: "testName",
+    },
+    {
+      label: "Amount",
+      name: "amount",
+      type: "number",
+    },
+    {
+      label: "Payment Reference No.",
+      name: "paymentRefNo",
+      type: "number",
+    },
+    {
+      label: "Payment Image",
+      name: "paymentImg",
+      isFile: true,
+    },
+    {
+      label: "Lac Sample Image",
+      name: "lacSampleImg",
+      isFile: true,
+    },
+    {
+      label: "Remarks",
+      name: "remarks",
+    },
+  ];
+  
   const queryClient = useQueryClient();
-  const { register, formState: { errors }, handleSubmit, setValue, clearErrors } = useForm({
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    setValue,
+    clearErrors,
+  } = useForm({
     defaultValues: {
       fpoName: fpo?.name || "",
       fpoContact: fpo?.contactNumber || "",
@@ -91,7 +87,7 @@ function LabSampleTest({ show, handleClose }) {
       paymentImg: "",
       lacSampleImg: "",
       remarks: "",
-    }
+    },
   });
 
   const { mutate, isLoading } = useMutation({
@@ -99,22 +95,15 @@ function LabSampleTest({ show, handleClose }) {
     onSuccess: () => {
       queryClient.invalidateQueries("fpo/lactest");
       handleClose();
-    }
+    },
   });
 
   return (
-    <Modal
-      show={show}
-      onHide={handleClose}
-      className="store_card"
-    >
+    <Modal show={show} onHide={handleClose} className="store_card">
       <Modal.Header closeButton>Lab Sample Test</Modal.Header>
       <Modal.Body>
-        <form
-          className="p-2"
-          onSubmit={handleSubmit(mutate)}
-        >
-          {list.map(l => {
+        <form className="p-2" onSubmit={handleSubmit(mutate)}>
+          {list.map((l) => {
             if (!l.isFile) {
               return (
                 <Input
