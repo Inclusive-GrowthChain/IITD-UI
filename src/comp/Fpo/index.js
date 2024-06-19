@@ -1,12 +1,12 @@
-import StoreMallDirectoryTwoToneIcon from '@mui/icons-material/StoreMallDirectoryTwoTone';
-import LocalGroceryStoreTwoToneIcon from '@mui/icons-material/LocalGroceryStoreTwoTone';
-import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTone';
+import StoreMallDirectoryTwoToneIcon from "@mui/icons-material/StoreMallDirectoryTwoTone";
+import LocalGroceryStoreTwoToneIcon from "@mui/icons-material/LocalGroceryStoreTwoTone";
+import SettingsSuggestTwoToneIcon from "@mui/icons-material/SettingsSuggestTwoTone";
 import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
-import PaymentsTwoToneIcon from '@mui/icons-material/PaymentsTwoTone';
-import ScienceTwoToneIcon from '@mui/icons-material/ScienceTwoTone';
+import PaymentsTwoToneIcon from "@mui/icons-material/PaymentsTwoTone";
+import ScienceTwoToneIcon from "@mui/icons-material/ScienceTwoTone";
 import PlaylistAddCheckCircleIcon from "@mui/icons-material/PlaylistAddCheckCircle";
-// import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
-import HelpTwoToneIcon from '@mui/icons-material/HelpTwoTone';
+import CampaignIcon from "@mui/icons-material/Campaign";
+import HelpTwoToneIcon from "@mui/icons-material/HelpTwoTone";
 import AppWrapper from "../Template/AppWrapper";
 import "./Fpo.css";
 
@@ -19,61 +19,62 @@ const list = [
   {
     title: "Farmer",
     icon: <AssignmentIndOutlinedIcon className="icon" />,
-    to: '/fpo/farmer'
+    to: "/fpo/farmer",
   },
   {
     title: "Requirement Gathering",
-    icon: (
-      <PlaylistAddCheckCircleIcon className='icon'
-      />
-    ),
+    icon: <PlaylistAddCheckCircleIcon className="icon" />,
     to: "/fpo/requirement-gathering",
-  }
-  ,
+  },
   {
     title: "FPO Store",
     icon: <LocalGroceryStoreTwoToneIcon className="icon" />,
-    to: '/fpo/store'
+    to: "/fpo/store",
   },
   {
     title: "Lac Procurement",
     icon: <StoreMallDirectoryTwoToneIcon className="icon" />,
-    to: '/fpo/lac-procurement'
+    to: "/fpo/lac-procurement",
+  },
+  {
+    title: "Announcement",
+    icon: <CampaignIcon className="icon" />,
+    to: "/fpo/fpo-announcements",
   },
   {
     title: "Lab Testing",
     icon: <ScienceTwoToneIcon className="icon" />,
-    to: '/fpo/lab-testing'
+    to: "/fpo/lab-testing",
   },
   {
     title: "Farmer Loan",
     icon: <PaymentsTwoToneIcon className="icon" />,
-    to: '/fpo/farmerloan'
+    to: "/fpo/farmerloan",
   },
   {
     title: "FPO Loan",
     icon: <PaymentsTwoToneIcon className="icon" />,
-    to: '/fpo/fpoloan'
+    to: "/fpo/fpoloan",
   },
   {
     title: "Corporate Customer",
     icon: <PaymentsTwoToneIcon className="icon" />,
-    to: '/fpo/corporate-customer'
+    to: "/fpo/corporate-customer",
   },
   {
     title: "Support",
     icon: <HelpTwoToneIcon className="icon" />,
-    to: '/fpo/support'
+    to: "/fpo/support",
   },
   {
     title: "Settings",
     icon: <SettingsSuggestTwoToneIcon className="icon" />,
-    to: '/fpo/settings'
+    to: "/fpo/settings",
   },
-]
+];
 
 function FPO() {
-  return <AppWrapper title="FPO" list={list} />
+  return <AppWrapper title="FPO" list={list} />;
 }
 
-export default FPO
+export default FPO;

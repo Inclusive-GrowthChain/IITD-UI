@@ -32,7 +32,7 @@ const backBtnStyle = {
   minWidth: "80px",
 }
 
-function LoanApplication({ show, data, isCreate, handleClose }) {
+function  LoanApplication({ show, data, isCreate, handleClose }) {
   const [step, setStep] = useState(1)
   const userDetails = useAuthStore(s => s.userDetails)
   const queryClient = useQueryClient()

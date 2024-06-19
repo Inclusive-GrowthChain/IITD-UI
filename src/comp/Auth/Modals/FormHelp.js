@@ -145,7 +145,11 @@ function FormHelp({
         }
 
         return f.name === "website" ||
-          (f.name === "panCardNumber" && role === "farmer") ? (
+          f.name === "panCardNumber" ||
+          f.name === "kusumTreeNumber" ||
+          f.name === "palashTreeNumber" ||
+          f.name === "semialataTreeNumber" ||
+          (f.name === "berTreeNumber" && role === "farmer") ? (
           <Input
             {...f}
             type={f.type}

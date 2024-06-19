@@ -222,6 +222,26 @@ const fieldSet1 = [
     label: "Upload Aadhar Card",
     isFile: true,
   },
+  {
+    name: "kusumTreeNumber",
+    label: "Number of Kusum Trees",
+    type: "number",
+  },
+  {
+    name: "palashTreeNumber",
+    label: "Number of Palash Trees",
+    type: "number",
+  },
+  {
+    name: "berTreeNumber",
+    label: "Number of Ber Trees",
+    type: "number",
+  },
+  {
+    name: "semialataTreeNumber",
+    label: "Number of Semialata Plants",
+    type: "number",
+  },
 ];
 
 function Register() {
@@ -273,6 +293,10 @@ function Register() {
       aadharCardNumber: "",
       aadharCardImage: "",
       fpoId: "",
+      kusumTreeNumber: "",
+      palashTreeNumber: "",
+      berTreeNumber: "",
+      semialataTreeNumber: "",
     },
   });
 

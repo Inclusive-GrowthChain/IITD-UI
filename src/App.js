@@ -9,7 +9,14 @@ import { cookies } from "./utils/sendApiReq";
 import Loader from "./comp/Common/Loader";
 
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
-import RequirementGathering from "./comp/Fpo/RequirementGathering";
+
+const FpoAnnouncement = lazy(() =>
+  import("./comp/Fpo/FpoAnnouncements/FpoAnnouncement")
+);
+
+const RequirementGathering = lazy(() =>
+  import("./comp/Fpo/RequirementGathering")
+);
 
 const Register = lazy(() => import("./comp/Auth/Register"));
 const Login = lazy(() => import("./comp/Auth/Login"));
@@ -29,7 +36,9 @@ const FarmerSettings = lazy(() => import("./comp/Farmer/Settings"));
 const FarmerStore = lazy(() => import("./comp/Farmer/Store"));
 const FarmerLoan = lazy(() => import("./comp/Farmer/Loan"));
 const FarmerWrapper = lazy(() => import("./comp/Farmer"));
-const FarmerInputRequirement = lazy(() => import("./comp/Farmer/InputRequirement"))
+const FarmerInputRequirement = lazy(() =>
+  import("./comp/Farmer/InputRequirement")
+);
 
 const FpoCorporateCustomer = lazy(() => import("./comp/Fpo/CorporateCustomer"));
 const FpoLacProcurement = lazy(() => import("./comp/Fpo/LacProcurement"));
@@ -72,7 +81,7 @@ const CorporateClientSettings = lazy(() =>
 const CorporateClientWrapper = lazy(() => import("./comp/CorporateClient"));
 
 function App() {
-  const { loggedIn, logIn } = useAuthStore()
+  const { loggedIn, logIn } = useAuthStore();
   // console.log(userStore,"userStore")
   // const logIn = useAuthStore((s) => {
   //   console.log(s)
@@ -80,7 +89,6 @@ function App() {
   // });
 
   const navigate = useNavigate();
-
 
   useEffect(() => {
     if (loggedIn) {
@@ -96,8 +104,6 @@ function App() {
       fetchData();
     }
   }, [loggedIn]); // eslint-disable-line react-hooks/exhaustive-deps
-
-
 
   const { isLoading, fetchStatus } = useQuery({
     queryFn: getUserDetails,
@@ -137,7 +143,7 @@ function App() {
 
         {/* farmer route */}
         <Route path="farmer" element={<ProtectedRoute role={"farmer"} />}>
-          <Route path="/farmer" element={<FarmerWrapper />}>
+          <Route path="/farmer/*" element={<FarmerWrapper />}>
             <Route
               path="transaction-history"
               element={<FarmerTransactionHistory />}
@@ -147,6 +153,7 @@ function App() {
             <Route path="training" element={<FarmerTrainingUpdate />} />
             <Route path="dashboard" element={<FarmerDashboard />} />
             <Route path="settings" element={<FarmerSettings />} />
+            <Route path="fpo-announcements" element={<FpoAnnouncement />} />
             <Route path="support" element={<TemplateSupport />} />
             <Route path="store" element={<FarmerStore />} />
             <Route path="loan" element={<FarmerLoan />} />
@@ -167,13 +174,17 @@ function App() {
             />
             <Route path="lac-procurement" element={<FpoLacProcurement />} />
             <Route path="lab-testing" element={<FpoLabTesting />} />
+            <Route path="fpo-announcements" element={<FpoAnnouncement />} />
             <Route path="farmerloan" element={<FpoFarmerLoan />} />
             <Route path="settings" element={<FpoSetting />} />
             <Route path="support" element={<TemplateSupport />} />
             <Route path="farmer" element={<FpoFarmer />} />
             <Route path="fpoloan" element={<FpoLoan />} />
             <Route path="store" element={<FpoStore />} />
-            <Route path="requirement-gathering" element={<RequirementGathering />} />
+            <Route
+              path="requirement-gathering"
+              element={<RequirementGathering />}
+            />
           </Route>
         </Route>
 
@@ -196,7 +207,10 @@ function App() {
         </Route>
 
         {/* Samunnati route */}
-        <Route path="samunnati" element={<ProtectedRoute role={"lendingpartner"} />}>
+        <Route
+          path="samunnati"
+          element={<ProtectedRoute role={"lendingpartner"} />}
+        >
           <Route path="/samunnati" element={<SamunnatiWrapper />}>
             <Route path="support" element={<TemplateSupport />} />
             <Route path="fpo-loan" element={<SamunnatiFPOLoan />} />
@@ -213,7 +227,10 @@ function App() {
         </Route>
 
         {/* Corporate Client route */}
-        <Route path="corporateclient" element={<ProtectedRoute role={"corporateclient"} />}>
+        <Route
+          path="corporateclient"
+          element={<ProtectedRoute role={"corporateclient"} />}
+        >
           <Route path="/corporateclient" element={<CorporateClientWrapper />}>
             <Route path="lac-bidding" element={<CorporateClientLacBidding />} />
             <Route path="settings" element={<CorporateClientSettings />} />

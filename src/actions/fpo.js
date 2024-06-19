@@ -10,23 +10,22 @@ export function getFpoProducts() {
 export function getLacTest2() {
   return sendApiReq({
     url: endPoints.fpo.getSampleTest,
-  })
+  });
 }
 
 export function getLacTest() {
   return sendApiReq({
-    url: endPoints.fpo.lactestList
-  })
+    url: endPoints.fpo.lactestList,
+  });
 }
-
 
 export function addLacTest(data) {
   return sendApiReq({
     method: "post",
     url: endPoints.fpo.addLacTest,
     data,
-    successMsg: "Product added successfully"
-  })
+    successMsg: "Product added successfully",
+  });
 }
 
 export function getLoansData(farmerId) {
@@ -75,7 +74,6 @@ export function addSale(data_passed, farmerId, totalAmount) {
     dateOfSale: new Date().toLocaleString(),
     farmerId: farmerId,
   };
-
 
   return sendApiReq({
     method: "post",
@@ -180,6 +178,45 @@ export function editFpoLac(data) {
   });
 }
 
+export function addFpoAnnouncement(data) {
+  const formData = new FormData();
+  formData.append("fpoId", data?.fpoId);
+  formData.append("heading", data?.heading);
+  formData.append("description", data?.description);
+
+  if (data?.fpoAnnouncementImage[0]) {
+    formData.append("fpoAnnouncementImage", data?.fpoAnnouncementImage[0]);
+  }
+
+  return sendApiReq({
+    method: "post",
+    url: endPoints.fpo.announcement,
+    data: formData,
+  });
+}
+
+export function editFpoAnnouncement(data) {
+  const formData = new FormData();
+  formData.append("fpoId", data?.fpoId);
+  formData.append("announcementId", data?.announcementId);
+  formData.append("heading", data?.heading);
+  formData.append("description", data?.description);
+
+  if (data?.fpoAnnouncementImage[0]) {
+    formData.append("fpoAnnouncementImage", data?.fpoAnnouncementImage[0]);
+  }
+
+  return sendApiReq({
+    method: "patch",
+    url: endPoints.fpo.updateAnnouncement,
+    data: formData,
+  });
+}
+export function getFpoAnnouncements() {
+  return sendApiReq({
+    url: endPoints.fpo?.getAnnouncements,
+  });
+}
 export function getLoanwindow({ windowType = "farmer" }) {
   return sendApiReq({
     url: endPoints.loanwindow,
@@ -189,15 +226,16 @@ export function getLoanwindow({ windowType = "farmer" }) {
 
 export function getLoanHistory({ type = "farmer", userId }) {
   return sendApiReq({
-    url: endPoints.loanHistory + `?userId=${userId}&type=${type}&status=approved`
-
+    url:
+      endPoints.loanHistory + `?userId=${userId}&type=${type}&status=approved`,
   });
 }
 
 export function getApprovedLoanList(farmerId) {
   return sendApiReq({
-    url: endPoints.loanHistory + `?userId=${farmerId}&type=farmer&status=approved`
-  })
+    url:
+      endPoints.loanHistory + `?userId=${farmerId}&type=farmer&status=approved`,
+  });
 }
 
 export function getActiveLoanwindow({ windowType = "fpo", fpoId }) {
@@ -258,8 +296,8 @@ export function getFarmerApplication(userId) {
 
 export function getRequirements() {
   return sendApiReq({
-    url: endPoints.fpo.requirements
-  })
+    url: endPoints.fpo.requirements,
+  });
 }
 
 export function updateFarmerApplication(data) {
@@ -329,12 +367,12 @@ export function approveClientPayment(data) {
 export function resetFarmerPassword(id) {
   return sendApiReq({
     method: "patch",
-    url: endPoints.fpo.resetPasswordFarmer + `/${id}`
-  })
+    url: endPoints.fpo.resetPasswordFarmer + `/${id}`,
+  });
 }
 
 export function getProcurementList() {
   return sendApiReq({
-    url: endPoints.fpo.procurements
-  })
+    url: endPoints.fpo.procurements,
+  });
 }

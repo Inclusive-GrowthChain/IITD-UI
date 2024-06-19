@@ -3,7 +3,7 @@ export const root = {
   // baseUrl: "http://3.7.253.48:3000/api", //Production URL
   // imgUrl: "http://3.7.253.48:3000",
   //  baseUrl: "http://52.66.41.156:3000/api",
-  baseUrl: "http://13.234.217.143:4000/api"
+  baseUrl: "http://13.234.217.143:4000/api",
 
   // baseUrl : "http://localhost:4000/api"
   // imgUrl: "http://52.66.41.156:3000/"
@@ -29,7 +29,7 @@ const endPoints = {
   updatePassword: "/updatepassword",
 
   admin: {
-    getLicenses: "/licenses"
+    getLicenses: "/licenses",
   },
 
   // Nisa
@@ -49,7 +49,7 @@ const endPoints = {
     purchaseTransaction: "/fpo/transaction/api/transactions",
     updateProfile: "/profile",
     lacProducts: "/farmer/fpo/lacproducts",
-    placeRequirements: "/farmer/requirements"
+    placeRequirements: "/farmer/requirements",
   },
 
   // Fpo
@@ -69,7 +69,10 @@ const endPoints = {
     loanData: "/loans/history?type=farmer&userId=",
     requirements: "/fpo/requirements",
     procurements: "/fpo/farmerproduce",
-    resetPasswordFarmer: "/fpo/farmer/forgotpassword"
+    resetPasswordFarmer: "/fpo/farmer/forgotpassword",
+    announcement: "/announcements/create-fpo-announcement",
+    getAnnouncements: "/announcements/fetch-fpo-announcement",
+    updateAnnouncement: "/announcements/update-fpo-announcement",
   },
 
   userList: {
@@ -78,7 +81,7 @@ const endPoints = {
     farmer: "/user/list/farmer",
     nisa: "/user/list/nisa",
     fpo: "/list/fpo",
-    fpolist: "/user/list/fpo"
+    fpolist: "/user/list/fpo",
   },
 
   samunnati: {
