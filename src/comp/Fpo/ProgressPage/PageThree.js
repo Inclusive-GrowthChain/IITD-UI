@@ -11,38 +11,45 @@ import useModal from "../../../hooks/useModal";
 
 const PageThree = ({ onButtonClick, bid, handleClose }) => {
   const [showInvoice, setShowInvoice] = useState(false);
-  const fpoId = useAuthStore(s => s.userDetails._id)
-  const [status, setStatus] = useState("")
-  const {updateModal,modal} = useModal()
+  const fpoId = useAuthStore((s) => s.userDetails._id);
+  const [status, setStatus] = useState("");
+  const { updateModal, modal } = useModal();
 
   const handleShowInvoice = () => setShowInvoice(true);
   const handleCloseInvoice = () => setShowInvoice(false);
 
-  const queryClient = useQueryClient()
-  const { register, formState: { errors }, handleSubmit, reset, setValue, clearErrors } = useForm({
+  const queryClient = useQueryClient();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+    setValue,
+    clearErrors,
+  } = useForm({
     defaultValues: {
       invoice: "",
       auctionId: "",
       bidId: "",
-    }
-  })
+    },
+  });
 
   const { mutate } = useMutation({
     mutationFn: sendInvoice,
     onSuccess: () => {
-      queryClient.invalidateQueries("auction/")
-      handleClose()
-    }
-  })
+      queryClient.invalidateQueries("auction/");
+      handleClose();
+    },
+  });
 
   useEffect(() => {
     bid.bids.forEach((item) => {
       if (item.fpoId === fpoId) {
         reset({
           auctionId: bid.id,
-          bidId: item.id
-        })
-        setStatus(item.status)
+          bidId: item.id,
+        });
+        setStatus(item.status);
       }
     });
   }, [bid, fpoId, reset]);
@@ -77,8 +84,8 @@ const PageThree = ({ onButtonClick, bid, handleClose }) => {
           >
             <button
               onClick={(e) => {
-                e.preventDefault()
-                onButtonClick("pagetwo")
+                e.preventDefault();
+                onButtonClick("pagetwo");
               }}
               style={{ backgroundColor: "white" }}
             >
@@ -95,11 +102,14 @@ const PageThree = ({ onButtonClick, bid, handleClose }) => {
           >
             <button
               onClick={(e) => {
-                e.preventDefault()
-                onButtonClick("pagefour")
+                e.preventDefault();
+                onButtonClick("pagefour");
               }}
               style={{ backgroundColor: "white" }}
-              disabled={status !== "completed" && status !== "payment-done-waiting-approval"}
+              disabled={
+                status !== "completed" &&
+                status !== "payment-done-waiting-approval"
+              }
             >
               <ArrowForwardIosIcon />
             </button>
@@ -147,101 +157,101 @@ const PageThree = ({ onButtonClick, bid, handleClose }) => {
           </div>
           <div className="row m-2">
             <div className="col-lg-6">
-              <label>Amount</label>
+              <label>Total Amount</label>
             </div>
             <div className="col-lg-6">
               <input
                 className="form-control"
                 type="text"
                 disabled={true}
-                value={bid.bids.find((item) => item.fpoId === fpoId).bidAmount}
+                value={
+                  bid.bids.find((item) => item.fpoId === fpoId).bidAmount *
+                  bid?.quantity
+                }
               />
             </div>
           </div>
-          {
-            status !== "test-report-added" && (
-              <div className="row m-2">
-                <div className="col-lg-6">
-                  <label>Date of Payment</label>
-                </div>
-                <div className="col-lg-6">
-                  <input
-                    className="form-control"
-                    type="text"
-                    disabled={true}
-                    value={bid.bids.find((item) => item.fpoId === fpoId).invoiceAddedAt?.substring(0, 10)}
-                  />
-                </div>
+          {status !== "test-report-added" && (
+            <div className="row m-2">
+              <div className="col-lg-6">
+                <label>Date of Payment</label>
               </div>
-            )
-          }
-          {
-            status === "test-report-added" && (
-              <div className="row m-2">
-                <div className="col-lg-12">
-                  <label>Upload Invoice</label>
-                </div>
-                <div className="col-lg-12">
-                  <FileInput
-                    {...register("invoice")}
-                    errors={errors}
-                    register={register}
-                    setValue={setValue}
-                    clearErrors={clearErrors}
-                  />
-                </div>
+              <div className="col-lg-6">
+                <input
+                  className="form-control"
+                  type="text"
+                  disabled={true}
+                  value={bid.bids
+                    .find((item) => item.fpoId === fpoId)
+                    .invoiceAddedAt?.substring(0, 10)}
+                />
               </div>
-            )
-          }
-          {
-            status !== "test-report-added" && (
-              <div className="row m-2">
-                <div className="col-lg-6">
-                  <label>Invoice</label>
-                </div>
-                <div className="col-lg-6">
-                  <button
-                    style={{
-                      backgroundColor: "#064420",
-                      color: "#fff",
-                      alignItems: "center",
-                      borderRadius: "5px",
-                      border: "none",
-                      padding: "0.25rem 1rem",
-                      width: "100%",
-                      fontSize: "1rem",
-                      lineHeight: "2rem",
-                    }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleShowInvoice();
-                      updateModal("showRequestedReport", { imgUrl: bid.bids.find((item) => item.fpoId === fpoId).invoice })
-                    }}
-                  >
-                    view
-                  </button>
-                </div>
+            </div>
+          )}
+          {status === "test-report-added" && (
+            <div className="row m-2">
+              <div className="col-lg-12">
+                <label>Upload Invoice</label>
               </div>
-            )
-          }
-          {
-            status === "test-report-added" && (
-              <div className="row m-2">
-                <div className="col-lg-12">
-                  <button
-                    className="btn btn-success"
-                    style={{
-                      marginTop: "1rem",
-                      backgroundColor: "#064420",
-                      width: "96%",
-                    }}
-                  >
-                    Submit
-                  </button>
-                </div>
+              <div className="col-lg-12">
+                <FileInput
+                  {...register("invoice")}
+                  errors={errors}
+                  register={register}
+                  setValue={setValue}
+                  clearErrors={clearErrors}
+                />
               </div>
-            )
-          }
+            </div>
+          )}
+          {status !== "test-report-added" && (
+            <div className="row m-2">
+              <div className="col-lg-6">
+                <label>Invoice</label>
+              </div>
+              <div className="col-lg-6">
+                <button
+                  style={{
+                    backgroundColor: "#064420",
+                    color: "#fff",
+                    alignItems: "center",
+                    borderRadius: "5px",
+                    border: "none",
+                    padding: "0.25rem 1rem",
+                    width: "100%",
+                    fontSize: "1rem",
+                    lineHeight: "2rem",
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleShowInvoice();
+                    updateModal("showRequestedReport", {
+                      imgUrl: bid.bids.find((item) => item.fpoId === fpoId)
+                        .invoice,
+                    });
+                  }}
+                >
+                  view
+                </button>
+              </div>
+            </div>
+          )}
+          {status === "test-report-added" && (
+            <div className="row m-2">
+              <div className="col-lg-12">
+                <button
+                  className="btn btn-success"
+                  style={{
+                    marginTop: "1rem",
+                    backgroundColor: "#064420",
+                    width: "96%",
+                  }}
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </form>
 

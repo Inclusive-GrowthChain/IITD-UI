@@ -23,6 +23,7 @@ const PageFour = ({ onButtonClick, bid, canEdit,handleClose }) => {
   const { mutate } = useMutation({
     mutationFn: approveClientPayment,
     onSuccess: () => {
+      handleClose()
       queryClient.invalidateQueries("auction/")
     }
   })
@@ -94,10 +95,10 @@ const PageFour = ({ onButtonClick, bid, canEdit,handleClose }) => {
           </div>
           <div className="row m-2">
             <div className="col-lg-6">
-              <label>Amount</label>
+              <label>Total Amount</label>
             </div>
             <div className="col-lg-6">
-              <label>{bid.bids.find((item) => item.fpoId === fpoId).bidAmount}</label>
+              <label>{bid.bids.find((item) => item.fpoId === fpoId).bidAmount * bid?.quantity}</label>
             </div>
             <div className="row m-2">
               <div className="col-lg-6" style={{ marginLeft: "-2.75%" }}>
