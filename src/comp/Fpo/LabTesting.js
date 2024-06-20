@@ -151,11 +151,8 @@ const FarmerInformation = () => {
     ],
   });
 
-  console.log(appList);
-  const uniqueCategories = new Set(appList?.data?.map((item) => item.category));
-
-  // Convert the Set back to an array
-  const outputArr = Array.from(uniqueCategories);
+  console.log(appList,"Applist");
+  
 
   if (isLoading1 || isLoading2)
     return <Loader wrapperCls="loader-main-right" />;
@@ -308,7 +305,7 @@ const FarmerInformation = () => {
       </div>
 
       {modal.state === "addSample" && (
-        <LabSampleTest outputArr={outputArr} show handleClose={closeModal} />
+        <LabSampleTest appList={appList?.data} show handleClose={closeModal} />
       )}
 
       {modal.state && modal.state !== "addSample" && (
