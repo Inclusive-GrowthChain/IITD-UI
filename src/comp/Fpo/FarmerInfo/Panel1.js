@@ -27,7 +27,9 @@ function Panel1() {
           </div>
           <div className="col-lg-6">
             <div className="form-group focused">
-              <label className="form-control-label text-black">{data?.data?.userName}</label>
+              <label className="form-control-label text-black">
+                {data?.data?.userName}
+              </label>
             </div>
           </div>
         </div>
@@ -71,7 +73,9 @@ function Panel1() {
           </div>
           <div className="col-lg-6">
             <div className="form-group focused">
-              <label className="form-control-label text-black">{data?.data?.gender}</label>
+              <label className="form-control-label text-black">
+                {data?.data?.gender}
+              </label>
             </div>
           </div>
         </div>
@@ -84,7 +88,9 @@ function Panel1() {
           <div className="col-lg-6">
             <div className="form-group focused">
               <label className="form-control-label text-black">
-                {data?.data?.doorNumber} {data?.data?.streetName} {data?.data?.village} {data?.data?.taluk} {data?.data?.district} {data?.data?.state} {data?.data?.pinCode}
+                {data?.data?.doorNumber} {data?.data?.streetName}{" "}
+                {data?.data?.village} {data?.data?.taluk} {data?.data?.district}{" "}
+                {data?.data?.state} {data?.data?.pinCode}
               </label>
             </div>
           </div>
@@ -105,8 +111,8 @@ function Panel1() {
             </div>
           </div>
         </div>
-        {
-          data?.data?.panCardNumber && <>
+        {data?.data?.panCardNumber && (
+          <>
             <div className="row">
               <div className="col-lg-6">
                 <div className="form-group focused">
@@ -124,7 +130,7 @@ function Panel1() {
               </div>
             </div>
           </>
-        }
+        )}
         <div className="row">
           <div className="col-lg-6">
             <div className="form-group focused">
@@ -133,7 +139,9 @@ function Panel1() {
           </div>
           <div className="col-lg-6">
             <div className="form-group focused">
-              <label className="form-control-label text-black">{data?.data?.bankName}</label>
+              <label className="form-control-label text-black">
+                {data?.data?.bankName}
+              </label>
             </div>
           </div>
         </div>
@@ -163,6 +171,70 @@ function Panel1() {
             <div className="form-group focused">
               <label className="form-control-label text-black">
                 {data?.data?.ifscCode}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-6">
+            <div className="form-group focused">
+              <label className="form-control-label text-black">
+                No of Kusum Tree
+              </label>
+            </div>
+          </div>
+          <div className="col-lg-6">
+            <div className="form-group focused">
+              <label className="form-control-label text-black">
+                {data?.data?.kusumTreeNumber || 0}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-6">
+            <div className="form-group focused">
+              <label className="form-control-label text-black">
+                No of Palash Tree
+              </label>
+            </div>
+          </div>
+          <div className="col-lg-6">
+            <div className="form-group focused">
+              <label className="form-control-label text-black">
+                {data?.data?.palashTreeNumber || 0}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-6">
+            <div className="form-group focused">
+              <label className="form-control-label text-black">
+                No of Ber Tree
+              </label>
+            </div>
+          </div>
+          <div className="col-lg-6">
+            <div className="form-group focused">
+              <label className="form-control-label text-black">
+                {data?.data?.berTreeNumber || 0}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-6">
+            <div className="form-group focused">
+              <label className="form-control-label text-black">
+                No of Semialata Tree
+              </label>
+            </div>
+          </div>
+          <div className="col-lg-6">
+            <div className="form-group focused">
+              <label className="form-control-label text-black">
+                {data?.data?.semialataTreeNumber || 0}
               </label>
             </div>
           </div>
