@@ -9,24 +9,28 @@ import { updateProfile } from "../../actions/farmer";
 import UpdatePassword from "../Fpo/UpdatePassword";
 
 const Settings = () => {
-  const [activeTab, setActiveTab] = useState("tab1")
-  const farmer = useAuthStore(s => s.userDetails)
+  const [activeTab, setActiveTab] = useState("tab1");
+  const farmer = useAuthStore((s) => s.userDetails);
 
-  const { modal, updateModal, closeModal } = useModal()
+  const { modal, updateModal, closeModal } = useModal();
 
-  const { register, handleSubmit, formState: { errors }, reset } = useForm()
-  const queryClient = useQueryClient()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+  const queryClient = useQueryClient();
 
-  const userType = farmer.userType
+  const userType = farmer.userType;
 
   const { mutate } = useMutation({
     mutationFn: (data) => updateProfile(data, userType),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user-detail"] });
-      reset()
-    }
-  })
-
+      reset();
+    },
+  });
 
   return (
     <div className="itemContainer">
@@ -44,7 +48,7 @@ const Settings = () => {
             <div className="col">
               <div
                 className="card shadow border-start-primary py-2"
-                style={{ backgroundColor: "#f6f6f7", }}
+                style={{ backgroundColor: "#f6f6f7" }}
               >
                 <div className="card-body">
                   <div className="row">
@@ -192,7 +196,10 @@ const Settings = () => {
                                   <div className="col-lg-6">
                                     <div className="form-group focused">
                                       <label className="form-control-label text-black">
-                                        {farmer.doorNumber}, {farmer.street}, {farmer.village}, {farmer.taluk}, {farmer.district}, {farmer.state}, {farmer.pinCode}
+                                        {farmer.doorNumber}, {farmer.street},{" "}
+                                        {farmer.village}, {farmer.taluk},{" "}
+                                        {farmer.district}, {farmer.state},{" "}
+                                        {farmer.pinCode}
                                       </label>
                                     </div>
                                   </div>
@@ -401,8 +408,8 @@ const Settings = () => {
                                           const imageData = {
                                             image: farmer.aadharCardImage,
                                             title: "Aadhar Card Image",
-                                          }
-                                          updateModal("imageViewer", imageData)
+                                          };
+                                          updateModal("imageViewer", imageData);
                                         }}
                                       >
                                         view
@@ -410,8 +417,8 @@ const Settings = () => {
                                     </div>
                                   </div>
                                 </div>
-                                {
-                                  farmer.panCardNumber && <>
+                                {farmer.panCardNumber && (
+                                  <>
                                     <div className="row">
                                       <div className="col-lg-6">
                                         <div className="form-group focused">
@@ -456,17 +463,84 @@ const Settings = () => {
                                               const imageData = {
                                                 image: farmer.panCardImage,
                                                 title: "PAN Card Image",
-                                              }
-                                              updateModal("imageViewer", imageData)
+                                              };
+                                              updateModal(
+                                                "imageViewer",
+                                                imageData
+                                              );
                                             }}
                                           >
                                             view
                                           </button>
                                         </div>
                                       </div>
-                                    </div></>
-                                }
-
+                                    </div>
+                                  </>
+                                )}
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        No of Kusum Tree
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {farmer?.kusumTreeNumber || 0}
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        No of Palash Tree
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {farmer?.palashTreeNumber || 0}
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        No of Ber Tree
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {farmer?.berTreeNumber || 0}
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        No of Semialata Tree
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-6">
+                                    <div className="form-group focused">
+                                      <label className="form-control-label text-black">
+                                        {farmer?.semialataTreeNumber || 0}
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             </form>
                           </div>
@@ -489,9 +563,13 @@ const Settings = () => {
                                       type="Number"
                                       className="form-control form-control-alternative"
                                       placeholder=""
-                                      {...register("contactNumber", { maxLength: 10, })}
+                                      {...register("contactNumber", {
+                                        maxLength: 10,
+                                      })}
                                     />
-                                    <p role="alert">{errors.contactNumber?.message}</p>
+                                    <p role="alert">
+                                      {errors.contactNumber?.message}
+                                    </p>
                                   </div>
                                 </div>
                                 <div className="col-lg-6">
@@ -505,7 +583,9 @@ const Settings = () => {
                                       placeholder=""
                                       {...register("doorNumber")}
                                     />
-                                    <p role="alert">{errors.doorNumber?.message}</p>
+                                    <p role="alert">
+                                      {errors.doorNumber?.message}
+                                    </p>
                                   </div>
                                 </div>
                                 <div className="col-lg-6">
@@ -519,7 +599,9 @@ const Settings = () => {
                                       placeholder=""
                                       {...register("streetName")}
                                     />
-                                    <p role="alert">{errors.streetName?.message}</p>
+                                    <p role="alert">
+                                      {errors.streetName?.message}
+                                    </p>
                                   </div>
                                 </div>
                                 <div className="col-lg-6">
@@ -533,7 +615,9 @@ const Settings = () => {
                                       placeholder=""
                                       {...register("village")}
                                     />
-                                    <p role="alert">{errors.village?.message}</p>
+                                    <p role="alert">
+                                      {errors.village?.message}
+                                    </p>
                                   </div>
                                 </div>
                                 <div className="col-lg-6">
@@ -561,7 +645,9 @@ const Settings = () => {
                                       placeholder=""
                                       {...register("district")}
                                     />
-                                    <p role="alert">{errors.district?.message}</p>
+                                    <p role="alert">
+                                      {errors.district?.message}
+                                    </p>
                                   </div>
                                 </div>
                                 <div className="col-lg-6">
@@ -589,7 +675,9 @@ const Settings = () => {
                                       placeholder=""
                                       {...register("pinCode", { maxLength: 6 })}
                                     />
-                                    <p role="alert">{errors.pinCode?.message}</p>
+                                    <p role="alert">
+                                      {errors.pinCode?.message}
+                                    </p>
                                   </div>
                                 </div>
                                 <div className="col-lg-6">
@@ -601,9 +689,11 @@ const Settings = () => {
                                       type="text"
                                       className="form-control form-control-alternative"
                                       placeholder=""
-                                      {...register('occupation')}
+                                      {...register("occupation")}
                                     />
-                                    <p role="alert">{errors.occupation?.message}</p>
+                                    <p role="alert">
+                                      {errors.occupation?.message}
+                                    </p>
                                   </div>
                                 </div>
                                 <div className="col-lg-6">
@@ -617,7 +707,9 @@ const Settings = () => {
                                       placeholder=""
                                       {...register("bankName")}
                                     />
-                                    <p role="alert">{errors.bankName?.message}</p>
+                                    <p role="alert">
+                                      {errors.bankName?.message}
+                                    </p>
                                   </div>
                                 </div>
                                 <div className="col-lg-6">
@@ -631,7 +723,9 @@ const Settings = () => {
                                       placeholder=""
                                       {...register("accountNumber")}
                                     />
-                                    <p role="alert">{errors.accountNumber?.message}</p>
+                                    <p role="alert">
+                                      {errors.accountNumber?.message}
+                                    </p>
                                   </div>
                                 </div>
                                 <div className="col-lg-6">
@@ -645,7 +739,9 @@ const Settings = () => {
                                       placeholder=""
                                       {...register("ifscCode")}
                                     />
-                                    <p role="alert">{errors.ifscCode?.message}</p>
+                                    <p role="alert">
+                                      {errors.ifscCode?.message}
+                                    </p>
                                   </div>
                                 </div>
                                 <div className="col-lg-6">
@@ -659,13 +755,18 @@ const Settings = () => {
                                       placeholder=""
                                       {...register("branchName")}
                                     />
-                                    <p role="alert">{errors.branchName?.message}</p>
+                                    <p role="alert">
+                                      {errors.branchName?.message}
+                                    </p>
                                   </div>
                                 </div>
                               </div>
                               <div
                                 className=""
-                                style={{ display: "flex", justifyContent: "center" }}
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                }}
                               >
                                 <button
                                   className="btn btn-info mt-4"
@@ -695,18 +796,16 @@ const Settings = () => {
         </div>
       </div>
 
-      {
-        modal.state === "imageViewer" && (
-          <DocImg
-            show
-            handleClose={closeModal}
-            imgUrl={modal?.data?.image}
-            title={modal?.data?.title}
-          />
-        )
-      }
+      {modal.state === "imageViewer" && (
+        <DocImg
+          show
+          handleClose={closeModal}
+          imgUrl={modal?.data?.image}
+          title={modal?.data?.title}
+        />
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Settings
+export default Settings;

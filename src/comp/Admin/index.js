@@ -4,7 +4,7 @@ import KeyIcon from "@mui/icons-material/Key";
 
 const list = [
   {
-    title: "IIT Dhanbad",
+    title: "LACSHMI",
     icon: <DashboardIcon className="icon" />,
     to: "/admin/dashboard",
   },

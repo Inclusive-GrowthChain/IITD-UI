@@ -38,7 +38,7 @@ const Login = () => {
         <div className="header_wrapper">
           <div className="logo_container">
             <img src={logo} className="logo" alt="logo" />
-            IIT DHANBAD
+            LACSHMI
           </div>
         </div>
 
