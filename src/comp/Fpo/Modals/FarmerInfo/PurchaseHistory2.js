@@ -2,27 +2,34 @@ import React, { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import Modal from "react-bootstrap/Modal";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { addPurchase, getLacTypes } from "../../../../actions/fpo";
+import { addPurchase, getItemNames } from "../../../../actions/fpo";
 import Loader from "../../../Common/Loader";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router";
 import { errorNotify } from "../../../../utils/toastifyHlp";
 
-function PurchaseHistory2({ showAddPurchase, handleShowAddPurchase, handleCloseAddPurchase, handleShowConfirmPurchase,
+function PurchaseHistory2({
+  showAddPurchase,
+  handleShowAddPurchase,
+  handleCloseAddPurchase,
+  handleShowConfirmPurchase,
 }) {
   const queryClient = useQueryClient();
   const { farmerId } = useParams();
-  const { register, watch, reset, handleSubmit } = useForm()
-  const [totalItems, setTotalItems] = useState([])
+  const { register, watch, reset, handleSubmit } = useForm();
+  const [totalItems, setTotalItems] = useState([]);
 
-  const amount = watch("ratePerUnit") * watch("quantity") || 0
+  const amount = watch("ratePerUnit") * watch("quantity") || 0;
 
   const onsubmit = (data) => {
-    setTotalItems([...totalItems, { ...data, amount },])
-    reset()
-  }
+    setTotalItems([...totalItems, { ...data, amount }]);
+    reset();
+  };
 
-  const totalAmount = totalItems.reduce((total, item) => total + parseFloat(item.amount), 0)
+  const totalAmount = totalItems.reduce(
+    (total, item) => total + parseFloat(item.amount),
+    0
+  );
 
   const { mutate } = useMutation({
     mutationFn: async (data) => {
@@ -35,23 +42,29 @@ function PurchaseHistory2({ showAddPurchase, handleShowAddPurchase, handleCloseA
     },
     onSuccess: () => {
       queryClient.invalidateQueries("/fpo/transaction/api/transaction");
-      handleCloseAddPurchase()
+      handleCloseAddPurchase();
     },
   });
 
   const { isLoading, data } = useQuery({
     queryKey: ["Item_Names"],
-    queryFn: getLacTypes,
+    queryFn: getItemNames,
   });
-
 
   if (isLoading) return <Loader wrapperCls="loader-main-right" />;
 
   const Select = React.forwardRef(({ onChange, onBlur, name, label }, ref) => (
     <>
-      <select id="inputState" className="form-select" name={name} ref={ref} onChange={onChange} onBlur={onBlur}>
+      <select
+        id="inputState"
+        className="form-select"
+        name={name}
+        ref={ref}
+        onChange={onChange}
+        onBlur={onBlur}
+      >
         {data?.productNames?.map((item, ind) => {
-          <option className="text-capitalize">Select the Item</option>
+          <option className="text-capitalize">Select the Item</option>;
           return (
             <option className="text-capitalize" value={item} key={ind}>
               {item}
@@ -61,7 +74,6 @@ function PurchaseHistory2({ showAddPurchase, handleShowAddPurchase, handleCloseA
       </select>
     </>
   ));
-
 
   return (
     <Modal size="xl" show={showAddPurchase} onHide={handleCloseAddPurchase}>
@@ -79,41 +91,64 @@ function PurchaseHistory2({ showAddPurchase, handleShowAddPurchase, handleCloseA
               <label htmlFor="inputQuantity" className="form-label">
                 Quantity
               </label>
-              <input type="number" {...register("quantity", { required: true })} className="form-control" id="inputCity" />
+              <input
+                type="number"
+                {...register("quantity", { required: true })}
+                className="form-control"
+                id="inputCity"
+              />
             </div>
             <div className="col-md-4">
               <label htmlFor="inputPassword4" className="form-label">
                 Rate/Uint
               </label>
-              <input type="number" {...register("ratePerUnit", { required: true })} className="form-control" id="inputPassword4" />
+              <input
+                type="number"
+                {...register("ratePerUnit", { required: true })}
+                className="form-control"
+                id="inputPassword4"
+              />
             </div>
             <div className="col-md-4">
               <label htmlFor="inputAmount" className="form-label">
                 Amount
               </label>
-              <input type="number" value={amount} disabled className="form-control" id="inputZip" />
+              <input
+                type="number"
+                value={amount}
+                disabled
+                className="form-control"
+                id="inputZip"
+              />
             </div>
             <div className="col-md-4">
               <label htmlFor="inputRemarks" className="form-label">
                 Remarks
               </label>
-              <input type="text" {...register("remarks")} className="form-control" id="inputZip" />
+              <input
+                type="text"
+                {...register("remarks")}
+                className="form-control"
+                id="inputZip"
+              />
             </div>
             <div className="col-12">
-              <button style={{
-                backgroundColor: "#064420",
-                border: "none",
-                borderRadius: "10px",
-                padding: "10px 15px",
-                color: "#fff",
-                fontSize: "15px",
-                marginBottom: "15px",
-              }} type="submit">
+              <button
+                style={{
+                  backgroundColor: "#064420",
+                  border: "none",
+                  borderRadius: "10px",
+                  padding: "10px 15px",
+                  color: "#fff",
+                  fontSize: "15px",
+                  marginBottom: "15px",
+                }}
+                type="submit"
+              >
                 Add Purchased Items
               </button>
             </div>
           </form>
-
         </div>
 
         <div className="card_table1 table-responsive">
@@ -142,29 +177,18 @@ function PurchaseHistory2({ showAddPurchase, handleShowAddPurchase, handleCloseA
                 fontWeight: "500",
               }}
             >
-              {
-                totalItems.length > 0 && totalItems?.map((item) => {
+              {totalItems.length > 0 &&
+                totalItems?.map((item) => {
                   return (
                     <tr>
-                      <td>
-                        {item?.itemName}
-                      </td>
-                      <td>
-                        {item?.quantity}
-                      </td>
-                      <td>
-                        {item?.ratePerUnit}
-                      </td>
-                      <td>
-                        {item?.amount}
-                      </td>
-                      <td>
-                        {item?.remarks}
-                      </td>
+                      <td>{item?.itemName}</td>
+                      <td>{item?.quantity}</td>
+                      <td>{item?.ratePerUnit}</td>
+                      <td>{item?.amount}</td>
+                      <td>{item?.remarks}</td>
                     </tr>
-                  )
-                })
-              }
+                  );
+                })}
             </tbody>
           </table>
           <div className="d-flex justify-content-between align-items-center px-2 py-3 border-top-1">
@@ -182,8 +206,8 @@ function PurchaseHistory2({ showAddPurchase, handleShowAddPurchase, handleCloseA
               <button
                 onClick={async () => {
                   await mutate(totalItems);
-                  setTotalItems([])
-                  handleCloseAddPurchase()
+                  setTotalItems([]);
+                  handleCloseAddPurchase();
                 }}
                 style={{
                   backgroundColor: "#064420",
@@ -200,7 +224,6 @@ function PurchaseHistory2({ showAddPurchase, handleShowAddPurchase, handleCloseA
             </div>
           </div>
         </div>
-
       </Modal.Body>
     </Modal>
   );

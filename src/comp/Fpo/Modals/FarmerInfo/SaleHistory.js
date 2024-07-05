@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { addSale, getItemNames } from "../../../../actions/fpo";
+import { addSale, getLacTypes } from "../../../../actions/fpo";
 import Loader from "../../../Common/Loader";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router";
@@ -39,7 +39,7 @@ function SaleHistory({ showAddSale, handleCloseAddSale, handleShowAddSale, handl
 
   const { isLoading, data } = useQuery({
     queryKey: ["Lac_Type"],
-    queryFn: getItemNames,
+    queryFn:  getLacTypes,
   });
 
   const Select = React.forwardRef(({ onChange, onBlur, name, label }, ref) => (

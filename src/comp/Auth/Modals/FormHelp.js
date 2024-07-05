@@ -119,7 +119,8 @@ function FormHelp({
     <>
       {fields.map((f) => {
         if (f.isFile) {
-          return f.name === "panCardImage" && role === "farmer" ? (
+          return f.name === "panCardImage" ||
+            (f.name === "aadharCardImage" && role === "farmer") ? (
             <File
               {...f}
               key={f.name}
@@ -145,7 +146,13 @@ function FormHelp({
         }
 
         return f.name === "website" ||
+          f.name === "fathersName" ||
+          f.name === "mothersName" ||
           f.name === "panCardNumber" ||
+          f.name === "natureOfplace" ||
+          f.name === "residence" ||
+          f.name === "streetName" ||
+          f.name === "doorNumber" ||
           f.name === "kusumTreeNumber" ||
           f.name === "palashTreeNumber" ||
           f.name === "semialataTreeNumber" ||
