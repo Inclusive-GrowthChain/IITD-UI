@@ -5,7 +5,7 @@ export const root = {
   //  baseUrl: "http://52.66.41.156:3000/api",
   // baseUrl: "http://13.234.217.143:4000/api",
     // baseUrl: "http://localhost:4000/api",
-  baseUrl: "http://43.204.37.161:5000/api"
+  baseUrl: "https://hdymqxsl37.execute-api.ap-south-1.amazonaws.com/api"
   // baseUrl : "http://localhost:4000/api"
   // imgUrl: "http://52.66.41.156:3000/"
 };
