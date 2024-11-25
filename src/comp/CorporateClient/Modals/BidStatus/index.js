@@ -8,7 +8,6 @@ import PageOne from "./PageOne";
 import PageTwo from "./PageTwo";
 
 function BidStatus({ show, data, handleClose }) {
-  console.log(data)
   const [page, setPage] = useState("pageone")
 
   const nextPage = (p) => setPage(p)

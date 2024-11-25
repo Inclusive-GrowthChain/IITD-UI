@@ -117,7 +117,6 @@ function  LoanApplication({ show, data, isCreate, handleClose }) {
       setValue("fpointrest", data?.fpoInterestRate)
       setValue("intrest", data?.data?.[0]?.intrest)
       setValue("loanWindowId", data?.data?.[0]?.windowId)
-      console.log(data, "testing", data?.fpoInterestRate, data?.data?.[0]?.intrest)
     },
     enabled: isCreate
   })

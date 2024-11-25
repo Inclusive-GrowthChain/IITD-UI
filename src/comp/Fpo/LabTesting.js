@@ -151,7 +151,6 @@ const FarmerInformation = () => {
     ],
   });
 
-  console.log(appList,"Applist");
   
 
   if (isLoading1 || isLoading2)

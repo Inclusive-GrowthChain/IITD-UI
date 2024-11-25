@@ -149,7 +149,6 @@ const PageTwo = ({ onButtonClick,handleClose,outerbid = [] }) => {
                             mm = '0' + mm
                           }
                           today = yyyy + '-' + mm + '-' + dd
-                          console.log(outerbid.bidEndDate , today)
                           if (outerbid.bidEndDate > today) {
                             alert("Order cannot be placed before the end of bidding period")
                             e.preventDefault();

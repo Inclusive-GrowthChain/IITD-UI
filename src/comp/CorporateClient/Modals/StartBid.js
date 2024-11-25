@@ -86,7 +86,6 @@ function StartBid({ show, handleClose }) {
 
 
 
-  // console.log(data)
   const {
     register, control, formState: { errors },
     handleSubmit, getValues,
