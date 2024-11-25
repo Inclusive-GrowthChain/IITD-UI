@@ -73,7 +73,7 @@ function Dashboard() {
     const fetchWeather = async () => {
       try {
         const response = await fetch(
-          `http://api.openweathermap.org/data/2.5/forecast?zip=${pincode},IN&appid=${process.env.REACT_APP_API_KEY}&units=metric`
+          `https://api.openweathermap.org/data/2.5/forecast?zip=${pincode},IN&appid=${process.env.REACT_APP_API_KEY}&units=metric`
         );
         if (!response.ok) throw new Error("Failed to retrieve weather data");
         const { list } = await response.json();
@@ -206,7 +206,7 @@ function Dashboard() {
                           alt="weatherIcon"
                           height={100}
                           width={100}
-                          src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon.slice(0, -1) + "d"
+                          src={`https://openweathermap.org/img/wn/${currentWeather.weather[0].icon.slice(0, -1) + "d"
                             }@2x.png`}
                         />
                       </div>
@@ -261,7 +261,7 @@ function Dashboard() {
                                 alt="myit"
                                 height={50}
                                 width={50}
-                                src={`http://openweathermap.org/img/wn/${nextInterval.icon.slice(0, -1) + "d"
+                                src={`https://openweathermap.org/img/wn/${nextInterval.icon.slice(0, -1) + "d"
                                   }@2x.png`}
                               />
                               <p className="text-base font-medium">
