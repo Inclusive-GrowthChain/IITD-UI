@@ -8,7 +8,7 @@ const PageOne = ({ onButtonClick, bid }) => {
 
   useEffect(() => {
     bid.bids.forEach((bid) => {
-      if ( bid.status !== "test-reports-rejected" && bid.fpoId === fpoId) {
+      if (bid.status && bid.status !== "test-reports-rejected" && bid.fpoId === fpoId) {
         setSelected(true);
       }
     });
