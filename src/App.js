@@ -184,10 +184,11 @@ function App() {
         </Route>
 
         {/* Admin route */}
-
-        <Route path="admin" element={<AdminWrapper />}>
+        <Route element={<ProtectedRoute role={"admin"}/>}>
+        <Route path="/admin" element={<AdminWrapper />}>
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="license-key" element={<LicenseKey />} />
+        </Route>
         </Route>
 
         {/* NISA route */}
