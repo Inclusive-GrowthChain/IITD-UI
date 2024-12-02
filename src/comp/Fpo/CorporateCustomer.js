@@ -115,6 +115,7 @@ const CorporateCustomer = () => {
                       <tr>
                         <th>Bid Id</th>
                         <th>Quantity</th>
+                        <th>Client Name</th>
                         <th>Date of Supply</th>
                         <th>End Date of Bidding</th>
                         <th>Information</th>
@@ -129,6 +130,7 @@ const CorporateCustomer = () => {
                           .map(item => (
                             <tr key={item.id}>
                               <td>{item.bidId}</td>
+                              <td>{item?.name}</td>
                               <td>{item.quantity}</td>
                               <td>{item.supplyDate}</td>
                               <td>{item.bidEndDate}</td>
