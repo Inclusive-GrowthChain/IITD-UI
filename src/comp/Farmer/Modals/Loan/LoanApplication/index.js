@@ -51,7 +51,7 @@ function  LoanApplication({ show, data, isCreate, handleClose }) {
       userName: userDetails.userName || data.value.userName,
       gender: userDetails.gender || data.value.gender,
       contactNumber: userDetails.contactNumber || data.value.contactNumber,
-      DOB: new Date(userDetails.DOB).toISOString().slice(0, 10) || new Date(data.value.DOB).toISOString().slice(0, 10),
+      DOB: new Date(userDetails.DOB)?.toISOString()?.slice(0, 10) || new Date(data.value.DOB).toISOString().slice(0, 10),
       age: userDetails.age || data.value.age,
       aadharCardNumber: userDetails.aadharCardNumber || data.value.aadharCardNumber,
       aadharCardImage: userDetails.aadharCardImage || data.value.aadharCardImage,
