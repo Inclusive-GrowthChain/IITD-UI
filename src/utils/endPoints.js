@@ -30,7 +30,7 @@ const endPoints = {
   updatePassword: "/updatepassword",
 
   admin: {
-    getLicenses: "/licenses",
+    getLicenses: "/admin/licenses",
   },
 
   // Nisa
