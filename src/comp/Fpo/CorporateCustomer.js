@@ -138,7 +138,7 @@ const CorporateCustomer = () => {
                                 <button
                                   style={btnStyle}
                                   onClick={() => updateModal("showStartBid", item)}
-                                >
+                                 >
                                   View
                                 </button>
                               </td>

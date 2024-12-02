@@ -1,6 +1,7 @@
 import { useId } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { uploadImg } from "../../../actions/general";
+import { errorNotify, successNotify } from "../../../utils/toastifyHlp";
 
 const errorStyle = { fontSize: "12px", marginTop: "2px", marginBottom: 0 };
 
@@ -73,8 +74,12 @@ function File({
     mutationFn: uploadImg,
     onSuccess: (data) => {
       setValue(name, data.data.docId);
+      successNotify("File uploaded successfully!")
       clearErrors(name);
     },
+    onError: (error) => {
+      errorNotify("Error",error)
+    }
   });
 
   const onChange = (e) => {
