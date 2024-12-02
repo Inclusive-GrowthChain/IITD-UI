@@ -73,11 +73,13 @@ function File({
   const { mutate } = useMutation({
     mutationFn: uploadImg,
     onSuccess: (data) => {
+      console.log("upload image data",data)
       setValue(name, data.data.docId);
       successNotify("File uploaded successfully!")
       clearErrors(name);
     },
     onError: (error) => {
+      console.log("upload image error",error)
       errorNotify("Error",error)
     }
   });
