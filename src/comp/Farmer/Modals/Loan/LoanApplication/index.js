@@ -58,7 +58,7 @@ function  LoanApplication({ show, data, isCreate, handleClose }) {
       panCardNumber: userDetails?.panCardNumber || data?.value?.panCardNumber,
       panCardImage: userDetails?.panCardImage || data?.value?.panCardImage,
       fathersName: userDetails.fathersName || data.value.fatherName,
-      mothersName: userDetails.mothersName || data.value.motherName,
+      mothersName: userDetails.mothersName || data.value.motherName, 
       doorNumber: userDetails.doorNumber || data.value.doorNumber,
       streetName: userDetails.streetName || data.value.street,
       village: userDetails.village || data.value.village,
