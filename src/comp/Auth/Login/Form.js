@@ -17,7 +17,7 @@ import ResetPassword from "../Modals/ResetPassword";
 const navigationList = {
   fpo: "farmer",
   nisa: "crop-advisory",
-  admin: "dashboard",
+  admin: "admin",
   farmer: "dashboard",
   samunnati: "fpo-loan",
   "iit-dhanbad": "dashboard",
