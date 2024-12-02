@@ -3,11 +3,11 @@ import { useForm, Controller } from "react-hook-form";
 import { MenuItem, Select } from "@mui/material";
 import { Modal } from "react-bootstrap";
 
-import { startAuction } from '../../../actions/auction';
-import useModal from '../../../hooks/useModal';
+import { startAuction } from "../../../actions/auction";
+import useModal from "../../../hooks/useModal";
 
-import Input, { errStyle } from '../../Nisa/Modals/Input';
-import ConfirmOrder from './ConfirmOrder';
+import Input, { errStyle } from "../../Nisa/Modals/Input";
+import ConfirmOrder from "./ConfirmOrder";
 import { nanoid } from "nanoid";
 import { getLacTest } from "../../../actions/nisa";
 
@@ -59,13 +59,13 @@ const list = [
     type: "number",
   },
   {
-    label: "Date of Supply",
-    name: "supplyDate",
+    label: "End Date for Bidding",
+    name: "bidEndDate",
     type: "date",
   },
   {
-    label: "End Date for Bidding",
-    name: "bidEndDate",
+    label: "Date of Supply",
+    name: "supplyDate",
     type: "date",
   },
 ];
@@ -75,25 +75,9 @@ function StartBid({ show, handleClose }) {
   const queryClient = useQueryClient();
 
   const { data } = useQuery({
-    queryKey: ['nisa/lactest'],
+    queryKey: ["nisa/lactest"],
     queryFn: getLacTest,
   });
-
-  const validateDates = (supplyDate) => {
-    const { bidEndDate } = getValues();
-    const currentDate = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
-
-    if (!bidEndDate) {
-      return "Please provide the Bid End Date first.";
-    }
-    if (supplyDate <= bidEndDate) {
-      return "Supply date must be after the bid end date.";
-    }
-    if (supplyDate < currentDate) {
-      return "Supply date cannot be in the past.";
-    }
-    return true;
-  };
 
   const {
     register,
@@ -101,6 +85,7 @@ function StartBid({ show, handleClose }) {
     formState: { errors },
     handleSubmit,
     getValues,
+    watch,
   } = useForm({
     defaultValues: {
       bidId: nanoid(10),
@@ -124,6 +109,24 @@ function StartBid({ show, handleClose }) {
       handleClose();
     },
   });
+
+  const bidEndDate = watch("bidEndDate"); // Watch bid end date
+  const supplyDate = watch("supplyDate"); // Watch supply date
+
+  const validateDates = (value) => {
+    const currentDate = new Date().toISOString().split("T")[0]; // Today's date in YYYY-MM-DD
+
+    if (!bidEndDate) {
+      return "Please provide the Bid End Date first.";
+    }
+    if (value <= bidEndDate) {
+      return "Supply date must be after the bid end date.";
+    }
+    if (value < currentDate) {
+      return "Supply date cannot be in the past.";
+    }
+    return true;
+  };
 
   const showConfirm = () => updateModal("showConfirmBox");
   const onConfirm = () => {
