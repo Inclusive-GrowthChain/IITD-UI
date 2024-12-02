@@ -11,23 +11,20 @@ import ConfirmOrder from './ConfirmOrder';
 import { nanoid } from "nanoid";
 import { getLacTest } from "../../../actions/nisa";
 
-const textAreaStyle = { resize: "none", height: "150px" }
+const textAreaStyle = { resize: "none", height: "150px" };
 
 const list = [
   {
     label: "Bid ID",
     name: "bidId",
-    disabled: true
+    disabled: true,
   },
   {
     label: "Lac Strain Type",
     name: "lacStrainType",
     isSelect: true,
     inputWrapperCls: "col-lg-12",
-    options: [
-      "Kusmi",
-      "Rangeeni",
-    ],
+    options: ["Kusmi", "Rangeeni"],
   },
   {
     label: "Source of Tree",
@@ -46,9 +43,7 @@ const list = [
     name: "origin",
     isSelect: true,
     inputWrapperCls: "col-lg-12",
-    options: [
-      "Jharkhand"
-    ],
+    options: ["Jharkhand"],
   },
   {
     label: "Seedlac Content",
@@ -73,22 +68,39 @@ const list = [
     name: "bidEndDate",
     type: "date",
   },
-]
+];
 
 function StartBid({ show, handleClose }) {
-  const { modal, updateModal, closeModal } = useModal()
-  const queryClient = useQueryClient()
+  const { modal, updateModal, closeModal } = useModal();
+  const queryClient = useQueryClient();
 
   const { data } = useQuery({
     queryKey: ['nisa/lactest'],
-    queryFn: getLacTest
-  })
+    queryFn: getLacTest,
+  });
 
+  const validateDates = (supplyDate) => {
+    const { bidEndDate } = getValues();
+    const currentDate = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
 
+    if (!bidEndDate) {
+      return "Please provide the Bid End Date first.";
+    }
+    if (supplyDate <= bidEndDate) {
+      return "Supply date must be after the bid end date.";
+    }
+    if (supplyDate < currentDate) {
+      return "Supply date cannot be in the past.";
+    }
+    return true;
+  };
 
   const {
-    register, control, formState: { errors },
-    handleSubmit, getValues,
+    register,
+    control,
+    formState: { errors },
+    handleSubmit,
+    getValues,
   } = useForm({
     defaultValues: {
       bidId: nanoid(10),
@@ -102,28 +114,25 @@ function StartBid({ show, handleClose }) {
       bidEndDate: "",
       reportsRequired: [],
       remarks: "",
-    }
-  })
+    },
+  });
 
   const { mutate, isLoading } = useMutation({
     mutationFn: startAuction,
     onSuccess: () => {
-      queryClient.invalidateQueries("corporateClient/lac-bidding")
-      handleClose()
-    }
-  })
+      queryClient.invalidateQueries("corporateClient/lac-bidding");
+      handleClose();
+    },
+  });
 
-  const showConfirm = () => updateModal("showConfirmBox")
+  const showConfirm = () => updateModal("showConfirmBox");
   const onConfirm = () => {
-    closeModal()
-    mutate(getValues())
-  }
+    closeModal();
+    mutate(getValues());
+  };
 
   return (
-    <Modal
-      show={show}
-      onHide={handleClose}
-    >
+    <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>Start Bid</Modal.Header>
       <Modal.Body>
         <div className="row">
@@ -131,16 +140,24 @@ function StartBid({ show, handleClose }) {
             <form onSubmit={handleSubmit(showConfirm)}>
               <div className="form">
                 <div className="card p-2">
-                  {
-                    list.map(l => (
-                      <Input
-                        key={l.name}
-                        {...l}
-                        register={register}
-                        errors={errors}
-                      />
-                    ))
-                  }
+                  {list.map((l) => (
+                    <Input
+                      key={l.name}
+                      {...l}
+                      register={register}
+                      validation={
+                        l.name === "supplyDate"
+                          ? {
+                              required: "Supply date is required",
+                              validate: validateDates,
+                            }
+                          : l.name === "bidEndDate"
+                          ? { required: "Bid end date is required" }
+                          : {}
+                      }
+                      errors={errors}
+                    />
+                  ))}
 
                   <div className="row m-2">
                     <div className="col-lg-6">
@@ -161,22 +178,20 @@ function StartBid({ show, handleClose }) {
                             value={value}
                             onChange={onChange}
                           >
-                            {
-                              data && data?.data?.map((test, ind) => {
-                                return <MenuItem key={ind} value={test?.testName}>{test?.testName
-                                }</MenuItem>
-                              })
-                            }
+                            {data &&
+                              data?.data?.map((test, ind) => (
+                                <MenuItem key={ind} value={test?.testName}>
+                                  {test?.testName}
+                                </MenuItem>
+                              ))}
                           </Select>
                         )}
                       />
-
-                      {
-                        errors.reportsRequired &&
+                      {errors.reportsRequired && (
                         <p className="text-danger" style={errStyle}>
                           {errors.reportsRequired.message}
                         </p>
-                      }
+                      )}
                     </div>
                   </div>
 
@@ -189,24 +204,22 @@ function StartBid({ show, handleClose }) {
                         className="form-control"
                         style={textAreaStyle}
                         {...register("remarks", {
-                          required: "Remark is required"
+                          required: "Remark is required",
                         })}
                       />
-
-                      {
-                        errors.remarks &&
+                      {errors.remarks && (
                         <p className="text-danger" style={errStyle}>
                           {errors.remarks.message}
                         </p>
-                      }
+                      )}
                     </div>
                   </div>
 
                   <div className="row m-2">
                     <button
-                      type='submit'
+                      type="submit"
                       className="btn btn-success"
-                      style={{ marginTop: '5rem', backgroundColor: '#064420' }}
+                      style={{ marginTop: "5rem", backgroundColor: "#064420" }}
                       disabled={isLoading}
                     >
                       Submit
@@ -218,17 +231,16 @@ function StartBid({ show, handleClose }) {
           </div>
         </div>
 
-        {
-          modal.state === "showConfirmBox" &&
+        {modal.state === "showConfirmBox" && (
           <ConfirmOrder
             show
             onConfirm={onConfirm}
             handleClose={closeModal}
           />
-        }
+        )}
       </Modal.Body>
     </Modal>
-  )
+  );
 }
 
-export default StartBid
+export default StartBid;
