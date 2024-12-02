@@ -185,7 +185,7 @@ function App() {
 
         {/* Admin route */}
         <Route element={<ProtectedRoute role={"admin"}/>}>
-        <Route path="admin" element={<AdminWrapper />}>
+        <Route path="/admin" element={<AdminWrapper />}>
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="license-key" element={<LicenseKey />} />
         </Route>
