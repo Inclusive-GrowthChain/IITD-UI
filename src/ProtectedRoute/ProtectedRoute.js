@@ -7,7 +7,7 @@ const ProtectedRoute = ({ role }) => {
   const userRole = useAuthStore((user) => user.userDetails);
 
   console.log(userRole, role,"Role of the route")
-  return loggedIn && userRole.userType === role ? <Outlet /> : <Navigate to="/" />;
+  return loggedIn && userRole?.userType || userRole?.role === role ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default ProtectedRoute;
