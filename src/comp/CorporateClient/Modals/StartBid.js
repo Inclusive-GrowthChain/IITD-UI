@@ -61,7 +61,7 @@ const list = [
   {
     label: "End Date for Bidding",
     name: "bidEndDate",
-    type: "date",
+    type: "datetime-local",
   },
   {
     label: "Date of Supply",
@@ -113,19 +113,18 @@ function StartBid({ show, handleClose }) {
   const bidEndDate = watch("bidEndDate"); // Watch bid end date
   const supplyDate = watch("supplyDate"); // Watch supply date
 
-  const validateDates = (value) => {
-    const currentDate = new Date().toISOString().split("T")[0]; // Today's date in YYYY-MM-DD
+  const validateBidEndDate = (value) => {
+    const currentDateTime = new Date().toISOString(); // Current date and time
+    return value >= currentDateTime || "Bid end date must not be in the past.";
+  };
 
+  const validateSupplyDate = (value) => {
     if (!bidEndDate) {
       return "Please provide the Bid End Date first.";
     }
-    if (value <= bidEndDate) {
-      return "Supply date must be after the bid end date.";
-    }
-    if (value < currentDate) {
-      return "Supply date cannot be in the past.";
-    }
-    return true;
+    return (
+      value > bidEndDate || "Supply date must be greater than the bid end date."
+    );
   };
 
   const showConfirm = () => updateModal("showConfirmBox");
@@ -149,13 +148,16 @@ function StartBid({ show, handleClose }) {
                       {...l}
                       register={register}
                       validation={
-                        l.name === "supplyDate"
+                        l.name === "bidEndDate"
+                          ? {
+                              required: "Bid end date is required",
+                              validate: validateBidEndDate,
+                            }
+                          : l.name === "supplyDate"
                           ? {
                               required: "Supply date is required",
-                              validate: validateDates,
+                              validate: validateSupplyDate,
                             }
-                          : l.name === "bidEndDate"
-                          ? { required: "Bid end date is required" }
                           : {}
                       }
                       errors={errors}
@@ -174,9 +176,6 @@ function StartBid({ show, handleClose }) {
                         render={({ field: { value, onChange } }) => (
                           <Select
                             multiple
-                            id="demo-multiple-name"
-                            name="reportsRequired"
-                            labelId="demo-multiple-name-label"
                             className="form-control"
                             value={value}
                             onChange={onChange}
@@ -222,7 +221,6 @@ function StartBid({ show, handleClose }) {
                     <button
                       type="submit"
                       className="btn btn-success"
-                      style={{ marginTop: "5rem", backgroundColor: "#064420" }}
                       disabled={isLoading}
                     >
                       Submit
