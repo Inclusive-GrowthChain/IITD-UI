@@ -17,7 +17,7 @@ import ResetPassword from "../Modals/ResetPassword";
 const navigationList = {
   fpo: "farmer",
   nisa: "crop-advisory",
-  admin: "farmer",
+  admin: "admin",
   farmer: "dashboard",
   samunnati: "fpo-loan",
   "iit-dhanbad": "dashboard",
@@ -61,13 +61,14 @@ function Form() {
       setTokenToApp(data.token)
       logIn(data.data)
       console.log(data,"admin login data")
-      let to = navigationList[data.data.userType]
+      let userType = data?.data?.userType || data?.data?.role
+      let to = navigationList[userType]
       if (data.data.userType === "lendingpartner") {
         to = navigationList["samunnati"]
         navigate(`/samunnati/${to}`)
         return
       }
-      if (to) navigate(`/${data.data.userType}/${to}`)
+      if (to) navigate(`/${userType}/${to}`)
     },
     onError: (e) => {
       errorNotify(e)
