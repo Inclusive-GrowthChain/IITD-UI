@@ -5,7 +5,8 @@ import { useAuthStore } from "../store/useAuthStore";
 const ProtectedRoute = ({ role }) => {
   const loggedIn = useAuthStore((auth) => auth.loggedIn);
   const userRole = useAuthStore((user) => user.userDetails);
-  
+
+  console.log(userRole.userType, role,"Role of the route")
   return loggedIn && userRole.userType === role ? <Outlet /> : <Navigate to="/" />;
 };
 
