@@ -228,7 +228,7 @@ const CorporateCustomer = () => {
                                 <td>{bid.bidId}</td>
                                 <td>{b.clientInvoiceDate?.substring(0, 10)}</td>
                                 <td>{b.clientInvoiceNumber}</td>
-                                <td>{b.bidAmount}</td>
+                                <td>{b.bidAmount * b.quantity}</td>
                                 <td>
                                   <button
                                     style={btnStyle}
