@@ -60,6 +60,7 @@ function Form() {
     onSuccess: (data) => {
       setTokenToApp(data.token)
       logIn(data.data)
+      console.log(data,"admin login data")
       let to = navigationList[data.data.userType]
       if (data.data.userType === "lendingpartner") {
         to = navigationList["samunnati"]
