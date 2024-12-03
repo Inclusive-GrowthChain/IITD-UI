@@ -114,7 +114,7 @@ const Bidding = () => {
                             <thead style={theadStyle}>
                               <tr>
                                 <td>Bid ID</td>
-                                <td>Start Date</td>
+                                <td>Date of Supply</td>
                                 <td>End Date</td>
                                 <td>Status</td>
                               </tr>
