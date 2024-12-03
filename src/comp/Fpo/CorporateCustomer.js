@@ -130,8 +130,8 @@ const CorporateCustomer = () => {
                           .map(item => (
                             <tr key={item.id}>
                               <td>{item.bidId}</td>
-                              <td>{item?.clientName}</td>
                               <td>{item.quantity}</td>
+                              <td>{item?.clientName}</td>
                               <td>{item.supplyDate}</td>
                               <td>{item.bidEndDate}</td>
                               <td>
