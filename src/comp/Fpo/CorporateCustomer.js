@@ -182,8 +182,8 @@ const CorporateCustomer = () => {
                           .filter((item) => item.status === "on-going" && item.bids.some((bid) => bid.userId === fpoId))
                           .map(item => (
                             <tr key={item.id}>
-                              <td>{item?.clientName}</td>
                               <td>{item.bidId}</td>
+                              <td>{item?.clientName}</td>
                               <td>{item.bids.find((bid) => bid.userId === fpoId).bidAmount}</td>
                               <td>{item.quantity}</td>
                               <td>{item.supplyDate}</td>
@@ -215,6 +215,7 @@ const CorporateCustomer = () => {
                     <thead style={theadStyle}>
                       <tr>
                         <th>Bid Id</th>
+                        <th>Client Name</th>
                         <th>Date of Invoice</th>
                         <th>Invoice Number</th>
                         <th>Total Amount</th>
@@ -230,6 +231,7 @@ const CorporateCustomer = () => {
                             return bid.bids.filter((b) => b.status === "completed" && b.fpoId === fpoId).map((b) => (
                               <tr key={bid.id}>
                                 <td>{bid.bidId}</td>
+                                <td>{bid?.clientName}</td>
                                 <td>{b.clientInvoiceDate?.substring(0, 10)}</td>
                                 <td>{b.clientInvoiceNumber}</td>
                                 <td>{ parseInt(b.bidAmount) * bid.quantity}</td>
