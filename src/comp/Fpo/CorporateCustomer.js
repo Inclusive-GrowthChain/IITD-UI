@@ -167,6 +167,7 @@ const CorporateCustomer = () => {
                     <thead style={theadStyle}>
                       <tr>
                         <th>Bid Id</th>
+                        <th>Client Name</th>
                         <th>Bid Price</th>
                         <th>Quantity</th>
                         <th>Date of Supply</th>
@@ -181,6 +182,7 @@ const CorporateCustomer = () => {
                           .filter((item) => item.status === "on-going" && item.bids.some((bid) => bid.userId === fpoId))
                           .map(item => (
                             <tr key={item.id}>
+                              <td>{item?.clientName}</td>
                               <td>{item.bidId}</td>
                               <td>{item.bids.find((bid) => bid.userId === fpoId).bidAmount}</td>
                               <td>{item.quantity}</td>
