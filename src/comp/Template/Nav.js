@@ -14,17 +14,21 @@ function Nav({ title, toggleSidebar }) {
   const navigate = useNavigate()
   const logOut = useAuthStore(s => s.logOut)
 
-  const logout = (e) => {
-    e.preventDefault();
-    try {
-      queryClient.clear();
-      cookies.remove("IITD", { path: "/fpo", domain: "lacshmi.agritwins.org" }); // Match the path and domain
-      logOut();
-      navigate("/");
-    } catch (error) {
-      console.error("Error during logout:", error);
-    }
+  const logout = () => {
+    // Clear cookies for dynamic paths
+    const paths = ["/", "/fpo", "/farmer", window.location.pathname];
+    const domain = document.domain;
+  
+    paths.forEach(path => {
+      cookies.remove("IITD", { path, domain });
+    });
+  
+    // Clear cache or state
+    queryClient.clear();
+    logOut();
+    navigate("/");
   };
+  
   
   return (
     <div className="navbar_wrapper app-nav">
