@@ -14,14 +14,18 @@ function Nav({ title, toggleSidebar }) {
   const navigate = useNavigate()
   const logOut = useAuthStore(s => s.logOut)
 
-  const logout = e => {
-    e.preventDefault()
-    queryClient.clear()
-    cookies.remove("IITD")
-    logOut()
-    navigate("/")
-  }
-
+  const logout = (e) => {
+    e.preventDefault();
+    try {
+      queryClient.clear();
+      cookies.remove("IITD", { path: "/fpo", domain: "lacshmi.agritwins.org" }); // Match the path and domain
+      logOut();
+      navigate("/");
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
+  
   return (
     <div className="navbar_wrapper app-nav">
       <div className="hamburger_menu" onClick={toggleSidebar}>
