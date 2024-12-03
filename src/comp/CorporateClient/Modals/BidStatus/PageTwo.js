@@ -31,9 +31,11 @@ const PageTwo = ({ onButtonClick,handleClose,outerbid = [] }) => {
     setShowConfirmBox(false)
   }
 
+  const currentDateTime = new Date().toISOString(); // Current date and time
+
   const checkOrderPlaced = () => {
     outerbid.bids.forEach((bid) => {
-      if (bid.status === "requested-test-report" || bid.status === "test-report-added" || bid.status === "invoice-added" || bid.status === "payment-done-waiting-approval" || bid.status === "completed") {
+      if (bid.status === "requested-test-report" || bid.bidEndDate < currentDateTime || bid.status === "test-report-added" || bid.status === "invoice-added" || bid.status === "payment-done-waiting-approval" || bid.status === "completed") {
         setOrderPlaced(true)
       }
     })
