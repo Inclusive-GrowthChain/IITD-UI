@@ -61,7 +61,7 @@ const list = [
   {
     label: "End Date for Bidding",
     name: "bidEndDate",
-    type: "datetime-local",
+    type: "date",
   },
   {
     label: "Date of Supply",
