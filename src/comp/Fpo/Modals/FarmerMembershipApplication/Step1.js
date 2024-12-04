@@ -7,6 +7,10 @@ const list = [
     name: "lastName"
   },
   {
+    label: "User Name",
+    name: "userName"
+  },
+  {
     label: "Bank Name",
     name: "bankName",
   },
