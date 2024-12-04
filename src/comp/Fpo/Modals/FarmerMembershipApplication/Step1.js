@@ -1,7 +1,10 @@
 const list = [
   {
-    label: "Farmer Name",
-    name: "userName",
+    label: "Farmer First Name",
+    name: "firstName",
+  },{
+    label: "Farmer Last Name",
+    name: "lastName"
   },
   {
     label: "Bank Name",
