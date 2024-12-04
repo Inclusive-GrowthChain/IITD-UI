@@ -114,8 +114,8 @@ const CorporateCustomer = () => {
                     <thead style={theadStyle}>
                       <tr>
                         <th>Bid Id</th>
-                        <th>Quantity</th>
                         <th>Client Name</th>
+                        <th>Quantity</th>
                         <th>Date of Supply</th>
                         <th>End Date of Bidding</th>
                         <th>Information</th>
