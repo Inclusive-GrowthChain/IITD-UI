@@ -140,29 +140,27 @@ const PageTwo = ({ onButtonClick,handleClose,outerbid = [] }) => {
                           lineHeight: "1rem",
                         }}
                         onClick={(e) => {
-                          let today = new Date()
-                          let dd = today.getDate()
-                          let mm = today.getMonth() + 1
-                          let yyyy = today.getFullYear()
-                          if (dd < 10) {
-                            dd = '0' + dd
-                          }
-                          if (mm < 10) {
-                            mm = '0' + mm
-                          }
-                          today = yyyy + '-' + mm + '-' + dd
-                          if (outerbid.bidEndDate > today) {
-                            alert("Order cannot be placed before the end of bidding period")
+                          const today = new Date();
+                          const bidEndDate = new Date(outerbid.bidEndDate);
+                        
+                          // Ensure the bidEndDate includes the end of the day (23:59:59)
+                          bidEndDate.setHours(23, 59, 59, 999);
+                        
+                          if (today < bidEndDate) {
+                            alert("Order cannot be placed before the end of the bidding period");
                             e.preventDefault();
-                            return
+                            return;
                           }
-                          let tempData = {}
-                          tempData.auctionId = outerbid.id
-                          tempData.bidId = bid.id
-                          setData(tempData)
-                          setCurrentFPO(bid)
-                          confirmOrder(e)
+                        
+                          let tempData = {
+                            auctionId: outerbid.id,
+                            bidId: bid.id,
+                          };
+                          setData(tempData);
+                          setCurrentFPO(bid);
+                          confirmOrder(e);
                         }}
+                        
                         disabled={orderPlaced || bid.status === "test-reports-rejected"}
                         className="btn btn-success"
                       >
