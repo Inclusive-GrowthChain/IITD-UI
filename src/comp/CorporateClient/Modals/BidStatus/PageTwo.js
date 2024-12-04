@@ -142,8 +142,6 @@ const PageTwo = ({ onButtonClick,handleClose,outerbid = [] }) => {
                         onClick={(e) => {
                           const today = new Date();
                           const bidEndDate = new Date(outerbid.bidEndDate);
-                        
-                          // Ensure the bidEndDate includes the end of the day (23:59:59)
                           bidEndDate.setHours(23, 59, 59, 999);
                         
                           if (today < bidEndDate) {
