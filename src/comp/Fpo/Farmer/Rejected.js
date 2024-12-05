@@ -14,7 +14,7 @@ function Rejected({ theadStyle, tbodyStyle, data = [] }) {
         <tbody style={tbodyStyle}>
           {data.map((app) => (
             <tr key={app._id}>
-<td>{app?.firstName} {app?.lastName}</td>
+<td className="text-capitalize">{app?.firstName} {app?.lastName}</td>
               <td>{app.village}</td>
               <td>{app.contactNumber}</td>
               <td>{app.aadharCardNumber}</td>
