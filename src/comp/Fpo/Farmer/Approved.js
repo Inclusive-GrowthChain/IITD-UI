@@ -35,7 +35,7 @@ function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
       <table className="table table-striped">
         <thead style={theadStyle}>
           <tr>
-            <th>Name</th>
+            <th>Farmer Name</th>
             <th>Village</th>
             <th>Phone Number</th>
             <th>Aadhaar Number</th>
@@ -49,7 +49,7 @@ function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
             <tr key={app._id}>
               <td>
                 <NavLink to={`/fpo/farmer-information/${app._id}`} className="info_btn">
-                  {app.userName}
+                <td>{app?.firstName} {app?.lastName}</td>
                 </NavLink>
               </td>
               <td>
