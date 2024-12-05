@@ -48,7 +48,7 @@ function Pending({ theadStyle, tbodyStyle, data = [], updateModal }) {
       <table className="table table-striped">
         <thead style={theadStyle}>
           <tr>
-            <th>Name</th>
+            <th>Farmer Name</th>
             <th>Village</th>
             <th>Phone Number</th>
             <th>Aadhaar Number</th>
@@ -60,7 +60,7 @@ function Pending({ theadStyle, tbodyStyle, data = [], updateModal }) {
         <tbody style={tbodyStyle}>
           {data.map((app) => (
             <tr key={app._id}>
-              <td>{app.userName}</td>
+              <td>{app?.firstName} {app?.lastName}</td>
               <td>{app.village}</td>
               <td>{app.contactNumber}</td>
               <td>{app.aadharCardNumber}</td>
