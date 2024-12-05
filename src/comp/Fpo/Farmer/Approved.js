@@ -49,7 +49,7 @@ function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
             <tr key={app._id}>
               <td>
                 <NavLink to={`/fpo/farmer-information/${app._id}`} className="info_btn">
-                <td>{app?.firstName} {app?.lastName}</td>
+                <td className="text-capitalize">{app?.firstName} {app?.lastName}</td>
                 </NavLink>
               </td>
               <td>
