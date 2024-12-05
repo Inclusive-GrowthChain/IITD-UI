@@ -47,9 +47,9 @@ function Approved({ theadStyle, tbodyStyle, data = [], updateModal }) {
         <tbody style={tbodyStyle}>
           {data.map((app) => (
             <tr key={app._id}>
-              <td>
+              <td className="text-capitalize">
                 <NavLink to={`/fpo/farmer-information/${app._id}`} className="info_btn">
-                <td className="text-capitalize">{app?.firstName} {app?.lastName}</td>
+                {app?.firstName} {app?.lastName}
                 </NavLink>
               </td>
               <td>
